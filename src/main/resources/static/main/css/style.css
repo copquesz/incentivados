@@ -395,7 +395,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 **/
 
 .footer-area {
-    background: #000000 url('/main/images/ponte-bg-5.png') no-repeat scroll center center / cover;
+    background: #000000 url('../images/ponte-bg-5.png') no-repeat scroll center center / cover;
 }
 
 /* .anlge-bg {
