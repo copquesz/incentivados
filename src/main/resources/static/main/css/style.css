@@ -393,9 +393,9 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 /**
 *Header-area
 **/
-/*TODO verificar por que não esta seguindo o caminho da foto*/
+
 .footer-area {
-    background: #000000 url('../images/ponte-bg-5.png') no-repeat scroll center center / cover;
+    background: #000000 url('/main/images/ponte-bg-5.png') no-repeat scroll center center / cover;
 }
 
 /* .anlge-bg {
@@ -423,6 +423,31 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 
 .header-text .button {
     margin-top: 30px;
+}
+
+.screen-slider .item {
+    background: url('images/molde-pc.png') no-repeat scroll center center / auto 100%;
+    padding: 100px 200px;
+    display: inline-block;
+    margin: auto;
+}
+
+.screen-slider.owl-carousel .owl-item {
+    text-align: center
+}
+
+.screen-slider .owl-controls {
+    position: absolute;
+    left: 0;
+    top: 100%;
+}
+
+.screen-slider .owl-controls .owl-nav>div {
+    display: inline-block;
+    margin: 0 15px;
+    font-size: 20px;
+    text-align: center;
+    position: relative;
 }
 
 .screen-slider .owl-controls .owl-nav {
