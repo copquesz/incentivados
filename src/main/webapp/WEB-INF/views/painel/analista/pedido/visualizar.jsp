@@ -120,6 +120,13 @@
                           <h5 class="text-center">Carta Ofício</h5>
                       </div>
                     </div>
+                    <div class="col-lg-2 text-center mt-5">
+                      <div class="form-group">
+                          <a href="${path}/${pedido.entidade.documentosEntidade.cartaoCnpj.path}" target="_blank"><i class="far fa-file-image text-primary" style="font-size: 56px;"></i></a>
+                          <hr>
+                          <h5 class="text-center">Cartão CNPJ</h5>
+                      </div>
+                    </div>
                   </fieldset> 
 
                   <hr class="bg-primary">
