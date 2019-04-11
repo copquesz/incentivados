@@ -56,14 +56,10 @@
                   <div class="col-12">
                     <!-- MSG DE VAZIO -->
                     <c:if test = "${empty pedidos}">
-                        <div class="alert alert-info alert-with-icon alert-dismissible fade show" data-notify="container">
-                          <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-                            <i class="nc-icon nc-simple-remove"></i>
-                          </button>
-                          <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
-                          <span data-notify="message">Não há nenhum pedido cadastrado</span>
-                        </div>
-                    </c:if>
+                      <div class="alert alert-danger mt-3" role="alert">
+                        <p class="text-bold">Não há registro(s) ou .</p>
+                      </div>
+                    </c:if>      
                     <c:if test = "${not empty pedidos}">              
                       <div class="table-responsive">
                         <table class="table">
@@ -87,9 +83,9 @@
                                 <td class="text-center">${pedido.analista.endereco.bairro} - ${pedido.analista.endereco.cidade} / ${pedido.analista.endereco.estado}</td>
                                 <td class="text-center"><a href="${path}/${pedido.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>
                                 <th class="text-center">
-                                  <c:if test = "${pedido.status.id == 0}"><span class="bg-warning p-1 text-white">${pedido.status}</span></c:if>
-                                  <c:if test = "${pedido.status.id == 1}"><span class="bg-danger p-1"><a href="#" class="text-white" data-toggle="modal" data-target="#modal-motivo-reprovado-${pedido.id}" title="Visualizar Motivo">${pedido.status}</a></span></c:if>
-                                  <c:if test = "${pedido.status.id == 2}"><span class="bg-success p-1 text-white">${pedido.status}</span></c:if>
+                                  <c:if test = "${pedido.status.id == 0}"><span class="bg-warning" ">${pedido.status}</span></c:if>
+                                  <c:if test = "${pedido.status.id == 1}"><span class="bg-danger" ">${pedido.status}</span></c:if>
+                                  <c:if test = "${pedido.status.id == 2}"><span class="bg-success" ">${pedido.status}</span></c:if>
                                 </th>
                               </tr>
                             </c:forEach>
@@ -108,7 +104,6 @@
         </div>         
       </div>
       <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
-      <c:import url="/WEB-INF/views/componentes/modal/modal-motivo-reprovado.jsp" />
     </div>
   </div>
 
@@ -119,7 +114,6 @@
   <!--   BOOTSTRAP   -->  
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>  
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script type="text/javascript" src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script>  
 
 </body>
