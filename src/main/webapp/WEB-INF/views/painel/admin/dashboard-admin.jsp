@@ -252,7 +252,7 @@
               labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
               datasets: [{
                   label: 'Registros',                  
-                  data: ['${dataChartEntidade[0]}', '${dataChartEntidade[1]}', '${dataChartEntidade[2]}', '${dataChartEntidade[3]}', '${dataChartEntidade[4]}', '${dataChartEntidade[5]}', '${dataChartEntidade[6]}', '${dataChartEntidade[7]}', '${dataChartEntidade[8]}', '${dataChartEntidade[9]}', '${dataChartEntidade[10]}', '${dataChartEntidade[11]}', '${dataChartEntidade[12]}'],
+                  data: [<c:forEach var="dataChartEntidade" items="${datasChartEntidade}">${dataChartEntidade},</c:forEach>],
                   backgroundColor: [
                       'rgba(54, 162, 235, 0.2)',
                   ],
