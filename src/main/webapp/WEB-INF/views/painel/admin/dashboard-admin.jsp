@@ -251,8 +251,8 @@
           data: {
               labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
               datasets: [{
-                  label: 'Registros',
-                  data: [12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3],
+                  label: 'Registros',                  
+                  data: ['${dataChartEntidade[0]}', '${dataChartEntidade[1]}', '${dataChartEntidade[2]}', '${dataChartEntidade[3]}', '${dataChartEntidade[4]}', '${dataChartEntidade[5]}', '${dataChartEntidade[6]}', '${dataChartEntidade[7]}', '${dataChartEntidade[8]}', '${dataChartEntidade[9]}', '${dataChartEntidade[10]}', '${dataChartEntidade[11]}', '${dataChartEntidade[12]}'],
                   backgroundColor: [
                       'rgba(54, 162, 235, 0.2)',
                   ],
@@ -280,10 +280,10 @@
       var barChart = new Chart(barCtx, {
           type: 'bar',
           data: {
-              labels: ["Criança e Adolescente", "Fundo do Idoso", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+              labels: ["Criança e Adolescente", "Fundo do Idoso"],
               datasets: [{
                   label: 'Registros',
-                  data: [12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3],
+                  data: [12, 40],
                   backgroundColor: [
                       'rgba(54, 162, 235, 0.2)',
                       'rgba(54, 162, 235, 0.2)',
