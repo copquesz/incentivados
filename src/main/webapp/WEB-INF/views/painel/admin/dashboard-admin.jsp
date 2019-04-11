@@ -2,7 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <html lang="pt-br">
 
 <head>
@@ -11,7 +10,7 @@
   <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Incentivados - Painel
+    Incentivados - Dashboard
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -39,7 +38,7 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="far fa-address-card text-info"></i>
+                      <i class="far fa-address-card text-default"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
@@ -64,7 +63,7 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="fas fa-project-diagram text-info"></i>
+                      <i class="fas fa-project-diagram text-default"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
@@ -89,7 +88,7 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="fas fa-hand-holding-heart text-info"></i>
+                      <i class="fas fa-hand-holding-heart text-default"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
@@ -165,7 +164,7 @@
                 <div class="tab-content" id="myTabContent">
                   <div class="tab-pane fade show active" id="entidades" role="tabpanel" aria-labelledby="entidades-tab"> 
                     <c:if test = "${empty entidades}">
-                      <div class="alert alert-info" role="alert">
+                      <div class="alert alert-danger" role="alert">
                         <p class="text-bold">Não há registro(s) ou .</p>
                       </div>
                     </c:if>      
@@ -188,7 +187,7 @@
                                 <td>${entidade.nomeFantasia}</td>
                                 <td>${entidade.cnpj}</td>
                                 <td class="text-center">
-                                  <a href="${path}/painel/entidades/${entidade.id}" class="btn btn-info btn-circle" title="Visualizar"><i class="fas fa-file-alt"></i></a>
+                                  <a href="${path}/painel/entidades/${entidade.id}" class="btn btn-default btn-circle" title="Visualizar"><i class="fas fa-file-alt"></i></a>
                                 </td>
                               </tr>
                             </c:forEach>
@@ -199,28 +198,29 @@
                   </div>
                   <div class="tab-pane fade" id="projetos" role="tabpanel" aria-labelledby="projetos-tab">
                     <c:if test = "${empty projetos}">
-                      <div class="alert alert-info mt-3" role="alert">
+                      <div class="alert alert-danger mt-3" role="alert">
                         <p class="text-bold">Não há registro(s) ou .</p>
                       </div>
                     </c:if>
-                    <c:if test = "${not empty projetos}"> 
-                      <div class="row justify-content-start">
-                        <c:forEach var="projeto" items="${projetos}">
-                          <div class="col-12 col-xl-3 col-lg-6 col-md-6 d-flex align-items-stretch align-self-stretch">
-                            <div class="card border mt-3">
-                              <img src="${path}/${projeto.documentosProjeto.logo.path}" class="card-img-top" alt="...">
-                              <div class="card-body">
-                                <h5 class="card-title" style="font-weight: bold;">${projeto.titulo}</h5>
-                                <hr>
-                                <p class="card-text text-justify">${fn:substring(projeto.objetivo, 0, 180)} ...</p>
-                              </div>
-                              <div class="card-footer">
-                                <button type="button" class="btn btn-primary">Ver Detalhes</button>
-                              </div>
-                            </div>
+                    <c:if test = "${not empty projetos}">           
+                      <c:forEach var="projeto" items="${projetos}">
+                        <div class="row p-3 mt-3">
+                          <div class="col-6 col-lg-4 col-md-12 col-sm-12 mx-auto text-center">
+                            <figure class="figure">
+                              <img src="${path}/${projeto.documentosProjeto.logo.path}" class="img-projeto mt-2 mb-2 mx-auto d-block" alt="${projeto.titulo}">
+                            </figure>
                           </div>
-                        </c:forEach>
-                      </div>
+                          <div class="col-6 col-lg-8 col-md-12 col-sm-12">
+                            <h3>${projeto.titulo} @ ${projeto.entidade.nomeFantasia}</h3>
+                            <hr class="bg-default">    
+                            <p class="lead">${projeto.objetivo}</p>
+                            <p class="text-center">
+                              <button type="button" class="btn btn-primary">Ver Detalhes</button>
+                            </p>
+                            <p></p>                
+                          </div>
+                        </div>
+                      </c:forEach>
                     </c:if>
                   </div>
                 </div>
@@ -243,7 +243,7 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>  
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="${path}/assets/js/paper-dashboard.js?v=2.0.0" type="text/javascript"></script>
+  <script src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
     <script type="text/javascript">    
       var lineCtx = document.getElementById("line-chart").getContext('2d');
       var lineChart = new Chart(lineCtx, {
@@ -252,7 +252,7 @@
               labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
               datasets: [{
                   label: 'Registros',                  
-                  data: [<c:forEach var="dataChartEntidade" items="${datasChartEntidade}">${dataChartEntidade},</c:forEach>],
+                  data: ['${dataChartEntidade[0]}', '${dataChartEntidade[1]}', '${dataChartEntidade[2]}', '${dataChartEntidade[3]}', '${dataChartEntidade[4]}', '${dataChartEntidade[5]}', '${dataChartEntidade[6]}', '${dataChartEntidade[7]}', '${dataChartEntidade[8]}', '${dataChartEntidade[9]}', '${dataChartEntidade[10]}', '${dataChartEntidade[11]}', '${dataChartEntidade[12]}'],
                   backgroundColor: [
                       'rgba(54, 162, 235, 0.2)',
                   ],
@@ -280,12 +280,39 @@
       var barChart = new Chart(barCtx, {
           type: 'bar',
           data: {
-              labels: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'${incentivoFiscal.legislacao}',</c:forEach>],
+              labels: ["Criança e Adolescente", "Fundo do Idoso"],
               datasets: [{
                   label: 'Registros',
-                  data: [<c:forEach var="dataCharProjeto" items="${datasCharProjeto}">${dataCharProjeto},</c:forEach>],
-                  backgroundColor: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'rgba(54, 162, 235, 0.2)',</c:forEach>],                 
-                  borderColor: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'rgba(54, 162, 235, 1)',</c:forEach>],
+                  data: [12, 40],
+                  backgroundColor: [
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(54, 162, 235, 0.2)'
+                  ],
+                  borderColor: [
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(54, 162, 235, 1)'
+                  ],
                   borderWidth: 1
               }]
           },
@@ -296,18 +323,13 @@
               scales: {
                 xAxes: [
                   {
-                    ticks:{                      
+                    ticks:{
                       callback: function (value) {
                         return ""
                       }
                     },
                   },
-                ],
-                yAxes: [{
-                    ticks: {
-                        beginAtZero:true
-                    }
-                }]
+                ]
               }
           }
       });
