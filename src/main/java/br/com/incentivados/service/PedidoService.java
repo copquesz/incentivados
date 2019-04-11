@@ -1,18 +1,25 @@
 package br.com.incentivados.service;
 
-import br.com.incentivados.enumerated.StatusPedido;
-import br.com.incentivados.model.*;
-import br.com.incentivados.repository.PedidoRepository;
-import br.com.incentivados.utility.FileUpload;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import br.com.incentivados.enumerated.StatusPedido;
+import br.com.incentivados.model.Arquivo;
+import br.com.incentivados.model.Empresa;
+import br.com.incentivados.model.Entidade;
+import br.com.incentivados.model.Pedido;
+import br.com.incentivados.model.Usuario;
+import br.com.incentivados.repository.PedidoRepository;
+import br.com.incentivados.utility.FileUpload;
 
 @Service
 public class PedidoService {
@@ -30,14 +37,22 @@ public class PedidoService {
 		pedido.setUsuario(usuario);
 		pedido.setAnalista(analista);
 		pedido.setEmpresa(empresa);
-		pedido.setEntidade(entidade);		
+		pedido.setEntidade(entidade);
 
 		pedido.getDocumentosPedido().getCartaOficio()
-				.setPath(upload(request, cartaOficio.getFile(), "carta-oficio-" + DateTimeFormatter.ofPattern("ddMMuuuuHHmmss").format(LocalDateTime.now()) + "."
-						+ cartaOficio.getFile().getOriginalFilename().split("\\.")[1], path));
+				.setPath(upload(request, cartaOficio.getFile(),
+						"carta-oficio-" + DateTimeFormatter.ofPattern("ddMMuuuuHHmmss").format(LocalDateTime.now())
+								+ "." + cartaOficio.getFile().getOriginalFilename().split("\\.")[1],
+						path));
 
 		return pedidoRepository.save(pedido);
 	}
+	
+	// Serviço de atualizar pedido
+		public Pedido update(Pedido pedido, StatusPedido status) {
+			pedido.setStatus(status);
+			return pedidoRepository.save(pedido);
+		}
 
 	// Serviço de busca objeto pelo ID
 	public Optional<Pedido> findById(Long id) {
@@ -53,6 +68,16 @@ public class PedidoService {
 	public List<Pedido> findByUsuario(Usuario usuario) {
 		return pedidoRepository.findByUsuario(usuario);
 	}
+	
+	// Serviço de buscar PEDIDO pelo USUÁRIO
+		public List<Pedido> findByAnalistaAndStatus(Usuario analista, StatusPedido status, Pageable page) {
+			return pedidoRepository.findByAnalistaAndStatus(analista, status, page);
+		}
+
+	// Serviço de buscar PEDIDO pelo USUÁRIO
+	public List<Pedido> findAllByAnalistaAndStatus(Usuario analista, StatusPedido status) {
+		return pedidoRepository.findAllByAnalistaAndStatus(analista, status);
+	}
 
 	// Serviço que contabiliza todos os PEDIDOS
 	public Long count() {
@@ -67,6 +92,16 @@ public class PedidoService {
 	// Serviço que contabiliza todos os PEDIDOS por USUÁRIO
 	public Long countByUsuario(Usuario usuario) {
 		return pedidoRepository.countByUsuario(usuario);
+	}
+
+	// Serviço que contabiliza todos os PEDIDOS por ANALISTA
+	public Long countByAnalista(Usuario analista) {
+		return pedidoRepository.countByAnalista(analista);
+	}
+
+	// Serviço que contabiliza todos os PEDIDOS por ANALISTA e STATUS
+	public Long countByAnalistaAndStatus(Usuario analista, StatusPedido status) {
+		return pedidoRepository.countByAnalistaAndStatus(analista, status);
 	}
 
 	// Serviço de upload de arquivos para o servidor
