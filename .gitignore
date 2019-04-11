@@ -24,9 +24,8 @@
 /.nb-gradle/
 /build/
 
-### ConfiguraÃ§Ã£o do Spring boot ###
-### application.properties
+### Configuração do Spring boot ###
+application.properties
 
 ### Ignorar Documentos ###
 /src/main/webapp/documentos/
-/package-lock.json

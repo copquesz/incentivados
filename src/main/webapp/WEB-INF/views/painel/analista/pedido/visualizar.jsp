@@ -120,13 +120,6 @@
                           <h5 class="text-center">Carta Ofício</h5>
                       </div>
                     </div>
-                    <div class="col-lg-2 text-center mt-5">
-                      <div class="form-group">
-                          <a href="${path}/${pedido.entidade.documentosEntidade.cartaoCnpj.path}" target="_blank"><i class="far fa-file-image text-primary" style="font-size: 56px;"></i></a>
-                          <hr>
-                          <h5 class="text-center">Cartão CNPJ</h5>
-                      </div>
-                    </div>
                   </fieldset> 
 
                   <hr class="bg-primary">
@@ -140,33 +133,7 @@
           </div>
         </div>              
       </div>
-      <footer class="footer footer-black  footer-white ">
-        <div class="container-fluid">
-          <div class="row">
-            <nav class="footer-nav">
-              <ul>
-                <li>
-                  <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>
-                </li>
-                <li>
-                  <a href="http://blog.creative-tim.com/" target="_blank">Blog</a>
-                </li>
-                <li>
-                  <a href="https://www.creative-tim.com/license" target="_blank">Licenses</a>
-                </li>
-              </ul>
-            </nav>
-            <div class="credits ml-auto">
-              <span class="copyright">
-                ©
-                <script>
-                  document.write(new Date().getFullYear())
-                </script>, made with <i class="fa fa-heart heart"></i> by Creative Tim
-              </span>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
     </div>
   </div>
 
