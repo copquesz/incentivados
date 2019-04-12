@@ -177,14 +177,12 @@ public class ProjetoController {
 				List<Projeto> projetos = new ArrayList<Projeto>();
 				projetos = projetoService.findAll();
 				model.addAttribute("projetos", projetos);
-
 				return "painel/admin/projeto/lista";
 
 			} else {
 				List<Projeto> projetos = new ArrayList<Projeto>();
 				projetos = projetoService.findByUsuario(usuario);
 				model.addAttribute("projetos", projetos);
-
 				return "painel/entidade/projeto/lista";
 			}
 

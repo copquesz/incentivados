@@ -54,13 +54,14 @@
               <div class="card-body">
                 <div class="row mt-2">
                   <div class="col-12">
+                    <hr>
                     <!-- MSG DE VAZIO -->
-                    <c:if test = "${empty pedidos}">
+                    <c:if test = "${empty projetos}">
                       <div class="alert alert-danger" role="alert">
                         <p class="text-bold">Não há registro(s) ou .</p>
                       </div>
                     </c:if>
-                    <c:if test = "${not empty pedidos}">           
+                    <c:if test = "${not empty projetos}">           
                       <c:forEach var="projeto" items="${projetos}">
                         <div class="row p-3 mt-3">
                           <div class="col-6 col-lg-4 col-md-12 col-sm-12 mx-auto text-center">
@@ -78,6 +79,7 @@
                             <p></p>                
                           </div>
                         </div>
+                        <hr>
                       </c:forEach>
                     </c:if>
                   </div>     

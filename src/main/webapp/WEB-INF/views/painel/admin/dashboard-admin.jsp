@@ -280,39 +280,12 @@
       var barChart = new Chart(barCtx, {
           type: 'bar',
           data: {
-              labels: ["Criança e Adolescente", "Fundo do Idoso"],
+              labels: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'${incentivoFiscal.legislacao}',</c:forEach>],
               datasets: [{
                   label: 'Registros',
-                  data: [12, 40],
-                  backgroundColor: [
-                      'rgba(54, 162, 235, 0.2)',
-                      'rgba(54, 162, 235, 0.2)',
-                      'rgba(54, 162, 235, 0.2)',
-                      'rgba(54, 162, 235, 0.2)',
-                      'rgba(54, 162, 235, 0.2)',
-                      'rgba(54, 162, 235, 0.2)',
-                      'rgba(54, 162, 235, 0.2)',
-                      'rgba(54, 162, 235, 0.2)',
-                      'rgba(54, 162, 235, 0.2)',
-                      'rgba(54, 162, 235, 0.2)',
-                      'rgba(54, 162, 235, 0.2)',
-                      'rgba(54, 162, 235, 0.2)',
-                      'rgba(54, 162, 235, 0.2)'
-                  ],
-                  borderColor: [
-                      'rgba(54, 162, 235, 1)',
-                      'rgba(54, 162, 235, 1)',
-                      'rgba(54, 162, 235, 1)',
-                      'rgba(54, 162, 235, 1)',
-                      'rgba(54, 162, 235, 1)',
-                      'rgba(54, 162, 235, 1)',
-                      'rgba(54, 162, 235, 1)',
-                      'rgba(54, 162, 235, 1)',
-                      'rgba(54, 162, 235, 1)',
-                      'rgba(54, 162, 235, 1)',
-                      'rgba(54, 162, 235, 1)',
-                      'rgba(54, 162, 235, 1)'
-                  ],
+                  data: [<c:forEach var="dataCharProjeto" items="${datasCharProjeto}">${dataCharProjeto},</c:forEach>],
+                  backgroundColor: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'rgba(54, 162, 235, 0.2)',</c:forEach>],                 
+                  borderColor: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'rgba(54, 162, 235, 1)',</c:forEach>],
                   borderWidth: 1
               }]
           },
@@ -323,13 +296,18 @@
               scales: {
                 xAxes: [
                   {
-                    ticks:{
+                    ticks:{                      
                       callback: function (value) {
                         return ""
                       }
                     },
                   },
-                ]
+                ],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
               }
           }
       });

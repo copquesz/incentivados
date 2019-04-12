@@ -1,16 +1,20 @@
 package br.com.incentivados.controller;
 
-import br.com.incentivados.enumerated.StatusPedido;
-import br.com.incentivados.enumerated.TipoUsuario;
-import br.com.incentivados.model.Entidade;
-import br.com.incentivados.model.Pedido;
-import br.com.incentivados.model.Projeto;
-import br.com.incentivados.model.Usuario;
-import br.com.incentivados.service.EntidadeService;
-import br.com.incentivados.service.PedidoService;
-import br.com.incentivados.service.ProjetoService;
-import br.com.incentivados.service.UsuarioService;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +23,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import br.com.incentivados.enumerated.StatusPedido;
+import br.com.incentivados.enumerated.TipoUsuario;
+import br.com.incentivados.model.Entidade;
+import br.com.incentivados.model.IncentivoFiscal;
+import br.com.incentivados.model.Pedido;
+import br.com.incentivados.model.Projeto;
+import br.com.incentivados.model.Usuario;
+import br.com.incentivados.service.EntidadeService;
+import br.com.incentivados.service.IncentivoFiscalService;
+import br.com.incentivados.service.PedidoService;
+import br.com.incentivados.service.ProjetoService;
+import br.com.incentivados.service.UsuarioService;
 
 @Controller
 public class DashboardController {
@@ -39,6 +50,9 @@ public class DashboardController {
 
 	@Autowired
 	private PedidoService pedidoService;
+
+	@Autowired
+	private IncentivoFiscalService incentivoFiscalService;
 
 	@GetMapping("/login")
 	public String getLogin(@ModelAttribute("redirectAttributesAcesso") String redirectAttributesAcesso,
@@ -147,19 +161,48 @@ public class DashboardController {
 			return "painel/entidade/dashboard-entidade";
 
 		case ANALISTA:
+
+			// Exibe total de pedidos por analista.
+			model.addAttribute("qtdPedidos", pedidoService.countByAnalista(usuario));
+
+			// Exibe os pedidos pendentes e a quantidade por analista.
+			model.addAttribute("pendentes", pedidoService.findByAnalistaAndStatus(usuario, StatusPedido.PENDENTE,
+					PageRequest.of(0, 5, Sort.by(Order.desc("id")))));
+			model.addAttribute("qtdPendente", pedidoService.countByAnalistaAndStatus(usuario, StatusPedido.PENDENTE));
+
+			// Exibe os pedidos aprovados e a quantidade por analista.
+			model.addAttribute("aprovados", pedidoService.findByAnalistaAndStatus(usuario, StatusPedido.APROVADO,
+					PageRequest.of(0, 5, Sort.by(Order.desc("id")))));
+			model.addAttribute("qtdAprovado", pedidoService.countByAnalistaAndStatus(usuario, StatusPedido.APROVADO));
+
+			// Exibe os pedidos reprovados e a quantidade por analista.
+			model.addAttribute("recusados", pedidoService.findByAnalistaAndStatus(usuario, StatusPedido.RECUSADO,
+					PageRequest.of(0, 5, Sort.by(Order.desc("id")))));
+			model.addAttribute("qtdRecusado", pedidoService.countByAnalistaAndStatus(usuario, StatusPedido.RECUSADO));
+
 			return "painel/analista/dashboard-analista";
 
-		case ADMIN:
+		case ADMIN:			
 			// Lista as infos e estatísticas das entidades cadastradas
-			entidades = entidadeService.findTop3ByOrderByIdDesc();
-			model.addAttribute("entidades", entidades);
+			model.addAttribute("entidades", entidadeService.findTop3ByOrderByIdDesc());
 			model.addAttribute("qtdEntidades", entidadeService.count());
+			model.addAttribute("datasChartEntidade", entidadeService.buildChart());
 
 			// Lista as infos e estatísticas dos projetos cadastrados
-			projetos = projetoService.findTop3ByOrderByIdDesc();
-			model.addAttribute("projetos", projetos);
+			model.addAttribute("projetos", projetoService.findTop3ByOrderByIdDesc());
 			model.addAttribute("qtdProjetos", projetoService.count());
-
+			
+			// Lista todos os incentivos fiscais cadastrados na base de dados
+			List<IncentivoFiscal> incentivosFiscais = incentivoFiscalService.findAll();
+			model.addAttribute("incentivosFiscais", incentivosFiscais);
+			
+			// Lista o número de projetos cadastrados por incentivo fiscal
+			List<Long> datasCharProjeto = new ArrayList<Long>();
+			for (int i = 0; i < incentivosFiscais.size(); i++) {
+				datasCharProjeto.add(projetoService.countByIncentivosFiscais(incentivosFiscais.get(i)));
+			}
+			model.addAttribute("datasCharProjeto", datasCharProjeto);
+			
 			// Lista as infos e estatísticas dos pedidos cadastrados
 			model.addAttribute("qtdPedidos", pedidoService.count());
 			model.addAttribute("qtdPedidosPendente", pedidoService.countByStatus(StatusPedido.PENDENTE));
