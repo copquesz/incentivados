@@ -128,36 +128,35 @@
                     </div> 
                     <div class="col-lg-2 text-center mt-5">
                       <div class="form-group">
-                          <a href="${path}/${projeto.documentosProjeto.ataEleicao.path}" target="_blank"><i class="far fa-file-image text-primary" style="font-size: 56px;"></i></a>
+                          <a href="${path}/${projeto.documentosProjeto.propostaTecnica.path}" target="_blank"><i class="fas fa-file-pdf text-primary" style="font-size: 56px;"></i></a>
                           <hr>
                           <h5 class="text-center">Projeto Técnico</h5>
                       </div>
                     </div>
                     <div class="col-lg-2 text-center mt-5">
                       <div class="form-group">
-                          <a href="${path}/${projeto.documentosProjeto.estatutoSocial.path}" target="_blank"><i class="far fa-file-image text-primary" style="font-size: 56px;"></i></a>
+                          <a href="${path}/${projeto.documentosProjeto.propostOrcamentaria.path}" target="_blank"><i class="fas fa-file-pdf text-primary" style="font-size: 56px;"></i></a>
                           <hr>
                           <h5 class="text-center">Projeto Orçamentário</h5>
                       </div>
                     </div> 
                     <div class="col-lg-2 text-center mt-5">
                       <div class="form-group">
-                          <a href="${path}/${projeto.documentosProjeto.identidade.path}" target="_blank"><i class="far fa-file-image text-primary" style="font-size: 56px;"></i></a>
+                          <a href="${path}/${projeto.documentosProjeto.dadosBancarios.path}" target="_blank"><i class="fas fa-file-pdf text-primary" style="font-size: 56px;"></i></a>
                           <hr>
                           <h5 class="text-center">Dados Bancários</h5>
                       </div>
                     </div>
                     <div class="col-lg-2 text-center mt-5">
                       <div class="form-group">
-                          <a href="${path}/${projeto.documentosProjeto.cartaoCnpj.path}" target="_blank"><i class="far fa-file-image text-primary" style="font-size: 56px;"></i></a>
+                          <a href="${path}/${projeto.documentosProjeto.certificado.path}" target="_blank"><i class="fas fa-file-pdf text-primary" style="font-size: 56px;"></i></a>
                           <hr>
                           <h5 class="text-center">Certificado de Captação</h5>
                       </div>
                     </div>
-                    </fieldset> 
-                    
+                    </fieldset>                     
                   </div>
-
+                </div>
               </div>
               <div class="card-footer bg-primary"></div>
             </div>

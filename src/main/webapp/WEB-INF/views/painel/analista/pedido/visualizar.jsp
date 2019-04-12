@@ -26,9 +26,9 @@
 <body class="">
   <div class="wrapper ">    
     <!-- Sidebar -->
-    <c:import url="/WEB-INF/views/componentes/sidebar/sidebar-entidade.jsp" />    
+    <c:import url="/WEB-INF/views/componentes/sidebar/sidebar-analista.jsp" />    
     <div class="main-panel">
-      <c:import url="/WEB-INF/views/componentes/navbar/navbar-entidade.jsp" />      
+      <c:import url="/WEB-INF/views/componentes/navbar/navbar-analista.jsp" />      
       <div class="content"> 
         <div class="row">
           <div class="col-md-12">
@@ -118,6 +118,13 @@
                           <a href="${path}/${pedido.documentosPedido.cartaOficio.path}" target="_blank"><i class="far fa-file-alt text-primary" style="font-size: 56px;"></i></a>
                           <hr>
                           <h5 class="text-center">Carta Ofício</h5>
+                      </div>
+                    </div>
+                    <div class="col-lg-2 text-center mt-5">
+                      <div class="form-group">
+                          <a href="${path}/${pedido.entidade.documentosEntidade.cartaoCnpj.path}" target="_blank"><i class="far fa-file-alt text-primary" style="font-size: 56px;"></i></a>
+                          <hr>
+                          <h5 class="text-center">Cartão CNPJ</h5>
                       </div>
                     </div>
                   </fieldset> 

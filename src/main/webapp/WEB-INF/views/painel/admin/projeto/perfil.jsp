@@ -50,25 +50,25 @@
                 </div>    
                 <hr>            
                 <div class="row justify-content-center mt-5">
-                  <div class="col-2 bg-primary rounded text-center p-3 ml-5">
+                  <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 bg-primary rounded text-center p-3 mx-3 my-1">
                     <h5 class="text-white"><i class="fas fa-file-invoice-dollar fa-3x"></i></h5>
                     <hr>
-                    <h5 class="text-white bold"><span style="font-size: 0.8em;">Valor Total:</span> </br><span style="font-size: 1.3em;">R$ ${projeto.valorTotal}</span></h5>
+                    <h5 class="text-white bold"><span style="font-size: 0.8rem;">Valor Total:</span> </br><span style="font-size: 1.3rem;">R$ ${projeto.valorTotal}</span></h5>
                   </div>
-                  <div class="col-2 bg-primary rounded text-center p-3 ml-5">
+                  <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 bg-primary rounded text-center p-3 mx-3 my-1">
                     <h5 class="text-white"><i class="fas fa-hand-holding-usd fa-3x"></i></h5>
                     <hr>
-                    <h5 class="text-white bold"><span style="font-size: 0.8em;">Valor Solicitado:</span> </br><span style="font-size: 1.3em;">R$ ${projeto.valorSolicitado}</span></h5>
+                    <h5 class="text-white bold"><span style="font-size: 0.8rem;">Valor Solicitado:</span> </br><span style="font-size: 1.3rem;">R$ ${projeto.valorSolicitado}</span></h5>
                   </div>
-                  <div class="col-2 bg-primary rounded text-center p-3 ml-5">
+                  <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 bg-primary rounded text-center p-3 mx-3 my-1">
                     <h5 class="text-white"><i class="fas fa-compress-arrows-alt fa-3x"></i></h5>
                     <hr>
-                    <h5 class="text-white bold"><span style="font-size: 0.8em;">Beneficiários Diretos:</span> </br><span style="font-size: 1.3em;"><i class="fas fa-users"></i> ${projeto.beneficiariosDiretos}</span></h5>
+                    <h5 class="text-white bold"><span style="font-size: 0.8rem;">Beneficiários Diretos:</span> </br><span style="font-size: 1.3rem;"><i class="fas fa-users"></i> ${projeto.beneficiariosDiretos}</span></h5>
                   </div>
-                  <div class="col-2 bg-primary rounded text-center p-3 ml-5">
+                  <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 bg-primary rounded text-center p-3 mx-3 my-1">
                     <h5 class="text-white"><i class="fas fa-expand-arrows-alt fa-3x"></i></h5>
                     <hr>
-                    <h5 class="text-white bold"><span style="font-size: 0.8em;">Beneficiários Indiretos:</span> </br><span style="font-size: 1.3em;"><i class="fas fa-users"></i> ${projeto.beneficiariosIndiretos}</span></h5>
+                    <h5 class="text-white bold"><span style="font-size: 0.8rem;">Beneficiários Indiretos:</span> </br><span style="font-size: 1.3rem;"><i class="fas fa-users"></i> ${projeto.beneficiariosIndiretos}</span></h5>
                   </div>
                 </div>
 
@@ -119,45 +119,44 @@
                   <legend class="text-primary">Uploads:</legend>
                   <hr class="bg-primary">
                   <div class="row justify-content-center">
-                    <div class="col-lg-2 text-center mt-5">
+                    <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 text-center mt-5">
                       <div class="form-group">
                           <a href="${path}/${projeto.documentosProjeto.logo.path}" target="_blank"><i class="far fa-file-image text-primary" style="font-size: 56px;"></i></a>
                           <hr>
                           <h5 class="text-center">Logo</h5>
                       </div>
                     </div> 
-                    <div class="col-lg-2 text-center mt-5">
+                    <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 text-center mt-5">
                       <div class="form-group">
-                          <a href="${path}/${projeto.documentosProjeto.ataEleicao.path}" target="_blank"><i class="far fa-file-image text-primary" style="font-size: 56px;"></i></a>
+                          <a href="${path}/${projeto.documentosProjeto.propostaTecnica.path}" target="_blank"><i class="fas fa-file-pdf text-primary" style="font-size: 56px;"></i></a>
                           <hr>
                           <h5 class="text-center">Projeto Técnico</h5>
                       </div>
                     </div>
-                    <div class="col-lg-2 text-center mt-5">
+                    <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 text-center mt-5">
                       <div class="form-group">
-                          <a href="${path}/${projeto.documentosProjeto.estatutoSocial.path}" target="_blank"><i class="far fa-file-image text-primary" style="font-size: 56px;"></i></a>
+                          <a href="${path}/${projeto.documentosProjeto.propostOrcamentaria.path}" target="_blank"><i class="fas fa-file-pdf text-primary" style="font-size: 56px;"></i></a>
                           <hr>
                           <h5 class="text-center">Projeto Orçamentário</h5>
                       </div>
                     </div> 
-                    <div class="col-lg-2 text-center mt-5">
+                    <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 text-center mt-5">
                       <div class="form-group">
-                          <a href="${path}/${projeto.documentosProjeto.identidade.path}" target="_blank"><i class="far fa-file-image text-primary" style="font-size: 56px;"></i></a>
+                          <a href="${path}/${projeto.documentosProjeto.dadosBancarios.path}" target="_blank"><i class="fas fa-file-pdf text-primary" style="font-size: 56px;"></i></a>
                           <hr>
                           <h5 class="text-center">Dados Bancários</h5>
                       </div>
                     </div>
-                    <div class="col-lg-2 text-center mt-5">
+                    <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 text-center mt-5">
                       <div class="form-group">
-                          <a href="${path}/${projeto.documentosProjeto.cartaoCnpj.path}" target="_blank"><i class="far fa-file-image text-primary" style="font-size: 56px;"></i></a>
+                          <a href="${path}/${projeto.documentosProjeto.certificado.path}" target="_blank"><i class="fas fa-file-pdf text-primary" style="font-size: 56px;"></i></a>
                           <hr>
                           <h5 class="text-center">Certificado de Captação</h5>
                       </div>
                     </div>
-                    </fieldset> 
-                    
+                    </fieldset>                     
                   </div>
-
+                </div>
               </div>
               <div class="card-footer bg-primary"></div>
             </div>
