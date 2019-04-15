@@ -106,7 +106,7 @@
                     <div class="card ">
                         <div class="card-header ">
                             <c:if test="${cadastroProjeto}">
-                                <a href="${path}/painel/projetos/cadastro" class="btn btn-default float-right"><i
+                                <a href="${path}/painel/projetos/cadastro" class="btn btn-info float-right"><i
                                         class="fas fa-plus mr-2"></i> Cadastrar Projeto</a>
                             </c:if>
                             <a href="${path}/painel/entidades/cadastro" class="btn btn-info float-right"><i
@@ -120,7 +120,7 @@
                                        role="tab" aria-controls="entidades" aria-selected="true">Entidades</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="projetos-tab" data-toggle="tab" href="#projetos" role="tab"
+                                    <a class="nav-link " id="projetos-tab" data-toggle="tab" href="#projetos" role="tab"
                                        aria-controls="projetos" aria-selected="false">Projetos</a>
                                 </li>
                             </ul>
@@ -128,7 +128,7 @@
                                 <div class="tab-pane fade show active" id="entidades" role="tabpanel"
                                      aria-labelledby="entidades-tab">
                                     <c:if test="${empty entidades}">
-                                        <div class="alert alert-danger mt-3" role="alert">
+                                        <div class="alert alert-info mt-3" role="alert">
                                             <p class="text-bold">Não há registro(s) ou .</p>
                                         </div>
                                     </c:if>
@@ -167,7 +167,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="projetos" role="tabpanel" aria-labelledby="projetos-tab">
                                     <c:if test="${empty projetos}">
-                                        <div class="alert alert-danger mt-3" role="alert">
+                                        <div class="alert alert-info mt-3" role="alert">
                                             <p class="text-bold">Não há registro(s) ou .</p>
                                         </div>
                                     </c:if>
@@ -206,7 +206,7 @@
                         <div class="card-header ">
                             <h5 class="card-title">Minhas Solicitações</h5>
                             <c:if test="${empty pedidos}">
-                                <div class="alert alert-danger mt-3" role="alert">
+                                <div class="alert alert-info mt-3" role="alert">
                                     <p class="text-bold">Não há registro(s) ou .</p>
                                 </div>
                             </c:if>
