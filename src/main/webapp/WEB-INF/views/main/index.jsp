@@ -334,7 +334,7 @@
                                             dos serviçõs disponibilizados</p>
                                     </div>
                                     <div class="caption-button" data-animation="animated fadeInUp">
-                                        <a href="#" class="button white">Crie sua conta</a>
+                                        <a href="${path}/login" class="button white">Crie sua conta</a>
                                     </div>
                                 </div>
                                 <div class="col-xs-6 col-md-3">
@@ -359,7 +359,7 @@
                                         <p>Cadastre seus projetos e entidades de maneira simple e facil</p>
                                     </div>
                                     <div class="caption-button" data-animation="animated fadeInUp">
-                                        <a href="#" class="button white">Acesse o painel</a>
+                                        <a href="${path}/login" class="button white">Acesse o painel</a>
                                     </div>
                                 </div>
                                 <div class="col-xs-6 col-md-3">
