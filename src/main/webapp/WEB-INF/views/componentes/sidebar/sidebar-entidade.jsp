@@ -10,10 +10,10 @@
   </div>
   <div class="sidebar-wrapper">
     <ul class="nav">
-      <li class="active ">
+      <li class="active">
         <a href="${path}/painel/dashboard">
           <i class="fas fa-desktop"></i>
-          Dashboard
+          Painel Principal
         </a>
       </li>
       <li>

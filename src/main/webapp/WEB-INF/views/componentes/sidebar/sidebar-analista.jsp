@@ -3,7 +3,7 @@
   <div class="logo">
     <a href="http://www.creative-tim.com" class="simple-text logo-mini">
       <div class="logo-image-small">
-        <img src="../assets/img/logo-small.png">
+        <img src="../assets/img/user-avatar.png">
       </div>
     </a>
     <a href="${path}/painel/perfil" class="logo-normal">Bem vindo, ${usuario.nome}.</a>
@@ -13,7 +13,7 @@
       <li class="active ">
         <a href="${path}/painel/dashboard">
           <i class="fas fa-desktop"></i>
-          Dashboard
+          Painel Principal
         </a>
       </li>
     </ul>
