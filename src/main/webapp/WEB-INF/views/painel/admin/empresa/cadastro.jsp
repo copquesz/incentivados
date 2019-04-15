@@ -33,7 +33,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card">
-              <div class="card-header bg-primary"></div>
+              <div class="card-header bg-info"></div>
               <div class="card-body border">
                 <form action="${path}/painel/empresas/cadastro" method="post" enctype="multipart/form-data" acceptcharset="UTF-8">
                   <fieldset>
@@ -74,11 +74,11 @@
                   </div>
                   </fieldset>
                   <hr class="bg-success">
-                  <button type="submit" class="btn btn-success float-right">Enviar <i class="far fa-share-square"></i></button>
+                  <button type="submit" class="btn btn-info float-right">Enviar <i class="far fa-share-square"></i></button>
                   <a href="${path}/painel/empresas" class="btn btn-danger float-right"><i class="fas fa-angle-double-left"></i> Voltar</a>
                 </form>       
               </div>
-              <div class="card-footer bg-primary"></div>
+              <div class="card-footer bg-info"></div>
             </div>
           </div>
         </div>              

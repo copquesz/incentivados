@@ -33,7 +33,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card">
-              <div class="card-header bg-primary"></div>
+              <div class="card-header bg-info"></div>
               <div class="card-body border"> 
 
                 <div class="row mt-3">
@@ -164,7 +164,7 @@
                   </fieldset>    
 
               </div>
-              <div class="card-footer bg-primary"></div>
+              <div class="card-footer bg-info"></div>
             </div>
           </div>
         </div>              

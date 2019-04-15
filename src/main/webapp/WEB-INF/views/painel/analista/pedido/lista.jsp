@@ -56,7 +56,7 @@
                   <div class="col-12">
                     <!-- MSG DE VAZIO -->
                     <c:if test = "${empty pedidos}">
-                      <div class="alert alert-danger mt-3" role="alert">
+                      <div class="alert alert-info mt-3" role="alert">
                         <p class="text-bold">Não há registro(s) ou .</p>
                       </div>
                     </c:if>      

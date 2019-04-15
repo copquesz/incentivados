@@ -77,7 +77,7 @@
                     <c:if test = "${empty pendentes}">
                       <div class="row mt-2">
                           <div class="col-12">
-                            <div class="alert alert-danger" role="alert">
+                            <div class="alert alert-info" role="alert">
                               <p class="text-bold">Não há registro(s).</p>
                             </div>
                           </div>
@@ -121,7 +121,7 @@
                     <c:if test = "${empty aprovados}">
                       <div class="row mt-2">
                         <div class="col-12">
-                          <div class="alert alert-danger" role="alert">
+                          <div class="alert alert-info" role="alert">
                             <p class="text-bold">Não há registro(s).</p>
                           </div>
                         </div>
@@ -163,7 +163,7 @@
                     <c:if test = "${empty recusados}">
                       <div class="row mt-2">
                         <div class="col-12">
-                          <div class="alert alert-danger" role="alert">
+                          <div class="alert alert-info" role="alert">
                             <p class="text-bold">Não há registro(s).</p>
                           </div>
                         </div>

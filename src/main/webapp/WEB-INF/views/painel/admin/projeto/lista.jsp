@@ -57,7 +57,7 @@
                     <hr>
                     <!-- MSG DE VAZIO -->
                     <c:if test = "${empty projetos}">
-                      <div class="alert alert-danger" role="alert">
+                      <div class="alert alert-info" role="alert">
                         <p class="text-bold">Não há registro(s) ou .</p>
                       </div>
                     </c:if>

@@ -33,7 +33,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card">
-              <div class="card-header bg-primary"></div>
+              <div class="card-header bg-info"></div>
               <div class="card-body border">
                 <fieldset>
                 <legend class="text-primary">Informações Gerais:</legend>
@@ -77,7 +77,7 @@
                 <div class="row justify-content-start">
                   <c:if test = "${empty empresa.analistas}">
                     <div class="col-12">
-                      <div class="alert alert-danger p-3" role="alert">
+                      <div class="alert alert-info p-3" role="alert">
                         <p class="text-bold">Não há registro(s) ou .</p>
                       </div>
                     </div>
@@ -110,9 +110,9 @@
                 </fieldset>
                 <hr class="bg-success">
                 <a href="${path}/painel/empresas" class="btn btn-danger float-right"><i class="fas fa-angle-double-left"></i> Voltar</a>
-                <a href="${path}/painel/empresas/${empresa.nomeFantasia}/analistas/cadastro" class="btn btn-default mr-5 float-right">Cadastrar Analista</a>
+                <a href="${path}/painel/empresas/${empresa.nomeFantasia}/analistas/cadastro" class="btn btn-info mr-5 float-right">Cadastrar Analista</a>
               </div>
-              <div class="card-footer bg-primary"></div>
+              <div class="card-footer bg-info"></div>
             </div>
           </div>
         </div>              

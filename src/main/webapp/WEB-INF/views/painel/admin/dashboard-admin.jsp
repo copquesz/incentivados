@@ -10,7 +10,7 @@
   <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Incentivados - Dashboard
+    Incentivados - Painel
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -38,7 +38,7 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="far fa-address-card text-default"></i>
+                      <i class="far fa-address-card text-info"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
@@ -63,7 +63,7 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="fas fa-project-diagram text-default"></i>
+                      <i class="fas fa-project-diagram text-info"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
@@ -88,7 +88,7 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="fas fa-hand-holding-heart text-default"></i>
+                      <i class="fas fa-hand-holding-heart text-info"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
@@ -164,7 +164,7 @@
                 <div class="tab-content" id="myTabContent">
                   <div class="tab-pane fade show active" id="entidades" role="tabpanel" aria-labelledby="entidades-tab"> 
                     <c:if test = "${empty entidades}">
-                      <div class="alert alert-danger" role="alert">
+                      <div class="alert alert-info" role="alert">
                         <p class="text-bold">Não há registro(s) ou .</p>
                       </div>
                     </c:if>      
@@ -187,7 +187,7 @@
                                 <td>${entidade.nomeFantasia}</td>
                                 <td>${entidade.cnpj}</td>
                                 <td class="text-center">
-                                  <a href="${path}/painel/entidades/${entidade.id}" class="btn btn-default btn-circle" title="Visualizar"><i class="fas fa-file-alt"></i></a>
+                                  <a href="${path}/painel/entidades/${entidade.id}" class="btn btn-info btn-circle" title="Visualizar"><i class="fas fa-file-alt"></i></a>
                                 </td>
                               </tr>
                             </c:forEach>
@@ -198,7 +198,7 @@
                   </div>
                   <div class="tab-pane fade" id="projetos" role="tabpanel" aria-labelledby="projetos-tab">
                     <c:if test = "${empty projetos}">
-                      <div class="alert alert-danger mt-3" role="alert">
+                      <div class="alert alert-info mt-3" role="alert">
                         <p class="text-bold">Não há registro(s) ou .</p>
                       </div>
                     </c:if>
@@ -212,7 +212,7 @@
                           </div>
                           <div class="col-6 col-lg-8 col-md-12 col-sm-12">
                             <h3>${projeto.titulo} @ ${projeto.entidade.nomeFantasia}</h3>
-                            <hr class="bg-default">    
+                            <hr class="bg-info">
                             <p class="lead">${projeto.objetivo}</p>
                             <p class="text-center">
                               <button type="button" class="btn btn-primary">Ver Detalhes</button>
