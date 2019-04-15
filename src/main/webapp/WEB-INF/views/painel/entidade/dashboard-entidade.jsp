@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>
-        Incentivados - Dashboard
+        Incentivados - Painel
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>
@@ -20,7 +20,7 @@
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <!-- CSS Files -->
     <link href="${path}/assets/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="${path}/assets/css/paper-dashboard.css?v=2.0.0" rel="stylesheet"/>
+    <link href="${path}/assets/css/paper-dashboard.css" rel="stylesheet"/>
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="${path}/assets/css/style.css" rel="stylesheet"/>
 </head>
@@ -40,7 +40,7 @@
                             <div class="row">
                                 <div class="col-5 col-md-4">
                                     <div class="icon-big text-center icon-warning">
-                                        <i class="far fa-address-card text-default"></i>
+                                        <i class="far fa-address-card text-info"></i>
                                     </div>
                                 </div>
                                 <div class="col-7 col-md-8">
@@ -62,7 +62,7 @@
                             <div class="row">
                                 <div class="col-5 col-md-4">
                                     <div class="icon-big text-center icon-warning">
-                                        <i class="fas fa-project-diagram text-default"></i>
+                                        <i class="fas fa-project-diagram text-info"></i>
                                     </div>
                                 </div>
                                 <div class="col-7 col-md-8">
@@ -84,7 +84,7 @@
                             <div class="row">
                                 <div class="col-5 col-md-4">
                                     <div class="icon-big text-center icon-warning">
-                                        <i class="fas fa-hand-holding-heart text-default"></i>
+                                        <i class="fas fa-hand-holding-heart text-info"></i>
                                     </div>
                                 </div>
                                 <div class="col-7 col-md-8">
@@ -109,7 +109,7 @@
                                 <a href="${path}/painel/projetos/cadastro" class="btn btn-default float-right"><i
                                         class="fas fa-plus mr-2"></i> Cadastrar Projeto</a>
                             </c:if>
-                            <a href="${path}/painel/entidades/cadastro" class="btn btn-default float-right"><i
+                            <a href="${path}/painel/entidades/cadastro" class="btn btn-info float-right"><i
                                     class="fas fa-plus mr-2"></i> Cadastrar Entidade</a>
                             <h5 class="card-title">Meus Cadastros</h5>
                         </div>
