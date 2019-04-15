@@ -39,7 +39,7 @@
                 <div class="d-flex justify-content-end">
                   <div class="row">
                     <div class="col-12">
-                      <a href="${path}/painel/incentivos-fiscais/cadastro" class="btn btn-default mr-5">Novo</a>
+                      <a href="${path}/painel/incentivos-fiscais/cadastro" class="btn btn-info mr-5">Novo</a>
                     </div>
                   </div>                  
                   <div class="row">
