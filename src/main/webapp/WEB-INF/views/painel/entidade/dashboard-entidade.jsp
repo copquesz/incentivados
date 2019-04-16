@@ -128,15 +128,13 @@
                                 <div class="tab-pane fade show active" id="entidades" role="tabpanel"
                                      aria-labelledby="entidades-tab">
                                     <c:if test="${empty entidades}">
-                                        <div class="col-12">
-                                            <div class="alert alert-info alert-with-icon alert-dismissible fade show" data-notify="container">
+                                            <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
                                                 <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
                                                     <i class="nc-icon nc-simple-remove"></i>
                                                 </button>
                                                 <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
                                                 <span data-notify="message">Não há nenhuma entidade cadastrada</span>
                                             </div>
-                                        </div>
                                     </c:if>
                                     <c:if test="${not empty entidades}">
                                         <div class="table-responsive">
@@ -173,7 +171,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="projetos" role="tabpanel" aria-labelledby="projetos-tab">
                                     <c:if test="${empty projetos}">
-                                        <div class="col-12">
+                                        <div class="col-12 mt-2">
                                             <div class="alert alert-info alert-with-icon alert-dismissible fade show" data-notify="container">
                                                 <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
                                                     <i class="nc-icon nc-simple-remove"></i>

@@ -37,6 +37,12 @@
 
 <body data-spy="scroll" data-target="#primary-menu">
 
+<!--EFEITO DE ONDAS/-->
+<div id="flow">
+    <span class="flow-1"></span>
+    <span class="flow-2"></span>
+    <span class="flow-3"></span>
+</div>
 <%--PRELOADER Desativado--%>
 <%--    <div class="preloader">--%>
 <%--        <div class="sk-folding-cube">--%>
@@ -131,12 +137,7 @@
     </div>
 </div>
 
-<!--EFEITO DE ONDAS/-->
-<div id="flow">
-    <span class="flow-1"></span>
-    <span class="flow-2"></span>
-    <span class="flow-3"></span>
-</div>
+
 
 <!--HEADER-->
 <header class="header-area bg-default full-height relative v-center" id="home-page">
