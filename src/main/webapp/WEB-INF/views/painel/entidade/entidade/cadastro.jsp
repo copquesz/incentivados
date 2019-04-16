@@ -165,8 +165,8 @@
                                 <fieldset class="mt-5 mb-5">
                                     <legend class="text-primary">Arquivos:</legend>
                                     <hr class="bg-primary">
-                                    <div class="row justify-content-center">
-                                        <div class=" col-md-6 col-lg-2 text-center mt-5">
+                                    <div class="row justify-content-center'">
+                                        <div class=" col-md-6 col-lg-4 text-center mt-5">
                                             <div class="form-group">
                                                 <label for="logo"><i class="far fa-file-image text-primary"
                                                                      style="font-size: 56px;"></i></label>
@@ -176,10 +176,10 @@
                                                        onchange="validaImg(this, this.id)" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-lg-2 text-center mt-5">
+                                        <div class="col-md-6 col-lg-4 text-center mt-5">
                                             <div class="form-group">
-                                                <label for="ata-eleicao"><i class="far fa-file-pdf text-primary"
-                                                                            style="font-size: 56px;"></i></label>
+                                                <label for="ata-eleicao">
+                                                    <i class="far fa-file-pdf text-primary"style="font-size: 56px;"></i></label>
                                                 <hr>
                                                 <h5 class="text-center">Ata de Eleição</h5>
                                                 <input type="file" id="ata-eleicao"
@@ -187,7 +187,7 @@
                                                        onchange="validaPdf(this, this.id)" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-lg-2 text-center mt-5">
+                                        <div class="col-md-6 col-lg-4 text-center mt-5">
                                             <div class="form-group">
                                                 <label for="estatuto-social"><i class="far fa-file-pdf text-primary"
                                                                                 style="font-size: 56px;"></i></label>
@@ -198,7 +198,7 @@
                                                        onchange="validaPdf(this, this.id)" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-lg-2 text-center mt-5">
+                                        <div class="col-md-6 col-lg-4 text-center mt-5">
                                             <div class="form-group">
                                                 <label for="identidade"><i class="far fa-file-pdf text-primary"
                                                                            style="font-size: 56px;"></i></label>
@@ -209,10 +209,11 @@
                                                        onchange="validaImgPdf(this, this.id)" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-12 col-lg-2 text-center mt-5">
+                                        <div class="col-md-12 col-lg-4 text-center mt-5">
                                             <div class="form-group">
-                                                <label for="cartao-cnpj"><i class="far fa-file-pdf text-primary"
-                                                                            style="font-size: 56px;"></i></label>
+                                                <label for="cartao-cnpj">
+                                                    <i class="far fa-file-pdf text-primary" style="font-size: 56px;"></i>
+                                                </label>
                                                 <hr>
                                                 <h5 class="text-center">Cartão CNPJ</h5>
                                                 <input type="file" id="cartao-cnpj"
