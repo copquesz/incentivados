@@ -110,3 +110,11 @@ html {
 	height: 2.5rem;
 	width: 2.5rem;
 }
+
+.bg-blue {
+	background-color: #051832;
+}
+
+body{
+	overflow: hidden;
+}

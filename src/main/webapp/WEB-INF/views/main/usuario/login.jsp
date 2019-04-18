@@ -21,13 +21,7 @@
     <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="assets/css/style.css" rel="stylesheet"/>
     <link rel="stylesheet" href="${path}/main/css/normalize.css">
-    <style type="text/css">
-        .bg-blue {
-            background-color: #051832;
-        }
-    </style>
 </head>
-
 <body class="bg-blue">
 <div class="container h-100">
     <div class="d-flex justify-content-center h-100">
