@@ -146,7 +146,7 @@
                     </fieldset>
                 </div>
                 <div class="modal-footer">
-                    <button type="su" class="btn btn-info">Enviar</button>
+                    <button type="su" class="btn btn-info">Cadastrar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
                 </div>
             </form>

@@ -171,15 +171,14 @@
                                 </div>
                                 <div class="tab-pane fade" id="projetos" role="tabpanel" aria-labelledby="projetos-tab">
                                     <c:if test="${empty projetos}">
-                                        <div class="col-12 mt-2">
-                                            <div class="alert alert-info alert-with-icon alert-dismissible fade show" data-notify="container">
+
+                                            <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
                                                 <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
                                                     <i class="nc-icon nc-simple-remove"></i>
                                                 </button>
                                                 <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
-                                                <span data-notify="message">Não há nenhuma solicitação</span>
+                                                <span data-notify="message">Não há nenhum projeto cadastrado</span>
                                             </div>
-                                        </div>
                                     </c:if>
                                     <c:if test="${not empty projetos}">
                                         <c:forEach var="projeto" items="${projetos}">

@@ -61,8 +61,12 @@
                   <div class="col-12">
                     <!-- MSG DE VAZIO -->
                     <c:if test = "${empty incentivosFiscais}">
-                      <div class="alert alert-danger" role="alert">
-                        <p class="text-bold">Não há registro(s) ou .</p>
+                      <div class="alert alert-info alert-with-icon alert-dismissible fade show" data-notify="container">
+                        <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                          <i class="nc-icon nc-simple-remove"></i>
+                        </button>
+                        <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
+                        <span data-notify="message">Não há nenhum incentivo fiscal cadastrado</span>
                       </div>
                     </c:if>
                     <c:if test = "${not empty incentivosFiscais}">  
