@@ -14,7 +14,7 @@
     <title>Home</title>
     <!-- Place favicon.ico in the root directory -->
     <link rel="apple-touch-icon" href="${path}/main/images/apple-touch-icon.png">
-    <link rel="shortcut icon" type="image/ico" href="${path}/main/images/favicon.ico"/>
+    <link rel="shortcut icon" type="image/ico" href="${path}/main/images/logoIncentivadoscolor.png"/>
     <!-- Plugin-CSS -->
     <link rel="stylesheet" href="${path}/main/css/bootstrap.min.css">
     <link rel="stylesheet" href="${path}/main/css/owl.carousel.min.css">
@@ -80,63 +80,11 @@
                 <li><a href="#plataforma">Plataforma</a></li>
                 <li><a href="#faq-page">FAQ</a></li>
                 <li><a href="#contact-page">Contato</a></li>
-                <li><a href="#" data-toggle="modal" data-target="#modalLogin">Login</a></li>
-
+                <li><a href="${path}/login">Login</a></li>
             </ul>
         </nav>
     </div>
 </div>
-
-<!-- Modal -->
-<div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="container">
-                    <div class="row ">
-                        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-                            <div class="card card-signin my-5">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Sign In</h5>
-                                    <form class="form-signin">
-                                        <div class="form-label-group">
-                                            <input type="email" id="inputEmail" class="form-control"
-                                                   placeholder="Email" required autofocus>
-                                            <label for="inputEmail">Email</label>
-                                        </div>
-
-                                        <div class="form-label-group">
-                                            <input type="password" id="inputPassword" class="form-control"
-                                                   placeholder="Senha" required>
-                                            <label for="inputPassword">Senha</label>
-                                        </div>
-
-                                        <div class="custom-control custom-checkbox mb-3">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                            <label class="custom-control-label" for="customCheck1">
-                                                Remember password</label>
-                                        </div>
-                                        <button class="btn btn-lg btn-primary btn-block text-uppercase"
-                                                type="submit">Entrar
-                                        </button>
-                                        <hr class="my-4">
-                                        <button class="btn btn-lg btn-primary btn-block text-uppercase"
-                                                type="submit">Cadastre-se
-                                        </button>
-                                        <hr class="my-4">
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
 
 
 <!--HEADER-->

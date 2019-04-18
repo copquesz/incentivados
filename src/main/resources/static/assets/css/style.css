@@ -3,6 +3,11 @@ html {
 	margin: 0;
 	padding: 0;
 	height: 100%;
+
+}
+
+body{
+	overflow: hidden;
 }
 
 .bold{
@@ -109,4 +114,12 @@ html {
 .logo-entidade{
 	height: 2.5rem;
 	width: 2.5rem;
+}
+
+.bg-blue {
+	background-color: #051832;
+}
+
+login_btn:hover{
+	background-color: #00bbff;
 }
