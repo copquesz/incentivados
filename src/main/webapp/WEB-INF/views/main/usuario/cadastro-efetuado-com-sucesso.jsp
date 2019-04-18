@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
-<html lang="pt-br">
+<html lang="pt-br"/>
 
 <head>
   <meta charset="utf-8" />
@@ -29,7 +29,12 @@
          <p class="lead">Olá <strong>${usuario.nome}</strong>, seu cadastro foi realizado com sucesso em nossa plataforma.</p>
          <p class="lead">Agora você está apto para cadastrar sua entidade e seus respectivos projetos na plataforma <strong>INCENTIVADOS</strong>.</p>
          <hr>
-         <p class="mb-0 lead">Clique<a class="text-white" href="${path}/login"><strong> <u>aqui</u></strong></a> para acessar a plataforma!</p>
+         <c:if test="${redirect eq ''}">
+          <p class="mb-0 lead">Clique<a class="text-white" href='${path}/login'><strong> <u>aqui</u></strong></a> para acessar a plataforma!</p>
+         </c:if>
+         <c:if test="${redirect ne ''}">
+          <p class="mb-0 lead">Clique<a class="text-white" href='${path}/login?redirect=${redirect}'><strong> <u>aqui</u></strong></a> para acessar a plataforma!</p>
+         </c:if>
        </div>
      </div>    
   </div>
@@ -48,7 +53,6 @@
   <!-- CUSTOM SCRIPT -->
   <script type="text/javascript" src="${path}/assets/js/cpf-validator.js"></script>
   <script type="text/javascript" src="${path}/assets/js/script.js"></script>
-  </script>
 </body>
 
 </html>

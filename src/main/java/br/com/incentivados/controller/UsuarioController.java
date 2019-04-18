@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -19,84 +20,83 @@ import java.util.Optional;
 @Controller
 public class UsuarioController {
 
-	@Autowired
-	private UsuarioService usuarioService;
+    @Autowired
+    private UsuarioService usuarioService;
 
-	private String path;
+    private String path;
 
-	@GetMapping("/usuarios/cadastro")
-	public String getCadastrar(HttpServletRequest request, Model model) {
+    @GetMapping("/usuarios/cadastro")
+    public String getCadastrar(HttpServletRequest request, Model model) {
 
-		// Seta o path da requisição
-		path = request.getContextPath();
-		model.addAttribute("path", path);
-		
-		System.out.println("URL: " + request.getServletPath());
+        // Seta o path da requisição
+        path = request.getContextPath();
+        model.addAttribute("path", path);
 
-		TipoUsuario[] tiposUsuario = TipoUsuario.values();
-		model.addAttribute("tiposUsuario", tiposUsuario);
+        System.out.println("URL: " + request.getServletPath());
 
-		return "main/usuario/cadastro";
-	}
+        TipoUsuario[] tiposUsuario = TipoUsuario.values();
+        model.addAttribute("tiposUsuario", tiposUsuario);
 
-	@PostMapping("/usuarios/cadastro")
-	public String postCadastrar(Usuario usuario, HttpServletRequest request, Model model) {
+        return "main/usuario/cadastro";
+    }
 
-		// Seta o path da requisição
-		path = request.getContextPath();
-		model.addAttribute("path", path);
+    @PostMapping("/usuarios/cadastro")
+    public String postCadastrar(@RequestParam(required = false, defaultValue = "") String redirect, Usuario usuario, HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
 
-		try {
-			usuarioService.save(usuario);
-			model.addAttribute("usuarioCadastrado", true);
-			return "main/usuario/cadastro-efetuado-com-sucesso";
-		} catch (Exception e) {
-			System.out.println(e);
-			return "main/usuario/cadastro-sem-sucesso";
-		}
-	}	
+        // Seta o path da requisição
+        path = request.getContextPath();
+        model.addAttribute("path", path);
+        model.addAttribute("redirect", redirect);
+        try {
+            usuarioService.save(usuario);
+            return "main/usuario/cadastro-efetuado-com-sucesso";
+        } catch (Exception e) {
+            System.out.println(e);
+            return "main/usuario/cadastro-sem-sucesso";
+        }
+    }
 
-	@GetMapping("/usuarios/{id}")
-	public String getPerfilById(@PathVariable Long id, HttpServletRequest request, Model model) {
+    @GetMapping("/usuarios/{id}")
+    public String getPerfilById(@PathVariable Long id, HttpServletRequest request, Model model) {
 
-		// Seta o path da requisição
-		path = request.getContextPath();
-		model.addAttribute("path", path);
+        // Seta o path da requisição
+        path = request.getContextPath();
+        model.addAttribute("path", path);
 
-		try {
-			Optional<Usuario> usuario = usuarioService.findById(id);
-			model.addAttribute("usuario", usuario.get());
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+        try {
+            Optional<Usuario> usuario = usuarioService.findById(id);
+            model.addAttribute("usuario", usuario.get());
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
 
-		return "usuario/perfil";
-	}
+        return "usuario/perfil";
+    }
 
-	@GetMapping("/usuarios")
-	public String getListar(@RequestParam(required = false) String n, HttpServletRequest request, Model model) {
+    @GetMapping("/usuarios")
+    public String getListar(@RequestParam(required = false) String n, HttpServletRequest request, Model model) {
 
-		// Seta o path da requisição
-		path = request.getContextPath();
-		model.addAttribute("path", path);
+        // Seta o path da requisição
+        path = request.getContextPath();
+        model.addAttribute("path", path);
 
-		List<Usuario> usuarios = new ArrayList<>();
+        List<Usuario> usuarios = new ArrayList<>();
 
-		try {
-			// Verifica se possui parâmetro de busca
-			if (n.equals("")) {
-				usuarios = usuarioService.findAll();
-			} else {
-				usuarios = usuarioService.findByNomeContains(n);
-			}
+        try {
+            // Verifica se possui parâmetro de busca
+            if (n.equals("")) {
+                usuarios = usuarioService.findAll();
+            } else {
+                usuarios = usuarioService.findByNomeContains(n);
+            }
 
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
 
-		model.addAttribute("usuarios", usuarios);
+        model.addAttribute("usuarios", usuarios);
 
-		return "main/usuario/listar";
-	}
+        return "main/usuario/listar";
+    }
 
 }
