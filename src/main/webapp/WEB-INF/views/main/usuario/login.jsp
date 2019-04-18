@@ -27,7 +27,7 @@
     <div class="d-flex justify-content-center h-100">
         <div class="login_card">
             <div class="d-flex justify-content-center">
-                <div class="login_image">
+                <div class="login_image bg-white" style= "border: 1.5px solid #051832!important">
                     <img src="${path}/assets/img/usuario.jpg" class="login_user_image" alt="Logo">
                 </div>
             </div>

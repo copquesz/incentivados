@@ -3,6 +3,11 @@ html {
 	margin: 0;
 	padding: 0;
 	height: 100%;
+
+}
+
+body{
+	overflow: hidden;
 }
 
 .bold{
@@ -115,6 +120,6 @@ html {
 	background-color: #051832;
 }
 
-body{
-	overflow: hidden;
+login_btn:hover{
+	background-color: #00bbff;
 }
