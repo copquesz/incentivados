@@ -14,7 +14,7 @@
     <title>Home</title>
     <!-- Place favicon.ico in the root directory -->
     <link rel="apple-touch-icon" href="${path}/main/images/apple-touch-icon.png">
-    <link rel="shortcut icon" type="image/ico" href="${path}/main/images/favicon.ico"/>
+    <link rel="shortcut icon" type="image/ico" href="${path}/main/images/logoIncentivadoscolor.png"/>
     <!-- Plugin-CSS -->
     <link rel="stylesheet" href="${path}/main/css/bootstrap.min.css">
     <link rel="stylesheet" href="${path}/main/css/owl.carousel.min.css">
