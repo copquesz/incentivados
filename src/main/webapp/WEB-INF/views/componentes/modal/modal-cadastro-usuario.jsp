@@ -12,7 +12,7 @@
             </div>
             <form action="${path}/usuarios/cadastro" method="post" acceptcharset="UTF-8">
                 <div class="modal-body">
-                    <input type="text" name="redirect" value="${redirect}">
+                    <input type="hidden" name="redirect" value="${redirect}">
                     <input type="hidden" name="tipoUsuario" value="ENTIDADE">
                     <fieldset>
                         <legend>Informações Gerais:</legend>
