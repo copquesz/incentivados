@@ -37,7 +37,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header ">
-                            <h5 class="card-title">Pedidos Cadastrado(s): </h5>
+                            <h5 class="card-title">Projetos Cadastrado(s): </h5>
                             <div class="d-flex justify-content-end">
                                 <div class="row">
                                     <div class="col-12">
