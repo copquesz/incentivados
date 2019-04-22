@@ -184,7 +184,7 @@ public class ProjetoController {
 				List<Projeto> projetos = new ArrayList<Projeto>();
 				projetos = projetoService.findByUsuario(usuario);
 				model.addAttribute("projetos", projetos);
-				model.addAttribute("qtdProjetos", projetoService.countByUsuario(usuariogit st));
+				model.addAttribute("qtdProjetos", projetoService.countByUsuario(usuario));
 				return "painel/entidade/projeto/lista";
 			}
 
