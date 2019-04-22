@@ -37,7 +37,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header ">
-                            <h5 class="card-title">Projetos Cadastrado(s): </h5>
+                            <h5 class="card-title">Projetos Cadastrado(s): ${qtdProjetos}</h5>
                             <div class="d-flex justify-content-end">
                                 <div class="row">
                                     <div class="col-12">
@@ -45,8 +45,7 @@
                                             <div class="form-group mx-sm-3 mb-2">
                                                 <input type="text" class="form-control" placeholder="Pesquisar por.."
                                                        name="n">
-                                            </div>
-                                            <div class="form-group mb-2">
+                                            </div>                                            <div class="form-group mb-2">
                                                 <button type="submit" class="btn btn-primary mb-2"><i
                                                         class="fas fa-search"></i></button>
                                             </div>
