@@ -3,7 +3,7 @@
   <div class="logo">
     <a href="http://www.creative-tim.com" class="simple-text logo-mini">
       <div class="logo-image-small">
-        <img src="../../assets/img/user-avatar.png">
+        <img src="${path}/assets/img/user-avatar.png">
       </div>
     </a>
     <a href="${path}/perfil" class="logo-normal">Bem vindo, ${usuario.nome}.</a>

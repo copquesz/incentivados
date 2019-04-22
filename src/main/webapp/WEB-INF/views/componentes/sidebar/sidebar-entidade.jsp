@@ -3,7 +3,7 @@
   <div class="logo">
     <a href="#" class="simple-text logo-mini">
       <div class="logo-image-small">
-        <img src="../assets/img/user-avatar.png" style="color: #00bbff">
+        <img src="${path}/assets/img/user-avatar.png" style="color: #00bbff">
       </div>
     </a>
     <a href="${path}/painel/perfil" class="logo-normal">Bem vindo, ${usuario.nome}.</a>
