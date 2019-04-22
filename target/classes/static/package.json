@@ -1,0 +1,22 @@
+{
+  "name": "incentivados",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "sass --watch static/assets/scss -o static/assets/css "
+  },
+  "author": "Lucas Copque",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.2.1",
+    "jquery": "^3.3.1",
+    "jquery-file-upload": "^4.0.11",
+    "jquery.maskedinput": "^1.4.1",
+    "popper.js": "^1.14.7"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.7.1"
+  }
+}

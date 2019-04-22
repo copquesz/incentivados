@@ -1,4 +1,4 @@
-/target/
+git/target/
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
@@ -36,3 +36,4 @@ application.properties
 /src/main/webapp/documentos/
 /src/main/resources/application.properties
 /classes/
+!/src/main/resources/static/node_modules/
