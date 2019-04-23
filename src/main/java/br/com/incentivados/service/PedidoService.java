@@ -84,19 +84,24 @@ public class PedidoService {
 		return pedidoRepository.count();
 	}
 
-	// Serviço que contabiliza todos os PEDIDOS por STATUS
-	public Long countByStatus(StatusPedido status) {
-		return pedidoRepository.countByStatus(status);
-	}
-
 	// Serviço que contabiliza todos os PEDIDOS por USUÁRIO
 	public Long countByUsuario(Usuario usuario) {
 		return pedidoRepository.countByUsuario(usuario);
 	}
 
+	// Serviço que contabiliza todos os PEDIDOS por EMPRESA
+	public Long countByEmpresa(Empresa empresa) {
+		return pedidoRepository.countByEmpresa(empresa);
+	}
+
 	// Serviço que contabiliza todos os PEDIDOS por ANALISTA
 	public Long countByAnalista(Usuario analista) {
 		return pedidoRepository.countByAnalista(analista);
+	}
+
+	// Serviço que contabiliza todos os PEDIDOS por STATUS
+	public Long countByStatus(StatusPedido status) {
+		return pedidoRepository.countByStatus(status);
 	}
 
 	// Serviço que contabiliza todos os PEDIDOS por ANALISTA e STATUS
