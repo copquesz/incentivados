@@ -6,7 +6,7 @@
         <img src="${path}/assets/img/user-avatar.png">
       </div>
     </a>
-    <a href="${path}/perfil" class="logo-normal">Bem vindo, ${usuario.nome}.</a>
+    <a href="${path}/painel/perfil" class="logo-normal">Bem vindo, ${usuario.nome}.</a>
   </div>
   <div class="sidebar-wrapper">
     <ul class="nav">
