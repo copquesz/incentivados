@@ -32,13 +32,13 @@ public class EmpresaService {
 
 		return empresaRepository.save(empresa);
 	}
-	
-	public Empresa update(Empresa empresa) {
-		return empresaRepository.save(empresa);
-	}
 
 	public boolean existsbyCnpj(String cnpj) {
 		return empresaRepository.existsByCnpj(cnpj);
+	}
+	
+	public Empresa update(Empresa empresa) {
+		return empresaRepository.save(empresa);
 	}
 	
 	public Optional<Empresa> findById(Long id) {
@@ -53,16 +53,20 @@ public class EmpresaService {
 		return empresaRepository.findByNomeFantasia(nomeFantasia);
 	}
 
-	public String upload(HttpServletRequest request, MultipartFile arquivo, String nomeArquivo, String url) {
-		return FileUpload.upload(request, arquivo, nomeArquivo, url);
-	}
-
 	public List<Empresa> findAll() {
 		return empresaRepository.findAll();
 	}
 
 	public List<Empresa> findByNomeFantasiaContains(String nomeFantasia) {
 		return empresaRepository.findByNomeFantasiaContains(nomeFantasia);
+	}
+
+	public Long count(){
+		return empresaRepository.count();
+	}
+
+	public String upload(HttpServletRequest request, MultipartFile arquivo, String nomeArquivo, String url) {
+		return FileUpload.upload(request, arquivo, nomeArquivo, url);
 	}
 
 }
