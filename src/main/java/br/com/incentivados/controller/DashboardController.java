@@ -137,9 +137,7 @@ public class DashboardController {
 
 		case EMPRESA:
 
-
-
-			return "";
+			return "painel/entidade/dashboard-";
 
 		case ENTIDADE:
 
