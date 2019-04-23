@@ -19,9 +19,8 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long>{
 	Optional<Pedido> findById(Long id);
 	
 	List<Pedido> findByUsuario(Usuario usuario);
-	List<Pedido> findByAnalistaAndStatus(Usuario analista, StatusPedido status, Pageable page);
 	List<Pedido> findAllByEmpresa(Empresa empresa);
-	List<Pedido> findAllByAnalistaAndStatus(Usuario analista, StatusPedido status);
+	List<Pedido> findAllByAnalistaAndStatus(Usuario analista, StatusPedido status, Pageable page);
 	
 	Long countByUsuario(Usuario usuario);
 	Long countByEmpresa(Empresa empresa);

@@ -64,11 +64,6 @@ public class PedidoService {
         return pedidoRepository.findByUsuario(usuario);
     }
 
-    // Serviço de buscar PEDIDO pelo USUÁRIO
-    public List<Pedido> findByAnalistaAndStatus(Usuario analista, StatusPedido status, Pageable page) {
-        return pedidoRepository.findByAnalistaAndStatus(analista, status, page);
-    }
-
     // Serviço de busca todos PEDIDOS
     public List<Pedido> findAll() {
         return pedidoRepository.findAll();
@@ -80,8 +75,8 @@ public class PedidoService {
     }
 
     // Serviço de buscar PEDIDO pelo USUÁRIO e STATUS
-    public List<Pedido> findAllByAnalistaAndStatus(Usuario analista, StatusPedido status) {
-        return pedidoRepository.findAllByAnalistaAndStatus(analista, status);
+    public List<Pedido> findAllByAnalistaAndStatus(Usuario analista, StatusPedido status, Pageable page) {
+        return pedidoRepository.findAllByAnalistaAndStatus(analista, status, page);
     }
 
     // Serviço que contabiliza todos os PEDIDOS

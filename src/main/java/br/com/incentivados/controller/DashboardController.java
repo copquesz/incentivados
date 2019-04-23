@@ -1,13 +1,10 @@
 package br.com.incentivados.controller;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
+
 import java.util.List;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -138,6 +135,12 @@ public class DashboardController {
 		// view
 		switch (usuario.getTipoUsuario()) {
 
+		case EMPRESA:
+
+
+
+			return "";
+
 		case ENTIDADE:
 
 			// Condicional que verifica se o usuário pode cadastrar um projeto
@@ -166,17 +169,17 @@ public class DashboardController {
 			model.addAttribute("qtdPedidos", pedidoService.countByAnalista(usuario));
 
 			// Exibe os pedidos pendentes e a quantidade por analista.
-			model.addAttribute("pendentes", pedidoService.findByAnalistaAndStatus(usuario, StatusPedido.PENDENTE,
+			model.addAttribute("pendentes", pedidoService.findAllByAnalistaAndStatus(usuario, StatusPedido.PENDENTE,
 					PageRequest.of(0, 5, Sort.by(Order.desc("id")))));
 			model.addAttribute("qtdPendente", pedidoService.countByAnalistaAndStatus(usuario, StatusPedido.PENDENTE));
 
 			// Exibe os pedidos aprovados e a quantidade por analista.
-			model.addAttribute("aprovados", pedidoService.findByAnalistaAndStatus(usuario, StatusPedido.APROVADO,
+			model.addAttribute("aprovados", pedidoService.findAllByAnalistaAndStatus(usuario, StatusPedido.APROVADO,
 					PageRequest.of(0, 5, Sort.by(Order.desc("id")))));
 			model.addAttribute("qtdAprovado", pedidoService.countByAnalistaAndStatus(usuario, StatusPedido.APROVADO));
 
 			// Exibe os pedidos reprovados e a quantidade por analista.
-			model.addAttribute("recusados", pedidoService.findByAnalistaAndStatus(usuario, StatusPedido.RECUSADO,
+			model.addAttribute("recusados", pedidoService.findAllByAnalistaAndStatus(usuario, StatusPedido.RECUSADO,
 					PageRequest.of(0, 5, Sort.by(Order.desc("id")))));
 			model.addAttribute("qtdRecusado", pedidoService.countByAnalistaAndStatus(usuario, StatusPedido.RECUSADO));
 
