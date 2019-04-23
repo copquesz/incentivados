@@ -35,26 +35,15 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header "> 
-                <h5 class="card-title">Empresas Cadastrada(s): </h5>
-                <div class="d-flex justify-content-end">
-                  <div class="row">
-                    <div class="col-12">
-                      <a href="${path}/painel/empresas/cadastro" class="btn btn-info mr-5">Novo</a>
-                    </div>
-                  </div>                  
-                  <div class="row">
-                    <div class="col-12">
-                      <form class="form-inline">                                          
-                        <div class="form-group mx-sm-3 mb-2">
-                          <input type="text" class="form-control" placeholder="Pesquisar por.." name="chave">
-                        </div>
-                        <div class="form-group mb-2">
-                          <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>
-                        </div>
-                      </form>
-                    </div>
+                <h5 class="card-title">Empresas Cadastrada(s): ${qtdEmpresas}</h5>
+                <div class="row d-flex justify-content-start">
+                  <div class="col-12">
+                    <form class="form-inline">
+                      <input type="text" class="form-control my-auto mr-2" id="" placeholder="Pesquisar">
+                      <button type="submit" class="btn btn-primary my-auto"><i class="fas fa-search"></i></button>
+                    </form>
                   </div>
-                </div>
+                </div>                
               </div>
               <div class="card-body">
                 <div class="row mt-2">
@@ -97,8 +86,8 @@
                   </div>     
                 </div>
               </div>
-              <div class="card-footer">
-                <hr>
+              <div class="card-footer mt-1">
+                <a href="${path}/painel/empresas/cadastro" class="btn btn-info">Cadastrar Empresa</a>
               </div>
             </div>
           </div>          
@@ -114,6 +103,7 @@
   <!--   BOOTSTRAP   -->  
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+  <script type="text/javascript" src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script>
 </body>
 

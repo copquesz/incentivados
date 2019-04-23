@@ -73,20 +73,20 @@
                 </fieldset>                          
 
                 <fieldset class="mt-5">
-                <legend class="text-primary">Analistas:</legend>                  
-                <div class="row justify-content-start">
-                  <c:if test = "${empty empresa.analistas}">
+                <legend class="text-primary">Responsáveis:</legend>                  
+                <div class="row justify-content-start"> 
+                  <c:if test = "${empty empresa.responsaveis}">
                     <div class="col-12">
-                      <div class="alert alert-info alert-with-icon alert-dismissible fade show" data-notify="container">
+                      <div class="alert alert-danger alert-with-icon alert-dismissible fade show" data-notify="container">
                         <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
                           <i class="nc-icon nc-simple-remove"></i>
                         </button>
                         <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
-                        <span data-notify="message">Não há pedidos</span>
+                        <span data-notify="message">Não há responsáveis cadastrados.</span>
                       </div>
                     </div>
-                  </c:if> 
-                  <c:if test = "${not empty empresa.analistas}">
+                  </c:if>                 
+                  <c:if test = "${not empty empresa.responsaveis}">
                     <div class="col-12">
                       <div class="table-responsive">
                         <table class="table">
@@ -97,12 +97,11 @@
                             <th class="border text-center">Loja</th>
                           </thead>
                           <tbody>
-                            <c:forEach var="analista" items="${empresa.analistas}">
+                            <c:forEach var="responsavel" items="${empresa.responsaveis}">
                               <tr>
-                                <td class="border text-center">${analista.nome} ${analista.sobrenome}</td>
-                                <td class="border text-center">${analista.cpf}</td>
-                                <td class="border text-center">${analista.email}</td>
-                                <td class="border text-center" ><strong><i class="far fa-building"></i> ${analista.endereco.bairro}</strong> (${analista.endereco.cidade} - ${analista.endereco.estado})</td>
+                                <td class="border text-center">${responsavel.nome} ${responsavel.sobrenome}</td>
+                                <td class="border text-center">${responsavel.cpf}</td>
+                                <td class="border text-center">${responsavel.email}</td>
                               </tr>
                             </c:forEach>
                           </tbody>
@@ -113,8 +112,16 @@
                 </div>
                 </fieldset>
                 <hr class="bg-success">
-                <a href="${path}/painel/empresas" class="btn btn-danger float-right"><i class="fas fa-angle-double-left"></i> Voltar</a>
-                <a href="${path}/painel/empresas/${empresa.nomeFantasia}/analistas/cadastro" class="btn btn-info mr-5 float-right">Cadastrar Analista</a>
+                <div class="dropdown">
+                  <button class="btn btn-info dropdown-toggle float-left" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Cadastrar
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="${path}/painel/empresas/${empresa.nomeFantasia}/analistas/cadastro">Analista</a>
+                    <a class="dropdown-item" href="#">Responsável</a>
+                  </div>
+                </div>
+                <a href="${path}/painel/empresas" class="btn btn-warning float-left"><i class="fas fa-angle-double-left"></i> Voltar</a>                
               </div>
               <div class="card-footer bg-info"></div>
             </div>
@@ -135,6 +142,7 @@
   <!--   BOOTSTRAP   -->  
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+  <script type="text/javascript" src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script> 
   <!-- API'S -->
   <script type="text/javascript" src="${path}/api/via-cep.js"></script>

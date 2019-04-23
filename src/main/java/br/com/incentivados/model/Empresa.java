@@ -40,6 +40,14 @@ public class Empresa implements Serializable {
 	@JoinColumn(name = "documentos_empresa_id")
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private DocumentosEmpresa documentosEmpresa;
+
+	@ManyToMany(cascade = { CascadeType.ALL })
+	@JoinTable(
+			name = "empresa_has_responsavel",
+			joinColumns = { @JoinColumn(name = "empresa_id") },
+			inverseJoinColumns = { @JoinColumn(name = "usuario_id") }
+	)
+	private List<Usuario> responsaveis;
 	
 	@ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
