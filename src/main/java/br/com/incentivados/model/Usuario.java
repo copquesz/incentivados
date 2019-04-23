@@ -51,6 +51,10 @@ public class Usuario implements Serializable {
 	@JoinColumn(name = "endereco_id")
 	private Endereco endereco;
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "empresa_id")
+	private Empresa empresa;
+
 	public Usuario() {
 		super();
 		this.dataCadastro = new Date();
