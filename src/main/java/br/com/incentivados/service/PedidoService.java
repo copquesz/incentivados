@@ -24,94 +24,99 @@ import br.com.incentivados.utility.FileUpload;
 @Service
 public class PedidoService {
 
-	@Autowired
-	private PedidoRepository pedidoRepository;
+    @Autowired
+    private PedidoRepository pedidoRepository;
 
-	// Serviço de persistência de dados do PEDIDO
-	public Pedido save(Pedido pedido, HttpServletRequest request, Usuario usuario, Usuario analista, Empresa empresa,
-			Entidade entidade) {
+    // Serviço de persistência de dados do PEDIDO
+    public Pedido save(Pedido pedido, HttpServletRequest request, Usuario usuario, Usuario analista, Empresa empresa,
+                       Entidade entidade) {
 
-		String path = "documentos/empresas/" + empresa.getNomeFantasia() + "/pedidos";
-		Arquivo cartaOficio = pedido.getDocumentosPedido().getCartaOficio();
+        String path = "documentos/empresas/" + empresa.getNomeFantasia() + "/pedidos";
+        Arquivo cartaOficio = pedido.getDocumentosPedido().getCartaOficio();
 
-		pedido.setUsuario(usuario);
-		pedido.setAnalista(analista);
-		pedido.setEmpresa(empresa);
-		pedido.setEntidade(entidade);
+        pedido.setUsuario(usuario);
+        pedido.setAnalista(analista);
+        pedido.setEmpresa(empresa);
+        pedido.setEntidade(entidade);
 
-		pedido.getDocumentosPedido().getCartaOficio()
-				.setPath(upload(request, cartaOficio.getFile(),
-						"carta-oficio-" + DateTimeFormatter.ofPattern("ddMMuuuuHHmmss").format(LocalDateTime.now())
-								+ "." + cartaOficio.getFile().getOriginalFilename().split("\\.")[1],
-						path));
+        pedido.getDocumentosPedido().getCartaOficio()
+                .setPath(upload(request, cartaOficio.getFile(),
+                        "carta-oficio-" + DateTimeFormatter.ofPattern("ddMMuuuuHHmmss").format(LocalDateTime.now())
+                                + "." + cartaOficio.getFile().getOriginalFilename().split("\\.")[1],
+                        path));
 
-		return pedidoRepository.save(pedido);
-	}
-	
-	// Serviço de atualizar pedido
-		public Pedido update(Pedido pedido, StatusPedido status) {
-			pedido.setStatus(status);
-			return pedidoRepository.save(pedido);
-		}
+        return pedidoRepository.save(pedido);
+    }
 
-	// Serviço de busca objeto pelo ID
-	public Optional<Pedido> findById(Long id) {
-		return pedidoRepository.findById(id);
-	}
+    // Serviço de atualizar pedido
+    public Pedido update(Pedido pedido, StatusPedido status) {
+        pedido.setStatus(status);
+        return pedidoRepository.save(pedido);
+    }
 
-	// Serviço de busca todos PEDIDOS
-	public List<Pedido> findAll() {
-		return pedidoRepository.findAll();
-	}
+    // Serviço de busca objeto pelo ID
+    public Optional<Pedido> findById(Long id) {
+        return pedidoRepository.findById(id);
+    }
 
-	// Serviço de buscar PEDIDO pelo USUÁRIO
-	public List<Pedido> findByUsuario(Usuario usuario) {
-		return pedidoRepository.findByUsuario(usuario);
-	}
-	
-	// Serviço de buscar PEDIDO pelo USUÁRIO
-		public List<Pedido> findByAnalistaAndStatus(Usuario analista, StatusPedido status, Pageable page) {
-			return pedidoRepository.findByAnalistaAndStatus(analista, status, page);
-		}
+    // Serviço de buscar PEDIDO pelo USUÁRIO
+    public List<Pedido> findByUsuario(Usuario usuario) {
+        return pedidoRepository.findByUsuario(usuario);
+    }
 
-	// Serviço de buscar PEDIDO pelo USUÁRIO
-	public List<Pedido> findAllByAnalistaAndStatus(Usuario analista, StatusPedido status) {
-		return pedidoRepository.findAllByAnalistaAndStatus(analista, status);
-	}
+    // Serviço de buscar PEDIDO pelo USUÁRIO
+    public List<Pedido> findByAnalistaAndStatus(Usuario analista, StatusPedido status, Pageable page) {
+        return pedidoRepository.findByAnalistaAndStatus(analista, status, page);
+    }
 
-	// Serviço que contabiliza todos os PEDIDOS
-	public Long count() {
-		return pedidoRepository.count();
-	}
+    // Serviço de busca todos PEDIDOS
+    public List<Pedido> findAll() {
+        return pedidoRepository.findAll();
+    }
 
-	// Serviço que contabiliza todos os PEDIDOS por USUÁRIO
-	public Long countByUsuario(Usuario usuario) {
-		return pedidoRepository.countByUsuario(usuario);
-	}
+    // Serviço de busca todos PEDIDOS pela EMPRESA
+    public List<Pedido> findAllByEmpresa(Empresa empresa){
+        return pedidoRepository.findAllByEmpresa(empresa);
+    }
 
-	// Serviço que contabiliza todos os PEDIDOS por EMPRESA
-	public Long countByEmpresa(Empresa empresa) {
-		return pedidoRepository.countByEmpresa(empresa);
-	}
+    // Serviço de buscar PEDIDO pelo USUÁRIO e STATUS
+    public List<Pedido> findAllByAnalistaAndStatus(Usuario analista, StatusPedido status) {
+        return pedidoRepository.findAllByAnalistaAndStatus(analista, status);
+    }
 
-	// Serviço que contabiliza todos os PEDIDOS por ANALISTA
-	public Long countByAnalista(Usuario analista) {
-		return pedidoRepository.countByAnalista(analista);
-	}
+    // Serviço que contabiliza todos os PEDIDOS
+    public Long count() {
+        return pedidoRepository.count();
+    }
 
-	// Serviço que contabiliza todos os PEDIDOS por STATUS
-	public Long countByStatus(StatusPedido status) {
-		return pedidoRepository.countByStatus(status);
-	}
+    // Serviço que contabiliza todos os PEDIDOS por USUÁRIO
+    public Long countByUsuario(Usuario usuario) {
+        return pedidoRepository.countByUsuario(usuario);
+    }
 
-	// Serviço que contabiliza todos os PEDIDOS por ANALISTA e STATUS
-	public Long countByAnalistaAndStatus(Usuario analista, StatusPedido status) {
-		return pedidoRepository.countByAnalistaAndStatus(analista, status);
-	}
+    // Serviço que contabiliza todos os PEDIDOS por EMPRESA
+    public Long countByEmpresa(Empresa empresa) {
+        return pedidoRepository.countByEmpresa(empresa);
+    }
 
-	// Serviço de upload de arquivos para o servidor
-	public String upload(HttpServletRequest request, MultipartFile arquivo, String nomeArquivo, String url) {
-		return FileUpload.upload(request, arquivo, nomeArquivo, url);
-	}
+    // Serviço que contabiliza todos os PEDIDOS por ANALISTA
+    public Long countByAnalista(Usuario analista) {
+        return pedidoRepository.countByAnalista(analista);
+    }
+
+    // Serviço que contabiliza todos os PEDIDOS por STATUS
+    public Long countByStatus(StatusPedido status) {
+        return pedidoRepository.countByStatus(status);
+    }
+
+    // Serviço que contabiliza todos os PEDIDOS por ANALISTA e STATUS
+    public Long countByAnalistaAndStatus(Usuario analista, StatusPedido status) {
+        return pedidoRepository.countByAnalistaAndStatus(analista, status);
+    }
+
+    // Serviço de upload de arquivos para o servidor
+    public String upload(HttpServletRequest request, MultipartFile arquivo, String nomeArquivo, String url) {
+        return FileUpload.upload(request, arquivo, nomeArquivo, url);
+    }
 
 }
