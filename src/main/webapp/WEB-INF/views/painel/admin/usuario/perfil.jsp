@@ -86,7 +86,7 @@
                   <div class="col-4">
                     <div class="form-group">
                         <label>CEP:</label>                     
-                        <input type="text" class="form-control" value="${usuario.endereco.cep}" readonly>
+                        <input type="text" class="form-control" value="${usuario.endereco.cep}" placeholder="Não Informado" readonly>
                     </div>
                   </div>
                 </div>
@@ -94,13 +94,13 @@
                   <div class="col-7">
                     <div class="form-group">
                         <label>Logradouro:</label>                      
-                        <input type="text" class="form-control" value="${usuario.endereco.logradouro}" readonly>
+                        <input type="text" class="form-control" value="${usuario.endereco.logradouro}" placeholder="Não Informado" readonly>
                     </div>
                   </div>
                   <div class="col-2">
                     <div class="form-group">
                         <label>Nº:</label>                      
-                        <input type="text" class="form-control" value="${usuario.endereco.numero}" readonly>
+                        <input type="text" class="form-control" value="${usuario.endereco.numero}" placeholder="Não Informado" readonly>
                     </div>
                   </div>
                   <div class="col-3">
@@ -114,19 +114,19 @@
                   <div class="col-4">
                     <div class="form-group">
                         <label>Bairro:</label>                      
-                        <input type="text" class="form-control" id="bairro" value="${usuario.endereco.bairro}" readonly >
+                        <input type="text" class="form-control" id="bairro" value="${usuario.endereco.bairro}" placeholder="Não Informado" readonly >
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="form-group">
                         <label>Cidade</label>                     
-                        <input type="text" class="form-control" id="cidade" value="${usuario.endereco.cidade}" readonly>
+                        <input type="text" class="form-control" id="cidade" value="${usuario.endereco.cidade}" placeholder="Não Informado" readonly>
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="form-group">
                         <label>Estado:</label>                      
-                        <input type="text" class="form-control" id="estado" value="${usuario.endereco.estado}" readonly>
+                        <input type="text" class="form-control" id="estado" value="${usuario.endereco.estado}" placeholder="Não Informado" readonly>
                     </div>
                   </div>
                 </div>
