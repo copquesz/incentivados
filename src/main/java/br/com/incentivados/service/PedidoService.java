@@ -104,6 +104,11 @@ public class PedidoService {
         return pedidoRepository.countByStatus(status);
     }
 
+    // Serviço que contabiliza todos os PEDIDOS por EMPRESA e STATUS
+    public Long countByEmpresaAndStatus(Empresa empresa, StatusPedido status) {
+        return pedidoRepository.countByEmpresaAndStatus(empresa, status);
+    }
+
     // Serviço que contabiliza todos os PEDIDOS por ANALISTA e STATUS
     public Long countByAnalistaAndStatus(Usuario analista, StatusPedido status) {
         return pedidoRepository.countByAnalistaAndStatus(analista, status);
