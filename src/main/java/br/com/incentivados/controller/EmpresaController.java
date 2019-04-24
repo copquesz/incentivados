@@ -22,7 +22,6 @@ public class EmpresaController {
 
 	private EmpresaService empresaService;
 	private UsuarioService usuarioService;
-	private String path;
 
 	@Autowired
 	public EmpresaController(EmpresaService empresaService, UsuarioService usuarioService) {
@@ -35,8 +34,7 @@ public class EmpresaController {
 	public String getCadastrar(HttpServletRequest request, Model model) {
 
 		// Seta o path da requisição
-		path = request.getContextPath();
-		model.addAttribute("path", path);
+		model.addAttribute("path", request.getContextPath());
 		model.addAttribute("breadcrumb", "Empresas " +  " <i class='fas fa-angle-double-right'></i> " +  " Cadastro");
 
 		return "painel/admin/empresa/cadastro";
@@ -46,8 +44,7 @@ public class EmpresaController {
 	public String postCadastrar(Empresa empresa, HttpServletRequest request, Model model) {
 
 		// Seta o path da requisição
-		path = request.getContextPath();
-		model.addAttribute("path", path);
+		model.addAttribute("path", request.getContextPath());
 		model.addAttribute("breadcrumb", "Empresas " +  " <i class='fas fa-angle-double-right'></i> " +  " Cadastro");
 
 		try {
@@ -71,8 +68,7 @@ public class EmpresaController {
 	public String getVisualizar(@PathVariable Long id, HttpServletRequest request, Model model) {
 
 		// Seta o path da requisição
-		path = request.getContextPath();
-		model.addAttribute("path", path);
+		model.addAttribute("path", request.getContextPath());
 		model.addAttribute("breadcrumb", "Empresas " +  " <i class='fas fa-angle-double-right'></i> " +  " Perfil");
 
 		try {
@@ -94,8 +90,7 @@ public class EmpresaController {
 	public String getAnalistaCadastrar(@PathVariable String nomeFantasia, HttpServletRequest request, Model model) {
 
 		// Seta o path da requisição
-		path = request.getContextPath();
-		model.addAttribute("path", path);
+		model.addAttribute("path", request.getContextPath());
 		model.addAttribute("breadcrumb", "Empresas " +  " <i class='fas fa-angle-double-right'></i> " +  " Analistas" +  " <i class='fas fa-angle-double-right'></i> " +  " Cadastro");
 
 		try {
@@ -113,8 +108,7 @@ public class EmpresaController {
 			Model model) {
 
 		// Seta o path da requisição
-		path = request.getContextPath();
-		model.addAttribute("path", path);
+		model.addAttribute("path", request.getContextPath());
 		model.addAttribute("breadcrumb", " Empresas " +  " <i class='fas fa-angle-double-right'></i> " +  " Analistas" +  " <i class='fas fa-angle-double-right'></i> " +  " Cadastro");
 
 		try {

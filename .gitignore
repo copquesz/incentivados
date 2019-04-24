@@ -37,3 +37,4 @@ application.properties
 /src/main/resources/application.properties
 /classes/
 !/src/main/resources/static/node_modules/
+/target/
