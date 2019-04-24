@@ -36,7 +36,7 @@
               <div class="card-header bg-info"></div>
               <div class="card-body border">
                 <form action="${path}/painel/empresas/${empresa.nomeFantasia}/responsavel/cadastro" method="post" acceptcharset="UTF-8">                  
-                  <input type="hidden" class="form-control" name="tipoUsuario" value="ANALISTA">    
+                  <input type="hidden" class="form-control" name="tipoUsuario" value="EMPRESA">    
                   <fieldset class="mt-3 mt-3">
                   <legend>Informações do Analista:</legend>
                   <div class="row">               

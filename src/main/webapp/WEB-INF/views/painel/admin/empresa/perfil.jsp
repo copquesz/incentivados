@@ -73,25 +73,26 @@
                 </fieldset>                          
 
                 <fieldset class="mt-5">
-                <legend class="text-primary">Responsáveis:</legend>                  
+                <legend class="text-primary">Usuários Cadastrados:</legend>                  
                 <div class="row justify-content-start"> 
-                  <c:if test = "${empty empresa.responsaveis}">
+                  <c:if test = "${empty empresa.responsaveis and empty empresa.analistas}">
                     <div class="col-12">
                       <div class="alert alert-danger alert-with-icon alert-dismissible fade show" data-notify="container">
                         <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
                           <i class="nc-icon nc-simple-remove"></i>
                         </button>
                         <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
-                        <span data-notify="message">Não há responsáveis cadastrados.</span>
+                        <span data-notify="message">Não há usuários cadastrados.</span>
                       </div>
                     </div>
                   </c:if>                 
-                  <c:if test = "${not empty empresa.responsaveis}">
+                  <c:if test = "${not empty empresa.responsaveis or not empty empresa.analistas}">
                     <div class="col-12">
                       <div class="table-responsive">
                         <table class="table">
                           <thead class=" text-primary">
                             <th class="border text-center">Nome</th>
+                            <th class="border text-center">Perfil</th>
                             <th class="border text-center">CPF</th>
                             <th class="border text-center">E-mail</th>
                             <th class="border text-center">Loja</th>
@@ -100,8 +101,19 @@
                             <c:forEach var="responsavel" items="${empresa.responsaveis}">
                               <tr>
                                 <td class="border text-center">${responsavel.nome} ${responsavel.sobrenome}</td>
+                                <td class="border text-center">${responsavel.tipoUsuario.descricao}</td>
                                 <td class="border text-center">${responsavel.cpf}</td>
                                 <td class="border text-center">${responsavel.email}</td>
+                                <td class="border text-center">Sede</td>
+                              </tr>
+                            </c:forEach>
+                            <c:forEach var="analista" items="${empresa.analistas}">
+                              <tr>
+                                <td class="border text-center">${analista.nome} ${analista.sobrenome}</td>
+                                <td class="border text-center">${analista.tipoUsuario.descricao}</td>
+                                <td class="border text-center">${analista.cpf}</td>
+                                <td class="border text-center">${analista.email}</td>
+                                <td class="border text-center">${analista.endereco.bairro} (${analista.endereco.cidade} / ${analista.endereco.estado})</td>
                               </tr>
                             </c:forEach>
                           </tbody>
@@ -118,7 +130,7 @@
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="${path}/painel/empresas/${empresa.nomeFantasia}/analistas/cadastro">Analista</a>
-                    <a class="dropdown-item" href="#">Responsável</a>
+                    <a class="dropdown-item" href="${path}/painel/empresas/${empresa.nomeFantasia}/responsavel/cadastro">Responsável</a>
                   </div>
                 </div>
                 <a href="${path}/painel/empresas" class="btn btn-warning float-left"><i class="fas fa-angle-double-left"></i> Voltar</a>                

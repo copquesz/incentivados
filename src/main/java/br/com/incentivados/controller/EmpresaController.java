@@ -73,7 +73,9 @@ public class EmpresaController {
 
 		try {
 			Optional<Empresa> empresa = empresaService.findById(id);
-			model.addAttribute("empresa", empresa.get());
+			if (empresa.isPresent()){
+                model.addAttribute("empresa", empresa.get());
+            }
 			return "painel/admin/empresa/perfil";
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -82,9 +84,56 @@ public class EmpresaController {
 		return "";
 	}
 
-	public String getResposavelCadastrar(){
-		return "";
+	@GetMapping("/painel/empresas/{nomeFantasia}/responsavel/cadastro")
+	public String getResposavelCadastrar(@PathVariable String nomeFantasia, HttpServletRequest request, Model model){
+
+		// Seta o path da requisição
+		model.addAttribute("path", request.getContextPath());
+		model.addAttribute("breadcrumb", "Empresas " +  " <i class='fas fa-angle-double-right'></i> " +  " Responsável" +  " <i class='fas fa-angle-double-right'></i> " +  " Cadastro");
+
+		Optional<Empresa> empresa = empresaService.findByNomeFantasia(nomeFantasia);
+		model.addAttribute("empresa", empresa.get());
+		return "painel/admin/empresa/responsavel/cadastro";
 	}
+
+    @PostMapping("/painel/empresas/{nomeFantasia}/responsavel/cadastro")
+	public String postResponsavelCadastrar(@PathVariable String nomeFantasia, Usuario responsavel, HttpServletRequest request,
+            Model model){
+
+        // Seta o path da requisição
+        model.addAttribute("path", request.getContextPath());
+        model.addAttribute("breadcrumb", " Empresas " +  " <i class='fas fa-angle-double-right'></i> " +  " Responsável" +  " <i class='fas fa-angle-double-right'></i> " +  " Cadastro");
+
+        try {
+            if (usuarioService.existsByEmail(responsavel.getEmail())) {
+                model.addAttribute("usuario", responsavel);
+                return "painel/admin/empresa/responsavel/cadastro-responsavel-falha-email-cadastrado";
+            } else if (usuarioService.existsByCpf(responsavel.getCpf())) {
+                model.addAttribute("usuario", responsavel);
+                return "painel/admin/empresa/responsavel/cadastro-responsavel-falha-cpf-cadastrado";
+            } else {
+                // Salva o analista na base de dados
+                responsavel = usuarioService.save(responsavel);
+                model.addAttribute("usuario", responsavel);
+
+                // Atribui o analista para a lista da empresa
+                Optional<Empresa> empresa = empresaService.findByNomeFantasia(nomeFantasia);
+                if(empresa.isPresent()){
+                    empresa.get().getResponsaveis().add(responsavel);
+                    empresaService.update(empresa.get());
+                    usuarioService.setEmpresa(responsavel, empresa.get());
+                    return "painel/admin/empresa/responsavel/cadastro-responsavel-sucesso";
+                }
+                else{
+                    return "painel/admin/empresa/responsavel/cadastro-responsavel-falha";
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            model.addAttribute("erro", e);
+            return "painel/admin/empresa/analista/cadastro-analista-falha";
+        }
+    }
 
 	@GetMapping("/painel/empresas/{nomeFantasia}/analistas/cadastro")
 	public String getAnalistaCadastrar(@PathVariable String nomeFantasia, HttpServletRequest request, Model model) {
