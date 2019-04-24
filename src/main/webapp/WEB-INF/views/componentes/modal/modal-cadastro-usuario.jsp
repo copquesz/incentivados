@@ -17,13 +17,13 @@
                     <fieldset>
                         <legend>Informações Gerais:</legend>
                         <div class="row mt-3 mt-3">
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Nome:</label>
                                     <input type="text" class="form-control" name="nome" required>
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Sobrenome:</label>
                                     <input type="text" class="form-control" name="sobrenome" required>
@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>CPF:</label>
                                     <input type="text" class="form-control" id="cpf" name="cpf"
@@ -39,13 +39,13 @@
                                            required>
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>E-mail:</label>
                                     <input type="email" class="form-control" name="email" required>
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Telefone:</label>
                                     <input type="text" class="form-control" id="telefone" name="telefone" required>
@@ -53,7 +53,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-8">
+                            <div class="col-md-8">
                                 <div class="form-group">
                                     <label>Senha de Acesso à Plataforma:</label>
                                     <input type="password" class="form-control" name="senha" required minlength="6">
