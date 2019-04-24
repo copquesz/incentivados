@@ -36,7 +36,7 @@
             <div class="card">
               <div class="card-header "> 
                 <h5 class="card-title">Empresas Cadastrada(s): ${qtdEmpresas}</h5>
-                <div class="row d-flex justify-content-start">
+                <div class="row d-flex justify-content-end">
                   <div class="col-12">
                     <form class="form-inline">
                       <input type="text" class="form-control my-auto mr-2" id="" placeholder="Pesquisar">
@@ -45,6 +45,7 @@
                   </div>
                 </div>                
               </div>
+
               <div class="card-body">
                 <div class="row mt-2">
                   <div class="col-12">
