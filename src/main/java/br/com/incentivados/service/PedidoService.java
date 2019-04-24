@@ -70,8 +70,8 @@ public class PedidoService {
     }
 
     // Serviço de busca todos PEDIDOS pela EMPRESA
-    public List<Pedido> findAllByEmpresa(Empresa empresa){
-        return pedidoRepository.findAllByEmpresa(empresa);
+    public List<Pedido> findAllByEmpresa(Empresa empresa, StatusPedido status, Pageable page){
+        return pedidoRepository.findAllByEmpresa(empresa, status, page);
     }
 
     // Serviço de buscar PEDIDO pelo USUÁRIO e STATUS
