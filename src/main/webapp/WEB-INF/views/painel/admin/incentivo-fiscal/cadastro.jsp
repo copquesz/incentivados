@@ -44,13 +44,13 @@
                       <fieldset>
                       <legend>Informações Gerais:</legend>
                       <div class="row mt-3 mt-3">               
-                        <div class="col-9">
+                        <div class="col-sm-12 col-md-9">
                           <div class="form-group">
                               <label>Legislação:</label>
                               <input type="text" class="form-control" name="legislacao" required>
                           </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-6 col-sm-5 col-md-3">
                           <div class="form-group">
                               <label>Sigla:</label>
                               <input type="text" class="form-control" name="sigla">
@@ -58,7 +58,7 @@
                         </div>            
                       </div>
                       <div class="row">                 
-                        <div class="col-4">
+                        <div class="col-sm-12 col-md-4">
                           <div class="form-group">
                               <label>Competência:</label>
                               <select class="form-control" id="competencia" name="competencia" required>                          
@@ -68,7 +68,7 @@
                               </select>
                           </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-sm-12 col-md-4">
                           <div class="form-group">
                               <label>Atuação:</label>
                               <select class="form-control" name="atuacao" required>
@@ -78,7 +78,7 @@
                               </select>
                           </div>
                         </div>
-                        <div class="col-4" id="campo-localidade">
+                        <div class="col-sm-12 col-md-4" id="campo-localidade">
                           <div class="form-group">
                               <label>Localidade:</label>
                               <input type="text" class="form-control" id="localidade" name="localidade">
@@ -87,7 +87,7 @@
                       </div>
                       </fieldset>
                       <hr class="bg-default">
-                      <button type="submit" class="btn btn-success float-right">Enviar <i class="far fa-share-square"></i></button>
+                      <button type="submit" class="btn btn-info float-right">Enviar <i class="far fa-share-square"></i></button>
                       <a href="${path}/painel/incentivos-fiscais" class="btn btn-danger float-right"><i class="fas fa-angle-double-left"></i> Voltar</a>
                     </form> 
                   </div>     
