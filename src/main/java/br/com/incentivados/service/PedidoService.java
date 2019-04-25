@@ -7,17 +7,13 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
+import br.com.incentivados.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.incentivados.enumerated.StatusPedido;
-import br.com.incentivados.model.Arquivo;
-import br.com.incentivados.model.Empresa;
-import br.com.incentivados.model.Entidade;
-import br.com.incentivados.model.Pedido;
-import br.com.incentivados.model.Usuario;
 import br.com.incentivados.repository.PedidoRepository;
 import br.com.incentivados.utility.FileUpload;
 
@@ -49,8 +45,9 @@ public class PedidoService {
     }
 
     // Serviço de atualizar pedido
-    public Pedido update(Pedido pedido, StatusPedido status) {
+    public Pedido update(Pedido pedido, StatusPedido status, ObservacaoPedido observacaoPedido) {
         pedido.setStatus(status);
+        pedido.setObservacaoPedido(observacaoPedido);
         return pedidoRepository.save(pedido);
     }
 
@@ -59,19 +56,25 @@ public class PedidoService {
         return pedidoRepository.findById(id);
     }
 
-    // Serviço de buscar PEDIDO pelo USUÁRIO
-    public List<Pedido> findByUsuario(Usuario usuario) {
-        return pedidoRepository.findByUsuario(usuario);
-    }
 
     // Serviço de busca todos PEDIDOS
     public List<Pedido> findAll() {
         return pedidoRepository.findAll();
     }
 
+    // Serviço de buscar PEDIDO pelo USUÁRIO
+    public List<Pedido> findAllByUsuario(Usuario usuario, Pageable page) {
+        return pedidoRepository.findAllByUsuario(usuario);
+    }
+
     // Serviço de busca todos PEDIDOS pela EMPRESA
-    public List<Pedido> findAllByEmpresa(Empresa empresa, StatusPedido status, Pageable page){
-        return pedidoRepository.findAllByEmpresa(empresa, status, page);
+    public List<Pedido> findAllByEmpresa(Empresa empresa, Pageable page){
+        return pedidoRepository.findAllByEmpresa(empresa, page);
+    }
+
+    // Serviço de busca todos PEDIDOS pela EMPRESA
+    public List<Pedido> findAllByEmpresaAndStatus(Empresa empresa, StatusPedido status, Pageable page){
+        return pedidoRepository.findAllByEmpresaAndStatus(empresa, status, page);
     }
 
     // Serviço de buscar PEDIDO pelo USUÁRIO e STATUS
