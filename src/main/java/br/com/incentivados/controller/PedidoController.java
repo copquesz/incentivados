@@ -6,7 +6,10 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
+import br.com.incentivados.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,15 +18,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import br.com.incentivados.enumerated.StatusPedido;
 import br.com.incentivados.enumerated.TipoUsuario;
-import br.com.incentivados.model.Empresa;
-import br.com.incentivados.model.Entidade;
-import br.com.incentivados.model.Pedido;
-import br.com.incentivados.model.Usuario;
 import br.com.incentivados.service.EmpresaService;
 import br.com.incentivados.service.EntidadeService;
 import br.com.incentivados.service.PedidoService;
 import br.com.incentivados.service.UsuarioService;
 import javassist.bytecode.analysis.Analyzer;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PedidoController {
@@ -138,33 +138,40 @@ public class PedidoController {
 		case ANALISTA:
 			return "painel/analista/pedido/visualizar";
 
-		case ENTIDADE:
-			return "painel/entidade/pedido/visualizar";
+		case EMPRESA:
+			return "painel/empresa/pedido/visualizar";
 
 		default:
 			return "";
 		}
 	}
 	
-	@GetMapping("/painel/pedido/{id}/{status}")
-	public String posAvaliacaoPedido(@PathVariable Long id, @PathVariable StatusPedido status, HttpServletRequest request, Model model) {
+	@PostMapping("/painel/pedido/{id}/avaliar")
+	public String postAvaliacaoPedido(@PathVariable Long id, @RequestParam StatusPedido status, ObservacaoPedido observacao, HttpServletRequest request, Model model) {
 
 		// Seta o path da requisição
 		model.addAttribute("path", request.getContextPath());
 
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
-		Pedido pedido = pedidoService.findById(id).get();
-		pedidoService.update(pedido, status);
-		
+		Optional<Pedido> pedido = pedidoService.findById(id);
 
-		switch (usuario.getTipoUsuario()) {
-		case ANALISTA:
-			return "redirect:/painel/dashboard";
 
-		default:
-			return "";
+		// Verifica se o pedido existe
+		if (pedido.isPresent()){
+			// Verifica se o pedido ainda está pendente de avaliação
+			if (pedido.get().getStatus() == StatusPedido.PENDENTE){
+				pedidoService.update(pedido.get(), status, observacao, usuario);
+				return "redirect:/painel/dashboard";
+			}
+			else{
+				return "painel/empresa/pedido/erro/pedido-ja-avaliado";
+			}
 		}
+		else{
+			return "painel/empresa/pedido/erro/pedido-nao-localizado";
+		}
+
 	}
 
 	@GetMapping("/painel/pedidos")
@@ -176,17 +183,24 @@ public class PedidoController {
 		model.addAttribute("breadcrumb", "Pedido " + " <i class='fas fa-angle-double-right'></i> " + " Lista");
 
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		Empresa empresa = usuario.getEmpresa();
 
 		try {
 
-			List<Pedido> pedidos = new ArrayList<Pedido>();
-
 			switch (usuario.getTipoUsuario()) {
 			case ADMIN:
-				pedidos = pedidoService.findAll();
-				model.addAttribute("pedidos", pedidos);
+				model.addAttribute("pedidos", pedidoService.findAll());
+				model.addAttribute("recusados", pedidoService.findAllByStatus(StatusPedido.RECUSADO, PageRequest.of(0, 10000, Sort.by(Sort.Order.desc("id")))));
 				model.addAttribute("qtdPedidos", pedidoService.count());
 				return "painel/admin/pedido/lista";
+
+			case EMPRESA:
+				model.addAttribute("pedidos", pedidoService.findAllByEmpresa(empresa, PageRequest.of(0, 5, Sort.by(Sort.Order.desc("id")))));
+				model.addAttribute("qtdPedidos", pedidoService.countByEmpresa(empresa));
+
+			case ANALISTA:
+				model.addAttribute("pedidos", pedidoService.findAllByUsuario(usuario, PageRequest.of(0, 5, Sort.by(Sort.Order.desc("id")))));
+				model.addAttribute("qtdPedidos", pedidoService.countByEmpresa(empresa));
 
 			default:
 				return "";

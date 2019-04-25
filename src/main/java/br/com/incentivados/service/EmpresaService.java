@@ -38,6 +38,7 @@ public class EmpresaService {
 	}
 	
 	public Empresa update(Empresa empresa) {
+		empresa.getAnalistas().get(empresa.getAnalistas().size() - 1).setEmpresa(empresa);
 		return empresaRepository.save(empresa);
 	}
 	

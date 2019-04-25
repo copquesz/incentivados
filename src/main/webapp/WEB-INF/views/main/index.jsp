@@ -5,11 +5,19 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="author" content="John Doe">
-    <meta name="description" content="">
-    <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+    <meta name="author" content="Yabá Consultoria">
+    <meta name="description" content="O Incentivados é uma iniciativa da YABÁ com objetivo de potencializar o uso estratégico e qualificado das Leis de Incentivo Fiscal, beneficiando empresas e sociedade.">
+    <meta name="keywords" content="Incentivados, Leis de Incentivo, Captação de Recursos.">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Metas OG -->
+    <meta property="og:title" content="Plataforma Incentivados" />
+    <meta property="og:description" content="O Incentivados é uma iniciativa da YABÁ com objetivo de potencializar o uso estratégico e qualificado das Leis de Incentivo Fiscal, beneficiando empresas e sociedade." />
+    <meta property="og:image" content="http://www.incentivados.com.br/main/images/logoIncentivadoscolor.png" />
+    <meta property="og:url" content="http://www.incentivados.com.br" />
+
+
     <!-- Title -->
     <title>Home</title>
     <!-- Place favicon.ico in the root directory -->
@@ -657,3 +665,4 @@
 </body>
 
 </html>
+

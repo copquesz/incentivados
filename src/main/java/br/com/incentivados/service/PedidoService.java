@@ -45,7 +45,8 @@ public class PedidoService {
     }
 
     // Serviço de atualizar pedido
-    public Pedido update(Pedido pedido, StatusPedido status, ObservacaoPedido observacaoPedido) {
+    public Pedido update(Pedido pedido, StatusPedido status, ObservacaoPedido observacaoPedido, Usuario usuario) {
+        observacaoPedido.setUsuario(usuario);
         pedido.setStatus(status);
         pedido.setObservacaoPedido(observacaoPedido);
         return pedidoRepository.save(pedido);
@@ -60,6 +61,11 @@ public class PedidoService {
     // Serviço de busca todos PEDIDOS
     public List<Pedido> findAll() {
         return pedidoRepository.findAll();
+    }
+
+    // Serviço de busca todos PEDIDOS por STATUS
+    public List<Pedido> findAllByStatus(StatusPedido status, Pageable page) {
+        return pedidoRepository.findAllByStatus(status, page);
     }
 
     // Serviço de buscar PEDIDO pelo USUÁRIO

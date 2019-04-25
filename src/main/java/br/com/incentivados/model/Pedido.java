@@ -50,6 +50,10 @@ public class Pedido implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Empresa empresa;
 
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "observacao_pedido_id")
+	private ObservacaoPedido observacaoPedido;
+
 	// Construtor
 	public Pedido() {
 		this.dataCadastro = new Date();

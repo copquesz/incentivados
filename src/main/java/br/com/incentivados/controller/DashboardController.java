@@ -136,8 +136,25 @@ public class DashboardController {
 		switch (usuario.getTipoUsuario()) {
 
 		case EMPRESA:
+			// Exibe total de pedidos por analista.
+			model.addAttribute("qtdPedidos", pedidoService.countByEmpresa(usuario.getEmpresa()));
 
-			return "painel/entidade/dashboard-";
+			// Exibe os pedidos pendentes e a quantidade por analista.
+			model.addAttribute("pendentes", pedidoService.findAllByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.PENDENTE,
+					PageRequest.of(0, 5, Sort.by(Order.desc("id")))));
+			model.addAttribute("qtdPendente", pedidoService.countByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.PENDENTE));
+
+			// Exibe os pedidos aprovados e a quantidade por analista.
+			model.addAttribute("aprovados", pedidoService.findAllByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.APROVADO,
+					PageRequest.of(0, 5, Sort.by(Order.desc("id")))));
+			model.addAttribute("qtdAprovado", pedidoService.countByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.APROVADO));
+
+			// Exibe os pedidos reprovados e a quantidade por analista.
+			model.addAttribute("recusados", pedidoService.findAllByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.RECUSADO,
+					PageRequest.of(0, 5, Sort.by(Order.desc("id")))));
+			model.addAttribute("qtdRecusado", pedidoService.countByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.RECUSADO));
+
+			return "painel/empresa/dashboard-empresa";
 
 		case ENTIDADE:
 
@@ -155,7 +172,7 @@ public class DashboardController {
 			model.addAttribute("qtdProjetos", projetoService.countByUsuario(usuario));
 
 			// Lista as infos e estatística de pedidos por usuário
-			pedidos = pedidoService.findByUsuario(usuario);
+			pedidos = pedidoService.findAllByUsuario(usuario, PageRequest.of(0, 5, Sort.by(Order.desc("id"))));
 			model.addAttribute("pedidos", pedidos);
 			model.addAttribute("qtdPedidos", pedidoService.countByUsuario(usuario));
 
@@ -228,17 +245,24 @@ public class DashboardController {
 		usuario = (Usuario) request.getSession().getAttribute("usuario");
 		model.addAttribute("usuario", usuario);
 
-		if (usuario.getTipoUsuario() == TipoUsuario.ADMIN) {
+		switch (usuario.getTipoUsuario()) {
+
+		case ADMIN:
 			return "painel/admin/usuario/perfil";
 
-		} else if (usuario.getTipoUsuario() == TipoUsuario.ENTIDADE) {
+		case EMPRESA:
+			return "painel/empresa/usuario/perfil";
+
+		case ANALISTA:
+			return "painel/analista/usuario/perfil";
+
+		case ENTIDADE:
 			return "painel/entidade/usuario/perfil";
 
-		} else {
+		default:
 			return "";
 
 		}
-
 	}
 
 	@GetMapping("/sair")

@@ -15,10 +15,9 @@
 
  */
 
-(function() {
-  isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
+(function() { 
 
-  if (isWindows) {
+  if (!window.innerWidth < 768) {
     // if we are on windows OS we activate the perfectScrollbar function
     $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
 
@@ -26,6 +25,7 @@
   } else {
     $('html').addClass('perfect-scrollbar-off');
   }
+  
 })();
 
 transparent = true;

@@ -26,9 +26,9 @@
 <body class="">
   <div class="wrapper ">    
     <!-- Sidebar -->
-    <c:import url="/WEB-INF/views/componentes/sidebar/sidebar-entidade.jsp" />    
+    <c:import url="/WEB-INF/views/componentes/sidebar/sidebar-admin.jsp" />    
     <div class="main-panel">
-      <c:import url="/WEB-INF/views/componentes/navbar/navbar-entidade.jsp" />      
+      <c:import url="/WEB-INF/views/componentes/navbar/navbar-admin.jsp" />      
       <div class="content">        
         <div class="row">
           <div class="col-md-12">
@@ -37,7 +37,7 @@
               <div class="card-body border">                 
 
                 <fieldset class="mt-3 mt-3">
-                <legend><i class="fas fa-map-marker-alt"></i> Filial:</legend>
+                <legend><i class="fas fa-user-alt"></i> Usuário:</legend>
                 <div class="row">               
                   <div class="col-4">
                     <div class="form-group">
@@ -81,12 +81,12 @@
                 </fieldset>
                 <hr>
                 <fieldset class="mt-3 mt-3">
-                <legend><i class="fas fa-map-marker-alt"></i> Endereço:</legend>
+                <legend><i class="fas fa-map-marker-alt"></i> Filial:</legend>
                 <div class="row">
                   <div class="col-4">
                     <div class="form-group">
                         <label>CEP:</label>                     
-                        <input type="text" class="form-control" value="${usuario.endereco.cep}" readonly>
+                        <input type="text" class="form-control" value="${usuario.endereco.cep}" placeholder="Não Informado" readonly>
                     </div>
                   </div>
                 </div>
@@ -94,13 +94,13 @@
                   <div class="col-7">
                     <div class="form-group">
                         <label>Logradouro:</label>                      
-                        <input type="text" class="form-control" value="${usuario.endereco.logradouro}" readonly>
+                        <input type="text" class="form-control" value="${usuario.endereco.logradouro}" placeholder="Não Informado" readonly>
                     </div>
                   </div>
                   <div class="col-2">
                     <div class="form-group">
                         <label>Nº:</label>                      
-                        <input type="text" class="form-control" value="${usuario.endereco.numero}" readonly>
+                        <input type="text" class="form-control" value="${usuario.endereco.numero}" placeholder="Não Informado" readonly>
                     </div>
                   </div>
                   <div class="col-3">
@@ -114,19 +114,19 @@
                   <div class="col-4">
                     <div class="form-group">
                         <label>Bairro:</label>                      
-                        <input type="text" class="form-control" id="bairro" value="${usuario.endereco.bairro}" readonly >
+                        <input type="text" class="form-control" id="bairro" value="${usuario.endereco.bairro}" placeholder="Não Informado" readonly >
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="form-group">
                         <label>Cidade</label>                     
-                        <input type="text" class="form-control" id="cidade" value="${usuario.endereco.cidade}" readonly>
+                        <input type="text" class="form-control" id="cidade" value="${usuario.endereco.cidade}" placeholder="Não Informado" readonly>
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="form-group">
                         <label>Estado:</label>                      
-                        <input type="text" class="form-control" id="estado" value="${usuario.endereco.estado}" readonly>
+                        <input type="text" class="form-control" id="estado" value="${usuario.endereco.estado}" placeholder="Não Informado" readonly>
                     </div>
                   </div>
                 </div>
@@ -143,13 +143,12 @@
   </div>
 
   <!--   JQUERY   -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <!--   POPPER   -->  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <!--   BOOTSTRAP   -->  
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>  
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>  
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script type="text/javascript" src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script>  
 </body>
 

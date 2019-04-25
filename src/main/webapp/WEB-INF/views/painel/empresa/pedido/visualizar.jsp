@@ -70,7 +70,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Descrição do Pedido:</label>
-                        <textarea class="form-control" rows="10" placeholder="Não Informado" readonly>${pedido.solicitacao}</textarea>
+                        <textarea class="form-control" rows="5" placeholder="Não Informado" readonly>${pedido.solicitacao}</textarea>
                       </div>
                     </div>  
                   </div>
@@ -130,8 +130,8 @@
                   </fieldset> 
 
                   <hr class="bg-primary">
-                  <a href="${path}/painel/pedido/${pedido.id}/RECUSADO" class="btn btn-danger float-right">Reprovar <i class="far fa-share-square"></i></a>
-                  <a href="${path}/painel/pedido/${pedido.id}/APROVADO" class="btn btn-success float-right">Aprovar <i class="far fa-share-square"></i></a>
+                  <a href="#" class="btn btn-danger float-right" data-toggle="modal" data-target="#modal-reprovar-pedido">Reprovar <i class="far fa-thumbs-down"></i></a>
+                  <a href="" class="btn btn-success float-right" data-toggle="modal" data-target="#modal-aprovar-pedido">Aprovar <i class="far fa-thumbs-up"></i></a>
                   <a href="${path}/dashboard" class="btn btn-warning float-left"><i class="fas fa-angle-double-left"></i> Voltar</a>
                 </form>
               </div>
@@ -140,6 +140,8 @@
           </div>
         </div>              
       </div>
+      <c:import url="/WEB-INF/views/componentes/modal/modal-aprovar-pedido.jsp" /> 
+      <c:import url="/WEB-INF/views/componentes/modal/modal-reprovar-pedido.jsp" /> 
       <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
     </div>
   </div>

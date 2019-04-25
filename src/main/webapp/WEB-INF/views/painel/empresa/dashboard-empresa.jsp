@@ -26,7 +26,7 @@
 <body class="">
   <div class="wrapper ">
     <!-- Sidebar -->
-    <c:import url="/WEB-INF/views/componentes/sidebar/sidebar-empresa.jsp.jsp" />
+    <c:import url="/WEB-INF/views/componentes/sidebar/sidebar-empresa.jsp" />
     <div class="main-panel">
       <!-- Navbar -->
       <c:import url="/WEB-INF/views/componentes/navbar/navbar-empresa.jsp" />
@@ -181,6 +181,7 @@
                                 <th class="text-center">Empresa</th>
                                 <th class="text-center">Loja</th>
                                 <th class="text-center">Carta Ofício</th>
+                                <th class="text-center">Motivo</th>
                               </thead>
                               <tbody>
                                 <c:forEach var="pedidoReprovado" items="${recusados}">
@@ -191,7 +192,8 @@
                                     <td class="text-center">${pedidoReprovado.entidade.nomeFantasia}</td>
                                     <td class="text-center">${pedidoReprovado.empresa.nomeFantasia}</td>
                                     <td class="text-center">${pedidoReprovado.analista.endereco.bairro} - ${pedidoReprovado.analista.endereco.cidade} / ${pedidoReprovado.analista.endereco.estado}</td>
-                                    <td class="text-center"><a href="${path}/${pedidoReprovado.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>                                
+                                    <td class="text-center"><a href="${path}/${pedidoReprovado.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td> 
+                                    <td class="text-center"><a href="#" data-toggle="modal" data-target="#modal-motivo-reprovado-${pedidoReprovado.id}" title="Visualizar"><i class="far fa-file-pdf"></i></a></td>                                
                                   </tr>
                                 </c:forEach>
                               </tbody>
@@ -208,6 +210,7 @@
         </div>       
       </div>
       <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
+      <c:import url="/WEB-INF/views/componentes/modal/modal-motivo-reprovado.jsp" />
     </div>
   </div>
   <!--   JQUERY   -->
@@ -223,39 +226,6 @@
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script type="text/javascript" src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <script src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
-    <script type="text/javascript">
-
-      var doughnutCtx = document.getElementById("doughnut-chart").getContext('2d');
-      var doughnutChart = new Chart(doughnutCtx, {
-          type: 'doughnut',
-          data: {
-              labels: ["Pendente", "Recusado", "Aprovado"],
-              datasets: [{
-                  label: 'Registros',
-                  data: ['${qtdPedidosPendente}', '${qtdPedidosRecusado}', '${qtdPedidosAprovado}'],
-                  backgroundColor: [
-                      'rgba(241, 196, 15, 0.6)',
-                      'rgba(231, 76, 60, 0.6)',
-                      'rgba(46, 204, 113, 0.6)'
-                  ],
-                  borderColor: [
-                      'rgba(241, 196, 15, 0.6)',
-                      'rgba(231, 76, 60, 0.6)',
-                      'rgba(46, 204, 113, 0.6)'
-                  ],
-                  borderWidth: 1
-              }]
-          },
-          options: {
-              legend: {
-                  display: false
-              },
-              scales: {
-                  display: false
-              }
-          }
-      });
-  </script>
 </body>
 
 </html>
