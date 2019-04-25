@@ -22,7 +22,7 @@
           <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-power-off"></i>
             <p>
-              <span class="d-lg-none d-md-block">Some Actions</span>
+              <span class="d-lg-none d-md-block">Opções</span>
             </p>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
