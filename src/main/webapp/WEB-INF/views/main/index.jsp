@@ -102,9 +102,9 @@
         <div class="row v-center">
             <div class="col-xs-12 col-md-7 header-text">
                 <h2 class="h2">Conectando empresas e proponentes</h2>
-                <p>Aumentar a chances de captação de recursos para organizações sociais e potencializar o uso
-                    qualificado de recursos dedutíveis do Imposto das empresas é o propósito do Incentivados no
-                    Brasil. </p>
+                <p>Aumentar as chances de captação de recursos para as organizações sociais e potencializar o uso
+                    qualificado de recursos dedutíveis do Imposto de Renda das empresas é o propósito do Incentivados no
+                    Brasil.</p>
                 <a href="${path}/login" class="button white">Comece agora!</a>
             </div>
         </div>
@@ -127,13 +127,11 @@
         <div class="row">
             <div class="col-sm-12 col-md-12">
                 <div class="box wow animated bounceInLeft slower">
-                    <p class="text-justify lead">O Incentivados é uma iniciativa da YABÁ, consultoria especializada
-                        em
-                        Investimento Social
-                        Privado, captação de recursos e monitoramento de resultados.
-                        A plataforma tecnológica é uma estratégia para viabilizar a curadoria de projetos aprovados
-                        nas Leis Incentivo Fiscal em âmbito federal, estadual e municipal.
-                        Conectar empresas à bons projetos, é certeza de fazer a diferença na sociedade.
+                    <p class="text-justify lead">O Incentivados é uma iniciativa da YABÁ, consultoria especializada em
+                        investimento social privado, captação de recursos e monitoramento de resultados. A plataforma
+                        tecnológica é uma estratégia para viabilizar a curadoria de projetos aprovados nas Leis
+                        Incentivo Fiscal em âmbito federal, estadual e municipal. Conectar empresas à bons projetos é
+                        certeza de fazer a diferença na sociedade.
 
                     </p>
                 </div>
@@ -256,12 +254,11 @@
                             <div class="v-center">
                                 <div class="col-xs-12 col-md-6">
                                     <div class="caption-title" data-animation="animated fadeInUp">
-                                        <h2>Conheça a platarfoma</h2>
+                                        <h2>Conheça a plataforma</h2>
                                     </div>
                                     <div class="caption-desc" data-animation="animated fadeInUp">
-                                        <p>Para Acessar a plataforma realize seu cadastro, simples e rapido, assim que
-                                            seu cadastro for feito
-                                            realize seu login para assim ter acesso ao painel. </p>
+                                        <p>Para Acessar a plataforma realize seu cadastro, simples e rápido, assim que
+                                            seu cadastro for feito realize seu login para assim ter acesso ao painel. </p>
                                     </div>
                                     <div class="caption-button" data-animation="animated fadeInUp">
                                         <a href="${path}/login" class="button white">Cadastre-se</a>
