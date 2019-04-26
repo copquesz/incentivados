@@ -135,56 +135,112 @@ public class EmpresaController {
         }
     }
 
-	@GetMapping("/painel/empresas/{nomeFantasia}/analistas/cadastro")
-	public String getAnalistaCadastrar(@PathVariable String nomeFantasia, HttpServletRequest request, Model model) {
+	@GetMapping({"/painel/empresas/{nomeFantasia}/analistas/cadastro", "painel/analistas/cadastro"})
+	public String getAnalistaCadastrar(@PathVariable(required = false) String nomeFantasia, HttpServletRequest request, Model model) {
 
 		// Seta o path da requisição
 		model.addAttribute("path", request.getContextPath());
 		model.addAttribute("breadcrumb", "Empresas " +  " <i class='fas fa-angle-double-right'></i> " +  " Analistas" +  " <i class='fas fa-angle-double-right'></i> " +  " Cadastro");
 
-		try {
-			Optional<Empresa> empresa = empresaService.findByNomeFantasia(nomeFantasia);
-			model.addAttribute("empresa", empresa.get());
-			return "painel/admin/empresa/analista/cadastro";
-		} catch (Exception e) {
-			return "";
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		model.addAttribute("usuario", usuario);
+
+		switch (usuario.getTipoUsuario()){
+
+			case ADMIN:
+				Optional<Empresa> empresa = empresaService.findByNomeFantasia(nomeFantasia);
+				model.addAttribute("empresa", empresa.get());
+				return "painel/admin/empresa/analista/cadastro";
+
+			case EMPRESA:
+				return "painel/empresa/analista/cadastro";
+
+			default:
+				return "";
 		}
+
 
 	}
 
-	@PostMapping("/painel/empresas/{nomeFantasia}/analistas/cadastro")
-	public String postAnalistaCadastrar(@PathVariable String nomeFantasia, Usuario analista, HttpServletRequest request,
+	@PostMapping({"/painel/empresas/{nomeFantasia}/analistas/cadastro", "/painel/analistas/cadastro"})
+	public String postAnalistaCadastrar(@PathVariable(required = false) String nomeFantasia, Usuario analista, HttpServletRequest request,
 			Model model) {
 
 		// Seta o path da requisição
 		model.addAttribute("path", request.getContextPath());
 		model.addAttribute("breadcrumb", " Empresas " +  " <i class='fas fa-angle-double-right'></i> " +  " Analistas" +  " <i class='fas fa-angle-double-right'></i> " +  " Cadastro");
 
-		try {
-			if (usuarioService.existsByEmail(analista.getEmail())) {
-				model.addAttribute("usuario", analista);
-				return "painel/admin/empresa/analista/cadastro-analista-falha-email-cadastrado";
-			} else if (usuarioService.existsByCpf(analista.getCpf())) {
-				model.addAttribute("usuario", analista);
-				return "painel/admin/empresa/analista/cadastro-analista-falha-cpf-cadastrado";
-			} else {
-				// Salva o analista na base de dados
-				analista = usuarioService.save(analista);
-				model.addAttribute("usuario", analista);
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		switch (usuario.getTipoUsuario()){
 
-				// Atribui o analista para a lista da empresa
-				Optional<Empresa> empresa = empresaService.findByNomeFantasia(nomeFantasia);
-				empresa.get().getAnalistas().add(analista);
-				empresaService.update(empresa.get());
+			case ADMIN:
+				try {
+					if (usuarioService.existsByEmail(analista.getEmail())) {
+						model.addAttribute("usuario", analista);
+						return "painel/admin/empresa/analista/cadastro-analista-falha-email-cadastrado";
+					} else if (usuarioService.existsByCpf(analista.getCpf())) {
+						model.addAttribute("usuario", analista);
+						return "painel/admin/empresa/analista/cadastro-analista-falha-cpf-cadastrado";
+					} else {
+						// Salva o analista na base de dados
+						analista = usuarioService.save(analista);
+						model.addAttribute("usuario", analista);
 
-				return "painel/admin/empresa/analista/cadastro-analista-sucesso";
-			}
-		} catch (Exception e) {
-			System.out.println(e.toString());
-			model.addAttribute("erro", e);
-			return "painel/admin/empresa/analista/cadastro-analista-falha";
+						// Atribui o analista para a lista da empresa
+						Optional<Empresa> empresa = empresaService.findByNomeFantasia(nomeFantasia);
+						empresa.get().getAnalistas().add(analista);
+						empresaService.update(empresa.get());
+
+						return "painel/admin/empresa/analista/cadastro-analista-sucesso";
+					}
+				} catch (Exception e) {
+					System.out.println(e.toString());
+					model.addAttribute("erro", e);
+					return "painel/admin/empresa/analista/cadastro-analista-falha";
+				}
+
+			case EMPRESA:
+				try {
+					if (usuarioService.existsByEmail(analista.getEmail())) {
+						model.addAttribute("usuario", analista);
+						return "painel/empresa/analista/cadastro-analista-falha-email-cadastrado";
+					} else if (usuarioService.existsByCpf(analista.getCpf())) {
+						model.addAttribute("usuario", analista);
+						return "painel/empresa/analista/cadastro-analista-falha-cpf-cadastrado";
+					} else {
+						// Salva o analista na base de dados
+						analista = usuarioService.save(analista);
+						model.addAttribute("usuario", analista);
+
+						// Atribui o analista para a lista da empresa
+						usuario.getEmpresa().getAnalistas().add(analista);
+						empresaService.update(usuario.getEmpresa());
+
+						return "painel/empresa/analista/cadastro-analista-sucesso";
+					}
+				} catch (Exception e) {
+					System.out.println(e.toString());
+					model.addAttribute("erro", e);
+					return "painel/empresa/analista/cadastro-analista-falha";
+				}
+
+			default:
+				return "";
 		}
 	}
+
+	@GetMapping("/painel/analistas")
+	public String getAnalistas(HttpServletRequest request, Model model){
+
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		model.addAttribute("usuario", usuario);
+
+        // Seta o path da requisição
+        model.addAttribute("path", request.getContextPath());
+        model.addAttribute("breadcrumb", " Empresas " +  " <i class='fas fa-angle-double-right'></i> " + usuario.getEmpresa().getNomeFantasia() + " <i class='fas fa-angle-double-right'></i> " + " Analistas");
+
+	    return "painel/empresa/analista/lista";
+    }
 
 	@GetMapping("/painel/empresas")
 	public String getListar(@RequestParam(required = false, defaultValue = "") String chave, HttpServletRequest request,

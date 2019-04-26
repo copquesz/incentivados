@@ -10,7 +10,7 @@
   <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Dashboard
+    Incentivados - Analistas
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -35,7 +35,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header "> 
-                <h5 class="card-title">Pedidos Cadastrado(s): ${qtdPedidos}</h5>
+                <h5 class="card-title">Analistas Cadastradis(s): </h5>
                 <div class="d-flex justify-content-end">
                   <div class="row">
                     <div class="col-12">
@@ -55,12 +55,12 @@
                 <div class="row mt-2">
                   <div class="col-12">
                     <!-- MSG DE VAZIO -->
-                    <c:if test = "${empty pedidos}">
+                    <c:if test = "${empty empresa.analistas}">
                       <div class="alert alert-info mt-3" role="alert">
                         <p class="text-bold">Não há registro(s) ou .</p>
                       </div>
                     </c:if>      
-                    <c:if test = "${not empty pedidos}">              
+                    <c:if test = "${not empty empresa.analistas}">              
                       <div class="table-responsive">
                         <table class="table">
                           <thead class=" text-primary">

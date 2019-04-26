@@ -123,8 +123,8 @@ public class DashboardController {
 		model.addAttribute("path", request.getContextPath());
 		model.addAttribute("breadcrumb", "Dashboard");
 
-		Usuario usuario = new Usuario();
-		usuario = (Usuario) request.getSession().getAttribute("usuario");
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		model.addAttribute("usuario", usuario);
 
 		// Lista todas as entidades pertencentes ao usuário.
 		List<Entidade> entidades = new ArrayList<Entidade>();
@@ -174,6 +174,7 @@ public class DashboardController {
 			// Lista as infos e estatística de pedidos por usuário
 			pedidos = pedidoService.findAllByUsuario(usuario, PageRequest.of(0, 5, Sort.by(Order.desc("id"))));
 			model.addAttribute("pedidos", pedidos);
+			model.addAttribute("recusados", pedidoService.findAllByUsuarioAndStatus(usuario, StatusPedido.RECUSADO, PageRequest.of(0, 5, Sort.by(Order.desc("id")))));
 			model.addAttribute("qtdPedidos", pedidoService.countByUsuario(usuario));
 
 			return "painel/entidade/dashboard-entidade";

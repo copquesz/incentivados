@@ -26,9 +26,9 @@
 <body class="">
   <div class="wrapper ">    
     <!-- Sidebar -->
-    <c:import url="/WEB-INF/views/componentes/sidebar/sidebar-admin.jsp" />    
+    <c:import url="/WEB-INF/views/componentes/sidebar/sidebar-empresa.jsp" />    
     <div class="main-panel">
-      <c:import url="/WEB-INF/views/componentes/navbar/navbar-admin.jsp" />      
+      <c:import url="/WEB-INF/views/componentes/navbar/navbar-empresa.jsp" />      
       <div class="content">        
         <div class="row">
           <div class="col-md-12">

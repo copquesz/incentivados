@@ -49,7 +49,7 @@ public class Empresa implements Serializable {
 	)
 	private List<Usuario> responsaveis;
 	
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
     @JoinTable(
         name = "empresa_has_analista", 
         joinColumns = { @JoinColumn(name = "empresa_id") }, 

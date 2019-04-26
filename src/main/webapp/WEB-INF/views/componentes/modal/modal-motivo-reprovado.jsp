@@ -15,12 +15,16 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-12">
-              <label><strong>Data de Análise:</strong></label>
-              <p class="text-justify"><fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${modalMotivoReprovado.observacaoPedido.dataCadastro}"/></p>
-              <hr>
-              <label><strong>Analisado por:</strong></label>
-              <p class="text-justify">${modalMotivoReprovado.observacaoPedido.usuario.nome} ${modalMotivoReprovado.observacaoPedido.usuario.sobrenome}</p>
-              <hr>
+              <c:if test = "${usuario.tipoUsuario.id != 0}">
+                <label><strong>Data de Análise:</strong></label>
+                <p class="text-justify"><fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${modalMotivoReprovado.observacaoPedido.dataCadastro}"/></p>
+                <hr>
+              </c:if>
+              <c:if test = "${usuario.tipoUsuario.id != 0}">
+                <label><strong>Analisado por:</strong></label>
+                <p class="text-justify">${modalMotivoReprovado.observacaoPedido.usuario.nome} ${modalMotivoReprovado.observacaoPedido.usuario.sobrenome}</p>
+                <hr>
+              </c:if>
               <label><strong>Motivo:</strong></label>
               <p class="text-justify">${modalMotivoReprovado.observacaoPedido.avaliacao}</p>
             </div>

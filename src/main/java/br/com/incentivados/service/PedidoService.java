@@ -78,6 +78,11 @@ public class PedidoService {
         return pedidoRepository.findAllByEmpresa(empresa, page);
     }
 
+    // Serviço de busca todos USUÁRIO pela EMPRESA
+    public List<Pedido> findAllByUsuarioAndStatus(Usuario usuario, StatusPedido status, Pageable page){
+        return pedidoRepository.findAllByUsuarioAndStatus(usuario, status, page);
+    }
+
     // Serviço de busca todos PEDIDOS pela EMPRESA
     public List<Pedido> findAllByEmpresaAndStatus(Empresa empresa, StatusPedido status, Pageable page){
         return pedidoRepository.findAllByEmpresaAndStatus(empresa, status, page);

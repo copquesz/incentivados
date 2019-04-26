@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <html lang="pt-br">
 
 <head>
@@ -54,7 +55,7 @@
               <div class="card-body">
                 <div class="row mt-2">
                   <div class="col-12">
-                    <!-- MSG DE VAZIO -->
+                    <!-- MSG CASO LISTA ESTEJA VAZIA -->
                     <c:if test = "${empty projetos}">
                       <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
                         <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
@@ -64,32 +65,31 @@
                         <span data-notify="message">Não há nenhum projeto cadastrado</span>
                       </div>
                     </c:if>
-                    <c:if test = "${not empty projetos}">           
-                      <c:forEach var="projeto" items="${projetos}">
-                        <div class="row p-3 mt-3">
-                          <div class="col-6 col-lg-4 col-md-12 col-sm-12 mx-auto text-center">
-                            <figure class="figure">
-                              <img src="${path}/${projeto.documentosProjeto.logo.path}" class="img-projeto mt-2 mb-2 mx-auto d-block" alt="${projeto.titulo}">
-                            </figure>
-                          </div>
-                          <div class="col-6 col-lg-8 col-md-12 col-sm-12">
-                            <h3>${projeto.titulo} @ ${projeto.entidade.nomeFantasia}</h3>
-                            <hr class="bg-default">    
-                            <p class="lead">${projeto.objetivo}</p>
-                            <p class="text-center">
-                              <a href="${path}/painel/projetos/${projeto.id}" class="btn btn-primary">Ver Detalhes</a>
-                            </p>
-                            <p></p>                
-                          </div>
-                        </div>
-                      </c:forEach>
+                    <!-- EXIBE A LISTA DE PROJETOS -->
+                    <c:if test="${not empty projetos}">
+                      <hr>
+                      <div class="row justify-content-start">
+                          <c:forEach var="projeto" items="${projetos}">
+                            <div class="col-12 col-xl-3 col-lg-6 col-md-6 d-flex align-items-stretch align-self-stretch">
+                              <div class="card border mt-3">
+                                <img src="${path}/${projeto.documentosProjeto.logo.path}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                  <h5 class="card-title" style="font-weight: bold;">${projeto.titulo}</h5>
+                                  <hr>
+                                  <p class="card-text text-justify">${fn:substring(projeto.objetivo, 0, 180)} ...</p>
+                                </div>
+                                <div class="card-footer">
+                                  <a href="${path}/painel/projetos/${projeto.id}" class="btn btn-primary">Ver Detalhes</a>
+                                </div>
+                              </div>
+                            </div>
+                          </c:forEach>
+                      </div>
                     </c:if>
                   </div>     
                 </div>
               </div>
-              <div class="card-footer">
-                <hr>
-              </div>
+              <div class="card-footer"></div>
             </div>
           </div>          
         </div>         

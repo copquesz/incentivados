@@ -87,9 +87,9 @@
                                 <td class="text-center">${pedido.analista.endereco.bairro} - ${pedido.analista.endereco.cidade} / ${pedido.analista.endereco.estado}</td>
                                 <td class="text-center"><a href="${path}/${pedido.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>
                                 <th class="text-center">
-                                  <c:if test = "${pedido.status.id == 0}"><span class="bg-warning p-1">${pedido.status}</span></c:if>
+                                  <c:if test = "${pedido.status.id == 0}"><span class="bg-warning p-1 text-white">${pedido.status}</span></c:if>
                                   <c:if test = "${pedido.status.id == 1}"><span class="bg-danger p-1"><a href="#" class="text-white" data-toggle="modal" data-target="#modal-motivo-reprovado-${pedido.id}" title="Visualizar Motivo">${pedido.status}</a></span></c:if>
-                                  <c:if test = "${pedido.status.id == 2}"><span class="bg-success p-1">${pedido.status}</span></c:if>
+                                  <c:if test = "${pedido.status.id == 2}"><span class="bg-success p-1 text-white">${pedido.status}</span></c:if>
                                 </th>
                               </tr>
                             </c:forEach>

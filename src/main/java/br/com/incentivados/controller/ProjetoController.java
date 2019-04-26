@@ -111,7 +111,7 @@ public class ProjetoController {
 
 	/**
 	 * Exibe os dados do projeto passado como parâmetro
-	 * 
+	 *
 	 * @param id      código do projeto
 	 * @param request recebe dados da requisição
 	 * @param model   fornece dados para a view

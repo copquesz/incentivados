@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <html lang="pt-br">
 
 <head>
@@ -105,22 +106,30 @@
                 <div class="col-md-12">
                     <div class="card ">
                         <div class="card-header ">
-                            <c:if test="${cadastroProjeto}">
-                                <a href="${path}/painel/projetos/cadastro" class="btn btn-info float-right"><i
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 class="card-title">Meus Cadastros</h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <c:if test="${cadastroProjeto}">
+                                        <a href="${path}/painel/projetos/cadastro" class="btn btn-info"><i
                                         class="fas fa-plus mr-2"></i> Cadastrar Projeto</a>
-                            </c:if>
-                            <a href="${path}/painel/entidades/cadastro" class="btn btn-info float-right"><i
+                                    </c:if>
+                                    <a href="${path}/painel/entidades/cadastro" class="btn btn-info"><i
                                     class="fas fa-plus mr-2"></i> Cadastrar Entidade</a>
-                            <h5 class="card-title">Meus Cadastros</h5>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body ">
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <ul class="nav nav-pills" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="entidades-tab" data-toggle="tab" href="#entidades"
+                                    <a class="nav-link active border" id="entidades-tab" data-toggle="tab" href="#entidades"
                                        role="tab" aria-controls="entidades" aria-selected="true">Entidades</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link " id="projetos-tab" data-toggle="tab" href="#projetos" role="tab"
+                                    <a class="nav-link border " id="projetos-tab" data-toggle="tab" href="#projetos" role="tab"
                                        aria-controls="projetos" aria-selected="false">Projetos</a>
                                 </li>
                             </ul>
@@ -137,33 +146,26 @@
                                             </div>
                                     </c:if>
                                     <c:if test="${not empty entidades}">
-                                        <div class="table-responsive">
+                                        <div class="table-responsive my-2">
                                             <table class="table">
                                                 <thead class=" text-primary">
-                                                <th></th>
-                                                <th>Data Cadastro</th>
-                                                <th>Nome Fantasia</th>
-                                                <th>CNPJ</th>
-                                                <th></th>
+                                                <th class="text-center border"></th>
+                                                <th class="text-center border">Data Cadastro</th>
+                                                <th class="text-center border">Nome Fantasia</th>
+                                                <th class="text-center border">CNPJ</th>
+                                                <th class="text-center"></th>
                                                 </thead>
                                                 <tbody>
-                                                <c:forEach var="entidade" items="${entidades}">
-                                                    <tr>
-                                                        <td class="text-center"><img class="logo-entidade"
-                                                                                     src="${path}/${entidade.documentosEntidade.logo.path}">
-                                                        </td>
-                                                        <fmt:formatDate type="both" dateStyle="short" timeStyle="short"
-                                                                        value="${entidade.dataCadastro}"
-                                                                        var="dataCadastro"/>
-                                                        <td>${dataCadastro}</td>
-                                                        <td>${entidade.nomeFantasia}</td>
-                                                        <td>${entidade.cnpj}</td>
-                                                        <td class="text-center"><a
-                                                                href="${path}/painel/entidades/${entidade.id}"
-                                                                class="btn btn-default btn-circle" title="Visualizar"><i
-                                                                class="fas fa-file-alt"></i></a></td>
-                                                    </tr>
-                                                </c:forEach>
+                                                    <c:forEach var="entidade" items="${entidades}">
+                                                        <tr>
+                                                            <td class="text-center border"><img class="logo-entidade" src="${path}/${entidade.documentosEntidade.logo.path}">
+                                                            </td>
+                                                            <td class="text-center border"><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${entidade.dataCadastro}"/></td>
+                                                            <td class="text-center border">${entidade.nomeFantasia}</td>
+                                                            <td class="text-center border">${entidade.cnpj}</td>
+                                                            <td class="text-center border"><a href="${path}/painel/entidades/${entidade.id}" class="btn btn-default btn-circle" title="Visualizar"><i class="fas fa-file-alt"></i></a></td>
+                                                        </tr>
+                                                    </c:forEach>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -171,37 +173,36 @@
                                 </div>
                                 <div class="tab-pane fade" id="projetos" role="tabpanel" aria-labelledby="projetos-tab">
                                     <c:if test="${empty projetos}">
-
-                                            <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
-                                                <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <i class="nc-icon nc-simple-remove"></i>
-                                                </button>
-                                                <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
-                                                <span data-notify="message">Não há nenhum projeto cadastrado</span>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
+                                                    <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <i class="nc-icon nc-simple-remove"></i>
+                                                    </button>
+                                                    <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
+                                                    <span data-notify="message">Não há nenhum projeto cadastrado</span>
+                                                </div>
                                             </div>
+                                        </div>
                                     </c:if>
                                     <c:if test="${not empty projetos}">
-                                        <c:forEach var="projeto" items="${projetos}">
-                                            <div class="row p-3 mt-3">
-                                                <div class="col-6 col-lg-4 col-md-12 col-sm-12 mx-auto text-center">
-                                                    <figure class="figure">
-                                                        <img src="${path}/${projeto.documentosProjeto.logo.path}"
-                                                             class="img-projeto img-fluid mt-2 mb-2 mx-auto d-block"
-                                                             alt="Logo">
-                                                    </figure>
+                                        <div class="row justify-content-start">
+                                            <c:forEach var="projeto" items="${projetos}">
+                                              <div class="col-12 col-xl-3 col-lg-6 col-md-6 d-flex align-items-stretch align-self-stretch">
+                                                <div class="card border mt-3">
+                                                  <img src="${path}/${projeto.documentosProjeto.logo.path}" class="card-img-top" alt="...">
+                                                  <div class="card-body">
+                                                    <h5 class="card-title" style="font-weight: bold;">${projeto.titulo}</h5>
+                                                    <hr>
+                                                    <p class="card-text text-justify">${fn:substring(projeto.objetivo, 0, 180)} ...</p>
+                                                  </div>
+                                                  <div class="card-footer">
+                                                    <a href="${path}/painel/projetos/${projeto.id}" class="btn btn-primary">Ver Detalhes</a>
+                                                  </div>
                                                 </div>
-                                                <div class="col-6 col-lg-8 col-md-12 col-sm-12">
-                                                    <h3>${projeto.titulo}</h3>
-                                                    <hr class="bg-default">
-                                                    <p class="lead">${projeto.objetivo}</p>
-                                                    <p class="text-center">
-                                                        <a href="${path}/painel/projetos/${projeto.id}"
-                                                           class="btn btn-primary">Ver Detalhes</a>
-                                                    </p>
-                                                    <p></p>
-                                                </div>
-                                            </div>
-                                        </c:forEach>
+                                              </div>
+                                            </c:forEach>
+                                        </div>
                                     </c:if>
                                 </div>
                             </div>
@@ -243,17 +244,18 @@
                                                 <td class="text-center">${pedido.analista.endereco.bairro}
                                                     - ${pedido.analista.endereco.cidade}
                                                     / ${pedido.analista.endereco.estado}</td>
-                                                <td class="text-center"><a
-                                                        href="${path}/${pedido.documentosPedido.cartaOficio.path}"
-                                                        title="Visualizar" target="_blank"><i
-                                                        class="far fa-file-alt"></i> Carta Ofício</a></td>
+                                                <td class="text-center">
+                                                    <a href="${path}/${pedido.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>
                                                 <th class="text-center">
-                                                    <c:if test="${pedido.status.id == 0}"><span
-                                                            class="bg-warning">${pedido.status}</span></c:if>
-                                                    <c:if test="${pedido.status.id == 1}"><span
-                                                            class="bg-danger">${pedido.status}</span></c:if>
-                                                    <c:if test="${pedido.status.id == 2}"><span
-                                                            class="bg-success">${pedido.status}</span></c:if>
+                                                    <c:if test="${pedido.status.id == 0}">
+                                                        <span class="bg-warning p-1 text-white">${pedido.status}</span>
+                                                    </c:if>
+                                                    <c:if test="${pedido.status.id == 1}">
+                                                        <span class="bg-danger p-1"><a class="text-white" href="#" data-toggle="modal" data-target="#modal-motivo-reprovado-${pedido.id}" title="Visualizar">${pedido.status}</a></span>
+                                                    </c:if>
+                                                    <c:if test="${pedido.status.id == 2}">
+                                                        <span class="bg-success p-1 text-white">${pedido.status}</span>
+                                                    </c:if>
                                                 </th>
                                             </tr>
                                         </c:forEach>
@@ -266,33 +268,8 @@
                 </div>
             </div>
         </div>
-        <footer class="footer footer-black  footer-white ">
-            <div class="container-fluid">
-                <div class="row">
-                    <nav class="footer-nav">
-                        <ul>
-                            <li>
-                                <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>
-                            </li>
-                            <li>
-                                <a href="http://blog.creative-tim.com/" target="_blank">Blog</a>
-                            </li>
-                            <li>
-                                <a href="https://www.creative-tim.com/license" target="_blank">Licenses</a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <div class="credits ml-auto">
-              <span class="copyright">
-                ©
-                <script>
-                  document.write(new Date().getFullYear())
-                </script>, made with <i class="fa fa-heart heart"></i> by Creative Tim
-              </span>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
+        <c:import url="/WEB-INF/views/componentes/modal/modal-motivo-reprovado.jsp" />
     </div>
 </div>
 <!--   JQUERY   -->
