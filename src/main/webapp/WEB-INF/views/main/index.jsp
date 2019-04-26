@@ -318,12 +318,12 @@
                                 </div>
                                 <div class="col-xs-6 col-md-3">
                                     <div class="caption-photo one" data-animation="animated fadeInRight">
-                                        <img src="${path}/main/images/cases-img/painel-1.png" alt="">
+                                        <img src="${path}/main/images/cases-img/cadastro-projeto-1.png" alt="">
                                     </div>
                                 </div>
                                 <div class="col-xs-6 col-md-3">
                                     <div class="caption-photo two" data-animation="animated fadeInRight">
-                                        <img src="${path}/main/images/cases-img/painel-2.png" alt="">
+                                        <img src="${path}/main/images/cases-img/cadastro-projeto-2.png" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -338,7 +338,7 @@
                             <strong>Painel Principal</strong>Todas as informações em um só lugar
                         </li>
                         <li data-target="#caption_slide" data-slide-to="2">
-                            <strong>Solicitações</strong>Realize suas solicitações
+                            <strong>Projetos</strong>Cadastre seus projetos
                         </li>
                     </ol>
                 </div>
