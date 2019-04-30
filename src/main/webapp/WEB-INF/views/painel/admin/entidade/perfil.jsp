@@ -37,12 +37,12 @@
               <div class="card-body border"> 
 
                 <div class="row mt-3">
-                  <div class="col-3 text-left">                    
+                  <div class="col-md-3 text-md-left text-center">
                     <figure class="figure">
                       <img class="img-thumbnail" src="${path}/${entidade.documentosEntidade.logo.path}"> 
                     </figure> 
                   </div> 
-                  <div class="col-9 text-left">      
+                  <div class="col-md-9 text-md-left text-center">
                       <h2 class="mt-3 ml-3 bold text-primary">${entidade.nomeFantasia}</h2>
                       <p class="lead p-3">${entidade.sobre}</p>
                   </div>
@@ -52,20 +52,20 @@
                 <legend class="text-primary">Informações Gerais:</legend>
                 <hr class="bg-primary">
                 <div class="row mt-3">
-                  <div class="col-4">
+                  <div class="col-md-4">
                     <div class="form-group">
                         <label>Data/Hora Cadastro:</label>   
                         <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${entidade.dataCadastro}" var="dataCadastro" />
                         <input type="text" class="form-control" value="${dataCadastro}" readonly>
                     </div>
                   </div>
-                  <div class="col-4">
+                  <div class="col-md-4">
                     <div class="form-group">
                         <label>Razão Social:</label>                     
                         <input type="text" class="form-control" value="${entidade.razaoSocial}" readonly>
                     </div>
                   </div>
-                  <div class="col-4">
+                  <div class="col-md-4">
                     <div class="form-group">
                         <label>CNPJ:</label>                     
                         <input type="text" class="form-control" value="${entidade.cnpj}" readonly>
@@ -73,7 +73,7 @@
                   </div>
                 </div>                
                 <div class="row mt-5">
-                  <div class="col-7">
+                  <div class="col-md-7">
                     <div class="form-group">
                         <label>Logradouro:</label>                      
                         <input type="text" class="form-control" value="${entidade.endereco.logradouro}" readonly>
@@ -85,7 +85,7 @@
                         <input type="text" class="form-control" value="${entidade.endereco.numero}" readonly>
                     </div>
                   </div>
-                  <div class="col-3">
+                  <div class="col-md-3">
                     <div class="form-group">
                         <label>Complemento:</label>                     
                         <input type="text" class="form-control" value="${entidade.endereco.complemento}" placeholder="Não Informado" readonly>
@@ -93,25 +93,25 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-3">
+                  <div class="col-md-3">
                     <div class="form-group">
                         <label>Cep:</label>                      
                         <input type="text" class="form-control" value="${entidade.endereco.cep}" readonly>
                     </div>
                   </div>
-                  <div class="col-3">
+                  <div class="col-md-3">
                     <div class="form-group">
                         <label>Bairro:</label>                      
                         <input type="text" class="form-control" value="${entidade.endereco.bairro}" readonly>
                     </div>
                   </div>
-                  <div class="col-3">
+                  <div class="col-md-3">
                     <div class="form-group">
                         <label>Cidade</label>                     
                         <input type="text" class="form-control" value="${entidade.endereco.cidade}" readonly>
                     </div>
                   </div>
-                  <div class="col-3">
+                  <div class="col-md-3">
                     <div class="form-group">
                         <label>Estado:</label>                      
                         <input type="text" class="form-control" value="${entidade.endereco.estado}" readonly>
