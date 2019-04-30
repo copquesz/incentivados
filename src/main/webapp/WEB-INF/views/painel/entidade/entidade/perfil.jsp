@@ -37,12 +37,12 @@
               <div class="card-body border"> 
 
                 <div class="row mt-3">
-                  <div class="col-3 text-left">                    
+                  <div class="col-md-3 text-md-left text-center">
                     <figure class="figure">
                       <img class="img-thumbnail" src="${path}/${entidade.documentosEntidade.logo.path}"> 
                     </figure> 
                   </div> 
-                  <div class="col-9 text-left">      
+                  <div class="col-md-9 text-md-left text-center">
                       <h2 class="mt-3 ml-3 bold text-primary">${entidade.nomeFantasia}</h2>
                       <p class="lead p-3">${entidade.sobre}</p>
                   </div>

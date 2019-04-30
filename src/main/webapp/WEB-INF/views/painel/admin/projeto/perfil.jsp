@@ -38,7 +38,7 @@
                         <div class="card-header bg-info"></div>
                         <div class="card-body border">
                             <div class="row mt-4">
-                                <div class="col-sm-12 col-md-4 text-sm-center align-content-center">
+                                <div class="col-sm-12 col-md-4 text-sm-center">
                                     <figure class="figure">
                                         <img class="img-thumbnail img-fluid"
                                              src="${path}/${projeto.documentosProjeto.logo.path}" width="400">
