@@ -33,19 +33,19 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card">
-              <div class="card-header bg-primary"></div>
+              <div class="card-header bg-info"></div>
               <div class="card-body border">
                 <fieldset>
                 <legend class="text-primary">Informações Gerais:</legend>
                 <div class="row mt-5">
-                  <div class="col-4 text-center">                    
+                  <div class="col-md-4 text-center">
                     <figure class="figure">
                       <img class="img-fluid" src="${path}/${empresa.documentosEmpresa.logo.path}" width="200"> 
                     </figure> 
                   </div>                                           
-                  <div class="col-8">
+                  <div class="col-md-8">
                     <div class="row">
-                      <div class="col-12">
+                      <div class="col-md-12">
                         <div class="form-group">
                             <label>Razao Social:</label>
                             <input type="text" class="form-control" value="${empresa.razaoSocial}" readonly>
@@ -53,7 +53,7 @@
                       </div>  
                     </div> 
                     <div class="row">
-                      <div class="col-12">
+                      <div class="col-md-12">
                         <div class="form-group">
                             <label>Nome Fantasia:</label>
                             <input type="text" class="form-control" value="${empresa.nomeFantasia}" readonly>
@@ -61,7 +61,7 @@
                       </div>  
                     </div> 
                     <div class="row">
-                      <div class="col-12">
+                      <div class="col-md-12">
                         <div class="form-group">
                             <label>CNPJ:</label>
                             <input type="text" class="form-control" value="${empresa.cnpj}" readonly>
@@ -73,17 +73,21 @@
                 </fieldset>                          
 
                 <fieldset class="mt-5">
-                <legend class="text-primary">Analistas:</legend>                  
-                <div class="row justify-content-start">
-                  <c:if test = "${empty empresa.analistas}">
-                    <div class="col-12">
-                      <div class="alert alert-danger p-3" role="alert">
-                        <p class="text-bold">Não há registro(s) ou .</p>
+                <legend class="text-primary">Responsáveis:</legend>                  
+                <div class="row justify-content-start"> 
+                  <c:if test = "${empty empresa.responsaveis}">
+                    <div class="col-md-12">
+                      <div class="alert alert-danger alert-with-icon alert-dismissible fade show" data-notify="container">
+                        <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                          <i class="nc-icon nc-simple-remove"></i>
+                        </button>
+                        <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
+                        <span data-notify="message">Não há responsáveis cadastrados.</span>
                       </div>
                     </div>
-                  </c:if> 
-                  <c:if test = "${not empty empresa.analistas}">
-                    <div class="col-12">
+                  </c:if>                 
+                  <c:if test = "${not empty empresa.responsaveis}">
+                    <div class="col-md-12">
                       <div class="table-responsive">
                         <table class="table">
                           <thead class=" text-primary">
@@ -93,12 +97,11 @@
                             <th class="border text-center">Loja</th>
                           </thead>
                           <tbody>
-                            <c:forEach var="analista" items="${empresa.analistas}">
+                            <c:forEach var="responsavel" items="${empresa.responsaveis}">
                               <tr>
-                                <td class="border text-center">${analista.nome} ${analista.sobrenome}</td>
-                                <td class="border text-center">${analista.cpf}</td>
-                                <td class="border text-center">${analista.email}</td>
-                                <td class="border text-center" ><strong><i class="far fa-building"></i> ${analista.endereco.bairro}</strong> (${analista.endereco.cidade} - ${analista.endereco.estado})</td>
+                                <td class="border text-center">${responsavel.nome} ${responsavel.sobrenome}</td>
+                                <td class="border text-center">${responsavel.cpf}</td>
+                                <td class="border text-center">${responsavel.email}</td>
                               </tr>
                             </c:forEach>
                           </tbody>
@@ -109,10 +112,18 @@
                 </div>
                 </fieldset>
                 <hr class="bg-success">
-                <a href="${path}/painel/empresas" class="btn btn-danger float-right"><i class="fas fa-angle-double-left"></i> Voltar</a>
-                <a href="${path}/painel/empresas/${empresa.nomeFantasia}/analistas/cadastro" class="btn btn-default mr-5 float-right">Cadastrar Analista</a>
+                <div class="dropdown">
+                  <button class="btn btn-info dropdown-toggle float-right" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Cadastrar
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="${path}/painel/empresas/${empresa.nomeFantasia}/analistas/cadastro">Analista</a>
+                    <a class="dropdown-item" href="#">Responsável</a>
+                  </div>
+                </div>
+                <a href="${path}/painel/empresas" class="btn btn-warning float-right"><i class="fas fa-angle-double-left"></i> Voltar</a>
               </div>
-              <div class="card-footer bg-primary"></div>
+              <div class="card-footer bg-info"></div>
             </div>
           </div>
         </div>              
@@ -131,6 +142,7 @@
   <!--   BOOTSTRAP   -->  
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+  <script type="text/javascript" src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script> 
   <!-- API'S -->
   <script type="text/javascript" src="${path}/api/via-cep.js"></script>
