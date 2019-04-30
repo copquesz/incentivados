@@ -249,6 +249,9 @@
     &[data-color="black"]{
       @include sidebar-color($dark-color);
     }
+    &[data-color="verde"]{
+        @include sidebar-color($verde-color);
+    }
 
 
     // Active color changing

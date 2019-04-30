@@ -38,7 +38,7 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="fas fa-hand-holding-heart text-default"></i>
+                      <i class="fas fa-hand-holding-heart text-info"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
