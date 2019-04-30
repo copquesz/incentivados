@@ -87,7 +87,7 @@
                       </div>
                       </fieldset>
                       <hr class="bg-default">
-                      <button type="submit" class="btn btn-info float-right">Enviar <i class="far fa-share-square"></i></button>
+                      <button type="submit" class="btn btn-primary float-right">Enviar <i class="far fa-share-square"></i></button>
                       <a href="${path}/painel/incentivos-fiscais" class="btn btn-danger float-right"><i class="fas fa-angle-double-left"></i> Voltar</a>
                     </form> 
                   </div>     
