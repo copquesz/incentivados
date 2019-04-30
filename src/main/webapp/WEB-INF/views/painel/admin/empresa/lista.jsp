@@ -88,7 +88,7 @@
                 </div>
               </div>
               <div class="card-footer mt-1">
-                <a href="${path}/painel/empresas/cadastro" class="btn btn-info">Cadastrar Empresa</a>
+                <a href="${path}/painel/empresas/cadastro" class="btn btn-primary">Cadastrar Empresa</a>
               </div>
             </div>
           </div>          

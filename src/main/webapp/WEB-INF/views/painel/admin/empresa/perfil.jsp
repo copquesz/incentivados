@@ -113,7 +113,7 @@
                 </fieldset>
                 <hr class="bg-success">
                 <div class="dropdown">
-                  <button class="btn btn-info dropdown-toggle float-right" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <button class="btn btn-primary dropdown-toggle float-left" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Cadastrar
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -121,7 +121,7 @@
                     <a class="dropdown-item" href="#">Responsável</a>
                   </div>
                 </div>
-                <a href="${path}/painel/empresas" class="btn btn-warning float-right"><i class="fas fa-angle-double-left"></i> Voltar</a>
+                <a href="${path}/painel/empresas" class="btn btn-warning float-left"><i class="fas fa-angle-double-left"></i> Voltar</a>
               </div>
               <div class="card-footer bg-info"></div>
             </div>
