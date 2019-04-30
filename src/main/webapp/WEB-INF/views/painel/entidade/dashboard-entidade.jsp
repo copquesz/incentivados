@@ -106,10 +106,10 @@
                     <div class="card ">
                         <div class="card-header ">
                             <c:if test="${cadastroProjeto}">
-                                <a href="${path}/painel/projetos/cadastro" class="btn btn-info float-right"><i
+                                <a href="${path}/painel/projetos/cadastro" class="btn btn-primary float-right"><i
                                         class="fas fa-plus mr-2"></i> Cadastrar Projeto</a>
                             </c:if>
-                            <a href="${path}/painel/entidades/cadastro" class="btn btn-info float-right"><i
+                            <a href="${path}/painel/entidades/cadastro" class="btn btn-primary float-right"><i
                                     class="fas fa-plus mr-2"></i> Cadastrar Entidade</a>
                             <h5 class="card-title">Meus Cadastros</h5>
                         </div>

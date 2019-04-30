@@ -188,7 +188,7 @@
                                 <td>${entidade.nomeFantasia}</td>
                                 <td>${entidade.cnpj}</td>
                                 <td class="text-center">
-                                  <a href="${path}/painel/entidades/${entidade.id}" class="btn btn-info btn-circle" title="Visualizar"><i class="fas fa-file-alt"></i></a>
+                                  <a href="${path}/painel/entidades/${entidade.id}" class="btn btn-primary btn-circle" title="Visualizar"><i class="fas fa-file-alt"></i></a>
                                 </td>
                               </tr>
                             </c:forEach>
@@ -215,7 +215,7 @@
                                 <p class="card-text text-justify">${fn:substring(projeto.objetivo, 0, 180)} ...</p>
                               </div>
                               <div class="card-footer">
-                                <button type="button" class="btn btn-info">Ver Detalhes</button>
+                                <button type="button" class="btn btn-primary">Ver Detalhes</button>
                               </div>
                             </div>
                           </div>
