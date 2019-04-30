@@ -37,8 +37,7 @@
                     <div class="card">
                         <div class="card-header bg-info"></div>
                         <div class="card-body border">
-                            <form action="${path}/painel/empresas/cadastro" method="post" enctype="multipart/form-data"
-                                  acceptcharset="UTF-8">
+                            <form action="${path}/painel/empresas/cadastro" method="post" enctype="multipart/form-data" acceptcharset="UTF-8">
                                 <fieldset>
                                     <legend class="text-primary">Informações Gerais:</legend>
                                     <div class="row mt-3 mt-3">
@@ -57,9 +56,7 @@
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label>CNPJ:</label>
-                                                <input type="text" class="form-control" id="cnpj" name="cnpj"
-                                                       onchange="if(!validarCNPJ(this.value)){$('#modal-cnpj-invalido').modal('show'); this.value='';}"
-                                                       required>
+                                                <input type="text" class="form-control" id="cnpj" name="cnpj" onchange="if(!validarCNPJ(this.value)){$('#modal-cnpj-invalido').modal('show'); this.value='';}" required>
                                             </div>
                                         </div>
                                     </div>
@@ -70,21 +67,18 @@
                                     <div class="row justify-content-start">
                                         <div class="col-lg-2 text-center mt-3">
                                             <div class="form-group">
-                                                <label for="logo"><i class="far fa-image text-primary"
-                                                                     style="font-size: 78px;"></i></label>
+                                                <label for="logo"><i class="far fa-image text-primary" style="font-size: 4rem;"></i></label>
                                                 <hr>
                                                 <h5 class="text-center">Logo</h5>
-                                                <input type="file" id="logo" name="documentosEmpresa.logo.file"
-                                                       onchange="validaImg(this, this.id)" required>
+                                                <input type="file" id="logo" name="documentosEmpresa.logo.file" onchange="validaImg(this, this.id)" required>
                                             </div>
                                         </div>
                                     </div>
                                 </fieldset>
+
                                 <hr class="bg-success">
-                                <button type="submit" class="btn btn-info float-right">Enviar <i
-                                        class="far fa-share-square"></i></button>
-                                <a href="${path}/painel/empresas" class="btn btn-danger float-right"><i
-                                        class="fas fa-angle-double-left"></i> Voltar</a>
+                                <button type="submit" class="btn btn-info float-right">Enviar <i class="far fa-share-square"></i></button>
+                                <a href="${path}/painel/empresas" class="btn btn-danger float-right"><i class="fas fa-angle-double-left"></i>Voltar</a>
                             </form>
                         </div>
                         <div class="card-footer bg-info"></div>

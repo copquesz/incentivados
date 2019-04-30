@@ -144,45 +144,45 @@
 
                   <hr class="bg-primary">
 
-                  <div class="row justify-content-center">
-                    <div class="col-lg-2 text-center mt-5">
+                  <div class="row justify-content-start">
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 text-center my-5">
                       <div class="form-group">
                           <label for="logo"><i class="far fa-file-image text-primary" style="font-size: 56px;"></i></label>
                           <hr>
                           <h5 class="text-center">Logo</h5>                          
-                          <input type="file" id="logo" name="documentosProjeto.logo.file" onchange="validaImg(this, this.id)"> 
+                          <input type="file" id="logo" name="documentosProjeto.logo.file" onchange="validaImg(this, this.id)" required> 
                       </div>
                     </div> 
-                    <div class="col-lg-2 text-center mt-5">
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 text-center my-5">
                       <div class="form-group">
                           <label for="proposta-tecnica"><i class="far fa-file-pdf text-primary" style="font-size: 56px;"></i></label>
                           <hr>
                           <h5 class="text-center">Proposta Técnica</h5>                          
-                          <input type="file" id="proposta-tecnica" name="documentosProjeto.propostaTecnica.file" onchange="validaPdf(this, this.id)"> 
+                          <input type="file" id="proposta-tecnica" name="documentosProjeto.propostaTecnica.file" onchange="validaPdf(this, this.id)" required> 
                       </div>
                     </div>
-                    <div class="col-lg-2 text-center mt-5">
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 text-center my-5">
                       <div class="form-group">
                           <label for="proposta-orcamentaria"><i class="far fa-file-pdf text-primary" style="font-size: 56px;"></i></label>
                           <hr>
                           <h5 class="text-center">Proposta Orçamentária</h5>                          
-                          <input type="file" id="proposta-orcamentaria" name="documentosProjeto.propostOrcamentaria.file" onchange="validaImgPdf(this, this.id)"> 
+                          <input type="file" id="proposta-orcamentaria" name="documentosProjeto.propostOrcamentaria.file" onchange="validaImgPdf(this, this.id)" required> 
                       </div>
                     </div>
-                    <div class="col-lg-2 text-center mt-5">
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 text-center my-5">
                       <div class="form-group">
                           <label for="dados-bancarios"><i class="far fa-file-pdf text-primary" style="font-size: 56px;"></i></label>
                           <hr>
                           <h5 class="text-center">Dados Bancários da Entidade</h5>                          
-                          <input type="file" id="dados-bancarios" name="documentosProjeto.dadosBancarios.file" onchange="validaImgPdf(this, this.id)"> 
+                          <input type="file" id="dados-bancarios" name="documentosProjeto.dadosBancarios.file" onchange="validaImgPdf(this, this.id)" required> 
                       </div>
                     </div>
-                    <div class="col-lg-2 text-center mt-5">
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 text-center my-5">
                       <div class="form-group">
                           <label for="certificado"><i class="far fa-file-pdf text-primary" style="font-size: 56px;"></i></label>
                           <hr>
                           <h5 class="text-center">Certificado de Captação / Diário Oficial</h5>                          
-                          <input type="file" id="certificado" name="documentosProjeto.certificado.file" onchange="validaImgPdf(this, this.id)"> 
+                          <input type="file" id="certificado" name="documentosProjeto.certificado.file" onchange="validaImgPdf(this, this.id)" required> 
                       </div>
                     </div>
                   </fieldset> 

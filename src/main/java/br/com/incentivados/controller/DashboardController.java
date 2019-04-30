@@ -59,6 +59,7 @@ public class DashboardController {
 
 		// paths da requisição e de redirecionamento
 		model.addAttribute("path", request.getContextPath());
+		model.addAttribute("cor", "#ffa");
 
 		// Seta a url de redirect
 		if (redirectAttributesRedirect.equals("")) {
