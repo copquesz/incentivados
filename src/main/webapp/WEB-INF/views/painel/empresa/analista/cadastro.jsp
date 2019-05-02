@@ -134,7 +134,7 @@
                   </fieldset>
                   <hr class="bg-success">
                   <button type="submit" class="btn btn-info float-right">Enviar <i class="far fa-share-square"></i></button>
-                  <a href="${path}/painel/empresas" class="btn btn-danger float-right"><i class="fas fa-angle-double-left"></i> Voltar</a>
+                  <a href="${path}/painel/dashboard" class="btn btn-danger float-right"><i class="fas fa-angle-double-left"></i> Voltar</a>
                 </form>       
               </div>
               <div class="card-footer bg-info"></div>
