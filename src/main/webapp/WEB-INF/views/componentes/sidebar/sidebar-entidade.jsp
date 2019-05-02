@@ -7,7 +7,7 @@
   <i class="far fa-user"></i>
       </div>
     </a>
-    <a href="${path}/painel/perfil" class="logo-normal">Bem vindo, ${usuario.nome}.</a>
+    <a href="${path}/painel/perfil" class="text-white">Bem vindo, ${usuario.nome}.</a>
   </div>
   <div class="sidebar-wrapper">
     <ul class="nav">
