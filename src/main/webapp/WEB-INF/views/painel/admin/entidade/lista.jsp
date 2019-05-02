@@ -10,7 +10,7 @@
   <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Incentivados - Lista de Entidades
+    Incentivados - Lista de Empresas
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -35,22 +35,17 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header "> 
-                <h5 class="card-title">Entidades Cadastrada(s): </h5>
-                <div class="d-flex justify-content-end">
-                  <div class="row">
-                    <div class="col-12">
-                      <form class="form-inline">                                          
-                        <div class="form-group mx-sm-3 mb-2">
-                          <input type="text" class="form-control" placeholder="Pesquisar por.." name="n">
-                        </div>
-                        <div class="form-group mb-2">
-                          <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>
-                        </div>
-                      </form>
-                    </div>
+                <h5 class="card-title">Entidades Cadastrada(s): ${qtdEntidades}</h5>
+                <div class="row d-flex justify-content-start">
+                  <div class="col-12">
+                    <form class="form-inline">
+                      <input type="text" class="form-control my-auto mr-2" id="" placeholder="Pesquisar">
+                      <button type="submit" class="btn btn-primary my-auto"><i class="fas fa-search"></i></button>
+                    </form>
                   </div>
-                </div>
+                </div>                
               </div>
+
               <div class="card-body">
                 <div class="row mt-2">
                   <div class="col-12">
@@ -82,7 +77,7 @@
                                 <td class="border text-center">${entidade.nomeFantasia}</td>
                                 <td class="border text-center" >${entidade.cnpj}</td>
                                 <td class="border text-center">
-                                  <a href="${path}/painel/entidades/${entidade.id}" class="btn btn-primary btn-sm text-white" title="Visualizar"><i class="far fa-address-card"></i>
+                                  <a href="${path}/painel/entidades/${entidade.id}" class="btn btn-primary btn-sm text-white" title="Visualizar"><i class="far fa-address-card"></i></a></td>
                               </tr>
                             </c:forEach>
                           </tbody>
@@ -91,9 +86,6 @@
                     </c:if>
                   </div>     
                 </div>
-              </div>
-              <div class="card-footer">
-                <hr>
               </div>
             </div>
           </div>          

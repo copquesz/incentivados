@@ -35,53 +35,51 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header bg-primary"></div>
+                        <div class="card-header bg-info"></div>
                         <div class="card-body border">
-
                             <div class="row mt-4">
                                 <div class="col-sm-12 col-md-4 text-sm-center">
                                     <figure class="figure">
                                         <img class="img-thumbnail img-fluid"
-                                             src="${path}/${projeto.documentosProjeto.logo.path}" width="400">
+                                             src="${path}/${projeto.documentosProjeto.logo.path}" width="400" />
                                     </figure>
                                 </div>
                                 <div class="col-sm-12 col-md-8 text-center text-md-left">
                                     <h2 class="mt-3 ml-3 bold text-primary text-center">${projeto.titulo}</h2>
                                     <hr>
-                                    <p class="lead">${projeto.objetivo}</p>
+                                    <p class="lead text-justify">${projeto.objetivo}</p>
                                 </div>
                             </div>
                             <hr>
-                            <div class="row justify-content-center mt-3">
-                                <div class="col-xl-2 col-lg-5 col-md-9 col-sm-8 bg-primary rounded text-center p-3 mt-3 mx-auto">
+                            <div class="row justify-content-center mt-5">
+                                <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 bg-primary rounded text-center p-3 mx-3 my-1">
                                     <h5 class="text-white"><i class="fas fa-file-invoice-dollar fa-3x"></i></h5>
                                     <hr>
                                     <h5 class="text-white bold"><span
-                                            style="font-size: 0.8em;">Valor Total:</span> </br><span
-                                            style="font-size: 1.3em;">R$ ${projeto.valorTotal}</span></h5>
+                                            style="font-size: 0.8rem;">Valor Total:</span> </br><span
+                                            style="font-size: 1.3rem;">R$ ${projeto.valorTotal}</span></h5>
                                 </div>
-                                <div class="col-xl-2 col-lg-5 col-md-9 col-sm-8 bg-primary rounded text-center p-3 mt-3 mx-auto">
+                                <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 bg-primary rounded text-center p-3 mx-3 my-1">
                                     <h5 class="text-white"><i class="fas fa-hand-holding-usd fa-3x"></i></h5>
                                     <hr>
                                     <h5 class="text-white bold"><span
-                                            style="font-size: 0.8em;">Valor Solicitado:</span> </br><span
-                                            style="font-size: 1.3em;">R$ ${projeto.valorSolicitado}</span></h5>
+                                            style="font-size: 0.8rem;">Valor Solicitado:</span> </br><span
+                                            style="font-size: 1.3rem;">R$ ${projeto.valorSolicitado}</span></h5>
                                 </div>
-                                <div class="col-xl-2 col-lg-5 col-md-9 col-sm-8 bg-primary rounded text-center p-3 mt-3 mx-auto">
+                                <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 bg-primary rounded text-center p-3 mx-3 my-1">
                                     <h5 class="text-white"><i class="fas fa-compress-arrows-alt fa-3x"></i></h5>
                                     <hr>
                                     <h5 class="text-white bold"><span
-                                            style="font-size: 0.8em;">Beneficiários Diretos:</span> </br><span
-                                            style="font-size: 1.3em;"><i
+                                            style="font-size: 0.8rem;">Beneficiários Diretos:</span> </br><span
+                                            style="font-size: 1.3rem;"><i
                                             class="fas fa-users"></i> ${projeto.beneficiariosDiretos}</span></h5>
                                 </div>
-                                <div class="col-xl-2 col-lg-5 col-md-9 col-sm-8 bg-primary rounded text-center p-3 mt-3 mx-auto">
+                                <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 bg-primary rounded text-center p-3 mx-3 my-1">
                                     <h5 class="text-white"><i class="fas fa-expand-arrows-alt fa-3x"></i></h5>
                                     <hr>
-                                    <h5 class="text-white bold"><span
-                                            style="font-size: 0.8em;">Beneficiários Indiretos:</span> </br><span
-                                            style="font-size: 1.3em;"><i
-                                            class="fas fa-users"></i> ${projeto.beneficiariosIndiretos}</span></h5>
+                                    <h5 class="text-white bold"><span style="font-size: 0.8rem;">Beneficiários Indiretos:</span> </br>
+                                        <span style="font-size: 1.3rem;"><i
+                                                class="fas fa-users"></i> ${projeto.beneficiariosIndiretos}</span></h5>
                                 </div>
                             </div>
 
@@ -137,7 +135,7 @@
                                 <legend class="text-primary">Uploads:</legend>
                                 <hr class="bg-primary">
                                 <div class="row justify-content-center">
-                                    <div class="col-lg-2 text-center mt-5">
+                                    <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 text-center mt-5">
                                         <div class="form-group">
                                             <a href="${path}/${projeto.documentosProjeto.logo.path}" target="_blank"><i
                                                     class="far fa-file-image text-primary" style="font-size: 56px;"></i></a>
@@ -145,7 +143,7 @@
                                             <h5 class="text-center">Logo</h5>
                                         </div>
                                     </div>
-                                    <div class="col-lg-2 text-center mt-5">
+                                    <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 text-center mt-5">
                                         <div class="form-group">
                                             <a href="${path}/${projeto.documentosProjeto.propostaTecnica.path}"
                                                target="_blank"><i class="fas fa-file-pdf text-primary"
@@ -154,7 +152,7 @@
                                             <h5 class="text-center">Projeto Técnico</h5>
                                         </div>
                                     </div>
-                                    <div class="col-lg-2 text-center mt-5">
+                                    <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 text-center mt-5">
                                         <div class="form-group">
                                             <a href="${path}/${projeto.documentosProjeto.propostOrcamentaria.path}"
                                                target="_blank"><i class="fas fa-file-pdf text-primary"
@@ -163,7 +161,7 @@
                                             <h5 class="text-center">Projeto Orçamentário</h5>
                                         </div>
                                     </div>
-                                    <div class="col-lg-2 text-center mt-5">
+                                    <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 text-center mt-5">
                                         <div class="form-group">
                                             <a href="${path}/${projeto.documentosProjeto.dadosBancarios.path}"
                                                target="_blank"><i class="fas fa-file-pdf text-primary"
@@ -172,7 +170,7 @@
                                             <h5 class="text-center">Dados Bancários</h5>
                                         </div>
                                     </div>
-                                    <div class="col-lg-2 text-center mt-5">
+                                    <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 text-center mt-5">
                                         <div class="form-group">
                                             <a href="${path}/${projeto.documentosProjeto.certificado.path}"
                                                target="_blank"><i class="fas fa-file-pdf text-primary"
@@ -187,26 +185,19 @@
                         <div class="card-footer bg-primary"></div>
                     </div>
                 </div>
+
             </div>
         </div>
+        <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp"/>
     </div>
-</div>
-<c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp"/>
-</div>
 </div>
 
 <!--   JQUERY   -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <!--   POPPER   -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <!--   BOOTSTRAP   -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 <script type="text/javascript" src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
 <script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script>

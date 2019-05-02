@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Dashboard
+    Incentivados - Cadastro de Projeto
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     FONTAWESOME     -->
@@ -40,7 +40,7 @@
                   <fieldset>
                   <legend class="text-primary">Órgão Executor:</legend>
                       <label>Entidade:</label>
-                      <select class="selectpicker form-control" name="entidade" title="Selecione ..." data-live-search="true" data-style="btn-info">
+                      <select class="selectpicker form-control" name="entidade" title="Selecione ..." data-live-search="true" data-style="btn-info" required>
                         <c:forEach var="entidade" items="${entidades}">
                           <option value="${entidade.id}">${entidade.razaoSocial}</option>
                         </c:forEach>
@@ -50,7 +50,7 @@
                   <fieldset class="mt-5">
                   <legend class="text-primary">Incentivo Fiscal:</legend>
                       <label>Lei:</label>
-                      <select class="selectpicker form-control" name="incentivosFiscais" multiple title="Selecione ..." data-live-search="true" data-style="btn-info">
+                      <select class="selectpicker form-control" name="incentivosFiscais" multiple title="Selecione ..." data-live-search="true" data-style="btn-info" required>
                         <c:forEach var="incentivoFiscal" items="${incentivosFiscais}">
                           <option value="${incentivoFiscal.id}">${incentivoFiscal.legislacao} <c:if test = "${not empty incentivoFiscal.sigla}"> - ${incentivoFiscal.sigla}</c:if></option>
                         </c:forEach>
@@ -66,7 +66,7 @@
                     <div class="col-12">
                       <div class="form-group">
                           <label>Título:</label>
-                          <input type="text" class="form-control" name="titulo">
+                          <input type="text" class="form-control" name="titulo" required>
                       </div>
                     </div>
                   </div>
@@ -74,25 +74,25 @@
                     <div class="col-sm-12 col-md-3">
                       <div class="form-group">
                           <label>Valor Solicitado:</label>
-                          <input type="text" class="form-control" id="valor-solicitado" name="valorSolicitado">
+                          <input type="text" class="form-control" id="valor-solicitado" name="valorSolicitado" required>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-3">
                       <div class="form-group">
                           <label>Valor Total:</label>
-                          <input type="text" class="form-control" id="valor-total" name="valorTotal">
+                          <input type="text" class="form-control" id="valor-total" name="valorTotal" required>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-3">
                       <div class="form-group">
                           <label>Beneficiários Diretos:</label>
-                          <input type="number" class="form-control" name="beneficiariosDiretos">
+                          <input type="number" class="form-control" name="beneficiariosDiretos" required>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-3">
                       <div class="form-group">
                           <label>Beneficiários Indiretos:</label>
-                          <input type="number" class="form-control" name="beneficiariosIndiretos">
+                          <input type="number" class="form-control" name="beneficiariosIndiretos" required>
                       </div>
                     </div>
                   </div>
@@ -100,7 +100,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Contrapartida:</label>
-                        <textarea class="form-control" name="contrapartida" rows="5" maxlength="3000" placeholder="Cite as estratégias de contrapartida ..."></textarea>
+                        <textarea class="form-control" name="contrapartida" rows="5" maxlength="3000" placeholder="Cite as estratégias de contrapartida ..." required></textarea>
                       </div>
                     </div>
                   </div>
@@ -108,7 +108,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Objetivo:</label>
-                        <textarea class="form-control" name="objetivo" rows="5" maxlength="3000" placeholder="Descreva o seu objetivo ..."></textarea>
+                        <textarea class="form-control" name="objetivo" rows="5" maxlength="3000" placeholder="Descreva o seu objetivo ..." required></textarea>
                       </div>
                     </div>
                   </div>
@@ -116,7 +116,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Resumo:</label>
-                        <textarea class="form-control" name="resumo" rows="10" maxlength="3000" placeholder="Apresente um resumo do projeto ..."></textarea>
+                        <textarea class="form-control" name="resumo" rows="10" maxlength="3000" placeholder="Apresente um resumo do projeto ..." required></textarea>
                       </div>
                     </div>
                   </div>
@@ -141,54 +141,54 @@
 
                   <fieldset class="mt-5 mb-5">
                   <legend class="text-primary">Uploads:</legend>
-
-                  <hr class="bg-primary">
-                  <div class="row justify-content-start">
-                    <div class="col-sm-12 col-md-6 text-center mt-5">
-                      <div class="form-group">
-                          <label for="logo"><i class="far fa-file-image text-primary" style="font-size: 56px;"></i></label>
-                          <hr>
-                          <h5 class="text-center">Logo</h5>
-                          <input type="file" id="logo" name="documentosProjeto.logo.file" onchange="validaImg(this, this.id)">
+                    <hr class="bg-primary">
+                    <div class="row justify-content-start">
+                      <div class="col-sm-12 col-md-6 text-center mt-5">
+                        <div class="form-group">
+                            <label for="logo"><i class="far fa-file-image text-primary" style="font-size: 56px;"></i></label>
+                            <hr>
+                            <h5 class="text-center">Logo</h5>
+                            <input type="file" id="logo" name="documentosProjeto.logo.file" onchange="validaImg(this, this.id)" required>
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 text-center mt-5">
-                      <div class="form-group">
-                          <label for="proposta-tecnica"><i class="far fa-file-pdf text-primary" style="font-size: 56px;"></i></label>
-                          <hr>
-                          <h5 class="text-center">Proposta Técnica</h5>
-                          <input type="file" id="proposta-tecnica" name="documentosProjeto.propostaTecnica.file" onchange="validaPdf(this, this.id)">
+                      <div class="col-sm-12 col-md-6 text-center mt-5">
+                        <div class="form-group">
+                            <label for="proposta-tecnica"><i class="far fa-file-pdf text-primary" style="font-size: 56px;"></i></label>
+                            <hr>
+                            <h5 class="text-center">Proposta Técnica</h5>
+                            <input type="file" id="proposta-tecnica" name="documentosProjeto.propostaTecnica.file" onchange="validaPdf(this, this.id)" required>
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 text-center mt-5">
-                      <div class="form-group">
-                          <label for="proposta-orcamentaria"><i class="far fa-file-pdf text-primary" style="font-size: 56px;"></i></label>
-                          <hr>
-                          <h5 class="text-center">Proposta Orçamentária</h5>
-                          <input type="file" id="proposta-orcamentaria" name="documentosProjeto.propostOrcamentaria.file" onchange="validaImgPdf(this, this.id)">
+                      <div class="col-sm-12 col-md-6 text-center mt-5">
+                        <div class="form-group">
+                            <label for="proposta-orcamentaria"><i class="far fa-file-pdf text-primary" style="font-size: 56px;"></i></label>
+                            <hr>
+                            <h5 class="text-center">Proposta Orçamentária</h5>
+                            <input type="file" id="proposta-orcamentaria" name="documentosProjeto.propostOrcamentaria.file" onchange="validaImgPdf(this, this.id)" required>
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 text-center mt-5">
-                      <div class="form-group">
-                          <label for="dados-bancarios"><i class="far fa-file-pdf text-primary" style="font-size: 56px;"></i></label>
-                          <hr>
-                          <h5 class="text-center">Dados Bancários da Entidade</h5>
-                          <input type="file" id="dados-bancarios" name="documentosProjeto.dadosBancarios.file" onchange="validaImgPdf(this, this.id)">
+                      <div class="col-sm-12 col-md-6 text-center mt-5">
+                        <div class="form-group">
+                            <label for="dados-bancarios"><i class="far fa-file-pdf text-primary" style="font-size: 56px;"></i></label>
+                            <hr>
+                            <h5 class="text-center">Dados Bancários da Entidade</h5>
+                            <input type="file" id="dados-bancarios" name="documentosProjeto.dadosBancarios.file" onchange="validaImgPdf(this, this.id)" required>
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6 text-center mt-5">
-                      <div class="form-group">
-                          <label for="certificado"><i class="far fa-file-pdf text-primary" style="font-size: 56px;"></i></label>
-                          <hr>
-                          <h5 class="text-center">Certificado de Captação / Diário Oficial</h5>
-                          <input type="file" id="certificado" name="documentosProjeto.certificado.file" onchange="validaImgPdf(this, this.id)">
+                      <div class="col-sm-12 col-md-6 text-center mt-5">
+                        <div class="form-group">
+                            <label for="certificado"><i class="far fa-file-pdf text-primary" style="font-size: 56px;"></i></label>
+                            <hr>
+                            <h5 class="text-center">Certificado de Captação / Diário Oficial</h5>
+                            <input type="file" id="certificado" name="documentosProjeto.certificado.file" onchange="validaImgPdf(this, this.id)" required>
+                        </div>
                       </div>
                     </div>
                   </fieldset>
 
                   <hr class="bg-primary">
                   <button type="submit" class="btn btn-primary float-right">Enviar <i class="far fa-share-square"></i></button>
-                  <a href="${path}/entidades" class="btn btn-danger float-right"><i class="fas fa-angle-double-left"></i> Voltar</a>
+                  <a href="${path}/painel/dashboard" class="btn btn-danger float-right"><i class="fas fa-angle-double-left"></i> Voltar</a>
                 </form>
               </div>
               <div class="card-footer bg-info"></div>
@@ -197,6 +197,7 @@
         </div>
       </div>
       <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
+      <c:import url="/WEB-INF/views/componentes/modal/modal-motivo-reprovado.jsp" />
     </div>
   </div>
 

@@ -39,15 +39,14 @@
                         <div class="card-body border">
 
                             <div class="row mt-3">
-                                <div class="col-md-3 text-md-left text-center">
+                                <div class="col-md-3 text-center">
                                     <figure class="figure">
-                                        <img class="img-thumbnail"
-                                             src="${path}/${entidade.documentosEntidade.logo.path}">
+                                        <img src="${path}/${entidade.documentosEntidade.logo.path}" width="200" />
                                     </figure>
                                 </div>
                                 <div class="col-md-9 text-md-left text-center">
                                     <h2 class="mt-3 ml-3 bold text-primary">${entidade.nomeFantasia}</h2>
-                                    <p class="lead p-3">${entidade.sobre}</p>
+                                    <p class="lead text-justify p-3">${entidade.sobre}</p>
                                 </div>
                             </div>
 
@@ -85,7 +84,7 @@
                                                    value="${entidade.endereco.logradouro}" readonly>
                                         </div>
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-md-2">
                                         <div class="form-group">
                                             <label>Nº:</label>
                                             <input type="text" class="form-control" value="${entidade.endereco.numero}"

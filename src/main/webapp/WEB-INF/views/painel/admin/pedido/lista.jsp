@@ -36,7 +36,7 @@
             <div class="card">
               <div class="card-header "> 
                 <h5 class="card-title">Pedidos Cadastrado(s): ${qtdPedidos}</h5>
-                <div class="d-flex justify-content-end">
+                <div class="d-flex justify-content-start">
                   <div class="row">
                     <div class="col-12">
                       <form class="form-inline">                                          
@@ -83,9 +83,9 @@
                                 <td class="text-center">${pedido.analista.endereco.bairro} - ${pedido.analista.endereco.cidade} / ${pedido.analista.endereco.estado}</td>
                                 <td class="text-center"><a href="${path}/${pedido.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>
                                 <th class="text-center">
-                                  <c:if test = "${pedido.status.id == 0}"><span class="bg-warning" ">${pedido.status}</span></c:if>
-                                  <c:if test = "${pedido.status.id == 1}"><span class="bg-danger" ">${pedido.status}</span></c:if>
-                                  <c:if test = "${pedido.status.id == 2}"><span class="bg-success" ">${pedido.status}</span></c:if>
+                                  <c:if test = "${pedido.status.id == 0}"><span class="bg-warning p-1 text-white">${pedido.status}</span></c:if>
+                                  <c:if test = "${pedido.status.id == 1}"><span class="bg-danger p-1"><a href="#" class="text-white" data-toggle="modal" data-target="#modal-motivo-reprovado-${pedido.id}" title="Visualizar Motivo">${pedido.status}</a></span></c:if>
+                                  <c:if test = "${pedido.status.id == 2}"><span class="bg-success p-1 text-white">${pedido.status}</span></c:if>
                                 </th>
                               </tr>
                             </c:forEach>
@@ -104,6 +104,7 @@
         </div>         
       </div>
       <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
+      <c:import url="/WEB-INF/views/componentes/modal/modal-motivo-reprovado.jsp" />
     </div>
   </div>
 

@@ -43,19 +43,19 @@
                     <div class="col-12 col-lg-4">
                       <div class="form-group">
                           <label>Nome:</label>
-                          <input type="text" class="form-control" name="nome">
+                          <input type="text" class="form-control" name="nome" required>
                       </div>
                     </div>
                     <div class="col-12 col-lg-4">
                       <div class="form-group">
                           <label>Sobrenome:</label>
-                          <input type="text" class="form-control" name="sobrenome" ">
+                          <input type="text" class="form-control" name="sobrenome" required>
                       </div>
                     </div>
                     <div class="col-12 col-lg-4">
                       <div class="form-group">
                           <label>CPF:</label>
-                          <input type="text" class="form-control" id="cpf" name="cpf" onchange="if(!validarCPF(this.value)){$('#modal-cpf-invalido').modal('show'); this.value='';}">
+                          <input type="text" class="form-control" id="cpf" name="cpf" onchange="if(!validarCPF(this.value)){$('#modal-cpf-invalido').modal('show'); this.value='';}" required>
                       </div>
                     </div>              
                   </div>
@@ -63,13 +63,13 @@
                     <div class="col-12 col-lg-4">
                       <div class="form-group">
                           <label>E-mail:</label>
-                          <input type="email" class="form-control" name="email">
+                          <input type="email" class="form-control" name="email" required>
                       </div>
                     </div>
                     <div class="col-12 col-lg-4">
                       <div class="form-group">
                           <label>Senha:</label>
-                          <input type="password" class="form-control" name="senha">
+                          <input type="password" class="form-control" name="senha" minlength="6" required>
                       </div>
                     </div>
                     <div class="col-12 col-lg-4">
@@ -87,7 +87,7 @@
                     <div class="col-12 col-lg-4">
                       <div class="form-group">
                           <label>CEP:</label>                     
-                          <input type="text" class="form-control" id="cep" name="endereco.cep">
+                          <input type="text" class="form-control" id="cep" name="endereco.cep" required>
                       </div>
                     </div>
                   </div>
@@ -95,13 +95,13 @@
                     <div class="col-12 col-lg-7">
                       <div class="form-group">
                           <label>Logradouro:</label>                      
-                          <input type="text" class="form-control" id="logradouro" name="endereco.logradouro">
+                          <input type="text" class="form-control" id="logradouro" name="endereco.logradouro" required>
                       </div>
                     </div>
                     <div class="col-12 col-lg-2">
                       <div class="form-group">
                           <label>Nº:</label>                      
-                          <input type="text" class="form-control" name="endereco.numero">
+                          <input type="text" class="form-control" name="endereco.numero" required>
                       </div>
                     </div>
                     <div class="col-12 col-lg-3">
@@ -115,19 +115,19 @@
                     <div class="col-12 col-lg-4">
                       <div class="form-group">
                           <label>Bairro:</label>                      
-                          <input type="text" class="form-control" id="bairro" name="endereco.bairro">
+                          <input type="text" class="form-control" id="bairro" name="endereco.bairro" required>
                       </div>
                     </div>
                     <div class="col-12 col-lg-4">
                       <div class="form-group">
                           <label>Cidade</label>                     
-                          <input type="text" class="form-control" id="cidade" name="endereco.cidade">
+                          <input type="text" class="form-control" id="cidade" name="endereco.cidade" required>
                       </div>
                     </div>
                     <div class="col-12 col-lg-4">
                       <div class="form-group">
                           <label>Estado:</label>                      
-                          <input type="text" class="form-control" id="estado" name="endereco.estado">
+                          <input type="text" class="form-control" id="estado" name="endereco.estado" required>
                       </div>
                     </div>
                   </div>

@@ -36,14 +36,9 @@
             <div class="card">
               <div class="card-header "> 
                 <h5 class="card-title">Incentivos Fiscais Cadastrado(s): ${qtdIncentivosFiscais}</h5>
-                <div class="d-flex justify-content-end">
+                <div class="d-flex justify-content-start"> 
                   <div class="row">
-                    <div class="col-12">
-                      <a href="${path}/painel/incentivos-fiscais/cadastro" class="btn btn-primary mr-5">Novo</a>
-                    </div>
-                  </div>                  
-                  <div class="row">
-                    <div class="col-12">
+                    <div class="col-md-12">
                       <form class="form-inline">                                          
                         <div class="form-group mx-sm-3 mb-2">
                           <input type="text" class="form-control" placeholder="Pesquisar por..">
@@ -95,7 +90,11 @@
                 </div>
               </div>
               <div class="card-footer">
-                <hr>
+                <div class="row">
+                  <div class="col-md-12">
+                    <a href="${path}/painel/incentivos-fiscais/cadastro" class="btn btn-primary mr-5">Cadastrar Incentivos Fiscal</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>          

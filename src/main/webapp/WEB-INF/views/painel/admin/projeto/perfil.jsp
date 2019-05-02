@@ -41,7 +41,7 @@
                                 <div class="col-sm-12 col-md-4 text-sm-center">
                                     <figure class="figure">
                                         <img class="img-thumbnail img-fluid"
-                                             src="${path}/${projeto.documentosProjeto.logo.path}" width="400">
+                                             src="${path}/${projeto.documentosProjeto.logo.path}" width="400" />
                                     </figure>
                                 </div>
                                 <div class="col-sm-12 col-md-8 text-center text-md-left">

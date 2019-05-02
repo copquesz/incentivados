@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <html lang="pt-br">
 
 <head>
@@ -181,27 +182,23 @@
                                             </div>
                                     </c:if>
                                     <c:if test="${not empty projetos}">
-                                        <c:forEach var="projeto" items="${projetos}">
-                                            <div class="row p-3 mt-3">
-                                                <div class="col-6 col-lg-4 col-md-12 col-sm-12 mx-auto text-center">
-                                                    <figure class="figure">
-                                                        <img src="${path}/${projeto.documentosProjeto.logo.path}"
-                                                             class="img-projeto img-fluid mt-2 mb-2 mx-auto d-block"
-                                                             alt="Logo">
-                                                    </figure>
+                                        <div class="row justify-content-start">
+                                            <c:forEach var="projeto" items="${projetos}">
+                                              <div class="col-12 col-xl-3 col-lg-6 col-md-6 d-flex align-items-stretch bd-highlight">
+                                                <div class="card border align-self-stretch flex-fill bd-highlight mt-3">
+                                                  <img src="${path}/${projeto.documentosProjeto.logo.path}" class="card-img-top" alt="...">
+                                                  <div class="card-body">
+                                                    <h5 class="card-title" style="font-weight: bold;">${projeto.titulo}</h5>
+                                                    <hr>
+                                                    <p class="card-text text-justify">${fn:substring(projeto.objetivo, 0, 180)} ...</p>
+                                                  </div>
+                                                  <div class="card-footer">
+                                                    <a href="${path}/painel/projetos/${projeto.id}" class="btn btn-primary">Ver Detalhes</a>
+                                                  </div>
                                                 </div>
-                                                <div class="col-6 col-lg-8 col-md-12 col-sm-12">
-                                                    <h3>${projeto.titulo}</h3>
-                                                    <hr class="bg-default">
-                                                    <p class="lead">${projeto.objetivo}</p>
-                                                    <p class="text-center">
-                                                        <a href="${path}/painel/projetos/${projeto.id}"
-                                                           class="btn btn-primary">Ver Detalhes</a>
-                                                    </p>
-                                                    <p></p>
-                                                </div>
-                                            </div>
-                                        </c:forEach>
+                                              </div>
+                                            </c:forEach>
+                                        </div>
                                     </c:if>
                                 </div>
                             </div>
@@ -243,17 +240,18 @@
                                                 <td class="text-center">${pedido.analista.endereco.bairro}
                                                     - ${pedido.analista.endereco.cidade}
                                                     / ${pedido.analista.endereco.estado}</td>
-                                                <td class="text-center"><a
-                                                        href="${path}/${pedido.documentosPedido.cartaOficio.path}"
-                                                        title="Visualizar" target="_blank"><i
-                                                        class="far fa-file-alt"></i> Carta Ofício</a></td>
+                                                <td class="text-center">
+                                                    <a href="${path}/${pedido.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>
                                                 <th class="text-center">
-                                                    <c:if test="${pedido.status.id == 0}"><span
-                                                            class="bg-warning">${pedido.status}</span></c:if>
-                                                    <c:if test="${pedido.status.id == 1}"><span
-                                                            class="bg-danger">${pedido.status}</span></c:if>
-                                                    <c:if test="${pedido.status.id == 2}"><span
-                                                            class="bg-success">${pedido.status}</span></c:if>
+                                                    <c:if test="${pedido.status.id == 0}">
+                                                        <span class="bg-warning p-1 text-white">${pedido.status}</span>
+                                                    </c:if>
+                                                    <c:if test="${pedido.status.id == 1}">
+                                                        <span class="bg-danger p-1"><a class="text-white" href="#" data-toggle="modal" data-target="#modal-motivo-reprovado-${pedido.id}" title="Visualizar">${pedido.status}</a></span>
+                                                    </c:if>
+                                                    <c:if test="${pedido.status.id == 2}">
+                                                        <span class="bg-success p-1 text-white">${pedido.status}</span>
+                                                    </c:if>
                                                 </th>
                                             </tr>
                                         </c:forEach>
@@ -266,7 +264,8 @@
                 </div>
             </div>
         </div>
-        <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
+        <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />        
+        <c:import url="/WEB-INF/views/componentes/modal/modal-motivo-reprovado.jsp" />
     </div>
 </div>
 <!--   JQUERY   -->

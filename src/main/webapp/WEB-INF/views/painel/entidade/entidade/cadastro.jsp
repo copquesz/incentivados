@@ -70,7 +70,7 @@
                                         <div class="col-md-12">
                                             <label>Sobre:</label>
                                             <textarea class="form-control" name="sobre" rows="5"
-                                                      maxlength="3000"></textarea>
+                                                      maxlength="3000" required></textarea>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -98,7 +98,7 @@
                                         <div class="col-5 col-sm-2 col-md-2">
                                             <div class="form-group">
                                                 <label>Nº:</label>
-                                                <input type="text" class="form-control" name="endereco.numero">
+                                                <input type="text" class="form-control" name="endereco.numero" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-10 col-md-4">
@@ -221,12 +221,13 @@
                                                        onchange="validaImgPdf(this, this.id)" required>
                                             </div>
                                         </div>
+                                    </div>
                                 </fieldset>
 
                                 <hr class="bg-primary">
                                 <button type="submit" class="btn btn-primary float-right">Enviar <i
                                         class="far fa-share-square"></i></button>
-                                <a href="${path}/painel/entidades" class="btn btn-danger float-right"><i
+                                <a href="${path}/painel/dashboard" class="btn btn-danger float-right"><i
                                         class="fas fa-angle-double-left"></i> Voltar</a>
                             </form>
                         </div>

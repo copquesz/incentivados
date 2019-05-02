@@ -40,7 +40,7 @@
                 <div class="row mt-5">
                   <div class="col-md-4 text-center">
                     <figure class="figure">
-                      <img class="img-fluid" src="${path}/${empresa.documentosEmpresa.logo.path}" width="200"> 
+                      <img class="img-fluid" src="${path}/${empresa.documentosEmpresa.logo.path}" style="max-width: 300px;" /> 
                     </figure> 
                   </div>                                           
                   <div class="col-md-8">

@@ -119,23 +119,22 @@
 
                   <fieldset class="mt-5 mb-5">
                   <legend class="text-primary">Uploads:</legend>
-
-                  <hr class="bg-primary">
-
-                  <div class="row justify-content-start">
-                    <div class="col-lg-2 text-center mt-5">
-                      <div class="form-group">
-                          <label for="carta-oficio"><i class="far fa-file-alt text-primary" style="font-size: 56px;"></i></label>
-                          <hr>
-                          <h5 class="text-center">Carta Oficio</h5>                          
-                          <input type="file" id="carta-oficio" name="documentosPedido.cartaOficio.file" onchange="validaImgPdf(this, this.id)" required> 
+                    <hr class="bg-primary">
+                    <div class="row justify-content-start">
+                      <div class="col-lg-2 text-center mt-5">
+                        <div class="form-group">
+                            <label for="carta-oficio"><i class="far fa-file-alt text-primary" style="font-size: 56px;"></i></label>
+                            <hr>
+                            <h5 class="text-center">Carta Oficio</h5>
+                            <input type="file" id="carta-oficio" name="documentosPedido.cartaOficio.file" onchange="validaImgPdf(this, this.id)" required>
+                        </div>
                       </div>
-                    </div> 
+                    </div>
                   </fieldset> 
 
                   <hr class="bg-primary">
                   <button type="submit" class="btn btn-success float-right">Enviar <i class="far fa-share-square"></i></button>
-                  <a href="${path}/entidades" class="btn btn-danger float-right"><i class="fas fa-angle-double-left"></i> Voltar</a>
+                  <a href="${path}/painel/dashboard" class="btn btn-danger float-right"><i class="fas fa-angle-double-left"></i> Voltar</a>
                 </form>
               </div>
               <div class="card-footer bg-primary"></div>

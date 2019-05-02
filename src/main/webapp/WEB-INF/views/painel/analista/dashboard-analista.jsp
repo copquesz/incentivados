@@ -181,6 +181,7 @@
                                 <th class="text-center">Empresa</th>
                                 <th class="text-center">Loja</th>
                                 <th class="text-center">Carta Ofício</th>
+                                <th class="text-center">Motivo</th>
                               </thead>
                               <tbody>
                                 <c:forEach var="pedidoReprovado" items="${recusados}">
@@ -191,7 +192,8 @@
                                     <td class="text-center">${pedidoReprovado.entidade.nomeFantasia}</td>
                                     <td class="text-center">${pedidoReprovado.empresa.nomeFantasia}</td>
                                     <td class="text-center">${pedidoReprovado.analista.endereco.bairro} - ${pedidoReprovado.analista.endereco.cidade} / ${pedidoReprovado.analista.endereco.estado}</td>
-                                    <td class="text-center"><a href="${path}/${pedidoReprovado.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>                                
+                                    <td class="text-center"><a href="${path}/${pedidoReprovado.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>
+                                    <td class="text-center"><a href="#" data-toggle="modal" data-target="#modal-motivo-reprovado-${pedidoReprovado.id}" title="Visualizar"><i class="far fa-file-pdf"></i></a></td>
                                   </tr>
                                 </c:forEach>
                               </tbody>
@@ -208,6 +210,7 @@
         </div>       
       </div>
       <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
+      <c:import url="/WEB-INF/views/componentes/modal/modal-motivo-reprovado.jsp" />
     </div>
   </div>
   <!--   JQUERY   -->

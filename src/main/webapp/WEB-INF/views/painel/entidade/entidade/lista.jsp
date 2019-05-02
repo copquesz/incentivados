@@ -36,7 +36,7 @@
             <div class="card">
               <div class="card-header "> 
                 <h5 class="card-title">Entidades Cadastrada(s): </h5>
-                <div class="d-flex justify-content-end">
+                <div class="d-flex justify-content-start">
                   <div class="row">
                     <div class="col-12">
                       <form class="form-inline">                                          
@@ -82,7 +82,7 @@
                                 <td class="border text-center">${entidade.nomeFantasia}</td>
                                 <td class="border text-center" >${entidade.cnpj}</td>
                                 <td class="border text-center">
-                                  <a href="${path}/painel/entidades/${entidade.id}" class="btn btn-primary btn-sm text-white" title="Visualizar"><i class="far fa-address-card"></i>
+                                  <a href="${path}/painel/entidades/${entidade.id}" class="btn btn-primary btn-sm text-white" title="Visualizar"><i class="far fa-address-card"></i></a></td>
                               </tr>
                             </c:forEach>
                           </tbody>

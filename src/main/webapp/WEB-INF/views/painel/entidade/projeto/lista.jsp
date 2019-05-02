@@ -11,7 +11,7 @@
   <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Dashboard
+    Incentivados - Projetos
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -36,8 +36,8 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header "> 
-                <h5 class="card-title">Projetos Cadastrado(s): </h5>
-                <div class="d-flex justify-content-end">
+                <h5 class="card-title">Projetos Cadastrado(s): ${qtdProjetos}</h5>
+                <div class="d-flex justify-content-start">
                   <div class="row">
                     <div class="col-12">
                       <form class="form-inline">                                          
@@ -70,9 +70,9 @@
                       <hr>
                       <div class="row justify-content-start">
                           <c:forEach var="projeto" items="${projetos}">
-                            <div class="col-12 col-xl-3 col-lg-6 col-md-6 d-flex align-items-stretch align-self-stretch">
-                              <div class="card border mt-3">
-                                <img src="${path}/${projeto.documentosProjeto.logo.path}" class="card-img-top" alt="...">
+                            <div class="col-12 col-xl-3 col-lg-6 col-md-6 d-flex align-items-stretch bd-highlight">
+                              <div class="card border align-self-stretch flex-fill bd-highlight mt-3">
+                                <img src="${path}/${projeto.documentosProjeto.logo.path}" class="card-img-top img-fluid" alt="...">
                                 <div class="card-body">
                                   <h5 class="card-title" style="font-weight: bold;">${projeto.titulo}</h5>
                                   <hr>

@@ -182,7 +182,7 @@
                           <tbody>
                             <c:forEach var="entidade" items="${entidades}">
                               <tr>
-                                <td class="text-center"><img class="logo-entidade" src="${path}/${entidade.documentosEntidade.logo.path}"></td>
+                                <td class="text-center"><img src="${path}/${entidade.documentosEntidade.logo.path}" style="max-width: 8rem; max-height: 4rem;"></td>
                                 <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${entidade.dataCadastro}" var="dataCadastro" />
                                 <td>${dataCadastro}</td>
                                 <td>${entidade.nomeFantasia}</td>
