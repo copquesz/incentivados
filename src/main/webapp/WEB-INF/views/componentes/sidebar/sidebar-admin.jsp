@@ -13,39 +13,27 @@
     <ul class="nav">
       <li class="">
         <a href="${path}/painel/dashboard">
-          <i class="nc-icon nc-bank"></i>
-          Painel Principal
-        </a>        
+          <i class="nc-icon nc-bank"></i>Painel Principal</a>        
       </li>
       <li>
         <a href="${path}/painel/empresas">
-          <i class="fas fa-city"></i>
-          Empresas
-        </a>
+          <i class="fas fa-city"></i>Empresas</a>
       </li>
       <li>
         <a href="${path}/painel/entidades">
-          <i class="fas fa-users"></i>
-          Entidades
-        </a>
+          <i class="fas fa-users"></i>Entidades</a>
       </li>
       <li>
         <a href="${path}/painel/projetos">
-          <i class="fas fa-project-diagram"></i>
-          Projetos
-        </a>
+          <i class="fas fa-project-diagram"></i>Projetos</a>
       </li>
       <li>
       	<a href="${path}/painel/incentivos-fiscais">
-          <i class="fas fa-gavel"></i>
-          Incentivos Fiscais
-        </a>
+          <i class="fas fa-gavel"></i>Incentivos Fiscais</a>
       </li>
       <li>
       	<a href="${path}/painel/pedidos">
-          <i class="fas fa-praying-hands"></i>
-          Pedidos
-        </a>
+          <i class="fas fa-praying-hands"></i>Pedidos</a>
       </li>
     </ul>
   </div>

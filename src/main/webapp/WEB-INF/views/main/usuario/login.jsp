@@ -4,15 +4,25 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="utf-8"/>
-    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="assets/img/favicon.png">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8">
+    <meta name="author" content="Yabá Consultoria">
+    <meta name="description" content="Acesse a plataforma incentivados e entre para o mundo digital que facilita o aporte financeiro através das leis de incentivo fiscal.">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Metas OG -->
+    <meta property="og:title" content="Login Plataforma Incentivados" />
+    <meta property="og:description" content="Acesse a plataforma incentivados e entre para o mundo digital que facilita o aporte financeiro através das leis de incentivo fiscal." />
+    <meta property="og:image" content="http://www.incentivados.com.br/main/images/logoIncentivadoscolor.png" />
+    <meta property="og:url" content="http://www.incentivados.com.br/login" />
+
     <title>
         Incentivados - Login
     </title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
-          name='viewport'/>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="${path}/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"

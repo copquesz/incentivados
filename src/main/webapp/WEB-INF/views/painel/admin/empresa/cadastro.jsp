@@ -11,12 +11,10 @@
     <title>
         Incentivados - Cadastro de Empresas
     </title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
-          name='viewport'/>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport'/>
     <!--     FONTAWESOME     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     <!--     BOOTSTRAP     -->
     <link href="${path}/assets/css/bootstrap.min.css" rel="stylesheet"/>
     <!--     CUSTOM     -->
@@ -27,64 +25,135 @@
 <body class="">
 <div class="wrapper ">
     <!-- Sidebar -->
-    <c:import url="/WEB-INF/views/componentes/sidebar/sidebar-admin.jsp"/>
+    <div class="sidebar" data-color="verde" data-active-color="white">
+      <div class="logo">
+        <a href="#" class="simple-text logo-mini">
+            <div class="logo-image-small"><i class="far fa-user"></i></div>
+        </a>
+        <a href="${path}/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li>
+            <a href="${path}/painel/dashboard">
+              <i class="nc-icon nc-bank"></i>Painel Principal</a>        
+          </li>
+          <li class="active">
+            <a href="${path}/painel/empresas">
+              <i class="fas fa-city"></i>Empresas</a>
+          </li>
+          <li>
+            <a href="${path}/painel/entidades">
+              <i class="fas fa-users"></i>Entidades</a>
+          </li>
+          <li>
+            <a href="${path}/painel/projetos">
+              <i class="fas fa-project-diagram"></i>Projetos</a>
+          </li>
+          <li>
+            <a href="${path}/painel/incentivos-fiscais">
+              <i class="fas fa-gavel"></i>Incentivos Fiscais</a>
+          </li>
+          <li>
+            <a href="${path}/painel/pedidos">
+              <i class="fas fa-praying-hands"></i>Pedidos</a>
+          </li>
+        </ul>
+      </div>
+    </div>
     <div class="main-panel">
         <!-- Navbar -->
-        <c:import url="/WEB-INF/views/componentes/navbar/navbar-admin.jsp"/>
+        <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+          <div class="container-fluid">
+            <div class="navbar-wrapper">
+              <div class="navbar-toggle">
+                <button type="button" class="navbar-toggler">
+                  <span class="navbar-toggler-bar bar1"></span>
+                  <span class="navbar-toggler-bar bar2"></span>
+                  <span class="navbar-toggler-bar bar3"></span>
+                </button>
+              </div>
+              <b><a class="navbar-brand" href="#">Empresas <i class='fas fa-angle-double-right'></i> Cadastro</a></b>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-bar navbar-kebab"></span>
+              <span class="navbar-toggler-bar navbar-kebab"></span>
+              <span class="navbar-toggler-bar navbar-kebab"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navigation">            
+              <ul class="navbar-nav">              
+                <li class="nav-item btn-rotate dropdown">
+                  <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-power-off"></i>
+                    <p>
+                      <span class="d-lg-none d-md-block">Ações</span>
+                    </p>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="${path}/painel/perfil">Meus Dados</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="${path}/sair">Sair</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
         <div class="content">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header bg-info"></div>
                         <div class="card-body border">
-                            <form action="${path}/painel/empresas/cadastro" method="post" enctype="multipart/form-data"
-                                  acceptcharset="UTF-8">
+                            <form action="${path}/painel/empresas/cadastro" method="post" enctype="multipart/form-data" acceptcharset="UTF-8">
+
                                 <fieldset>
-                                    <legend class="text-primary">Informações Gerais:</legend>
-                                    <div class="row mt-3 mt-3">
-                                        <div class="col-sm-12  col-lg-4">
-                                            <div class="form-group">
-                                                <label>Nome Fantasia:</label>
-                                                <input type="text" class="form-control" name="nomeFantasia" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 col-lg-4">
-                                            <div class="form-group">
-                                                <label>Razao Social:</label>
-                                                <input type="text" class="form-control" name="razaoSocial" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 col-lg-4">
-                                            <div class="form-group">
-                                                <label>CNPJ:</label>
-                                                <input type="text" class="form-control" id="cnpj" name="cnpj"
-                                                       onchange="if(!validarCNPJ(this.value)){$('#modal-cnpj-invalido').modal('show'); this.value='';}"
-                                                       required>
-                                            </div>
-                                        </div>
+                                <legend class="text-primary">Informações Gerais:</legend>
+                                  <div class="row mt-3 mt-3">
+                                    <div class="col-sm-12  col-lg-4">
+                                      <div class="form-group">
+                                        <label>Nome Fantasia:</label>
+                                        <input type="text" class="form-control" name="nomeFantasia" required>
+                                      </div>
                                     </div>
+                                    <div class="col-sm-12 col-lg-4">
+                                      <div class="form-group">
+                                        <label>Razao Social:</label>
+                                        <input type="text" class="form-control" name="razaoSocial" required>
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-12 col-lg-4">
+                                      <div class="form-group">
+                                        <label>CNPJ:</label>
+                                        <input type="text" class="form-control" id="cnpj" name="cnpj" onchange="if(!validarCNPJ(this.value)){$('#modal-cnpj-invalido').modal('show'); this.value='';}" required>
+                                      </div>
+                                    </div>
+                                  </div>
                                 </fieldset>
 
-                                <fieldset class="mt-3 mt-3">
-                                    <legend class="text-primary">Uploads:</legend>
-                                    <div class="row justify-content-start">
-                                        <div class="col-lg-12 text-center mt-3">
-                                            <div class="form-group">
-                                                <label for="logo"><i class="far fa-image text-primary"
-                                                                     style="font-size: 78px;"></i></label>
-                                                <hr>
-                                                <h5 class="text-center">Logo</h5>
-                                                <input type="file" id="logo" name="documentosEmpresa.logo.file"
-                                                       onchange="validaImg(this, this.id)" required>
-                                            </div>
-                                        </div>
+                                <fieldset class="mt-3">
+                                <legend class="text-primary">Uploads:</legend>
+                                  <div class="row justify-content-start">
+                                    <div class="col-lg-2 text-center mt-3">
+                                      <div class="form-group">
+                                        <label for="logo"><i class="far fa-image text-primary" style="font-size: 78px;"></i></label>
+                                        <hr>
+                                        <h5 class="text-center">Logo</h5>
+                                        <input type="file" id="logo" name="documentosEmpresa.logo.file" onchange="validaImg(this, this.id)" required>
+                                      </div>
                                     </div>
+                                  </div>
                                 </fieldset>
+
                                 <hr class="bg-success">
-                                <button type="submit" class="btn btn-primary float-right">Enviar <i
-                                        class="far fa-share-square"></i></button>
-                                <a href="${path}/painel/empresas" class="btn btn-danger float-right"><i
-                                        class="fas fa-angle-double-left"></i> Voltar</a>
+
+                                <button type="submit" class="btn btn-primary float-right">
+                                  <i class="far fa-share-square"></i> Enviar
+                                </button>
+                                <a href="${path}/painel/empresas" class="btn btn-danger float-right">
+                                  <i class="fas fa-angle-double-left"></i> Voltar
+                                </a>
+
                             </form>
                         </div>
                         <div class="card-footer bg-info"></div>

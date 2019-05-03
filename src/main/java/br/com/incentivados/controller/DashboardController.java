@@ -117,6 +117,12 @@ public class DashboardController {
 
 	}
 
+	/**
+	 *
+	 * @param request
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/painel/dashboard")
 	public String getDashboard(HttpServletRequest request, Model model) {
 
@@ -236,15 +242,20 @@ public class DashboardController {
 
 	}
 
+	/**
+	 * Este método faz uma chamada GET para acessar a página que exibe os dados do usuário logado.
+	 * @param request contém informações referente a requisição feita através desta url.
+	 * @param model disponibiliza dados da controller para a view.
+	 * @return retorna a página que exibe os dados do usuário logado.
+	 */
 	@GetMapping("/painel/perfil")
 	public String getPerfil(HttpServletRequest request, Model model) {
 
 		// Seta o path da requisição
 		model.addAttribute("path", request.getContextPath());
-		model.addAttribute("breadcrumb", "Perfil");
 
-		Usuario usuario = new Usuario();
-		usuario = (Usuario) request.getSession().getAttribute("usuario");
+		// Disponibiliza os dados do usuário logado para a view
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 		model.addAttribute("usuario", usuario);
 
 		switch (usuario.getTipoUsuario()) {
@@ -263,18 +274,22 @@ public class DashboardController {
 
 		default:
 			return "";
-
 		}
 	}
 
+	/**
+	 * Este método faz uma chamada GET para finalizar a sessão do usuário logado.
+	 * @param request contém informações referente a requisição feita através desta url.
+	 * @param model disponibiliza dados da controller para a view.
+	 * @param session ocontém informações referente a sessão do usuário logado.
+	 * @return redireciona o usuário para o formulário de login.
+	 */
 	@GetMapping("/sair")
 	public String getDashboard(HttpServletRequest request, Model model, HttpSession session) {
 
 		// Seta o path da requisição
 		model.addAttribute("path", request.getContextPath());
 		session.invalidate();
-
 		return "redirect:login";
 	}
-
 }

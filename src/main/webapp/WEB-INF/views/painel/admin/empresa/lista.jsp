@@ -15,7 +15,7 @@
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
   <!-- CSS Files -->
   <link href="${path}/assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="${path}/assets/css/paper-dashboard.css?v=2.0.0" rel="stylesheet" />
@@ -26,10 +26,83 @@
 <body class="">
   <div class="wrapper ">
     <!-- Sidebar -->
-    <c:import url="/WEB-INF/views/componentes/sidebar/sidebar-admin.jsp" />    
+    <div class="sidebar" data-color="verde" data-active-color="white">
+      <div class="logo">
+        <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+          <div class="logo-image-small">
+
+            <i class="far fa-user"></i>
+          </div>
+        </a>
+        <a href="${path}/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li>
+            <a href="${path}/painel/dashboard">
+              <i class="nc-icon nc-bank"></i>Painel Principal</a>        
+          </li>
+          <li class="active">
+            <a href="${path}/painel/empresas">
+              <i class="fas fa-city"></i>Empresas</a>
+          </li>
+          <li>
+            <a href="${path}/painel/entidades">
+              <i class="fas fa-users"></i>Entidades</a>
+          </li>
+          <li>
+            <a href="${path}/painel/projetos">
+              <i class="fas fa-project-diagram"></i>Projetos</a>
+          </li>
+          <li>
+            <a href="${path}/painel/incentivos-fiscais">
+              <i class="fas fa-gavel"></i>Incentivos Fiscais</a>
+          </li>
+          <li>
+            <a href="${path}/painel/pedidos">
+              <i class="fas fa-praying-hands"></i>Pedidos</a>
+          </li>
+        </ul>
+      </div>
+    </div>
     <div class="main-panel">
       <!-- Navbar -->
-      <c:import url="/WEB-INF/views/componentes/navbar/navbar-admin.jsp" /> 
+      <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <div class="navbar-toggle">
+              <button type="button" class="navbar-toggler">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+              </button>
+            </div>
+            <b><a class="navbar-brand" href="#">Empresas</a></b>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navigation">            
+            <ul class="navbar-nav">              
+              <li class="nav-item btn-rotate dropdown">
+                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-power-off"></i>
+                  <p>
+                    <span class="d-lg-none d-md-block">Ações</span>
+                  </p>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="${path}/painel/perfil">Meus Dados</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="${path}/sair">Sair</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
       <div class="content">
         <div class="row">          
           <div class="col-12">
@@ -45,7 +118,6 @@
                   </div>
                 </div>                
               </div>
-
               <div class="card-body">
                 <div class="row mt-2">
                   <div class="col-12">
@@ -77,7 +149,9 @@
                                 <td class="border text-center">${empresa.nomeFantasia}</td>
                                 <td class="border text-center" >${empresa.cnpj}</td>
                                 <td class="border text-center">
-                                  <a href="${path}/painel/empresas/${empresa.id}" class="btn btn-primary btn-sm text-white" title="Visualizar"><i class="far fa-address-card"></i></a>
+                                  <a href="${path}/painel/empresas/${empresa.id}" class="btn btn-primary btn-sm text-white" title="Visualizar">
+                                    <i class="far fa-address-card"></i>
+                                  </a>
                               </tr>
                             </c:forEach>
                           </tbody>
