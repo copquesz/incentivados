@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<div class="sidebar" data-color="verde" data-active-color="info">
+<div class="sidebar" data-color="verde" data-active-color="white">
     <div class="logo">
         <a href="http://www.creative-tim.com" class="simple-text logo-mini">
             <div class="logo-image-small">
@@ -11,7 +11,7 @@
     </div>
     <div class="sidebar-wrapper">
         <ul class="nav">
-            <li class="">
+            <li class="active">
                 <a href="${path}/painel/dashboard"><i class="fas fa-desktop"></i>Painel Principal</a>
             </li>
             <li>

@@ -44,7 +44,7 @@ body{
 	margin-top: auto;
 	margin-bottom: auto;
 	background: #FFFFFF;
-	border: 3px solid #3ab524;
+	border: 3px solid #b9b9b9;
 	position: relative;
 	display: flex;
 	justify-content: center;
@@ -122,4 +122,23 @@ body{
 
 login_btn:hover{
 	background-color: #00bbff;
+}
+
+.shape{
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 500px;
+	z-index: -9;
+}
+
+.shape1{
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.shape2{
+	position: absolute;
+	bottom: 0;
+	left: 0;
 }
