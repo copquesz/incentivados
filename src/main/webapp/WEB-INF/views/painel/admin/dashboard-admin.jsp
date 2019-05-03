@@ -103,8 +103,7 @@
             </ul>
           </div>
         </div>
-      </nav>    
-      <c:import url="/WEB-INF/views/componentes/navbar/navbar-admin.jsp" /> 
+      </nav>  
       <div class="content">
         <div class="row">
           <div class="col-lg-4 col-md-4 col-sm-6">
