@@ -33,7 +33,7 @@
             <i class="far fa-user"></i>
           </div>
         </a>
-        <a href="${path}/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
+        <a href="${path}/painel/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
@@ -207,7 +207,7 @@
                   </fieldset>
                   <hr class="bg-success">
                   <button type="submit" class="btn btn-primary float-right">Enviar <i class="far fa-share-square"></i></button>
-                  <a href="${path}/painel/empresas" class="btn btn-danger float-right"><i class="fas fa-angle-double-left"></i> Voltar</a>
+                  <a href="${path}/painel/empresas/${empresa.id}" class="btn btn-danger float-right"><i class="fas fa-angle-double-left"></i> Voltar</a>
                 </form>       
               </div>
               <div class="card-footer bg-info"></div>

@@ -33,7 +33,7 @@
             <i class="far fa-user"></i>
           </div>
         </a>
-        <a href="${path}/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
+        <a href="${path}/painel/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
@@ -110,7 +110,7 @@
               <div class="card-body bg-success">
                 <p class="text-white bold">Analista: ${usuario.nome} ${usuario.sobrenome}</br>CPF: ${usuario.cpf}</br>E-mail: ${usuario.email}</p>
                 <p class="text-white">O cadastro foi realizado com sucesso na plataforma.</p>
-                <p><a href="${path}/painel/dashboard" class="btn btn-warning rounded"><i class="fas fa-angle-double-left"></i> Voltar</a></p>
+                <p><a href="${path}/painel/empresas/${empresa.id}" class="btn btn-warning rounded"><i class="fas fa-angle-double-left"></i> Voltar</a></p>
               </div>
               <div class="card-footer bg-success"></div>
             </div>

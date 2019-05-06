@@ -29,12 +29,9 @@
     <div class="sidebar" data-color="verde" data-active-color="white">
       <div class="logo">
         <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-          <div class="logo-image-small">
-
-            <i class="far fa-user"></i>
-          </div>
+          <div class="logo-image-small"><i class="far fa-user"></i></div>
         </a>
-        <a href="${path}/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
+        <a href="${path}/painel/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">

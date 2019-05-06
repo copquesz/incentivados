@@ -35,7 +35,7 @@
             <i class="far fa-user"></i>
           </div>
         </a>
-        <a href="${path}/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
+        <a href="${path}/painel/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
@@ -279,8 +279,8 @@
                     <c:if test = "${not empty projetos}"> 
                       <div class="row justify-content-start">
                         <c:forEach var="projeto" items="${projetos}">
-                          <div class="col-12 col-xl-3 col-lg-6 col-md-6 d-flex align-items-stretch align-self-stretch">
-                            <div class="card border mt-3">
+                          <div class="col-12 col-xl-3 col-lg-6 col-md-6 d-flex align-items-stretch bd-highlight">
+                            <div class="card border align-self-stretch flex-fill bd-highlight mt-3">
                               <img src="${path}/${projeto.documentosProjeto.logo.path}" class="card-img-top" alt="...">
                               <div class="card-body">
                                 <h5 class="card-title" style="font-weight: bold;">${projeto.titulo}</h5>

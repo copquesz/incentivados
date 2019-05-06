@@ -33,7 +33,7 @@
             <i class="far fa-user"></i>
           </div>
         </a>
-        <a href="${path}/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
+        <a href="${path}/painel/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
@@ -109,9 +109,9 @@
             <div class="card">
               <div class="card-header bg-danger"><h4 class="card-title text-white bold"><i class="far fa-thumbs-down fa-2x"></i> Falha!</h4><hr></div>              
               <div class="card-body bg-danger">
-                <p class="text-white"><span class="bold">Ocorreu um erro inesperado. Tente novamente.</p>
-                   <p class="text-white"><span class="bold">Erro: ${erro}</p>
-                <p><a href="${path}/painel/dashboard" class="btn btn-warning rounded"><i class="fas fa-angle-double-left"></i> Voltar</a></p>
+                <p class="text-white"><span class="bold">Ocorreu um erro inesperado. Tente novamente.</span></p>
+                <p class="text-white"><span class="bold">Erro: ${erro}</span></p>
+                <p><a href="${path}/painel/empresas/${empresa.id}" class="btn btn-warning rounded"><i class="fas fa-angle-double-left"></i> Voltar</a></p>
               </div>
               <div class="card-footer bg-danger"></div>
             </div>

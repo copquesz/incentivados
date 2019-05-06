@@ -33,7 +33,7 @@
             <i class="far fa-user"></i>
           </div>
         </a>
-        <a href="${path}/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
+        <a href="${path}/painel/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
@@ -76,7 +76,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <b><a class="navbar-brand" href="#">Empresa <i class='fas fa-angle-double-right'></i> ${empresa.nomeFantasia} <i class='fas fa-angle-double-right'></i> Responsável <i class='fas fa-angle-double-right'></i> Cadastro</a></b>
+            <b><a class="navbar-brand" href="#">Pedidos <i class='fas fa-angle-double-right'></i> ${empresa.nomeFantasia} <i class='fas fa-angle-double-right'></i> #${pedido.id}</a></b>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -102,7 +102,6 @@
           </div>
         </div>
       </nav>
-      <c:import url="/WEB-INF/views/componentes/navbar/navbar-admin.jsp" />    
       <div class="content">        
         <div class="row">
           <div class="col-md-12">
@@ -110,7 +109,7 @@
               <div class="card-header bg-danger"><h4 class="card-title text-white bold"><i class="far fa-thumbs-down fa-2x"></i> Falha!</h4><hr></div>              
               <div class="card-body bg-danger">
                 <p class="text-white"><span class="bold">E-mail: ${usuario.email}</span> já possui registro na plataforma. Tente novamente informando outros dados.</p>
-                <p><a href="${path}/painel/dashboard" class="btn btn-warning rounded"><i class="fas fa-angle-double-left"></i> Voltar</a></p>
+                <p><a href="${path}/painel/empresas/${empresa.id}" class="btn btn-warning rounded"><i class="fas fa-angle-double-left"></i> Voltar</a></p>
               </div>
               <div class="card-footer bg-danger"></div>
             </div>
