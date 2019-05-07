@@ -25,12 +25,14 @@
 <body class="bg-blue">
 
 <div class="container h-100">
-    <img class="shape" src="${path}/assets/img/shape1.png" alt="">
+    <img class="shape"  src="${path}/assets/img/shape1.png" alt="">
+    <img class="shape2" src="${path}/assets/img/shape2.png" alt="">
+
     <div class="d-flex justify-content-center h-100">
         <div class="login_card">
             <div class="d-flex justify-content-center">
                 <div class="login_image bg-white" style="border: 1.5px solid #3ab524!important">
-                    <img src="${path}/assets/img/leroy.png" class="login_user_image" alt="Logo">
+                    <img src="${path}/assets/img/usuario.jpg" class="login_user_image" alt="Logo">
                 </div>
             </div>
             <div class="d-flex justify-content-center form_container">
