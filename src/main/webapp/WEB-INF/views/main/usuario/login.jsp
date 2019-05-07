@@ -24,15 +24,16 @@
 </head>
 <body class="bg-blue">
 
+
 <div class="container h-100">
-    <img class="shape"  src="${path}/assets/img/shape1.png" alt="">
+    <img class="shape" src="${path}/assets/img/shape1.png" alt="">
     <img class="shape2" src="${path}/assets/img/shape2.png" alt="">
 
     <div class="d-flex justify-content-center h-100">
         <div class="login_card">
             <div class="d-flex justify-content-center">
                 <div class="login_image bg-white" style="border: 1.5px solid #3ab524!important">
-                    <img src="${path}/assets/img/usuario.jpg" class="login_user_image" alt="Logo">
+                    <img src="${path}/assets/img/usuario.jpg" class="login_user_image img-fluid" alt="Logo">
                 </div>
             </div>
             <div class="d-flex justify-content-center form_container">
@@ -62,11 +63,16 @@
                                              class="ml-2">Cadastre-se</a>
                 </div>
                 <div class="d-flex justify-content-center links">
-                    <a href="#">Esqueceu sua senha?</a>
+                    <a hr ef="#">Esqueceu sua senha?</a>
                 </div>
             </div>
+
         </div>
     </div>
+</div>
+
+<div class="footer-leroy" style="position: absolute; bottom: 0; right: 30px; padding-bottom: 30px">
+    <img src="${path}/assets/img/LogoLeroy.png" class="login_user_image img-fluid">
 </div>
 
 <!-- MODAL -->
