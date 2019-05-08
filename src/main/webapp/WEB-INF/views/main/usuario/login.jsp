@@ -70,9 +70,9 @@
         </div>
     </div>
 </div>
-
-<div class="footer-leroy" style="position: absolute; bottom: 0; right: 30px; padding-bottom: 30px">
-    <img src="${path}/assets/img/LogoLeroy.png" class="login_user_image img-fluid">
+<%--Logo Leroy canto inferior direito--%>
+<div class="footer-leroy bg-white">
+    <img src="${path}/assets/img/LogoLeroy.png" class="img-fluid">
 </div>
 
 <!-- MODAL -->

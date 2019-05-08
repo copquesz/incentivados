@@ -67,9 +67,22 @@ body{
 	text-align: center;
 }
 .login_user_image {
+	height: 110px;
+	width: 110px;
+	position: absolute;
+	border-radius: 20%;
+	border: 2px solid white;
+	top: 25px;
+	left: 12px;
+}
+.footer-leroy{
+	position: absolute;
+	bottom: 0;
+	right: 15px;
+	padding-bottom: 30px;
 	height: 150px;
-	width: 150px;
-	border-radius: 50%;
+	width: 163px;
+	border-radius: 100%;
 	border: 2px solid white;
 }
 .form_container {
