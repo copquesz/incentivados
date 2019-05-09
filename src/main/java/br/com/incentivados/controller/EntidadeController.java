@@ -43,8 +43,7 @@ public class EntidadeController {
 		model.addAttribute("path", path);
 		model.addAttribute("page", "CADASTRO DE ENTIDADE");
 
-		Usuario usuario = new Usuario();
-		usuario = (Usuario) request.getSession().getAttribute("usuario");
+		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
 		try {
 			if (!entidadeService.existsByCnpj(entidade.getCnpj())) {
@@ -67,10 +66,8 @@ public class EntidadeController {
 		// Seta o path da requisição
 		path = request.getContextPath();
 		model.addAttribute("path", path);
-		model.addAttribute("page", "PERFIL DE ENTIDADES");
 
-		Usuario usuario = new Usuario();
-		usuario = (Usuario) request.getSession().getAttribute("usuario");
+		Usuario	usuario = (Usuario) request.getSession().getAttribute("usuario");
 
 		try {
 

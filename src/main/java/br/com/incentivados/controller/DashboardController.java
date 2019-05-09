@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.incentivados.enumerated.StatusPedido;
-import br.com.incentivados.enumerated.TipoUsuario;
 import br.com.incentivados.model.Entidade;
 import br.com.incentivados.model.IncentivoFiscal;
 import br.com.incentivados.model.Pedido;
