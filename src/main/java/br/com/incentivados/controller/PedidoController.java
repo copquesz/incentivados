@@ -74,7 +74,7 @@ public class PedidoController {
 
 			// Lista das entidades cadastradas pelo usuário logado
 			List<Entidade> entidades = new ArrayList<Entidade>();
-			entidades = entidadeService.findByUsuario(usuario);
+			entidades = entidadeService.findAllByUsuario(usuario);
 			model.addAttribute("entidades", entidades);
 
 			return "painel/entidade/pedido/cadastro";

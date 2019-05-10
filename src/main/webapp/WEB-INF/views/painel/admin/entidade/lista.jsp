@@ -132,7 +132,51 @@
                         <span data-notify="message">Não há nenhuma entidade cadastrada</span>
                       </div>
                     </c:if>
-                    <c:if test = "${not empty entidades}">  
+                    <c:if test = "${not empty entidades}">                     
+                      <nav class="float-right" aria-label="Paginação de Entidades">
+                        <ul class="pagination"> 
+                          <c:choose> 
+                            <c:when test = "${entidades.totalPages == 1}">
+                              <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
+                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/entidades?page=${entidades.number}">${entidades.number + 1}</a></li>
+                              <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
+                            </c:when>
+                            <c:when test = "${(entidades.totalPages == 2) && (entidades.number + 1 < entidades.totalPages)}">
+                              <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
+                              <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/entidades?page=${entidades.number}">${entidades.number + 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades?page=${entidades.number + 1}">${entidades.number + 2}</a></li>
+                              <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
+                            </c:when>
+                            <c:when test = "${(entidades.totalPages == 2) && (entidades.number + 1 == entidades.totalPages)}">
+                              <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades?page=${entidades.number - 1}">${entidades.number}</a></li>
+                              <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/entidades?page=${entidades.number}">${entidades.number + 1}</a></li>
+                              <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
+                            </c:when>
+                            <c:when test = "${(entidades.totalPages >= 3) && (entidades.number == 0)}">
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades">Primeira</a></li>
+                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/entidades?page=${entidades.number}">${entidades.number + 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades?page=${entidades.number + 1}">${entidades.number + 2}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades?page=${entidades.number + 2}">${entidades.number + 3}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades?page=${entidades.totalPages - 1}">Última</a></li>
+                            </c:when>
+                            <c:when test = "${(entidades.totalPages >= 3) && (entidades.number > 0) && (entidades.number + 1 < entidades.totalPages)}">
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades">Primeira</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades?page=${entidades.number - 1}">${entidades.number}</a></li>
+                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/entidades?page=${entidades.number}">${entidades.number + 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades?page=${entidades.number + 1}">${entidades.number + 2}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades?page=${entidades.totalPages - 1}">Última</a></li>
+                            </c:when>
+                            <c:when test = "${(entidades.totalPages >= 3) && (entidades.number + 1 == entidades.totalPages)}">
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades">Primeira</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades?page=${entidades.number - 2}">${entidades.number - 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades?page=${entidades.number - 1}">${entidades.number}</a></li>
+                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/entidades?page=${entidades.number}">${entidades.number + 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades?page=${entidades.totalPages - 1}">Última</a></li>
+                            </c:when>
+                          </c:choose> 
+                        </ul>
+                      </nav> 
                       <div class="table-responsive">
                         <table class="table">
                           <thead class=" text-primary">
@@ -143,7 +187,7 @@
                             <th class="border text-center">Ações</th>
                           </thead>
                           <tbody>
-                            <c:forEach var="entidade" items="${entidades}">
+                            <c:forEach var="entidade" items="${entidades.content}">
                               <tr>
                                 <td class="border text-center"><img class="img-fluid rounded mx-auto d-block" src="${path}/${entidade.documentosEntidade.logo.path}" style="max-width: 100px; max-height: 75px;"></td>
                                 <td class="border text-center">${entidade.id}</td>
@@ -154,7 +198,7 @@
                               </tr>
                             </c:forEach>
                           </tbody>
-                        </table>
+                        </table>                        
                       </div>
                     </c:if>
                   </div>     

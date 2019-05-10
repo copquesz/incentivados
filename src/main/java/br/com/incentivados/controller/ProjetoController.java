@@ -57,7 +57,7 @@ public class ProjetoController {
 
 		// Carrega a lista de ENTIDADES cadastradas pelo USUÁRIO logado
 		List<Entidade> entidades = new ArrayList<Entidade>();
-		entidades = entidadeService.findByUsuario(usuario);
+		entidades = entidadeService.findAllByUsuario(usuario);
 		model.addAttribute("entidades", entidades);
 
 		// Carrega todos os INCENTIVOS FISCAIS cadastrados

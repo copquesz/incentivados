@@ -253,7 +253,7 @@
                             <th></th>
                           </thead>
                           <tbody>
-                            <c:forEach var="entidade" items="${entidades}">
+                            <c:forEach var="entidade" items="${entidades.content}">
                               <tr>
                                 <td class="text-center"><img src="${path}/${entidade.documentosEntidade.logo.path}" style="max-width: 8rem; max-height: 4rem;"></td>
                                 <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${entidade.dataCadastro}" var="dataCadastro" />

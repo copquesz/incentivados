@@ -168,35 +168,31 @@
                     <div class="card ">
                         <div class="card-header ">
                             <c:if test="${cadastroProjeto}">
-                                <a href="${path}/painel/projetos/cadastro" class="btn btn-primary float-right"><i
-                                        class="fas fa-plus mr-2"></i> Cadastrar Projeto</a>
+                                <a href="${path}/painel/projetos/cadastro" class="btn btn-primary float-right"><i class="fas fa-plus mr-2"></i> Cadastrar Projeto</a>
                             </c:if>
-                            <a href="${path}/painel/entidades/cadastro" class="btn btn-primary float-right"><i
-                                    class="fas fa-plus mr-2"></i> Cadastrar Entidade</a>
+                            <a href="${path}/painel/entidades/cadastro" class="btn btn-primary float-right"><i class="fas fa-plus mr-2"></i> Cadastrar Entidade</a>
                             <h5 class="card-title">Meus Cadastros</h5>
                         </div>
                         <div class="card-body ">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="entidades-tab" data-toggle="tab" href="#entidades"
-                                       role="tab" aria-controls="entidades" aria-selected="true">Entidades</a>
+                                    <a class="nav-link active" id="entidades-tab" data-toggle="tab" href="#entidades" role="tab" aria-controls="entidades" aria-selected="true">Entidades</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link " id="projetos-tab" data-toggle="tab" href="#projetos" role="tab"
-                                       aria-controls="projetos" aria-selected="false">Projetos</a>
+                                    <a class="nav-link " id="projetos-tab" data-toggle="tab" href="#projetos" role="tab" aria-controls="projetos" aria-selected="false">Projetos</a>
                                 </li>
                             </ul>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="entidades" role="tabpanel"
                                      aria-labelledby="entidades-tab">
                                     <c:if test="${empty entidades}">
-                                            <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
-                                                <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <i class="nc-icon nc-simple-remove"></i>
-                                                </button>
-                                                <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
-                                                <span data-notify="message">Não há nenhuma entidade cadastrada</span>
-                                            </div>
+                                        <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
+                                            <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                                                <i class="nc-icon nc-simple-remove"></i>
+                                            </button>
+                                            <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
+                                            <span data-notify="message">Não há nenhuma entidade cadastrada</span>
+                                        </div>
                                     </c:if>
                                     <c:if test="${not empty entidades}">
                                         <div class="table-responsive">
@@ -209,23 +205,19 @@
                                                 <th></th>
                                                 </thead>
                                                 <tbody>
-                                                <c:forEach var="entidade" items="${entidades}">
-                                                    <tr>
-                                                        <td class="text-center"><img class="logo-entidade"
-                                                                                     src="${path}/${entidade.documentosEntidade.logo.path}">
-                                                        </td>
-                                                        <fmt:formatDate type="both" dateStyle="short" timeStyle="short"
-                                                                        value="${entidade.dataCadastro}"
-                                                                        var="dataCadastro"/>
-                                                        <td>${dataCadastro}</td>
-                                                        <td>${entidade.nomeFantasia}</td>
-                                                        <td>${entidade.cnpj}</td>
-                                                        <td class="text-center"><a
-                                                                href="${path}/painel/entidades/${entidade.id}"
-                                                                class="btn btn-primary btn-circle" title="Visualizar"><i
-                                                                class="fas fa-file-alt"></i></a></td>
-                                                    </tr>
-                                                </c:forEach>
+                                                    <c:forEach var="entidade" items="${entidades.content}">
+                                                        <tr>
+                                                            <td class="text-center"><img class="logo-entidade" src="${path}/${entidade.documentosEntidade.logo.path}">
+                                                            </td>
+                                                            <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${entidade.dataCadastro}" var="dataCadastro"/>
+                                                            <td>${dataCadastro}</td>
+                                                            <td>${entidade.nomeFantasia}</td>
+                                                            <td>${entidade.cnpj}</td>
+                                                            <td class="text-center">
+                                                                <a href="${path}/painel/entidades/${entidade.id}" class="btn btn-primary btn-circle" title="Visualizar"><i class="fas fa-file-alt"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -233,14 +225,13 @@
                                 </div>
                                 <div class="tab-pane fade" id="projetos" role="tabpanel" aria-labelledby="projetos-tab">
                                     <c:if test="${empty projetos}">
-
-                                            <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
-                                                <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <i class="nc-icon nc-simple-remove"></i>
-                                                </button>
-                                                <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
-                                                <span data-notify="message">Não há nenhum projeto cadastrado</span>
-                                            </div>
+                                        <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
+                                            <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                                                <i class="nc-icon nc-simple-remove"></i>
+                                            </button>
+                                            <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
+                                            <span data-notify="message">Não há nenhum projeto cadastrado</span>
+                                        </div>
                                     </c:if>
                                     <c:if test="${not empty projetos}">
                                         <div class="row justify-content-start">
@@ -293,16 +284,14 @@
                                         <c:forEach var="pedido" items="${pedidos}">
                                             <tr>
                                                 <td class="text-center">${pedido.id}</td>
-                                                <fmt:formatDate type="both" dateStyle="short" timeStyle="short"
-                                                                value="${pedido.dataCadastro}" var="dataCadastro"/>
+                                                <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${pedido.dataCadastro}" var="dataCadastro"/>
                                                 <td class="text-center">${dataCadastro}</td>
                                                 <td class="text-center">${pedido.entidade.nomeFantasia}</td>
                                                 <td class="text-center">${pedido.empresa.nomeFantasia}</td>
-                                                <td class="text-center">${pedido.analista.endereco.bairro}
-                                                    - ${pedido.analista.endereco.cidade}
-                                                    / ${pedido.analista.endereco.estado}</td>
+                                                <td class="text-center">${pedido.analista.endereco.bairro} - ${pedido.analista.endereco.cidade} / ${pedido.analista.endereco.estado}</td>
                                                 <td class="text-center">
-                                                    <a href="${path}/${pedido.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>
+                                                    <a href="${path}/${pedido.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a>
+                                                </td>
                                                 <th class="text-center">
                                                     <c:if test="${pedido.status.id == 0}">
                                                         <span class="bg-warning p-1 text-white">${pedido.status}</span>

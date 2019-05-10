@@ -132,11 +132,6 @@ public class DashboardController {
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 		model.addAttribute("usuario", usuario);
 
-		// Lista todas as entidades pertencentes ao usuário.
-		List<Entidade> entidades = new ArrayList<Entidade>();
-		List<Projeto> projetos = new ArrayList<Projeto>();
-		List<Pedido> pedidos = new ArrayList<Pedido>();
-
 		// Verifica qual tipo de usuário está logado e redireciona para sua respectiva
 		// view
 		switch (usuario.getTipoUsuario()) {
@@ -168,18 +163,15 @@ public class DashboardController {
 			model.addAttribute("cadastroProjeto", entidadeService.existsByUsuario(usuario));
 
 			// Lista as infos e estatísticas de entidades por usuário
-			entidades = entidadeService.findByUsuario(usuario);
-			model.addAttribute("entidades", entidades);
+			model.addAttribute("entidades", entidadeService.findAllByUsuario(usuario, PageRequest.of(0, 3, Sort.by(Order.desc("id")))));
 			model.addAttribute("qtdEntidades", entidadeService.countByUsuario(usuario));
 
 			// Lista as infos e estatísticas de projetos por usuário
-			projetos = projetoService.findByUsuario(usuario);
-			model.addAttribute("projetos", projetos);
+			model.addAttribute("projetos", projetoService.findByUsuario(usuario));
 			model.addAttribute("qtdProjetos", projetoService.countByUsuario(usuario));
 
 			// Lista as infos e estatística de pedidos por usuário
-			pedidos = pedidoService.findAllByUsuario(usuario, PageRequest.of(0, 5, Sort.by(Order.desc("id"))));
-			model.addAttribute("pedidos", pedidos);
+			model.addAttribute("pedidos", pedidoService.findAllByUsuario(usuario, PageRequest.of(0, 5, Sort.by(Order.desc("id")))));
 			model.addAttribute("recusados", pedidoService.findAllByUsuarioAndStatus(usuario, StatusPedido.RECUSADO, PageRequest.of(0, 5, Sort.by(Order.desc("id")))));
 			model.addAttribute("qtdPedidos", pedidoService.countByUsuario(usuario));
 
@@ -209,7 +201,7 @@ public class DashboardController {
 
 		case ADMIN:			
 			// Lista as infos e estatísticas das entidades cadastradas
-			model.addAttribute("entidades", entidadeService.findTop3ByOrderByIdDesc());
+			model.addAttribute("entidades", entidadeService.findAll(PageRequest.of(0, 3, Sort.by(Sort.Order.asc("id")))));
 			model.addAttribute("qtdEntidades", entidadeService.count());
 			model.addAttribute("datasChartEntidade", entidadeService.buildChart());
 
