@@ -46,7 +46,7 @@ public class ProjetoService {
 		return projetoRepository.save(projeto);
 	}
 
-	// Serviço que verifica se o PROJETO já possui registro com mesmo TÍTULO
+	// Serviço que verifica se o PROJETO já possui registro com mesmo TITULO
 	public boolean existsByTitulo(String titulo) {
 		return projetoRepository.existsByTitulo(titulo);
 	}
@@ -66,7 +66,7 @@ public class ProjetoService {
 		return projetoRepository.findTop3ByOrderByIdDesc();
 	}
 
-	// Serviço que carrega os PROJETOS de acordo com o USUÁRIO
+	// Serviço que carrega os PROJETOS de acordo com o USUARIO
 	public List<Projeto> findByUsuario(Usuario usuario) {
 		return projetoRepository.findByUsuario(usuario);
 	}
@@ -76,12 +76,12 @@ public class ProjetoService {
 		return projetoRepository.count();
 	}
 
-	// Serviço que contabiliza os PROJETOS de acordo com o USUÁRIO
+	// Serviço que contabiliza os PROJETOS de acordo com o USUARIO
 	public Long countByUsuario(Usuario usuario) {
 		return projetoRepository.countByUsuario(usuario);
 	}
 
-	// Serviço que contabiliza os PROJETOS de acordo com o USUÁRIO
+	// Serviço que contabiliza os PROJETOS de acordo com o USUARIO
 	public Long countByIncentivosFiscais(IncentivoFiscal incentivoFiscal) {
 		return projetoRepository.countByIncentivosFiscais(incentivoFiscal);
 	}

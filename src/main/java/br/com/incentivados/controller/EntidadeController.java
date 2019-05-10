@@ -20,8 +20,12 @@ import java.util.logging.Logger;
 @Controller
 public class EntidadeController {
 
-    @Autowired
     private EntidadeService entidadeService;
+
+    @Autowired
+    public EntidadeController(EntidadeService entidadeService){
+        this.entidadeService = entidadeService;
+    }
 
     private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
 

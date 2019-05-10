@@ -51,11 +51,11 @@ public class ProjetoController {
 		// Seta o breadcrumb da página
 		model.addAttribute("breadcrumb", "Projeto " + " <i class='fas fa-angle-double-right'></i> " + " Cadastro");
 
-		// Recebe o USUÁRIO logado na session
+		// Recebe o USUARIO logado na session
 		Usuario usuario = new Usuario();
 		usuario = (Usuario) request.getSession().getAttribute("usuario");
 
-		// Carrega a lista de ENTIDADES cadastradas pelo USUÁRIO logado
+		// Carrega a lista de ENTIDADES cadastradas pelo USUARIO logado
 		List<Entidade> entidades = new ArrayList<Entidade>();
 		entidades = entidadeService.findAllByUsuario(usuario);
 		model.addAttribute("entidades", entidades);
@@ -84,7 +84,7 @@ public class ProjetoController {
 		// Seta o breadcrumb da página
 		model.addAttribute("breadcrumb", "Projeto " + " <i class='fas fa-angle-double-right'></i> " + " Cadastro");
 
-		// Recebe o USUÁRIO logado na session
+		// Recebe o USUARIO logado na session
 		Usuario usuario = new Usuario();
 		usuario = (Usuario) request.getSession().getAttribute("usuario");
 
@@ -125,7 +125,7 @@ public class ProjetoController {
 		// Seta o breadcrumb da página
 		model.addAttribute("breadcrumb", "Projeto " + " <i class='fas fa-angle-double-right'></i> " + " Perfil");
 
-		// Recebe o USUÁRIO logado na session
+		// Recebe o USUARIO logado na session
 		Usuario usuario = new Usuario();
 		usuario = (Usuario) request.getSession().getAttribute("usuario");
 
@@ -134,7 +134,7 @@ public class ProjetoController {
 			Optional<Projeto> projeto = projetoService.findById(id);
 			model.addAttribute("projeto", projeto.get());
 
-			// Direciona o USUÁRIO para a view de acordo com seu tipo de perfil
+			// Direciona o USUARIO para a view de acordo com seu tipo de perfil
 			switch (usuario.getTipoUsuario()) {
 			case ADMIN:
 				return "painel/admin/projeto/perfil";
@@ -166,13 +166,13 @@ public class ProjetoController {
 		// Seta o breadcrumb da página
 		model.addAttribute("breadcrumb", "Projeto " + " <i class='fas fa-angle-double-right'></i> " + " Lista");
 
-		// Recebe o USUÁRIO logado na session
+		// Recebe o USUARIO logado na session
 		Usuario usuario = new Usuario();
 		usuario = (Usuario) request.getSession().getAttribute("usuario");
 
 		try {
 
-			// Direciona o USUÁRIO para sua view de acordo com perfil
+			// Direciona o USUARIO para sua view de acordo com perfil
 			if (usuario.getTipoUsuario() == TipoUsuario.ADMIN) {
 				List<Projeto> projetos = new ArrayList<Projeto>();
 				projetos = projetoService.findAll();

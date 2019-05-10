@@ -68,7 +68,7 @@ public class PedidoService {
         return pedidoRepository.findAllByStatus(status, page);
     }
 
-    // Serviço de buscar PEDIDO pelo USUÁRIO
+    // Serviço de buscar PEDIDO pelo USUARIO
     public List<Pedido> findAllByUsuario(Usuario usuario, Pageable page) {
         return pedidoRepository.findAllByUsuario(usuario);
     }
@@ -78,7 +78,7 @@ public class PedidoService {
         return pedidoRepository.findAllByEmpresa(empresa, page);
     }
 
-    // Serviço de busca todos USUÁRIO pela EMPRESA
+    // Serviço de busca todos USUARIO pela EMPRESA
     public List<Pedido> findAllByUsuarioAndStatus(Usuario usuario, StatusPedido status, Pageable page){
         return pedidoRepository.findAllByUsuarioAndStatus(usuario, status, page);
     }
@@ -88,7 +88,7 @@ public class PedidoService {
         return pedidoRepository.findAllByEmpresaAndStatus(empresa, status, page);
     }
 
-    // Serviço de buscar PEDIDO pelo USUÁRIO e STATUS
+    // Serviço de buscar PEDIDO pelo USUARIO e STATUS
     public List<Pedido> findAllByAnalistaAndStatus(Usuario analista, StatusPedido status, Pageable page) {
         return pedidoRepository.findAllByAnalistaAndStatus(analista, status, page);
     }
@@ -98,7 +98,7 @@ public class PedidoService {
         return pedidoRepository.count();
     }
 
-    // Serviço que contabiliza todos os PEDIDOS por USUÁRIO
+    // Serviço que contabiliza todos os PEDIDOS por USUARIO
     public Long countByUsuario(Usuario usuario) {
         return pedidoRepository.countByUsuario(usuario);
     }
