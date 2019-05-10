@@ -1,102 +1,60 @@
 package br.com.incentivados.controller;
 
-import br.com.incentivados.enumerated.TipoUsuario;
 import br.com.incentivados.model.Usuario;
 import br.com.incentivados.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Controller
 public class UsuarioController {
 
-    @Autowired
     private UsuarioService usuarioService;
+    private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
 
-    private String path;
-
-    @GetMapping("/usuarios/cadastro")
-    public String getCadastrar(HttpServletRequest request, Model model) {
-
-        // Seta o path da requisição
-        path = request.getContextPath();
-        model.addAttribute("path", path);
-
-        System.out.println("URL: " + request.getServletPath());
-
-        TipoUsuario[] tiposUsuario = TipoUsuario.values();
-        model.addAttribute("tiposUsuario", tiposUsuario);
-
-        return "main/usuario/cadastro";
+    @Autowired
+    public UsuarioController(UsuarioService usuarioService){
+        this.usuarioService = usuarioService;
     }
 
+    /**
+     * Persiste os dados do usuário no banco de dados.
+     * @param redirect Contém a url de redirecionamento vinda da getLogin(), onde após efetuar o cadastro o usuário repassa este atributo para o método recapturar a informação.
+     * @param usuario Objeto que será persistido no banco de dados.
+     * @param request Recebe dados da requisição.
+     * @param model   Fornece dados para a view.
+     * @return 1) Retorna a página de sucesso caso usuário for cadastrado.
+     *         2) Retorna a página de erro, caso não consiga cadastrar o usuário.
+     */
     @PostMapping("/usuarios/cadastro")
-    public String postCadastrar(@RequestParam(required = false, defaultValue = "") String redirect, Usuario usuario, HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
+    public String postCadastrar(@RequestParam(required = false, defaultValue = "") String redirect, Usuario usuario, HttpServletRequest request, Model model) {
 
         // Seta o path da requisição
-        path = request.getContextPath();
-        model.addAttribute("path", path);
+        model.addAttribute("path", request.getContextPath());
         model.addAttribute("redirect", redirect);
         try {
-            usuarioService.save(usuario);
-            return "main/usuario/cadastro-efetuado-com-sucesso";
+            if(usuarioService.existsByCpf(usuario.getCpf())){
+                logger.log(Level.WARNING, "Cpf já cadastrado: " + usuario.getCpf());
+                return "main/usuario/cadastro-sem-sucesso";
+            }
+            else if(usuarioService.existsByEmail(usuario.getEmail())){
+                logger.log(Level.WARNING, "E-mail já cadastrado: " + usuario.getEmail());
+                return "main/usuario/cadastro-sem-sucesso";
+            }
+            else{
+                usuarioService.save(usuario);
+                logger.log(Level.INFO, "Usuário salvo com sucesso: " + usuario.getEmail());
+                return "main/usuario/cadastro-efetuado-com-sucesso";
+            }
         } catch (Exception e) {
-            System.out.println(e);
+            logger.log(Level.SEVERE, "Ocorreu um erro ao cadastrar o usuário.", e);
             return "main/usuario/cadastro-sem-sucesso";
         }
     }
-
-    @GetMapping("/usuarios/{id}")
-    public String getPerfilById(@PathVariable Long id, HttpServletRequest request, Model model) {
-
-        // Seta o path da requisição
-        path = request.getContextPath();
-        model.addAttribute("path", path);
-
-        try {
-            Optional<Usuario> usuario = usuarioService.findById(id);
-            model.addAttribute("usuario", usuario.get());
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
-
-        return "usuario/perfil";
-    }
-
-    @GetMapping("/usuarios")
-    public String getListar(@RequestParam(required = false) String n, HttpServletRequest request, Model model) {
-
-        // Seta o path da requisição
-        path = request.getContextPath();
-        model.addAttribute("path", path);
-
-        List<Usuario> usuarios = new ArrayList<>();
-
-        try {
-            // Verifica se possui parâmetro de busca
-            if (n.equals("")) {
-                usuarios = usuarioService.findAll();
-            } else {
-                usuarios = usuarioService.findByNomeContains(n);
-            }
-
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
-
-        model.addAttribute("usuarios", usuarios);
-
-        return "main/usuario/listar";
-    }
-
 }
