@@ -10,17 +10,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ProjetoService {
 
-	@Autowired
 	private ProjetoRepository projetoRepository;
+
+	@Autowired
+	public ProjetoService(ProjetoRepository projetoRepository){
+		this.projetoRepository = projetoRepository;
+	}
 
 	// Serviço que faz a persistencia do PROJETO
 	public Projeto save(Projeto projeto, Usuario usuario, HttpServletRequest request) {
