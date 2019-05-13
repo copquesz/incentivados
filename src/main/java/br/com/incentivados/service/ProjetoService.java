@@ -7,6 +7,8 @@ import br.com.incentivados.model.Usuario;
 import br.com.incentivados.repository.ProjetoRepository;
 import br.com.incentivados.utility.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -56,19 +58,12 @@ public class ProjetoService {
 		return projetoRepository.findById(id);
 	}
 
-	// Serviço que carrega todos os PROJETOS
-	public List<Projeto> findAll() {
-		return projetoRepository.findAll();
+	public Page<Projeto> findAll(Pageable page){
+		return projetoRepository.findAll(page);
 	}
 
-	// Serviço que carrega os 3 últimos PROJETOS persistidos
-	public List<Projeto> findTop3ByOrderByIdDesc() {
-		return projetoRepository.findTop3ByOrderByIdDesc();
-	}
-
-	// Serviço que carrega os PROJETOS de acordo com o USUARIO
-	public List<Projeto> findByUsuario(Usuario usuario) {
-		return projetoRepository.findByUsuario(usuario);
+	public Page<Projeto> findAllByUsuario(Usuario usuario, Pageable page){
+		return projetoRepository.findAllByUsuario(usuario, page);
 	}
 
 	// Serviço que contabiliza os PROJETOS

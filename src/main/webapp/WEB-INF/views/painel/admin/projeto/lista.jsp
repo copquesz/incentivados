@@ -77,7 +77,7 @@
                   <span class="navbar-toggler-bar bar3"></span>
                 </button>
               </div>
-              <b><a class="navbar-brand" href="#">Projetos</b>
+              <b><a class="navbar-brand" href="#">Projetos</a></b>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -108,27 +108,25 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header "> 
-                <h5 class="card-title">Projetos Cadastrado(s): ${qtdProjetos}</h5>
-                <div class="d-flex justify-content-start"> 
-                  <div class="row">
-                    <div class="col-md-12">
-                      <form class="form-inline">                                          
-                        <div class="form-group mx-sm-3 mb-2">
-                          <input type="text" class="form-control" placeholder="Pesquisar por..">
-                        </div>
-                        <div class="form-group mb-2">
-                          <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>
-                        </div>
-                      </form>
-                    </div>
+                <h5 class="card-title">Projetos Cadastrado(s): ${qtdProjetos}</h5>                
+                <div class="row">
+                  <div class="col-12 d-flex justify-content-start">
+                    <form class="form-inline">                                          
+                      <div class="form-group mx-sm-3 mb-2">
+                        <input type="text" class="form-control" placeholder="Pesquisar por..">
+                      </div>
+                      <div class="form-group mb-2">
+                        <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>
+                      </div>
+                    </form>
                   </div>
-                </div>
+                </div>                
               </div>
               <div class="card-body">
                 <div class="row">
                   <div class="col-12">
                     <!-- MSG CASO LISTA ESTEJA VAZIA -->
-                    <c:if test = "${empty projetos}">
+                    <c:if test = "${empty projetos.content}">
                       <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
                         <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
                           <i class="nc-icon nc-simple-remove"></i>
@@ -138,23 +136,72 @@
                       </div>
                     </c:if>
                     <!-- EXIBE A LISTA DE PROJETOS -->
-                    <c:if test="${not empty projetos}">
-                      <div class="row justify-content-start">
-                          <c:forEach var="projeto" items="${projetos}">
-                            <div class="col-12 col-xl-3 col-lg-6 col-md-6 d-flex align-items-stretch bd-highlight">
-                              <div class="card border align-self-stretch flex-fill bd-highlight mt-3">
-                                <img src="${path}/${projeto.documentosProjeto.logo.path}" class="card-img-top img-fluid" alt="...">
-                                <div class="card-body">
-                                  <h5 class="card-title" style="font-weight: bold;">${projeto.titulo}</h5>
-                                  <hr>
-                                  <p class="card-text text-justify">${fn:substring(projeto.objetivo, 0, 180)} ...</p>
-                                </div>
-                                <div class="card-footer">
-                                  <a href="${path}/painel/projetos/${projeto.id}" class="btn btn-primary">Ver Detalhes</a>
-                                </div>
+                    <c:if test="${not empty projetos.content}">
+                      <div class="row">
+                        <div class="col-12 d-flex justify-content-end">
+                          <nav class="" aria-label="Paginação de Projetos">
+                            <ul class="pagination"> 
+                              <c:choose> 
+                                <c:when test = "${projetos.totalPages == 1}">
+                                  <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
+                                  <li class="page-item active"><a class="page-link text-white" href="${path}/painel/projetos?page=${projetos.number}">${projetos.number + 1}</a></li>
+                                  <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
+                                </c:when>
+                                <c:when test = "${(projetos.totalPages == 2) && (projetos.number + 1 < projetos.totalPages)}">
+                                  <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
+                                  <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/projetos?page=${projetos.number}">${projetos.number + 1}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.number + 1}">${projetos.number + 2}</a></li>
+                                  <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
+                                </c:when>
+                                <c:when test = "${(projetos.totalPages == 2) && (projetos.number + 1 == projetos.totalPages)}">
+                                  <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.number - 1}">${projetos.number}</a></li>
+                                  <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/projetos?page=${projetos.number}">${projetos.number + 1}</a></li>
+                                  <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
+                                </c:when>
+                                <c:when test = "${(projetos.totalPages >= 3) && (projetos.number == 0)}">
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos">Primeira</a></li>
+                                  <li class="page-item active"><a class="page-link text-white" href="${path}/painel/projetos?page=${projetos.number}">${projetos.number + 1}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.number + 1}">${projetos.number + 2}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.number + 2}">${projetos.number + 3}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.totalPages - 1}">Última</a></li>
+                                </c:when>
+                                <c:when test = "${(projetos.totalPages >= 3) && (projetos.number > 0) && (projetos.number + 1 < projetos.totalPages)}">
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos">Primeira</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.number - 1}">${projetos.number}</a></li>
+                                  <li class="page-item active"><a class="page-link text-white" href="${path}/painel/projetos?page=${projetos.number}">${projetos.number + 1}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.number + 1}">${projetos.number + 2}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.totalPages - 1}">Última</a></li>
+                                </c:when>
+                                <c:when test = "${(projetos.totalPages >= 3) && (projetos.number + 1 == projetos.totalPages)}">
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos">Primeira</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.number - 2}">${projetos.number - 1}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.number - 1}">${projetos.number}</a></li>
+                                  <li class="page-item active"><a class="page-link text-white" href="${path}/painel/projetos?page=${projetos.number}">${projetos.number + 1}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.totalPages - 1}">Última</a></li>
+                                </c:when>
+                              </c:choose> 
+                            </ul>
+                          </nav>  
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row justify-content-start">                        
+                        <c:forEach var="projeto" items="${projetos.content}">
+                          <div class="col-12 col-xl-3 col-lg-6 col-md-6 d-flex align-items-stretch bd-highlight">
+                            <div class="card border align-self-stretch flex-fill bd-highlight mt-3">
+                              <img src="${path}/${projeto.documentosProjeto.logo.path}" class="card-img-top img-fluid" alt="...">
+                              <div class="card-body">
+                                <h5 class="card-title" style="font-weight: bold;">${projeto.titulo}</h5>
+                                <hr>
+                                <p class="card-text text-justify">${fn:substring(projeto.objetivo, 0, 180)} ...</p>
+                              </div>
+                              <div class="card-footer">
+                                <a href="${path}/painel/projetos/${projeto.id}" class="btn btn-primary">Ver Detalhes</a>
                               </div>
                             </div>
-                          </c:forEach>
+                          </div>
+                        </c:forEach>
                       </div>
                     </c:if>
                   </div>     

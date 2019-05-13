@@ -224,7 +224,7 @@
                                     </c:if>
                                 </div>
                                 <div class="tab-pane fade" id="projetos" role="tabpanel" aria-labelledby="projetos-tab">
-                                    <c:if test="${empty projetos}">
+                                    <c:if test="${empty projetos.content}">
                                         <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
                                             <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
                                                 <i class="nc-icon nc-simple-remove"></i>
@@ -233,9 +233,9 @@
                                             <span data-notify="message">Não há nenhum projeto cadastrado</span>
                                         </div>
                                     </c:if>
-                                    <c:if test="${not empty projetos}">
+                                    <c:if test="${not empty projetos.content}">
                                         <div class="row justify-content-start">
-                                            <c:forEach var="projeto" items="${projetos}">
+                                            <c:forEach var="projeto" items="${projetos.content}">
                                               <div class="col-12 col-xl-3 col-lg-6 col-md-6 d-flex align-items-stretch bd-highlight">
                                                 <div class="card border align-self-stretch flex-fill bd-highlight mt-3">
                                                   <img src="${path}/${projeto.documentosProjeto.logo.path}" class="card-img-top" alt="...">

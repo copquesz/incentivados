@@ -242,7 +242,7 @@
                         <p class="text-bold">Não há registro(s) ou .</p>
                       </div>
                     </c:if>      
-                    <c:if test = "${not empty entidades}">              
+                    <c:if test = "${not empty entidades.content}">              
                       <div class="table-responsive">
                         <table class="table">
                           <thead class=" text-info">
@@ -276,9 +276,9 @@
                         <p class="text-bold">Não há registro(s) ou .</p>
                       </div>
                     </c:if>
-                    <c:if test = "${not empty projetos}"> 
+                    <c:if test = "${not empty projetos.content}"> 
                       <div class="row justify-content-start">
-                        <c:forEach var="projeto" items="${projetos}">
+                        <c:forEach var="projeto" items="${projetos.content}">
                           <div class="col-12 col-xl-3 col-lg-6 col-md-6 d-flex align-items-stretch bd-highlight">
                             <div class="card border align-self-stretch flex-fill bd-highlight mt-3">
                               <img src="${path}/${projeto.documentosProjeto.logo.path}" class="card-img-top" alt="...">

@@ -1,197 +1,186 @@
 package br.com.incentivados.controller;
 
-import br.com.incentivados.enumerated.TipoUsuario;
-import br.com.incentivados.model.Entidade;
-import br.com.incentivados.model.IncentivoFiscal;
 import br.com.incentivados.model.Projeto;
 import br.com.incentivados.model.Usuario;
 import br.com.incentivados.service.EntidadeService;
 import br.com.incentivados.service.IncentivoFiscalService;
 import br.com.incentivados.service.ProjetoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Controller
 public class ProjetoController {
 
-	private ProjetoService projetoService;
-	private EntidadeService entidadeService;
-	private IncentivoFiscalService incentivoFiscalService;
+    private ProjetoService projetoService;
+    private EntidadeService entidadeService;
+    private IncentivoFiscalService incentivoFiscalService;
+    private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
 
-	@Autowired
-	public ProjetoController(ProjetoService projetoService, EntidadeService entidadeService,
-			IncentivoFiscalService incentivoFiscalService) {
-		super();
-		this.projetoService = projetoService;
-		this.entidadeService = entidadeService;
-		this.incentivoFiscalService = incentivoFiscalService;
-	}
+    @Autowired
+    public ProjetoController(ProjetoService projetoService, EntidadeService entidadeService,
+                             IncentivoFiscalService incentivoFiscalService) {
+        super();
+        this.projetoService = projetoService;
+        this.entidadeService = entidadeService;
+        this.incentivoFiscalService = incentivoFiscalService;
+    }
 
-	/**
-	 * Exibe a página de cadastro do PROJETO
-	 * 
-	 * @param request recebe dados da requisição
-	 * @param model   fornece dados para a view
-	 * @return view jsp
-	 */
-	@GetMapping("/painel/projetos/cadastro")
-	public String getCadastrar(HttpServletRequest request, Model model) {
+    /**
+     * Exibe a lista de projetos
+     *
+     * @param request Recebe dados da requisição.
+     * @param model   Fornece dados para a view.
+     * @return Retorna a lista de projetos solicitada.
+     */
+    @GetMapping("/painel/projetos")
+    public String getListar(@RequestParam(required = false, defaultValue = "0") int page, HttpServletRequest request, Model model) {
 
-		// Seta o path da requisição
-		model.addAttribute("path", request.getContextPath());
-		// Seta o breadcrumb da página
-		model.addAttribute("breadcrumb", "Projeto " + " <i class='fas fa-angle-double-right'></i> " + " Cadastro");
+        // Seta o path da requisição
+        model.addAttribute("path", request.getContextPath());
 
-		// Recebe o USUARIO logado na session
-		Usuario usuario = new Usuario();
-		usuario = (Usuario) request.getSession().getAttribute("usuario");
+        // Recebe o USUARIO logado na session
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
-		// Carrega a lista de ENTIDADES cadastradas pelo USUARIO logado
-		List<Entidade> entidades = new ArrayList<Entidade>();
-		entidades = entidadeService.findAllByUsuario(usuario);
-		model.addAttribute("entidades", entidades);
+        try {
+            Pageable pageable = PageRequest.of(page, 9, Sort.by(Sort.Order.asc("id")));
 
-		// Carrega todos os INCENTIVOS FISCAIS cadastrados
-		List<IncentivoFiscal> incentivosFiscais = new ArrayList<IncentivoFiscal>();
-		incentivosFiscais = incentivoFiscalService.findAll();
-		model.addAttribute("incentivosFiscais", incentivosFiscais);
+            // Direciona o USUARIO para sua view de acordo com perfil
+            switch (usuario.getTipoUsuario()) {
+                case ADMIN:
+                    model.addAttribute("projetos", projetoService.findAll(pageable));
+                    model.addAttribute("qtdProjetos", projetoService.count());
+                    return "painel/admin/projeto/lista";
+                case ENTIDADE:
+                    model.addAttribute("projetos", projetoService.findAllByUsuario(usuario, pageable));
+                    model.addAttribute("qtdProjetos", projetoService.countByUsuario(usuario));
+                    return "painel/entidade/projeto/lista";
+                default:
+                    logger.log(Level.WARNING, "Usuário não encontrado.");
+                    return "";
+            }
 
-		return "painel/entidade/projeto/cadastro";
-	}
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Erro listar projetos.");
+            return "";
+        }
+    }
 
-	/**
-	 * Persiste os dados do PROJETO no banco de dados
-	 * 
-	 * @param projeto objeto modelo que será persistido
-	 * @param request recebe dados da requisição
-	 * @param model   fornece dados para a view
-	 * @return view jsp
-	 */
-	@PostMapping("/painel/projetos/cadastro")
-	public String postCadastrar(Projeto projeto, HttpServletRequest request, Model model) {
+    /**
+     * Exibe a página de cadastro do PROJETO
+     *
+     * @param request recebe dados da requisição
+     * @param model   fornece dados para a view
+     * @return view jsp
+     */
+    @GetMapping("/painel/projetos/cadastro")
+    public String getCadastrar(HttpServletRequest request, Model model) {
 
-		// Seta o path da requisição
-		model.addAttribute("path", request.getContextPath());
-		// Seta o breadcrumb da página
-		model.addAttribute("breadcrumb", "Projeto " + " <i class='fas fa-angle-double-right'></i> " + " Cadastro");
+        // Seta o path da requisição
+        model.addAttribute("path", request.getContextPath());
 
-		// Recebe o USUARIO logado na session
-		Usuario usuario = new Usuario();
-		usuario = (Usuario) request.getSession().getAttribute("usuario");
+        // Recebe o USUARIO logado na session
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
-		try {
-			// Cadastra o projeto casa não exista nenhum projeto com título igual
-			if (!projetoService.existsByTitulo(projeto.getTitulo())) {
-				projeto = projetoService.save(projeto, usuario, request);
-				model.addAttribute("projeto", projeto);
+        // Carrega a lista de ENTIDADES cadastradas pelo USUARIO logado
+        model.addAttribute("entidades", entidadeService.findAllByUsuario(usuario));
 
-				return "painel/entidade/projeto/cadastro-projeto-sucesso";
+        // Carrega todos os INCENTIVOS FISCAIS cadastrados
+        model.addAttribute("incentivosFiscais", incentivoFiscalService.findAll());
 
-			} else {
-				model.addAttribute("projeto", projeto);
+        return "painel/entidade/projeto/cadastro";
+    }
 
-				return "painel/entidade/projeto/cadastro-projeto-falha-titulo-cadastrado";
-			}
+    /**
+     * Persiste os dados do PROJETO no banco de dados
+     *
+     * @param projeto objeto modelo que será persistido
+     * @param request recebe dados da requisição
+     * @param model   fornece dados para a view
+     * @return 1) Retorna página de sucesso caso o projeto for cadastrado.
+     *         2) Retorna página de falha caso já exista projeto com mesmo título.
+     */
+    @PostMapping("/painel/projetos/cadastro")
+    public String postCadastrar(Projeto projeto, HttpServletRequest request, Model model) {
 
-		} catch (Exception e) {
-			System.out.println(e);
-			return "painel/entidade/projeto/cadastro-projeto-falha";
-		}
+        // Seta o path da requisição
+        model.addAttribute("path", request.getContextPath());
 
-	}
+        // Recebe o USUARIO logado na session
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
-	/**
-	 * Exibe os dados do projeto passado como parâmetro
-	 *
-	 * @param id      código do projeto
-	 * @param request recebe dados da requisição
-	 * @param model   fornece dados para a view
-	 * @return view jsp
-	 */
-	@GetMapping("/painel/projetos/{id}")
-	public String getPerfil(@PathVariable Long id, HttpServletRequest request, Model model) {
+        try {
+            // Cadastra o projeto casa não exista nenhum projeto com título igual
+            if (!projetoService.existsByTitulo(projeto.getTitulo())) {
+                projeto = projetoService.save(projeto, usuario, request);
+                model.addAttribute("projeto", projeto);
+                logger.log(Level.INFO, "Projeto cadastrado com sucesso: " + projeto.getTitulo());
+                return "painel/entidade/projeto/cadastro-projeto-sucesso";
 
-		// Seta o path da requisição
-		model.addAttribute("path", request.getContextPath());
-		// Seta o breadcrumb da página
-		model.addAttribute("breadcrumb", "Projeto " + " <i class='fas fa-angle-double-right'></i> " + " Perfil");
+            } else {
+                model.addAttribute("projeto", projeto);
+                logger.log(Level.INFO, "Projeto já existente: " + projeto.getTitulo());
+                return "painel/entidade/projeto/cadastro-projeto-falha-titulo-cadastrado";
+            }
 
-		// Recebe o USUARIO logado na session
-		Usuario usuario = new Usuario();
-		usuario = (Usuario) request.getSession().getAttribute("usuario");
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Falha cadastro de projeto.", e);
+            return "painel/entidade/projeto/cadastro-projeto-falha";
+        }
 
-		try {
-			// Carrega o PROJETO passando id como parâmetro
-			Optional<Projeto> projeto = projetoService.findById(id);
-			model.addAttribute("projeto", projeto.get());
+    }
 
-			// Direciona o USUARIO para a view de acordo com seu tipo de perfil
-			switch (usuario.getTipoUsuario()) {
-			case ADMIN:
-				return "painel/admin/projeto/perfil";
+    /**
+     * Exibe os dados do projeto passado como parâmetro
+     *
+     * @param id      código do projeto
+     * @param request recebe dados da requisição
+     * @param model   fornece dados para a view
+     * @return Retorna os dados do projeto buscado.
+     */
+    @GetMapping("/painel/projetos/{id}")
+    public String getPerfil(@PathVariable Long id, HttpServletRequest request, Model model) {
 
-			case ENTIDADE:
-				return "painel/entidade/projeto/perfil";
+        // Seta o path da requisição
+        model.addAttribute("path", request.getContextPath());
 
-			default:
-				return "";
-			}
+        // Recebe o USUARIO logado na session
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
-		} catch (Exception e) {
-			return "";
-		}
-	}
+        try {
+            // Carrega o PROJETO passando id como parâmetro
+            Optional<Projeto> projeto = projetoService.findById(id);
+            if (projeto.isPresent()) {
+                model.addAttribute("projeto", projeto.get());
+            }
 
-	/**
-	 * Exibe a lista de PROJETOS do usuário logado
-	 * 
-	 * @param request recebe dados da requisição
-	 * @param model   fornece dados para a view
-	 * @return view jsp
-	 */
-	@GetMapping("/painel/projetos")
-	public String getListar(HttpServletRequest request, Model model) {
+            // Direciona o USUARIO para a view de acordo com seu tipo de perfil
+            switch (usuario.getTipoUsuario()) {
+                case ADMIN:
+                    return "painel/admin/projeto/perfil";
+                case ENTIDADE:
+                    return "painel/entidade/projeto/perfil";
+                default:
+                    logger.log(Level.WARNING, "Usuário não encontrado.");
+                    return "";
+            }
 
-		// Seta o path da requisição
-		model.addAttribute("path", request.getContextPath());
-		// Seta o breadcrumb da página
-		model.addAttribute("breadcrumb", "Projeto " + " <i class='fas fa-angle-double-right'></i> " + " Lista");
-
-		// Recebe o USUARIO logado na session
-		Usuario usuario = new Usuario();
-		usuario = (Usuario) request.getSession().getAttribute("usuario");
-
-		try {
-
-			// Direciona o USUARIO para sua view de acordo com perfil
-			if (usuario.getTipoUsuario() == TipoUsuario.ADMIN) {
-				List<Projeto> projetos = new ArrayList<Projeto>();
-				projetos = projetoService.findAll();
-				model.addAttribute("projetos", projetos);
-				model.addAttribute("qtdProjetos", projetoService.count());
-				return "painel/admin/projeto/lista";
-
-			} else {
-				List<Projeto> projetos = new ArrayList<Projeto>();
-				projetos = projetoService.findByUsuario(usuario);
-				model.addAttribute("projetos", projetos);
-				model.addAttribute("qtdProjetos", projetoService.countByUsuario(usuario));
-				return "painel/entidade/projeto/lista";
-			}
-
-		} catch (Exception e) {
-			System.out.println(e);
-			return "";
-		}
-	}
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Falha localizar projeto.", e);
+            return "";
+        }
+    }
 
 }
