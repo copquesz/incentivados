@@ -44,8 +44,8 @@
               <i class="fas fa-city"></i>Empresas</a>
           </li>
           <li>
-            <a href="${path}/painel/empresas">
-              <i class="fas fa-users"></i>empresas</a>
+            <a href="${path}/painel/entidades">
+              <i class="fas fa-users"></i>Entidades</a>
           </li>
           <li>
             <a href="${path}/painel/projetos">
