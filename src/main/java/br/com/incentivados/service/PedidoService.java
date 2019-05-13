@@ -11,7 +11,6 @@ import br.com.incentivados.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import br.com.incentivados.enumerated.StatusPedido;
 import br.com.incentivados.repository.PedidoRepository;
@@ -20,26 +19,23 @@ import br.com.incentivados.utility.FileUpload;
 @Service
 public class PedidoService {
 
-    @Autowired
     private PedidoRepository pedidoRepository;
+
+    @Autowired
+    public PedidoService(PedidoRepository pedidoRepository){
+        this.pedidoRepository = pedidoRepository;
+    }
 
     // Serviço de persistência de dados do PEDIDO
     public Pedido save(Pedido pedido, HttpServletRequest request, Usuario usuario, Usuario analista, Empresa empresa,
                        Entidade entidade) {
-
-        String path = "documentos/empresas/" + empresa.getNomeFantasia() + "/pedidos";
-        Arquivo cartaOficio = pedido.getDocumentosPedido().getCartaOficio();
 
         pedido.setUsuario(usuario);
         pedido.setAnalista(analista);
         pedido.setEmpresa(empresa);
         pedido.setEntidade(entidade);
 
-        pedido.getDocumentosPedido().getCartaOficio()
-                .setPath(upload(request, cartaOficio.getFile(),
-                        "carta-oficio-" + DateTimeFormatter.ofPattern("ddMMuuuuHHmmss").format(LocalDateTime.now())
-                                + "." + cartaOficio.getFile().getOriginalFilename().split("\\.")[1],
-                        path));
+        pedido = uploadDocumentos(pedido, request);
 
         return pedidoRepository.save(pedido);
     }
@@ -128,9 +124,18 @@ public class PedidoService {
         return pedidoRepository.countByAnalistaAndStatus(analista, status);
     }
 
-    // Serviço de upload de arquivos para o servidor
-    public String upload(HttpServletRequest request, MultipartFile arquivo, String nomeArquivo, String url) {
-        return FileUpload.upload(request, arquivo, nomeArquivo, url);
+    private Pedido uploadDocumentos(Pedido pedido, HttpServletRequest request) {
+
+        final String path = "documentos/empresas/" + pedido.getEmpresa().getNomeFantasia() + "/pedidos";
+        final Arquivo cartaOficio = pedido.getDocumentosPedido().getCartaOficio();
+
+        pedido.getDocumentosPedido().getCartaOficio()
+                .setPath(FileUpload.upload(request, cartaOficio.getFile(),
+                        "carta-oficio-" + DateTimeFormatter.ofPattern("ddMMuuuuHHmmss").format(LocalDateTime.now())
+                                + "." + cartaOficio.getFile().getOriginalFilename().split("\\.")[1],
+                        path));
+
+        return pedido;
     }
 
 }

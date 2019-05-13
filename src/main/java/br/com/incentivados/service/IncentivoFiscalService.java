@@ -13,8 +13,12 @@ import java.util.List;
 @Service
 public class IncentivoFiscalService {
 	
-	@Autowired
 	private IncentivoFiscalRepository incentivoFiscalRepository;
+
+	@Autowired
+	public IncentivoFiscalService(IncentivoFiscalRepository incentivoFiscalRepository){
+		this.incentivoFiscalRepository = incentivoFiscalRepository;
+	}
 	
 	public IncentivoFiscal save(IncentivoFiscal incentivoFiscal) {
 		return incentivoFiscalRepository.save(incentivoFiscal);

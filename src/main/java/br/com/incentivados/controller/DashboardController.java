@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Controller;
@@ -128,6 +129,9 @@ public class DashboardController {
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 		model.addAttribute("usuario", usuario);
 
+		Pageable pageableProjetos = PageRequest.of(0, 4, Sort.by(Sort.Order.asc("id")));
+		Pageable pageableEntidades = PageRequest.of(0, 3, Sort.by(Sort.Order.asc("id")));
+
 		// Verifica qual tipo de usuário está logado e redireciona para sua respectiva
 		// view
 		switch (usuario.getTipoUsuario()) {
@@ -163,7 +167,7 @@ public class DashboardController {
 			model.addAttribute("qtdEntidades", entidadeService.countByUsuario(usuario));
 
 			// Lista as infos e estatísticas de projetos por usuário
-			model.addAttribute("projetos", projetoService.findByUsuario(usuario));
+			model.addAttribute("projetos", projetoService.findAllByUsuario(usuario, pageableProjetos));
 			model.addAttribute("qtdProjetos", projetoService.countByUsuario(usuario));
 
 			// Lista as infos e estatística de pedidos por usuário
@@ -197,12 +201,12 @@ public class DashboardController {
 
 		case ADMIN:			
 			// Lista as infos e estatísticas das entidades cadastradas
-			model.addAttribute("entidades", entidadeService.findAll(PageRequest.of(0, 3, Sort.by(Sort.Order.asc("id")))));
+			model.addAttribute("entidades", entidadeService.findAll(pageableEntidades));
 			model.addAttribute("qtdEntidades", entidadeService.count());
 			model.addAttribute("datasChartEntidade", entidadeService.buildChart());
 
 			// Lista as infos e estatísticas dos projetos cadastrados
-			model.addAttribute("projetos", projetoService.findTop3ByOrderByIdDesc());
+			model.addAttribute("projetos", projetoService.findAll(pageableProjetos));
 			model.addAttribute("qtdProjetos", projetoService.count());
 			
 			// Lista todos os incentivos fiscais cadastrados na base de dados

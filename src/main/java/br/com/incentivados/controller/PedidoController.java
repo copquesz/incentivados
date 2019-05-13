@@ -3,6 +3,8 @@ package br.com.incentivados.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -33,6 +35,7 @@ public class PedidoController {
 	private EntidadeService entidadeService;
 	private UsuarioService usuarioService;
 	private PedidoService pedidoService;
+	private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
 
 	// Construtor
 	@Autowired
@@ -58,30 +61,29 @@ public class PedidoController {
 
 		// Seta o path da requisição
 		model.addAttribute("path", request.getContextPath());
-		// Seta o breadcrumb da página
-		model.addAttribute("breadcrumb", "Pedido " + " <i class='fas fa-angle-double-right'></i> " + " Cadastro");
 
 		try {
 
 			// Carrega a empresa que foi passada como parâmetro
 			Optional<Empresa> empresa = empresaService.findByNomeFantasia(nomeFantasia);
-			model.addAttribute("empresa", empresa.get());
+			if(empresa.isPresent()){
+				model.addAttribute("empresa", empresa.get());
+			}
+			else{
+				logger.log(Level.WARNING, "Empresa não localizada.");
+			}
 
 			// Recebe o usuário logado na sessão
-			Usuario usuario = new Usuario();
-			usuario = (Usuario) request.getSession().getAttribute("usuario");
+			Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 			model.addAttribute("usuario", usuario);
 
 			// Lista das entidades cadastradas pelo usuário logado
-			List<Entidade> entidades = new ArrayList<Entidade>();
-			entidades = entidadeService.findAllByUsuario(usuario);
-			model.addAttribute("entidades", entidades);
+			model.addAttribute("entidades", entidadeService.findAllByUsuario(usuario));
 
 			return "painel/entidade/pedido/cadastro";
 
 		} catch (Exception e) {
-			System.out.println(e);
-
+			logger.log(Level.SEVERE, "Erro exibir formulário de pedidos.", e);
 			return "";
 		}
 
@@ -100,8 +102,6 @@ public class PedidoController {
 
 		// Seta o path da requisição
 		model.addAttribute("path", request.getContextPath());
-		// Seta o breadcrumb da página
-		model.addAttribute("breadcrumb", "Pedido " + " <i class='fas fa-angle-double-right'></i> " + " Cadastro");
 
 		try {
 
@@ -115,10 +115,11 @@ public class PedidoController {
 			pedido = pedidoService.save(pedido, request, usuario.get(), analista.get(), empresa.get(), entidade.get());
 			model.addAttribute("pedido", pedido);
 
+			logger.log(Level.INFO, "Pedido cadastrado com sucesso: #" + pedido.getId());
 			return "painel/entidade/pedido/pedido-entidade-sucesso";
 
 		} catch (Exception e) {
-			System.err.println(e);
+			logger.log(Level.SEVERE, "Erro cadastrar pedido.", e);
 			return "painel/entidade/pedido/pedido-entidade-falha";
 		}
 	}
@@ -129,20 +130,26 @@ public class PedidoController {
 		// Seta o path da requisição
 		model.addAttribute("path", request.getContextPath());
 
+		// Recebe o usuário logado na sessão
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		model.addAttribute("usuario", usuario);
 
-		Pedido pedido = pedidoService.findById(id).get();
-		model.addAttribute("pedido", pedido);
+		Optional<Pedido> pedido = pedidoService.findById(id);
+		if(pedido.isPresent()){
+			model.addAttribute("pedido", pedido.get());
+		}
+		else{
+			logger.log(Level.WARNING, "Pedido não localizado.");
+		}
 
 		switch (usuario.getTipoUsuario()) {
-		case ANALISTA:
-			return "painel/analista/pedido/visualizar";
-
-		case EMPRESA:
-			return "painel/empresa/pedido/visualizar";
-
-		default:
-			return "";
+			case ANALISTA:
+				return "painel/analista/pedido/visualizar";
+			case EMPRESA:
+				return "painel/empresa/pedido/visualizar";
+			default:
+				logger.log(Level.WARNING, "Usuário não localizado.");
+				return "";
 		}
 	}
 	
@@ -152,23 +159,27 @@ public class PedidoController {
 		// Seta o path da requisição
 		model.addAttribute("path", request.getContextPath());
 
+		// Recebe o usuário logado na sessão
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		model.addAttribute("usuario", usuario);
 
 		Optional<Pedido> pedido = pedidoService.findById(id);
-
 
 		// Verifica se o pedido existe
 		if (pedido.isPresent()){
 			// Verifica se o pedido ainda está pendente de avaliação
 			if (pedido.get().getStatus() == StatusPedido.PENDENTE){
 				pedidoService.update(pedido.get(), status, observacao, usuario);
+				logger.log(Level.INFO, "Pedido avaliado: #" + pedido.get().getId());
 				return "redirect:/painel/dashboard";
 			}
 			else{
+				logger.log(Level.WARNING, "Pedido avaliado já avaliado: #" + pedido.get().getId());
 				return "painel/empresa/pedido/erro/pedido-ja-avaliado";
 			}
 		}
 		else{
+			logger.log(Level.WARNING, "Pedido não localizado: #" + id);
 			return "painel/empresa/pedido/erro/pedido-nao-localizado";
 		}
 
@@ -179,10 +190,11 @@ public class PedidoController {
 
 		// Seta o path da requisição
 		model.addAttribute("path", request.getContextPath());
-		// Seta o breadcrumb da página
-		model.addAttribute("breadcrumb", "Pedido " + " <i class='fas fa-angle-double-right'></i> " + " Lista");
 
+		// Recebe o usuário logado na sessão
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+		model.addAttribute("usuario", usuario);
+
 		Empresa empresa = usuario.getEmpresa();
 
 		try {
@@ -203,11 +215,12 @@ public class PedidoController {
 				model.addAttribute("qtdPedidos", pedidoService.countByEmpresa(empresa));
 
 			default:
+				logger.log(Level.WARNING, "Usuário não localizado.");
 				return "";
 			}
 
 		} catch (Exception e) {
-			System.err.println(e);
+			logger.log(Level.SEVERE, "Erro listas pedidos.", e);
 			return "";
 		}
 	}

@@ -18,8 +18,12 @@ import java.util.Optional;
 @Service
 public class EmpresaService {
 
-    @Autowired
     private EmpresaRepository empresaRepository;
+
+    @Autowired
+    public EmpresaService(EmpresaRepository empresaRepository){
+        this.empresaRepository = empresaRepository;
+    }
 
     public Empresa save(Empresa empresa, Usuario usuario, HttpServletRequest request) {
 
@@ -62,13 +66,9 @@ public class EmpresaService {
         return empresaRepository.count();
     }
 
-    public String upload(HttpServletRequest request, MultipartFile arquivo, String nomeArquivo, String url) {
-        return FileUpload.upload(request, arquivo, nomeArquivo, url);
-    }
-
-    public Empresa uploadDocumentos(Empresa empresa, HttpServletRequest request) {
+    private Empresa uploadDocumentos(Empresa empresa, HttpServletRequest request) {
         empresa.getDocumentosEmpresa().getLogo()
-                .setPath(upload(request, empresa.getDocumentosEmpresa().getLogo().getFile(), "logo."
+                .setPath(FileUpload.upload(request, empresa.getDocumentosEmpresa().getLogo().getFile(), "logo."
                                 + empresa.getDocumentosEmpresa().getLogo().getFile().getOriginalFilename().split("\\.")[1],
                         "documentos/empresas/" + empresa.getNomeFantasia()));
         return empresa;

@@ -25,28 +25,13 @@ public class ProjetoService {
 	// Serviço que faz a persistencia do PROJETO
 	public Projeto save(Projeto projeto, Usuario usuario, HttpServletRequest request) {
 
-		String path = "documentos/entidades/" + projeto.getEntidade().getNomeFantasia() + "/" + projeto.getTitulo();
-		Arquivo logo = projeto.getDocumentosProjeto().getLogo();
-		Arquivo propostaTecnica = projeto.getDocumentosProjeto().getPropostaTecnica();
-		Arquivo propostaOrcamentaria = projeto.getDocumentosProjeto().getPropostOrcamentaria();
-		Arquivo dadosBancarios = projeto.getDocumentosProjeto().getDadosBancarios();
-		Arquivo certificado = projeto.getDocumentosProjeto().getCertificado();
-
-		projeto.getDocumentosProjeto().getLogo().setPath(
-				upload(request, logo.getFile(), "logo." + logo.getFile().getOriginalFilename().split("\\.")[1], path));
-		projeto.getDocumentosProjeto().getPropostaTecnica().setPath(upload(request, propostaTecnica.getFile(),
-				"proposta-tecnica." + propostaTecnica.getFile().getOriginalFilename().split("\\.")[1], path));
-		projeto.getDocumentosProjeto().getPropostOrcamentaria().setPath(upload(request, propostaOrcamentaria.getFile(),
-				"proposta-orcamentaria." + logo.getFile().getOriginalFilename().split("\\.")[1], path));
-		projeto.getDocumentosProjeto().getDadosBancarios().setPath(upload(request, dadosBancarios.getFile(),
-				"dados-bancarios." + dadosBancarios.getFile().getOriginalFilename().split("\\.")[1], path));
-		projeto.getDocumentosProjeto().getCertificado().setPath(upload(request, certificado.getFile(),
-				"certificado." + certificado.getFile().getOriginalFilename().split("\\.")[1], path));
-
 		projeto.setUsuario(usuario);
+
+		projeto = uploadDocumentos(request, projeto);
 
 		return projetoRepository.save(projeto);
 	}
+
 
 	// Serviço que verifica se o PROJETO já possui registro com mesmo TITULO
 	public boolean existsByTitulo(String titulo) {
@@ -81,9 +66,32 @@ public class ProjetoService {
 		return projetoRepository.countByIncentivosFiscais(incentivoFiscal);
 	}
 
-	// Serviço que faz o upload de arquivos para o servidor
-	public String upload(HttpServletRequest request, MultipartFile arquivo, String nomeArquivo, String url) {
-		return FileUpload.upload(request, arquivo, nomeArquivo, url);
+	private Projeto uploadDocumentos(HttpServletRequest request, Projeto projeto) {
+
+		final String path = "documentos/entidades/" + projeto.getEntidade().getNomeFantasia() + "/" + projeto.getTitulo();
+		final Arquivo logo = projeto.getDocumentosProjeto().getLogo();
+		final Arquivo propostaTecnica = projeto.getDocumentosProjeto().getPropostaTecnica();
+		final Arquivo propostaOrcamentaria = projeto.getDocumentosProjeto().getPropostOrcamentaria();
+		final Arquivo dadosBancarios = projeto.getDocumentosProjeto().getDadosBancarios();
+		final Arquivo certificado = projeto.getDocumentosProjeto().getCertificado();
+
+		projeto.getDocumentosProjeto().getLogo().setPath(
+				FileUpload.upload(request, logo.getFile(), "logo." + logo.getFile().getOriginalFilename().split("\\.")[1], path));
+
+		projeto.getDocumentosProjeto().getPropostaTecnica().setPath(FileUpload.upload(request, propostaTecnica.getFile(),
+				"proposta-tecnica." + propostaTecnica.getFile().getOriginalFilename().split("\\.")[1], path));
+
+		projeto.getDocumentosProjeto().getPropostOrcamentaria().setPath(FileUpload.upload(request, propostaOrcamentaria.getFile(),
+				"proposta-orcamentaria." + logo.getFile().getOriginalFilename().split("\\.")[1], path));
+
+		projeto.getDocumentosProjeto().getDadosBancarios().setPath(FileUpload.upload(request, dadosBancarios.getFile(),
+				"dados-bancarios." + dadosBancarios.getFile().getOriginalFilename().split("\\.")[1], path));
+
+		projeto.getDocumentosProjeto().getCertificado().setPath(FileUpload.upload(request, certificado.getFile(),
+				"certificado." + certificado.getFile().getOriginalFilename().split("\\.")[1], path));
+
+		return projeto;
+
 	}
 
 }

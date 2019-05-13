@@ -89,14 +89,9 @@ public class EntidadeService {
         }
         return array;
     }
-
-    public String upload(HttpServletRequest request, MultipartFile arquivo, String nomeArquivo, String url) {
-        return FileUpload.upload(request, arquivo, nomeArquivo, url);
-    }
-
     private Entidade uploadDocumentos(Entidade entidade, HttpServletRequest request) {
 
-        final String path = "documentos/entidades/" + entidade.getId();
+        final String path = "documentos/entidades/" + entidade.getNomeFantasia();
         final Arquivo logo = entidade.getDocumentosEntidade().getLogo();
         final Arquivo ataEleicao = entidade.getDocumentosEntidade().getAtaEleicao();
         final Arquivo estatutoSocial = entidade.getDocumentosEntidade().getEstatutoSocial();
@@ -104,20 +99,19 @@ public class EntidadeService {
         final Arquivo cartaoCnpj = entidade.getDocumentosEntidade().getCartaoCnpj();
 
         // Seta os parâmetros dos arquivos para fazer o upload
-
         entidade.getDocumentosEntidade().getLogo().setPath(
-                upload(request, logo.getFile(), "logo." + logo.getFile().getOriginalFilename().split("\\.")[1], path));
+                FileUpload.upload(request, logo.getFile(), "logo." + logo.getFile().getOriginalFilename().split("\\.")[1], path));
 
-        entidade.getDocumentosEntidade().getAtaEleicao().setPath(upload(request, ataEleicao.getFile(),
+        entidade.getDocumentosEntidade().getAtaEleicao().setPath(FileUpload.upload(request, ataEleicao.getFile(),
                 "ata-de-eleicao." + ataEleicao.getFile().getOriginalFilename().split("\\.")[1], path));
 
-        entidade.getDocumentosEntidade().getEstatutoSocial().setPath(upload(request, estatutoSocial.getFile(),
+        entidade.getDocumentosEntidade().getEstatutoSocial().setPath(FileUpload.upload(request, estatutoSocial.getFile(),
                 "estatuto-social." + estatutoSocial.getFile().getOriginalFilename().split("\\.")[1], path));
 
-        entidade.getDocumentosEntidade().getIdentidade().setPath(upload(request, identidade.getFile(),
+        entidade.getDocumentosEntidade().getIdentidade().setPath(FileUpload.upload(request, identidade.getFile(),
                 "identidade." + identidade.getFile().getOriginalFilename().split("\\.")[1], path));
 
-        entidade.getDocumentosEntidade().getCartaoCnpj().setPath(upload(request, cartaoCnpj.getFile(),
+        entidade.getDocumentosEntidade().getCartaoCnpj().setPath(FileUpload.upload(request, cartaoCnpj.getFile(),
                 "cartao-cnpj." + cartaoCnpj.getFile().getOriginalFilename().split("\\.")[1], path));
 
         return entidade;

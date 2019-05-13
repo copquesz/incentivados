@@ -65,9 +65,6 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    // Método para listar todos os usuários que conter os caracteres passados como parâmetro
-    public List<Usuario> findByNomeContains(String nome){
-        return usuarioRepository.findByNomeContains(nome);
-    }
+
 
 }
