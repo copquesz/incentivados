@@ -21,13 +21,12 @@ import java.util.logging.Logger;
 public class EntidadeController {
 
     private EntidadeService entidadeService;
+    private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
 
     @Autowired
     public EntidadeController(EntidadeService entidadeService){
         this.entidadeService = entidadeService;
     }
-
-    private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
 
     /**
      * Exibe a página de cadastro da entidade.

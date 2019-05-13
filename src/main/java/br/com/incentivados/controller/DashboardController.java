@@ -21,10 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.incentivados.enumerated.StatusPedido;
-import br.com.incentivados.model.Entidade;
 import br.com.incentivados.model.IncentivoFiscal;
-import br.com.incentivados.model.Pedido;
-import br.com.incentivados.model.Projeto;
 import br.com.incentivados.model.Usuario;
 import br.com.incentivados.service.EntidadeService;
 import br.com.incentivados.service.IncentivoFiscalService;
@@ -58,7 +55,6 @@ public class DashboardController {
 
 		// paths da requisição e de redirecionamento
 		model.addAttribute("path", request.getContextPath());
-		model.addAttribute("cor", "#ffa");
 
 		// Seta a url de redirect
 		if (redirectAttributesRedirect.equals("")) {

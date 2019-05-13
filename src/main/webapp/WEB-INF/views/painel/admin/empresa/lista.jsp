@@ -44,8 +44,8 @@
               <i class="fas fa-city"></i>Empresas</a>
           </li>
           <li>
-            <a href="${path}/painel/entidades">
-              <i class="fas fa-users"></i>Entidades</a>
+            <a href="${path}/painel/empresas">
+              <i class="fas fa-users"></i>empresas</a>
           </li>
           <li>
             <a href="${path}/painel/projetos">
@@ -119,7 +119,7 @@
                 <div class="row mt-2">
                   <div class="col-12">
                     <!-- MSG DE VAZIO -->
-                    <c:if test = "${empty empresas}">
+                    <c:if test = "${empty empresas.content}">
                       <div class="alert alert-info alert-with-icon alert-dismissible fade show" data-notify="container">
                         <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
                           <i class="nc-icon nc-simple-remove"></i>
@@ -128,7 +128,51 @@
                         <span data-notify="message">Não há nenhuma empresa cadastrada</span>
                       </div>
                     </c:if>
-                    <c:if test = "${not empty empresas}">  
+                    <c:if test = "${not empty empresas.content}"> 
+                      <nav class="float-right" aria-label="Paginação de Empresas">
+                        <ul class="pagination"> 
+                          <c:choose> 
+                            <c:when test = "${empresas.totalPages == 1}">
+                              <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
+                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/empresas?page=${empresas.number}">${empresas.number + 1}</a></li>
+                              <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
+                            </c:when>
+                            <c:when test = "${(empresas.totalPages == 2) && (empresas.number + 1 < empresas.totalPages)}">
+                              <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
+                              <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/empresas?page=${empresas.number}">${empresas.number + 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.number + 1}">${empresas.number + 2}</a></li>
+                              <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
+                            </c:when>
+                            <c:when test = "${(empresas.totalPages == 2) && (empresas.number + 1 == empresas.totalPages)}">
+                              <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.number - 1}">${empresas.number}</a></li>
+                              <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/empresas?page=${empresas.number}">${empresas.number + 1}</a></li>
+                              <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
+                            </c:when>
+                            <c:when test = "${(empresas.totalPages >= 3) && (empresas.number == 0)}">
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas">Primeira</a></li>
+                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/empresas?page=${empresas.number}">${empresas.number + 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.number + 1}">${empresas.number + 2}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.number + 2}">${empresas.number + 3}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.totalPages - 1}">Última</a></li>
+                            </c:when>
+                            <c:when test = "${(empresas.totalPages >= 3) && (empresas.number > 0) && (empresas.number + 1 < empresas.totalPages)}">
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas">Primeira</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.number - 1}">${empresas.number}</a></li>
+                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/empresas?page=${empresas.number}">${empresas.number + 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.number + 1}">${empresas.number + 2}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.totalPages - 1}">Última</a></li>
+                            </c:when>
+                            <c:when test = "${(empresas.totalPages >= 3) && (empresas.number + 1 == empresas.totalPages)}">
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas">Primeira</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.number - 2}">${empresas.number - 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.number - 1}">${empresas.number}</a></li>
+                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/empresas?page=${empresas.number}">${empresas.number + 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.totalPages - 1}">Última</a></li>
+                            </c:when>
+                          </c:choose> 
+                        </ul>
+                      </nav>  
                       <div class="table-responsive">
                         <table class="table">
                           <thead class=" text-primary">
@@ -139,7 +183,7 @@
                             <th class="border text-center">Ações</th>
                           </thead>
                           <tbody>
-                            <c:forEach var="empresa" items="${empresas}">
+                            <c:forEach var="empresa" items="${empresas.content}">
                               <tr>
                                 <td class="border text-center"><img class="img-fluid rounded mx-auto d-block" src="${path}/${empresa.documentosEmpresa.logo.path}" style="max-width: 100px; max-height: 75px;"></td>
                                 <td class="border text-center">${empresa.id}</td>
