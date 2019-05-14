@@ -79,13 +79,17 @@ public class EntidadeService {
     // Exibe os dados estatísticos para buildar o charts dinamicamente
     public List<Long> buildChart() {
         final int ANO_ATUAL = GregorianCalendar.getInstance().get(Calendar.YEAR);
+        final int[] MESES = new int[]{Calendar.JANUARY, Calendar.FEBRUARY, Calendar.MARCH, Calendar.APRIL, Calendar.MAY, Calendar.JUNE, Calendar.JUNE, Calendar.AUGUST, Calendar.SEPTEMBER, Calendar.OCTOBER, Calendar.NOVEMBER, Calendar.DECEMBER};
         List<Long> array = new ArrayList<>();
+        Calendar data;
         for (int i = 0; i < 12; i++) {
+
+            data = new GregorianCalendar(ANO_ATUAL, MESES[i], 1);
             array.add(countByDataCadastroBetween(
-                    // Instancia um calendar com a primeira data do mês passado como parâmetro -> ENUM CALENDAR
-                    new GregorianCalendar(ANO_ATUAL, i, new GregorianCalendar().getMinimum(i)).getTime(),
-                    // Instancia um calendar com a última data do mês passado como parâmetro -> ENUM CALENDAR
-                    new GregorianCalendar(ANO_ATUAL, i, new GregorianCalendar().getMaximum(i)).getTime()));
+                // Instancia um calendar com a primeira data do mês passado como parâmetro -> ENUM CALENDAR
+                new GregorianCalendar(ANO_ATUAL, MESES[i], data.getMinimum(Calendar.DAY_OF_MONTH)).getTime(),
+                // Instancia um calendar com a última data do mês passado como parâmetro -> ENUM CALENDAR
+                new GregorianCalendar(ANO_ATUAL, MESES[i], data.getMaximum(Calendar.DAY_OF_MONTH)).getTime()));
         }
         return array;
     }
