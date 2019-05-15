@@ -137,24 +137,4 @@ login_btn:hover{
 	background-color: #00bbff;
 }
 
-.shape{
-	position: absolute;
-	bottom: 0px;
-	left: 0px;
-	width: 500px;
-	z-index: -9;
-}
-
-.shape1{
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-.shape2{
-	position: fixed;
-	bottom: 0;
-	right: 0;
-	top: 0;
-	width: 500px;
-}
 

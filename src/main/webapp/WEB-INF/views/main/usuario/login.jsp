@@ -35,8 +35,6 @@
 <body class="bg-blue">
 
 <div class="container h-100">
-    <img class="shape" src="${path}/assets/img/shape1.png" alt="">
-    <img class="shape2" src="${path}/assets/img/shape2.png" alt="">
 
     <div class="d-flex justify-content-center h-100">
         <div class="login_card">
