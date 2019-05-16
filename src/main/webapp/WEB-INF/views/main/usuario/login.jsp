@@ -80,11 +80,11 @@
     </div>
 </div>
 <%--Logo Yaba canto inferios esquerdo--%>
-<div class="footer-yaba bg-white rounded-circle">
+<div class="footer-yaba bg-white rounded-circle" style="height: 18%;">
     <img src="${path}/assets/img/LogoYaba.png" class="img-fluid">
 </div>
 <%--Logo Leroy canto inferior direito--%>
-<div class="footer-leroy bg-white rounded-circle">
+<div class="footer-leroy bg-white rounded-circle" style="height: 18%;">
     <img src="${path}/assets/img/LogoLeroy.png" class="img-fluid">
 </div>
 
