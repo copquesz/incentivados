@@ -34,10 +34,10 @@
     <link href="assets/css/style.css" rel="stylesheet"/>
     <link rel="stylesheet" href="${path}/main/css/normalize.css">
 </head>
-<body class="bg-blue">
 
-<div class="container h-100">
-    <div class="d-flex justify-content-center h-100">
+<body class="bg-blue">
+<div class="container justify-content-center h-100" style="position: relative">
+    <div class="d-flex justify-content-center h-100 d-inline-block">
         <div class="login_card">
             <div class="d-flex justify-content-center">
                 <div class="login_image bg-white" style="border: 1.5px solid #3ab524!important">
@@ -51,7 +51,8 @@
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-at"></i></span>
                         </div>
-                        <input type="email" name="email" class="form-control input_user" value="" placeholder="e-mail">
+                        <input type="email" name="email" class="form-control input_user" value=""
+                               placeholder="e-mail">
                     </div>
                     <div class="input-group mb-2">
                         <div class="input-group-append">
@@ -71,7 +72,7 @@
                                              class="ml-2">Cadastre-se</a>
                 </div>
                 <div class="d-flex justify-content-center links">
-                    <a hr ef="#">Esqueceu sua senha?</a>
+                    <a href="#">Esqueceu sua senha?</a>
                 </div>
             </div>
 
@@ -79,14 +80,26 @@
     </div>
 </div>
 <%--Logo Yaba canto inferios esquerdo--%>
-<div class="footer-yaba">
-    <img src="${path}/assets/img/LogoYaba.png" class="img-fluid" style="position: absolute; top: 27%;">
+<div class="footer-yaba bg-white rounded-circle">
+    <img src="${path}/assets/img/LogoYaba.png" class="img-fluid">
 </div>
 <%--Logo Leroy canto inferior direito--%>
-
-<div class="footer-leroy bg-white">
+<div class="footer-leroy bg-white rounded-circle">
     <img src="${path}/assets/img/LogoLeroy.png" class="img-fluid">
 </div>
+
+
+<%--<div style="position: relative;">--%>
+<%--    <div class="row justify-content-between" style="position:absolute; bottom:0%;">--%>
+<%--        <div class="col-4 d-flex align-items-center bg-white rounded-circle m-3" >--%>
+<%--            <img src="${path}/assets/img/LogoYaba.png" class="img-fluid" >--%>
+<%--        </div>--%>
+<%--        <div class="col-4 d-flex align-items-center bg-white rounded-circle m-3" >--%>
+<%--            <img src="${path}/assets/img/LogoLeroy.png" class="img-fluid">--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
+
 
 <!-- MODAL -->
 <c:import url="/WEB-INF/views/componentes/modal/modal-cadastro-usuario.jsp"/>
