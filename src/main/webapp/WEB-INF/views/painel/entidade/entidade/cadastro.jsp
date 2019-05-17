@@ -106,19 +106,19 @@
                                     <hr class="bg-primary">
 
                                     <div class="row mt-3">
-                                        <div class="col-12 col-sm-12 col-md-4">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Nome Fantasia:</label>
                                                 <input type="text" class="form-control" name="nomeFantasia" required>
                                             </div>
                                         </div>
-                                        <div class="col-12 col-sm-12 col-md-4">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Razao Social:</label>
                                                 <input type="text" class="form-control" name="razaoSocial" required>
                                             </div>
                                         </div>
-                                        <div class="col-12 col-sm-6 col-md-4">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>CNPJ:</label>
                                                 <input type="text" class="form-control" id="cnpj" name="cnpj"
@@ -140,7 +140,7 @@
                                     <legend class="text-primary">Endereço:</legend>
                                     <hr class="bg-primary">
                                     <div class="row mt-3">
-                                        <div class="col-8 col-sm-6 col-md-4">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>CEP:</label>
                                                 <input type="text" class="form-control" id="cep" name="endereco.cep"
@@ -149,20 +149,20 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-12 col-sm-12 col-md-6 ">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Logradouro:</label>
                                                 <input type="text" class="form-control" id="logradouro"
                                                        name="endereco.logradouro" required>
                                             </div>
                                         </div>
-                                        <div class="col-5 col-sm-2 col-md-2">
+                                        <div class="col-md-2">
                                             <div class="form-group">
                                                 <label>Nº:</label>
                                                 <input type="text" class="form-control" name="endereco.numero" required>
                                             </div>
                                         </div>
-                                        <div class="col-sm-10 col-md-4">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Complemento:</label>
                                                 <input type="text" class="form-control" name="endereco.complemento">

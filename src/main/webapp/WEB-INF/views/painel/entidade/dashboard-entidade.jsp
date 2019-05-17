@@ -96,16 +96,16 @@
         </nav> 
         <div class="content">
             <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="col-md-4">
                     <div class="card card-stats">
                         <div class="card-body ">
                             <div class="row">
-                                <div class="col-5 col-md-4">
+                                <div class="col-md-4">
                                     <div class="icon-big text-center icon-warning">
                                         <i class="far fa-address-card text-info"></i>
                                     </div>
                                 </div>
-                                <div class="col-7 col-md-8">
+                                <div class="col-md-8">
                                     <div class="numbers">
                                         <p class="card-category">Entidades</p>
                                         <p class="card-title">${qtdEntidades}<p>
@@ -118,16 +118,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="col-md-4">
                     <div class="card card-stats">
                         <div class="card-body ">
                             <div class="row">
-                                <div class="col-5 col-md-4">
+                                <div class="col-md-4">
                                     <div class="icon-big text-center icon-warning">
                                         <i class="fas fa-project-diagram text-info"></i>
                                     </div>
                                 </div>
-                                <div class="col-7 col-md-8">
+                                <div class="col-md-8">
                                     <div class="numbers">
                                         <p class="card-category">Projetos</p>
                                         <p class="card-title">${qtdProjetos}<p>
@@ -140,16 +140,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="col-md-4">
                     <div class="card card-stats">
                         <div class="card-body ">
                             <div class="row">
-                                <div class="col-5 col-md-4">
+                                <div class="col-md-4">
                                     <div class="icon-big text-center icon-warning">
                                         <i class="fas fa-hand-holding-heart text-info"></i>
                                     </div>
                                 </div>
-                                <div class="col-7 col-md-8">
+                                <div class="col-md-8">
                                     <div class="numbers">
                                         <p class="card-category">Pedidos</p>
                                         <p class="card-title">${qtdPedidos}<p>

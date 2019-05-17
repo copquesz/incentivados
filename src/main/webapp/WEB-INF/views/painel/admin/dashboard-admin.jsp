@@ -237,9 +237,9 @@
                 </ul>
                 <div class="tab-content" id="myTabContent">
                   <div class="tab-pane fade show active" id="entidades" role="tabpanel" aria-labelledby="entidades-tab"> 
-                    <c:if test = "${empty entidades}">
+                    <c:if test = "${empty entidades.content}">
                       <div class="alert alert-info" role="alert">
-                        <p class="text-bold">Não há registro(s) ou .</p>
+                        <p class="text-bold">Não há entidade(s) cadastrada(s).</p>
                       </div>
                     </c:if>      
                     <c:if test = "${not empty entidades.content}">              
@@ -271,9 +271,9 @@
                     </c:if>          
                   </div>
                   <div class="tab-pane fade" id="projetos" role="tabpanel" aria-labelledby="projetos-tab">
-                    <c:if test = "${empty projetos}">
+                    <c:if test = "${empty projetos.content}">
                       <div class="alert alert-info mt-3" role="alert">
-                        <p class="text-bold">Não há registro(s) ou .</p>
+                        <p class="text-bold">Não há projeto(s) cadastrado(s).</p>
                       </div>
                     </c:if>
                     <c:if test = "${not empty projetos.content}"> 
