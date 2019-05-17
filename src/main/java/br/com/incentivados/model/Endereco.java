@@ -35,4 +35,5 @@ public class Endereco implements Serializable {
 	private String estado;
 
 	private String cep;
+
 }

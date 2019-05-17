@@ -38,7 +38,10 @@
             <a href="${path}/painel/dashboard"><i class="fas fa-desktop"></i>Painel Principal</a>
           </li>
           <li class="active">
-            <a href="${path}/painel/${usuario.empresa.id}/analistas"><i class="fas fa-desktop"></i>Analistas</a>
+            <a href="${path}/painel/${usuario.empresa.id}/analistas"><i class="fas fa-users"></i>Analistas</a>
+          </li>
+          <li>
+            <a href="${path}/painel/pedidos?filtro=TODOS"><i class="fas fa-praying-hands"></i>Pedidos</a>
           </li>
         </ul>
       </div>
@@ -85,8 +88,8 @@
             <div class="card">
               <div class="card-header bg-danger"><h4 class="card-title text-white bold"><i class="far fa-thumbs-down fa-2x"></i> Falha!</h4><hr></div>              
               <div class="card-body bg-danger">
-                <p class="text-white"><span class="bold">Ocorreu um erro inesperado. Tente novamente.</p>
-                   <p class="text-white"><span class="bold">Erro: ${erro}</p>
+                <p class="text-white"><span class="bold">Ocorreu um erro inesperado. Tente novamente.</span></p>
+                <p class="text-white"><span class="bold">Erro: ${erro}</span></p>
                 <p><a href="${path}/painel/dashboard" class="btn btn-warning rounded"><i class="fas fa-angle-double-left"></i> Voltar</a></p>
               </div>
               <div class="card-footer bg-danger"></div>

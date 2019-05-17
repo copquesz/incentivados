@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import br.com.incentivados.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -59,18 +60,23 @@ public class PedidoService {
         return pedidoRepository.findAll();
     }
 
+    // Serviço de busca todos PEDIDOS
+    public Page<Pedido> findAll(Pageable page) {
+        return pedidoRepository.findAll(page);
+    }
+
+    // Serviço de buscar PEDIDO pelo USUARIO
+    public Page<Pedido> findAllByUsuario(Usuario usuario, Pageable page) {
+        return pedidoRepository.findAllByUsuario(usuario, page);
+    }
+
     // Serviço de busca todos PEDIDOS por STATUS
     public List<Pedido> findAllByStatus(StatusPedido status, Pageable page) {
         return pedidoRepository.findAllByStatus(status, page);
     }
 
-    // Serviço de buscar PEDIDO pelo USUARIO
-    public List<Pedido> findAllByUsuario(Usuario usuario, Pageable page) {
-        return pedidoRepository.findAllByUsuario(usuario);
-    }
-
     // Serviço de busca todos PEDIDOS pela EMPRESA
-    public List<Pedido> findAllByEmpresa(Empresa empresa, Pageable page){
+    public Page<Pedido> findAllByEmpresa(Empresa empresa, Pageable page){
         return pedidoRepository.findAllByEmpresa(empresa, page);
     }
 
@@ -87,6 +93,47 @@ public class PedidoService {
     // Serviço de buscar PEDIDO pelo USUARIO e STATUS
     public List<Pedido> findAllByAnalistaAndStatus(Usuario analista, StatusPedido status, Pageable page) {
         return pedidoRepository.findAllByAnalistaAndStatus(analista, status, page);
+    }
+
+
+    // Serviço de buscar PEDIDO por EMPRESA e BAIRRO
+    public Page<Pedido> findAllByEmpresaAndBairro(Empresa empresa, String key, Pageable page) {
+        return pedidoRepository.findAllByEmpresaAndBairro(empresa, key, page);
+    }
+
+    // Serviço de buscar PEDIDO por EMPRESA e CIDADE
+    public Page<Pedido> findAllByEmpresaAndCidade(Empresa empresa, String key, Pageable page) {
+        return pedidoRepository.findAllByEmpresaAndCidade(empresa, key, page);
+    }
+
+    // Serviço de buscar PEDIDO por EMPRESA e ESTADO
+    public Page<Pedido> findAllByEmpresaAndEstado(Empresa empresa, String key, Pageable page) {
+        return pedidoRepository.findAllByEmpresaAndEstado(empresa, key, page);
+    }
+
+    // Serviço de buscar PEDIDO por EMPRESA e ENTIDADE
+    public Page<Pedido> findAllByEmpresaAndEntidade(Empresa empresa, String key, Pageable page) {
+        return pedidoRepository.findAllByEmpresaAndEntidade(empresa, key, page);
+    }
+
+    // Serviço de buscar PEDIDO por EMPRESA, STATUS e BAIRRO
+    public List<Pedido> findAllByEmpresaAndStatusAndBairro(Empresa empresa, StatusPedido status, String key, Pageable page) {
+        return pedidoRepository.findAllByEmpresaAndStatusAndBairro(empresa, status, key, page);
+    }
+
+    // Serviço de buscar PEDIDO por EMPRESA, STATUS e CIDADE
+    public List<Pedido> findAllByEmpresaAndStatusAndCidade(Empresa empresa, StatusPedido status, String key, Pageable page) {
+        return pedidoRepository.findAllByEmpresaAndStatusAndCidade(empresa, status, key, page);
+    }
+
+    // Serviço de buscar PEDIDO por EMPRESA, STATUS e ESTADO
+    public List<Pedido> findAllByEmpresaAndStatusAndEstado(Empresa empresa, StatusPedido status, String key, Pageable page) {
+        return pedidoRepository.findAllByEmpresaAndStatusAndEstado(empresa, status, key, page);
+    }
+
+    // Serviço de buscar PEDIDO por EMPRESA, STATUS e ENTIDADE
+    public List<Pedido> findAllByEmpresaAndStatusAndEntidade(Empresa empresa, StatusPedido status, String key, Pageable page) {
+        return pedidoRepository.findAllByEmpresaAndStatusAndEntidade(empresa, status, key, page);
     }
 
     // Serviço que contabiliza todos os PEDIDOS
@@ -123,6 +170,28 @@ public class PedidoService {
     public Long countByAnalistaAndStatus(Usuario analista, StatusPedido status) {
         return pedidoRepository.countByAnalistaAndStatus(analista, status);
     }
+
+    // Serviço que contabiliza todos os PEDIDOS por EMPRESA e BAIRRO
+    public Long countByEmpresaAndBairro(Empresa empresa, String key){
+        return pedidoRepository.countByEmpresaAndBairro(empresa, key);
+    }
+
+    // Serviço que contabiliza todos os PEDIDOS por EMPRESA e CIDADE
+    public Long countByEmpresaAndCidade(Empresa empresa, String key){
+        return pedidoRepository.countByEmpresaAndCidade(empresa, key);
+    }
+
+    // Serviço que contabiliza todos os PEDIDOS por EMPRESA e ESTADO
+    public Long countByEmpresaAndEstado(Empresa empresa, String key){
+        return pedidoRepository.countByEmpresaAndEstado(empresa, key);
+    }
+
+    // Serviço que contabiliza todos os PEDIDOS por EMPRESA e ENTIDADE
+    public Long countByEmpresaAndEntidade(Empresa empresa, String key){
+        return pedidoRepository.countByEmpresaAndEntidade(empresa, key);
+    }
+
+
 
     private Pedido uploadDocumentos(Pedido pedido, HttpServletRequest request) {
 

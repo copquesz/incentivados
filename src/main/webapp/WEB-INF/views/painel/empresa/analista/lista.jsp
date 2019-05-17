@@ -39,7 +39,10 @@
             <a href="${path}/painel/dashboard"><i class="fas fa-desktop"></i>Painel Principal</a>
           </li>
           <li class="active">
-            <a href="${path}/painel/${usuario.empresa.id}/analistas"><i class="fas fa-desktop"></i>Analistas</a>
+            <a href="${path}/painel/${usuario.empresa.id}/analistas"><i class="fas fa-users"></i>Analistas</a>
+          </li>
+          <li>
+            <a href="${path}/painel/pedidos?filtro=TODOS"><i class="fas fa-praying-hands"></i>Pedidos</a>
           </li>
         </ul>
       </div>
@@ -88,10 +91,10 @@
                 <h5 class="card-title">Analistas Cadastrado(s): ${qtdPedidos}</h5>
                 <div class="d-flex justify-content-start">
                   <div class="row">
-                    <div class="col-12">
-                      <form class="form-inline">                                          
+                    <div class="col-12">                      
+                      <form class="form-inline">
                         <div class="form-group mx-sm-3 mb-2">
-                          <input type="text" class="form-control" placeholder="Pesquisar por.." name="n">
+                          <input class="form-control" type="text" name="key" id="key" placeholder="palavra-chave" />
                         </div>
                         <div class="form-group mb-2">
                           <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>
@@ -131,7 +134,7 @@
                                 <td class="border text-center">${analista.tipoUsuario.descricao}</td>
                                 <td class="border text-center">${analista.cpf}</td>
                                 <td class="border text-center">${analista.email}</td>
-                                <td class="border text-center">${analista.endereco.bairro} (${analista.endereco.cidade} / ${analista.endereco.estado})</td>
+                                <td class="border text-center" title="Cidade: ${analista.endereco.cidade} / Estado: ${analista.endereco.estado}"> ${analista.endereco.bairro}</td>
                               </tr>
                             </c:forEach>
                           </tbody>

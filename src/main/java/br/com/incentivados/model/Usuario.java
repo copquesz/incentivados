@@ -59,6 +59,5 @@ public class Usuario implements Serializable {
 		super();
 		this.dataCadastro = new Date();
 	}
-	
-	
+
 }

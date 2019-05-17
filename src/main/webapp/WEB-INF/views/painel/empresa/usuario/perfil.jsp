@@ -39,7 +39,10 @@
             <a href="${path}/painel/dashboard"><i class="fas fa-desktop"></i>Painel Principal</a>
           </li>
           <li>
-            <a href="${path}/painel/${usuario.empresa.id}/analistas"><i class="fas fa-desktop"></i>Analistas</a>
+            <a href="${path}/painel/${usuario.empresa.id}/analistas"><i class="fas fa-users"></i>Analistas</a>
+          </li>
+          <li>
+            <a href="${path}/painel/pedidos?filtro=TODOS"><i class="fas fa-praying-hands"></i>Pedidos</a>
           </li>
         </ul>
       </div>
@@ -56,7 +59,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <b><a class="navbar-brand" href="#">Meus Dados</b>
+            <b><a class="navbar-brand" href="#">Meus Dados</a></b>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>

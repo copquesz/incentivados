@@ -39,7 +39,10 @@
             <a href="${path}/painel/dashboard"><i class="fas fa-desktop"></i>Painel Principal</a>
           </li>
           <li>
-            <a href="${path}/painel/${usuario.empresa.id}/analistas"><i class="fas fa-desktop"></i>Analistas</a>
+            <a href="${path}/painel/${usuario.empresa.id}/analistas"><i class="fas fa-users"></i>Analistas</a>
+          </li>
+          <li>
+            <a href="${path}/painel/pedidos"><i class="fas fa-praying-hands"></i>Pedidos</a>
           </li>
         </ul>
       </div>
@@ -139,12 +142,12 @@
                           <div class="table-responsive pr-3">
                             <table class="table border">
                               <thead class=" text-primary">
-                                <th class="text-center">Código Pedido</th>
-                                <th class="text-center">Data Solicitação</th>
-                                <th class="text-center">Entidade</th>
-                                <th class="text-center">Empresa</th>
-                                <th class="text-center">Loja</th>
-                                <th class="text-center">Carta Ofício</th>
+                                <th class="text-center border">Código Pedido</th>
+                                <th class="text-center border">Data Solicitação</th>
+                                <th class="text-center border">Entidade</th>
+                                <th class="text-center border">Empresa</th>
+                                <th class="text-center border">Loja</th>
+                                <th class="text-center border">Carta Ofício</th>
                                 <th class="text-center"></th>
                               </thead>
                               <tbody>
@@ -152,12 +155,12 @@
                                   <tr>
                                     <td class="text-center">${pedidoPendente.id}</td>
                                     <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoPendente.dataCadastro}" var="dataCadastro" />
-                                    <td class="text-center">${dataCadastro}</td>
-                                    <td class="text-center">${pedidoPendente.entidade.nomeFantasia}</td>
-                                    <td class="text-center">${pedidoPendente.empresa.nomeFantasia}</td>
-                                    <td class="text-center">${pedidoPendente.analista.endereco.bairro} - ${pedidoPendente.analista.endereco.cidade} / ${pedidoPendente.analista.endereco.estado}</td>
-                                    <td class="text-center"><a href="${path}/${pedidoPendente.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td> 
-                                    <td class="text-center"><a class="btn btn-success btn-sm" href="${path}/painel/pedido/${pedidoPendente.id}" title="Avaliar"><i class="fas fa-sign-in-alt"></i></a></td>
+                                    <td class="text-center border">${dataCadastro}</td>
+                                    <td class="text-center border">${pedidoPendente.entidade.nomeFantasia}</td>
+                                    <td class="text-center border">${pedidoPendente.empresa.nomeFantasia}</td>
+                                    <td class="text-center border">${pedidoPendente.analista.endereco.bairro} - ${pedidoPendente.analista.endereco.cidade} / ${pedidoPendente.analista.endereco.estado}</td>
+                                    <td class="text-center border"><a href="${path}/${pedidoPendente.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td> 
+                                    <td class="text-center border"><a class="btn btn-success btn-sm" href="${path}/painel/pedido/${pedidoPendente.id}" title="Avaliar"><i class="fas fa-sign-in-alt"></i></a></td>
                                   </tr>
                                 </c:forEach>
                               </tbody>

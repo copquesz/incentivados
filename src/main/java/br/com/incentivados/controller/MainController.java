@@ -20,10 +20,8 @@ public class MainController {
 	public String main(HttpServletRequest request, Model model) {
 
 		model.addAttribute("path", request.getContextPath());
-
-		model.addAttribute("cor", "#000;");
 		
-		return "main/index";
+		return "redirect:/login";
 	}
 
 }

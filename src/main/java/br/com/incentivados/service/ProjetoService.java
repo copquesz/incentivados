@@ -28,7 +28,6 @@ public class ProjetoService {
 	public Projeto save(Projeto projeto, Usuario usuario, HttpServletRequest request) {
 
 		projeto.setUsuario(usuario);
-
 		projeto = uploadDocumentos(request, projeto);
 
 		return projetoRepository.save(projeto);

@@ -38,7 +38,10 @@
             <a href="${path}/painel/dashboard"><i class="fas fa-desktop"></i>Painel Principal</a>
           </li>
           <li class="active">
-            <a href="${path}/painel/${usuario.empresa.id}/analistas"><i class="fas fa-desktop"></i>Analistas</a>
+            <a href="${path}/painel/${usuario.empresa.id}/analistas"><i class="fas fa-users"></i>Analistas</a>
+          </li>
+          <li>
+            <a href="${path}/painel/pedidos?filtro=TODOS"><i class="fas fa-praying-hands"></i>Pedidos</a>
           </li>
         </ul>
       </div>
