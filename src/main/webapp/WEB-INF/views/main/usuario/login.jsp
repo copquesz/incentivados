@@ -36,11 +36,19 @@
 </head>
 
 <body class="bg-blue">
+<div>
+    <div class="row justify-content-end" style="position:absolute; bottom:0; right: 0">
+        <div class="col-xl-9 bg-white rounded-circle mb-3 mr-4" style="max-width: 150px; min-height: 150px">
+            <img src="${path}/assets/img/LogoLeroy.png" class="img-fluid pb-3 pr-4 " style="max-width: 150px; min-height: 150px" >
+        </div>
+    </div>
+</div>
 <div class="container justify-content-center h-100" style="position: relative">
+
     <div class="d-flex justify-content-center h-100 d-inline-block">
         <div class="login_card">
             <div class="d-flex justify-content-center">
-                <div class="login_image bg-white" style="border: 1.5px solid #3ab524!important">
+                <div class="login_image bg-white rounded-circle" style="border: 1.5px solid #3ab524!important">
                     <img src="${path}/assets/img/usuario.jpg" class="login_user_image img-fluid" alt="Logo">
                 </div>
             </div>
@@ -75,18 +83,19 @@
                     <a href="#">Esqueceu sua senha?</a>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
+
+
 <%--Logo Yaba canto inferios esquerdo--%>
-<div class="footer-yaba bg-white rounded-circle" style="height: 18%;">
-    <img src="${path}/assets/img/LogoYaba.png" class="img-fluid">
-</div>
-<%--Logo Leroy canto inferior direito--%>
-<div class="footer-leroy bg-white rounded-circle" style="height: 18%;">
-    <img src="${path}/assets/img/LogoLeroy.png" class="img-fluid">
-</div>
+<%--<div class="footer-yaba rounded-circle" style="height: 18%;">--%>
+<%--    <img src="${path}/assets/img/LogoYaba.png" class="img-fluid">--%>
+<%--</div>--%>
+<%--&lt;%&ndash;Logo Leroy canto inferior direito&ndash;%&gt;--%>
+<%--<div class="footer-leroy bg-white rounded-circle" style="height: 18%;">--%>
+<%--    <img src="${path}/assets/img/LogoLeroy.png" class="img-fluid">--%>
+<%--</div>--%>
 
 
 <%--<div style="position: relative;">--%>
