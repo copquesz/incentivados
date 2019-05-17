@@ -158,7 +158,7 @@
                   </c:if>                 
                   <c:if test = "${not empty empresa.responsaveis}">
                     <div class="col-md-12">
-                      <div class="table-responsive">
+                      <div class="table-responsive-sm">
                         <table class="table">
                           <thead class=" text-primary">
                             <th class="border text-center">Nível</th>
@@ -183,7 +183,7 @@
                                 <td class="border text-center">${analista.nome} ${analista.sobrenome}</td>
                                 <td class="border text-center">${analista.cpf}</td>
                                 <td class="border text-center">${analista.email}</td>
-                                <td class="border text-center">${analista.endereco.bairro} (${analista.endereco.cidade} / ${analista.endereco.estado})</td>
+                                <td class="text-center border" title="Cidade: ${analista.endereco.cidade} / Estado: ${analista.endereco.estado}"> ${analista.endereco.bairro}</td>
                               </tr>
                             </c:forEach>
                           </tbody>

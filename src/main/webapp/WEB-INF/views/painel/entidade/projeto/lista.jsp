@@ -117,14 +117,14 @@
                 <div class="row mt-2">
                   <div class="col-12">
                     <!-- MSG CASO LISTA ESTEJA VAZIA -->
-                    <c:if test = "${empty projetos.content}">
-                      <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
-                        <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-                          <i class="nc-icon nc-simple-remove"></i>
-                        </button>
-                        <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
-                        <span data-notify="message">Não há nenhum projeto cadastrado</span>
-                      </div>
+                    <c:if test="${empty projetos.content}">
+                        <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
+                            <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                                <i class="nc-icon nc-simple-remove"></i>
+                            </button>
+                            <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
+                            <span data-notify="message">Não há projeto(s) cadastrado(s).</span>
+                        </div>
                     </c:if>
                     <!-- EXIBE A LISTA DE PROJETOS -->
                     <c:if test="${not empty projetos.content}">

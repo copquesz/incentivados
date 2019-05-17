@@ -24,8 +24,7 @@
 /.nb-gradle/
 /build/
 
-### Configuração do Spring boot ###
-application.properties
 
 ### Ignorar Documentos ###
 /src/main/webapp/documentos/
+/src/main/resources/application.properties

@@ -116,14 +116,14 @@
                 <div class="row mt-2">
                   <div class="col-12">
                     <!-- MSG DE VAZIO -->
-                    <c:if test = "${empty entidades.content}">
-                      <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
-                        <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-                          <i class="nc-icon nc-simple-remove"></i>
-                        </button>
-                        <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
-                        <span data-notify="message">Não há nenhuma entidade cadastrada</span>
-                      </div>
+                    <c:if test="${empty entidades.content}">
+                        <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
+                            <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                                <i class="nc-icon nc-simple-remove"></i>
+                            </button>
+                            <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
+                            <span data-notify="message">Não há entidade(s) cadastrada(s).</span>
+                        </div>
                     </c:if>
                     <c:if test = "${not empty entidades.content}"> 
                       <nav class="float-right" aria-label="Paginação de Entidades">
@@ -170,7 +170,7 @@
                           </c:choose> 
                         </ul>
                       </nav>  
-                      <div class="table-responsive">
+                      <div class="table-responsive-sm">
                         <table class="table">
                           <thead class=" text-primary">
                             <th class="border text-center"></th>

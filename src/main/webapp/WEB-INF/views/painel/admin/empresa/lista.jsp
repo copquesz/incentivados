@@ -173,7 +173,7 @@
                           </c:choose> 
                         </ul>
                       </nav>  
-                      <div class="table-responsive">
+                      <div class="table-responsive-sm">
                         <table class="table">
                           <thead class=" text-primary">
                             <th class="border text-center"></th>

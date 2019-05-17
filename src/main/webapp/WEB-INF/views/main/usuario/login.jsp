@@ -6,23 +6,25 @@
 <head>
     <meta charset="utf-8">
     <meta name="author" content="Yabá Consultoria">
-    <meta name="description" content="Acesse a plataforma incentivados e entre para o mundo digital que facilita o aporte financeiro através das leis de incentivo fiscal.">
+    <meta name="description"
+          content="Acesse a plataforma incentivados e entre para o mundo digital que facilita o aporte financeiro através das leis de incentivo fiscal.">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Metas OG -->
-    <meta property="og:title" content="Login Plataforma Incentivados" />
-    <meta property="og:description" content="Acesse a plataforma incentivados e entre para o mundo digital que facilita o aporte financeiro através das leis de incentivo fiscal." />
-    <meta property="og:image" content="http://www.incentivados.com.br/main/images/logoIncentivadoscolor.png" />
-    <meta property="og:url" content="http://www.incentivados.com.br/login" />
+    <meta property="og:title" content="Login Plataforma Incentivados"/>
+    <meta property="og:description"
+          content="Acesse a plataforma incentivados e entre para o mundo digital que facilita o aporte financeiro através das leis de incentivo fiscal."/>
+    <meta property="og:image" content="http://www.incentivados.com.br/main/images/logoIncentivadoscolor.png"/>
+    <meta property="og:url" content="http://www.incentivados.com.br/login"/>
 
     <title>
         Incentivados - Login
     </title>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <link rel="apple-touch-icon" sizes="76x76" href="${path}/assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
@@ -35,9 +37,6 @@
 <body class="bg-blue">
 
 <div class="container h-100">
-    <img class="shape" src="${path}/assets/img/shape1.png" alt="">
-    <img class="shape2" src="${path}/assets/img/shape2.png" alt="">
-
     <div class="d-flex justify-content-center h-100">
         <div class="login_card">
             <div class="d-flex justify-content-center">
@@ -80,6 +79,7 @@
     </div>
 </div>
 <%--Logo Leroy canto inferior direito--%>
+
 <div class="footer-leroy bg-white">
     <img src="${path}/assets/img/LogoLeroy.png" class="img-fluid">
 </div>
@@ -102,7 +102,6 @@
 <!-- CUSTOM SCRIPT -->
 <script type="text/javascript" src="assets/js/cpf-validator.js"></script>
 <script type="text/javascript" src="assets/js/script.js"></script>
-<
 <c:if test="${acessoNegado}">
     <script type="text/javascript">
         $(document).ready(function () {

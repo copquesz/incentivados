@@ -167,11 +167,19 @@
                 <div class="col-md-12">
                     <div class="card ">
                         <div class="card-header ">
-                            <c:if test="${cadastroProjeto}">
-                                <a href="${path}/painel/projetos/cadastro" class="btn btn-primary float-right"><i class="fas fa-plus mr-2"></i> Cadastrar Projeto</a>
-                            </c:if>
-                            <a href="${path}/painel/entidades/cadastro" class="btn btn-primary float-right"><i class="fas fa-plus mr-2"></i> Cadastrar Entidade</a>
-                            <h5 class="card-title">Meus Cadastros</h5>
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 class="card-title">Meus Cadastros</h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <c:if test="${cadastroProjeto}">
+                                        <a href="${path}/painel/projetos/cadastro" class="btn btn-primary float-right"><i class="fas fa-plus mr-2"></i> Cadastrar Projeto</a>
+                                    </c:if>
+                                    <a href="${path}/painel/entidades/cadastro" class="btn btn-primary float-right"><i class="fas fa-plus mr-2"></i> Cadastrar Entidade</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body ">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -185,35 +193,35 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="entidades" role="tabpanel"
                                      aria-labelledby="entidades-tab">
-                                    <c:if test="${empty entidades}">
+                                    <c:if test="${empty entidades.content}">
                                         <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
                                             <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
                                                 <i class="nc-icon nc-simple-remove"></i>
                                             </button>
                                             <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
-                                            <span data-notify="message">Não há nenhuma entidade cadastrada</span>
+                                            <span data-notify="message">Não há entidade(s) cadastrada(s).</span>
                                         </div>
                                     </c:if>
-                                    <c:if test="${not empty entidades}">
-                                        <div class="table-responsive">
+                                    <c:if test="${not empty entidades.content}">
+                                        <div class="table-responsive-sm">
                                             <table class="table">
                                                 <thead class=" text-primary">
-                                                <th></th>
-                                                <th>Data Cadastro</th>
-                                                <th>Nome Fantasia</th>
-                                                <th>CNPJ</th>
-                                                <th></th>
+                                                <th class="border-left border-right"></th>
+                                                <th class="text-center border-left border-right">Data Cadastro</th>
+                                                <th class="text-center border-left border-right">Nome Fantasia</th>
+                                                <th class="text-center border-left border-right">CNPJ</th>
+                                                <th class="text-center border-left border-right">Ações</th>
                                                 </thead>
                                                 <tbody>
                                                     <c:forEach var="entidade" items="${entidades.content}">
                                                         <tr>
-                                                            <td class="text-center"><img class="logo-entidade" src="${path}/${entidade.documentosEntidade.logo.path}">
+                                                            <td class="text-center border"><img class="logo-entidade" src="${path}/${entidade.documentosEntidade.logo.path}">
                                                             </td>
                                                             <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${entidade.dataCadastro}" var="dataCadastro"/>
-                                                            <td>${dataCadastro}</td>
-                                                            <td>${entidade.nomeFantasia}</td>
-                                                            <td>${entidade.cnpj}</td>
-                                                            <td class="text-center">
+                                                            <td class="text-center border">${dataCadastro}</td>
+                                                            <td class="text-center border">${entidade.nomeFantasia}</td>
+                                                            <td class="text-center border">${entidade.cnpj}</td>
+                                                            <td class="text-center border">
                                                                 <a href="${path}/painel/entidades/${entidade.id}" class="btn btn-primary btn-circle" title="Visualizar"><i class="fas fa-file-alt"></i></a>
                                                             </td>
                                                         </tr>
@@ -230,7 +238,7 @@
                                                 <i class="nc-icon nc-simple-remove"></i>
                                             </button>
                                             <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
-                                            <span data-notify="message">Não há nenhum projeto cadastrado</span>
+                                            <span data-notify="message">Não há projeto(s) cadastrado(s).</span>
                                         </div>
                                     </c:if>
                                     <c:if test="${not empty projetos.content}">
@@ -263,36 +271,40 @@
                     <div class="card ">
                         <div class="card-header ">
                             <h5 class="card-title">Minhas Solicitações</h5>
-                            <c:if test="${empty pedidos}">
-                                <div class="alert alert-info mt-3" role="alert">
-                                    <p class="text-bold">Não há registro(s) ou .</p>
+                            <c:if test="${empty pedidos.content}">
+                                <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
+                                    <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                                        <i class="nc-icon nc-simple-remove"></i>
+                                    </button>
+                                    <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
+                                    <span data-notify="message">Não há pedido(s) cadastrado(s).</span>
                                 </div>
                             </c:if>
-                            <c:if test="${not empty pedidos}">
-                                <div class="table-responsive">
+                            <c:if test="${not empty pedidos.content}">
+                                <div class="table-responsive-sm">
                                     <table class="table">
                                         <thead class=" text-primary">
-                                        <th class="text-center">Código Pedido</th>
-                                        <th class="text-center">Data Solicitação</th>
-                                        <th class="text-center">Entidade</th>
-                                        <th class="text-center">Empresa</th>
-                                        <th class="text-center">Loja</th>
-                                        <th class="text-center">Carta Ofício</th>
-                                        <th class="text-center">Status</th>
+                                        <th class="text-center border">Código Pedido</th>
+                                        <th class="text-center border">Data Solicitação</th>
+                                        <th class="text-center border">Entidade</th>
+                                        <th class="text-center border">Empresa</th>
+                                        <th class="text-center border">Loja</th>
+                                        <th class="text-center border">Carta Ofício</th>
+                                        <th class="text-center border">Status</th>
                                         </thead>
                                         <tbody>
-                                        <c:forEach var="pedido" items="${pedidos}">
+                                        <c:forEach var="pedido" items="${pedidos.content}">
                                             <tr>
-                                                <td class="text-center">${pedido.id}</td>
+                                                <td class="text-center border">${pedido.id}</td>
                                                 <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${pedido.dataCadastro}" var="dataCadastro"/>
-                                                <td class="text-center">${dataCadastro}</td>
-                                                <td class="text-center">${pedido.entidade.nomeFantasia}</td>
-                                                <td class="text-center">${pedido.empresa.nomeFantasia}</td>
-                                                <td class="text-center">${pedido.analista.endereco.bairro} - ${pedido.analista.endereco.cidade} / ${pedido.analista.endereco.estado}</td>
+                                                <td class="text-center border">${dataCadastro}</td>
+                                                <td class="text-center border">${pedido.entidade.nomeFantasia}</td>
+                                                <td class="text-center border">${pedido.empresa.nomeFantasia}</td>
+                                                <td class="text-center border" title="Cidade: ${pedido.analista.endereco.cidade} / Estado: ${pedido.analista.endereco.estado}"> ${pedido.analista.endereco.bairro}</td>
                                                 <td class="text-center">
                                                     <a href="${path}/${pedido.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a>
                                                 </td>
-                                                <th class="text-center">
+                                                <th class="text-center border">
                                                     <c:if test="${pedido.status.id == 0}">
                                                         <span class="bg-warning p-1 text-white">${pedido.status}</span>
                                                     </c:if>

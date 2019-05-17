@@ -166,7 +166,7 @@
                           </c:choose> 
                         </ul>
                       </nav> 
-                      <div class="table-responsive">
+                      <div class="table-responsive-sm">
                         <table class="table border">
                           <thead class=" text-primary">
                             <th class="text-center border">Código Pedido</th>

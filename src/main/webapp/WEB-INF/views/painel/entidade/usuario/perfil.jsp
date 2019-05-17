@@ -37,7 +37,7 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="active">
+          <li>
             <a href="${path}/painel/dashboard">
               <i class="fas fa-desktop"></i>Painel Principal
             </a>
@@ -101,19 +101,19 @@
                 <fieldset class="mt-3 mt-3">
                 <legend><i class="far fa-user"></i> Informações Gerais:</legend>
                 <div class="row">               
-                  <div class="col-4">
+                  <div class="col-lg-4">
                     <div class="form-group">
                         <label>Nome:</label>
                         <input type="text" class="form-control" value="${usuario.nome}" readonly>
                     </div>
                   </div>
-                  <div class="col-4">
+                  <div class="col-lg-4">
                     <div class="form-group">
                         <label>Sobrenome:</label>
                         <input type="text" class="form-control" value="${usuario.sobrenome}" readonly>
                     </div>
                   </div>
-                  <div class="col-4">
+                  <div class="col-lg-4">
                     <div class="form-group">
                         <label>CPF:</label>
                         <input type="text" class="form-control" value="${usuario.cpf}" readonly>
@@ -121,19 +121,19 @@
                   </div>              
                 </div>
                 <div class="row">
-                  <div class="col-4">
+                  <div class="col-lg-4">
                     <div class="form-group">
                         <label>E-mail:</label>
                         <input type="email" class="form-control" value="${usuario.email}" readonly>
                     </div>
                   </div>
-                  <div class="col-4">
+                  <div class="col-lg-4">
                     <div class="form-group">
                         <label>Tipo de Usuário:</label>
                         <input type="email" class="form-control" value="${usuario.tipoUsuario.descricao}" readonly>
                     </div>
                   </div>
-                  <div class="col-4">
+                  <div class="col-lg-4">
                     <div class="form-group">
                         <label>Telefone:</label>
                         <input type="text" class="form-control" value="${usuario.telefone}" readonly>
@@ -145,7 +145,7 @@
                 <fieldset class="mt-3 mt-3">
                 <legend><i class="fas fa-map-marker-alt"></i> Endereço:</legend>
                 <div class="row">
-                  <div class="col-4">
+                  <div class="col-lg-4">
                     <div class="form-group">
                         <label>CEP:</label>                     
                         <input type="text" class="form-control" value="${usuario.endereco.cep}" readonly>
@@ -153,19 +153,19 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-7">
+                  <div class="col-lg-7">
                     <div class="form-group">
                         <label>Logradouro:</label>                      
                         <input type="text" class="form-control" value="${usuario.endereco.logradouro}" readonly>
                     </div>
                   </div>
-                  <div class="col-2">
+                  <div class="col-lg-2">
                     <div class="form-group">
                         <label>Nº:</label>                      
                         <input type="text" class="form-control" value="${usuario.endereco.numero}" readonly>
                     </div>
                   </div>
-                  <div class="col-3">
+                  <div class="col-lg-3">
                     <div class="form-group">
                         <label>Complemento:</label>                     
                         <input type="text" class="form-control" value="${usuario.endereco.complemento}" placeholder="Não Informado" readonly>
@@ -173,19 +173,19 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-4">
+                  <div class="col-lg-4">
                     <div class="form-group">
                         <label>Bairro:</label>                      
                         <input type="text" class="form-control" id="bairro" value="${usuario.endereco.bairro}" readonly >
                     </div>
                   </div>
-                  <div class="col-4">
+                  <div class="col-lg-4">
                     <div class="form-group">
                         <label>Cidade</label>                     
                         <input type="text" class="form-control" id="cidade" value="${usuario.endereco.cidade}" readonly>
                     </div>
                   </div>
-                  <div class="col-4">
+                  <div class="col-lg-4">
                     <div class="form-group">
                         <label>Estado:</label>                      
                         <input type="text" class="form-control" id="estado" value="${usuario.endereco.estado}" readonly>

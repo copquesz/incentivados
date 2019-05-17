@@ -118,7 +118,7 @@
                       </div>                      
                     </c:if>                 
                     <c:if test = "${not empty usuario.empresa.analistas}">                      
-                      <div class="table-responsive">
+                      <div class="table-responsive-sm">
                         <table class="table">
                           <thead class=" text-primary">
                             <th class="border text-center">Nome</th>
