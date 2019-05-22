@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-@ToString
 @Setter
 @Getter
 @Entity
@@ -26,6 +25,9 @@ public class Projeto implements Serializable{
 	private Date dataCadastro;
 	
 	private String titulo;
+
+	@Column(name = "prazo_captacao")
+	private String prazoCaptacao;
 	
 	@Column(name = "valor_solicitado")
 	private String valorSolicitado;

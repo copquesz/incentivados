@@ -20,9 +20,16 @@
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <!--     BOOTSTRAP     -->
     <link href="${path}/assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css" rel="stylesheet">
     <!--     CUSTOM     -->
     <link href="${path}/assets/css/paper-dashboard.css?v=2.0.0" rel="stylesheet"/>
     <link href="${path}/assets/css/style.css" rel="stylesheet"/>
+    <style type="text/css">
+      .btn-select, .btn-select:hover{
+        background-color: #badc58; 
+        color: #fff;
+      }
+    </style>
 </head>
 
 <body class="">
@@ -160,7 +167,7 @@
                                 <legend class="text-primary">Informações Gerais:</legend>
                                 <hr class="bg-primary">
                                 <div class="row mt-3">
-                                    <div class="col-12 col-md-4">
+                                    <div class="col-12 col-md-3">
                                         <div class="form-group">
                                             <label>Data/Hora Cadastro:</label>
                                             <fmt:formatDate type="both" dateStyle="short" timeStyle="short"
@@ -168,7 +175,13 @@
                                             <input type="text" class="form-control" value="${dataCadastro}" readonly>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-8">
+                                    <div class="col-12 col-md-3">
+                                        <div class="form-group">
+                                            <label>Prazo de Captação:</label>
+                                            <input type="text" class="form-control" value="${projeto.prazoCaptacao}" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label>Entidade Executora:</label>
                                             <input type="text" class="form-control"
@@ -255,13 +268,18 @@
                                 </div>
                             </fieldset>
                         </div>
-                        <div class="card-footer bg-primary"></div>
+                        <div class="card-footer">
+                          <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modal-indicacao" data-id="${projeto.id}">
+                            Indicar Projeto
+                          </button>
+                        </div>
                     </div>
                 </div>
 
             </div>
         </div>
         <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp"/>
+        <c:import url="/WEB-INF/views/componentes/modal/modal-indicacao.jsp"/>
     </div>
 </div>
 
@@ -271,9 +289,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <!--   BOOTSTRAP   -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
 <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 <script type="text/javascript" src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
 <script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script>
+<script type="text/javascript">
+    $('#modal-indicacao').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var id_projeto = button.data('id') // Extract info from data-* attributes
+      // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+      // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+      var modal = $(this)
+      modal.find('#id-projeto').val(id_projeto)
+    })
+</script>
 </body>
 
 </html>

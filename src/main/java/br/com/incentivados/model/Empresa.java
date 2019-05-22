@@ -3,13 +3,16 @@ package br.com.incentivados.model;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.springframework.data.domain.Page;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
-@ToString
 @Setter
 @Getter
 @Entity
@@ -33,6 +36,9 @@ public class Empresa implements Serializable {
 
 	private String cnpj;
 
+	@Transient
+	private boolean indicacao;
+
 	@JoinColumn(name = "usuario_id")
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Usuario usuario;
@@ -54,7 +60,16 @@ public class Empresa implements Serializable {
         name = "empresa_has_analista", 
         joinColumns = { @JoinColumn(name = "empresa_id") }, 
         inverseJoinColumns = { @JoinColumn(name = "usuario_id") }
-    )	
+    )
+
 	private List<Usuario> analistas;
-	
+
+	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SUBSELECT)
+	@JoinTable(
+			name = "empresa_has_projeto",
+			joinColumns = { @JoinColumn(name = "empresa_id") },
+			inverseJoinColumns = { @JoinColumn(name = "projeto_id") }
+	)
+	private List<Projeto> projetos;
 }

@@ -193,9 +193,7 @@ public class EmpresaController {
                 Optional<Empresa> empresa = empresaService.findById(id);
 
                 if (empresa.isPresent()) {
-                    empresa.get().getResponsaveis().add(responsavel);
-                    empresaService.update(empresa.get());
-                    usuarioService.setEmpresa(responsavel, empresa.get());
+                    empresaService.adicionaResponsavel(empresa.get(), responsavel);
                     return "painel/admin/empresa/responsavel/cadastro-responsavel-sucesso";
                 } else {
                     return "painel/admin/empresa/responsavel/cadastro-responsavel-falha";
@@ -309,8 +307,9 @@ public class EmpresaController {
 
                         // Atribui o analista para a lista da empresa
                         Optional<Empresa> empresa = empresaService.findById(id);
-                        empresa.get().getAnalistas().add(analista);
-                        empresaService.update(empresa.get());
+                        if(empresa.isPresent()){
+                            empresaService.adcionaAnalista(empresa.get(), analista);
+                        }
 
                         return "painel/admin/empresa/analista/cadastro-analista-sucesso";
                     }
@@ -338,8 +337,7 @@ public class EmpresaController {
                         model.addAttribute("usuario", analista);
 
                         // Atribui o analista para a lista da empresa
-                        usuario.getEmpresa().getAnalistas().add(analista);
-                        empresaService.update(usuario.getEmpresa());
+                        empresaService.adcionaAnalista(usuario.getEmpresa(), analista);
 
                         return "painel/empresa/analista/cadastro-analista-sucesso";
                     }

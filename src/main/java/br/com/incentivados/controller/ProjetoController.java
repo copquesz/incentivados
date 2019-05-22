@@ -1,14 +1,14 @@
 package br.com.incentivados.controller;
 
+import br.com.incentivados.model.Empresa;
 import br.com.incentivados.model.Projeto;
 import br.com.incentivados.model.Usuario;
+import br.com.incentivados.service.EmpresaService;
 import br.com.incentivados.service.EntidadeService;
 import br.com.incentivados.service.IncentivoFiscalService;
 import br.com.incentivados.service.ProjetoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,15 +28,17 @@ public class ProjetoController {
     private ProjetoService projetoService;
     private EntidadeService entidadeService;
     private IncentivoFiscalService incentivoFiscalService;
+    private EmpresaService empresaService;
     private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
 
     @Autowired
     public ProjetoController(ProjetoService projetoService, EntidadeService entidadeService,
-                             IncentivoFiscalService incentivoFiscalService) {
+                             IncentivoFiscalService incentivoFiscalService, EmpresaService empresaService) {
         super();
         this.projetoService = projetoService;
         this.entidadeService = entidadeService;
         this.incentivoFiscalService = incentivoFiscalService;
+        this.empresaService = empresaService;
     }
 
     /**
@@ -67,13 +70,16 @@ public class ProjetoController {
                     model.addAttribute("projetos", projetoService.findAllByUsuario(usuario, pageable));
                     model.addAttribute("qtdProjetos", projetoService.countByUsuario(usuario));
                     return "painel/entidade/projeto/lista";
+                case EMPRESA:
+                    model.addAttribute("projetos", new PageImpl<>(usuario.getEmpresa().getProjetos(), pageable, usuario.getEmpresa().getProjetos().size()));
+                    return "painel/empresa/projeto/lista";
                 default:
                     logger.log(Level.WARNING, "Usuário não encontrado.");
                     return "";
             }
 
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Erro listar projetos.");
+            logger.log(Level.SEVERE, "Erro listar projetos.", e);
             return "";
         }
     }
@@ -113,7 +119,7 @@ public class ProjetoController {
      *         2) Retorna página de falha caso já exista projeto com mesmo título.
      */
     @PostMapping("/painel/projetos/cadastro")
-    public String postCadastrar(Projeto projeto, HttpServletRequest request, Model model) {
+    public String postCadastrar(@RequestParam(required = false, defaultValue = "18.520.427/0001-86") String cnpj, Projeto projeto, HttpServletRequest request, Model model) {
 
         // Seta o path da requisição
         model.addAttribute("path", request.getContextPath());
@@ -127,6 +133,14 @@ public class ProjetoController {
                 projeto = projetoService.save(projeto, usuario, request);
                 model.addAttribute("projeto", projeto);
                 logger.log(Level.INFO, "Projeto cadastrado com sucesso: " + projeto.getTitulo());
+
+                if(!cnpj.equals("18.520.427/0001-86")){
+                    Optional<Empresa> empresa = empresaService.findByCnpj(cnpj);
+                    if(empresa.isPresent()){
+                        empresaService.adicionaProjeto(empresa.get(), projeto);
+                        logger.log(Level.INFO, "Projeto " + projeto.getTitulo() + " adicionado a lista de: " + empresa.get().getNomeFantasia());
+                    }
+                }
                 return "painel/entidade/projeto/cadastro-projeto-sucesso";
 
             } else {
@@ -169,9 +183,16 @@ public class ProjetoController {
             // Direciona o USUARIO para a view de acordo com seu tipo de perfil
             switch (usuario.getTipoUsuario()) {
                 case ADMIN:
+                    List<Empresa> empresas = empresaService.findAll();
+                    for (Empresa empresa : empresas){
+                        empresa.setIndicacao(empresaService.isIndicacao(empresa, projeto.get()));
+                    }
+                    model.addAttribute("empresas", empresas);
                     return "painel/admin/projeto/perfil";
                 case ENTIDADE:
                     return "painel/entidade/projeto/perfil";
+                case EMPRESA:
+                    return "painel/empresa/projeto/perfil";
                 default:
                     logger.log(Level.WARNING, "Usuário não encontrado.");
                     return "";
@@ -181,6 +202,26 @@ public class ProjetoController {
             logger.log(Level.SEVERE, "Falha localizar projeto.", e);
             return "";
         }
+    }
+
+    @PostMapping("/painel/projetos/indicar")
+    public String postIndicarProjeto(@RequestParam(required = true) Long empresaId, @RequestParam(required = true) Long projetoId, HttpServletRequest request, Model model){
+
+        // Seta o path da requisição
+        model.addAttribute("path", request.getContextPath());
+
+        Optional<Projeto> projeto = projetoService.findById(projetoId);
+        Optional<Empresa> empresa = empresaService.findById(empresaId);
+
+        if (projeto.isPresent() && empresa.isPresent()) {
+            empresaService.adicionaProjeto(empresa.get(), projeto.get());
+            logger.log(Level.INFO, "Projeto " + projeto.get().getTitulo() + " adicionado a lista de: " + empresa.get().getNomeFantasia());
+        }
+        else {
+            logger.log(Level.WARNING, "Projeto ou Empresa não localizado.");
+        }
+
+        return "redirect:/painel/projetos/" + projeto.get().getId();
     }
 
 }

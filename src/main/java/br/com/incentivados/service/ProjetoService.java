@@ -1,9 +1,6 @@
 package br.com.incentivados.service;
 
-import br.com.incentivados.model.Arquivo;
-import br.com.incentivados.model.IncentivoFiscal;
-import br.com.incentivados.model.Projeto;
-import br.com.incentivados.model.Usuario;
+import br.com.incentivados.model.*;
 import br.com.incentivados.repository.ProjetoRepository;
 import br.com.incentivados.utility.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +29,6 @@ public class ProjetoService {
 
 		return projetoRepository.save(projeto);
 	}
-
 
 	// Serviço que verifica se o PROJETO já possui registro com mesmo TITULO
 	public boolean existsByTitulo(String titulo) {

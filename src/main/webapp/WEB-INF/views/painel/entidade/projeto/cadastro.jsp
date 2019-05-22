@@ -99,6 +99,9 @@
               <div class="card-body border">
                 <form action="${path}/painel/projetos/cadastro" method="post" enctype="multipart/form-data" acceptcharset="UTF-8">
 
+                  <!-- Cnpj da empresa que irá receber o projeto - Padrão 18.520.427/0001-86 -> Yabá Consultoria -->
+                  <input type="hidden" name="cnpj" value="01.438.784/0001-05">
+
                   <fieldset>
                   <legend class="text-primary">Órgão Executor:</legend>
                       <label>Entidade:</label>
@@ -125,10 +128,16 @@
                   <hr class="bg-primary">
 
                   <div class="row mt-3">
-                    <div class="col-12">
+                    <div class="col-md-8">
                       <div class="form-group">
                           <label>Título:</label>
                           <input type="text" class="form-control" name="titulo" required>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                          <label>Prazo de Captação:</label>
+                          <input type="text" class="form-control" id="prazo-captacao" name="prazoCaptacao" required>
                       </div>
                     </div>
                   </div>
@@ -284,6 +293,7 @@
   <!-- VALIDATOR -->
   <script type="text/javascript" src="${path}/assets/js/file-validator.js"></script>
   <!-- MASK -->
+  <script type="text/javascript" src="${path}/assets/js/core/jquery.maskedinput.js"></script>
   <script type="text/javascript" src="${path}/assets/js/core/jquery.maskMoney.js"></script>
   <script type="text/javascript">
     $(document).ready(function () {
@@ -305,6 +315,7 @@
   <script type="text/javascript">
     $("#valor-solicitado").maskMoney({showSymbol: true, symbol:'R$ ', thousands:'.', decimal:','});
     $("#valor-total").maskMoney({showSymbol: true, symbol:'R$ ', thousands:'.', decimal:','});
+    $("#prazo-captacao").mask("99/99/9999");
   </script>
 </body>
 

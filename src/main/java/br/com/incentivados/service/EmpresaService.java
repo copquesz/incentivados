@@ -1,6 +1,7 @@
 package br.com.incentivados.service;
 
 import br.com.incentivados.model.Empresa;
+import br.com.incentivados.model.Projeto;
 import br.com.incentivados.model.Usuario;
 import br.com.incentivados.repository.EmpresaRepository;
 import br.com.incentivados.utility.FileUpload;
@@ -40,8 +41,27 @@ public class EmpresaService {
         return empresaRepository.existsByCnpj(cnpj);
     }
 
-    public Empresa update(Empresa empresa) {
-        empresa.getAnalistas().get(empresa.getAnalistas().size() - 1).setEmpresa(empresa);
+    public boolean isIndicacao(Empresa empresa, Projeto projeto){
+        if(empresaRepository.isIndicacao(empresa.getId(), projeto.getId()) == 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    public Empresa adcionaAnalista(Empresa empresa, Usuario usuario) {
+        empresa.getAnalistas().add(usuario);
+        return empresaRepository.save(empresa);
+    }
+
+    public Empresa adicionaResponsavel(Empresa empresa, Usuario usuario) {
+        empresa.getResponsaveis().add(usuario);
+        return empresaRepository.save(empresa);
+    }
+
+    public Empresa adicionaProjeto(Empresa empresa, Projeto projeto) {
+        empresa.getProjetos().add(projeto);
         return empresaRepository.save(empresa);
     }
 
@@ -49,9 +69,17 @@ public class EmpresaService {
         return empresaRepository.findById(id);
     }
 
+    public Optional<Empresa> findByCnpj(String cnpj){
+        return empresaRepository.findByCnpj(cnpj);
+    }
+
 
     public Optional<Empresa> findByNomeFantasia(String nomeFantasia) {
         return empresaRepository.findByNomeFantasia(nomeFantasia);
+    }
+
+    public List<Empresa> findAll(){
+        return empresaRepository.findAll();
     }
 
     public List<Empresa> findByNomeFantasiaContains(String nomeFantasia) {

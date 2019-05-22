@@ -149,7 +149,7 @@
                                 <legend class="text-primary">Informações Gerais:</legend>
                                 <hr class="bg-primary">
                                 <div class="row mt-3">
-                                    <div class="col-12 col-md-4">
+                                    <div class="col-12 col-md-3">
                                         <div class="form-group">
                                             <label>Data/Hora Cadastro:</label>
                                             <fmt:formatDate type="both" dateStyle="short" timeStyle="short"
@@ -157,7 +157,13 @@
                                             <input type="text" class="form-control" value="${dataCadastro}" readonly>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-8">
+                                    <div class="col-12 col-md-3">
+                                        <div class="form-group">
+                                            <label>Prazo de Captação:</label>                                            
+                                            <input type="text" class="form-control" value="${projeto.prazoCaptacao}" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label>Entidade Executora:</label>
                                             <input type="text" class="form-control"

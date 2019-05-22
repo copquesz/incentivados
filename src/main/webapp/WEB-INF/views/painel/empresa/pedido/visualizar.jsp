@@ -41,8 +41,11 @@
           <li>
             <a href="${path}/painel/${usuario.empresa.id}/analistas"><i class="fas fa-users"></i>Analistas</a>
           </li>
+          <li>
+            <a href="${path}/painel/projetos"><i class="fas fa-project-diagram"></i>Projetos</a>
+          </li>
           <li class="active">
-            <a href="${path}/painel/pedidos?filtro=TODOS"><i class="fas fa-praying-hands"></i>Pedidos</a>
+            <a href="${path}/painel/pedidos"><i class="fas fa-praying-hands"></i>Pedidos</a>
           </li>
         </ul>
       </div>
@@ -218,7 +221,7 @@
   <script type="text/javascript" src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script>  
   <!-- VALIDATOR -->
-  <script type="text/javascript" src="${path}/assets/js/file-validator.js"></script>
+  <script type="text/javascript" src="${path}/assets/js/file-validator.js"></script> 
 </body>
 
 </html>
