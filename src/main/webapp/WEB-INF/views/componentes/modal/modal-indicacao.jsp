@@ -14,18 +14,18 @@
         <div class="modal-body">
           <input type="hidden" id="id-projeto" name="projetoId">
           <label>Selecione a empresa para qual você deseja indicar este projeto:</label>
-          <select class="selectpicker form-control" name="empresaId" title="Selecione ..." data-live-search="true" data-style="btn-select" required>
+          <select class="selectpicker form-control" name="empresaId" title="Selecione ..." data-live-search="true" data-style="btn-neutral" required>
             <c:forEach var="empresa" items="${empresas}">
               <c:choose>
                 <c:when test = "${empresa.indicacao}">
-                  <option disabled style="background: #ff7979; color: #fff;">${empresa.nomeFantasia}</option>
+                  <option disabled >${empresa.nomeFantasia}</option>
                 </c:when>
                 <c:otherwise>
                   <option value="${empresa.id}">${empresa.nomeFantasia}</option>
                 </c:otherwise>
               </c:choose>
             </c:forEach>
-          </select>          
+          </select>
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-success">Sim</button>

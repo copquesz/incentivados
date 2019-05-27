@@ -20,16 +20,15 @@
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <!--     BOOTSTRAP     -->
     <link href="${path}/assets/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="${path}/assets/css/bootstrap-select.min.css" rel="stylesheet">
     <!--     CUSTOM     -->
     <link href="${path}/assets/css/paper-dashboard.css?v=2.0.0" rel="stylesheet"/>
     <link href="${path}/assets/css/style.css" rel="stylesheet"/>
-    <style type="text/css">
-      .btn-select, .btn-select:hover{
-        background-color: #badc58; 
-        color: #fff;
-      }
-    </style>
+<%--    <style type="text/css">--%>
+<%--      .btn-select, .btn-select:hover{--%>
+<%--        background-color: #e0eeef;--%>
+<%--      }--%>
+<%--    </style>--%>
 </head>
 
 <body class="">
@@ -48,7 +47,7 @@
         <ul class="nav">
           <li>
             <a href="${path}/painel/dashboard">
-              <i class="nc-icon nc-bank"></i>Painel Principal</a>        
+              <i class="nc-icon nc-bank"></i>Painel Principal</a>
           </li>
           <li>
             <a href="${path}/painel/empresas">
@@ -92,8 +91,8 @@
               <span class="navbar-toggler-bar navbar-kebab"></span>
               <span class="navbar-toggler-bar navbar-kebab"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navigation">            
-              <ul class="navbar-nav">              
+            <div class="collapse navbar-collapse justify-content-end" id="navigation">
+              <ul class="navbar-nav">
                 <li class="nav-item btn-rotate dropdown">
                   <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-power-off"></i>
