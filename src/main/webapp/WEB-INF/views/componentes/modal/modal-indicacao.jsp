@@ -18,7 +18,7 @@
             <c:forEach var="empresa" items="${empresas}">
               <c:choose>
                 <c:when test = "${empresa.indicacao}">
-                  <option disabled >${empresa.nomeFantasia}</option>
+                  <option style="background-color: #e74c3c; color: #fff; font-weight: bold; border-radius: 0%;" disabled >${empresa.nomeFantasia}</option>
                 </c:when>
                 <c:otherwise>
                   <option value="${empresa.id}">${empresa.nomeFantasia}</option>
