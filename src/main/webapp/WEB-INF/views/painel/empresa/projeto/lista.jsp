@@ -46,7 +46,7 @@
             <a href="${path}/painel/projetos"><i class="fas fa-project-diagram"></i>Projetos</a>
           </li>
           <li>
-            <a href="${path}/painel/pedidos"><i class="fas fa-praying-hands"></i>Pedidos</a>
+            <a href="${path}/painel/pedidos?filtro=TODOS&key="><i class="fas fa-praying-hands"></i>Pedidos</a>
           </li>
         </ul>
       </div>
@@ -94,19 +94,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header "> 
-                <h5 class="card-title">Projetos Cadastrado(s): ${qtdProjetos}</h5>                
-                <div class="row">
-                  <div class="col-12 d-flex justify-content-start">
-                    <form class="form-inline">                                          
-                      <div class="form-group mx-sm-3 mb-2">
-                        <input type="text" class="form-control" placeholder="Pesquisar por..">
-                      </div>
-                      <div class="form-group mb-2">
-                        <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>
-                      </div>
-                    </form>
-                  </div>
-                </div>                
+                <h5 class="card-title">Projetos Cadastrado(s): ${projetos.totalElements}</h5>  
               </div>
               <div class="card-body">
                 <div class="row">

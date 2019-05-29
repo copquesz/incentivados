@@ -12,6 +12,7 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
+@ToString
 public class Projeto implements Serializable{
 	
 	private static final long serialVersionUID = -1229591784464619823L;
