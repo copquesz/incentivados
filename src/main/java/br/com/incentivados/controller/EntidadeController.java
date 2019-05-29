@@ -135,7 +135,7 @@ public class EntidadeController {
      * @return Retorna a página com a lista de entidades.
      */
     @GetMapping("/painel/entidades")
-    public String getListar(HttpServletRequest request, Model model, @RequestParam(required = false, defaultValue = "0") int page) {
+    public String getListar(HttpServletRequest request, Model model, @RequestParam(required = false, defaultValue = "0") int page, @RequestParam(required = false, defaultValue = "0") String key) {
 
         // Seta o path da requisição
         model.addAttribute("path", request.getContextPath());
@@ -151,7 +151,7 @@ public class EntidadeController {
                     return "painel/admin/entidade/lista";
 
                 case ENTIDADE:
-                    model.addAttribute("entidades", entidadeService.findAllByUsuario(usuario, PageRequest.of(page, 5, Sort.by(Sort.Order.asc("id")))));
+                    model.addAttribute("entidades", entidadeService.findAllByUsuario(usuario, PageRequest.of(page, 5, Sort.by(Sort.Order.asc("id"))), key));
                     return "painel/entidade/entidade/lista";
 
                 default:

@@ -96,13 +96,13 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header "> 
-                <h5 class="card-title">Entidades Cadastrada(s): </h5>
+                <h5 class="card-title">Entidades Cadastrada(s): ${entidades.totalElements}</h5>
                 <div class="d-flex justify-content-start">
                   <div class="row">
                     <div class="col-12">
                       <form class="form-inline">                                          
                         <div class="form-group mx-sm-3 mb-2">
-                          <input type="text" class="form-control" placeholder="Pesquisar por.." name="n">
+                          <input type="text" class="form-control" placeholder="Pesquisar por CNPJ ou Nome Fantasia ..." name="key">
                         </div>
                         <div class="form-group mb-2">
                           <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>
@@ -122,7 +122,7 @@
                                 <i class="nc-icon nc-simple-remove"></i>
                             </button>
                             <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
-                            <span data-notify="message">Não há entidade(s) cadastrada(s).</span>
+                            <span data-notify="message">Não há entidade(s) cadastrada(s) ou resultado(s) para esta busca.</span>
                         </div>
                     </c:if>
                     <c:if test = "${not empty entidades.content}"> 
