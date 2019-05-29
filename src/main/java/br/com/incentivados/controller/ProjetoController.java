@@ -49,7 +49,7 @@ public class ProjetoController {
      * @return Retorna a lista de projetos solicitada.
      */
     @GetMapping("/painel/projetos")
-    public String getListar(@RequestParam(required = false, defaultValue = "0") int page, HttpServletRequest request, Model model) {
+    public String getListar(@RequestParam(required = false, defaultValue = "0") int page, @RequestParam(required = false, defaultValue = "") String key, HttpServletRequest request, Model model) {
 
         // Seta o path da requisição
         model.addAttribute("path", request.getContextPath());
@@ -67,8 +67,7 @@ public class ProjetoController {
                     model.addAttribute("qtdProjetos", projetoService.count());
                     return "painel/admin/projeto/lista";
                 case ENTIDADE:
-                    model.addAttribute("projetos", projetoService.findAllByUsuario(usuario, pageable));
-                    model.addAttribute("qtdProjetos", projetoService.countByUsuario(usuario));
+                    model.addAttribute("projetos", projetoService.findAllByUsuario(usuario, pageable, key));
                     return "painel/entidade/projeto/lista";
                 case EMPRESA:
                     model.addAttribute("projetos", new PageImpl<>(usuario.getEmpresa().getProjetos(), pageable, usuario.getEmpresa().getProjetos().size()));

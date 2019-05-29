@@ -49,6 +49,10 @@ public class ProjetoService {
 		return projetoRepository.findAllByUsuario(usuario, page);
 	}
 
+	public Page<Projeto> findAllByUsuario(Usuario usuario, Pageable page, String key){
+		return projetoRepository.findAllByUsuario(usuario, page, key);
+	}
+
 	// Serviço que contabiliza os PROJETOS
 	public Long count() {
 		return projetoRepository.count();
