@@ -97,7 +97,7 @@
                     <div class="col-12">                      
                       <form class="form-inline">
                         <div class="form-group mx-sm-3 mb-2">
-                          <input class="form-control" type="text" name="key" id="key" placeholder="palavra-chave" />
+                          <input class="form-control" type="text" name="key" id="key" placeholder="Pesquisar por Nome ou Sobrenome ..." />
                         </div>
                         <div class="form-group mb-2">
                           <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>
@@ -111,16 +111,16 @@
                 <div class="row mt-2">
                   <div class="col-12">
                     <!-- MSG DE VAZIO -->
-                    <c:if test = "${empty usuario.empresa.analistas}">                      
+                    <c:if test = "${empty analistas.content}">                      
                       <div class="alert alert-danger alert-with-icon alert-dismissible fade show" data-notify="container">
                         <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
                           <i class="nc-icon nc-simple-remove"></i>
                         </button>
                         <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
-                        <span data-notify="message">Não há analista(s) cadastrado(s).</span>
+                        <span data-notify="message">Não há analista(s) cadastrado(s) ou resultado(s) para a pesquisa.</span>
                       </div>                      
                     </c:if>                 
-                    <c:if test = "${not empty usuario.empresa.analistas}">                      
+                    <c:if test = "${not empty analistas.content}">                      
                       <div class="table-responsive-sm">
                         <table class="table">
                           <thead class=" text-primary">
@@ -131,7 +131,7 @@
                             <th class="border text-center">Loja</th>
                           </thead>
                           <tbody>
-                            <c:forEach var="analista" items="${empresa.analistas}">
+                            <c:forEach var="analista" items="${analistas.content}">
                               <tr>
                                 <td class="border text-center">${analista.nome} ${analista.sobrenome}</td>
                                 <td class="border text-center">${analista.tipoUsuario.descricao}</td>

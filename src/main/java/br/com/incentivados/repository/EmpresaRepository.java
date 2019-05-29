@@ -1,6 +1,8 @@
 package br.com.incentivados.repository;
 
 import br.com.incentivados.model.Empresa;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,5 +24,6 @@ public interface EmpresaRepository extends JpaRepository<Empresa, Long>{
 
 	@Query(value = "SELECT COUNT(*) FROM empresa_has_projeto WHERE empresa_id = :empresa_id and projeto_id = :projeto_id", nativeQuery = true)
 	Long isIndicacao(@Param("empresa_id") Long empresaId, @Param("projeto_id") Long projetoId);
+
 
 }

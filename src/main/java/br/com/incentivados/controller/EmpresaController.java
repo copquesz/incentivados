@@ -1,11 +1,13 @@
 package br.com.incentivados.controller;
 
+import br.com.incentivados.enumerated.TipoUsuario;
 import br.com.incentivados.model.Empresa;
 import br.com.incentivados.model.Usuario;
 import br.com.incentivados.service.EmpresaService;
 import br.com.incentivados.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -207,15 +209,16 @@ public class EmpresaController {
     }
 
     /**
-     * Este método recebe uma chamada GET que exibe a lista de analistas cadastrados
-     *
-     * @param id      Long - código identidicador da empresa.
-     * @param request
-     * @param model
-     * @return
+     * * Este método recebe uma chamada GET para listar todos os analistas da empresa passada como parâmetro.
+     * @param id - Long - código identificador da empresa
+     * @param page - inteiro - que contém o número da página que será listada no banco de dados.
+     * @param key - String - chave com os caractéres de nome ou sobrenome que deseja procurar.
+     * @param request     contém informações referente a requisição feita através desta url.
+     * @param model       disponibiliza dados da controller para a view.
+     * @return retorna a página com a lista resultada.
      */
     @GetMapping("/painel/{id}/analistas")
-    public String getAnalistas(@PathVariable Long id, HttpServletRequest request, Model model) {
+    public String getAnalistas(@PathVariable Long id, @RequestParam(required = false, defaultValue = "0") int page, @RequestParam(required = false, defaultValue = "") String key, HttpServletRequest request, Model model) {
 
         // Seta o path da requisição
         model.addAttribute("path", request.getContextPath());
@@ -226,6 +229,11 @@ public class EmpresaController {
 
         Optional<Empresa> empresa = empresaService.findById(id);
         model.addAttribute("empresa", empresa.get());
+
+
+        Pageable pageableAnalistas = PageRequest.of(page, 10, Sort.by(Sort.Order.desc("id")));
+        model.addAttribute("analistas", usuarioService.findAllByEmpresa(pageableAnalistas, empresa.get(), key, TipoUsuario.ANALISTA));
+
 
         return "painel/empresa/analista/lista";
     }

@@ -1,9 +1,12 @@
 package br.com.incentivados.service;
 
+import br.com.incentivados.enumerated.TipoUsuario;
 import br.com.incentivados.model.Empresa;
 import br.com.incentivados.model.Usuario;
 import br.com.incentivados.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -65,6 +68,8 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-
+    public Page<Usuario> findAllByEmpresa(Pageable page, Empresa empresa, String key, TipoUsuario tipoUsuario){
+        return usuarioRepository.findAllByEmpresa(page, empresa, key, tipoUsuario);
+    }
 
 }
