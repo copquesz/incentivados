@@ -26,4 +26,6 @@ public interface EmpresaRepository extends JpaRepository<Empresa, Long>{
 	Long isIndicacao(@Param("empresa_id") Long empresaId, @Param("projeto_id") Long projetoId);
 
 
+	@Query("SELECT empresa FROM Empresa empresa WHERE empresa.nomeFantasia LIKE %:key% OR empresa.cnpj LIKE %:key%")
+    Page<Empresa> findAllByNomeFantasiaOrCnpjContaining(Pageable pageable, @Param("key") String key);
 }

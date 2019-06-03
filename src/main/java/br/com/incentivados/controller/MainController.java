@@ -21,7 +21,7 @@ public class MainController {
 
 		model.addAttribute("path", request.getContextPath());
 		
-		return "redirect:/login";
+		return "main/index";
 	}
 
 }

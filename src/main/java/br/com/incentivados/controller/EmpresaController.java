@@ -44,19 +44,20 @@ public class EmpresaController {
      * @return retorna uma página com a lista de empresas pesquisada.
      */
     @GetMapping("/painel/empresas")
-    public String getListar(@RequestParam(required = false, defaultValue = "") String chave,
+    public String getListar(@RequestParam(required = false, defaultValue = "") String key,
                             @RequestParam(required = false, defaultValue = "0") int page, HttpServletRequest request,
                             Model model) {
 
         // Seta o path da requisição
         model.addAttribute("path", request.getContextPath());
-        model.addAttribute("qtdEmpresas", empresaService.count());
 
-        if (chave.equals("")) {
-            model.addAttribute("empresas", empresaService.findAll(PageRequest.of(page, 5, Sort.by(Sort.Order.asc("id")))));
-        } else {
-            model.addAttribute("empresas", empresaService.findByNomeFantasiaContains(chave));
-        }
+        model.addAttribute("key", key);
+        model.addAttribute("page", page);
+
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(Sort.Order.asc("id")));
+
+        model.addAttribute("empresas", empresaService.findAllByNomeFantasiaOrCnpjContaining(pageable, key));
+
         return "painel/admin/empresa/lista";
     }
 

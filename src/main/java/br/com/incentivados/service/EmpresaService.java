@@ -90,6 +90,10 @@ public class EmpresaService {
         return empresaRepository.findAll(page);
     }
 
+    public Page<Empresa> findAllByNomeFantasiaOrCnpjContaining(Pageable pageable, String key){
+        return empresaRepository.findAllByNomeFantasiaOrCnpjContaining(pageable, key);
+    }
+
     public Long count() {
         return empresaRepository.count();
     }

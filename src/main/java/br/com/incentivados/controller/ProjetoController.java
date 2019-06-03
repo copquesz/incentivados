@@ -58,7 +58,7 @@ public class ProjetoController {
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
         try {
-            Pageable pageable = PageRequest.of(page, 9, Sort.by(Sort.Order.asc("id")));
+            Pageable pageable = PageRequest.of(page, 12, Sort.by(Sort.Order.asc("id")));
 
             // Direciona o USUARIO para sua view de acordo com perfil
             switch (usuario.getTipoUsuario()) {
