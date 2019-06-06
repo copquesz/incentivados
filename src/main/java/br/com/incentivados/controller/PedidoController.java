@@ -49,26 +49,20 @@ public class PedidoController {
     /**
      * Exibe a página de cadastro de pedido para a empresa passada como parâmetro
      *
-     * @param nomeFantasia nome da empresa que irá receber o pedido
      * @param request      recebe dados da requisição
      * @param model        fornece dados para a view
      * @return view jsp
      */
-    @GetMapping("/painel/pedidos/{nomeFantasia}/cadastro")
-    public String getCadastrar(@PathVariable String nomeFantasia, HttpServletRequest request, Model model) {
+    @GetMapping("/painel/pedidos/cadastro")
+    public String getCadastrar(@RequestParam String empresaCnpj, HttpServletRequest request, Model model) {
 
         // Seta o path da requisição
         model.addAttribute("path", request.getContextPath());
 
-        try {
-
-            // Carrega a empresa que foi passada como parâmetro
-            Optional<Empresa> empresa = empresaService.findByNomeFantasia(nomeFantasia);
-            if (empresa.isPresent()) {
-                model.addAttribute("empresa", empresa.get());
-            } else {
-                logger.log(Level.WARNING, "Empresa não localizada.");
-            }
+        // Carrega a empresa que foi passada como parâmetro
+        Optional<Empresa> empresa = empresaService.findByCnpj(empresaCnpj);
+        if (empresa.isPresent()) {
+            model.addAttribute("empresa", empresa.get());
 
             // Recebe o usuário logado na sessão
             Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
@@ -79,10 +73,11 @@ public class PedidoController {
 
             return "painel/entidade/pedido/cadastro";
 
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Erro exibir formulário de pedidos.", e);
+        } else {
+            logger.log(Level.WARNING, "Empresa não localizada.");
             return "";
         }
+
 
     }
 
@@ -94,7 +89,7 @@ public class PedidoController {
      * @param model   fornece dados para a view
      * @return view jsp
      */
-    @PostMapping("/painel/pedidos/{nomeFantasia}/cadastro")
+    @PostMapping("/painel/pedidos/cadastro")
     public String postCadastrar(Pedido pedido, HttpServletRequest request, Model model) {
 
         // Seta o path da requisição
@@ -212,25 +207,22 @@ public class PedidoController {
 
                     Pageable pageablePedidosEmpresa = PageRequest.of(page, 10, Sort.by(Sort.Order.asc("id")));
 
-                    if(filtro == FiltroPedidos.LOJA){
+                    if (filtro == FiltroPedidos.LOJA) {
                         model.addAttribute("pedidos", pedidoService.findAllByEmpresaAndBairro(empresa, key, pageablePedidosEmpresa));
                         model.addAttribute("qtdPedidos", pedidoService.countByEmpresaAndBairro(empresa, key));
                         model.addAttribute("recusados", pedidoService.findAllByEmpresaAndStatusAndBairro(empresa, StatusPedido.RECUSADO, key,
                                 pageablePedidosEmpresa));
-                    }
-                    else if (filtro == FiltroPedidos.CIDADE){
+                    } else if (filtro == FiltroPedidos.CIDADE) {
                         model.addAttribute("pedidos", pedidoService.findAllByEmpresaAndCidade(empresa, key, pageablePedidosEmpresa));
                         model.addAttribute("qtdPedidos", pedidoService.countByEmpresaAndCidade(empresa, key));
                         model.addAttribute("recusados", pedidoService.findAllByEmpresaAndStatusAndCidade(empresa, StatusPedido.RECUSADO, key,
                                 pageablePedidosEmpresa));
-                    }
-                    else if (filtro == FiltroPedidos.ENTIDADE){
+                    } else if (filtro == FiltroPedidos.ENTIDADE) {
                         model.addAttribute("pedidos", pedidoService.findAllByEmpresaAndEntidade(empresa, key, pageablePedidosEmpresa));
                         model.addAttribute("qtdPedidos", pedidoService.countByEmpresaAndEntidade(empresa, key));
                         model.addAttribute("recusados", pedidoService.findAllByEmpresaAndStatusAndEntidade(empresa, StatusPedido.RECUSADO, key,
                                 pageablePedidosEmpresa));
-                    }
-                    else{
+                    } else {
                         model.addAttribute("pedidos", pedidoService.findAllByEmpresa(empresa, pageablePedidosEmpresa));
                         model.addAttribute("qtdPedidos", pedidoService.countByEmpresa(empresa));
                         model.addAttribute("recusados", pedidoService.findAllByEmpresaAndStatus(empresa, StatusPedido.RECUSADO, pageablePedidosEmpresa));

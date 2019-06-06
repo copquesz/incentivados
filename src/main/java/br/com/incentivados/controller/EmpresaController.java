@@ -38,7 +38,7 @@ public class EmpresaController {
     /**
      * Este método recebe uma chamada GET que exibe a lista de empresas cadastradas.
      *
-     * @param chave   String - nome fantasia da empresa que deseja filtrar.
+     * @param key     String - nome fantasia da empresa que deseja filtrar.
      * @param request contém informações referente a requisição feita através desta url.
      * @param model   disponibiliza dados da controller para a view.
      * @return retorna uma página com a lista de empresas pesquisada.
@@ -146,18 +146,18 @@ public class EmpresaController {
     /**
      * Este método recebe uma chamada GET que exibe o formulário de cadastro do responsável pela empresa.
      *
-     * @param id      Long - código identificador da empresa.
-     * @param request contém informações referente a requisição feita através desta url.
-     * @param model   disponibiliza dados da controller para a view.
+     * @param empresaId Long - código identificador da empresa.
+     * @param request   contém informações referente a requisição feita através desta url.
+     * @param model     disponibiliza dados da controller para a view.
      * @return retorna o formulário para cadastrar o responsável pela empresa.
      */
-    @GetMapping("/painel/empresas/{id}/responsavel/cadastro")
-    public String getResposavelCadastrar(@PathVariable Long id, HttpServletRequest request, Model model) {
+    @GetMapping("/painel/empresas/{empresaId}/responsavel/cadastro")
+    public String getResposavelCadastrar(@PathVariable Long empresaId, HttpServletRequest request, Model model) {
 
         // Seta o path da requisição
         model.addAttribute("path", request.getContextPath());
 
-        Optional<Empresa> empresa = empresaService.findById(id);
+        Optional<Empresa> empresa = empresaService.findById(empresaId);
         model.addAttribute("empresa", empresa.get());
         return "painel/admin/empresa/responsavel/cadastro";
     }
@@ -165,7 +165,7 @@ public class EmpresaController {
     /**
      * Este método recebe uma chamada POST para cadastrar o responsável pela empresa.
      *
-     * @param id          - Long - código identificador da empresa
+     * @param empresaId   - Long - código identificador da empresa
      * @param responsavel objeto que será persistido no banco de dados.
      * @param request     contém informações referente a requisição feita através desta url.
      * @param model       disponibiliza dados da controller para a view.
@@ -173,8 +173,8 @@ public class EmpresaController {
      * 2- retorna página de erro caso já possua email cadastrado
      * 3- retorna página de erro caso já possua cpf cadastrado.
      */
-    @PostMapping("/painel/empresas/{id}/responsavel/cadastro")
-    public String postResponsavelCadastrar(@PathVariable Long id, Usuario responsavel, HttpServletRequest request,
+    @PostMapping("/painel/empresas/{empresaId}/responsavel/cadastro")
+    public String postResponsavelCadastrar(@PathVariable Long empresaId, Usuario responsavel, HttpServletRequest request,
                                            Model model) {
 
         // Seta o path da requisição
@@ -188,12 +188,13 @@ public class EmpresaController {
                 model.addAttribute("usuario", responsavel);
                 return "painel/admin/empresa/responsavel/cadastro-responsavel-falha-cpf-cadastrado";
             } else {
+                System.out.println(responsavel);
                 // Salva o analista na base de dados
                 responsavel = usuarioService.save(responsavel);
                 model.addAttribute("usuario", responsavel);
 
                 // Atribui o analista para a lista da empresa
-                Optional<Empresa> empresa = empresaService.findById(id);
+                Optional<Empresa> empresa = empresaService.findById(empresaId);
 
                 if (empresa.isPresent()) {
                     empresaService.adicionaResponsavel(empresa.get(), responsavel);
@@ -211,15 +212,16 @@ public class EmpresaController {
 
     /**
      * * Este método recebe uma chamada GET para listar todos os analistas da empresa passada como parâmetro.
-     * @param id - Long - código identificador da empresa
-     * @param page - inteiro - que contém o número da página que será listada no banco de dados.
-     * @param key - String - chave com os caractéres de nome ou sobrenome que deseja procurar.
-     * @param request     contém informações referente a requisição feita através desta url.
-     * @param model       disponibiliza dados da controller para a view.
+     *
+     * @param empresaId - Long - código identificador da empresa
+     * @param page      - inteiro - que contém o número da página que será listada no banco de dados.
+     * @param key       - String - chave com os caractéres de nome ou sobrenome que deseja procurar.
+     * @param request   contém informações referente a requisição feita através desta url.
+     * @param model     disponibiliza dados da controller para a view.
      * @return retorna a página com a lista resultada.
      */
-    @GetMapping("/painel/{id}/analistas")
-    public String getAnalistas(@PathVariable Long id, @RequestParam(required = false, defaultValue = "0") int page, @RequestParam(required = false, defaultValue = "") String key, HttpServletRequest request, Model model) {
+    @GetMapping("/painel/{empresaId}/analistas")
+    public String getAnalistas(@PathVariable Long empresaId, @RequestParam(required = false, defaultValue = "0") int page, @RequestParam(required = false, defaultValue = "") String key, HttpServletRequest request, Model model) {
 
         // Seta o path da requisição
         model.addAttribute("path", request.getContextPath());
@@ -228,7 +230,7 @@ public class EmpresaController {
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         model.addAttribute("usuario", usuario);
 
-        Optional<Empresa> empresa = empresaService.findById(id);
+        Optional<Empresa> empresa = empresaService.findById(empresaId);
         model.addAttribute("empresa", empresa.get());
 
 
@@ -242,13 +244,13 @@ public class EmpresaController {
     /**
      * Este método recebe uma chamada GET que exibe o formulário de cadastro de analista
      *
-     * @param id      Long - código identidicador da empresa.
-     * @param request contém informações referente a requisição feita através desta url.
-     * @param model   disponibiliza dados da controller para a view.
+     * @param empresaId Long - código identidicador da empresa.
+     * @param request   contém informações referente a requisição feita através desta url.
+     * @param model     disponibiliza dados da controller para a view.
      * @return retorna a página que contém o formulário para cadastro do analista
      */
-    @GetMapping({"/painel/empresas/{id}/analistas/cadastro", "painel/analistas/cadastro"})
-    public String getAnalistaCadastrar(@PathVariable(required = false) Long id, HttpServletRequest request, Model model) {
+    @GetMapping({"/painel/empresas/{empresaId}/analistas/cadastro", "painel/analistas/cadastro"})
+    public String getAnalistaCadastrar(@PathVariable(required = false) Long empresaId, HttpServletRequest request, Model model) {
 
         // Seta o path da requisição
         model.addAttribute("path", request.getContextPath());
@@ -259,7 +261,7 @@ public class EmpresaController {
         switch (usuario.getTipoUsuario()) {
 
             case ADMIN:
-                Optional<Empresa> empresa = empresaService.findById(id);
+                Optional<Empresa> empresa = empresaService.findById(empresaId);
                 model.addAttribute("empresa", empresa.get());
                 return "painel/admin/empresa/analista/cadastro";
 
@@ -277,16 +279,16 @@ public class EmpresaController {
     /**
      * Este método recebe uma chamada POST para cadastrar o analista no banco de dados.
      *
-     * @param id       Long - código identificador da empresa.
-     * @param analista - objeto que será persistido no banco de dados.
-     * @param request  contém informações referente a requisição feita através desta url.
-     * @param model    disponibiliza dados da controller para a view.
+     * @param empresaId Long - código identificador da empresa.
+     * @param analista  - objeto que será persistido no banco de dados.
+     * @param request   contém informações referente a requisição feita através desta url.
+     * @param model     disponibiliza dados da controller para a view.
      * @return 1- retorna a página de sucesso com os dados cadastrados caso ok.
      * 2- retorna página de erro caso já possua email cadastrado
      * 3- retorna página de erro caso já possua cpf cadastrado.
      */
-    @PostMapping({"/painel/empresas/{id}/analistas/cadastro", "/painel/analistas/cadastro"})
-    public String postAnalistaCadastrar(@PathVariable(required = false) Long id, Usuario analista, HttpServletRequest request,
+    @PostMapping({"/painel/empresas/{empresaId}/analistas/cadastro", "/painel/analistas/cadastro"})
+    public String postAnalistaCadastrar(@PathVariable(required = false) Long empresaId, Usuario analista, HttpServletRequest request,
                                         Model model) {
 
         // Seta o path da requisição
@@ -315,8 +317,8 @@ public class EmpresaController {
                         model.addAttribute("usuario", analista);
 
                         // Atribui o analista para a lista da empresa
-                        Optional<Empresa> empresa = empresaService.findById(id);
-                        if(empresa.isPresent()){
+                        Optional<Empresa> empresa = empresaService.findById(empresaId);
+                        if (empresa.isPresent()) {
                             empresaService.adcionaAnalista(empresa.get(), analista);
                         }
 

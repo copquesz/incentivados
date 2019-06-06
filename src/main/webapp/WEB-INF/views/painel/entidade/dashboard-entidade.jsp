@@ -194,7 +194,7 @@
                                 <div class="tab-pane fade show active" id="entidades" role="tabpanel"
                                      aria-labelledby="entidades-tab">
                                     <c:if test="${empty entidades.content}">
-                                        <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
+                                        <div class="alert alert-danger alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
                                             <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
                                                 <i class="nc-icon nc-simple-remove"></i>
                                             </button>
@@ -233,7 +233,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="projetos" role="tabpanel" aria-labelledby="projetos-tab">
                                     <c:if test="${empty projetos.content}">
-                                        <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
+                                        <div class="alert alert-danger alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
                                             <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
                                                 <i class="nc-icon nc-simple-remove"></i>
                                             </button>
@@ -271,8 +271,13 @@
                     <div class="card ">
                         <div class="card-header ">
                             <h5 class="card-title">Minhas Solicitações</h5>
+                            <div class="row">
+                                <div class="col-12">                                    
+                                    <a href="${path}/painel/pedidos/cadastro?empresaCnpj=01.438.784/0001-05" class="btn btn-primary float-right"><i class="fas fa-plus mr-2"></i> Cadastrar Pedido</a>
+                                </div>
+                            </div>
                             <c:if test="${empty pedidos.content}">
-                                <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
+                                <div class="alert alert-danger alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
                                     <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
                                         <i class="nc-icon nc-simple-remove"></i>
                                     </button>
@@ -301,7 +306,7 @@
                                                 <td class="text-center border">${pedido.entidade.nomeFantasia}</td>
                                                 <td class="text-center border">${pedido.empresa.nomeFantasia}</td>
                                                 <td class="text-center border" title="Cidade: ${pedido.analista.endereco.cidade} / Estado: ${pedido.analista.endereco.estado}"> ${pedido.analista.endereco.bairro}</td>
-                                                <td class="text-center">
+                                                <td class="text-center border">
                                                     <a href="${path}/${pedido.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a>
                                                 </td>
                                                 <th class="text-center border">

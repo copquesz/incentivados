@@ -13,6 +13,7 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
+@ToString
 public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 4802512298815065850L;
@@ -39,7 +40,7 @@ public class Usuario implements Serializable {
 
 	private String senha;
 	
-	@OneToMany(mappedBy = "usuario",fetch = FetchType.LAZY, orphanRemoval = true)
+	@OneToMany(mappedBy = "usuario",fetch = FetchType.LAZY)
 	private List<Pedido> pedidos;
 
 	@Enumerated(EnumType.ORDINAL)
