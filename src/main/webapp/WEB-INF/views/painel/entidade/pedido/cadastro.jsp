@@ -98,7 +98,6 @@
               <div class="card-header bg-primary"></div>
               <div class="card-body border">
                 <form action="${path}/painel/pedidos/cadastro" method="post" enctype="multipart/form-data" acceptcharset="UTF-8">
-
                   <fieldset>
                   <legend class="text-primary">Solicitante:</legend>
                   <hr class="bg-primary">
