@@ -70,7 +70,9 @@ public class ProjetoController {
                     model.addAttribute("projetos", projetoService.findAllByUsuario(usuario, pageable, key));
                     return "painel/entidade/projeto/lista";
                 case EMPRESA:
-                    model.addAttribute("projetos", new PageImpl<>(usuario.getEmpresa().getProjetos(), pageable, usuario.getEmpresa().getProjetos().size()));
+                    if(usuario.getEmpresa().getProjetos().size() > 0){
+                        model.addAttribute("projetos", new PageImpl<>(usuario.getEmpresa().getProjetos(), pageable, usuario.getEmpresa().getProjetos().size()));
+                    }
                     return "painel/empresa/projeto/lista";
                 default:
                     logger.log(Level.WARNING, "Usuário não encontrado.");
