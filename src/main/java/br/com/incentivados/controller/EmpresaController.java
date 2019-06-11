@@ -188,15 +188,14 @@ public class EmpresaController {
                 model.addAttribute("usuario", responsavel);
                 return "painel/admin/empresa/responsavel/cadastro-responsavel-falha-cpf-cadastrado";
             } else {
-                System.out.println(responsavel);
-                // Salva o analista na base de dados
-                responsavel = usuarioService.save(responsavel);
-                model.addAttribute("usuario", responsavel);
-
                 // Atribui o analista para a lista da empresa
                 Optional<Empresa> empresa = empresaService.findById(empresaId);
 
                 if (empresa.isPresent()) {
+                    // Salva o analista na base de dados
+                    responsavel = usuarioService.save(responsavel, empresa.get());
+                    model.addAttribute("usuario", responsavel);
+
                     empresaService.adicionaResponsavel(empresa.get(), responsavel);
                     return "painel/admin/empresa/responsavel/cadastro-responsavel-sucesso";
                 } else {

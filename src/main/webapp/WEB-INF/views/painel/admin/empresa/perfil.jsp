@@ -156,7 +156,7 @@
                       </div>
                     </div>
                   </c:if>                 
-                  <c:if test = "${not empty empresa.responsaveis}">
+                  <c:if test = "${not empty empresa.responsaveis || not empty empresa.analistas}">
                     <div class="col-md-12">
                       <div class="table-responsive-sm">
                         <table class="table">

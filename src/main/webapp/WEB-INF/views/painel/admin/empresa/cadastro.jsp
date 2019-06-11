@@ -105,56 +105,52 @@
                     <div class="card">
                         <div class="card-header bg-info"></div>
                         <div class="card-body border">
-                            <form action="${path}/painel/empresas/cadastro" method="post" enctype="multipart/form-data" acceptcharset="UTF-8">
-
-                                <fieldset>
-                                <legend class="text-primary">Informações Gerais:</legend>
-                                  <div class="row mt-3 mt-3">
-                                    <div class="col-sm-12  col-lg-4">
-                                      <div class="form-group">
-                                        <label>Nome Fantasia:</label>
-                                        <input type="text" class="form-control" name="nomeFantasia" required>
-                                      </div>
-                                    </div>
-                                    <div class="col-sm-12 col-lg-4">
-                                      <div class="form-group">
-                                        <label>Razao Social:</label>
-                                        <input type="text" class="form-control" name="razaoSocial" required>
-                                      </div>
-                                    </div>
-                                    <div class="col-sm-12 col-lg-4">
-                                      <div class="form-group">
-                                        <label>CNPJ:</label>
-                                        <input type="text" class="form-control" id="cnpj" name="cnpj" onchange="if(!validarCNPJ(this.value)){$('#modal-cnpj-invalido').modal('show'); this.value='';}" required>
-                                      </div>
+                          <form action="${path}/painel/empresas/cadastro" method="post" enctype="multipart/form-data" acceptcharset="UTF-8">
+                              <fieldset>
+                              <legend class="text-primary">Informações Gerais:</legend>
+                                <div class="row mt-3 mt-3">
+                                  <div class="col-sm-12  col-lg-4">
+                                    <div class="form-group">
+                                      <label>Nome Fantasia:</label>
+                                      <input type="text" class="form-control" name="nomeFantasia" required>
                                     </div>
                                   </div>
-                                </fieldset>
-
-                                <fieldset class="mt-3">
-                                <legend class="text-primary">Uploads:</legend>
-                                  <div class="row justify-content-start">
-                                    <div class="col-lg-2 text-center mt-3">
-                                      <div class="form-group">
-                                        <label for="logo"><i class="far fa-image text-primary" style="font-size: 78px;"></i></label>
-                                        <hr>
-                                        <h5 class="text-center">Logo</h5>
-                                        <input type="file" id="logo" name="documentosEmpresa.logo.file" onchange="validaImg(this, this.id)" required>
-                                      </div>
+                                  <div class="col-sm-12 col-lg-4">
+                                    <div class="form-group">
+                                      <label>Razao Social:</label>
+                                      <input type="text" class="form-control" name="razaoSocial" required>
                                     </div>
                                   </div>
-                                </fieldset>
+                                  <div class="col-sm-12 col-lg-4">
+                                    <div class="form-group">
+                                      <label>CNPJ:</label>
+                                      <input type="text" class="form-control" id="cnpj" name="cnpj" onchange="if(!validarCNPJ(this.value)){$('#modal-cnpj-invalido').modal('show'); this.value='';}" required>
+                                    </div>
+                                  </div>
+                                </div>
+                              </fieldset>
 
-                                <hr class="bg-success">
-
-                                <button type="submit" class="btn btn-primary float-right">
-                                  <i class="far fa-share-square"></i> Enviar
-                                </button>
-                                <a href="${path}/painel/empresas" class="btn btn-danger float-right">
-                                  <i class="fas fa-angle-double-left"></i> Voltar
-                                </a>
-
-                            </form>
+                              <fieldset class="mt-3">
+                              <legend class="text-primary">Uploads:</legend>
+                                <div class="row justify-content-start">
+                                  <div class="col-lg-2 text-center mt-3">
+                                    <div class="form-group">
+                                      <label for="logo"><i class="far fa-image text-primary" style="font-size: 78px;"></i></label>
+                                      <hr>
+                                      <h5 class="text-center">Logo</h5>
+                                      <input type="file" id="logo" name="documentosEmpresa.logo.file" onchange="validaImg(this, this.id)" required>
+                                    </div>
+                                  </div>
+                                </div>
+                              </fieldset> 
+                              <hr class="bg-success">
+                              <button type="submit" class="btn btn-primary float-right">
+                                <i class="far fa-share-square"></i> Enviar
+                              </button>
+                              <a href="${path}/painel/empresas" class="btn btn-danger float-right">
+                                <i class="fas fa-angle-double-left"></i> Voltar
+                              </a>
+                          </form>
                         </div>
                         <div class="card-footer bg-info"></div>
                     </div>

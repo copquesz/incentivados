@@ -24,6 +24,11 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
+    public Usuario save(Usuario usuario, Empresa empresa){
+        usuario.setEmpresa(empresa);
+        return usuarioRepository.save(usuario);
+    }
+
     // Método para verificar a existência do usuário e senha
     public boolean existsByEmailAndSenha(String cpf, String senha){
         return usuarioRepository.existsByEmailAndSenha(cpf, senha);
