@@ -65,10 +65,56 @@ public class PedidoService {
         return pedidoRepository.findAll(page);
     }
 
+    // Serviço de busca todos PEDIDOS por LOJA
+    public Page<Pedido> findAllByLoja(String key, Pageable page) {
+        return pedidoRepository.findAllByLoja(key, page);
+    }
+
+    // Serviço de busca todos PEDIDOS filtrado por findAllByLoja e STATUS
+    public List<Pedido> findAllByLojaAndStatus(String key, StatusPedido status, Pageable page){
+        return pedidoRepository.findAllByLojaAndStatus(key, status, page);
+    }
+
+    // Serviço de busca todos PEDIDOS por CIDADE
+    public Page<Pedido> findAllByCidade(String key, Pageable page) {
+        return pedidoRepository.findAllByCidade(key, page);
+    }
+
+    // Serviço de busca todos PEDIDOS filtrado por CIDADE e STATUS
+    public List<Pedido> findAllByCidadeAndStatus(String key, StatusPedido status, Pageable page){
+        return pedidoRepository.findAllByCidadeAndStatus(key, status, page);
+    }
+
+    // Serviço de busca todos PEDIDOS por LOJA
+    public Page<Pedido> findAllByEstado(String key, Pageable page) {
+        return pedidoRepository.findAllByEstado(key, page);
+    }
+
+    // Serviço de busca todos PEDIDOS filtrado por ESTADO e STATUS
+    public List<Pedido> findAllByEstadoAndStatus(String key, StatusPedido status, Pageable page){
+        return pedidoRepository.findAllByEstadoAndStatus(key, status, page);
+    }
+
+    // Serviço de busca todos PEDIDOS por LOJA
+    public Page<Pedido> findAllByEntidade(String key, Pageable page) {
+        return pedidoRepository.findAllByEntidade(key, page);
+    }
+
+    // Serviço de busca todos PEDIDOS filtrado por ENTIDADE e STATUS
+    public List<Pedido> findAllByEntidadeAndStatus(String key, StatusPedido status, Pageable page){
+        return pedidoRepository.findAllByEntidadeAndStatus(key, status, page);
+    }
+
     // Serviço de buscar PEDIDO pelo USUARIO
     public Page<Pedido> findAllByUsuario(Usuario usuario, Pageable page) {
         return pedidoRepository.findAllByUsuario(usuario, page);
     }
+
+    // Serviço de busca todos USUARIO pela EMPRESA
+    public List<Pedido> findAllByUsuarioAndStatus(Usuario usuario, StatusPedido status, Pageable page){
+        return pedidoRepository.findAllByUsuarioAndStatus(usuario, status, page);
+    }
+
 
     // Serviço de busca todos PEDIDOS por STATUS
     public List<Pedido> findAllByStatus(StatusPedido status, Pageable page) {
@@ -80,25 +126,15 @@ public class PedidoService {
         return pedidoRepository.findAllByEmpresa(empresa, page);
     }
 
-    // Serviço de busca todos USUARIO pela EMPRESA
-    public List<Pedido> findAllByUsuarioAndStatus(Usuario usuario, StatusPedido status, Pageable page){
-        return pedidoRepository.findAllByUsuarioAndStatus(usuario, status, page);
-    }
-
     // Serviço de busca todos PEDIDOS pela EMPRESA
     public List<Pedido> findAllByEmpresaAndStatus(Empresa empresa, StatusPedido status, Pageable page){
         return pedidoRepository.findAllByEmpresaAndStatus(empresa, status, page);
     }
 
-    // Serviço de buscar PEDIDO pelo USUARIO e STATUS
-    public List<Pedido> findAllByAnalistaAndStatus(Usuario analista, StatusPedido status, Pageable page) {
-        return pedidoRepository.findAllByAnalistaAndStatus(analista, status, page);
-    }
 
-
-    // Serviço de buscar PEDIDO por EMPRESA e BAIRRO
-    public Page<Pedido> findAllByEmpresaAndBairro(Empresa empresa, String key, Pageable page) {
-        return pedidoRepository.findAllByEmpresaAndBairro(empresa, key, page);
+    // Serviço de buscar PEDIDO por EMPRESA e LOJA
+    public Page<Pedido> findAllByEmpresaAndLoja(Empresa empresa, String key, Pageable page) {
+        return pedidoRepository.findAllByEmpresaAndLoja(empresa, key, page);
     }
 
     // Serviço de buscar PEDIDO por EMPRESA e CIDADE
@@ -116,24 +152,29 @@ public class PedidoService {
         return pedidoRepository.findAllByEmpresaAndEntidade(empresa, key, page);
     }
 
-    // Serviço de buscar PEDIDO por EMPRESA, STATUS e BAIRRO
-    public List<Pedido> findAllByEmpresaAndStatusAndBairro(Empresa empresa, StatusPedido status, String key, Pageable page) {
-        return pedidoRepository.findAllByEmpresaAndStatusAndBairro(empresa, status, key, page);
+    // Serviço de buscar PEDIDO pelo USUARIO e STATUS
+    public List<Pedido> findAllByAnalistaAndStatus(Usuario analista, StatusPedido status, Pageable page) {
+        return pedidoRepository.findAllByAnalistaAndStatus(analista, status, page);
+    }
+
+    // Serviço de buscar PEDIDO por EMPRESA, STATUS e LOJA
+    public List<Pedido> findAllByEmpresaAndLojaAndStatus(Empresa empresa, String key, StatusPedido status, Pageable page) {
+        return pedidoRepository.findAllByEmpresaAndLojaAndStatus(empresa, key, status, page);
     }
 
     // Serviço de buscar PEDIDO por EMPRESA, STATUS e CIDADE
-    public List<Pedido> findAllByEmpresaAndStatusAndCidade(Empresa empresa, StatusPedido status, String key, Pageable page) {
-        return pedidoRepository.findAllByEmpresaAndStatusAndCidade(empresa, status, key, page);
+    public List<Pedido> findAllByEmpresaAndCidadeAndStatus(Empresa empresa, String key, StatusPedido status, Pageable page) {
+        return pedidoRepository.findAllByEmpresaAndLojaAndStatus(empresa, key, status, page);
     }
 
     // Serviço de buscar PEDIDO por EMPRESA, STATUS e ESTADO
-    public List<Pedido> findAllByEmpresaAndStatusAndEstado(Empresa empresa, StatusPedido status, String key, Pageable page) {
-        return pedidoRepository.findAllByEmpresaAndStatusAndEstado(empresa, status, key, page);
+    public List<Pedido> findAllByEmpresaAndEstadoAndStatus(Empresa empresa, String key, StatusPedido status, Pageable page) {
+        return pedidoRepository.findAllByEmpresaAndEstadoAndStatus(empresa, key, status, page);
     }
 
     // Serviço de buscar PEDIDO por EMPRESA, STATUS e ENTIDADE
-    public List<Pedido> findAllByEmpresaAndStatusAndEntidade(Empresa empresa, StatusPedido status, String key, Pageable page) {
-        return pedidoRepository.findAllByEmpresaAndStatusAndEntidade(empresa, status, key, page);
+    public List<Pedido> findAllByEmpresaAndEntidadeAndStatus(Empresa empresa, String key, StatusPedido status, Pageable page) {
+        return pedidoRepository.findAllByEmpresaAndEntidadeAndStatus(empresa, key, status, page);
     }
 
     // Serviço que contabiliza todos os PEDIDOS
@@ -170,28 +211,6 @@ public class PedidoService {
     public Long countByAnalistaAndStatus(Usuario analista, StatusPedido status) {
         return pedidoRepository.countByAnalistaAndStatus(analista, status);
     }
-
-    // Serviço que contabiliza todos os PEDIDOS por EMPRESA e BAIRRO
-    public Long countByEmpresaAndBairro(Empresa empresa, String key){
-        return pedidoRepository.countByEmpresaAndBairro(empresa, key);
-    }
-
-    // Serviço que contabiliza todos os PEDIDOS por EMPRESA e CIDADE
-    public Long countByEmpresaAndCidade(Empresa empresa, String key){
-        return pedidoRepository.countByEmpresaAndCidade(empresa, key);
-    }
-
-    // Serviço que contabiliza todos os PEDIDOS por EMPRESA e ESTADO
-    public Long countByEmpresaAndEstado(Empresa empresa, String key){
-        return pedidoRepository.countByEmpresaAndEstado(empresa, key);
-    }
-
-    // Serviço que contabiliza todos os PEDIDOS por EMPRESA e ENTIDADE
-    public Long countByEmpresaAndEntidade(Empresa empresa, String key){
-        return pedidoRepository.countByEmpresaAndEntidade(empresa, key);
-    }
-
-
 
     private Pedido uploadDocumentos(Pedido pedido, HttpServletRequest request) {
 

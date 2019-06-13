@@ -59,7 +59,7 @@
               <i class="fas fa-gavel"></i>Incentivos Fiscais</a>
           </li>
           <li>
-            <a href="${path}/painel/pedidos">
+            <a href="${path}/painel/pedidos?filtro=TODOS&key=">
               <i class="fas fa-praying-hands"></i>Pedidos</a>
           </li>
         </ul>
@@ -113,7 +113,7 @@
                   <div class="col-12 d-flex justify-content-start">
                     <form class="form-inline">                                          
                       <div class="form-group mx-sm-3 mb-2">
-                        <input type="text" class="form-control" placeholder="Pesquisar por..">
+                        <input type="text" class="form-control" placeholder="Título ..." name="key">
                       </div>
                       <div class="form-group mb-2">
                         <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>
@@ -126,13 +126,13 @@
                 <div class="row">
                   <div class="col-12">
                     <!-- MSG CASO LISTA ESTEJA VAZIA -->
-                    <c:if test = "${empty projetos.content}">
-                      <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
+                    <c:if test="${empty projetos.content}">
+                      <div class="alert alert-danger alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
                         <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-                          <i class="nc-icon nc-simple-remove"></i>
+                            <i class="nc-icon nc-simple-remove"></i>
                         </button>
                         <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
-                        <span data-notify="message">Não há nenhum projeto cadastrado</span>
+                        <span data-notify="message">Não há projeto(s) cadastrado(s) ou resultado(s) para esta busca.</span>
                       </div>
                     </c:if>
                     <!-- EXIBE A LISTA DE PROJETOS -->

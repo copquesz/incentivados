@@ -191,41 +191,67 @@ public class PedidoController {
         Empresa empresa = usuario.getEmpresa();
 
         try {
+            FiltroPedidos[] filtroPedidos = FiltroPedidos.values();
+            model.addAttribute("filtroPedidos", filtroPedidos);
 
             switch (usuario.getTipoUsuario()) {
+
                 case ADMIN:
-                    Pageable pageablePedidos = PageRequest.of(page, 10000, Sort.by(Sort.Order.desc("id")));
-                    model.addAttribute("pedidos", pedidoService.findAll());
-                    model.addAttribute("recusados", pedidoService.findAllByStatus(StatusPedido.RECUSADO, pageablePedidos));
-                    model.addAttribute("qtdPedidos", pedidoService.count());
+
+
+                    // TODO TERMINAR OS FILTROS DE PEDIDOS ADMIN
+
+                    Pageable pageablePedidosAdmin = PageRequest.of(page, 10, Sort.by(Sort.Order.asc("id")));
+
+                    if (filtro == FiltroPedidos.LOJA) {
+                        model.addAttribute("pedidos", pedidoService.findAllByLoja(key, pageablePedidosAdmin));
+                        model.addAttribute("recusados", pedidoService.findAllByLojaAndStatus(key, StatusPedido.RECUSADO,
+                                pageablePedidosAdmin));
+                    } else if (filtro == FiltroPedidos.CIDADE) {
+                        model.addAttribute("pedidos", pedidoService.findAllByCidade(key, pageablePedidosAdmin));
+                        model.addAttribute("recusados", pedidoService.findAllByCidadeAndStatus(key, StatusPedido.RECUSADO,
+                                pageablePedidosAdmin));
+                    } else if (filtro == FiltroPedidos.ESTADO) {
+                        model.addAttribute("pedidos", pedidoService.findAllByEstado(key, pageablePedidosAdmin));
+                        model.addAttribute("recusados", pedidoService.findAllByEstadoAndStatus(key, StatusPedido.RECUSADO,
+                                pageablePedidosAdmin));
+                    } else if (filtro == FiltroPedidos.ENTIDADE) {
+                        model.addAttribute("pedidos", pedidoService.findAllByEntidade(key, pageablePedidosAdmin));
+                        model.addAttribute("recusados", pedidoService.findAllByEntidadeAndStatus(key, StatusPedido.RECUSADO,
+                                pageablePedidosAdmin));
+                    } else {
+                        model.addAttribute("pedidos", pedidoService.findAll(pageablePedidosAdmin));
+                        model.addAttribute("recusados", pedidoService.findAllByStatus(StatusPedido.RECUSADO,
+                                pageablePedidosAdmin));
+                    }
+
                     return "painel/admin/pedido/lista";
 
 
                 case EMPRESA:
-                    FiltroPedidos[] filtroPedidos = FiltroPedidos.values();
-                    model.addAttribute("filtroPedidos", filtroPedidos);
 
                     Pageable pageablePedidosEmpresa = PageRequest.of(page, 10, Sort.by(Sort.Order.asc("id")));
 
                     if (filtro == FiltroPedidos.LOJA) {
-                        model.addAttribute("pedidos", pedidoService.findAllByEmpresaAndBairro(empresa, key, pageablePedidosEmpresa));
-                        model.addAttribute("qtdPedidos", pedidoService.countByEmpresaAndBairro(empresa, key));
-                        model.addAttribute("recusados", pedidoService.findAllByEmpresaAndStatusAndBairro(empresa, StatusPedido.RECUSADO, key,
+                        model.addAttribute("pedidos", pedidoService.findAllByEmpresaAndLoja(empresa, key, pageablePedidosEmpresa));
+                        model.addAttribute("recusados", pedidoService.findAllByEmpresaAndLojaAndStatus(empresa, key, StatusPedido.RECUSADO,
                                 pageablePedidosEmpresa));
                     } else if (filtro == FiltroPedidos.CIDADE) {
                         model.addAttribute("pedidos", pedidoService.findAllByEmpresaAndCidade(empresa, key, pageablePedidosEmpresa));
-                        model.addAttribute("qtdPedidos", pedidoService.countByEmpresaAndCidade(empresa, key));
-                        model.addAttribute("recusados", pedidoService.findAllByEmpresaAndStatusAndCidade(empresa, StatusPedido.RECUSADO, key,
+                        model.addAttribute("recusados", pedidoService.findAllByEmpresaAndCidadeAndStatus(empresa, key, StatusPedido.RECUSADO,
+                                pageablePedidosEmpresa));
+                    } else if (filtro == FiltroPedidos.ESTADO) {
+                        model.addAttribute("pedidos", pedidoService.findAllByEmpresaAndEstado(empresa, key, pageablePedidosEmpresa));
+                        model.addAttribute("recusados", pedidoService.findAllByEmpresaAndEstadoAndStatus(empresa, key, StatusPedido.RECUSADO,
                                 pageablePedidosEmpresa));
                     } else if (filtro == FiltroPedidos.ENTIDADE) {
-                        model.addAttribute("pedidos", pedidoService.findAllByEmpresaAndEntidade(empresa, key, pageablePedidosEmpresa));
-                        model.addAttribute("qtdPedidos", pedidoService.countByEmpresaAndEntidade(empresa, key));
-                        model.addAttribute("recusados", pedidoService.findAllByEmpresaAndStatusAndEntidade(empresa, StatusPedido.RECUSADO, key,
+                        model.addAttribute("pedidos", pedidoService.findAllByEmpresaAndEstado(empresa, key, pageablePedidosEmpresa));
+                        model.addAttribute("recusados", pedidoService.findAllByEmpresaAndEstadoAndStatus(empresa, key, StatusPedido.RECUSADO,
                                 pageablePedidosEmpresa));
                     } else {
                         model.addAttribute("pedidos", pedidoService.findAllByEmpresa(empresa, pageablePedidosEmpresa));
-                        model.addAttribute("qtdPedidos", pedidoService.countByEmpresa(empresa));
-                        model.addAttribute("recusados", pedidoService.findAllByEmpresaAndStatus(empresa, StatusPedido.RECUSADO, pageablePedidosEmpresa));
+                        model.addAttribute("recusados", pedidoService.findAllByEmpresaAndStatus(empresa, StatusPedido.RECUSADO,
+                                pageablePedidosEmpresa));
                     }
 
                     return "painel/empresa/pedido/lista";

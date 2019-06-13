@@ -64,8 +64,7 @@ public class ProjetoController {
             // Direciona o USUARIO para sua view de acordo com perfil
             switch (usuario.getTipoUsuario()) {
                 case ADMIN:
-                    model.addAttribute("projetos", projetoService.findAll(pageable));
-                    model.addAttribute("qtdProjetos", projetoService.count());
+                    model.addAttribute("projetos", projetoService.findAll(pageable, key));
                     return "painel/admin/projeto/lista";
                 case ENTIDADE:
                     model.addAttribute("projetos", projetoService.findAllByUsuario(usuario, pageable, key));

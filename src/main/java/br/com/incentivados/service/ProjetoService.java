@@ -61,6 +61,10 @@ public class ProjetoService {
 		return projetoRepository.findAll(page);
 	}
 
+	public Page<Projeto> findAll(Pageable page, String key){
+		return projetoRepository.findAll(page, key);
+	}
+
 	public Page<Projeto> findAllByUsuario(Usuario usuario, Pageable page){
 		return projetoRepository.findAllByUsuario(usuario, page);
 	}

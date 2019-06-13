@@ -98,14 +98,14 @@
                       <label>Filtrar por: </label>
                       <form class="form-inline">                                          
                         <div class="form-group mb-2">                          
-                          <select class="form-control" name="filtro" id="filtro">
+                          <select class="form-control" name="filtro" id="filtro-empresa">
                              <c:forEach var="filtroPedido" items="${filtroPedidos}">
                                <option value="${filtroPedido}">${filtroPedido.descricao}</option>
                              </c:forEach>
                           </select>
                         </div>
                         <div class="form-group mx-sm-3 mb-2">
-                          <input class="form-control" type="text" name="key" id="key" placeholder="palavra-chave" />
+                          <input class="form-control" type="text" name="key" id="key-empresa" placeholder="palavra-chave" />
                         </div>
                         <div class="form-group mb-2">
                           <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>
@@ -234,36 +234,30 @@
             
             if(chave == 'filtro'){
               if(valor == 'LOJA'){
-                $("#filtro").val('LOJA');
-                $('#key').show();
+                $("#filtro-empresa").val('LOJA');
+                $('#key-empresa').show();
 
               }
               else if(valor == 'CIDADE'){
-                $("#filtro").val('CIDADE');
-                $('#key').show();
+                $("#filtro-empresa").val('CIDADE');
+                $('#key-empresa').show();
               }
               else if(valor == 'ESTADO'){
-                $("#filtro").val('ESTADO');
-                $('#key').show();
+                $("#filtro-empresa").val('ESTADO');
+                $('#key-empresa').show();
               }
               else if(valor == 'ENTIDADE'){
-                $("#filtro").val('ENTIDADE');
-                $('#key').show();
+                $("#filtro-empresa").val('ENTIDADE');
+                $('#key-empresa').show();
               }
               else{
-                $("#filtro").val('TODOS');
-                $('#key').hide();
+                $("#filtro-empresa").val('TODOS');
+                $('#key-empresa').hide();
               }
             }
         });
     });
   </script> 
-  <script type="text/javascript">
-    $(document).ready(function() {
-      
-    });
-  </script> 
-
 </body>
 
 </html>

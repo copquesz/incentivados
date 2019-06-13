@@ -5,6 +5,7 @@ import br.com.incentivados.model.Usuario;
 import br.com.incentivados.service.EntidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -143,15 +144,18 @@ public class EntidadeController {
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
         try {
+
+            Pageable pageable = PageRequest.of(page, 5, Sort.by(Sort.Order.asc("id")));
+
             // Verifica o tipo de usuário logado.
             switch (usuario.getTipoUsuario()) {
 
                 case ADMIN:
-                    model.addAttribute("entidades", entidadeService.findAll(PageRequest.of(page, 5, Sort.by(Sort.Order.asc("id"))), key));
+                    model.addAttribute("entidades", entidadeService.findAll(pageable, key));
                     return "painel/admin/entidade/lista";
 
                 case ENTIDADE:
-                    model.addAttribute("entidades", entidadeService.findAllByUsuario(usuario, PageRequest.of(page, 5, Sort.by(Sort.Order.asc("id"))), key));
+                    model.addAttribute("entidades", entidadeService.findAllByUsuario(usuario, pageable, key));
                     return "painel/entidade/entidade/lista";
 
                 default:

@@ -23,6 +23,9 @@ public interface ProjetoRepository extends JpaRepository<Projeto, Projeto> {
     Long countByUsuario(Usuario usuario);
     Long countByIncentivosFiscais(IncentivoFiscal incentivoFiscal);
 
+    @Query("SELECT projeto FROM Projeto projeto WHERE projeto.titulo LIKE %:key%")
+    Page<Projeto> findAll(Pageable page, @Param("key") String key);
+
     @Query("SELECT projeto FROM Projeto projeto WHERE projeto.usuario = :usuario AND projeto.titulo LIKE %:key%")
     Page<Projeto> findAllByUsuario(@Param("usuario") Usuario usuario, Pageable page, @Param("key") String key);
 }

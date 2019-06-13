@@ -58,7 +58,7 @@
               <i class="fas fa-gavel"></i>Incentivos Fiscais</a>
           </li>
           <li class="active">
-            <a href="${path}/painel/pedidos">
+            <a href="${path}/painel/pedidos?filtro=TODOS&key=">
               <i class="fas fa-praying-hands"></i>Pedidos</a>
           </li>
         </ul>
@@ -107,13 +107,21 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header "> 
-                <h5 class="card-title">Pedidos Cadastrado(s): ${qtdPedidos}</h5>
+                <h5 class="card-title">Pedidos(s): ${qtdPedidos}</h5>
                 <div class="d-flex justify-content-start">
                   <div class="row">
                     <div class="col-12">
+                      <label>Filtrar por: </label>
                       <form class="form-inline">                                          
+                        <div class="form-group mb-2">                          
+                          <select class="form-control" name="filtro" id="filtro-admin">
+                             <c:forEach var="filtroPedido" items="${filtroPedidos}">
+                               <option value="${filtroPedido}">${filtroPedido.descricao}</option>
+                             </c:forEach>
+                          </select>
+                        </div>
                         <div class="form-group mx-sm-3 mb-2">
-                          <input type="text" class="form-control" placeholder="Pesquisar por.." name="n">
+                          <input class="form-control" type="text" name="key" id="key-admin" placeholder="palavra-chave" />
                         </div>
                         <div class="form-group mb-2">
                           <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>
@@ -127,34 +135,76 @@
                 <div class="row mt-2">
                   <div class="col-12">
                     <!-- MSG DE VAZIO -->
-                    <c:if test = "${empty pedidos}">
+                    <c:if test = "${empty pedidos.content}">
                       <div class="alert alert-danger mt-3" role="alert">
-                        <p class="text-bold">Não há registro(s) ou .</p>
+                        <p class="text-bold">Não há registro(s) ou não há resultados para esta palavra-chave.</p>
                       </div>
                     </c:if>      
-                    <c:if test = "${not empty pedidos}">              
-                      <div class="table-responsive">
-                        <table class="table">
+                    <c:if test = "${not empty pedidos.content}"> 
+                      <nav class="float-right" aria-label="Paginação de Pedidos">
+                        <ul class="pagination"> 
+                          <c:choose> 
+                            <c:when test = "${pedidos.totalPages == 1}">
+                              <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
+                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/pedidos?page=${pedidos.number}&filtro=${filtro}&key=${key}">${pedidos.number + 1}</a></li>
+                              <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
+                            </c:when>
+                            <c:when test = "${(pedidos.totalPages == 2) && (pedidos.number + 1 < pedidos.totalPages)}">
+                              <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
+                              <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/pedidos?page=${pedidos.number}&filtro=${filtro}&key=${key}">${pedidos.number + 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.number + 1}&filtro=${filtro}&key=${key}">${pedidos.number + 2}</a></li>
+                              <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
+                            </c:when>
+                            <c:when test = "${(pedidos.totalPages == 2) && (pedidos.number + 1 == pedidos.totalPages)}">
+                              <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.number - 1}&filtro=${filtro}&key=${key}">${pedidos.number}</a></li>
+                              <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/pedidos?page=${pedidos.number}&filtro=${filtro}&key=${key}">${pedidos.number + 1}</a></li>
+                              <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
+                            </c:when>
+                            <c:when test = "${(pedidos.totalPages >= 3) && (pedidos.number == 0)}">
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?filtro=${filtro}&key=${key}">Primeira</a></li>
+                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/pedidos?page=${pedidos.number}&filtro=${filtro}&key=${key}">${pedidos.number + 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.number + 1}&filtro=${filtro}&key=${key}">${pedidos.number + 2}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.number + 2}&filtro=${filtro}&key=${key}">${pedidos.number + 3}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.totalPages - 1}&filtro=${filtro}&key=${key}">Última</a></li>
+                            </c:when>
+                            <c:when test = "${(pedidos.totalPages >= 3) && (pedidos.number > 0) && (pedidos.number + 1 < pedidos.totalPages)}">
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?filtro=${filtro}&key=${key}">Primeira</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.number - 1}&filtro=${filtro}&key=${key}">${pedidos.number}</a></li>
+                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/pedidos?page=${pedidos.number}&filtro=${filtro}&key=${key}">${pedidos.number + 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.number + 1}&filtro=${filtro}&key=${key}">${pedidos.number + 2}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.totalPages - 1}&filtro=${filtro}&key=${key}">Última</a></li>
+                            </c:when>
+                            <c:when test = "${(pedidos.totalPages >= 3) && (pedidos.number + 1 == pedidos.totalPages)}">
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?filtro=${filtro}&key=${key}">Primeira</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.number - 2}&filtro=${filtro}&key=${key}">${pedidos.number - 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.number - 1}&filtro=${filtro}&key=${key}">${pedidos.number}</a></li>
+                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/pedidos?page=${pedidos.number}&filtro=${filtro}&key=${key}">${pedidos.number + 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.totalPages - 1}&filtro=${filtro}&key=${key}">Última</a></li>
+                            </c:when>
+                          </c:choose> 
+                        </ul>
+                      </nav> 
+                      <div class="table-responsive-sm">
+                        <table class="table border">
                           <thead class=" text-primary">
-                            <th class="text-center">Código Pedido</th>
-                            <th class="text-center">Data Solicitação</th>
-                            <th class="text-center">Entidade</th>
-                            <th class="text-center">Empresa</th>
-                            <th class="text-center">Loja</th>
-                            <th class="text-center">Carta Ofício</th>
-                            <th class="text-center">Status</th>
+                            <th class="text-center border">Código Pedido</th>
+                            <th class="text-center border">Data Solicitação</th>
+                            <th class="text-center border">Entidade</th>
+                            <th class="text-center border">Loja</th>
+                            <th class="text-center border">Carta Ofício</th>
+                            <th class="text-center border">Status</th>
                           </thead>
                           <tbody>
-                            <c:forEach var="pedido" items="${pedidos}">
+                            <c:forEach var="pedido" items="${pedidos.content}">
                               <tr>
-                                <td class="text-center">${pedido.id}</td>
+                                <td class="text-center border"># ${pedido.id}</td>
                                 <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedido.dataCadastro}" var="dataCadastro" />
-                                <td class="text-center">${dataCadastro}</td>
-                                <td class="text-center">${pedido.entidade.nomeFantasia}</td>
-                                <td class="text-center">${pedido.empresa.nomeFantasia}</td>
-                                <td class="text-center">${pedido.analista.endereco.bairro} - ${pedido.analista.endereco.cidade} / ${pedido.analista.endereco.estado}</td>
-                                <td class="text-center"><a href="${path}/${pedido.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>
-                                <th class="text-center">
+                                <td class="text-center border">${dataCadastro}</td>
+                                <td class="text-center border" title="${pedido.entidade.razaoSocial}">${pedido.entidade.nomeFantasia}</td>
+                                <td class="text-center border" title="Cidade: ${pedido.analista.endereco.cidade} / Estado: ${pedido.analista.endereco.estado}"> ${pedido.analista.endereco.bairro}</td>
+                                <td class="text-center border"><a href="${path}/${pedido.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>
+                                <th class="text-center border">
                                   <c:if test = "${pedido.status.id == 0}"><span class="bg-warning p-1 text-white">${pedido.status}</span></c:if>
                                   <c:if test = "${pedido.status.id == 1}"><span class="bg-danger p-1"><a href="#" class="text-white" data-toggle="modal" data-target="#modal-motivo-reprovado-${pedido.id}" title="Visualizar Motivo">${pedido.status}</a></span></c:if>
                                   <c:if test = "${pedido.status.id == 2}"><span class="bg-success p-1 text-white">${pedido.status}</span></c:if>
@@ -187,7 +237,42 @@
   <!--   BOOTSTRAP   -->  
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>  
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script>  
+  <script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      var url = location.search.slice(1);
+        var partes = url.split('&');
+        partes.forEach(function (parte) {
+            var chaveValor = parte.split('=');
+            var chave = String(chaveValor[0]);
+            var valor = chaveValor[1];    
+            
+            if(chave == 'filtro'){
+              if(valor == 'LOJA'){
+                $("#filtro-admin").val('LOJA');
+                $('#key-admin').show();
+
+              }
+              else if(valor == 'CIDADE'){
+                $("#filtro-admin").val('CIDADE');
+                $('#key-admin').show();
+              }
+              else if(valor == 'ESTADO'){
+                $("#filtro-admin").val('ESTADO');
+                $('#key-admin').show();
+              }
+              else if(valor == 'ENTIDADE'){
+                $("#filtro-admin").val('ENTIDADE');
+                $('#key-admin').show();
+              }
+              else{
+                $("#filtro-admin").val('TODOS');
+                $('#key-admin').hide();
+              }
+            }
+        });
+    });
+  </script>   
 
 </body>
 
