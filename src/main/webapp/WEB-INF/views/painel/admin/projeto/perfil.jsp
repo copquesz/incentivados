@@ -5,30 +5,25 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="utf-8"/>
-    <link rel="apple-touch-icon" sizes="76x76" href="${path}/assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>
-        Incentivados - ${projeto.titulo}
-    </title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
-          name='viewport'/>
-    <!--     FONTAWESOME     -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <!--     BOOTSTRAP     -->
-    <link href="${path}/assets/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="${path}/assets/css/bootstrap-select.min.css" rel="stylesheet">
-    <!--     CUSTOM     -->
-    <link href="${path}/assets/css/paper-dashboard.css?v=2.0.0" rel="stylesheet"/>
-    <link href="${path}/assets/css/style.css" rel="stylesheet"/>
-<%--    <style type="text/css">--%>
-<%--      .btn-select, .btn-select:hover{--%>
-<%--        background-color: #e0eeef;--%>
-<%--      }--%>
-<%--    </style>--%>
+  <meta charset="utf-8"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="${path}/assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>
+      Incentivados - ${projeto.titulo}
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+        name='viewport'/>
+  <!--     FONTAWESOME     -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <!--     BOOTSTRAP     -->
+  <link href="${path}/assets/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="${path}/assets/css/bootstrap-select.min.css" rel="stylesheet">
+  <!--     CUSTOM     -->
+  <link href="${path}/assets/css/paper-dashboard.css?v=2.0.0" rel="stylesheet"/>
+  <link href="${path}/assets/css/style.css" rel="stylesheet"/>
 </head>
 
 <body class="">
@@ -116,6 +111,15 @@
                     <div class="card">
                         <div class="card-header bg-info"></div>
                         <div class="card-body border">
+                            <c:if test = "${not empty projeto.ods}">
+                              <div class="row mt-2">
+                                <div class="col-md-12">
+                                  <c:forEach var="ods" items="${projeto.ods}">
+                                    <img class="logo-ods float-right mx-1" src="${path}/${ods.path}">
+                                  </c:forEach>
+                                </div>
+                              </div>
+                            </c:if>
                             <div class="row mt-4">
                                 <div class="col-sm-12 col-md-4 text-sm-center">
                                     <figure class="figure">
@@ -268,8 +272,11 @@
                             </fieldset>
                         </div>
                         <div class="card-footer">
-                          <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modal-indicacao" data-id="${projeto.id}">
+                          <button type="button" class="btn btn-primary float-right mx-1" data-toggle="modal" data-target="#modal-indicacao">
                             Indicar Projeto
+                          </button>
+                          <button type="button" class="btn btn-warning float-right mx-1" data-toggle="modal" data-target="#modal-ods">
+                            Adicionar Selo ODS
                           </button>
                         </div>
                     </div>
@@ -279,6 +286,7 @@
         </div>
         <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp"/>
         <c:import url="/WEB-INF/views/componentes/modal/modal-indicacao.jsp"/>
+        <c:import url="/WEB-INF/views/componentes/modal/modal-ods.jsp"/>
     </div>
 </div>
 
@@ -292,16 +300,6 @@
 <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 <script type="text/javascript" src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
 <script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script>
-<script type="text/javascript">
-    $('#modal-indicacao').on('show.bs.modal', function (event) {
-      var button = $(event.relatedTarget) // Button that triggered the modal
-      var id_projeto = button.data('id') // Extract info from data-* attributes
-      // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-      // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-      var modal = $(this)
-      modal.find('#id-projeto').val(id_projeto)
-    })
-</script>
 </body>
 
 </html>

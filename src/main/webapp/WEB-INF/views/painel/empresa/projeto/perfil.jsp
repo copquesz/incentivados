@@ -98,6 +98,15 @@
                     <div class="card">
                         <div class="card-header bg-info"></div>
                         <div class="card-body border">
+                            <c:if test = "${not empty projeto.ods}">
+                              <div class="row mt-2">
+                                <div class="col-md-12">
+                                  <c:forEach var="ods" items="${projeto.ods}">
+                                    <img class="logo-ods float-right mx-1" src="${path}/${ods.path}">
+                                  </c:forEach>
+                                </div>
+                              </div>
+                            </c:if>
                             <div class="row mt-4">
                                 <div class="col-sm-12 col-md-4 text-sm-center">
                                     <figure class="figure">

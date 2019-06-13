@@ -9,9 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UsuarioService {
@@ -53,7 +51,10 @@ public class UsuarioService {
 
     // Método para atualizar o último acesso do usuário
     public Usuario ultimoAcesso(Usuario usuario) {
-    	usuario.setUltimoAcesso(new Date());
+        TimeZone tz = TimeZone.getTimeZone("America/Sao_Paulo");
+        TimeZone.setDefault(tz);
+    	usuario.setUltimoAcesso(Calendar.getInstance(tz).getTime());
+        System.out.println(Calendar.getInstance(tz).getTime());
     	return usuarioRepository.save(usuario);
     }
 

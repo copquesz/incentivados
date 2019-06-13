@@ -1,5 +1,6 @@
 package br.com.incentivados.service;
 
+import br.com.incentivados.enumerated.Ods;
 import br.com.incentivados.model.*;
 import br.com.incentivados.repository.ProjetoRepository;
 import br.com.incentivados.utility.FileUpload;
@@ -27,6 +28,21 @@ public class ProjetoService {
 
 		projeto.setUsuario(usuario);
 		projeto = uploadDocumentos(request, projeto);
+
+		return projetoRepository.save(projeto);
+	}
+
+	// Serviço que faz a persistencia das ODS's do PROJETO
+	public Projeto adicionaOds(Projeto projeto, List<Ods> ods){
+
+		if(projeto.getOds().size() == 0){
+			projeto.setOds(ods);
+		}
+
+		else{
+			for(Ods odsAux: ods)
+			projeto.getOds().add(odsAux);
+		}
 
 		return projetoRepository.save(projeto);
 	}

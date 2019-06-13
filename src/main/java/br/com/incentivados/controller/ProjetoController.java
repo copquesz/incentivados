@@ -1,5 +1,6 @@
 package br.com.incentivados.controller;
 
+import br.com.incentivados.enumerated.Ods;
 import br.com.incentivados.model.Empresa;
 import br.com.incentivados.model.Projeto;
 import br.com.incentivados.model.Usuario;
@@ -189,6 +190,10 @@ public class ProjetoController {
                         empresa.setIndicacao(empresaService.isIndicacao(empresa, projeto.get()));
                     }
                     model.addAttribute("empresas", empresas);
+
+                    Ods[] listaOds = Ods.values();
+                    model.addAttribute("listaOds", listaOds);
+
                     return "painel/admin/projeto/perfil";
                 case ENTIDADE:
                     return "painel/entidade/projeto/perfil";
@@ -220,6 +225,25 @@ public class ProjetoController {
         }
         else {
             logger.log(Level.WARNING, "Projeto ou Empresa não localizado.");
+        }
+
+        return "redirect:/painel/projetos/" + projeto.get().getId();
+    }
+
+    @PostMapping("/painel/projetos/ods")
+    public String postAdicionarOds(@RequestParam(required = true) Long projetoId,@RequestParam List<Ods> ods, HttpServletRequest request, Model model){
+
+        // Seta o path da requisição
+        model.addAttribute("path", request.getContextPath());
+
+        Optional<Projeto> projeto = projetoService.findById(projetoId);
+
+        if(projeto.isPresent()){
+            projetoService.adicionaOds(projeto.get(), ods);
+            logger.log(Level.INFO, "ODS's adicionada ao projeto " + projeto.get().getTitulo());
+        }
+        else {
+            logger.log(Level.SEVERE, "Falha ao adicionar as ODS no projeto " + projeto.get().getTitulo());
         }
 
         return "redirect:/painel/projetos/" + projeto.get().getId();

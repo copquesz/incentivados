@@ -1,11 +1,13 @@
 package br.com.incentivados.model;
 
+import br.com.incentivados.enumerated.Ods;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -74,10 +76,16 @@ public class Projeto implements Serializable{
     )	
 	private List<IncentivoFiscal> incentivosFiscais;
 
+	@ElementCollection(targetClass = Ods.class)
+	@Enumerated(EnumType.STRING)
+	private Collection<Ods> ods;
+
 	// Construtor
 	public Projeto() {
 		super();
 		this.dataCadastro = new Date();
+		this.incentivosFiscais = null;
+		this.ods = null;
 	}
 	
 	

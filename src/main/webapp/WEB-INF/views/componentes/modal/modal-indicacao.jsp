@@ -12,13 +12,13 @@
       </div>
       <form action="${path}/painel/projetos/indicar" method="post" acceptcharset="UTF-8"> 
         <div class="modal-body">
-          <input type="hidden" id="id-projeto" name="projetoId">
+          <input type="hidden" name="projetoId" value="${projeto.id}">
           <label>Selecione a empresa para qual você deseja indicar este projeto:</label>
           <select class="selectpicker form-control" name="empresaId" title="Selecione ..." data-live-search="true" data-style="btn-neutral" required>
             <c:forEach var="empresa" items="${empresas}">
               <c:choose>
                 <c:when test = "${empresa.indicacao}">
-                  <option style="background-color: #e74c3c; color: #fff; font-weight: bold; border-radius: 0%;" disabled >${empresa.nomeFantasia}</option>
+                  <option style="background-color: #e74c3c; color: #fff; font-weight: bold; border-radius: 0%; border: 1px solid #fff;" disabled >${empresa.nomeFantasia}</option>
                 </c:when>
                 <c:otherwise>
                   <option value="${empresa.id}">${empresa.nomeFantasia}</option>

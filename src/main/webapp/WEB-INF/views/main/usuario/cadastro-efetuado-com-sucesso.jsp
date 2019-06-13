@@ -23,7 +23,7 @@
 
 <body class="bg-success">
   <div class="container h-100">    
-     <div class="d-flex justify-content-center h-100" style="margin-top: 300px;">
+     <div class="d-flex justify-content-center h-100" style="margin-top: 30%;">
        <div class="alert alert-success bg-success" role="alert">
          <h1 class="alert-heading"> <i class="fas fa-check fa-2x text-white align-middle"></i> <strong>Cadastro Realizado!</strong></h1>
          <p class="lead">Olá <strong>${usuario.nome}</strong>, seu cadastro foi realizado com sucesso em nossa plataforma.</p>

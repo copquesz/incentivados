@@ -23,7 +23,7 @@
 
 <body class="bg-danger">
   <div class="container h-100">    
-      <div class="d-flex justify-content-center h-100" style="margin-top: 300px;">
+      <div class="d-flex justify-content-center h-100" style="margin-top: 30%;">
         <div class="alert alert-danger bg-danger" role="alert">
           <input type="hidden" name="redirect" value="${redirect}">
           <h1 class="alert-heading"> <i class="fas fa-check fa-2x text-white align-middle"></i> <strong>Falha!</strong></h1>
