@@ -103,7 +103,7 @@
                     <div class="col-12">
                       <form class="form-inline">                                          
                         <div class="form-group mx-sm-3 mb-2">
-                          <input type="text" class="form-control" placeholder="Pesquisar por Título ..." name="key">
+                          <input type="text" class="form-control" placeholder="Título ..." name="key">
                         </div>
                         <div class="form-group mb-2">
                           <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>

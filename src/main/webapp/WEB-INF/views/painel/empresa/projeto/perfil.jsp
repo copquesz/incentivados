@@ -102,7 +102,7 @@
                               <div class="row mt-2">
                                 <div class="col-md-12">
                                   <c:forEach var="ods" items="${projeto.ods}">
-                                    <img class="logo-ods float-right mx-1" src="${path}/${ods.path}">
+                                    <img class="logo-ods float-right mx-1 my-1" src="${path}/${ods.path}">
                                   </c:forEach>
                                 </div>
                               </div>

@@ -59,6 +59,10 @@ public class EntidadeService {
         return entidadeRepository.findAll(page);
     }
 
+    public Page<Entidade> findAll(Pageable page, String key) {
+        return entidadeRepository.findAll(page, key);
+    }
+
     public Page<Entidade> findAllByUsuario(Usuario usuario, Pageable page) {
         return entidadeRepository.findAllByUsuario(usuario, page);
     }

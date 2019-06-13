@@ -147,7 +147,7 @@ public class EntidadeController {
             switch (usuario.getTipoUsuario()) {
 
                 case ADMIN:
-                    model.addAttribute("entidades", entidadeService.findAll(PageRequest.of(page, 5, Sort.by(Sort.Order.asc("id")))));
+                    model.addAttribute("entidades", entidadeService.findAll(PageRequest.of(page, 5, Sort.by(Sort.Order.asc("id"))), key));
                     return "painel/admin/entidade/lista";
 
                 case ENTIDADE:

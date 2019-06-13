@@ -29,6 +29,9 @@ public interface EntidadeRepository extends JpaRepository<Entidade, Long> {
 
     Page<Entidade> findAllByUsuario(Usuario usuario, Pageable page);
 
+    @Query("SELECT entidade FROM Entidade entidade WHERE entidade.nomeFantasia LIKE %:key% OR entidade.cnpj LIKE %:key%")
+    Page<Entidade> findAll(Pageable page, @Param("key") String key);
+
     @Query("SELECT entidade FROM Entidade entidade WHERE entidade.usuario = :usuario AND entidade.nomeFantasia LIKE %:key% OR entidade.cnpj LIKE %:key%")
     Page<Entidade> findAllByUsuario(@Param("usuario") Usuario usuario, Pageable page, @Param("key") String key);
 
