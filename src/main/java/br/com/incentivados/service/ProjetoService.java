@@ -98,19 +98,19 @@ public class ProjetoService {
 		final Arquivo certificado = projeto.getDocumentosProjeto().getCertificado();
 
 		projeto.getDocumentosProjeto().getLogo().setPath(
-				FileUpload.upload(request, logo.getFile(), "logo." + logo.getFile().getOriginalFilename().split("\\.")[1], path));
+				FileUpload.upload(request, logo.getFile(), "logo.", path));
 
 		projeto.getDocumentosProjeto().getPropostaTecnica().setPath(FileUpload.upload(request, propostaTecnica.getFile(),
-				"proposta-tecnica." + propostaTecnica.getFile().getOriginalFilename().split("\\.")[1], path));
+				"proposta-tecnica.", path));
 
 		projeto.getDocumentosProjeto().getPropostOrcamentaria().setPath(FileUpload.upload(request, propostaOrcamentaria.getFile(),
-				"proposta-orcamentaria." + logo.getFile().getOriginalFilename().split("\\.")[1], path));
+				"proposta-orcamentaria.", path));
 
 		projeto.getDocumentosProjeto().getDadosBancarios().setPath(FileUpload.upload(request, dadosBancarios.getFile(),
-				"dados-bancarios." + dadosBancarios.getFile().getOriginalFilename().split("\\.")[1], path));
+				"dados-bancarios.", path));
 
 		projeto.getDocumentosProjeto().getCertificado().setPath(FileUpload.upload(request, certificado.getFile(),
-				"certificado." + certificado.getFile().getOriginalFilename().split("\\.")[1], path));
+				"certificado.", path));
 
 		return projeto;
 

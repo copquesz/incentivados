@@ -112,19 +112,23 @@ public class EntidadeService {
 
         // Seta os parâmetros dos arquivos para fazer o upload
         entidade.getDocumentosEntidade().getLogo().setPath(
-                FileUpload.upload(request, logo.getFile(), "logo." + logo.getFile().getOriginalFilename().split("\\.")[1], path));
+                FileUpload.upload(request, logo.getFile(), "logo", path));
 
-        entidade.getDocumentosEntidade().getAtaEleicao().setPath(FileUpload.upload(request, ataEleicao.getFile(),
-                "ata-de-eleicao." + ataEleicao.getFile().getOriginalFilename().split("\\.")[1], path));
+        if (!ataEleicao.getFile().isEmpty()) {
+            entidade.getDocumentosEntidade().getAtaEleicao().setPath(FileUpload.upload(request, ataEleicao.getFile(),
+                    "ata-de-eleicao", path));
+        }
 
-        entidade.getDocumentosEntidade().getEstatutoSocial().setPath(FileUpload.upload(request, estatutoSocial.getFile(),
-                "estatuto-social." + estatutoSocial.getFile().getOriginalFilename().split("\\.")[1], path));
+
+       entidade.getDocumentosEntidade().getEstatutoSocial().setPath(FileUpload.upload(request, estatutoSocial.getFile(),
+                   "estatuto-social", path));
+
 
         entidade.getDocumentosEntidade().getIdentidade().setPath(FileUpload.upload(request, identidade.getFile(),
-                "identidade." + identidade.getFile().getOriginalFilename().split("\\.")[1], path));
+                "identidade", path));
 
         entidade.getDocumentosEntidade().getCartaoCnpj().setPath(FileUpload.upload(request, cartaoCnpj.getFile(),
-                "cartao-cnpj." + cartaoCnpj.getFile().getOriginalFilename().split("\\.")[1], path));
+                "cartao-cnpj", path));
 
         return entidade;
     }

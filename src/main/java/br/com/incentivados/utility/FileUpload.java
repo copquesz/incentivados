@@ -12,8 +12,7 @@ public class FileUpload implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static String REAL_PATH = "";
 
-	public static String upload(HttpServletRequest request, MultipartFile arquivo, String nomeArquivo,
-			String url) {
+	public static String upload(HttpServletRequest request, MultipartFile arquivo, String nomeArquivo, String url) {
 
 		REAL_PATH = request.getServletContext().getRealPath(url);
 
@@ -21,11 +20,19 @@ public class FileUpload implements Serializable {
 			new File(REAL_PATH).mkdirs();
 		}
 
+
 		try {
+			System.out.println(nomeArquivo);
+			String[] extensao = arquivo.getOriginalFilename().split("\\.");
+			for (String s: extensao){
+				System.out.println("Extensão: " + s);
+			}
+			nomeArquivo += "." + extensao[extensao.length - 1];
+			System.out.println("Nome do Arquivo: " + nomeArquivo);
 			arquivo.transferTo(new File(REAL_PATH + "/" + nomeArquivo));
 			System.out.println("Arquivo salvo no local:\n" + REAL_PATH + "/" + nomeArquivo);
 		} catch (IOException e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 
 		return url + "/" + nomeArquivo;

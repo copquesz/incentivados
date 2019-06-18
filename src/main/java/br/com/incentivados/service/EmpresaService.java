@@ -100,8 +100,8 @@ public class EmpresaService {
 
     private Empresa uploadDocumentos(Empresa empresa, HttpServletRequest request) {
         empresa.getDocumentosEmpresa().getLogo()
-                .setPath(FileUpload.upload(request, empresa.getDocumentosEmpresa().getLogo().getFile(), "logo."
-                                + empresa.getDocumentosEmpresa().getLogo().getFile().getOriginalFilename().split("\\.")[1],
+                .setPath(FileUpload.upload(request,
+                        empresa.getDocumentosEmpresa().getLogo().getFile(), "logo.",
                         "documentos/empresas/" + empresa.getNomeFantasia()));
         return empresa;
     }

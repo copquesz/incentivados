@@ -209,22 +209,24 @@
                                             <h5 class="text-center">Logo</h5>
                                         </div>
                                     </div>
-                                    <div class="col-lg-2 text-center mt-5">
-                                        <div class="form-group">
-                                            <a href="${path}/${entidade.documentosEntidade.ataEleicao.path}"
-                                               target="_blank"><i class="far fa-file-image text-primary"
-                                                                  style="font-size: 56px;"></i></a>
-                                            <hr>
-                                            <h5 class="text-center">Ata de Eleição</h5>
-                                        </div>
-                                    </div>
+                                    <c:if test="${not empty entidade.documentosEntidade.ataEleicao.path}">
+                                      <div class="col-lg-2 text-center mt-5">
+                                          <div class="form-group">
+                                              <a href="${path}/${entidade.documentosEntidade.ataEleicao.path}"
+                                                 target="_blank"><i class="far fa-file-image text-primary"
+                                                                    style="font-size: 56px;"></i></a>
+                                              <hr>
+                                              <h5 class="text-center">Ata de Eleição</h5>
+                                          </div>
+                                      </div>
+                                    </c:if>
                                     <div class="col-lg-2 text-center mt-5">
                                         <div class="form-group">
                                             <a href="${path}/${entidade.documentosEntidade.estatutoSocial.path}"
                                                target="_blank"><i class="far fa-file-image text-primary"
                                                                   style="font-size: 56px;"></i></a>
                                             <hr>
-                                            <h5 class="text-center">Estatuto Social</h5>
+                                            <h5 class="text-center">Estatuto Social ou Contrato Social</h5>
                                         </div>
                                     </div>
                                     <div class="col-lg-2 text-center mt-5">

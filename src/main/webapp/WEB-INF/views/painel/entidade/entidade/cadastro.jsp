@@ -245,7 +245,7 @@
                                                 <h5 class="text-center">Ata de Eleição</h5>
                                                 <input type="file" id="ata-eleicao"
                                                        name="documentosEntidade.ataEleicao.file"
-                                                       onchange="validaPdf(this, this.id)" required>
+                                                       onchange="validaPdf(this, this.id)">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-lg-4 text-center mt-5">
@@ -253,7 +253,7 @@
                                                 <label for="estatuto-social"><i class="far fa-file-pdf text-primary"
                                                                                 style="font-size: 56px;"></i></label>
                                                 <hr>
-                                                <h5 class="text-center">Estatuto Social</h5>
+                                                <h5 class="text-center">Estatuto Social ou Contrato Social</h5>
                                                 <input type="file" id="estatuto-social"
                                                        name="documentosEntidade.estatutoSocial.file"
                                                        onchange="validaPdf(this, this.id)" required>
@@ -306,6 +306,7 @@
 <c:import url="/WEB-INF/views/componentes/modal/modal-arquivo-recusado-all.jsp"/>
 <c:import url="/WEB-INF/views/componentes/modal/modal-arquivo-recusado-img.jsp"/>
 <c:import url="/WEB-INF/views/componentes/modal/modal-arquivo-recusado-pdf.jsp"/>
+<c:import url="/WEB-INF/views/componentes/modal/modal-arquivo-recusado-tamanho.jsp"/>
 
 
 <!--   JQUERY   -->
