@@ -28,7 +28,7 @@
 <body class="">
 <div class="wrapper ">
     <!-- Sidebar -->
-    <div class="sidebar" data-color="verde" data-active-color="white">
+    <div class="sidebar" data-color="black" data-active-color="info">
       <div class="logo">
         <a href="http://www.creative-tim.com" class="simple-text logo-mini">
           <div class="logo-image-small">
