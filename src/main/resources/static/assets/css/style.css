@@ -70,7 +70,7 @@ body {
     width: 160px;
     top: -75px;
     border-radius: 50%;
-    background: #3ab524;
+    background: #051832 ;
     padding: 5px;
     text-align: center;
 }
@@ -82,7 +82,7 @@ body {
     border-radius: 20%;
     border: 2px solid white;
     top: 25px;
-    left: 12px;
+    left: 25px;
 }
 
 .footer-leroy {
@@ -123,7 +123,7 @@ img-yaba {
 
 .login_btn {
     width: 100%;
-    background: #72bf44 !important;
+    background: #051832 !important;
     color: white !important;
 }
 
@@ -137,7 +137,7 @@ img-yaba {
 }
 
 .input-group-text {
-    background: #72bf44 !important;
+    background: #051832 !important;
     color: white !important;
     border: 0 !important;
     border-radius: 0.25rem 0 0 0.25rem !important;
@@ -168,7 +168,7 @@ img-yaba {
 }
 
 .bg-blue {
-    background-color: #72bf44;
+    background-color: #051832;
 }
 
 login_btn:hover {
