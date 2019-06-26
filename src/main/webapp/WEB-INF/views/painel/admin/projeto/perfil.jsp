@@ -252,11 +252,11 @@
                                     </div>
                                     <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 text-center mt-5">
                                         <div class="form-group">
-                                            <a href="${path}/${projeto.documentosProjeto.dadosBancarios.path}"
+                                            <a href="${path}/${projeto.documentosProjeto.dadosBancariosFundo.path}"
                                                target="_blank"><i class="fas fa-file-pdf text-primary"
                                                                   style="font-size: 56px;"></i></a>
                                             <hr>
-                                            <h5 class="text-center">Dados Bancários</h5>
+                                            <h5 class="text-center">Dados Bancários do Fundo</h5>
                                         </div>
                                     </div>
                                     <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 text-center mt-5">

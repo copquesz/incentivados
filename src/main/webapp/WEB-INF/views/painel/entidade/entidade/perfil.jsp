@@ -247,6 +247,15 @@
                                             <h5 class="text-center">Cartão CNPJ</h5>
                                         </div>
                                     </div>
+                                    <div class="col-lg-2 text-center mt-5">
+                                        <div class="form-group">
+                                            <a href="${path}/${entidade.documentosEntidade.dadosBancarios.path}"
+                                               target="_blank"><i class="fas fa-file-pdf text-primary"
+                                                                  style="font-size: 56px;"></i></a>
+                                            <hr>
+                                            <h5 class="text-center">Dados Bancários</h5>
+                                        </div>
+                                    </div>
                                 </div>
                             </fieldset>
 

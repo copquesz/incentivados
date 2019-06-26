@@ -111,7 +111,7 @@
                     <div class="col-12 col-lg-4">
                       <div class="form-group">
                           <label>CPF:</label>
-                          <input type="text" class="form-control" id="cpf" name="cpf" onchange="if(!validarCPF(this.value)){$('#modal-cpf-invalido').modal('show'); this.value='';}" required>
+                          <input type="text" class="form-control" id="cpf" name="cpf" onchange="if(!validarCPF(this.value)){$('#modal-cpf-invalido').modal('show'); this.value='';}">
                       </div>
                     </div>              
                   </div>

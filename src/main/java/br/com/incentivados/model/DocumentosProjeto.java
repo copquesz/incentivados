@@ -31,8 +31,8 @@ public class DocumentosProjeto implements Serializable{
 	private Arquivo propostOrcamentaria;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "dados_bancarios")
-	private Arquivo dadosBancarios;
+	@JoinColumn(name = "dados_bancarios_fundo")
+	private Arquivo dadosBancariosFundo;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "certificado")

@@ -109,6 +109,7 @@ public class EntidadeService {
         final Arquivo estatutoSocial = entidade.getDocumentosEntidade().getEstatutoSocial();
         final Arquivo identidade = entidade.getDocumentosEntidade().getIdentidade();
         final Arquivo cartaoCnpj = entidade.getDocumentosEntidade().getCartaoCnpj();
+        final Arquivo dadosBancarios = entidade.getDocumentosEntidade().getDadosBancarios();
 
         // Seta os parâmetros dos arquivos para fazer o upload
         entidade.getDocumentosEntidade().getLogo().setPath(
@@ -119,6 +120,8 @@ public class EntidadeService {
                     "ata-de-eleicao", path));
         }
 
+        entidade.getDocumentosEntidade().getDadosBancarios().setPath(FileUpload.upload(request, dadosBancarios.getFile(),
+                "dados-bancarios", path));
 
        entidade.getDocumentosEntidade().getEstatutoSocial().setPath(FileUpload.upload(request, estatutoSocial.getFile(),
                    "estatuto-social", path));

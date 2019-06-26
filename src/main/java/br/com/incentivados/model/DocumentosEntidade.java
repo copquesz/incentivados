@@ -35,4 +35,8 @@ public class DocumentosEntidade {
 	@JoinColumn(name = "cartao_cnpj_id")
 	private Arquivo cartaoCnpj;
 
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "dados_bancarios")
+	private Arquivo dadosBancarios;
+
 }

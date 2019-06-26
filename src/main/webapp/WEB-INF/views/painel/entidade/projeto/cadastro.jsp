@@ -115,9 +115,9 @@
                   <fieldset class="mt-5">
                   <legend class="text-primary">Incentivo Fiscal:</legend>
                       <label>Lei:</label>
-                      <select class="selectpicker form-control" name="incentivosFiscais" multiple title="Selecione ..." data-live-search="true" data-style="btn-info" required>
+                      <select class="selectpicker form-control" id="selectpicker-incentivo-fiscal" name="incentivosFiscais" multiple title="Selecione ..." data-live-search="true" data-style="btn-info" required>
                         <c:forEach var="incentivoFiscal" items="${incentivosFiscais}">
-                          <option value="${incentivoFiscal.id}">${incentivoFiscal.legislacao} <c:if test = "${not empty incentivoFiscal.sigla}"> - ${incentivoFiscal.sigla}</c:if></option>
+                          <option value="${incentivoFiscal.id}">${incentivoFiscal.legislacao} (${incentivoFiscal.competencia.descricao})<c:if test = "${not empty incentivoFiscal.sigla}"> - ${incentivoFiscal.sigla}</c:if></option>
                         </c:forEach>
                       </select>
                   </fieldset>
@@ -131,7 +131,7 @@
                     <div class="col-md-8">
                       <div class="form-group">
                           <label>Título:</label>
-                          <input type="text" class="form-control" name="titulo" required>
+                          <input type="text" class="form-control text-capitalize" name="titulo" required>
                       </div>
                     </div>
                     <div class="col-md-4">
@@ -238,12 +238,12 @@
                             <input type="file" id="proposta-orcamentaria" name="documentosProjeto.propostOrcamentaria.file" onchange="validaImgPdf(this, this.id)" required>
                         </div>
                       </div>
-                      <div class="col-sm-12 col-md-6 text-center mt-5">
+                      <div class="col-sm-12 col-md-6 text-center mt-5" id="campo-dados-bancarios-fundo">
                         <div class="form-group">
-                            <label for="dados-bancarios"><i class="far fa-file-pdf text-primary" style="font-size: 56px;"></i></label>
+                            <label for="dados-bancarios-fundo"><i class="far fa-file-pdf text-primary" style="font-size: 56px;"></i></label>
                             <hr>
-                            <h5 class="text-center">Dados Bancários da Entidade</h5>
-                            <input type="file" id="dados-bancarios" name="documentosProjeto.dadosBancarios.file" onchange="validaImgPdf(this, this.id)" required>
+                            <h5 class="text-center">Dados Bancários do Fundo</h5>
+                            <input type="file" id="dados-bancarios-fundo" name="documentosProjeto.dadosBancariosFundo.file" onchange="validaImgPdf(this, this.id)">
                         </div>
                       </div>
                       <div class="col-sm-12 col-md-6 text-center mt-5">
@@ -297,19 +297,48 @@
   <script type="text/javascript" src="${path}/assets/js/core/jquery.maskMoney.js"></script>
   <script type="text/javascript">
     $(document).ready(function () {
-        let condicional = $('#condicional-parceiros-apoiadores');
+        let condicional_parceiros_apoiadores = $('#condicional-parceiros-apoiadores');
         let campo_parceiros_apoiadores = $('#campo-parceiros-apoiadores');
         campo_parceiros_apoiadores.hide();
 
-        condicional.change(function () {
-          if(condicional.val() == "Não"){
+        condicional_parceiros_apoiadores.change(function () {
+          if(condicional_parceiros_apoiadores.val() == "Não"){
             campo_parceiros_apoiadores.hide();
           }
           else{
             campo_parceiros_apoiadores.show();
           }
         });
-        //final get estado
+    });
+  </script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+
+        // Variáveis globais
+        let selectpicker_incentivo_fiscal = $('#selectpicker-incentivo-fiscal');
+        let campo_dados_bancarios_fundo = $('#campo-dados-bancarios-fundo');        
+
+        // Esconde o campo ao abrir a página
+        campo_dados_bancarios_fundo.hide();       
+
+        // Função que verifica se o campo oculta
+        selectpicker_incentivo_fiscal.change(function () {  
+          // Variáveis locais
+          let show = false;
+          let size = $(this).val().length;
+          for(i = 0; i < size ; i++){
+            if(selectpicker_incentivo_fiscal.val()[i] == 5 || selectpicker_incentivo_fiscal.val()[i] == 6){
+              show = true;
+            }
+          }
+          if(show){
+            campo_dados_bancarios_fundo.show();
+          }
+          else{          
+            campo_dados_bancarios_fundo.hide();
+          }
+        });  
+
     });
   </script>
   <script type="text/javascript">

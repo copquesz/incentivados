@@ -19,6 +19,9 @@ public class UsuarioService {
    
     // Método para adicionar um novo usuário
     public Usuario save(Usuario usuario) {
+        if(usuario.getCpf().equals("")){
+            usuario.setCpf(null);
+        }
         return usuarioRepository.save(usuario);
     }
 

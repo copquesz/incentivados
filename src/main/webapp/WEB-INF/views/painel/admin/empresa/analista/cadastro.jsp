@@ -116,19 +116,19 @@
                     <div class="col-12 col-lg-4">
                       <div class="form-group">
                           <label>Nome:</label>
-                          <input type="text" class="form-control" name="nome" required>
+                          <input type="text" class="form-control text-capitalize" name="nome" required>
                       </div>
                     </div>
                     <div class="col-12 col-lg-4">
                       <div class="form-group">
                           <label>Sobrenome:</label>
-                          <input type="text" class="form-control" name="sobrenome" required>
+                          <input type="text" class="form-control text-capitalize" name="sobrenome" required>
                       </div>
                     </div>
                     <div class="col-12 col-lg-4">
                       <div class="form-group">
                           <label>CPF:</label>
-                          <input type="text" class="form-control" id="cpf" name="cpf" onchange="if(!validarCPF(this.value)){$('#modal-cpf-invalido').modal('show'); this.value='';}" required>
+                          <input type="text" class="form-control" id="cpf" name="cpf" onchange="if(!validarCPF(this.value)){$('#modal-cpf-invalido').modal('show'); this.value='';}">
                       </div>
                     </div>              
                   </div>
@@ -136,7 +136,7 @@
                     <div class="col-12 col-lg-4">
                       <div class="form-group">
                           <label>E-mail:</label>
-                          <input type="email" class="form-control" name="email" required>
+                          <input type="email" class="form-control text-lowercase" name="email" required onkeyup="this.value = this.value.toLowerCase()">
                       </div>
                     </div>
                     <div class="col-12 col-lg-4">

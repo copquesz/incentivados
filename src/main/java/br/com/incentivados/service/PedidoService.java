@@ -219,8 +219,7 @@ public class PedidoService {
 
         pedido.getDocumentosPedido().getCartaOficio()
                 .setPath(FileUpload.upload(request, cartaOficio.getFile(),
-                        "carta-oficio-" + DateTimeFormatter.ofPattern("ddMMuuuuHHmmss").format(LocalDateTime.now())
-                                + "." + cartaOficio.getFile().getOriginalFilename().split("\\.")[1],
+                        "carta-oficio-" + DateTimeFormatter.ofPattern("ddMMuuuuHHmmss").format(LocalDateTime.now()),
                         path));
 
         return pedido;

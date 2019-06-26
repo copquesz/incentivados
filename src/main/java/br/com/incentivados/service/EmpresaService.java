@@ -98,10 +98,18 @@ public class EmpresaService {
         return empresaRepository.count();
     }
 
+    public Long verifyRelacionamentoAnalista(Long empresaId, Long usuarioId){
+        return empresaRepository.verifyRelacionamentoAnalista(empresaId, usuarioId);
+    }
+
+    public Long verifyRelacionamentoResponsavel(Long empresaId, Long usuarioId){
+        return empresaRepository.verifyRelacionamentoResponsavel(empresaId, usuarioId);
+    }
+
     private Empresa uploadDocumentos(Empresa empresa, HttpServletRequest request) {
         empresa.getDocumentosEmpresa().getLogo()
                 .setPath(FileUpload.upload(request,
-                        empresa.getDocumentosEmpresa().getLogo().getFile(), "logo.",
+                        empresa.getDocumentosEmpresa().getLogo().getFile(), "logo",
                         "documentos/empresas/" + empresa.getNomeFantasia()));
         return empresa;
     }

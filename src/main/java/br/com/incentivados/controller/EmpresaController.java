@@ -184,7 +184,7 @@ public class EmpresaController {
             if (usuarioService.existsByEmail(responsavel.getEmail())) {
                 model.addAttribute("usuario", responsavel);
                 return "painel/admin/empresa/responsavel/cadastro-responsavel-falha-email-cadastrado";
-            } else if (usuarioService.existsByCpf(responsavel.getCpf())) {
+            } else if (!responsavel.getCpf().equals("") && usuarioService.existsByCpf(responsavel.getCpf())) {
                 model.addAttribute("usuario", responsavel);
                 return "painel/admin/empresa/responsavel/cadastro-responsavel-falha-cpf-cadastrado";
             } else {
@@ -192,11 +192,15 @@ public class EmpresaController {
                 Optional<Empresa> empresa = empresaService.findById(empresaId);
 
                 if (empresa.isPresent()) {
+
                     // Salva o analista na base de dados
                     responsavel = usuarioService.save(responsavel, empresa.get());
                     model.addAttribute("usuario", responsavel);
 
-                    empresaService.adicionaResponsavel(empresa.get(), responsavel);
+                    if(empresaService.verifyRelacionamentoResponsavel(empresa.get().getId(), responsavel.getId()) == 0){
+                        empresaService.adicionaResponsavel(empresa.get(), responsavel);
+                    }
+
                     return "painel/admin/empresa/responsavel/cadastro-responsavel-sucesso";
                 } else {
                     return "painel/admin/empresa/responsavel/cadastro-responsavel-falha";
@@ -292,7 +296,6 @@ public class EmpresaController {
 
         // Seta o path da requisição
         model.addAttribute("path", request.getContextPath());
-        model.addAttribute("breadcrumb", " Empresas " + " <i class='fas fa-angle-double-right'></i> " + " Analistas" + " <i class='fas fa-angle-double-right'></i> " + " Cadastro");
 
         // Busca os dados do usuário logado na sessão
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
@@ -306,21 +309,24 @@ public class EmpresaController {
                         return "painel/admin/empresa/analista/cadastro-analista-falha-email-cadastrado";
 
                         // Verifica se o usuário ja possui cadastro com este cpf
-                    } else if (usuarioService.existsByCpf(analista.getCpf())) {
+                    } else if (!analista.getCpf().equals("") && usuarioService.existsByCpf(analista.getCpf())) {
                         model.addAttribute("usuario", analista);
                         return "painel/admin/empresa/analista/cadastro-analista-falha-cpf-cadastrado";
 
                     } else {
-                        // Salva o analista na base de dados
-                        analista = usuarioService.save(analista);
-                        model.addAttribute("usuario", analista);
-
                         // Atribui o analista para a lista da empresa
                         Optional<Empresa> empresa = empresaService.findById(empresaId);
-                        if (empresa.isPresent()) {
-                            empresaService.adcionaAnalista(empresa.get(), analista);
-                        }
 
+                        if (empresa.isPresent()) {
+
+                            // Salva o analista na base de dados
+                            analista = usuarioService.save(analista);
+                            model.addAttribute("usuario", analista);
+
+                            if(empresaService.verifyRelacionamentoAnalista(empresa.get().getId(), analista.getId()) == 0) {
+                                empresaService.adcionaAnalista(empresa.get(), analista);
+                            }
+                        }
                         return "painel/admin/empresa/analista/cadastro-analista-sucesso";
                     }
                 } catch (Exception e) {

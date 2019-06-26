@@ -94,23 +94,25 @@ public class ProjetoService {
 		final Arquivo logo = projeto.getDocumentosProjeto().getLogo();
 		final Arquivo propostaTecnica = projeto.getDocumentosProjeto().getPropostaTecnica();
 		final Arquivo propostaOrcamentaria = projeto.getDocumentosProjeto().getPropostOrcamentaria();
-		final Arquivo dadosBancarios = projeto.getDocumentosProjeto().getDadosBancarios();
+		final Arquivo dadosBancarios = projeto.getDocumentosProjeto().getDadosBancariosFundo();
 		final Arquivo certificado = projeto.getDocumentosProjeto().getCertificado();
 
 		projeto.getDocumentosProjeto().getLogo().setPath(
 				FileUpload.upload(request, logo.getFile(), "logo.", path));
 
 		projeto.getDocumentosProjeto().getPropostaTecnica().setPath(FileUpload.upload(request, propostaTecnica.getFile(),
-				"proposta-tecnica.", path));
+				"proposta-tecnica", path));
 
 		projeto.getDocumentosProjeto().getPropostOrcamentaria().setPath(FileUpload.upload(request, propostaOrcamentaria.getFile(),
-				"proposta-orcamentaria.", path));
+				"proposta-orcamentaria", path));
 
-		projeto.getDocumentosProjeto().getDadosBancarios().setPath(FileUpload.upload(request, dadosBancarios.getFile(),
-				"dados-bancarios.", path));
+		if (!dadosBancarios.getFile().isEmpty()) {
+			projeto.getDocumentosProjeto().getDadosBancariosFundo().setPath(FileUpload.upload(request, dadosBancarios.getFile(),
+					"dados-bancarios", path));
+		}
 
 		projeto.getDocumentosProjeto().getCertificado().setPath(FileUpload.upload(request, certificado.getFile(),
-				"certificado.", path));
+				"certificado", path));
 
 		return projeto;
 

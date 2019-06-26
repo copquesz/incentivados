@@ -109,13 +109,13 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Nome Fantasia:</label>
-                                                <input type="text" class="form-control" name="nomeFantasia" required>
+                                                <input type="text" class="form-control text-capitalize" name="nomeFantasia" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Razao Social:</label>
-                                                <input type="text" class="form-control" name="razaoSocial" required>
+                                                <input type="text" class="form-control text-capitalize" name="razaoSocial" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -282,6 +282,14 @@
                                                        onchange="validaImgPdf(this, this.id)" required>
                                             </div>
                                         </div>
+                                        <div class="col-sm-12 col-md-4 text-center mt-5">
+                                            <div class="form-group">
+                                                <label for="dados-bancarios"><i class="far fa-file-pdf text-primary" style="font-size: 56px;"></i></label>
+                                                <hr>
+                                                <h5 class="text-center">Dados Bancários do Fundo</h5>
+                                                <input type="file" id="dados-bancarios" name="documentosEntidade.dadosBancarios.file" onchange="validaImgPdf(this, this.id)" required>
+                                            </div>
+                                          </div>
                                     </div>
                                 </fieldset>
 

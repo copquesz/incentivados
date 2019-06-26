@@ -39,10 +39,12 @@ public class UsuarioController {
         model.addAttribute("path", request.getContextPath());
         model.addAttribute("redirect", redirect);
         try {
-            if(usuarioService.existsByCpf(usuario.getCpf())){
+
+            if (!usuario.getCpf().equals("") && usuarioService.existsByCpf(usuario.getCpf())) {
                 logger.log(Level.WARNING, "Cpf já cadastrado: " + usuario.getCpf());
                 return "main/usuario/cadastro-sem-sucesso";
             }
+
             else if(usuarioService.existsByEmail(usuario.getEmail())){
                 logger.log(Level.WARNING, "E-mail já cadastrado: " + usuario.getEmail());
                 return "main/usuario/cadastro-sem-sucesso";
