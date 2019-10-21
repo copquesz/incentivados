@@ -23,106 +23,93 @@ import br.com.incentivados.utility.FileUpload;
 
 @Service
 public class EntidadeService {
-
     private EntidadeRepository entidadeRepository;
 
     @Autowired
-    EntidadeService(EntidadeRepository entidadeRepository){
+    EntidadeService(EntidadeRepository entidadeRepository) {
         this.entidadeRepository = entidadeRepository;
     }
 
     public Entidade save(Entidade entidade, Usuario usuario, HttpServletRequest request) {
         entidade.setUsuario(usuario);
-        entidade = uploadDocumentos(entidade, request);
-        entidade = entidadeRepository.save(entidade);
+        entidade = this.uploadDocumentos(entidade, request);
+        entidade = (Entidade)this.entidadeRepository.save(entidade);
         return entidade;
     }
 
     public boolean existsByCnpj(String cnpj) {
-        return entidadeRepository.existsByCnpj(cnpj);
+        return this.entidadeRepository.existsByCnpj(cnpj);
     }
 
     public boolean existsByUsuario(Usuario usuario) {
-        return entidadeRepository.existsByUsuario(usuario);
+        return this.entidadeRepository.existsByUsuario(usuario);
     }
 
     public Optional<Entidade> findById(Long id) {
-        return entidadeRepository.findById(id);
+        return this.entidadeRepository.findById(id);
     }
 
-
     public List<Entidade> findAllByUsuario(Usuario usuario) {
-        return entidadeRepository.findAllByUsuario(usuario);
+        return this.entidadeRepository.findAllByUsuario(usuario);
     }
 
     public Page<Entidade> findAll(Pageable page) {
-        return entidadeRepository.findAll(page);
+        return this.entidadeRepository.findAll(page);
+    }
+
+    public Page<Entidade> findAll(Pageable page, String key) {
+        return this.entidadeRepository.findAll(page, key);
     }
 
     public Page<Entidade> findAllByUsuario(Usuario usuario, Pageable page) {
-        return entidadeRepository.findAllByUsuario(usuario, page);
+        return this.entidadeRepository.findAllByUsuario(usuario, page);
     }
 
-    public Page<Entidade> findAllByUsuario(Usuario usuario, Pageable page, String key) {
-        return entidadeRepository.findAllByUsuario(usuario, page, key);
+    public Page<Entidade> findAllByUsuarioAndCnpjOrNomeFantasia(Usuario usuario, Pageable page, String key) {
+        return this.entidadeRepository.findAllByUsuarioAndCnpjOrNomeFantasia(usuario, page, key);
     }
 
     public Long count() {
-        return entidadeRepository.count();
+        return this.entidadeRepository.count();
     }
 
     public Long countByUsuario(Usuario usuario) {
-        return entidadeRepository.countByUsuario(usuario);
+        return this.entidadeRepository.countByUsuario(usuario);
     }
 
-
-    private Long countByDataCadastroBetween(Date inicio, Date fim) {
-        return entidadeRepository.countByDataCadastroBetween(inicio, fim);
+    private Long countByIdAndDataCadastroBetween(Date inicio, Date fim) {
+        return this.entidadeRepository.countByDataCadastroBetween(inicio, fim);
     }
 
-    // Exibe os dados estatísticos para buildar o charts dinamicamente
     public List<Long> buildChart() {
-        final int ANO_ATUAL = GregorianCalendar.getInstance().get(Calendar.YEAR);
-        final int[] MESES = new int[]{Calendar.JANUARY, Calendar.FEBRUARY, Calendar.MARCH, Calendar.APRIL, Calendar.MAY, Calendar.JUNE, Calendar.JUNE, Calendar.AUGUST, Calendar.SEPTEMBER, Calendar.OCTOBER, Calendar.NOVEMBER, Calendar.DECEMBER};
-        List<Long> array = new ArrayList<>();
-        Calendar data;
-        for (int i = 0; i < 12; i++) {
+        int ANO_ATUAL = GregorianCalendar.getInstance().get(1);
+        List<Long> array = new ArrayList();
 
-            data = new GregorianCalendar(ANO_ATUAL, MESES[i], 1);
-            array.add(countByDataCadastroBetween(
-                // Instancia um calendar com a primeira data do mês passado como parâmetro -> ENUM CALENDAR
-                new GregorianCalendar(ANO_ATUAL, MESES[i], data.getMinimum(Calendar.DAY_OF_MONTH)).getTime(),
-                // Instancia um calendar com a última data do mês passado como parâmetro -> ENUM CALENDAR
-                new GregorianCalendar(ANO_ATUAL, MESES[i], data.getMaximum(Calendar.DAY_OF_MONTH)).getTime()));
+        for(int i = 0; i < 12; ++i) {
+            Calendar data = new GregorianCalendar(ANO_ATUAL, i, 1);
+            array.add(this.countByIdAndDataCadastroBetween((new GregorianCalendar(ANO_ATUAL, i, data.getActualMinimum(5))).getTime(), (new GregorianCalendar(ANO_ATUAL, i, data.getActualMaximum(5))).getTime()));
         }
+
         return array;
     }
+
     private Entidade uploadDocumentos(Entidade entidade, HttpServletRequest request) {
+        String path = "documentos/entidades/" + entidade.getNomeFantasia();
+        Arquivo logo = entidade.getDocumentosEntidade().getLogo();
+        Arquivo ataEleicao = entidade.getDocumentosEntidade().getAtaEleicao();
+        Arquivo estatutoSocial = entidade.getDocumentosEntidade().getEstatutoSocial();
+        Arquivo identidade = entidade.getDocumentosEntidade().getIdentidade();
+        Arquivo cartaoCnpj = entidade.getDocumentosEntidade().getCartaoCnpj();
+        Arquivo dadosBancarios = entidade.getDocumentosEntidade().getDadosBancarios();
+        entidade.getDocumentosEntidade().getLogo().setPath(FileUpload.upload(request, logo.getFile(), "logo", path));
+        if (!ataEleicao.getFile().isEmpty()) {
+            entidade.getDocumentosEntidade().getAtaEleicao().setPath(FileUpload.upload(request, ataEleicao.getFile(), "ata-de-eleicao", path));
+        }
 
-        final String path = "documentos/entidades/" + entidade.getNomeFantasia();
-        final Arquivo logo = entidade.getDocumentosEntidade().getLogo();
-        final Arquivo ataEleicao = entidade.getDocumentosEntidade().getAtaEleicao();
-        final Arquivo estatutoSocial = entidade.getDocumentosEntidade().getEstatutoSocial();
-        final Arquivo identidade = entidade.getDocumentosEntidade().getIdentidade();
-        final Arquivo cartaoCnpj = entidade.getDocumentosEntidade().getCartaoCnpj();
-
-        // Seta os parâmetros dos arquivos para fazer o upload
-        entidade.getDocumentosEntidade().getLogo().setPath(
-                FileUpload.upload(request, logo.getFile(), "logo." + logo.getFile().getOriginalFilename().split("\\.")[1], path));
-
-        entidade.getDocumentosEntidade().getAtaEleicao().setPath(FileUpload.upload(request, ataEleicao.getFile(),
-                "ata-de-eleicao." + ataEleicao.getFile().getOriginalFilename().split("\\.")[1], path));
-
-        entidade.getDocumentosEntidade().getEstatutoSocial().setPath(FileUpload.upload(request, estatutoSocial.getFile(),
-                "estatuto-social." + estatutoSocial.getFile().getOriginalFilename().split("\\.")[1], path));
-
-        entidade.getDocumentosEntidade().getIdentidade().setPath(FileUpload.upload(request, identidade.getFile(),
-                "identidade." + identidade.getFile().getOriginalFilename().split("\\.")[1], path));
-
-        entidade.getDocumentosEntidade().getCartaoCnpj().setPath(FileUpload.upload(request, cartaoCnpj.getFile(),
-                "cartao-cnpj." + cartaoCnpj.getFile().getOriginalFilename().split("\\.")[1], path));
-
+        entidade.getDocumentosEntidade().getDadosBancarios().setPath(FileUpload.upload(request, dadosBancarios.getFile(), "dados-bancarios", path));
+        entidade.getDocumentosEntidade().getEstatutoSocial().setPath(FileUpload.upload(request, estatutoSocial.getFile(), "estatuto-social", path));
+        entidade.getDocumentosEntidade().getIdentidade().setPath(FileUpload.upload(request, identidade.getFile(), "identidade", path));
+        entidade.getDocumentosEntidade().getCartaoCnpj().setPath(FileUpload.upload(request, cartaoCnpj.getFile(), "cartao-cnpj", path));
         return entidade;
     }
-
 }

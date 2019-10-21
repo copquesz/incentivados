@@ -186,9 +186,9 @@
                   </fieldset> 
 
                   <hr class="bg-primary">
-                  <a href="${path}/painel/pedido/${pedido.id}/RECUSADO" class="btn btn-danger float-right">Reprovar <i class="far fa-share-square"></i></a>
-                  <a href="${path}/painel/pedido/${pedido.id}/APROVADO" class="btn btn-success float-right">Aprovar <i class="far fa-share-square"></i></a>
-                  <a href="${path}/dashboard" class="btn btn-warning float-left"><i class="fas fa-angle-double-left"></i> Voltar</a>
+                  <a href="#" class="btn btn-danger float-right" data-toggle="modal" data-target="#modal-reprovar-pedido">Reprovar <i class="far fa-thumbs-down"></i></a>
+                  <a href="" class="btn btn-success float-right" data-toggle="modal" data-target="#modal-aprovar-pedido">Aprovar <i class="far fa-thumbs-up"></i></a>
+                  <a href="${path}/painel/dashboard" class="btn btn-warning float-left"><i class="fas fa-angle-double-left"></i> Voltar</a>
                 </form>
               </div>
               <div class="card-footer bg-primary"></div>
@@ -201,22 +201,19 @@
   </div>
 
   <!-- MODALS -->
-  <c:import url="/WEB-INF/views/componentes/modal/modal-arquivo-recusado-all.jsp" />
-  <c:import url="/WEB-INF/views/componentes/modal/modal-arquivo-recusado-img.jsp" />
-  <c:import url="/WEB-INF/views/componentes/modal/modal-arquivo-recusado-pdf.jsp" />
+  <c:import url="/WEB-INF/views/componentes/modal/modal-aprovar-pedido.jsp" /> 
+  <c:import url="/WEB-INF/views/componentes/modal/modal-reprovar-pedido.jsp" />
 
 
   <!--   JQUERY   -->
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <!--   POPPER   -->  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <!--   POPPER   -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <!--   BOOTSTRAP   -->  
+  <!--   BOOTSTRAP   -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script>  
-  <!-- VALIDATOR -->
-  <script type="text/javascript" src="${path}/assets/js/file-validator.js"></script>
+  <script type="text/javascript" src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script>
 </body>
 
 </html>

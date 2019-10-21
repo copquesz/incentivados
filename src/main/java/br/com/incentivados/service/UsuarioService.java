@@ -9,67 +9,69 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UsuarioService {
-
     @Autowired
     private UsuarioRepository usuarioRepository;
-   
-    // Método para adicionar um novo usuário
+
+    public UsuarioService() {
+    }
+
     public Usuario save(Usuario usuario) {
-        return usuarioRepository.save(usuario);
+        if (usuario.getCpf().equals("")) {
+            usuario.setCpf((String)null);
+        }
+
+        return (Usuario)this.usuarioRepository.save(usuario);
     }
 
-    // Método para verificar a existência do usuário e senha
-    public boolean existsByEmailAndSenha(String cpf, String senha){
-        return usuarioRepository.existsByEmailAndSenha(cpf, senha);
+    public Usuario save(Usuario usuario, Empresa empresa) {
+        usuario.setEmpresa(empresa);
+        return (Usuario)this.usuarioRepository.save(usuario);
     }
 
-    // Método para verificar a existência do cpf
-    public boolean existsByCpf(String cpf){
-        return usuarioRepository.existsByCpf(cpf);
+    public boolean existsByEmailAndSenha(String cpf, String senha) {
+        return this.usuarioRepository.existsByEmailAndSenha(cpf, senha);
     }
 
-    // Método para verificar a existência do email
-    public boolean existsByEmail(String email){
-        return usuarioRepository.existsByEmail(email);
+    public boolean existsByCpf(String cpf) {
+        return this.usuarioRepository.existsByCpf(cpf);
     }
 
-    // Método para validação de login
-    public Usuario login(String email){
-    	Usuario usuario = usuarioRepository.findByEmail(email);
-    	ultimoAcesso(usuario);
+    public boolean existsByEmail(String email) {
+        return this.usuarioRepository.existsByEmail(email);
+    }
+
+    public Usuario login(String email) {
+        Usuario usuario = this.usuarioRepository.findByEmail(email);
+        this.ultimoAcesso(usuario);
         return usuario;
     }
 
-    // Método para atualizar o último acesso do usuário
     public Usuario ultimoAcesso(Usuario usuario) {
-    	usuario.setUltimoAcesso(new Date());
-    	return usuarioRepository.save(usuario);
+        TimeZone tz = TimeZone.getTimeZone("America/Sao_Paulo");
+        TimeZone.setDefault(tz);
+        usuario.setUltimoAcesso(Calendar.getInstance(tz).getTime());
+        System.out.println(Calendar.getInstance(tz).getTime());
+        return (Usuario)this.usuarioRepository.save(usuario);
     }
 
-    // Método para atualizar a empresa do usuário
     public Usuario setEmpresa(Usuario usuario, Empresa empresa) {
         usuario.setEmpresa(empresa);
-        return usuarioRepository.save(usuario);
+        return (Usuario)this.usuarioRepository.save(usuario);
     }
 
-    // Método para buscar um usuário por id
     public Optional<Usuario> findById(Long id) {
-        return usuarioRepository.findById(id);
+        return this.usuarioRepository.findById(id);
     }
 
-    // Método para listar todos usuários
-    public List<Usuario> findAll(){
-        return usuarioRepository.findAll();
+    public List<Usuario> findAll() {
+        return this.usuarioRepository.findAll();
     }
 
-    public Page<Usuario> findAllByEmpresa(Pageable page, Empresa empresa, String key, TipoUsuario tipoUsuario){
-        return usuarioRepository.findAllByEmpresa(page, empresa, key, tipoUsuario);
+    public Page<Usuario> findAllByEmpresa(Pageable page, Empresa empresa, String key, TipoUsuario tipoUsuario) {
+        return this.usuarioRepository.findAllByEmpresa(page, empresa, key, tipoUsuario);
     }
-
 }

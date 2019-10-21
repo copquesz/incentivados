@@ -23,7 +23,6 @@ import java.util.logging.Logger;
 
 @Controller
 public class EmpresaController {
-
     private EmpresaService empresaService;
     private UsuarioService usuarioService;
     private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
@@ -32,329 +31,192 @@ public class EmpresaController {
     public EmpresaController(EmpresaService empresaService, UsuarioService usuarioService) {
         this.empresaService = empresaService;
         this.usuarioService = usuarioService;
-
     }
 
-    /**
-     * Este método recebe uma chamada GET que exibe a lista de empresas cadastradas.
-     *
-     * @param chave   String - nome fantasia da empresa que deseja filtrar.
-     * @param request contém informações referente a requisição feita através desta url.
-     * @param model   disponibiliza dados da controller para a view.
-     * @return retorna uma página com a lista de empresas pesquisada.
-     */
-    @GetMapping("/painel/empresas")
-    public String getListar(@RequestParam(required = false, defaultValue = "") String chave,
-                            @RequestParam(required = false, defaultValue = "0") int page, HttpServletRequest request,
-                            Model model) {
-
-        // Seta o path da requisição
+    @GetMapping({"/painel/empresas"})
+    public String getListar(@RequestParam(required = false,defaultValue = "") String key, @RequestParam(required = false,defaultValue = "0") int page, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-        model.addAttribute("qtdEmpresas", empresaService.count());
-
-        if (chave.equals("")) {
-            model.addAttribute("empresas", empresaService.findAll(PageRequest.of(page, 5, Sort.by(Sort.Order.asc("id")))));
-        } else {
-            model.addAttribute("empresas", empresaService.findByNomeFantasiaContains(chave));
-        }
+        model.addAttribute("key", key);
+        model.addAttribute("page", page);
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(new Sort.Order[]{Sort.Order.asc("id")}));
+        model.addAttribute("empresas", this.empresaService.findAllByNomeFantasiaOrCnpjContaining(pageable, key));
         return "painel/admin/empresa/lista";
     }
 
-    /**
-     * Este método recebe uma chamada GET para exibir os dados da empresa passada como parâmetro.
-     *
-     * @param id      Long - código identificador da empresa.
-     * @param request contém informações referente a requisição feita através desta url.
-     * @param model   disponibiliza dados da controller para a view.
-     * @return retorna a página que exibe os dados da empresa.
-     */
-    @GetMapping("/painel/empresas/{id}")
+    @GetMapping({"/painel/empresas/{id}"})
     public String getVisualizar(@PathVariable Long id, HttpServletRequest request, Model model) {
-
-        // Seta o path da requisição
         model.addAttribute("path", request.getContextPath());
 
         try {
-            Optional<Empresa> empresa = empresaService.findById(id);
+            Optional<Empresa> empresa = this.empresaService.findById(id);
             if (empresa.isPresent()) {
                 model.addAttribute("empresa", empresa.get());
             }
+
             return "painel/admin/empresa/perfil";
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Erro inesperado exibir os dados da empresa.", e);
+        } catch (Exception var5) {
+            this.logger.log(Level.SEVERE, "Erro inesperado exibir os dados da empresa.", var5);
             return "";
         }
     }
 
-    /**
-     * Este método recebe uma chamada GET para acessar o formulário de cadastro de empresas.
-     *
-     * @param request contém informações referente a requisição feita através desta url.
-     * @param model   disponibiliza dados da controller para a view.
-     * @return retorna o formulário de cadastro de empresas.
-     */
-    @GetMapping("/painel/empresas/cadastro")
+    @GetMapping({"/painel/empresas/cadastro"})
     public String getCadastrar(HttpServletRequest request, Model model) {
-
-        // Seta o path da requisição
         model.addAttribute("path", request.getContextPath());
-
-        // Disponibiliza os dados do usuário logado para a view
-        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
         model.addAttribute("usuario", usuario);
         return "painel/admin/empresa/cadastro";
     }
 
-    /**
-     * Este método recebe uma chamada POST para cadastrar uma empresa.
-     *
-     * @param empresa objeto que será persistido no banco de dados.
-     * @param request contém informações referente a requisição feita através desta url.
-     * @param model   disponibiliza dados da controller para a view.
-     * @return 1- retorna página de sucesso com os dados cadastrados caso tudo ocorra normalmente.
-     * 2- retorna a página de falha caso a empresa ja possua cnpj cadastrado na plataforma.
-     * 3- retorna a página de falha caso algum erro inesperado seja localizado.
-     */
-    @PostMapping("/painel/empresas/cadastro")
+    @PostMapping({"/painel/empresas/cadastro"})
     public String postCadastrar(Empresa empresa, HttpServletRequest request, Model model) {
-
-        // Seta o path da requisição
         model.addAttribute("path", request.getContextPath());
 
         try {
-            // Disponibiliza os dados do usuário logado para a view
-            Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+            Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
             model.addAttribute("usuario", usuario);
-
-            // Verifica se ja possui CNPJ cadastrado
-            if (!empresaService.existsbyCnpj(empresa.getCnpj())) {
-                empresa = empresaService.save(empresa, usuario, request);
+            if (!this.empresaService.existsbyCnpj(empresa.getCnpj())) {
+                empresa = this.empresaService.save(empresa, usuario, request);
                 model.addAttribute("empresa", empresa);
                 return "painel/admin/empresa/cadastro-empresa-sucesso";
             } else {
                 model.addAttribute("empresa", empresa);
                 return "painel/admin/empresa/cadastro-empresa-falha-cnpj-cadastrado";
             }
-
-        } catch (Exception e) {
+        } catch (Exception var5) {
             return "painel/admin/empresa/cadastro-empresa-falha";
         }
     }
 
-
-    /**
-     * Este método recebe uma chamada GET que exibe o formulário de cadastro do responsável pela empresa.
-     *
-     * @param id      Long - código identificador da empresa.
-     * @param request contém informações referente a requisição feita através desta url.
-     * @param model   disponibiliza dados da controller para a view.
-     * @return retorna o formulário para cadastrar o responsável pela empresa.
-     */
-    @GetMapping("/painel/empresas/{id}/responsavel/cadastro")
-    public String getResposavelCadastrar(@PathVariable Long id, HttpServletRequest request, Model model) {
-
-        // Seta o path da requisição
+    @GetMapping({"/painel/empresas/{empresaId}/responsavel/cadastro"})
+    public String getResposavelCadastrar(@PathVariable Long empresaId, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-
-        Optional<Empresa> empresa = empresaService.findById(id);
+        Optional<Empresa> empresa = this.empresaService.findById(empresaId);
         model.addAttribute("empresa", empresa.get());
         return "painel/admin/empresa/responsavel/cadastro";
     }
 
-    /**
-     * Este método recebe uma chamada POST para cadastrar o responsável pela empresa.
-     *
-     * @param id          - Long - código identificador da empresa
-     * @param responsavel objeto que será persistido no banco de dados.
-     * @param request     contém informações referente a requisição feita através desta url.
-     * @param model       disponibiliza dados da controller para a view.
-     * @return 1- retorna a página de sucesso com os dados cadastrados caso ok.
-     * 2- retorna página de erro caso já possua email cadastrado
-     * 3- retorna página de erro caso já possua cpf cadastrado.
-     */
-    @PostMapping("/painel/empresas/{id}/responsavel/cadastro")
-    public String postResponsavelCadastrar(@PathVariable Long id, Usuario responsavel, HttpServletRequest request,
-                                           Model model) {
-
-        // Seta o path da requisição
+    @PostMapping({"/painel/empresas/{empresaId}/responsavel/cadastro"})
+    public String postResponsavelCadastrar(@PathVariable Long empresaId, Usuario responsavel, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
 
         try {
-            if (usuarioService.existsByEmail(responsavel.getEmail())) {
+            if (this.usuarioService.existsByEmail(responsavel.getEmail())) {
                 model.addAttribute("usuario", responsavel);
                 return "painel/admin/empresa/responsavel/cadastro-responsavel-falha-email-cadastrado";
-            } else if (usuarioService.existsByCpf(responsavel.getCpf())) {
+            } else if (!responsavel.getCpf().equals("") && this.usuarioService.existsByCpf(responsavel.getCpf())) {
                 model.addAttribute("usuario", responsavel);
                 return "painel/admin/empresa/responsavel/cadastro-responsavel-falha-cpf-cadastrado";
             } else {
-                // Salva o analista na base de dados
-                responsavel = usuarioService.save(responsavel);
-                model.addAttribute("usuario", responsavel);
-
-                // Atribui o analista para a lista da empresa
-                Optional<Empresa> empresa = empresaService.findById(id);
-
+                Optional<Empresa> empresa = this.empresaService.findById(empresaId);
                 if (empresa.isPresent()) {
-                    empresaService.adicionaResponsavel(empresa.get(), responsavel);
+                    responsavel = this.usuarioService.save(responsavel, (Empresa)empresa.get());
+                    model.addAttribute("usuario", responsavel);
+                    if (this.empresaService.verifyRelacionamentoResponsavel(((Empresa)empresa.get()).getId(), responsavel.getId()) == 0L) {
+                        this.empresaService.adicionaResponsavel((Empresa)empresa.get(), responsavel);
+                    }
+
                     return "painel/admin/empresa/responsavel/cadastro-responsavel-sucesso";
                 } else {
                     return "painel/admin/empresa/responsavel/cadastro-responsavel-falha";
                 }
             }
-        } catch (Exception e) {
-            System.out.println(e.toString());
-            model.addAttribute("erro", e);
+        } catch (Exception var6) {
+            System.out.println(var6.toString());
+            model.addAttribute("erro", var6);
             return "painel/admin/empresa/responsavel/cadastro-analista-falha";
         }
     }
 
-    /**
-     * * Este método recebe uma chamada GET para listar todos os analistas da empresa passada como parâmetro.
-     * @param id - Long - código identificador da empresa
-     * @param page - inteiro - que contém o número da página que será listada no banco de dados.
-     * @param key - String - chave com os caractéres de nome ou sobrenome que deseja procurar.
-     * @param request     contém informações referente a requisição feita através desta url.
-     * @param model       disponibiliza dados da controller para a view.
-     * @return retorna a página com a lista resultada.
-     */
-    @GetMapping("/painel/{id}/analistas")
-    public String getAnalistas(@PathVariable Long id, @RequestParam(required = false, defaultValue = "0") int page, @RequestParam(required = false, defaultValue = "") String key, HttpServletRequest request, Model model) {
-
-        // Seta o path da requisição
+    @GetMapping({"/painel/{empresaId}/analistas"})
+    public String getAnalistas(@PathVariable Long empresaId, @RequestParam(required = false,defaultValue = "0") int page, @RequestParam(required = false,defaultValue = "") String key, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-
-        // Disponibiliza os dados do usuário logado para a view
-        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
         model.addAttribute("usuario", usuario);
-
-        Optional<Empresa> empresa = empresaService.findById(id);
+        Optional<Empresa> empresa = this.empresaService.findById(empresaId);
         model.addAttribute("empresa", empresa.get());
-
-
-        Pageable pageableAnalistas = PageRequest.of(page, 10, Sort.by(Sort.Order.desc("id")));
-        model.addAttribute("analistas", usuarioService.findAllByEmpresa(pageableAnalistas, empresa.get(), key, TipoUsuario.ANALISTA));
-
-
+        Pageable pageableAnalistas = PageRequest.of(page, 10, Sort.by(new Sort.Order[]{Sort.Order.desc("id")}));
+        model.addAttribute("analistas", this.usuarioService.findAllByEmpresa(pageableAnalistas, (Empresa)empresa.get(), key, TipoUsuario.ANALISTA));
         return "painel/empresa/analista/lista";
     }
 
-    /**
-     * Este método recebe uma chamada GET que exibe o formulário de cadastro de analista
-     *
-     * @param id      Long - código identidicador da empresa.
-     * @param request contém informações referente a requisição feita através desta url.
-     * @param model   disponibiliza dados da controller para a view.
-     * @return retorna a página que contém o formulário para cadastro do analista
-     */
-    @GetMapping({"/painel/empresas/{id}/analistas/cadastro", "painel/analistas/cadastro"})
-    public String getAnalistaCadastrar(@PathVariable(required = false) Long id, HttpServletRequest request, Model model) {
-
-        // Seta o path da requisição
+    @GetMapping({"/painel/empresas/{empresaId}/analistas/cadastro", "/painel/{empresaId}/analistas/cadastro"})
+    public String getAnalistaCadastrar(@PathVariable Long empresaId, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-
-        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
         model.addAttribute("usuario", usuario);
-
-        switch (usuario.getTipoUsuario()) {
-
+        switch(usuario.getTipoUsuario()) {
             case ADMIN:
-                Optional<Empresa> empresa = empresaService.findById(id);
+                Optional<Empresa> empresa = this.empresaService.findById(empresaId);
                 model.addAttribute("empresa", empresa.get());
                 return "painel/admin/empresa/analista/cadastro";
-
             case EMPRESA:
                 return "painel/empresa/analista/cadastro";
-
             default:
                 return "";
         }
-
-
     }
 
-
-    /**
-     * Este método recebe uma chamada POST para cadastrar o analista no banco de dados.
-     *
-     * @param id       Long - código identificador da empresa.
-     * @param analista - objeto que será persistido no banco de dados.
-     * @param request  contém informações referente a requisição feita através desta url.
-     * @param model    disponibiliza dados da controller para a view.
-     * @return 1- retorna a página de sucesso com os dados cadastrados caso ok.
-     * 2- retorna página de erro caso já possua email cadastrado
-     * 3- retorna página de erro caso já possua cpf cadastrado.
-     */
-    @PostMapping({"/painel/empresas/{id}/analistas/cadastro", "/painel/analistas/cadastro"})
-    public String postAnalistaCadastrar(@PathVariable(required = false) Long id, Usuario analista, HttpServletRequest request,
-                                        Model model) {
-
-        // Seta o path da requisição
+    @PostMapping({"/painel/empresas/{empresaId}/analistas/cadastro", "/painel/{empresaId}/analistas/cadastro"})
+    public String postAnalistaCadastrar(@PathVariable Long empresaId, Usuario analista, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-        model.addAttribute("breadcrumb", " Empresas " + " <i class='fas fa-angle-double-right'></i> " + " Analistas" + " <i class='fas fa-angle-double-right'></i> " + " Cadastro");
-
-        // Busca os dados do usuário logado na sessão
-        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-        switch (usuario.getTipoUsuario()) {
-
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        Optional empresa;
+        switch(usuario.getTipoUsuario()) {
             case ADMIN:
                 try {
-                    // Verifica se o usuário ja possui cadastro com este email
-                    if (usuarioService.existsByEmail(analista.getEmail())) {
-                        model.addAttribute("usuario", analista);
+                    if (this.usuarioService.existsByEmail(analista.getEmail())) {
+                        model.addAttribute("analista", analista);
                         return "painel/admin/empresa/analista/cadastro-analista-falha-email-cadastrado";
-
-                        // Verifica se o usuário ja possui cadastro com este cpf
-                    } else if (usuarioService.existsByCpf(analista.getCpf())) {
-                        model.addAttribute("usuario", analista);
-                        return "painel/admin/empresa/analista/cadastro-analista-falha-cpf-cadastrado";
-
                     } else {
-                        // Salva o analista na base de dados
-                        analista = usuarioService.save(analista);
-                        model.addAttribute("usuario", analista);
+                        if (!analista.getCpf().equals("") && this.usuarioService.existsByCpf(analista.getCpf())) {
+                            model.addAttribute("analista", analista);
+                            return "painel/admin/empresa/analista/cadastro-analista-falha-cpf-cadastrado";
+                        }
 
-                        // Atribui o analista para a lista da empresa
-                        Optional<Empresa> empresa = empresaService.findById(id);
-                        if(empresa.isPresent()){
-                            empresaService.adcionaAnalista(empresa.get(), analista);
+                        empresa = this.empresaService.findById(empresaId);
+                        if (empresa.isPresent()) {
+                            analista = this.usuarioService.save(analista, (Empresa)empresa.get());
+                            model.addAttribute("analista", analista);
+                            if (this.empresaService.verifyRelacionamentoAnalista(((Empresa)empresa.get()).getId(), analista.getId()) == 0L) {
+                                this.empresaService.adcionaAnalista((Empresa)empresa.get(), analista);
+                            }
                         }
 
                         return "painel/admin/empresa/analista/cadastro-analista-sucesso";
                     }
-                } catch (Exception e) {
-                    System.out.println(e.toString());
-                    model.addAttribute("erro", e);
+                } catch (Exception var8) {
+                    System.out.println(var8.toString());
+                    model.addAttribute("erro", var8);
                     return "painel/admin/empresa/analista/cadastro-analista-falha";
                 }
-
             case EMPRESA:
                 try {
-                    // Verifica se o usuário ja possui cadastro com este email
-                    if (usuarioService.existsByEmail(analista.getEmail())) {
+                    if (this.usuarioService.existsByEmail(analista.getEmail())) {
                         model.addAttribute("usuario", analista);
                         return "painel/empresa/analista/cadastro-analista-falha-email-cadastrado";
-
-                        // Verifica se o usuário ja possui cadastro com este cpf
-                    } else if (usuarioService.existsByCpf(analista.getCpf())) {
-                        model.addAttribute("usuario", analista);
-                        return "painel/empresa/analista/cadastro-analista-falha-cpf-cadastrado";
-
                     } else {
-                        // Salva o analista na base de dados
-                        analista = usuarioService.save(analista);
-                        model.addAttribute("usuario", analista);
+                        if (this.usuarioService.existsByCpf(analista.getCpf())) {
+                            model.addAttribute("usuario", analista);
+                            return "painel/empresa/analista/cadastro-analista-falha-cpf-cadastrado";
+                        }
 
-                        // Atribui o analista para a lista da empresa
-                        empresaService.adcionaAnalista(usuario.getEmpresa(), analista);
+                        empresa = this.empresaService.findById(empresaId);
+                        if (empresa.isPresent()) {
+                            analista = this.usuarioService.save(analista, (Empresa)empresa.get());
+                            model.addAttribute("analista", analista);
+                            if (this.empresaService.verifyRelacionamentoAnalista(((Empresa)empresa.get()).getId(), analista.getId()) == 0L) {
+                                this.empresaService.adcionaAnalista((Empresa)empresa.get(), analista);
+                            }
+                        }
 
                         return "painel/empresa/analista/cadastro-analista-sucesso";
                     }
-                } catch (Exception e) {
-                    System.out.println(e.toString());
-                    model.addAttribute("erro", e);
+                } catch (Exception var7) {
+                    System.out.println(var7.toString());
+                    model.addAttribute("erro", var7);
                     return "painel/empresa/analista/cadastro-analista-falha";
                 }
-
             default:
                 return "";
         }

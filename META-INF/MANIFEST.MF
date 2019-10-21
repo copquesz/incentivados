@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: br.com.incentivados.IncentivadosApplication
+Class-Path: br.com.incentivados.IncentivadosApplication
+

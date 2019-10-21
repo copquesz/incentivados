@@ -58,8 +58,12 @@
               <i class="fas fa-gavel"></i>Incentivos Fiscais</a>
           </li>
           <li>
-            <a href="${path}/painel/pedidos">
+            <a href="${path}/painel/pedidos?filtro=TODOS&key=">
               <i class="fas fa-praying-hands"></i>Pedidos</a>
+          </li>
+          <li>
+            <a href="${path}/painel/ranking">
+              <i class="far fa-chart-bar"></i>Ranking</a>
           </li>
         </ul>
       </div>
@@ -142,41 +146,41 @@
                           <c:choose> 
                             <c:when test = "${incentivosFiscais.totalPages == 1}">
                               <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
-                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/incentivosFiscais?page=${incentivosFiscais.number}">${incentivosFiscais.number + 1}</a></li>
+                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/incentivos-fiscais?page=${incentivosFiscais.number}">${incentivosFiscais.number + 1}</a></li>
                               <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
                             </c:when>
                             <c:when test = "${(incentivosFiscais.totalPages == 2) && (incentivosFiscais.number + 1 < incentivosFiscais.totalPages)}">
                               <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
-                              <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/incentivosFiscais?page=${incentivosFiscais.number}">${incentivosFiscais.number + 1}</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivosFiscais?page=${incentivosFiscais.number + 1}">${incentivosFiscais.number + 2}</a></li>
+                              <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/incentivos-fiscais?page=${incentivosFiscais.number}">${incentivosFiscais.number + 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivos-fiscais?page=${incentivosFiscais.number + 1}">${incentivosFiscais.number + 2}</a></li>
                               <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
                             </c:when>
                             <c:when test = "${(incentivosFiscais.totalPages == 2) && (incentivosFiscais.number + 1 == incentivosFiscais.totalPages)}">
                               <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivosFiscais?page=${incentivosFiscais.number - 1}">${incentivosFiscais.number}</a></li>
-                              <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/incentivosFiscais?page=${incentivosFiscais.number}">${incentivosFiscais.number + 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivos-fiscais?page=${incentivosFiscais.number - 1}">${incentivosFiscais.number}</a></li>
+                              <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/incentivos-fiscais?page=${incentivosFiscais.number}">${incentivosFiscais.number + 1}</a></li>
                               <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
                             </c:when>
                             <c:when test = "${(incentivosFiscais.totalPages >= 3) && (incentivosFiscais.number == 0)}">
                               <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivosFiscais">Primeira</a></li>
-                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/incentivosFiscais?page=${incentivosFiscais.number}">${incentivosFiscais.number + 1}</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivosFiscais?page=${incentivosFiscais.number + 1}">${incentivosFiscais.number + 2}</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivosFiscais?page=${incentivosFiscais.number + 2}">${incentivosFiscais.number + 3}</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivosFiscais?page=${incentivosFiscais.totalPages - 1}">Última</a></li>
+                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/incentivos-fiscais?page=${incentivosFiscais.number}">${incentivosFiscais.number + 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivos-fiscais?page=${incentivosFiscais.number + 1}">${incentivosFiscais.number + 2}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivos-fiscais?page=${incentivosFiscais.number + 2}">${incentivosFiscais.number + 3}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivos-fiscais?page=${incentivosFiscais.totalPages - 1}">Última</a></li>
                             </c:when>
                             <c:when test = "${(incentivosFiscais.totalPages >= 3) && (incentivosFiscais.number > 0) && (incentivosFiscais.number + 1 < incentivosFiscais.totalPages)}">
                               <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivosFiscais">Primeira</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivosFiscais?page=${incentivosFiscais.number - 1}">${incentivosFiscais.number}</a></li>
-                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/incentivosFiscais?page=${incentivosFiscais.number}">${incentivosFiscais.number + 1}</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivosFiscais?page=${incentivosFiscais.number + 1}">${incentivosFiscais.number + 2}</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivosFiscais?page=${incentivosFiscais.totalPages - 1}">Última</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivos-fiscais?page=${incentivosFiscais.number - 1}">${incentivosFiscais.number}</a></li>
+                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/incentivos-fiscais?page=${incentivosFiscais.number}">${incentivosFiscais.number + 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivos-fiscais?page=${incentivosFiscais.number + 1}">${incentivosFiscais.number + 2}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivos-fiscais?page=${incentivosFiscais.totalPages - 1}">Última</a></li>
                             </c:when>
                             <c:when test = "${(incentivosFiscais.totalPages >= 3) && (incentivosFiscais.number + 1 == incentivosFiscais.totalPages)}">
                               <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivosFiscais">Primeira</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivosFiscais?page=${incentivosFiscais.number - 2}">${incentivosFiscais.number - 1}</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivosFiscais?page=${incentivosFiscais.number - 1}">${incentivosFiscais.number}</a></li>
-                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/incentivosFiscais?page=${incentivosFiscais.number}">${incentivosFiscais.number + 1}</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivosFiscais?page=${incentivosFiscais.totalPages - 1}">Última</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivos-fiscais?page=${incentivosFiscais.number - 2}">${incentivosFiscais.number - 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivos-fiscais?page=${incentivosFiscais.number - 1}">${incentivosFiscais.number}</a></li>
+                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/incentivos-fiscais?page=${incentivosFiscais.number}">${incentivosFiscais.number + 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/incentivos-fiscais?page=${incentivosFiscais.totalPages - 1}">Última</a></li>
                             </c:when>
                           </c:choose> 
                         </ul>

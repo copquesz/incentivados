@@ -61,8 +61,12 @@
               <i class="fas fa-gavel"></i>Incentivos Fiscais</a>
           </li>
           <li>
-            <a href="${path}/painel/pedidos">
+            <a href="${path}/painel/pedidos?filtro=TODOS&key=">
               <i class="fas fa-praying-hands"></i>Pedidos</a>
+          </li>
+          <li>
+            <a href="${path}/painel/ranking">
+              <i class="far fa-chart-bar"></i>Ranking</a>
           </li>
         </ul>
       </div>
@@ -127,6 +131,26 @@
                             <fieldset class="mt-5">
                                 <legend class="text-primary">Informações Gerais:</legend>
                                 <hr class="bg-primary">
+                                <div class="row mt-3">
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Responsável:</label>                                        
+                                        <input type="text" class="form-control" value="${entidade.usuario.nome} ${entidade.usuario.sobrenome}" readonly>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>E-mail:</label>                                        
+                                        <input type="text" class="form-control" value="${entidade.usuario.email}" readonly>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Telefone:</label>                                        
+                                        <input type="text" class="form-control" value="${entidade.usuario.telefone}" readonly>
+                                    </div>
+                                  </div>
+                                </div>
                                 <div class="row mt-3">
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -221,22 +245,24 @@
                                             <h5 class="text-center">Logo</h5>
                                         </div>
                                     </div>
-                                    <div class="col-lg-2 text-center mt-5">
-                                        <div class="form-group">
-                                            <a href="${path}/${entidade.documentosEntidade.ataEleicao.path}"
-                                               target="_blank"><i class="far fa-file-image text-primary"
-                                                                  style="font-size: 56px;"></i></a>
-                                            <hr>
-                                            <h5 class="text-center">Ata de Eleição</h5>
-                                        </div>
-                                    </div>
+                                    <c:if test="${not empty entidade.documentosEntidade.ataEleicao.path}">
+                                      <div class="col-lg-2 text-center mt-5">
+                                          <div class="form-group">
+                                              <a href="${path}/${entidade.documentosEntidade.ataEleicao.path}"
+                                                 target="_blank"><i class="far fa-file-image text-primary"
+                                                                    style="font-size: 56px;"></i></a>
+                                              <hr>
+                                              <h5 class="text-center">Ata de Eleição</h5>
+                                          </div>
+                                      </div>
+                                    </c:if>
                                     <div class="col-lg-2 text-center mt-5">
                                         <div class="form-group">
                                             <a href="${path}/${entidade.documentosEntidade.estatutoSocial.path}"
                                                target="_blank"><i class="far fa-file-image text-primary"
                                                                   style="font-size: 56px;"></i></a>
                                             <hr>
-                                            <h5 class="text-center">Estatuto Social</h5>
+                                            <h5 class="text-center">Estatuto Social ou Contrato Social</h5>
                                         </div>
                                     </div>
                                     <div class="col-lg-2 text-center mt-5">
@@ -255,6 +281,15 @@
                                                                   style="font-size: 56px;"></i></a>
                                             <hr>
                                             <h5 class="text-center">Cartão CNPJ</h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 text-center mt-5">
+                                        <div class="form-group">
+                                            <a href="${path}/${entidade.documentosEntidade.dadosBancarios.path}"
+                                               target="_blank"><i class="fas fa-file-pdf text-primary"
+                                                                  style="font-size: 56px;"></i></a>
+                                            <hr>
+                                            <h5 class="text-center">Dados Bancários da Entidade</h5>
                                         </div>
                                     </div>
                                 </div>

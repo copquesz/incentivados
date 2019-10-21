@@ -20,13 +20,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Nome:</label>
-                                    <input type="text" class="form-control" name="nome" required>
+                                    <input type="text" class="form-control text-capitalize" name="nome" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Sobrenome:</label>
-                                    <input type="text" class="form-control" name="sobrenome" required>
+                                    <input type="text" class="form-control text-capitalize" name="sobrenome" required>
                                 </div>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>E-mail:</label>
-                                    <input type="email" class="form-control" name="email" required>
+                                    <input type="email" class="form-control text-lowercase" name="email" required>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -145,6 +145,14 @@
                             </div>
                         </div>
                     </fieldset>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="termos-de-uso" required>
+                                <label class="form-check-label" for="termos-de-uso">Li e estou ciente com os <strong><a href="${path}/documentos/termo-de-uso-compromisso.pdf" target="_blank">TERMOS DE USO E COMPROMISSO</a></strong> da plataforma.</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="su" class="btn btn-info">Cadastrar</button>

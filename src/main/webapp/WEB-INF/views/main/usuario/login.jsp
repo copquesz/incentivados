@@ -59,7 +59,7 @@
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-at"></i></span>
                         </div>
-                        <input type="email" name="email" class="form-control input_user" value=""
+                        <input type="email" name="email" class="form-control input_user text-lowercase" value=""
                                placeholder="e-mail">
                     </div>
                     <div class="input-group mb-2">
@@ -113,6 +113,7 @@
 <!-- MODAL -->
 <c:import url="/WEB-INF/views/componentes/modal/modal-cadastro-usuario.jsp"/>
 <c:import url="/WEB-INF/views/componentes/modal/modal-acesso-negado.jsp"/>
+<c:import url="/WEB-INF/views/componentes/modal/modal-sessao-expirada.jsp"/>
 
 </body>
 <!--   Core JS Files   -->
@@ -132,6 +133,13 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#modal-acesso-negado').modal('show');
+        });
+    </script>
+</c:if>
+<c:if test="${sessaoExpirada}">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#modal-sessao-expirada').modal('show');
         });
     </script>
 </c:if>

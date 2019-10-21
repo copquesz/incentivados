@@ -34,8 +34,6 @@ import br.com.incentivados.service.UsuarioService;
 
 @Controller
 public class DashboardController {
-
-
     private UsuarioService usuarioService;
     private EntidadeService entidadeService;
     private ProjetoService projetoService;
@@ -52,239 +50,151 @@ public class DashboardController {
         this.incentivoFiscalService = incentivoFiscalService;
     }
 
-    @GetMapping("/login")
-    public String getLogin(@ModelAttribute("redirectAttributesAcesso") String redirectAttributesAcesso,
-                           @ModelAttribute("redirectAttributesRedirect") String redirectAttributesRedirect,
-                           @RequestParam(required = false, defaultValue = "") String redirect, HttpServletRequest request,
-                           Model model) {
-
-        // paths da requisição e de redirecionamento
+    @GetMapping({"/login"})
+    public String getLogin(@ModelAttribute("redirectAttributesAcesso") String redirectAttributesAcesso, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-
-        // Seta a url de redirect
-        if (redirectAttributesRedirect.equals("")) {
-            model.addAttribute("redirect", redirect);
-        } else {
-            model.addAttribute("redirect", redirectAttributesRedirect);
-        }
-
         if (redirectAttributesAcesso.equals("negado")) {
             model.addAttribute("acessoNegado", true);
         }
 
-        return "main/usuario/login";
+        if (redirectAttributesAcesso.equals("expirado")) {
+            model.addAttribute("sessaoExpirada", true);
+        }
 
+        return "main/usuario/login";
     }
 
-    @PostMapping("/login")
-    public String postLogin(@RequestParam(required = false, defaultValue = "") String redirect, String email,
-                            String senha, HttpServletRequest request, Model model, HttpSession session,
-                            RedirectAttributes redirectAttributes) {
-
-        // Atribui para a view o path da requisição
+    @PostMapping({"/login"})
+    public String postLogin(@RequestParam(required = false,defaultValue = "") String redirect, String email, String senha, HttpServletRequest request, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         model.addAttribute("path", request.getContextPath());
 
         try {
-            // Verifica a existencia do usuário no banco de dados e carrega os dados caso
-            // exista. Senão exibe uma mensagem de erro
-            if (usuarioService.existsByEmailAndSenha(email, senha)) {
-
-                Usuario usuario = usuarioService.login(email);
+            if (this.usuarioService.existsByEmailAndSenha(email, senha)) {
+                Usuario usuario = this.usuarioService.login(email);
                 model.addAttribute("usuario", usuario);
                 session.setAttribute("usuario", usuario);
-                logger.log(Level.INFO, "Acesso liberado: " + email);
-
-                if (redirect.equals("")) {
-                    return "redirect:painel/dashboard";
-                } else {
-                    return "redirect:" + redirect;
-                }
-
+                this.logger.log(Level.INFO, "Acesso liberado: " + email);
+                return redirect.equals("") ? "redirect:painel/dashboard" : "redirect:" + redirect;
             } else {
-                logger.log(Level.INFO, "Tentativa de acesso incorreta: " + email);
+                this.logger.log(Level.INFO, "Tentativa de acesso incorreta: " + email);
                 redirectAttributes.addFlashAttribute("redirectAttributesRedirect", redirect);
                 redirectAttributes.addFlashAttribute("redirectAttributesAcesso", "negado");
                 return "redirect:login";
-
             }
-
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Erro login: " + email, e);
-            model.addAttribute("e", e);
+        } catch (Exception var9) {
+            this.logger.log(Level.SEVERE, "Erro login: " + email, var9);
+            model.addAttribute("e", var9);
             model.addAttribute("dataAtual", new Date());
-
             return "";
         }
-
     }
 
-    /**
-     * @param request
-     * @param model
-     * @return
-     */
-    @GetMapping("/painel/dashboard")
+    @GetMapping({"/painel/dashboard"})
     public String getDashboard(HttpServletRequest request, Model model) {
-
-        // Atribui para a view o path da requisição
         model.addAttribute("path", request.getContextPath());
         model.addAttribute("breadcrumb", "Dashboard");
-
-        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
         model.addAttribute("usuario", usuario);
-
-        Pageable pageableProjetos = PageRequest.of(0, 4, Sort.by(Sort.Order.asc("id")));
-        Pageable pageableEntidades = PageRequest.of(0, 3, Sort.by(Sort.Order.asc("id")));
-        Pageable pageablePedidos = PageRequest.of(0, 5, Sort.by(Order.desc("id")));
-
-        // Verifica qual tipo de usuário está logado e redireciona para sua respectiva
-        // view
-        switch (usuario.getTipoUsuario()) {
-
+        Pageable pageableProjetos = PageRequest.of(0, 4, Sort.by(new Order[]{Order.desc("id")}));
+        Pageable pageableEntidades = PageRequest.of(0, 3, Sort.by(new Order[]{Order.desc("id")}));
+        Pageable pageablePedidos = PageRequest.of(0, 5, Sort.by(new Order[]{Order.desc("id")}));
+        List incentivosFiscais;
+        ArrayList datasCharProjeto;
+        int i;
+        switch(usuario.getTipoUsuario()) {
             case EMPRESA:
-                // Exibe total de pedidos por analista.
-                model.addAttribute("qtdPedidos", pedidoService.countByEmpresa(usuario.getEmpresa()));
-
-                model.addAttribute("pendentes", pedidoService.findAllByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.PENDENTE,
-                        pageablePedidos));
-                model.addAttribute("qtdPendente", pedidoService.countByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.PENDENTE));
-
-                // Exibe os pedidos aprovados e a quantidade por analista.
-                model.addAttribute("aprovados", pedidoService.findAllByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.APROVADO,
-                        pageablePedidos));
-                model.addAttribute("qtdAprovado", pedidoService.countByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.APROVADO));
-
-                // Exibe os pedidos reprovados e a quantidade por analista.
-                model.addAttribute("recusados", pedidoService.findAllByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.RECUSADO,
-                        pageablePedidos));
-                model.addAttribute("qtdRecusado", pedidoService.countByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.RECUSADO));
-
-                return "painel/empresa/dashboard-empresa";
-
-            case ENTIDADE:
-
-                // Condicional que verifica se o usuário pode cadastrar um projeto
-                model.addAttribute("cadastroProjeto", entidadeService.existsByUsuario(usuario));
-
-                // Lista as infos e estatísticas de entidades por usuário
-                model.addAttribute("entidades", entidadeService.findAllByUsuario(usuario, pageableEntidades));
-                model.addAttribute("qtdEntidades", entidadeService.countByUsuario(usuario));
-
-                // Lista as infos e estatísticas de projetos por usuário
-                model.addAttribute("projetos", projetoService.findAllByUsuario(usuario, pageableProjetos));
-                model.addAttribute("qtdProjetos", projetoService.countByUsuario(usuario));
-
-                // Lista as infos e estatística de pedidos por usuário
-                model.addAttribute("pedidos", pedidoService.findAllByUsuario(usuario, pageablePedidos));
-                model.addAttribute("recusados", pedidoService.findAllByUsuarioAndStatus(usuario, StatusPedido.RECUSADO, pageablePedidos));
-                model.addAttribute("qtdPedidos", pedidoService.countByUsuario(usuario));
-
-                return "painel/entidade/dashboard-entidade";
-
-            case ANALISTA:
-
-                // Exibe total de pedidos por analista.
-                model.addAttribute("qtdPedidos", pedidoService.countByAnalista(usuario));
-
-                // Exibe os pedidos pendentes e a quantidade por analista.
-                model.addAttribute("pendentes", pedidoService.findAllByAnalistaAndStatus(usuario, StatusPedido.PENDENTE,
-                        pageablePedidos));
-                model.addAttribute("qtdPendente", pedidoService.countByAnalistaAndStatus(usuario, StatusPedido.PENDENTE));
-
-                // Exibe os pedidos aprovados e a quantidade por analista.
-                model.addAttribute("aprovados", pedidoService.findAllByAnalistaAndStatus(usuario, StatusPedido.APROVADO,
-                        pageablePedidos));
-                model.addAttribute("qtdAprovado", pedidoService.countByAnalistaAndStatus(usuario, StatusPedido.APROVADO));
-
-                // Exibe os pedidos reprovados e a quantidade por analista.
-                model.addAttribute("recusados", pedidoService.findAllByAnalistaAndStatus(usuario, StatusPedido.RECUSADO,
-                        pageablePedidos));
-                model.addAttribute("qtdRecusado", pedidoService.countByAnalistaAndStatus(usuario, StatusPedido.RECUSADO));
-
-                return "painel/analista/dashboard-analista";
-
-            case ADMIN:
-                // Lista as infos e estatísticas das entidades cadastradas
-                model.addAttribute("entidades", entidadeService.findAll(pageableEntidades));
-                model.addAttribute("qtdEntidades", entidadeService.count());
-                model.addAttribute("datasChartEntidade", entidadeService.buildChart());
-
-                // Lista as infos e estatísticas dos projetos cadastrados
-                model.addAttribute("projetos", projetoService.findAll(pageableProjetos));
-                model.addAttribute("qtdProjetos", projetoService.count());
-
-                // Lista todos os incentivos fiscais cadastrados na base de dados que servirá de parâmetro para gerar o filtro do chart de projetos.
-                List<IncentivoFiscal> incentivosFiscais = incentivoFiscalService.findAll();
+                model.addAttribute("qtdPedidos", this.pedidoService.countByEmpresa(usuario.getEmpresa()));
+                model.addAttribute("pendentes", this.pedidoService.findAllByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.PENDENTE, pageablePedidos));
+                model.addAttribute("qtdPendente", this.pedidoService.countByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.PENDENTE));
+                model.addAttribute("aprovados", this.pedidoService.findAllByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.APROVADO, pageablePedidos));
+                model.addAttribute("qtdAprovado", this.pedidoService.countByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.APROVADO));
+                model.addAttribute("recusados", this.pedidoService.findAllByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.RECUSADO, pageablePedidos));
+                model.addAttribute("qtdRecusado", this.pedidoService.countByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.RECUSADO));
+                model.addAttribute("preAprovados", this.pedidoService.findAllByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.PRE_APROVADO, pageablePedidos));
+                model.addAttribute("qtdPreAprovado", this.pedidoService.countByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.PRE_APROVADO));
+                model.addAttribute("qtdProjetos", this.projetoService.count());
+                incentivosFiscais = this.incentivoFiscalService.findAll();
                 model.addAttribute("incentivosFiscais", incentivosFiscais);
+                datasCharProjeto = new ArrayList();
 
-                // Lista o número de projetos cadastrados por incentivo fiscal
-                List<Long> datasCharProjeto = new ArrayList<Long>();
-                for (int i = 0; i < incentivosFiscais.size(); i++) {
-                    datasCharProjeto.add(projetoService.countByIncentivosFiscais(incentivosFiscais.get(i)));
+                for(i = 0; i < incentivosFiscais.size(); ++i) {
+                    datasCharProjeto.add(this.projetoService.countByIncentivosFiscais((IncentivoFiscal)incentivosFiscais.get(i)));
                 }
+
                 model.addAttribute("datasCharProjeto", datasCharProjeto);
+                model.addAttribute("qtdPedidos", this.pedidoService.count());
+                model.addAttribute("qtdPedidosPendente", this.pedidoService.countByStatus(StatusPedido.PENDENTE));
+                model.addAttribute("qtdPedidosPreAprovado", this.pedidoService.countByStatus(StatusPedido.PRE_APROVADO));
+                model.addAttribute("qtdPedidosAprovado", this.pedidoService.countByStatus(StatusPedido.APROVADO));
+                model.addAttribute("qtdPedidosRecusado", this.pedidoService.countByStatus(StatusPedido.RECUSADO));
+                return "painel/empresa/dashboard-empresa";
+            case ENTIDADE:
+                model.addAttribute("cadastroProjeto", this.entidadeService.existsByUsuario(usuario));
+                model.addAttribute("entidades", this.entidadeService.findAllByUsuario(usuario, pageableEntidades));
+                model.addAttribute("qtdEntidades", this.entidadeService.countByUsuario(usuario));
+                model.addAttribute("projetos", this.projetoService.findAllByUsuario(usuario, pageableProjetos));
+                model.addAttribute("qtdProjetos", this.projetoService.countByUsuario(usuario));
+                model.addAttribute("pedidos", this.pedidoService.findAllByUsuario(usuario, pageablePedidos));
+                model.addAttribute("qtdPedidos", this.pedidoService.countByUsuario(usuario));
+                return "painel/entidade/dashboard-entidade";
+            case ANALISTA:
+                model.addAttribute("qtdPedidos", this.pedidoService.countByAnalista(usuario));
+                model.addAttribute("pendentes", this.pedidoService.findAllByAnalistaAndStatus(usuario, StatusPedido.PENDENTE, pageablePedidos));
+                model.addAttribute("qtdPendente", this.pedidoService.countByAnalistaAndStatus(usuario, StatusPedido.PENDENTE));
+                model.addAttribute("aprovados", this.pedidoService.findAllByAnalistaAndStatus(usuario, StatusPedido.APROVADO, pageablePedidos));
+                model.addAttribute("qtdAprovado", this.pedidoService.countByAnalistaAndStatus(usuario, StatusPedido.APROVADO));
+                model.addAttribute("recusados", this.pedidoService.findAllByAnalistaAndStatus(usuario, StatusPedido.RECUSADO, pageablePedidos));
+                model.addAttribute("qtdRecusado", this.pedidoService.countByAnalistaAndStatus(usuario, StatusPedido.RECUSADO));
+                model.addAttribute("preAprovados", this.pedidoService.findAllByAnalistaAndStatus(usuario, StatusPedido.PRE_APROVADO, pageablePedidos));
+                model.addAttribute("qtdPreAprovado", this.pedidoService.countByAnalistaAndStatus(usuario, StatusPedido.PRE_APROVADO));
+                return "painel/analista/dashboard-analista";
+            case ADMIN:
+                model.addAttribute("entidades", this.entidadeService.findAll(pageableEntidades));
+                model.addAttribute("qtdEntidades", this.entidadeService.count());
+                model.addAttribute("datasChartEntidade", this.entidadeService.buildChart());
+                model.addAttribute("projetos", this.projetoService.findAll(pageableProjetos));
+                model.addAttribute("qtdProjetos", this.projetoService.count());
+                incentivosFiscais = this.incentivoFiscalService.findAll();
+                model.addAttribute("incentivosFiscais", incentivosFiscais);
+                datasCharProjeto = new ArrayList();
 
-                // Lista as infos e estatísticas dos pedidos cadastrados
-                model.addAttribute("qtdPedidos", pedidoService.count());
-                model.addAttribute("qtdPedidosPendente", pedidoService.countByStatus(StatusPedido.PENDENTE));
-                model.addAttribute("qtdPedidosAprovado", pedidoService.countByStatus(StatusPedido.APROVADO));
-                model.addAttribute("qtdPedidosRecusado", pedidoService.countByStatus(StatusPedido.RECUSADO));
+                for(i = 0; i < incentivosFiscais.size(); ++i) {
+                    datasCharProjeto.add(this.projetoService.countByIncentivosFiscais((IncentivoFiscal)incentivosFiscais.get(i)));
+                }
+
+                model.addAttribute("datasCharProjeto", datasCharProjeto);
+                model.addAttribute("qtdPedidos", this.pedidoService.count());
+                model.addAttribute("qtdPedidosPendente", this.pedidoService.countByStatus(StatusPedido.PENDENTE));
+                model.addAttribute("qtdPedidosPreAprovado", this.pedidoService.countByStatus(StatusPedido.PRE_APROVADO));
+                model.addAttribute("qtdPedidosAprovado", this.pedidoService.countByStatus(StatusPedido.APROVADO));
+                model.addAttribute("qtdPedidosRecusado", this.pedidoService.countByStatus(StatusPedido.RECUSADO));
                 return "painel/admin/dashboard-admin";
-
             default:
                 return "";
         }
-
     }
 
-    /**
-     * Este método faz uma chamada GET para acessar a página que exibe os dados do usuário logado.
-     *
-     * @param request contém informações referente a requisição feita através desta url.
-     * @param model   disponibiliza dados da controller para a view.
-     * @return retorna a página que exibe os dados do usuário logado.
-     */
-    @GetMapping("/painel/perfil")
+    @GetMapping({"/painel/perfil"})
     public String getPerfil(HttpServletRequest request, Model model) {
-
-        // Seta o path da requisição
         model.addAttribute("path", request.getContextPath());
-
-        // Disponibiliza os dados do usuário logado para a view
-        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
         model.addAttribute("usuario", usuario);
-
-        switch (usuario.getTipoUsuario()) {
-
-            case ADMIN:
-                return "painel/admin/usuario/perfil";
-
+        switch(usuario.getTipoUsuario()) {
             case EMPRESA:
                 return "painel/empresa/usuario/perfil";
-
-            case ANALISTA:
-                return "painel/analista/usuario/perfil";
-
             case ENTIDADE:
                 return "painel/entidade/usuario/perfil";
-
+            case ANALISTA:
+                return "painel/analista/usuario/perfil";
+            case ADMIN:
+                return "painel/admin/usuario/perfil";
             default:
                 return "";
         }
     }
 
-    /**
-     * Este método faz uma chamada GET para finalizar a sessão do usuário logado.
-     *
-     * @param request contém informações referente a requisição feita através desta url.
-     * @param model   disponibiliza dados da controller para a view.
-     * @param session ocontém informações referente a sessão do usuário logado.
-     * @return redireciona o usuário para o formulário de login.
-     */
-    @GetMapping("/sair")
+    @GetMapping({"/sair"})
     public String getDashboard(HttpServletRequest request, Model model, HttpSession session) {
-
-        // Seta o path da requisição
         model.addAttribute("path", request.getContextPath());
         session.invalidate();
         return "redirect:login";

@@ -24,235 +24,205 @@ import br.com.incentivados.service.EntidadeService;
 import br.com.incentivados.service.PedidoService;
 import br.com.incentivados.service.UsuarioService;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class PedidoController {
-
-    // Instancias de Serviços
     private EmpresaService empresaService;
     private EntidadeService entidadeService;
     private UsuarioService usuarioService;
     private PedidoService pedidoService;
     private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
 
-    // Construtor
     @Autowired
-    public PedidoController(EmpresaService empresaService, EntidadeService entidadeService,
-                            UsuarioService usuarioService, PedidoService pedidoService, HttpServletRequest request) {
-        super();
+    public PedidoController(EmpresaService empresaService, EntidadeService entidadeService, UsuarioService usuarioService, PedidoService pedidoService, HttpServletRequest request) {
         this.empresaService = empresaService;
         this.entidadeService = entidadeService;
         this.usuarioService = usuarioService;
         this.pedidoService = pedidoService;
     }
 
-    /**
-     * Exibe a página de cadastro de pedido para a empresa passada como parâmetro
-     *
-     * @param nomeFantasia nome da empresa que irá receber o pedido
-     * @param request      recebe dados da requisição
-     * @param model        fornece dados para a view
-     * @return view jsp
-     */
-    @GetMapping("/painel/pedidos/{nomeFantasia}/cadastro")
-    public String getCadastrar(@PathVariable String nomeFantasia, HttpServletRequest request, Model model) {
-
-        // Seta o path da requisição
+    @GetMapping({"/painel/pedidos/cadastro"})
+    public String getCadastrar(@RequestParam String empresaCnpj, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-
-        try {
-
-            // Carrega a empresa que foi passada como parâmetro
-            Optional<Empresa> empresa = empresaService.findByNomeFantasia(nomeFantasia);
-            if (empresa.isPresent()) {
-                model.addAttribute("empresa", empresa.get());
-            } else {
-                logger.log(Level.WARNING, "Empresa não localizada.");
-            }
-
-            // Recebe o usuário logado na sessão
-            Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        Optional<Empresa> empresa = this.empresaService.findByCnpj(empresaCnpj);
+        if (empresa.isPresent()) {
+            model.addAttribute("empresa", empresa.get());
+            Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
             model.addAttribute("usuario", usuario);
-
-            // Lista das entidades cadastradas pelo usuário logado
-            model.addAttribute("entidades", entidadeService.findAllByUsuario(usuario));
-
+            model.addAttribute("entidades", this.entidadeService.findAllByUsuario(usuario));
             return "painel/entidade/pedido/cadastro";
-
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Erro exibir formulário de pedidos.", e);
+        } else {
+            this.logger.log(Level.WARNING, "Empresa não localizada.");
             return "";
         }
-
     }
 
-    /**
-     * Faz a persistência de dados do pedido
-     *
-     * @param pedido  modelo do objeto que será persistido
-     * @param request recebe dados da requisição
-     * @param model   fornece dados para a view
-     * @return view jsp
-     */
-    @PostMapping("/painel/pedidos/{nomeFantasia}/cadastro")
+    @PostMapping({"/painel/pedidos/cadastro"})
     public String postCadastrar(Pedido pedido, HttpServletRequest request, Model model) {
-
-        // Seta o path da requisição
         model.addAttribute("path", request.getContextPath());
 
         try {
-
-            // Carrega os objetos que serão setados no pedido
-            Optional<Usuario> usuario = usuarioService.findById(pedido.getUsuario().getId());
-            Optional<Usuario> analista = usuarioService.findById(pedido.getAnalista().getId());
-            Optional<Empresa> empresa = empresaService.findById(pedido.getEmpresa().getId());
-            Optional<Entidade> entidade = entidadeService.findById(pedido.getEntidade().getId());
-
-            // Persiste o pedido na base de dados
-            pedido = pedidoService.save(pedido, request, usuario.get(), analista.get(), empresa.get(), entidade.get());
+            Optional<Usuario> usuario = this.usuarioService.findById(pedido.getUsuario().getId());
+            Optional<Usuario> analista = this.usuarioService.findById(pedido.getAnalista().getId());
+            Optional<Empresa> empresa = this.empresaService.findById(pedido.getEmpresa().getId());
+            Optional<Entidade> entidade = this.entidadeService.findById(pedido.getEntidade().getId());
+            pedido = this.pedidoService.save(pedido, request, (Usuario)usuario.get(), (Usuario)analista.get(), (Empresa)empresa.get(), (Entidade)entidade.get());
             model.addAttribute("pedido", pedido);
-
-            logger.log(Level.INFO, "Pedido cadastrado com sucesso: #" + pedido.getId());
+            this.logger.log(Level.INFO, "Pedido cadastrado com sucesso: #" + pedido.getId());
             return "painel/entidade/pedido/pedido-entidade-sucesso";
-
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Erro cadastrar pedido.", e);
+        } catch (Exception var8) {
+            this.logger.log(Level.SEVERE, "Erro cadastrar pedido.", var8);
             return "painel/entidade/pedido/pedido-entidade-falha";
         }
     }
 
-    @GetMapping("/painel/pedido/{id}")
+    @GetMapping({"/painel/pedido/{id}"})
     public String getAvaliacaoPedido(@PathVariable Long id, HttpServletRequest request, Model model) {
-
-        // Seta o path da requisição
         model.addAttribute("path", request.getContextPath());
-
-        // Recebe o usuário logado na sessão
-        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
         model.addAttribute("usuario", usuario);
-
-        Optional<Pedido> pedido = pedidoService.findById(id);
+        Optional<Pedido> pedido = this.pedidoService.findById(id);
         if (pedido.isPresent()) {
             model.addAttribute("pedido", pedido.get());
         } else {
-            logger.log(Level.WARNING, "Pedido não localizado.");
+            this.logger.log(Level.WARNING, "Pedido não localizado.");
         }
 
-        switch (usuario.getTipoUsuario()) {
+        switch(usuario.getTipoUsuario()) {
+            case ADMIN:
+                return "painel/admin/pedido/visualizar";
             case ANALISTA:
                 return "painel/analista/pedido/visualizar";
             case EMPRESA:
                 return "painel/empresa/pedido/visualizar";
             default:
-                logger.log(Level.WARNING, "Usuário não localizado.");
+                this.logger.log(Level.WARNING, "Usuário não localizado.");
                 return "";
         }
     }
 
-    @PostMapping("/painel/pedido/{id}/avaliar")
+    @PostMapping({"/painel/pedido/{id}/avaliar"})
     public String postAvaliacaoPedido(@PathVariable Long id, @RequestParam StatusPedido status, ObservacaoPedido observacao, HttpServletRequest request, Model model) {
-
-        // Seta o path da requisição
         model.addAttribute("path", request.getContextPath());
-
-        // Recebe o usuário logado na sessão
-        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
         model.addAttribute("usuario", usuario);
-
-        Optional<Pedido> pedido = pedidoService.findById(id);
-
-        // Verifica se o pedido existe
+        Optional<Pedido> pedido = this.pedidoService.findById(id);
         if (pedido.isPresent()) {
-            // Verifica se o pedido ainda está pendente de avaliação
-            if (pedido.get().getStatus() == StatusPedido.PENDENTE) {
-                pedidoService.update(pedido.get(), status, observacao, usuario);
-                logger.log(Level.INFO, "Pedido avaliado: #" + pedido.get().getId());
+            if (((Pedido)pedido.get()).getStatus() == StatusPedido.PENDENTE) {
+                this.pedidoService.update((Pedido)pedido.get(), status, observacao, usuario);
+                this.logger.log(Level.INFO, "Pedido avaliado: #" + ((Pedido)pedido.get()).getId());
                 return "redirect:/painel/dashboard";
             } else {
-                logger.log(Level.WARNING, "Pedido avaliado já avaliado: #" + pedido.get().getId());
+                this.logger.log(Level.WARNING, "Pedido avaliado já avaliado: #" + ((Pedido)pedido.get()).getId());
                 return "painel/empresa/pedido/erro/pedido-ja-avaliado";
             }
         } else {
-            logger.log(Level.WARNING, "Pedido não localizado: #" + id);
+            this.logger.log(Level.WARNING, "Pedido não localizado: #" + id);
             return "painel/empresa/pedido/erro/pedido-nao-localizado";
         }
-
     }
 
-    @GetMapping("/painel/pedidos")
-    public String getPedidos(@RequestParam(required = false, defaultValue = "0") int page, @RequestParam(required = false, defaultValue = "") String key, @RequestParam(required = false, defaultValue = "TODOS") FiltroPedidos filtro, HttpServletRequest request, Model model) {
-
-        // Seta o path da requisição
+    @PostMapping({"/painel/pedido/{id}/nota-fiscal"})
+    public String postNotaFiscal(@PathVariable Long id, @RequestParam MultipartFile notaFiscal, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
+        Optional<Pedido> pedido = this.pedidoService.findById(id);
+        if (pedido.isPresent()) {
+            if (!notaFiscal.isEmpty()) {
+                this.pedidoService.update((Pedido)pedido.get(), request, notaFiscal);
+                this.logger.log(Level.INFO, "Nota Fiscal submetidda com sucesso! - Pedido: #" + ((Pedido)pedido.get()).getId());
+                return "redirect:/painel/dashboard";
+            } else {
+                this.logger.log(Level.WARNING, "Erro ao submeter nota fiscal: #" + ((Pedido)pedido.get()).getId());
+                return "painel/empresa/pedido/erro/pedido-nao-localizado";
+            }
+        } else {
+            this.logger.log(Level.SEVERE, "Pedido não localizado: #" + id);
+            return "painel/empresa/pedido/erro/pedido-nao-localizado";
+        }
+    }
 
+    @GetMapping({"/painel/pedidos"})
+    public String getPedidos(@RequestParam(required = false,defaultValue = "0") int page, @RequestParam(required = false,defaultValue = "") String key, @RequestParam(required = false,defaultValue = "TODOS") FiltroPedidos filtro, HttpServletRequest request, Model model) {
+        model.addAttribute("path", request.getContextPath());
         model.addAttribute("page", page);
         model.addAttribute("key", key);
         model.addAttribute("filtro", filtro);
-
-        // Recebe o usuário logado na sessão
-        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
         model.addAttribute("usuario", usuario);
-
         Empresa empresa = usuario.getEmpresa();
 
         try {
-
-            switch (usuario.getTipoUsuario()) {
+            FiltroPedidos[] filtroPedidos = FiltroPedidos.values();
+            model.addAttribute("filtroPedidos", filtroPedidos);
+            switch(usuario.getTipoUsuario()) {
                 case ADMIN:
-                    Pageable pageablePedidos = PageRequest.of(page, 10000, Sort.by(Sort.Order.desc("id")));
-                    model.addAttribute("pedidos", pedidoService.findAll());
-                    model.addAttribute("recusados", pedidoService.findAllByStatus(StatusPedido.RECUSADO, pageablePedidos));
-                    model.addAttribute("qtdPedidos", pedidoService.count());
+                    Pageable pageablePedidosAdmin = PageRequest.of(page, 10, Sort.by(new Sort.Order[]{Sort.Order.desc("id")}));
+                    if (filtro == FiltroPedidos.LOJA) {
+                        model.addAttribute("pedidos", this.pedidoService.findAllByLoja(key, pageablePedidosAdmin));
+                        model.addAttribute("recusados", this.pedidoService.findAllByLojaAndStatus(key, StatusPedido.RECUSADO, pageablePedidosAdmin));
+                        model.addAttribute("aprovados", this.pedidoService.findAllByLojaAndStatus(key, StatusPedido.APROVADO, pageablePedidosAdmin));
+                    } else if (filtro == FiltroPedidos.CIDADE) {
+                        model.addAttribute("pedidos", this.pedidoService.findAllByCidade(key, pageablePedidosAdmin));
+                        model.addAttribute("recusados", this.pedidoService.findAllByCidadeAndStatus(key, StatusPedido.RECUSADO, pageablePedidosAdmin));
+                        model.addAttribute("aprovados", this.pedidoService.findAllByCidadeAndStatus(key, StatusPedido.APROVADO, pageablePedidosAdmin));
+                    } else if (filtro == FiltroPedidos.ESTADO) {
+                        model.addAttribute("pedidos", this.pedidoService.findAllByEstado(key, pageablePedidosAdmin));
+                        model.addAttribute("recusados", this.pedidoService.findAllByEstadoAndStatus(key, StatusPedido.RECUSADO, pageablePedidosAdmin));
+                        model.addAttribute("aprovados", this.pedidoService.findAllByEstadoAndStatus(key, StatusPedido.APROVADO, pageablePedidosAdmin));
+                    } else if (filtro == FiltroPedidos.ENTIDADE) {
+                        model.addAttribute("pedidos", this.pedidoService.findAllByEntidade(key, pageablePedidosAdmin));
+                        model.addAttribute("recusados", this.pedidoService.findAllByEntidadeAndStatus(key, StatusPedido.RECUSADO, pageablePedidosAdmin));
+                        model.addAttribute("aprovados", this.pedidoService.findAllByEntidadeAndStatus(key, StatusPedido.APROVADO, pageablePedidosAdmin));
+                    } else {
+                        model.addAttribute("pedidos", this.pedidoService.findAll(pageablePedidosAdmin));
+                        model.addAttribute("recusados", this.pedidoService.findAllByStatus(StatusPedido.RECUSADO, pageablePedidosAdmin));
+                        model.addAttribute("aprovados", this.pedidoService.findAllByStatus(StatusPedido.APROVADO, pageablePedidosAdmin));
+                    }
+
                     return "painel/admin/pedido/lista";
-
-
+                case ANALISTA:
+                    Pageable pageablePedidosAnalista = PageRequest.of(page, 5, Sort.by(new Sort.Order[]{Sort.Order.desc("id")}));
+                    model.addAttribute("pedidos", this.pedidoService.findAllByUsuario(usuario, pageablePedidosAnalista));
+                    model.addAttribute("qtdPedidos", this.pedidoService.countByEmpresa(empresa));
+                    return "painel/analista/pedido/lista";
                 case EMPRESA:
-                    FiltroPedidos[] filtroPedidos = FiltroPedidos.values();
-                    model.addAttribute("filtroPedidos", filtroPedidos);
-
-                    Pageable pageablePedidosEmpresa = PageRequest.of(page, 10, Sort.by(Sort.Order.asc("id")));
-
-                    if(filtro == FiltroPedidos.LOJA){
-                        model.addAttribute("pedidos", pedidoService.findAllByEmpresaAndBairro(empresa, key, pageablePedidosEmpresa));
-                        model.addAttribute("qtdPedidos", pedidoService.countByEmpresaAndBairro(empresa, key));
-                        model.addAttribute("recusados", pedidoService.findAllByEmpresaAndStatusAndBairro(empresa, StatusPedido.RECUSADO, key,
-                                pageablePedidosEmpresa));
-                    }
-                    else if (filtro == FiltroPedidos.CIDADE){
-                        model.addAttribute("pedidos", pedidoService.findAllByEmpresaAndCidade(empresa, key, pageablePedidosEmpresa));
-                        model.addAttribute("qtdPedidos", pedidoService.countByEmpresaAndCidade(empresa, key));
-                        model.addAttribute("recusados", pedidoService.findAllByEmpresaAndStatusAndCidade(empresa, StatusPedido.RECUSADO, key,
-                                pageablePedidosEmpresa));
-                    }
-                    else if (filtro == FiltroPedidos.ENTIDADE){
-                        model.addAttribute("pedidos", pedidoService.findAllByEmpresaAndEntidade(empresa, key, pageablePedidosEmpresa));
-                        model.addAttribute("qtdPedidos", pedidoService.countByEmpresaAndEntidade(empresa, key));
-                        model.addAttribute("recusados", pedidoService.findAllByEmpresaAndStatusAndEntidade(empresa, StatusPedido.RECUSADO, key,
-                                pageablePedidosEmpresa));
-                    }
-                    else{
-                        model.addAttribute("pedidos", pedidoService.findAllByEmpresa(empresa, pageablePedidosEmpresa));
-                        model.addAttribute("qtdPedidos", pedidoService.countByEmpresa(empresa));
-                        model.addAttribute("recusados", pedidoService.findAllByEmpresaAndStatus(empresa, StatusPedido.RECUSADO, pageablePedidosEmpresa));
+                    Pageable pageablePedidosEmpresa = PageRequest.of(page, 10, Sort.by(new Sort.Order[]{Sort.Order.desc("id")}));
+                    if (filtro == FiltroPedidos.LOJA) {
+                        model.addAttribute("pedidos", this.pedidoService.findAllByEmpresaAndLoja(empresa, key, pageablePedidosEmpresa));
+                        model.addAttribute("recusados", this.pedidoService.findAllByEmpresaAndLojaAndStatus(empresa, key, StatusPedido.RECUSADO, pageablePedidosEmpresa));
+                        model.addAttribute("aprovados", this.pedidoService.findAllByEmpresaAndLojaAndStatus(empresa, key, StatusPedido.APROVADO, pageablePedidosEmpresa));
+                        model.addAttribute("preAprovados", this.pedidoService.findAllByEmpresaAndLojaAndStatus(empresa, key, StatusPedido.PRE_APROVADO, pageablePedidosEmpresa));
+                    } else if (filtro == FiltroPedidos.CIDADE) {
+                        model.addAttribute("pedidos", this.pedidoService.findAllByEmpresaAndCidade(empresa, key, pageablePedidosEmpresa));
+                        model.addAttribute("recusados", this.pedidoService.findAllByEmpresaAndCidadeAndStatus(empresa, key, StatusPedido.RECUSADO, pageablePedidosEmpresa));
+                        model.addAttribute("aprovados", this.pedidoService.findAllByEmpresaAndCidadeAndStatus(empresa, key, StatusPedido.APROVADO, pageablePedidosEmpresa));
+                        model.addAttribute("preAprovados", this.pedidoService.findAllByEmpresaAndCidadeAndStatus(empresa, key, StatusPedido.PRE_APROVADO, pageablePedidosEmpresa));
+                    } else if (filtro == FiltroPedidos.ESTADO) {
+                        model.addAttribute("pedidos", this.pedidoService.findAllByEmpresaAndEstado(empresa, key, pageablePedidosEmpresa));
+                        model.addAttribute("recusados", this.pedidoService.findAllByEmpresaAndEstadoAndStatus(empresa, key, StatusPedido.RECUSADO, pageablePedidosEmpresa));
+                        model.addAttribute("aprovados", this.pedidoService.findAllByEmpresaAndEstadoAndStatus(empresa, key, StatusPedido.APROVADO, pageablePedidosEmpresa));
+                        model.addAttribute("preAprovados", this.pedidoService.findAllByEmpresaAndEstadoAndStatus(empresa, key, StatusPedido.PRE_APROVADO, pageablePedidosEmpresa));
+                    } else if (filtro == FiltroPedidos.ENTIDADE) {
+                        model.addAttribute("pedidos", this.pedidoService.findAllByEmpresaAndEstado(empresa, key, pageablePedidosEmpresa));
+                        model.addAttribute("recusados", this.pedidoService.findAllByEmpresaAndEstadoAndStatus(empresa, key, StatusPedido.RECUSADO, pageablePedidosEmpresa));
+                        model.addAttribute("aprovados", this.pedidoService.findAllByEmpresaAndEstadoAndStatus(empresa, key, StatusPedido.APROVADO, pageablePedidosEmpresa));
+                        model.addAttribute("preAprovados", this.pedidoService.findAllByEmpresaAndEstadoAndStatus(empresa, key, StatusPedido.PRE_APROVADO, pageablePedidosEmpresa));
+                    } else {
+                        model.addAttribute("pedidos", this.pedidoService.findAllByEmpresa(empresa, pageablePedidosEmpresa));
+                        model.addAttribute("recusados", this.pedidoService.findAllByEmpresaAndStatus(empresa, StatusPedido.RECUSADO, pageablePedidosEmpresa));
+                        model.addAttribute("aprovados", this.pedidoService.findAllByEmpresaAndStatus(empresa, StatusPedido.APROVADO, pageablePedidosEmpresa));
+                        model.addAttribute("preAprovados", this.pedidoService.findAllByEmpresaAndStatus(empresa, StatusPedido.PRE_APROVADO, pageablePedidosEmpresa));
                     }
 
                     return "painel/empresa/pedido/lista";
-
-                case ANALISTA:
-                    Pageable pageablePedidosAnalista = PageRequest.of(page, 5, Sort.by(Sort.Order.desc("id")));
-                    model.addAttribute("pedidos", pedidoService.findAllByUsuario(usuario, pageablePedidosAnalista));
-                    model.addAttribute("qtdPedidos", pedidoService.countByEmpresa(empresa));
-                    return "painel/analista/pedido/lista";
-
                 default:
-                    logger.log(Level.WARNING, "Usuário não localizado.");
+                    this.logger.log(Level.WARNING, "Usuário não localizado.");
                     return "";
             }
-
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Erro listas pedidos.", e);
+        } catch (Exception var12) {
+            this.logger.log(Level.SEVERE, "Erro listas pedidos.", var12);
             return "";
         }
     }
-
 }

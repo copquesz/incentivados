@@ -52,6 +52,11 @@
               <i class="fas fa-project-diagram"></i>Projetos
             </a>
           </li>
+          <li>
+            <a href="${path}/documentos/manual-do-usuario.pdf" target="_blank">
+              <i class="far fa-question-circle"></i>Tutorial
+            </a>
+          </li>
         </ul>
       </div>
     </div>

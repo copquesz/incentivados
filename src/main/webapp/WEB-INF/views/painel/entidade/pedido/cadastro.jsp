@@ -52,6 +52,11 @@
               <i class="fas fa-project-diagram"></i>Projetos
             </a>
           </li>
+          <li>
+            <a href="${path}/documentos/manual-do-usuario.pdf" target="_blank">
+              <i class="far fa-question-circle"></i>Tutorial
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -97,8 +102,7 @@
             <div class="card">
               <div class="card-header bg-primary"></div>
               <div class="card-body border">
-                <form action="${path}/painel/pedidos/${empresa.nomeFantasia}/cadastro" method="post" enctype="multipart/form-data" acceptcharset="UTF-8">
-
+                <form action="${path}/painel/pedidos/cadastro" method="post" enctype="multipart/form-data" acceptcharset="UTF-8">
                   <fieldset>
                   <legend class="text-primary">Solicitante:</legend>
                   <hr class="bg-primary">

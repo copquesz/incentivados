@@ -58,6 +58,10 @@
             <a href="${path}/painel/pedidos">
               <i class="fas fa-praying-hands"></i>Pedidos</a>
           </li>
+          <li>
+            <a href="${path}/painel/ranking">
+              <i class="far fa-chart-bar"></i>Ranking</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -108,24 +112,24 @@
                 <form action="${path}/painel/empresas/${empresa.id}/responsavel/cadastro" method="post" acceptcharset="UTF-8">                  
                   <input type="hidden" class="form-control" name="tipoUsuario" value="EMPRESA">    
                   <fieldset class="mt-3 mt-3">
-                  <legend>Informações do Analista:</legend>
+                  <legend>Informações do Responsável:</legend>
                   <div class="row">               
                     <div class="col-12 col-lg-4">
                       <div class="form-group">
                           <label>Nome:</label>
-                          <input type="text" class="form-control" name="nome" required>
+                          <input type="text" class="form-control text-capitalize" name="nome" required>
                       </div>
                     </div>
                     <div class="col-12 col-lg-4">
                       <div class="form-group">
                           <label>Sobrenome:</label>
-                          <input type="text" class="form-control" name="sobrenome" required>
+                          <input type="text" class="form-control text-capitalize" name="sobrenome" required>
                       </div>
                     </div>
                     <div class="col-12 col-lg-4">
                       <div class="form-group">
                           <label>CPF:</label>
-                          <input type="text" class="form-control" id="cpf" name="cpf" onchange="if(!validarCPF(this.value)){$('#modal-cpf-invalido').modal('show'); this.value='';}" required>
+                          <input type="text" class="form-control" id="cpf" name="cpf" onchange="if(!validarCPF(this.value)){$('#modal-cpf-invalido').modal('show'); this.value='';}">
                       </div>
                     </div>              
                   </div>
@@ -133,7 +137,7 @@
                     <div class="col-12 col-lg-4">
                       <div class="form-group">
                           <label>E-mail:</label>
-                          <input type="email" class="form-control" name="email" required>
+                          <input type="email" class="form-control text-lowercase" name="email" required onkeyup="this.value = this.value.toLowerCase()">
                       </div>
                     </div>
                     <div class="col-12 col-lg-4">
@@ -149,10 +153,12 @@
                       </div>
                     </div>
                   </div>
-                  </fieldset>                  
+                  </fieldset>
+
                   <hr class="bg-success">
                   <button type="submit" class="btn btn-info float-right">Enviar <i class="far fa-share-square"></i></button>
                   <a href="${path}/painel/empresas/${empresa.id}" class="btn btn-danger float-right"><i class="fas fa-angle-double-left"></i> Voltar</a>
+                  
                 </form>       
               </div>
               <div class="card-footer bg-info"></div>

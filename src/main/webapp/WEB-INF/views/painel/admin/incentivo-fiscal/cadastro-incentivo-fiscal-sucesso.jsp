@@ -57,8 +57,12 @@
               <i class="fas fa-gavel"></i>Incentivos Fiscais</a>
           </li>
           <li>
-            <a href="${path}/painel/pedidos">
+            <a href="${path}/painel/pedidos?filtro=TODOS&key=">
               <i class="fas fa-praying-hands"></i>Pedidos</a>
+          </li>
+          <li>
+            <a href="${path}/painel/ranking">
+              <i class="far fa-chart-bar"></i>Ranking</a>
           </li>
         </ul>
       </div>
@@ -107,7 +111,7 @@
             <div class="card">
               <div class="card-header bg-success"><h4 class="card-title text-white bold"><i class="far fa-thumbs-up fa-2x"></i> Cadastro Realizado!</h4><hr></div>              
               <div class="card-body bg-success">
-                <p class="text-white">O incentivo fiscal <strong>${incentivoFiscal.legislacao}</strong> foi cadastrado com sucesso na plataforma.</p>
+                <p class="text-white">O item <strong>${incentivoFiscal.legislacao}</strong> atuante em <strong>${incentivoFiscal.atuacao}</strong> foi cadastrado com sucesso na plataforma.</p>
                 <p><a href="${path}/painel/incentivos-fiscais" class="btn btn-warning"><i class="far fa-share-square"></i> Ver Registros</a></p>
               </div>
               <div class="card-footer bg-success"></div>

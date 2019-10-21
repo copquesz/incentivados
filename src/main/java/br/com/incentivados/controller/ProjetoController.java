@@ -1,6 +1,8 @@
 package br.com.incentivados.controller;
 
+import br.com.incentivados.enumerated.Ods;
 import br.com.incentivados.model.Empresa;
+import br.com.incentivados.model.IncentivoFiscal;
 import br.com.incentivados.model.Projeto;
 import br.com.incentivados.model.Usuario;
 import br.com.incentivados.service.EmpresaService;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -24,7 +27,6 @@ import java.util.logging.Logger;
 
 @Controller
 public class ProjetoController {
-
     private ProjetoService projetoService;
     private EntidadeService entidadeService;
     private IncentivoFiscalService incentivoFiscalService;
@@ -32,196 +34,186 @@ public class ProjetoController {
     private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
 
     @Autowired
-    public ProjetoController(ProjetoService projetoService, EntidadeService entidadeService,
-                             IncentivoFiscalService incentivoFiscalService, EmpresaService empresaService) {
-        super();
+    public ProjetoController(ProjetoService projetoService, EntidadeService entidadeService, IncentivoFiscalService incentivoFiscalService, EmpresaService empresaService) {
         this.projetoService = projetoService;
         this.entidadeService = entidadeService;
         this.incentivoFiscalService = incentivoFiscalService;
         this.empresaService = empresaService;
     }
 
-    /**
-     * Exibe a lista de projetos
-     *
-     * @param request Recebe dados da requisição.
-     * @param model   Fornece dados para a view.
-     * @return Retorna a lista de projetos solicitada.
-     */
-    @GetMapping("/painel/projetos")
-    public String getListar(@RequestParam(required = false, defaultValue = "0") int page, HttpServletRequest request, Model model) {
-
-        // Seta o path da requisição
+    @GetMapping({"/painel/projetos"})
+    public String getListar(@RequestParam(required = false,defaultValue = "0") int page, @RequestParam(required = false,defaultValue = "") String key, @RequestParam(required = false,defaultValue = "0") IncentivoFiscal categoria, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-
-        // Recebe o USUARIO logado na session
-        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        model.addAttribute("incentivosFiscais", this.incentivoFiscalService.findAll());
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
 
         try {
-            Pageable pageable = PageRequest.of(page, 9, Sort.by(Sort.Order.asc("id")));
-
-            // Direciona o USUARIO para sua view de acordo com perfil
-            switch (usuario.getTipoUsuario()) {
+            Pageable pageable = PageRequest.of(page, 12, Sort.by(new Sort.Order[]{Sort.Order.desc("id"), Sort.Order.desc("qtdAvaliacoes")}));
+            Page<Projeto> projetos;
+            switch(usuario.getTipoUsuario()) {
                 case ADMIN:
-                    model.addAttribute("projetos", projetoService.findAll(pageable));
-                    model.addAttribute("qtdProjetos", projetoService.count());
+                    if (categoria != null && !categoria.equals("0")) {
+                        projetos = this.projetoService.findAllByTituloOrIncentivosFiscaisContaining(pageable, key, categoria);
+                    } else {
+                        projetos = this.projetoService.findAll(pageable, key);
+                    }
+                    projetos.getContent().forEach((projeto) -> {
+                        projeto.setAvaliado(this.projetoService.verifyAvaliacao(projeto.getId(), usuario.getId()));
+                    });
+                    model.addAttribute("projetos", projetos);
+                    model.addAttribute("qtdAvaliados", this.projetoService.countProjetosAvaliados(usuario.getId()));
+                    model.addAttribute("qtdPendentes", this.projetoService.count() - this.projetoService.countProjetosAvaliados(usuario.getId()));
                     return "painel/admin/projeto/lista";
                 case ENTIDADE:
-                    model.addAttribute("projetos", projetoService.findAllByUsuario(usuario, pageable));
-                    model.addAttribute("qtdProjetos", projetoService.countByUsuario(usuario));
+                    model.addAttribute("projetos", this.projetoService.findAllByUsuario(usuario, pageable, key));
                     return "painel/entidade/projeto/lista";
                 case EMPRESA:
-                    model.addAttribute("projetos", new PageImpl<>(usuario.getEmpresa().getProjetos(), pageable, usuario.getEmpresa().getProjetos().size()));
+                    if (usuario.getEmpresa().getProjetos().size() > 0) {
+                        if (categoria != null && !categoria.equals("0")) {
+                            projetos = this.projetoService.findAllByEmpresaAndIncentivosFiscaisAndTituloContaining(usuario.getEmpresa().getId(), categoria.getId(), key, pageable);
+                        } else {
+                            projetos = new PageImpl(usuario.getEmpresa().getProjetos(), pageable, (long)usuario.getEmpresa().getProjetos().size());
+                        }
+
+                        projetos.forEach((projeto) -> {
+                            projeto.setAvaliado(this.projetoService.verifyAvaliacao(projeto.getId(), usuario.getId()));
+                        });
+                        model.addAttribute("projetos", projetos);
+                        model.addAttribute("qtdAvaliados", this.projetoService.countProjetosAvaliados(usuario.getId()));
+                        model.addAttribute("qtdPendentes", this.projetoService.count() - this.projetoService.countProjetosAvaliados(usuario.getId()));
+                    }
+
                     return "painel/empresa/projeto/lista";
                 default:
-                    logger.log(Level.WARNING, "Usuário não encontrado.");
+                    this.logger.log(Level.WARNING, "Usuário não encontrado.");
                     return "";
             }
-
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Erro listar projetos.", e);
+        } catch (Exception var9) {
+            this.logger.log(Level.SEVERE, "Erro listar projetos.", var9);
             return "";
         }
     }
 
-    /**
-     * Exibe a página de cadastro do PROJETO
-     *
-     * @param request recebe dados da requisição
-     * @param model   fornece dados para a view
-     * @return view jsp
-     */
-    @GetMapping("/painel/projetos/cadastro")
+    @GetMapping({"/painel/projetos/cadastro"})
     public String getCadastrar(HttpServletRequest request, Model model) {
-
-        // Seta o path da requisição
         model.addAttribute("path", request.getContextPath());
-
-        // Recebe o USUARIO logado na session
-        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-
-        // Carrega a lista de ENTIDADES cadastradas pelo USUARIO logado
-        model.addAttribute("entidades", entidadeService.findAllByUsuario(usuario));
-
-        // Carrega todos os INCENTIVOS FISCAIS cadastrados
-        model.addAttribute("incentivosFiscais", incentivoFiscalService.findAll());
-
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        model.addAttribute("entidades", this.entidadeService.findAllByUsuario(usuario));
+        model.addAttribute("incentivosFiscais", this.incentivoFiscalService.findAll());
         return "painel/entidade/projeto/cadastro";
     }
 
-    /**
-     * Persiste os dados do PROJETO no banco de dados
-     *
-     * @param projeto objeto modelo que será persistido
-     * @param request recebe dados da requisição
-     * @param model   fornece dados para a view
-     * @return 1) Retorna página de sucesso caso o projeto for cadastrado.
-     *         2) Retorna página de falha caso já exista projeto com mesmo título.
-     */
-    @PostMapping("/painel/projetos/cadastro")
-    public String postCadastrar(@RequestParam(required = false, defaultValue = "18.520.427/0001-86") String cnpj, Projeto projeto, HttpServletRequest request, Model model) {
-
-        // Seta o path da requisição
+    @PostMapping({"/painel/projetos/cadastro"})
+    public String postCadastrar(@RequestParam(required = false,defaultValue = "18.520.427/0001-86") String cnpj, Projeto projeto, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-
-        // Recebe o USUARIO logado na session
-        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
 
         try {
-            // Cadastra o projeto casa não exista nenhum projeto com título igual
-            if (!projetoService.existsByTitulo(projeto.getTitulo())) {
-                projeto = projetoService.save(projeto, usuario, request);
+            if (!this.projetoService.existsByTitulo(projeto.getTitulo())) {
+                projeto = this.projetoService.save(projeto, usuario, request);
                 model.addAttribute("projeto", projeto);
-                logger.log(Level.INFO, "Projeto cadastrado com sucesso: " + projeto.getTitulo());
-
-                if(!cnpj.equals("18.520.427/0001-86")){
-                    Optional<Empresa> empresa = empresaService.findByCnpj(cnpj);
-                    if(empresa.isPresent()){
-                        empresaService.adicionaProjeto(empresa.get(), projeto);
-                        logger.log(Level.INFO, "Projeto " + projeto.getTitulo() + " adicionado a lista de: " + empresa.get().getNomeFantasia());
+                this.logger.log(Level.INFO, "Projeto cadastrado com sucesso: " + projeto.getTitulo());
+                if (!cnpj.equals("18.520.427/0001-86")) {
+                    Optional<Empresa> empresa = this.empresaService.findByCnpj(cnpj);
+                    if (empresa.isPresent()) {
+                        this.empresaService.adicionaProjeto((Empresa)empresa.get(), projeto);
+                        this.logger.log(Level.INFO, "Projeto " + projeto.getTitulo() + " adicionado a lista de: " + ((Empresa)empresa.get()).getNomeFantasia());
                     }
                 }
-                return "painel/entidade/projeto/cadastro-projeto-sucesso";
 
+                return "painel/entidade/projeto/cadastro-projeto-sucesso";
             } else {
                 model.addAttribute("projeto", projeto);
-                logger.log(Level.INFO, "Projeto já existente: " + projeto.getTitulo());
-                return "painel/entidade/projeto/cadastro-projeto-falha-titulo-cadastrado";
+                this.logger.log(Level.INFO, "Projeto já existente: " + projeto.getTitulo());
+                return "painel/entidade/projeto/cadastro-projeto-titulo-cadastrado";
             }
-
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Falha cadastro de projeto.", e);
+        } catch (Exception var7) {
+            this.logger.log(Level.SEVERE, "Falha cadastro de projeto.", var7);
             return "painel/entidade/projeto/cadastro-projeto-falha";
         }
-
     }
 
-    /**
-     * Exibe os dados do projeto passado como parâmetro
-     *
-     * @param id      código do projeto
-     * @param request recebe dados da requisição
-     * @param model   fornece dados para a view
-     * @return Retorna os dados do projeto buscado.
-     */
-    @GetMapping("/painel/projetos/{id}")
+    @GetMapping({"/painel/projetos/{id}"})
     public String getPerfil(@PathVariable Long id, HttpServletRequest request, Model model) {
-
-        // Seta o path da requisição
         model.addAttribute("path", request.getContextPath());
-
-        // Recebe o USUARIO logado na session
-        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
 
         try {
-            // Carrega o PROJETO passando id como parâmetro
-            Optional<Projeto> projeto = projetoService.findById(id);
+            Optional<Projeto> projeto = this.projetoService.findById(id);
             if (projeto.isPresent()) {
                 model.addAttribute("projeto", projeto.get());
             }
 
-            // Direciona o USUARIO para a view de acordo com seu tipo de perfil
-            switch (usuario.getTipoUsuario()) {
+            switch(usuario.getTipoUsuario()) {
                 case ADMIN:
-                    List<Empresa> empresas = empresaService.findAll();
-                    for (Empresa empresa : empresas){
-                        empresa.setIndicacao(empresaService.isIndicacao(empresa, projeto.get()));
+                    List<Empresa> empresas = this.empresaService.findAll();
+                    Iterator var7 = empresas.iterator();
+
+                    while(var7.hasNext()) {
+                        Empresa empresa = (Empresa)var7.next();
+                        empresa.setIndicacao(this.empresaService.isIndicacao(empresa, (Projeto)projeto.get()));
                     }
+
                     model.addAttribute("empresas", empresas);
+                    Ods[] listaOds = Ods.values();
+                    model.addAttribute("listaOds", listaOds);
                     return "painel/admin/projeto/perfil";
                 case ENTIDADE:
                     return "painel/entidade/projeto/perfil";
                 case EMPRESA:
                     return "painel/empresa/projeto/perfil";
                 default:
-                    logger.log(Level.WARNING, "Usuário não encontrado.");
+                    this.logger.log(Level.WARNING, "Usuário não encontrado.");
                     return "";
             }
-
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Falha localizar projeto.", e);
+        } catch (Exception var9) {
+            this.logger.log(Level.SEVERE, "Falha localizar projeto.", var9);
             return "";
         }
     }
 
-    @PostMapping("/painel/projetos/indicar")
-    public String postIndicarProjeto(@RequestParam(required = true) Long empresaId, @RequestParam(required = true) Long projetoId, HttpServletRequest request, Model model){
-
-        // Seta o path da requisição
+    @PostMapping({"/painel/projetos/indicar"})
+    public String postIndicarProjeto(@RequestParam(required = true) Long empresaId, @RequestParam(required = true) Long projetoId, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-
-        Optional<Projeto> projeto = projetoService.findById(projetoId);
-        Optional<Empresa> empresa = empresaService.findById(empresaId);
-
+        Optional<Projeto> projeto = this.projetoService.findById(projetoId);
+        Optional<Empresa> empresa = this.empresaService.findById(empresaId);
         if (projeto.isPresent() && empresa.isPresent()) {
-            empresaService.adicionaProjeto(empresa.get(), projeto.get());
-            logger.log(Level.INFO, "Projeto " + projeto.get().getTitulo() + " adicionado a lista de: " + empresa.get().getNomeFantasia());
-        }
-        else {
-            logger.log(Level.WARNING, "Projeto ou Empresa não localizado.");
+            this.empresaService.adicionaProjeto((Empresa)empresa.get(), (Projeto)projeto.get());
+            this.logger.log(Level.INFO, "Projeto " + ((Projeto)projeto.get()).getTitulo() + " adicionado a lista de: " + ((Empresa)empresa.get()).getNomeFantasia());
+        } else {
+            this.logger.log(Level.WARNING, "Projeto ou Empresa não localizado.");
         }
 
-        return "redirect:/painel/projetos/" + projeto.get().getId();
+        return "redirect:/painel/projetos/" + ((Projeto)projeto.get()).getId();
     }
 
+    @PostMapping({"/painel/projetos/ods"})
+    public String postAdicionarOds(@RequestParam(required = true) Long projetoId, @RequestParam List<Ods> ods, HttpServletRequest request, Model model) {
+        model.addAttribute("path", request.getContextPath());
+        Optional<Projeto> projeto = this.projetoService.findById(projetoId);
+        if (projeto.isPresent()) {
+            this.projetoService.adicionaOds((Projeto)projeto.get(), ods);
+            this.logger.log(Level.INFO, "ODS's adicionada ao projeto " + ((Projeto)projeto.get()).getTitulo());
+        } else {
+            this.logger.log(Level.SEVERE, "Falha ao adicionar as ODS no projeto " + ((Projeto)projeto.get()).getTitulo());
+        }
+
+        return "redirect:/painel/projetos/" + ((Projeto)projeto.get()).getId();
+    }
+
+    @GetMapping({"/painel/ranking"})
+    public String getRanking(HttpServletRequest request, Model model) {
+        Pageable pageable = PageRequest.of(0, 10);
+        model.addAttribute("path", request.getContextPath());
+        model.addAttribute("projetos", this.projetoService.getRanking(pageable));
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        switch(usuario.getTipoUsuario()) {
+            case ADMIN:
+                return "painel/admin/projeto/ranking";
+            case EMPRESA:
+                return "painel/empresa/projeto/ranking";
+            default:
+                return "erro";
+        }
+    }
 }

@@ -55,6 +55,11 @@
               <i class="fas fa-project-diagram"></i>Projetos
             </a>
           </li>
+          <li>
+            <a href="${path}/documentos/manual-do-usuario.pdf" target="_blank">
+              <i class="far fa-question-circle"></i>Tutorial
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -194,7 +199,7 @@
                                 <div class="tab-pane fade show active" id="entidades" role="tabpanel"
                                      aria-labelledby="entidades-tab">
                                     <c:if test="${empty entidades.content}">
-                                        <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
+                                        <div class="alert alert-danger alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
                                             <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
                                                 <i class="nc-icon nc-simple-remove"></i>
                                             </button>
@@ -215,7 +220,7 @@
                                                 <tbody>
                                                     <c:forEach var="entidade" items="${entidades.content}">
                                                         <tr>
-                                                            <td class="text-center border"><img class="logo-entidade" src="${path}/${entidade.documentosEntidade.logo.path}">
+                                                            <td class="text-center border"><img class="" src="${path}/${entidade.documentosEntidade.logo.path}" style="max-width: 6rem; max-height: 3rem;">
                                                             </td>
                                                             <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${entidade.dataCadastro}" var="dataCadastro"/>
                                                             <td class="text-center border">${dataCadastro}</td>
@@ -233,7 +238,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="projetos" role="tabpanel" aria-labelledby="projetos-tab">
                                     <c:if test="${empty projetos.content}">
-                                        <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
+                                        <div class="alert alert-danger alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
                                             <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
                                                 <i class="nc-icon nc-simple-remove"></i>
                                             </button>
@@ -246,7 +251,7 @@
                                             <c:forEach var="projeto" items="${projetos.content}">
                                               <div class="col-12 col-xl-3 col-lg-6 col-md-6 d-flex align-items-stretch bd-highlight">
                                                 <div class="card border align-self-stretch flex-fill bd-highlight mt-3">
-                                                  <img src="${path}/${projeto.documentosProjeto.logo.path}" class="card-img-top" alt="...">
+                                                  <img src="${path}/${projeto.documentosProjeto.logo.path}" class="img-fluid img-thumbnail" alt="..." style="height: 200px;">
                                                   <div class="card-body">
                                                     <h5 class="card-title" style="font-weight: bold;">${projeto.titulo}</h5>
                                                     <hr>
@@ -271,8 +276,13 @@
                     <div class="card ">
                         <div class="card-header ">
                             <h5 class="card-title">Minhas Solicitações</h5>
+                            <div class="row">
+                                <div class="col-12">                                    
+                                    <a href="${path}/painel/pedidos/cadastro?empresaCnpj=01.438.784/0001-05" class="btn btn-primary float-right"><i class="fas fa-plus mr-2"></i> Cadastrar Pedido</a>
+                                </div>
+                            </div>
                             <c:if test="${empty pedidos.content}">
-                                <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
+                                <div class="alert alert-danger alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
                                     <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
                                         <i class="nc-icon nc-simple-remove"></i>
                                     </button>
@@ -301,18 +311,21 @@
                                                 <td class="text-center border">${pedido.entidade.nomeFantasia}</td>
                                                 <td class="text-center border">${pedido.empresa.nomeFantasia}</td>
                                                 <td class="text-center border" title="Cidade: ${pedido.analista.endereco.cidade} / Estado: ${pedido.analista.endereco.estado}"> ${pedido.analista.endereco.bairro}</td>
-                                                <td class="text-center">
+                                                <td class="text-center border">
                                                     <a href="${path}/${pedido.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a>
                                                 </td>
                                                 <th class="text-center border">
                                                     <c:if test="${pedido.status.id == 0}">
-                                                        <span class="bg-warning p-1 text-white">${pedido.status}</span>
+                                                        <span class="bg-warning p-1 text-white">PENDENTE</span>
                                                     </c:if>
                                                     <c:if test="${pedido.status.id == 1}">
-                                                        <span class="bg-danger p-1"><a class="text-white" href="#" data-toggle="modal" data-target="#modal-motivo-reprovado-${pedido.id}" title="Visualizar">${pedido.status}</a></span>
+                                                        <span class="bg-danger p-1"><a class="text-white" href="#" data-toggle="modal" data-target="#modal-observacao-pedido-${pedido.id}" title="Visualizar">REPROVADO</a></span>
                                                     </c:if>
                                                     <c:if test="${pedido.status.id == 2}">
-                                                        <span class="bg-success p-1 text-white">${pedido.status}</span>
+                                                        <span class="bg-success p-1"><a class="text-white" href="#" data-toggle="modal" data-target="#modal-observacao-pedido-${pedido.id}" title="Visualizar">APROVADO</a></span>
+                                                    </c:if>
+                                                    <c:if test="${pedido.status.id == 3}">
+                                                        <span class="bg-success p-1"><a class="text-white" href="#" data-toggle="modal" data-target="#modal-observacao-pedidopre-aprovado-usuario-${pedido.id}" title="Visualizar">PRÉ-APROVADO</a></span>
                                                     </c:if>
                                                 </th>
                                             </tr>
@@ -327,7 +340,8 @@
             </div>
         </div>
         <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />        
-        <c:import url="/WEB-INF/views/componentes/modal/modal-motivo-reprovado.jsp" />
+        <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido.jsp" />
+        <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido-pre-aprovado-usuario.jsp" />
     </div>
 </div>
 <!--   JQUERY   -->

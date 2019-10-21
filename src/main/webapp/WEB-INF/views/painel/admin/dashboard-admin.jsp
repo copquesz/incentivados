@@ -60,8 +60,12 @@
               <i class="fas fa-gavel"></i>Incentivos Fiscais</a>
           </li>
           <li>
-            <a href="${path}/painel/pedidos">
+            <a href="${path}/painel/pedidos?filtro=TODOS&key=">
               <i class="fas fa-praying-hands"></i>Pedidos</a>
+          </li>
+          <li>
+            <a href="${path}/painel/ranking">
+              <i class="far fa-chart-bar"></i>Ranking</a>
           </li>
         </ul>
       </div>
@@ -255,7 +259,7 @@
                           <tbody>
                             <c:forEach var="entidade" items="${entidades.content}">
                               <tr>
-                                <td class="text-center"><img src="${path}/${entidade.documentosEntidade.logo.path}" style="max-width: 8rem; max-height: 4rem;"></td>
+                                <td class="text-center"><img src="${path}/${entidade.documentosEntidade.logo.path}" style="max-width: 6rem; max-height: 3rem;"></td>
                                 <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${entidade.dataCadastro}" var="dataCadastro" />
                                 <td>${dataCadastro}</td>
                                 <td>${entidade.nomeFantasia}</td>
@@ -281,14 +285,23 @@
                         <c:forEach var="projeto" items="${projetos.content}">
                           <div class="col-12 col-xl-3 col-lg-6 col-md-6 d-flex align-items-stretch bd-highlight">
                             <div class="card border align-self-stretch flex-fill bd-highlight mt-3">
-                              <img src="${path}/${projeto.documentosProjeto.logo.path}" class="card-img-top" alt="...">
+                              <img src="${path}/${projeto.documentosProjeto.logo.path}" class="card-img-top img-fluid" alt="..." style="max-height: 200px;">
                               <div class="card-body">
-                                <h5 class="card-title" style="font-weight: bold;">${projeto.titulo}</h5>
+                                <h5 class="card-title" style="font-weight: bold;">
+                                  <c:choose> 
+                                    <c:when test = "${fn:length(projeto.titulo) > 30}">
+                                      ${fn:substring(projeto.titulo, 0, 30)} ...
+                                    </c:when>
+                                    <c:otherwise>  
+                                      ${projeto.titulo}
+                                    </c:otherwise>
+                                  </c:choose>
+                                </h5>
                                 <hr>
                                 <p class="card-text text-justify">${fn:substring(projeto.objetivo, 0, 180)} ...</p>
                               </div>
                               <div class="card-footer">
-                                <button type="button" class="btn btn-primary">Ver Detalhes</button>
+                                <a href="${path}/painel/projetos/${projeto.id}" class="btn btn-primary">Ver Detalhes</a>
                               </div>
                             </div>
                           </div>
@@ -317,105 +330,106 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
-    <script type="text/javascript">    
-      var lineCtx = document.getElementById("line-chart").getContext('2d');
-      var lineChart = new Chart(lineCtx, {
-          type: 'line',
-          data: {
-              labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
-              datasets: [{
-                  label: 'Registros',                  
-                  data: [<c:forEach var="dataChartEntidade" items="${datasChartEntidade}">${dataChartEntidade},</c:forEach>],
-                  backgroundColor: [
-                      'rgba(114, 191, 68, 0.2)',
-                  ],
-                  borderColor: [
-                      'rgba(114, 191, 68, 1)',
-                  ],
-                  borderWidth: 1
-              }]
-          },
-          options: {
-              legend: {
-                  display: false
-              },
-              scales: {
-                  yAxes: [{
-                      ticks: {
-                          beginAtZero:true
-                      }
-                  }]
-              }
-          }
-      });
-
-      var barCtx = document.getElementById("bar-chart").getContext('2d');
-      var barChart = new Chart(barCtx, {
-          type: 'bar',
-          data: {
-              labels: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'${incentivoFiscal.legislacao}',</c:forEach>],
-              datasets: [{
-                  label: 'Registros',
-                  data: [<c:forEach var="dataCharProjeto" items="${datasCharProjeto}">${dataCharProjeto},</c:forEach>],
-                  backgroundColor: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'rgba(114, 191, 68, 0.2)',</c:forEach>],
-                  borderColor: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'rgba(114, 191, 68, 1)',</c:forEach>],
-                  borderWidth: 1
-              }]
-          },
-          options: {
-              legend: {
-                  display: false
-              },
-              scales: {
-                xAxes: [
-                  {
-                    ticks:{                      
-                      callback: function (value) {
-                        return ""
-                      }
-                    },
-                  },
+  <script type="text/javascript" src="${path}/assets/js/file-validator.js"></script>
+  <script type="text/javascript">    
+    var lineCtx = document.getElementById("line-chart").getContext('2d');
+    var lineChart = new Chart(lineCtx, {
+        type: 'line',
+        data: {
+            labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+            datasets: [{
+                label: 'Registros',                  
+                data: [<c:forEach var="dataChartEntidade" items="${datasChartEntidade}">${dataChartEntidade},</c:forEach>],
+                backgroundColor: [
+                    'rgba(114, 191, 68, 0.2)',
                 ],
+                borderColor: [
+                    'rgba(114, 191, 68, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            scales: {
                 yAxes: [{
                     ticks: {
                         beginAtZero:true
                     }
                 }]
-              }
-          }
-      });
+            }
+        }
+    });
 
-      var doughnutCtx = document.getElementById("doughnut-chart").getContext('2d');
-      var doughnutChart = new Chart(doughnutCtx, {
-          type: 'doughnut',
-          data: {
-              labels: ["Pendente", "Recusado", "Aprovado"],
-              datasets: [{
-                  label: 'Registros',
-                  data: ['${qtdPedidosPendente}', '${qtdPedidosRecusado}', '${qtdPedidosAprovado}'],
-                  backgroundColor: [
-                      'rgba(241, 196, 15, 0.6)',
-                      'rgba(231, 76, 60, 0.6)',
-                      'rgba(46, 204, 113, 0.6)'
-                  ],
-                  borderColor: [
-                      'rgba(241, 196, 15, 0.6)',
-                      'rgba(231, 76, 60, 0.6)',
-                      'rgba(46, 204, 113, 0.6)'
-                  ],
-                  borderWidth: 1
+    var barCtx = document.getElementById("bar-chart").getContext('2d');
+    var barChart = new Chart(barCtx, {
+        type: 'bar',
+        data: {
+            labels: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'${incentivoFiscal.legislacao}',</c:forEach>],
+            datasets: [{
+                label: 'Registros',
+                data: [<c:forEach var="dataCharProjeto" items="${datasCharProjeto}">${dataCharProjeto},</c:forEach>],
+                backgroundColor: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'rgba(114, 191, 68, 0.2)',</c:forEach>],
+                borderColor: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'rgba(114, 191, 68, 1)',</c:forEach>],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            scales: {
+              xAxes: [
+                {
+                  ticks:{                      
+                    callback: function (value) {
+                      return ""
+                    }
+                  },
+                },
+              ],
+              yAxes: [{
+                  ticks: {
+                      beginAtZero:true
+                  }
               }]
-          },
-          options: {
-              legend: {
-                  display: false
-              },
-              scales: {
-                  display: false
-              }
-          }
-      });
-  </script>
+            }
+        }
+    });
+
+    var doughnutCtx = document.getElementById("doughnut-chart").getContext('2d');
+    var doughnutChart = new Chart(doughnutCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ["Pendente", "Recusado", "Aprovado"],
+            datasets: [{
+                label: 'Registros',
+                data: ['${qtdPedidosPendente}', '${qtdPedidosRecusado}', '${qtdPedidosAprovado}'],
+                backgroundColor: [
+                    'rgba(241, 196, 15, 0.6)',
+                    'rgba(231, 76, 60, 0.6)',
+                    'rgba(46, 204, 113, 0.6)'
+                ],
+                borderColor: [
+                    'rgba(241, 196, 15, 0.6)',
+                    'rgba(231, 76, 60, 0.6)',
+                    'rgba(46, 204, 113, 0.6)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            legend: {
+                display: false
+            },
+            scales: {
+                display: false
+            }
+        }
+    });
+</script>
 </body>
 
 </html>

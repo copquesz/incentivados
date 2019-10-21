@@ -54,6 +54,11 @@
               <i class="fas fa-project-diagram"></i>Projetos
             </a>
           </li>
+          <li>
+            <a href="${path}/documentos/manual-do-usuario.pdf" target="_blank">
+              <i class="far fa-question-circle"></i>Tutorial
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -183,7 +188,7 @@
                             </fieldset>
 
                             <fieldset class="mt-5">
-                                <legend class="text-primary">Incentivos Fiscais Selecionados:</legend>
+                                <legend class="text-primary">Categoria(s) Selecionada(s):</legend>
                                 <hr class="bg-primary">
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -229,24 +234,28 @@
                                             <h5 class="text-center">Projeto Orçamentário</h5>
                                         </div>
                                     </div>
-                                    <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 text-center mt-5">
-                                        <div class="form-group">
-                                            <a href="${path}/${projeto.documentosProjeto.dadosBancarios.path}"
-                                               target="_blank"><i class="fas fa-file-pdf text-primary"
-                                                                  style="font-size: 56px;"></i></a>
-                                            <hr>
-                                            <h5 class="text-center">Dados Bancários</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 text-center mt-5">
-                                        <div class="form-group">
-                                            <a href="${path}/${projeto.documentosProjeto.certificado.path}"
-                                               target="_blank"><i class="fas fa-file-pdf text-primary"
-                                                                  style="font-size: 56px;"></i></a>
-                                            <hr>
-                                            <h5 class="text-center">Certificado de Captação</h5>
-                                        </div>
-                                    </div>
+                                    <c:if test="${not empty projeto.documentosProjeto.dadosBancariosFundo.path}">
+                                      <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 text-center mt-5">
+                                          <div class="form-group">
+                                              <a href="${path}/${projeto.documentosProjeto.dadosBancariosFundo.path}"
+                                                 target="_blank"><i class="fas fa-file-pdf text-primary"
+                                                                    style="font-size: 56px;"></i></a>
+                                              <hr>
+                                              <h5 class="text-center">Dados Bancários do Fundo</h5>
+                                          </div>
+                                      </div>
+                                    </c:if>
+                                    <c:if test="${not empty projeto.documentosProjeto.certificado.path}">
+                                      <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 text-center mt-5">
+                                          <div class="form-group">
+                                              <a href="${path}/${projeto.documentosProjeto.certificado.path}"
+                                                 target="_blank"><i class="fas fa-file-pdf text-primary"
+                                                                    style="font-size: 56px;"></i></a>
+                                              <hr>
+                                              <h5 class="text-center">Certificado de Captação</h5>
+                                          </div>
+                                      </div>
+                                    </c:if>
                                 </div>
                             </fieldset>
                         </div>

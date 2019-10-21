@@ -14,6 +14,14 @@ body {
     font-weight: bold;
 }
 
+.text-capitalize{
+    text-transform: capitalize;
+}
+
+.text-lowercase{
+    text-transform: lowercase;
+}
+
 .btn-circle {
     width: 30px;
     height: 30px;
@@ -23,6 +31,13 @@ body {
     font-size: 12px;
     line-height: 1.42857;
 }
+
+/* ########################################### ODS ########################################### */
+.logo-ods {
+    width: 64px;
+    height: 64px;
+}
+
 
 /* ########################################### ALERT BOX ########################################### */
 .alert_box {
@@ -157,7 +172,7 @@ img-yaba {
 
 .logo-entidade {
     height: 2.5rem;
-    width: 2.5rem;
+    max-width: 8rem;
 }
 
 .bg-blue {

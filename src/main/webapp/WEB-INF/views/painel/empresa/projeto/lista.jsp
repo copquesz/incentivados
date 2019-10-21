@@ -48,6 +48,9 @@
           <li>
             <a href="${path}/painel/pedidos?filtro=TODOS&key="><i class="fas fa-praying-hands"></i>Pedidos</a>
           </li>
+          <li>
+            <a href="${path}/painel/ranking"><i class="far fa-chart-bar"></i>Ranking</a>
+          </li>
         </ul>
       </div>
     </div> 
@@ -94,7 +97,8 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header "> 
-                <h5 class="card-title">Projetos Cadastrado(s): ${projetos.totalElements}</h5>  
+                <h5 class="card-title">Projetos Cadastrado(s): ${projetos.totalElements}</h5>      
+                <p><small style="color: red; font-weight: bold;"><i class="far fa-thumbs-up"></i> Avaliado(s): ${qtdAvaliados}</small><small style="color: red; font-weight: bold;" class="mx-2"><i class="fas fa-grip-lines-vertical"></i></small><small style="color: red; font-weight: bold;"> <i class="far fa-thumbs-down"></i> Pendentes(s): ${qtdPendentes}</small></p>             
               </div>
               <div class="card-body">
                 <div class="row">
@@ -160,18 +164,42 @@
                         </div>
                       </div>
                       <hr>
-                      <div class="row justify-content-start">                        
+                      <div class="row justify-content-start">
                         <c:forEach var="projeto" items="${projetos.content}">
                           <div class="col-12 col-xl-3 col-lg-6 col-md-6 d-flex align-items-stretch bd-highlight">
                             <div class="card border align-self-stretch flex-fill bd-highlight mt-3">
-                              <img src="${path}/${projeto.documentosProjeto.logo.path}" class="card-img-top img-fluid" alt="...">
+                              <img src="${path}/${projeto.documentosProjeto.logo.path}" class="img-fluid img-thumbnail" alt="..." style="height: 200px;">
                               <div class="card-body">
-                                <h5 class="card-title" style="font-weight: bold;">${projeto.titulo}</h5>
+                                <h5 class="card-title" style="font-weight: bold;">
+                                  <c:choose> 
+                                    <c:when test = "${fn:length(projeto.titulo) > 25}">
+                                      ${fn:substring(projeto.titulo, 0, 25)} ...
+                                    </c:when>
+                                    <c:otherwise>  
+                                      ${projeto.titulo}
+                                    </c:otherwise>
+                                  </c:choose>
+                                </h5>
                                 <hr>
-                                <p class="card-text text-justify">${fn:substring(projeto.objetivo, 0, 180)} ...</p>
+                                <p class="card-text text-justify">
+                                  <c:choose> 
+                                    <c:when test = "${fn:length(projeto.objetivo) > 200}">
+                                      ${fn:substring(projeto.objetivo, 0, 200)} ...
+                                    </c:when>
+                                    <c:otherwise>  
+                                      ${projeto.objetivo}
+                                    </c:otherwise>
+                                  </c:choose>
+                                </p>
                               </div>
                               <div class="card-footer">
-                                <a href="${path}/painel/projetos/${projeto.id}" class="btn btn-primary">Ver Detalhes</a>
+                                <a href="${path}/painel/projetos/${projeto.id}" class="btn btn-primary rounded my-2 mx-auto d-block"><i class="fas fa-angle-double-right"></i> Detalhes</a>
+                                <c:if test="${projeto.avaliado}">
+                                  <a href="#" class="btn btn-primary rounded my-2 mx-auto d-block"><i class="far fa-thumbs-up"></i> Projeto Avaliado</a>
+                                </c:if> 
+                                <c:if test="${not projeto.avaliado}">
+                                  <a href="${path}/painel/projetos/avaliacao/${projeto.id}" class="btn btn-danger rounded my-2 mx-auto d-block"><i class="far fa-hand-point-right"></i> Avaliar Projeto</a>
+                                </c:if>                               
                               </div>
                             </div>
                           </div>

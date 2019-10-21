@@ -120,6 +120,9 @@
                     <a class="nav-link active bg-warning text-white border" id="pendentes-tab" data-toggle="tab" href="#pendentes" role="tab" aria-controls="pendentes" aria-selected="true">Pendentes: ${qtdPendente}</a>
                   </li>
                   <li class="nav-item">
+                    <a class="nav-link bg-warning text-white border" id="pre-aprovados-tab" data-toggle="tab" href="#pre-aprovados" role="tab" aria-controls="pre-aprovados" aria-selected="true">Pré-Aprovados: ${qtdPreAprovado}</a>
+                  </li>
+                  <li class="nav-item">
                     <a class="nav-link bg-success text-white border" id="aprovados-tab" data-toggle="tab" href="#aprovados" role="tab" aria-controls="aprovados" aria-selected="false">Aprovados: ${qtdAprovado}</a>
                   </li>
                   <li class="nav-item">
@@ -141,14 +144,14 @@
                       <div class="row mt-2">  
                         <div class="col-12">         
                           <div class="table-responsive pr-3">
-                            <table class="table border">
+                            <table class="table">
                               <thead class=" text-primary">
-                                <th class="text-center">Código Pedido</th>
-                                <th class="text-center">Data Solicitação</th>
-                                <th class="text-center">Entidade</th>
-                                <th class="text-center">Empresa</th>
-                                <th class="text-center">Loja</th>
-                                <th class="text-center">Carta Ofício</th>
+                                <th class="text-center border">Código Pedido</th>
+                                <th class="text-center border">Data Solicitação</th>
+                                <th class="text-center border">Entidade</th>
+                                <th class="text-center border">Empresa</th>
+                                <th class="text-center border">Loja</th>
+                                <th class="text-center border">Carta Ofício</th>
                                 <th class="text-center"></th>
                               </thead>
                               <tbody>
@@ -156,12 +159,12 @@
                                   <tr>
                                     <td class="text-center">${pedidoPendente.id}</td>
                                     <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoPendente.dataCadastro}" var="dataCadastro" />
-                                    <td class="text-center">${dataCadastro}</td>
-                                    <td class="text-center">${pedidoPendente.entidade.nomeFantasia}</td>
-                                    <td class="text-center">${pedidoPendente.empresa.nomeFantasia}</td>
-                                    <td class="text-center">${pedidoPendente.analista.endereco.bairro} - ${pedidoPendente.analista.endereco.cidade} / ${pedidoPendente.analista.endereco.estado}</td>
-                                    <td class="text-center"><a href="${path}/${pedidoPendente.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td> 
-                                    <td class="text-center"><a class="btn btn-success btn-sm" href="${path}/painel/pedido/${pedidoPendente.id}" title="Avaliar"><i class="fas fa-sign-in-alt"></i></a></td>
+                                    <td class="text-center border">${dataCadastro}</td>
+                                    <td class="text-center border">${pedidoPendente.entidade.nomeFantasia}</td>
+                                    <td class="text-center border">${pedidoPendente.empresa.nomeFantasia}</td>
+                                    <td class="text-center border">${pedidoPendente.analista.endereco.bairro}</td>
+                                    <td class="text-center border"><a href="${path}/${pedidoPendente.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td> 
+                                    <td class="text-center border"><a class="btn btn-success btn-sm" href="${path}/painel/pedido/${pedidoPendente.id}" title="Avaliar"><i class="fas fa-sign-in-alt"></i></a></td>
                                   </tr>
                                 </c:forEach>
                               </tbody>
@@ -170,7 +173,51 @@
                         </div>
                       </div>  
                     </c:if>          
-                  </div>                  
+                  </div>  
+                  <div class="tab-pane fade show" id="pre-aprovados" role="tabpanel" aria-labelledby="pre-aprovados-tab"> 
+                    <c:if test = "${empty preAprovados}">
+                      <div class="row mt-2">
+                        <div class="col-12">
+                          <div class="alert alert-danger" role="alert">
+                            <p class="text-bold">Não há registro(s).</p>
+                          </div>
+                        </div>
+                      </div>
+                    </c:if>      
+                    <c:if test = "${not empty preAprovados}">   
+                      <div class="row mt-2">  
+                        <div class="col-12">            
+                          <div class="table-responsive pr-3">
+                            <table class="table border">
+                              <thead class=" text-primary">
+                                <th class="text-center border">Código Pedido</th>
+                                <th class="text-center border">Data Solicitação</th>
+                                <th class="text-center border">Entidade</th>
+                                <th class="text-center border">Empresa</th>
+                                <th class="text-center border">Loja</th>
+                                <th class="text-center border">Carta Ofício</th>
+                                <th class="text-center border">Parecer</th>
+                              </thead>
+                              <tbody>
+                                <c:forEach var="pedidoPreAprovado" items="${preAprovados}">
+                                  <tr>
+                                    <td class="text-center">${pedidoPreAprovado.id}</td>
+                                    <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoPreAprovado.dataCadastro}" var="dataCadastro" />
+                                    <td class="text-center border">${dataCadastro}</td>
+                                    <td class="text-center border">${pedidoPreAprovado.entidade.nomeFantasia}</td>
+                                    <td class="text-center border">${pedidoPreAprovado.empresa.nomeFantasia}</td>
+                                    <td class="text-center border">${pedidoPreAprovado.analista.endereco.bairro} - ${pedidoPreAprovado.analista.endereco.cidade} / ${pedidoPreAprovado.analista.endereco.estado}</td>
+                                    <td class="text-center border"><a href="${path}/${pedidoPreAprovado.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>   
+                                    <td class="text-center border"><a href="#" data-toggle="modal" data-target="#modal-observacao-pedido-pre-aprovado-${pedidoPreAprovado.id}" title="Visualizar"><i class="far fa-file-pdf"></i></a></td>                                 
+                                  </tr>
+                                </c:forEach>
+                              </tbody>
+                            </table>
+                          </div> 
+                        </div>
+                      </div>  
+                    </c:if>  
+                  </div>     
                   <div class="tab-pane fade show" id="aprovados" role="tabpanel" aria-labelledby="aprovados-tab"> 
                     <c:if test = "${empty aprovados}">
                       <div class="row mt-2">
@@ -187,23 +234,25 @@
                           <div class="table-responsive pr-3">
                             <table class="table border">
                               <thead class=" text-primary">
-                                <th class="text-center">Código Pedido</th>
-                                <th class="text-center">Data Solicitação</th>
-                                <th class="text-center">Entidade</th>
-                                <th class="text-center">Empresa</th>
-                                <th class="text-center">Loja</th>
-                                <th class="text-center">Carta Ofício</th>
+                                <th class="text-center border">Código Pedido</th>
+                                <th class="text-center border">Data Solicitação</th>
+                                <th class="text-center border">Entidade</th>
+                                <th class="text-center border">Empresa</th>
+                                <th class="text-center border">Loja</th>
+                                <th class="text-center border">Carta Ofício</th>
+                                <th class="text-center border">Parecer</th>
                               </thead>
                               <tbody>
                                 <c:forEach var="pedidoAprovado" items="${aprovados}">
                                   <tr>
                                     <td class="text-center">${pedidoAprovado.id}</td>
                                     <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoAprovado.dataCadastro}" var="dataCadastro" />
-                                    <td class="text-center">${dataCadastro}</td>
-                                    <td class="text-center">${pedidoAprovado.entidade.nomeFantasia}</td>
-                                    <td class="text-center">${pedidoAprovado.empresa.nomeFantasia}</td>
-                                    <td class="text-center">${pedidoAprovado.analista.endereco.bairro} - ${pedidoAprovado.analista.endereco.cidade} / ${pedidoAprovado.analista.endereco.estado}</td>
-                                    <td class="text-center"><a href="${path}/${pedidoAprovado.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>                                
+                                    <td class="text-center border">${dataCadastro}</td>
+                                    <td class="text-center border">${pedidoAprovado.entidade.nomeFantasia}</td>
+                                    <td class="text-center border">${pedidoAprovado.empresa.nomeFantasia}</td>
+                                    <td class="text-center border">${pedidoAprovado.analista.endereco.bairro} - ${pedidoAprovado.analista.endereco.cidade} / ${pedidoAprovado.analista.endereco.estado}</td>
+                                    <td class="text-center border"><a href="${path}/${pedidoAprovado.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>    
+                                    <td class="text-center border"><a href="#" data-toggle="modal" data-target="#modal-observacao-pedido-aprovado-${pedidoAprovado.id}" title="Visualizar"><i class="far fa-file-pdf"></i></a></td>                                 
                                   </tr>
                                 </c:forEach>
                               </tbody>
@@ -229,25 +278,25 @@
                           <div class="table-responsive pr-3">
                             <table class="table border">
                               <thead class=" text-primary">
-                                <th class="text-center">Código Pedido</th>
-                                <th class="text-center">Data Solicitação</th>
-                                <th class="text-center">Entidade</th>
-                                <th class="text-center">Empresa</th>
-                                <th class="text-center">Loja</th>
-                                <th class="text-center">Carta Ofício</th>
-                                <th class="text-center">Motivo</th>
+                                <th class="text-center border">Código Pedido</th>
+                                <th class="text-center border">Data Solicitação</th>
+                                <th class="text-center border">Entidade</th>
+                                <th class="text-center border">Empresa</th>
+                                <th class="text-center border">Loja</th>
+                                <th class="text-center border">Carta Ofício</th>
+                                <th class="text-center border">Parecer</th>
                               </thead>
                               <tbody>
                                 <c:forEach var="pedidoReprovado" items="${recusados}">
                                   <tr>
                                     <td class="text-center">${pedidoReprovado.id}</td>
                                     <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoReprovado.dataCadastro}" var="dataCadastro" />
-                                    <td class="text-center">${dataCadastro}</td>
-                                    <td class="text-center">${pedidoReprovado.entidade.nomeFantasia}</td>
-                                    <td class="text-center">${pedidoReprovado.empresa.nomeFantasia}</td>
-                                    <td class="text-center">${pedidoReprovado.analista.endereco.bairro} - ${pedidoReprovado.analista.endereco.cidade} / ${pedidoReprovado.analista.endereco.estado}</td>
-                                    <td class="text-center"><a href="${path}/${pedidoReprovado.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>
-                                    <td class="text-center"><a href="#" data-toggle="modal" data-target="#modal-motivo-reprovado-${pedidoReprovado.id}" title="Visualizar"><i class="far fa-file-pdf"></i></a></td>
+                                    <td class="text-center border">${dataCadastro}</td>
+                                    <td class="text-center border">${pedidoReprovado.entidade.nomeFantasia}</td>
+                                    <td class="text-center border">${pedidoReprovado.empresa.nomeFantasia}</td>
+                                    <td class="text-center border">${pedidoReprovado.analista.endereco.bairro} - ${pedidoReprovado.analista.endereco.cidade} / ${pedidoReprovado.analista.endereco.estado}</td>
+                                    <td class="text-center border"><a href="${path}/${pedidoReprovado.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td> 
+                                    <td class="text-center border"><a href="#" data-toggle="modal" data-target="#modal-observacao-pedido-recusado-${pedidoReprovado.id}" title="Visualizar"><i class="far fa-file-pdf"></i></a></td>                                
                                   </tr>
                                 </c:forEach>
                               </tbody>
@@ -261,12 +310,16 @@
               </div>              
             </div>
           </div>
-        </div>       
+        </div>          
       </div>
-      <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
-      <c:import url="/WEB-INF/views/componentes/modal/modal-motivo-reprovado.jsp" />
     </div>
   </div>
+
+  <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
+  <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido-aprovado.jsp" /> 
+  <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido-recusado.jsp" />
+  <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido-pre-aprovado.jsp" /> 
+
   <!--   JQUERY   -->
   <script src="${path}/assets/js/core/jquery.min.js"></script>
   <script src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>

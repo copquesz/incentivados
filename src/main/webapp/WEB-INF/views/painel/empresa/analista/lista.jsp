@@ -47,6 +47,9 @@
           <li>
             <a href="${path}/painel/pedidos?filtro=TODOS&key="><i class="fas fa-praying-hands"></i>Pedidos</a>
           </li>
+          <li>
+            <a href="${path}/painel/ranking"><i class="far fa-chart-bar"></i>Ranking</a>
+          </li>
         </ul>
       </div>
     </div>   
@@ -91,7 +94,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header "> 
-                <h5 class="card-title">Analistas Cadastrado(s): ${qtdPedidos}</h5>
+                <h5 class="card-title">Analistas Cadastrado(s): ${analistas.totalElements}</h5>
                 <div class="d-flex justify-content-start">
                   <div class="row">
                     <div class="col-12">                      
@@ -120,7 +123,55 @@
                         <span data-notify="message">Não há analista(s) cadastrado(s) ou resultado(s) para a pesquisa.</span>
                       </div>                      
                     </c:if>                 
-                    <c:if test = "${not empty analistas.content}">                      
+                    <c:if test = "${not empty analistas.content}">  
+                      <div class="row">
+                        <div class="col-12 d-flex justify-content-end">
+                          <nav class="" aria-label="Paginação de Projetos">
+                            <ul class="pagination"> 
+                              <c:choose> 
+                                <c:when test = "${analistas.totalPages == 1}">
+                                  <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
+                                  <li class="page-item active"><a class="page-link text-white" href="${path}/painel/${empresa.id}/analistas?page=${analistas.number}&key=">${analistas.number + 1}</a></li>
+                                  <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
+                                </c:when>
+                                <c:when test = "${(analistas.totalPages == 2) && (analistas.number + 1 < analistas.totalPages)}">
+                                  <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
+                                  <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/${empresa.id}/analistas?page=${analistas.number}&key=">${analistas.number + 1}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/${empresa.id}/analistas?page=${analistas.number + 1}&key=">${analistas.number + 2}</a></li>
+                                  <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
+                                </c:when>
+                                <c:when test = "${(analistas.totalPages == 2) && (analistas.number + 1 == analistas.totalPages)}">
+                                  <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/${empresa.id}/analistas?page=${analistas.number - 1}&key=">${analistas.number}</a></li>
+                                  <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/${empresa.id}/analistas?page=${analistas.number}&key=">${analistas.number + 1}</a></li>
+                                  <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
+                                </c:when>
+                                <c:when test = "${(analistas.totalPages >= 3) && (analistas.number == 0)}">
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/${empresa.id}/analistas?key=">Primeira</a></li>
+                                  <li class="page-item active"><a class="page-link text-white" href="${path}/painel/${empresa.id}/analistas?page=${analistas.number}&key=">${analistas.number + 1}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/${empresa.id}/analistas?page=${analistas.number + 1}&key=">${analistas.number + 2}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/${empresa.id}/analistas?page=${analistas.number + 2}&key=">${analistas.number + 3}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/${empresa.id}/analistas?page=${analistas.totalPages - 1}&key=">Última</a></li>
+                                </c:when>
+                                <c:when test = "${(analistas.totalPages >= 3) && (analistas.number > 0) && (analistas.number + 1 < analistas.totalPages)}">
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/${empresa.id}/analistas?key=">Primeira</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/${empresa.id}/analistas?page=${analistas.number - 1}&key=">${analistas.number}</a></li>
+                                  <li class="page-item active"><a class="page-link text-white" href="${path}/painel/${empresa.id}/analistas?page=${analistas.number}&key=">${analistas.number + 1}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/${empresa.id}/analistas?page=${analistas.number + 1}&key=">${analistas.number + 2}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/analistas?page=${analistas.totalPages - 1}&key=">Última</a></li>
+                                </c:when>
+                                <c:when test = "${(analistas.totalPages >= 3) && (analistas.number + 1 == analistas.totalPages)}">
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/${empresa.id}/analistas?key=">Primeira</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/${empresa.id}/analistas?page=${analistas.number - 2}&key=">${analistas.number - 1}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/${empresa.id}/analistas?page=${analistas.number - 1}&key=">${analistas.number}</a></li>
+                                  <li class="page-item active"><a class="page-link text-white" href="${path}/painel/${empresa.id}/analistas?page=${analistas.number}&key=">${analistas.number + 1}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/${empresa.id}/analistas?page=${analistas.totalPages - 1}&key=">Última</a></li>
+                                </c:when>
+                              </c:choose> 
+                            </ul>
+                          </nav>  
+                        </div>
+                      </div>                    
                       <div class="table-responsive-sm">
                         <table class="table">
                           <thead class=" text-primary">
@@ -135,7 +186,12 @@
                               <tr>
                                 <td class="border text-center">${analista.nome} ${analista.sobrenome}</td>
                                 <td class="border text-center">${analista.tipoUsuario.descricao}</td>
-                                <td class="border text-center">${analista.cpf}</td>
+                                <c:if test = "${empty analista.cpf}">                    
+                                  <td class="border text-center">Não Informado</td>
+                                </c:if>
+                                <c:if test = "${not empty analista.cpf}">                    
+                                  <td class="border text-center">${analista.cpf}</td>
+                                </c:if>
                                 <td class="border text-center">${analista.email}</td>
                                 <td class="border text-center" title="Cidade: ${analista.endereco.cidade} / Estado: ${analista.endereco.estado}"> ${analista.endereco.bairro}</td>
                               </tr>

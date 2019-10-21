@@ -61,6 +61,10 @@
             <a href="${path}/painel/pedidos">
               <i class="fas fa-praying-hands"></i>Pedidos</a>
           </li>
+          <li>
+          <a href="${path}/painel/ranking">
+              <i class="far fa-chart-bar"></i>Ranking</a>
+          </li>
         </ul>
       </div>
     </div>

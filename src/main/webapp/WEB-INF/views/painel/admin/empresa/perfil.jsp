@@ -55,8 +55,12 @@
               <i class="fas fa-gavel"></i>Incentivos Fiscais</a>
           </li>
           <li>
-            <a href="${path}/painel/pedidos">
+            <a href="${path}/painel/pedidos?filtro=TODOS&key=">
               <i class="fas fa-praying-hands"></i>Pedidos</a>
+          </li>
+          <li>
+            <a href="${path}/painel/ranking">
+              <i class="far fa-chart-bar"></i>Ranking</a>
           </li>
         </ul>
       </div>
@@ -156,7 +160,7 @@
                       </div>
                     </div>
                   </c:if>                 
-                  <c:if test = "${not empty empresa.responsaveis}">
+                  <c:if test = "${not empty empresa.responsaveis || not empty empresa.analistas}">
                     <div class="col-md-12">
                       <div class="table-responsive-sm">
                         <table class="table">

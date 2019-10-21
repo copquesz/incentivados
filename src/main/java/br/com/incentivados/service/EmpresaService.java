@@ -18,88 +18,86 @@ import java.util.Optional;
 
 @Service
 public class EmpresaService {
-
     private EmpresaRepository empresaRepository;
 
     @Autowired
-    public EmpresaService(EmpresaRepository empresaRepository){
+    public EmpresaService(EmpresaRepository empresaRepository) {
         this.empresaRepository = empresaRepository;
     }
 
     public Empresa save(Empresa empresa, Usuario usuario, HttpServletRequest request) {
-
         empresa.setDataCadastro(new Date());
         empresa.setUsuario(usuario);
-
-        empresa = uploadDocumentos(empresa, request);
-        empresa = empresaRepository.save(empresa);
-
+        empresa = this.uploadDocumentos(empresa, request);
+        empresa = (Empresa)this.empresaRepository.save(empresa);
         return empresa;
     }
 
     public boolean existsbyCnpj(String cnpj) {
-        return empresaRepository.existsByCnpj(cnpj);
+        return this.empresaRepository.existsByCnpj(cnpj);
     }
 
-    public boolean isIndicacao(Empresa empresa, Projeto projeto){
-        if(empresaRepository.isIndicacao(empresa.getId(), projeto.getId()) == 0){
-            return false;
-        }
-        else{
-            return true;
-        }
+    public boolean isIndicacao(Empresa empresa, Projeto projeto) {
+        return this.empresaRepository.isIndicacao(empresa.getId(), projeto.getId()) != 0L;
     }
 
     public Empresa adcionaAnalista(Empresa empresa, Usuario usuario) {
         empresa.getAnalistas().add(usuario);
-        return empresaRepository.save(empresa);
+        return (Empresa)this.empresaRepository.save(empresa);
     }
 
     public Empresa adicionaResponsavel(Empresa empresa, Usuario usuario) {
         empresa.getResponsaveis().add(usuario);
-        return empresaRepository.save(empresa);
+        return (Empresa)this.empresaRepository.save(empresa);
     }
 
     public Empresa adicionaProjeto(Empresa empresa, Projeto projeto) {
         empresa.getProjetos().add(projeto);
-        return empresaRepository.save(empresa);
+        return (Empresa)this.empresaRepository.save(empresa);
     }
 
     public Optional<Empresa> findById(Long id) {
-        return empresaRepository.findById(id);
+        return this.empresaRepository.findById(id);
     }
 
-    public Optional<Empresa> findByCnpj(String cnpj){
-        return empresaRepository.findByCnpj(cnpj);
+    public Optional<Empresa> findByCnpj(String cnpj) {
+        return this.empresaRepository.findByCnpj(cnpj);
     }
-
 
     public Optional<Empresa> findByNomeFantasia(String nomeFantasia) {
-        return empresaRepository.findByNomeFantasia(nomeFantasia);
+        return this.empresaRepository.findByNomeFantasia(nomeFantasia);
     }
 
-    public List<Empresa> findAll(){
-        return empresaRepository.findAll();
+    public List<Empresa> findAll() {
+        return this.empresaRepository.findAll();
     }
 
     public List<Empresa> findByNomeFantasiaContains(String nomeFantasia) {
-        return empresaRepository.findByNomeFantasiaContains(nomeFantasia);
+        return this.empresaRepository.findByNomeFantasiaContains(nomeFantasia);
     }
 
-    public Page<Empresa> findAll(Pageable page){
-        return empresaRepository.findAll(page);
+    public Page<Empresa> findAll(Pageable page) {
+        return this.empresaRepository.findAll(page);
+    }
+
+    public Page<Empresa> findAllByNomeFantasiaOrCnpjContaining(Pageable pageable, String key) {
+        return this.empresaRepository.findAllByNomeFantasiaOrCnpjContaining(pageable, key);
     }
 
     public Long count() {
-        return empresaRepository.count();
+        return this.empresaRepository.count();
+    }
+
+    public Long verifyRelacionamentoAnalista(Long empresaId, Long usuarioId) {
+        return this.empresaRepository.verifyRelacionamentoAnalista(empresaId, usuarioId);
+    }
+
+    public Long verifyRelacionamentoResponsavel(Long empresaId, Long usuarioId) {
+        return this.empresaRepository.verifyRelacionamentoResponsavel(empresaId, usuarioId);
     }
 
     private Empresa uploadDocumentos(Empresa empresa, HttpServletRequest request) {
-        empresa.getDocumentosEmpresa().getLogo()
-                .setPath(FileUpload.upload(request, empresa.getDocumentosEmpresa().getLogo().getFile(), "logo."
-                                + empresa.getDocumentosEmpresa().getLogo().getFile().getOriginalFilename().split("\\.")[1],
-                        "documentos/empresas/" + empresa.getNomeFantasia()));
+        empresa.getDocumentosEmpresa().getLogo().setPath(FileUpload.upload(request, empresa.getDocumentosEmpresa().getLogo().getFile(), "logo", "documentos/empresas/" + empresa.getNomeFantasia()));
         return empresa;
     }
-
 }

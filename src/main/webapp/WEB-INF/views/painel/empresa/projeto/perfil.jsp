@@ -51,6 +51,9 @@
           <li>
             <a href="${path}/painel/pedidos?filtro=TODOS&key="><i class="fas fa-praying-hands"></i>Pedidos</a>
           </li>
+          <li>
+            <a href="${path}/painel/ranking"><i class="far fa-chart-bar"></i>Ranking</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -98,6 +101,15 @@
                     <div class="card">
                         <div class="card-header bg-info"></div>
                         <div class="card-body border">
+                            <c:if test = "${not empty projeto.ods}">
+                              <div class="row mt-2">
+                                <div class="col-md-12">
+                                  <c:forEach var="ods" items="${projeto.ods}">
+                                    <img class="logo-ods float-right mx-1 my-1" src="${path}/${ods.path}">
+                                  </c:forEach>
+                                </div>
+                              </div>
+                            </c:if>
                             <div class="row mt-4">
                                 <div class="col-sm-12 col-md-4 text-sm-center">
                                     <figure class="figure">
@@ -148,7 +160,7 @@
                                 <legend class="text-primary">Informações Gerais:</legend>
                                 <hr class="bg-primary">
                                 <div class="row mt-3">
-                                    <div class="col-12 col-md-3">
+                                    <div class="col-12 col-md-4">
                                         <div class="form-group">
                                             <label>Data/Hora Cadastro:</label>
                                             <fmt:formatDate type="both" dateStyle="short" timeStyle="short"
@@ -156,13 +168,13 @@
                                             <input type="text" class="form-control" value="${dataCadastro}" readonly>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-3">
+                                    <div class="col-12 col-md-4">
                                         <div class="form-group">
                                             <label>Prazo de Captação:</label>
                                             <input type="text" class="form-control" value="${projeto.prazoCaptacao}" readonly>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-12 col-md-4">
                                         <div class="form-group">
                                             <label>Entidade Executora:</label>
                                             <input type="text" class="form-control"
@@ -170,6 +182,26 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row mt-3">
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Responsável:</label>                                        
+                                        <input type="text" class="form-control" value="${projeto.entidade.usuario.nome} ${projeto.entidade.usuario.sobrenome}" readonly>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>E-mail:</label>                                        
+                                        <input type="text" class="form-control" value="${projeto.entidade.usuario.email}" readonly>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Telefone:</label>                                        
+                                        <input type="text" class="form-control" value="${projeto.entidade.usuario.telefone}" readonly>
+                                    </div>
+                                  </div>
+                                </div>        
                                 <div class="row mt-3">
                                     <div class="col-12">
                                         <div class="form-group">
@@ -182,7 +214,7 @@
                             </fieldset>
 
                             <fieldset class="mt-5">
-                                <legend class="text-primary">Incentivos Fiscais Selecionados:</legend>
+                                <legend class="text-primary">Categoria(s) Selecionada(s):</legend>
                                 <hr class="bg-primary">
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -230,22 +262,24 @@
                                     </div>
                                     <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 text-center mt-5">
                                         <div class="form-group">
-                                            <a href="${path}/${projeto.documentosProjeto.dadosBancarios.path}"
+                                            <a href="${path}/${projeto.documentosProjeto.dadosBancariosFundo.path}"
                                                target="_blank"><i class="fas fa-file-pdf text-primary"
                                                                   style="font-size: 56px;"></i></a>
                                             <hr>
-                                            <h5 class="text-center">Dados Bancários</h5>
+                                            <h5 class="text-center">Dados Bancários do Fundo</h5>
                                         </div>
                                     </div>
-                                    <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 text-center mt-5">
-                                        <div class="form-group">
-                                            <a href="${path}/${projeto.documentosProjeto.certificado.path}"
-                                               target="_blank"><i class="fas fa-file-pdf text-primary"
-                                                                  style="font-size: 56px;"></i></a>
-                                            <hr>
-                                            <h5 class="text-center">Certificado de Captação</h5>
-                                        </div>
-                                    </div>
+                                    <c:if test="${not empty projeto.documentosProjeto.certificado.path}">
+                                      <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 text-center mt-5">
+                                          <div class="form-group">
+                                              <a href="${path}/${projeto.documentosProjeto.certificado.path}"
+                                                 target="_blank"><i class="fas fa-file-pdf text-primary"
+                                                                    style="font-size: 56px;"></i></a>
+                                              <hr>
+                                              <h5 class="text-center">Certificado de Captação</h5>
+                                          </div>
+                                      </div>
+                                    </c:if>
                                 </div>
                             </fieldset>
                         </div>

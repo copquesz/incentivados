@@ -59,8 +59,12 @@
               <i class="fas fa-gavel"></i>Incentivos Fiscais</a>
           </li>
           <li>
-            <a href="${path}/painel/pedidos">
+            <a href="${path}/painel/pedidos?filtro=TODOS&key=">
               <i class="fas fa-praying-hands"></i>Pedidos</a>
+          </li>
+          <li>
+          <a href="${path}/painel/ranking">
+              <i class="far fa-chart-bar"></i>Ranking</a>
           </li>
         </ul>
       </div>
@@ -108,16 +112,25 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header "> 
-                <h5 class="card-title">Projetos Cadastrado(s): ${qtdProjetos}</h5>                
+                <h5 class="card-title">Projetos Cadastrado(s): ${projetos.totalElements}</h5>      
+                <p><small style="color: red; font-weight: bold;"><i class="far fa-thumbs-up"></i> Avaliado(s): ${qtdAvaliados}</small><small style="color: red; font-weight: bold;" class="mx-2"><i class="fas fa-grip-lines-vertical"></i></small><small style="color: red; font-weight: bold;"> <i class="far fa-thumbs-down"></i> Pendentes(s): ${qtdPendentes}</small></p>             
                 <div class="row">
                   <div class="col-12 d-flex justify-content-start">
                     <form class="form-inline">                                          
-                      <div class="form-group mx-sm-3 mb-2">
-                        <input type="text" class="form-control" placeholder="Pesquisar por..">
+                      <div class="form-group mx-sm-1 mb-2">
+                        <input type="text" class="form-control" placeholder="Título ..." name="key">
+                      </div>
+                      <div class="form-group mx-sm-1 mb-2">
+                        <select class="form-control" name="categoria">
+                           <option value="0">Todos</option>
+                           <c:forEach var="incentivoFiscal" items="${incentivosFiscais}">
+                             <option value="${incentivoFiscal.id}">${incentivoFiscal.legislacao}</option>
+                           </c:forEach>
+                        </select>
                       </div>
                       <div class="form-group mb-2">
                         <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>
-                      </div>
+                      </div>                      
                     </form>
                   </div>
                 </div>                
@@ -126,13 +139,13 @@
                 <div class="row">
                   <div class="col-12">
                     <!-- MSG CASO LISTA ESTEJA VAZIA -->
-                    <c:if test = "${empty projetos.content}">
-                      <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
+                    <c:if test="${empty projetos.content}">
+                      <div class="alert alert-danger alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
                         <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-                          <i class="nc-icon nc-simple-remove"></i>
+                            <i class="nc-icon nc-simple-remove"></i>
                         </button>
                         <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
-                        <span data-notify="message">Não há nenhum projeto cadastrado</span>
+                        <span data-notify="message">Não há projeto(s) cadastrado(s) ou resultado(s) para esta busca.</span>
                       </div>
                     </c:if>
                     <!-- EXIBE A LISTA DE PROJETOS -->
@@ -186,18 +199,42 @@
                         </div>
                       </div>
                       <hr>
-                      <div class="row justify-content-start">                        
+                      <div class="row justify-content-start">
                         <c:forEach var="projeto" items="${projetos.content}">
                           <div class="col-12 col-xl-3 col-lg-6 col-md-6 d-flex align-items-stretch bd-highlight">
                             <div class="card border align-self-stretch flex-fill bd-highlight mt-3">
-                              <img src="${path}/${projeto.documentosProjeto.logo.path}" class="card-img-top img-fluid" alt="...">
+                              <img src="${path}/${projeto.documentosProjeto.logo.path}" class="img-fluid img-thumbnail" alt="..." style="height: 200px;">
                               <div class="card-body">
-                                <h5 class="card-title" style="font-weight: bold;">${projeto.titulo}</h5>
+                                <h5 class="card-title" style="font-weight: bold;">
+                                  <c:choose> 
+                                    <c:when test = "${fn:length(projeto.titulo) > 25}">
+                                      ${fn:substring(projeto.titulo, 0, 25)} ...
+                                    </c:when>
+                                    <c:otherwise>  
+                                      ${projeto.titulo}
+                                    </c:otherwise>
+                                  </c:choose>
+                                </h5>
                                 <hr>
-                                <p class="card-text text-justify">${fn:substring(projeto.objetivo, 0, 180)} ...</p>
+                                <p class="card-text text-justify">
+                                  <c:choose> 
+                                    <c:when test = "${fn:length(projeto.objetivo) > 200}">
+                                      ${fn:substring(projeto.objetivo, 0, 200)} ...
+                                    </c:when>
+                                    <c:otherwise>  
+                                      ${projeto.objetivo}
+                                    </c:otherwise>
+                                  </c:choose>
+                                </p>
                               </div>
                               <div class="card-footer">
-                                <a href="${path}/painel/projetos/${projeto.id}" class="btn btn-primary">Ver Detalhes</a>
+                                <a href="${path}/painel/projetos/${projeto.id}" class="btn btn-primary rounded my-2 mx-auto d-block"><i class="fas fa-angle-double-right"></i> Detalhes</a>
+                                <c:if test="${projeto.avaliado}">
+                                  <a href="#" class="btn btn-primary rounded my-2 mx-auto d-block"><i class="far fa-thumbs-up"></i> Projeto Avaliado</a>
+                                </c:if> 
+                                <c:if test="${not projeto.avaliado}">
+                                  <a href="${path}/painel/projetos/avaliacao/${projeto.id}" class="btn btn-danger rounded my-2 mx-auto d-block"><i class="far fa-hand-point-right"></i> Avaliar Projeto</a>
+                                </c:if>                               
                               </div>
                             </div>
                           </div>

@@ -11,8 +11,13 @@
       </div>
       <form action="${path}/painel/pedido/${pedido.id}/avaliar" method="post" acceptcharset="UTF-8"> 
         <div class="modal-body">          
-          <input type="hidden" name="status" value="APROVADO">
-          <p>Você deseja realmente aprovar este pedido?</p>
+          <input type="hidden" name="status" value="PRE_APROVADO"> 
+          <div class="row">
+            <div class="col-12">
+              <label>Informe o que está sendo aprovado neste pedido:</label>
+              <textarea class="form-control" name="avaliacao" rows="5"></textarea>
+            </div>
+          </div>   
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-success">Sim</button>

@@ -56,8 +56,12 @@
               <i class="fas fa-gavel"></i>Incentivos Fiscais</a>
           </li>
           <li>
-            <a href="${path}/painel/pedidos">
+            <a href="${path}/painel/pedidos?filtro=TODOS&key=">
               <i class="fas fa-praying-hands"></i>Pedidos</a>
+          </li>
+          <li>
+            <a href="${path}/painel/ranking">
+              <i class="far fa-chart-bar"></i>Ranking</a>
           </li>
         </ul>
       </div>
@@ -105,11 +109,11 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header "> 
-                <h5 class="card-title">Empresas Cadastrada(s): ${qtdEmpresas}</h5>
+                <h5 class="card-title">Empresas Cadastrada(s): ${empresa.totalElements}</h5>
                 <div class="row d-flex justify-content-end">
                   <div class="col-12">
                     <form class="form-inline">
-                      <input type="text" class="form-control my-auto mr-2" id="" placeholder="Pesquisar">
+                      <input type="text" class="form-control my-auto mr-2" name="key" placeholder="Pesquisar por Nome Fantazia ou CNPJ ...">
                       <button type="submit" class="btn btn-primary my-auto"><i class="fas fa-search"></i></button>
                     </form>
                   </div>
@@ -120,12 +124,12 @@
                   <div class="col-12">
                     <!-- MSG DE VAZIO -->
                     <c:if test = "${empty empresas.content}">
-                      <div class="alert alert-info alert-with-icon alert-dismissible fade show" data-notify="container">
+                      <div class="alert alert-danger alert-with-icon alert-dismissible fade show" data-notify="container">
                         <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
                           <i class="nc-icon nc-simple-remove"></i>
                         </button>
                         <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
-                        <span data-notify="message">Não há nenhuma empresa cadastrada</span>
+                        <span data-notify="message">Não há empresa(s) cadastrada(s) ou não há resultado(s) para esta busca.</span>
                       </div>
                     </c:if>
                     <c:if test = "${not empty empresas.content}"> 
@@ -134,41 +138,41 @@
                           <c:choose> 
                             <c:when test = "${empresas.totalPages == 1}">
                               <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
-                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/empresas?page=${empresas.number}">${empresas.number + 1}</a></li>
+                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/empresas?page=${empresas.number}&key=${key}">${empresas.number + 1}</a></li>
                               <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
                             </c:when>
                             <c:when test = "${(empresas.totalPages == 2) && (empresas.number + 1 < empresas.totalPages)}">
                               <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
-                              <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/empresas?page=${empresas.number}">${empresas.number + 1}</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.number + 1}">${empresas.number + 2}</a></li>
+                              <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/empresas?page=${empresas.number}&key=${key}">${empresas.number + 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.number + 1}&key=${key}">${empresas.number + 2}</a></li>
                               <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
                             </c:when>
                             <c:when test = "${(empresas.totalPages == 2) && (empresas.number + 1 == empresas.totalPages)}">
                               <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.number - 1}">${empresas.number}</a></li>
-                              <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/empresas?page=${empresas.number}">${empresas.number + 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.number - 1}&key=${key}">${empresas.number}</a></li>
+                              <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/empresas?page=${empresas.number}&key=${key}">${empresas.number + 1}</a></li>
                               <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
                             </c:when>
                             <c:when test = "${(empresas.totalPages >= 3) && (empresas.number == 0)}">
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas">Primeira</a></li>
-                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/empresas?page=${empresas.number}">${empresas.number + 1}</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.number + 1}">${empresas.number + 2}</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.number + 2}">${empresas.number + 3}</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.totalPages - 1}">Última</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=0&key=${key}">Primeira</a></li>
+                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/empresas?page=${empresas.number}&key=${key}">${empresas.number + 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.number + 1}&key=${key}">${empresas.number + 2}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.number + 2}&key=${key}">${empresas.number + 3}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.totalPages - 1}&key=${key}">Última</a></li>
                             </c:when>
                             <c:when test = "${(empresas.totalPages >= 3) && (empresas.number > 0) && (empresas.number + 1 < empresas.totalPages)}">
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas">Primeira</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.number - 1}">${empresas.number}</a></li>
-                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/empresas?page=${empresas.number}">${empresas.number + 1}</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.number + 1}">${empresas.number + 2}</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.totalPages - 1}">Última</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=0&key=${key}">Primeira</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.number - 1}&key=${key}">${empresas.number}</a></li>
+                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/empresas?page=${empresas.number}&key=${key}">${empresas.number + 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.number + 1}&key=${key}">${empresas.number + 2}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.totalPages - 1}&key=${key}">Última</a></li>
                             </c:when>
                             <c:when test = "${(empresas.totalPages >= 3) && (empresas.number + 1 == empresas.totalPages)}">
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas">Primeira</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.number - 2}">${empresas.number - 1}</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.number - 1}">${empresas.number}</a></li>
-                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/empresas?page=${empresas.number}">${empresas.number + 1}</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.totalPages - 1}">Última</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=0&key=${key}">Primeira</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.number - 2}&key=${key}">${empresas.number - 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.number - 1}&key=${key}">${empresas.number}</a></li>
+                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/empresas?page=${empresas.number}&key=${key}">${empresas.number + 1}</a></li>
+                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/empresas?page=${empresas.totalPages - 1}&key=${key}">Última</a></li>
                             </c:when>
                           </c:choose> 
                         </ul>

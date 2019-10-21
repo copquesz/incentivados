@@ -28,6 +28,10 @@ public class ObservacaoPedido implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     private Usuario usuario;
 
+    @JoinColumn(name = "documentos_observacao_pedido_id")
+    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    private DocumentosObservacaoPedido documentosObservacaoPedido;
+
     // Construtor
     public ObservacaoPedido() {
         this.dataCadastro = new Date();

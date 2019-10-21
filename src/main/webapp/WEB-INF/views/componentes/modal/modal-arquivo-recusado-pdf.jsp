@@ -10,7 +10,6 @@
         </button>
       </div>
       <div class="modal-body">
-        <p class="text-justify">O arquivo foi recursado!</p>
         <p class="text-justify">É necessário enviar um arquivo no formato <b>PDF</b>.</p>
       </div>
       <div class="modal-footer">

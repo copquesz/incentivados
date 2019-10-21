@@ -47,6 +47,9 @@
           <li class="active">
             <a href="${path}/painel/pedidos?filtro=TODOS&key="><i class="fas fa-praying-hands"></i>Pedidos</a>
           </li>
+          <li>
+            <a href="${path}/painel/ranking"><i class="far fa-chart-bar"></i>Ranking</a>
+          </li>
         </ul>
       </div>
     </div>   
@@ -98,14 +101,14 @@
                       <label>Filtrar por: </label>
                       <form class="form-inline">                                          
                         <div class="form-group mb-2">                          
-                          <select class="form-control" name="filtro" id="filtro">
+                          <select class="form-control" name="filtro" id="filtro-empresa">
                              <c:forEach var="filtroPedido" items="${filtroPedidos}">
                                <option value="${filtroPedido}">${filtroPedido.descricao}</option>
                              </c:forEach>
                           </select>
                         </div>
                         <div class="form-group mx-sm-3 mb-2">
-                          <input class="form-control" type="text" name="key" id="key" placeholder="palavra-chave" />
+                          <input class="form-control" type="text" name="key" id="key-empresa" placeholder="palavra-chave" />
                         </div>
                         <div class="form-group mb-2">
                           <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>
@@ -178,6 +181,7 @@
                             <th class="text-center border">Loja</th>
                             <th class="text-center border">Carta Ofício</th>
                             <th class="text-center border">Status</th>
+                            <th></th>
                           </thead>
                           <tbody>
                             <c:forEach var="pedido" items="${pedidos.content}">
@@ -188,11 +192,15 @@
                                 <td class="text-center border" title="${pedido.entidade.razaoSocial}">${pedido.entidade.nomeFantasia}</td>
                                 <td class="text-center border" title="Cidade: ${pedido.analista.endereco.cidade} / Estado: ${pedido.analista.endereco.estado}"> ${pedido.analista.endereco.bairro}</td>
                                 <td class="text-center border"><a href="${path}/${pedido.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>
-                                <th class="text-center border">
-                                  <c:if test = "${pedido.status.id == 0}"><span class="bg-warning p-1 text-white">${pedido.status}</span></c:if>
-                                  <c:if test = "${pedido.status.id == 1}"><span class="bg-danger p-1"><a href="#" class="text-white" data-toggle="modal" data-target="#modal-motivo-reprovado-${pedido.id}" title="Visualizar Motivo">${pedido.status}</a></span></c:if>
-                                  <c:if test = "${pedido.status.id == 2}"><span class="bg-success p-1 text-white">${pedido.status}</span></c:if>
-                                </th>
+                                <td class="text-center border">
+                                  <c:if test = "${pedido.status.id == 0}"><span class="bg-warning p-1 text-white">PENDENTE</span></c:if>
+                                  <c:if test = "${pedido.status.id == 1}"><span class="bg-danger p-1"><a href="#" class="text-white" data-toggle="modal" data-target="#modal-observacao-pedido-${pedido.id}" title="Visualizar Motivo">RECUSADO</a></span></c:if>
+                                  <c:if test = "${pedido.status.id == 2}"><span class="bg-primary p-1"><a href="#" class="text-white" data-toggle="modal" data-target="#modal-observacao-pedido-${pedido.id}" title="Visualizar Motivo">APROVADO</a></span></c:if>
+                                  <c:if test = "${pedido.status.id == 3}"><span class="bg-success p-1"><a href="#" class="text-white" data-toggle="modal" data-target="#modal-observacao-pedido-${pedido.id}" title="Visualizar Motivo">PRÉ-APROVADO</a></span></c:if>
+                                </td>
+                                <td class="text-center border">
+                                  <a class="btn btn-success btn-sm" href="${path}/painel/pedido/${pedido.id}" title="Visualizar"><i class="fas fa-sign-in-alt"></i></a>
+                                </td>
                               </tr>
                             </c:forEach>
                           </tbody>
@@ -210,7 +218,7 @@
         </div>         
       </div>
       <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
-      <c:import url="/WEB-INF/views/componentes/modal/modal-motivo-reprovado.jsp" />
+      <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido.jsp" />
     </div>
   </div>
 
@@ -234,36 +242,30 @@
             
             if(chave == 'filtro'){
               if(valor == 'LOJA'){
-                $("#filtro").val('LOJA');
-                $('#key').show();
+                $("#filtro-empresa").val('LOJA');
+                $('#key-empresa').show();
 
               }
               else if(valor == 'CIDADE'){
-                $("#filtro").val('CIDADE');
-                $('#key').show();
+                $("#filtro-empresa").val('CIDADE');
+                $('#key-empresa').show();
               }
               else if(valor == 'ESTADO'){
-                $("#filtro").val('ESTADO');
-                $('#key').show();
+                $("#filtro-empresa").val('ESTADO');
+                $('#key-empresa').show();
               }
               else if(valor == 'ENTIDADE'){
-                $("#filtro").val('ENTIDADE');
-                $('#key').show();
+                $("#filtro-empresa").val('ENTIDADE');
+                $('#key-empresa').show();
               }
               else{
-                $("#filtro").val('TODOS');
-                $('#key').hide();
+                $("#filtro-empresa").val('TODOS');
+                $('#key-empresa').hide();
               }
             }
         });
     });
   </script> 
-  <script type="text/javascript">
-    $(document).ready(function() {
-      
-    });
-  </script> 
-
 </body>
 
 </html>

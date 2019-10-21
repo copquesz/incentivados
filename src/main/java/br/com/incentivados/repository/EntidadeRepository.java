@@ -18,9 +18,11 @@ import br.com.incentivados.model.Usuario;
 public interface EntidadeRepository extends JpaRepository<Entidade, Long> {
 
     boolean existsByCnpj(String cnpj);
+
     boolean existsByUsuario(Usuario usuario);
 
     Long countByUsuario(Usuario usuario);
+
     Long countByDataCadastroBetween(Date inicio, Date fim);
 
     Optional<Entidade> findById(Long id);
@@ -29,7 +31,10 @@ public interface EntidadeRepository extends JpaRepository<Entidade, Long> {
 
     Page<Entidade> findAllByUsuario(Usuario usuario, Pageable page);
 
-    @Query("SELECT entidade FROM Entidade entidade WHERE entidade.usuario = :usuario AND entidade.nomeFantasia LIKE %:key% OR entidade.cnpj LIKE %:key%")
-    Page<Entidade> findAllByUsuario(@Param("usuario") Usuario usuario, Pageable page, @Param("key") String key);
+    @Query("SELECT entidade FROM Entidade entidade WHERE entidade.nomeFantasia LIKE %:key% OR entidade.cnpj LIKE %:key%")
+    Page<Entidade> findAll(Pageable page, @Param("key") String key);
+
+    @Query("SELECT entidade FROM Entidade entidade WHERE entidade.usuario = :usuario AND (entidade.nomeFantasia LIKE %:key% OR entidade.cnpj LIKE %:key%)")
+    Page<Entidade> findAllByUsuarioAndCnpjOrNomeFantasia(@Param("usuario") Usuario usuario, Pageable page, @Param("key") String key);
 
 }

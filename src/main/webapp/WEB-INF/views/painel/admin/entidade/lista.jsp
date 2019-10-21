@@ -59,8 +59,12 @@
               <i class="fas fa-gavel"></i>Incentivos Fiscais</a>
           </li>
           <li>
-            <a href="${path}/painel/pedidos">
+            <a href="${path}/painel/pedidos?filtro=TODOS&key=">
               <i class="fas fa-praying-hands"></i>Pedidos</a>
+          </li>
+          <li>
+            <a href="${path}/painel/ranking">
+              <i class="far fa-chart-bar"></i>Ranking</a>
           </li>
         </ul>
       </div>
@@ -111,25 +115,28 @@
                 <h5 class="card-title">Entidades Cadastrada(s): ${qtdEntidades}</h5>
                 <div class="row d-flex justify-content-start">
                   <div class="col-12">
-                    <form class="form-inline">
-                      <input type="text" class="form-control my-auto mr-2" id="" placeholder="Pesquisar">
-                      <button type="submit" class="btn btn-primary my-auto"><i class="fas fa-search"></i></button>
+                    <form class="form-inline">                                          
+                      <div class="form-group mx-sm-3 mb-2">
+                        <input type="text" class="form-control" placeholder="CNPJ ou Nome Fantasia ..." name="key">
+                      </div>
+                      <div class="form-group mb-2">
+                        <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>
+                      </div>
                     </form>
                   </div>
                 </div>                
               </div>
-
               <div class="card-body">
                 <div class="row mt-2">
                   <div class="col-12">
                     <!-- MSG DE VAZIO -->
-                    <c:if test = "${empty entidades.content}">
-                      <div class="alert alert-info alert-with-icon alert-dismissible fade show" data-notify="container">
+                    <c:if test="${empty entidades.content}">
+                      <div class="alert alert-danger alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
                         <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-                          <i class="nc-icon nc-simple-remove"></i>
+                            <i class="nc-icon nc-simple-remove"></i>
                         </button>
                         <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
-                        <span data-notify="message">Não há nenhuma entidade cadastrada</span>
+                        <span data-notify="message">Não há entidade(s) cadastrada(s) ou resultado(s) para esta busca.</span>
                       </div>
                     </c:if>
                     <c:if test = "${not empty entidades.content}">                     

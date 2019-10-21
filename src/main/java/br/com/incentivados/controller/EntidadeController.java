@@ -5,6 +5,7 @@ import br.com.incentivados.model.Usuario;
 import br.com.incentivados.service.EntidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,148 +20,89 @@ import java.util.logging.Logger;
 
 @Controller
 public class EntidadeController {
-
     private EntidadeService entidadeService;
     private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
 
     @Autowired
-    public EntidadeController(EntidadeService entidadeService){
+    public EntidadeController(EntidadeService entidadeService) {
         this.entidadeService = entidadeService;
     }
 
-    /**
-     * Exibe a página de cadastro da entidade.
-     *
-     * @param request Recebe dados da requisição.
-     * @param model   Fornece dados para a view.
-     * @return Retorna o formulário de cadastro da entidade.
-     */
-    @GetMapping("/painel/entidades/cadastro")
+    @GetMapping({"/painel/entidades/cadastro"})
     public String getCadastrar(HttpServletRequest request, Model model) {
-
-        // Seta o path da requisição.
         model.addAttribute("path", request.getContextPath());
         return "painel/entidade/entidade/cadastro";
-
     }
 
-    /**
-     * Faz a persistência do objeto entidade na base de dados.
-     *
-     * @param entidade Objeto que será persistido.
-     * @param request  recebe dados da requisição.
-     * @param model    fornece dados para a view.
-     * @return 1) Sucesso caso entidade for cadastrada.
-     * 2) Falha caso já tenha o cnpj cadastrado.
-     * 3) Erro caso ocorra algum problema na aplicação.
-     */
-    @PostMapping("/painel/entidades/cadastro")
+    @PostMapping({"/painel/entidades/cadastro"})
     public String postCadastrar(Entidade entidade, HttpServletRequest request, Model model) {
-
-        // Seta o path da requisição.
         model.addAttribute("path", request.getContextPath());
-        // Obtém os dados do usuário logado na sessão atual.
-        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
 
         try {
-            // Verifica se não existe o cnpj cadastrado.
-            if (!entidadeService.existsByCnpj(entidade.getCnpj())) {
-                entidade = entidadeService.save(entidade, usuario, request);
+            if (!this.entidadeService.existsByCnpj(entidade.getCnpj())) {
+                entidade = this.entidadeService.save(entidade, usuario, request);
                 model.addAttribute("entidade", entidade);
-                logger.log(Level.INFO, "Entidade cadastrada com sucesso: " + entidade.getNomeFantasia());
+                this.logger.log(Level.INFO, "Entidade cadastrada com sucesso: " + entidade.getNomeFantasia());
                 return "painel/entidade/entidade/cadastro-entidade-sucesso";
             } else {
                 model.addAttribute("entidade", entidade);
-                logger.log(Level.INFO, "O cnpj ja possui registro na base de dados: " + entidade.getCnpj());
+                this.logger.log(Level.INFO, "O cnpj ja possui registro na base de dados: " + entidade.getCnpj());
                 return "painel/entidade/entidade/cadastro-entidade-falha-cnpj-cadastrado";
             }
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Erro inesperado ao cadastrar a entidade.", e);
+        } catch (Exception var6) {
+            this.logger.log(Level.SEVERE, "Erro inesperado ao cadastrar a entidade.", var6);
             return "painel/entidade/entidade/cadastro-entidade-falha";
         }
-
     }
 
-    /**
-     * Exibe a página com informações da entidade recebida como parâmetro.
-     *
-     * @param id      Long - código identificador da entidade.
-     * @param request Recebe dados da requisição.
-     * @param model   Fornece dados para a view.
-     * @return Retorna a página que contém informações da entidade.
-     */
-    @GetMapping("/painel/entidades/{id}")
+    @GetMapping({"/painel/entidades/{id}"})
     public String getVisualizar(@PathVariable Long id, HttpServletRequest request, Model model) {
-
-        // Seta o path da requisição
         model.addAttribute("path", request.getContextPath());
-        // Obtém os dados do usuário logado na sessão atual.
-        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
 
         try {
-            // Verifica se possui objeto com o código identificador passado como parâmetro.
-            if (entidadeService.findById(id).isPresent()) {
-                Entidade entidade = entidadeService.findById(id).get();
+            if (this.entidadeService.findById(id).isPresent()) {
+                Entidade entidade = (Entidade)this.entidadeService.findById(id).get();
                 model.addAttribute("entidade", entidade);
-
-                // Retorna a página de acordo com o usuário logado.
-                switch (usuario.getTipoUsuario()) {
-
+                switch(usuario.getTipoUsuario()) {
                     case ADMIN:
                         return "painel/admin/entidade/perfil";
-
                     case ENTIDADE:
                         return "painel/entidade/entidade/perfil";
-
                     default:
                         return "";
                 }
             } else {
-                logger.log(Level.INFO, "Usuário não possui permissão para visualizar a página.");
+                this.logger.log(Level.INFO, "Usuário não possui permissão para visualizar a página.");
                 return "";
             }
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Erro ao visualizar a entidade.", e);
+        } catch (Exception var6) {
+            this.logger.log(Level.SEVERE, "Erro ao visualizar a entidade.", var6);
             return "";
         }
-
     }
 
-    /**
-     * Exibe a lista de entidades cadastradas.
-     *
-     * @param request Recebe dados da requisição.
-     * @param model   Fornece dados para a view.
-     * @param page    int - Número da página que será buscada no banco de dados.
-     * @return Retorna a página com a lista de entidades.
-     */
-    @GetMapping("/painel/entidades")
-    public String getListar(HttpServletRequest request, Model model, @RequestParam(required = false, defaultValue = "0") int page, @RequestParam(required = false, defaultValue = "0") String key) {
-
-        // Seta o path da requisição
+    @GetMapping({"/painel/entidades"})
+    public String getListar(HttpServletRequest request, Model model, @RequestParam(required = false,defaultValue = "0") int page, @RequestParam(required = false,defaultValue = "0") String key) {
         model.addAttribute("path", request.getContextPath());
-        // Obtém os dados do usuário logado na sessão atual.
-        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
 
         try {
-            // Verifica o tipo de usuário logado.
-            switch (usuario.getTipoUsuario()) {
-
+            Pageable pageable = PageRequest.of(page, 5, Sort.by(new Sort.Order[]{Sort.Order.asc("id")}));
+            switch(usuario.getTipoUsuario()) {
                 case ADMIN:
-                    model.addAttribute("entidades", entidadeService.findAll(PageRequest.of(page, 5, Sort.by(Sort.Order.asc("id")))));
+                    model.addAttribute("entidades", this.entidadeService.findAll(pageable, key));
                     return "painel/admin/entidade/lista";
-
                 case ENTIDADE:
-                    model.addAttribute("entidades", entidadeService.findAllByUsuario(usuario, PageRequest.of(page, 5, Sort.by(Sort.Order.asc("id"))), key));
+                    model.addAttribute("entidades", this.entidadeService.findAllByUsuarioAndCnpjOrNomeFantasia(usuario, pageable, key));
                     return "painel/entidade/entidade/lista";
-
                 default:
                     return "";
             }
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Erro ao listar as entidades.", e);
+        } catch (Exception var7) {
+            this.logger.log(Level.SEVERE, "Erro ao listar as entidades.", var7);
             return "";
         }
     }
-
 }
