@@ -31,7 +31,7 @@
 <body class="">
 <div class="wrapper ">
   <!-- Sidebar -->
-  <div class="sidebar" data-color="verde" data-active-color="white">
+  <div class="sidebar" data-color="grey" data-active-color="white">
     <div class="logo">
       <a href="#" class="simple-text logo-mini">
         <div class="logo-image-small">
@@ -111,14 +111,14 @@
           <div class="card">
             <div class="card-header bg-info"></div>
             <div class="card-body border">
-              <form action="${path}/painel/projetos/avaliacao/${projeto.id}" method="post" enctype="multipart/form-data" acceptcharset="UTF-8"> 
-              <input type="hidden" name="tipoAvaliacao" value="TECNICA">   
-              <input type="hidden" name="analista" value="${usuario.id}">             
+              <form action="${path}/painel/projetos/avaliacao/${projeto.id}" method="post" enctype="multipart/form-data" acceptcharset="UTF-8">
+                <input type="hidden" name="tipoAvaliacao" value="TECNICA">
+                <input type="hidden" name="analista" value="${usuario.id}">
                 <div class="accordion" id="accordionExample">
                   <div class="card">
                     <div class="card-header bg-info" id="headingOne">
                       <h5 class="mb-0">
-                        <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        <button class="btn btn-info new-red" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                           Projeto Técnico <i class="fas fa-angle-down mx-2"></i>
                         </button>
                       </h5>
@@ -175,7 +175,7 @@
                   <div class="card">
                     <div class="card-header bg-info" id="headingTwo">
                       <h5 class="mb-0">
-                        <button class="btn btn-info collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <button class="btn btn-info new-red collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                           Estratégias Corporativas <i class="fas fa-angle-down mx-2"></i>
                         </button>
                       </h5>
@@ -243,7 +243,7 @@
                   <div class="card">
                     <div class="card-header bg-info" id="headingThree">
                       <h5 class="mb-0">
-                        <button class="btn btn-info collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <button class="btn btn-info new-red collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                           Visibilidade <i class="fas fa-angle-down mx-2"></i>
                         </button>
                       </h5>
@@ -292,7 +292,7 @@
                 <div class="card">
                   <div class="card-header bg-info" id="headingFour">
                     <h5 class="mb-0">
-                      <button class="btn btn-info collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                      <button class="btn btn-info new-red collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                         Acesso aos Direitos <i class="fas fa-angle-down mx-2"></i>
                       </button>
                     </h5>
@@ -303,9 +303,9 @@
                         <div class="col-12">
                           <p class="lead"><strong> Considerando a Lei de Incentivo que a proposta  está inscrito/aprovada pela instância pública:</strong></p>
                           <p class="lead">
-                            <ul>
-                              <c:forEach var="incentivoFiscal" items="${projeto.incentivosFiscais}"><li>${incentivoFiscal.legislacao}</li></c:forEach>
-                            </ul>
+                          <ul>
+                            <c:forEach var="incentivoFiscal" items="${projeto.incentivosFiscais}"><li>${incentivoFiscal.legislacao}</li></c:forEach>
+                          </ul>
                           </p>
                         </div>
                       </div>
@@ -345,7 +345,7 @@
                     </div>
                   </div>
                 </div>
-                <hr class="bg-primary">                
+                <hr class="bg-primary">
                 <button type="submit" class="btn btn-primary float-right">Enviar <i class="far fa-share-square"></i></button>
                 <a href="${path}/painel/dashboard" class="btn btn-danger float-right"><i class="fas fa-angle-double-left"></i> Voltar</a>
                 <a href="${path}/painel/projetos/${projeto.id}" class="btn btn-warning float-left" target="_blank"><i class="fas fa-book"></i> Dados da Proposta</a>

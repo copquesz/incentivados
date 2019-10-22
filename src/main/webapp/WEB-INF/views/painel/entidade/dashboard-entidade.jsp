@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <html lang="pt-br">
 
 <head>
@@ -27,9 +26,9 @@
 </head>
 
 <body class="">
-<div class="wrapper ">
+<div class="wrapper">
     <!-- Sidebar -->    
-    <div class="sidebar" data-color="verde" data-active-color="white">
+    <div class="sidebar" data-color="grey" data-active-color="white">
       <div class="logo">
         <a href="#" class="simple-text logo-mini">
           <div class="logo-image-small">
@@ -316,16 +315,16 @@
                                                 </td>
                                                 <th class="text-center border">
                                                     <c:if test="${pedido.status.id == 0}">
-                                                        <span class="bg-warning p-1 text-white">PENDENTE</span>
+                                                        <span class="bg-warning p-1 text-branco">PENDENTE</span>
                                                     </c:if>
                                                     <c:if test="${pedido.status.id == 1}">
-                                                        <span class="bg-danger p-1"><a class="text-white" href="#" data-toggle="modal" data-target="#modal-observacao-pedido-${pedido.id}" title="Visualizar">REPROVADO</a></span>
+                                                        <span class="new-red p-1"><a class="" href="#" data-toggle="modal" data-target="#modal-observacao-pedido-${pedido.id}" title="Visualizar">REPROVADO</a></span>
                                                     </c:if>
                                                     <c:if test="${pedido.status.id == 2}">
-                                                        <span class="bg-success p-1"><a class="text-white" href="#" data-toggle="modal" data-target="#modal-observacao-pedido-${pedido.id}" title="Visualizar">APROVADO</a></span>
+                                                        <span class="bg-success p-1"><a class="" href="#" data-toggle="modal" data-target="#modal-observacao-pedido-${pedido.id}" title="Visualizar">APROVADO</a></span>
                                                     </c:if>
                                                     <c:if test="${pedido.status.id == 3}">
-                                                        <span class="bg-success p-1"><a class="text-white" href="#" data-toggle="modal" data-target="#modal-observacao-pedidopre-aprovado-usuario-${pedido.id}" title="Visualizar">PRÉ-APROVADO</a></span>
+                                                        <span class="bg-success p-1"><a class="" href="#" data-toggle="modal" data-target="#modal-observacao-pedidopre-aprovado-usuario-${pedido.id}" title="Visualizar">PRÉ-APROVADO</a></span>
                                                     </c:if>
                                                 </th>
                                             </tr>

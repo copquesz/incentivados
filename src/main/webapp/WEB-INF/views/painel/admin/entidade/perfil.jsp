@@ -28,85 +28,85 @@
 <body class="">
 <div class="wrapper ">
     <!-- Sidebar -->
-    <div class="sidebar" data-color="verde" data-active-color="white">
-      <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-          <div class="logo-image-small">
+    <div class="sidebar" data-color="grey" data-active-color="white">
+        <div class="logo">
+            <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+                <div class="logo-image-small">
 
-            <i class="far fa-user"></i>
-          </div>
-        </a>
-        <a href="${path}/painel/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
-      </div>
-      <div class="sidebar-wrapper">
-        <ul class="nav">
-          <li>
-            <a href="${path}/painel/dashboard">
-              <i class="nc-icon nc-bank"></i>Painel Principal</a>        
-          </li>
-          <li>
-            <a href="${path}/painel/empresas">
-              <i class="fas fa-city"></i>Empresas</a>
-          </li>
-          <li class="active">
-            <a href="${path}/painel/entidades">
-              <i class="fas fa-users"></i>Entidades</a>
-          </li>
-          <li>
-            <a href="${path}/painel/projetos">
-              <i class="fas fa-project-diagram"></i>Projetos</a>
-          </li>
-          <li>
-            <a href="${path}/painel/incentivos-fiscais">
-              <i class="fas fa-gavel"></i>Incentivos Fiscais</a>
-          </li>
-          <li>
-            <a href="${path}/painel/pedidos?filtro=TODOS&key=">
-              <i class="fas fa-praying-hands"></i>Pedidos</a>
-          </li>
-          <li>
-            <a href="${path}/painel/ranking">
-              <i class="far fa-chart-bar"></i>Ranking</a>
-          </li>
-        </ul>
-      </div>
+                    <i class="far fa-user"></i>
+                </div>
+            </a>
+            <a href="${path}/painel/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
+        </div>
+        <div class="sidebar-wrapper">
+            <ul class="nav">
+                <li>
+                    <a href="${path}/painel/dashboard">
+                        <i class="nc-icon nc-bank"></i>Painel Principal</a>
+                </li>
+                <li>
+                    <a href="${path}/painel/empresas">
+                        <i class="fas fa-city"></i>Empresas</a>
+                </li>
+                <li class="active">
+                    <a href="${path}/painel/entidades">
+                        <i class="fas fa-users"></i>Entidades</a>
+                </li>
+                <li>
+                    <a href="${path}/painel/projetos">
+                        <i class="fas fa-project-diagram"></i>Projetos</a>
+                </li>
+                <li>
+                    <a href="${path}/painel/incentivos-fiscais">
+                        <i class="fas fa-gavel"></i>Incentivos Fiscais</a>
+                </li>
+                <li>
+                    <a href="${path}/painel/pedidos?filtro=TODOS&key=">
+                        <i class="fas fa-praying-hands"></i>Pedidos</a>
+                </li>
+                <li>
+                    <a href="${path}/painel/ranking">
+                        <i class="far fa-chart-bar"></i>Ranking</a>
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="main-panel">
-      <!-- Navbar -->
+        <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
             <div class="container-fluid">
-              <div class="navbar-wrapper">
-                <div class="navbar-toggle">
-                  <button type="button" class="navbar-toggler">
-                    <span class="navbar-toggler-bar bar1"></span>
-                    <span class="navbar-toggler-bar bar2"></span>
-                    <span class="navbar-toggler-bar bar3"></span>
-                  </button>
-                </div>
-                <b><a class="navbar-brand" href="#">Entidade <i class='fas fa-angle-double-right'></i> ${entidade.nomeFantasia}</a></b>
-              </div>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-bar navbar-kebab"></span>
-                <span class="navbar-toggler-bar navbar-kebab"></span>
-                <span class="navbar-toggler-bar navbar-kebab"></span>
-              </button>
-              <div class="collapse navbar-collapse justify-content-end" id="navigation">            
-                <ul class="navbar-nav">              
-                  <li class="nav-item btn-rotate dropdown">
-                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-power-off"></i>
-                      <p>
-                        <span class="d-lg-none d-md-block">Ações</span>
-                      </p>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="${path}/painel/perfil">Meus Dados</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="${path}/sair">Sair</a>
+                <div class="navbar-wrapper">
+                    <div class="navbar-toggle">
+                        <button type="button" class="navbar-toggler">
+                            <span class="navbar-toggler-bar bar1"></span>
+                            <span class="navbar-toggler-bar bar2"></span>
+                            <span class="navbar-toggler-bar bar3"></span>
+                        </button>
                     </div>
-                  </li>
-                </ul>
-              </div>
+                    <b><a class="navbar-brand" href="#">Entidade <i class='fas fa-angle-double-right'></i> ${entidade.nomeFantasia}</a></b>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                    <ul class="navbar-nav">
+                        <li class="nav-item btn-rotate dropdown">
+                            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-power-off"></i>
+                                <p>
+                                    <span class="d-lg-none d-md-block">Ações</span>
+                                </p>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="${path}/painel/perfil">Meus Dados</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="${path}/sair">Sair</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
         <div class="content">
@@ -132,24 +132,24 @@
                                 <legend class="text-primary">Informações Gerais:</legend>
                                 <hr class="bg-primary">
                                 <div class="row mt-3">
-                                  <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Responsável:</label>                                        
-                                        <input type="text" class="form-control" value="${entidade.usuario.nome} ${entidade.usuario.sobrenome}" readonly>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Responsável:</label>
+                                            <input type="text" class="form-control" value="${entidade.usuario.nome} ${entidade.usuario.sobrenome}" readonly>
+                                        </div>
                                     </div>
-                                  </div>
-                                  <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>E-mail:</label>                                        
-                                        <input type="text" class="form-control" value="${entidade.usuario.email}" readonly>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>E-mail:</label>
+                                            <input type="text" class="form-control" value="${entidade.usuario.email}" readonly>
+                                        </div>
                                     </div>
-                                  </div>
-                                  <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Telefone:</label>                                        
-                                        <input type="text" class="form-control" value="${entidade.usuario.telefone}" readonly>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Telefone:</label>
+                                            <input type="text" class="form-control" value="${entidade.usuario.telefone}" readonly>
+                                        </div>
                                     </div>
-                                  </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-4">
@@ -245,17 +245,17 @@
                                             <h5 class="text-center">Logo</h5>
                                         </div>
                                     </div>
-                                    <c:if test="${not empty entidade.documentosEntidade.ataEleicao.path}">
-                                      <div class="col-lg-2 text-center mt-5">
-                                          <div class="form-group">
-                                              <a href="${path}/${entidade.documentosEntidade.ataEleicao.path}"
-                                                 target="_blank"><i class="far fa-file-image text-primary"
-                                                                    style="font-size: 56px;"></i></a>
-                                              <hr>
-                                              <h5 class="text-center">Ata de Eleição</h5>
-                                          </div>
-                                      </div>
-                                    </c:if>
+
+                                    <div class="col-lg-2 text-center mt-5">
+                                        <div class="form-group">
+                                            <a href="${path}/${entidade.documentosEntidade.ataEleicao.path}"
+                                               target="_blank"><i class="far fa-file-image text-primary"
+                                                                  style="font-size: 56px;"></i></a>
+                                            <hr>
+                                            <h5 class="text-center">Ata de Eleição</h5>
+                                        </div>
+                                    </div>
+
                                     <div class="col-lg-2 text-center mt-5">
                                         <div class="form-group">
                                             <a href="${path}/${entidade.documentosEntidade.estatutoSocial.path}"

@@ -68,19 +68,19 @@ $pale-bg:                    #FFFCF5 !default;
 $medium-pale-bg:             #F1EAE0 !default;
 $default-body-bg:                 #f4f3ef !default;
 
-$primary-color: #3fa733 !default;
+$primary-color: #ED1C24!default; 
 $primary-states-color:       darken($primary-color, 10%) !default;
 
 $success-color:              #6bd098 !default;
 $success-states-color:       darken($success-color, 10%) !default;
 
-$info-color:                 #72bf44 !default;
-$info-states-color:          darken($info-color, 10%) !default;
+$icon-color:                 #ED1C24 !default;
+$info-states-color:          darken($icon-color, 10%) !default;
 
-$warning-color:              #fbc658 !default;
+$warning-color:              #444240 !default;
 $warning-states-color:       darken($warning-color, 10%) !default;
 
-$danger-color:               #ef8157 !default;
+$danger-color:               #ff7675 !default;
 $danger-states-color:        darken($danger-color, 8%) !default;
 
 $link-disabled-color:        #666666 !default;
@@ -94,13 +94,14 @@ $brown-color:                #dcb285 !default;
 $default-color-opacity:      rgba(182, 182, 182, .6) !default;
 $primary-color-opacity:      rgba(249, 99, 50, .3) !default;
 $success-color-opacity:      rgba(24, 206, 15, .3) !default;
-$info-color-opacity:         rgba(44, 168, 255, .3) !default;
+$icon-color-opacity:         rgba(44, 168, 255, .3) !default;
 $warning-color-opacity:      rgba(255, 178, 54, .3) !default;
 $danger-color-opacity:       rgba(255, 54, 54, .3) !default;
 
 $new-blue:            #1DC7EA;
 $new-purple:          #9368E9;
-$new-red:             #FB404B;
+$new-red:             #ED1C24;
+$secundary-red:       #e74c3c;
 $new-green:           #87CB16;
 $new-orange:          #FFA534;
 $new-dark-blue:       #1F77D0;
@@ -112,7 +113,7 @@ $color-grey-arrow: rgba(204, 204, 204, 0.2) !default;
 
 $bg-nude:               #FFFCF5 !default;
 $bg-primary:            lighten($primary-color, 7%) !default;
-$bg-info:               lighten($info-color, 7%) !default;
+$bg-info:               lighten($icon-color, 7%) !default;
 $bg-success:            lighten($success-color, 7%) !default;
 $bg-warning:            lighten($warning-color, 7%) !default;
 $bg-danger:             lighten($danger-color, 7%) !default;
@@ -121,7 +122,7 @@ $bg-purple:             lighten($purple-color, 7%) !default;
 
 //     brand Colors
 $brand-primary:              $primary-color !default;
-$brand-info:                 $info-color !default;
+$brand-info:                 $icon-color !default;
 $brand-success:              $success-color !default;
 $brand-warning:              $warning-color !default;
 $brand-danger:               $danger-color !default;
@@ -129,11 +130,11 @@ $brand-inverse:              $black-color !default;
 
 $link-disabled-color:        #666666 !default;
 $dark-color:                 #051832 !default;
-$verde-color:                #72bf44 !default;
+$grey-color:                #FFF !default;
 
 //     light colors
 $light-blue:                 rgba($primary-color, .2);
-$light-azure:                rgba($info-color, .2);
+$light-azure:                rgba($icon-color, .2);
 $light-green:                rgba($success-color, .2);
 $light-orange:               rgba($warning-color, .2);
 $light-red:                  rgba($danger-color, .2);

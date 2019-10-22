@@ -53,13 +53,13 @@
         }
 
         &.btn-info{
-            color: $info-color !important;
+            color: $grey-color !important;
 
             &:hover,
             &:focus,
             &:active,
             &:active:focus{
-                color: $info-states-color !important;
+                color: $grey-color !important;
             }
         }
 

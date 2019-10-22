@@ -124,7 +124,7 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
       @include badge-color($primary-color);
   }
   &.badge-info{
-      @include badge-color($info-color);
+      @include badge-color($icon-color);
   }
   &.badge-success{
       @include badge-color($success-color);

@@ -24,186 +24,186 @@
 </head>
 
 <body class="">
-  <div class="wrapper ">
-    <!-- Sidebar -->
-    <div class="sidebar" data-color="verde" data-active-color="white">
-      <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-          <div class="logo-image-small">
-            <i class="far fa-user"></i>
-          </div>
-        </a>
-        <a href="${path}/painel/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
-      </div>
-      <div class="sidebar-wrapper">
-        <ul class="nav">
-          <li>
-            <a href="${path}/painel/dashboard">
-              <i class="nc-icon nc-bank"></i>Painel Principal</a>        
-          </li>
-          <li>
-            <a href="${path}/painel/empresas">
-              <i class="fas fa-city"></i>Empresas</a>
-          </li>
-          <li>
-            <a href="${path}/painel/entidades">
-              <i class="fas fa-users"></i>Entidades</a>
-          </li>
-          <li>
-            <a href="${path}/painel/projetos">
-              <i class="fas fa-project-diagram"></i>Projetos</a>
-          </li>
-          <li class="active">
-            <a href="${path}/painel/incentivos-fiscais">
-              <i class="fas fa-gavel"></i>Incentivos Fiscais</a>
-          </li>
-          <li>
-            <a href="${path}/painel/pedidos?filtro=TODOS&key=">
-              <i class="fas fa-praying-hands"></i>Pedidos</a>
-          </li>
-          <li>
-            <a href="${path}/painel/ranking">
-              <i class="far fa-chart-bar"></i>Ranking</a>
-          </li>
-        </ul>
-      </div>
+<div class="wrapper ">
+  <!-- Sidebar -->
+  <div class="sidebar" data-color="grey" data-active-color="white">
+    <div class="logo">
+      <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+        <div class="logo-image-small">
+          <i class="far fa-user"></i>
+        </div>
+      </a>
+      <a href="${path}/painel/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
     </div>
-    <div class="main-panel">
-      <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
-          <div class="container-fluid">
-            <div class="navbar-wrapper">
-              <div class="navbar-toggle">
-                <button type="button" class="navbar-toggler">
-                  <span class="navbar-toggler-bar bar1"></span>
-                  <span class="navbar-toggler-bar bar2"></span>
-                  <span class="navbar-toggler-bar bar3"></span>
-                </button>
-              </div>
-              <b><a class="navbar-brand" href="#">Incentivos Fiscais <i class='fas fa-angle-double-right'></i> Cadastro</a></b>
-            </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-bar navbar-kebab"></span>
-              <span class="navbar-toggler-bar navbar-kebab"></span>
-              <span class="navbar-toggler-bar navbar-kebab"></span>
+    <div class="sidebar-wrapper">
+      <ul class="nav">
+        <li>
+          <a href="${path}/painel/dashboard">
+            <i class="nc-icon nc-bank"></i>Painel Principal</a>
+        </li>
+        <li>
+          <a href="${path}/painel/empresas">
+            <i class="fas fa-city"></i>Empresas</a>
+        </li>
+        <li>
+          <a href="${path}/painel/entidades">
+            <i class="fas fa-users"></i>Entidades</a>
+        </li>
+        <li>
+          <a href="${path}/painel/projetos">
+            <i class="fas fa-project-diagram"></i>Projetos</a>
+        </li>
+        <li class="active">
+          <a href="${path}/painel/incentivos-fiscais">
+            <i class="fas fa-gavel"></i>Incentivos Fiscais</a>
+        </li>
+        <li>
+          <a href="${path}/painel/pedidos?filtro=TODOS&key=">
+            <i class="fas fa-praying-hands"></i>Pedidos</a>
+        </li>
+        <li>
+          <a href="${path}/painel/ranking">
+            <i class="far fa-chart-bar"></i>Ranking</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="main-panel">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+      <div class="container-fluid">
+        <div class="navbar-wrapper">
+          <div class="navbar-toggle">
+            <button type="button" class="navbar-toggler">
+              <span class="navbar-toggler-bar bar1"></span>
+              <span class="navbar-toggler-bar bar2"></span>
+              <span class="navbar-toggler-bar bar3"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navigation">            
-              <ul class="navbar-nav">              
-                <li class="nav-item btn-rotate dropdown">
-                  <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-power-off"></i>
-                    <p>
-                      <span class="d-lg-none d-md-block">Ações</span>
-                    </p>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="${path}/painel/perfil">Meus Dados</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="${path}/sair">Sair</a>
-                  </div>
-                </li>
-              </ul>
-            </div>
           </div>
-      </nav>
-      <div class="content">
-        <div class="row">          
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header ">                
-                <h5 class="card-title text-primary">Cadastro de Incentivo Fiscal</h5>
+          <b><a class="navbar-brand" href="#">Incentivos Fiscais <i class='fas fa-angle-double-right'></i> Cadastro</a></b>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navigation">
+          <ul class="navbar-nav">
+            <li class="nav-item btn-rotate dropdown">
+              <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-power-off"></i>
+                <p>
+                  <span class="d-lg-none d-md-block">Ações</span>
+                </p>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="${path}/painel/perfil">Meus Dados</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="${path}/sair">Sair</a>
               </div>
-              <div class="card-body">
-                <div class="row mt-5">
-                  <div class="col-12">
-                    <form action="${path}/painel/incentivos-fiscais/cadastro" method="post" acceptcharset="UTF-8">
-                      <fieldset>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="content">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header ">
+              <h5 class="card-title text-primary">Cadastro de Incentivo Fiscal</h5>
+            </div>
+            <div class="card-body">
+              <div class="row mt-5">
+                <div class="col-12">
+                  <form action="${path}/painel/incentivos-fiscais/cadastro" method="post" acceptcharset="UTF-8">
+                    <fieldset>
                       <legend>Informações Gerais:</legend>
-                      <div class="row mt-3 mt-3">               
+                      <div class="row mt-3 mt-3">
                         <div class="col-sm-12 col-md-9">
                           <div class="form-group">
-                              <label>Legislação:</label>
-                              <input type="text" class="form-control" name="legislacao" required>
+                            <label>Legislação:</label>
+                            <input type="text" class="form-control" name="legislacao" required>
                           </div>
                         </div>
                         <div class="col-6 col-sm-5 col-md-3">
                           <div class="form-group">
-                              <label>Sigla:</label>
-                              <input type="text" class="form-control" name="sigla">
+                            <label>Sigla:</label>
+                            <input type="text" class="form-control" name="sigla">
                           </div>
-                        </div>            
+                        </div>
                       </div>
-                      <div class="row">                 
+                      <div class="row">
                         <div class="col-sm-12 col-md-4">
                           <div class="form-group">
-                              <label>Competência:</label>
-                              <select class="form-control" id="competencia" name="competencia" required>                          
-                                <c:forEach var="competencia" items="${competencias}">
-                                    <option value="${competencia}">${competencia.descricao}</option>
-                                </c:forEach>
-                              </select>
+                            <label>Competência:</label>
+                            <select class="form-control" id="competencia" name="competencia" required>
+                              <c:forEach var="competencia" items="${competencias}">
+                                <option value="${competencia}">${competencia.descricao}</option>
+                              </c:forEach>
+                            </select>
                           </div>
                         </div>
                         <div class="col-sm-12 col-md-4">
                           <div class="form-group">
-                              <label>Atuação:</label>
-                              <select class="form-control" name="atuacao" required>
-                                <c:forEach var="atuacao" items="${atuacoes}">
-                                    <option value="${atuacao}">${atuacao.descricao}</option>
-                                </c:forEach>
-                              </select>
+                            <label>Atuação:</label>
+                            <select class="form-control" name="atuacao" required>
+                              <c:forEach var="atuacao" items="${atuacoes}">
+                                <option value="${atuacao}">${atuacao.descricao}</option>
+                              </c:forEach>
+                            </select>
                           </div>
                         </div>
                         <div class="col-sm-12 col-md-4" id="campo-localidade">
                           <div class="form-group">
-                              <label>Localidade:</label>
-                              <input type="text" class="form-control" id="localidade" name="localidade">
+                            <label>Localidade:</label>
+                            <input type="text" class="form-control" id="localidade" name="localidade">
                           </div>
                         </div>
                       </div>
-                      </fieldset>
-                      <hr class="bg-primary">
-                      <button type="submit" class="btn btn-primary float-right">Enviar <i class="far fa-share-square"></i></button>
-                      <a href="${path}/painel/incentivos-fiscais" class="btn btn-danger float-right"><i class="fas fa-angle-double-left"></i> Voltar</a>
-                    </form> 
-                  </div>     
+                    </fieldset>
+                    <hr class="bg-primary">
+                    <button type="submit" class="btn btn-primary float-right">Enviar <i class="far fa-share-square"></i></button>
+                    <a href="${path}/painel/incentivos-fiscais" class="btn btn-danger float-right"><i class="fas fa-angle-double-left"></i> Voltar</a>
+                  </form>
                 </div>
               </div>
-              <div class="card-footer">
-                <hr>
-              </div>
             </div>
-          </div>          
-        </div>         
+            <div class="card-footer">
+              <hr>
+            </div>
+          </div>
+        </div>
       </div>
-      <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
     </div>
+    <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
   </div>
-  <!--   JQUERY   -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <!--   POPPER   -->  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <!--   BOOTSTRAP   -->  
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> 
-  <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script type="text/javascript" src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script> 
-  <script type="text/javascript">
-    $(document).ready(function () {      
-        let competencia = $('#competencia');
-        let campo_localidade = $('#campo-localidade'); 
+</div>
+<!--   JQUERY   -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!--   POPPER   -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<!--   BOOTSTRAP   -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script type="text/javascript" src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    let competencia = $('#competencia');
+    let campo_localidade = $('#campo-localidade');
 
-        competencia.change(function () {
-          if(competencia.val() == "FEDERAL"){
-            campo_localidade.hide();
-          }
-          else{
-            campo_localidade.show();
-          }
-        });
-        //final get estado
+    competencia.change(function () {
+      if(competencia.val() == "FEDERAL"){
+        campo_localidade.hide();
+      }
+      else{
+        campo_localidade.show();
+      }
     });
-  </script>
+    //final get estado
+  });
+</script>
 </body>
 
 </html>

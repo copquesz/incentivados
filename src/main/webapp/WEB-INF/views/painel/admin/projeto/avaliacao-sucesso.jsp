@@ -31,7 +31,7 @@
 <body class="">
 <div class="wrapper ">
   <!-- Sidebar -->
-  <div class="sidebar" data-color="verde" data-active-color="white">
+  <div class="sidebar" data-color="grey" data-active-color="white">
     <div class="logo">
       <a href="#" class="simple-text logo-mini">
         <div class="logo-image-small">
@@ -63,9 +63,9 @@
           </a>
         </li>
         <li>
-            <a href="${path}/painel/ranking">
-              <i class="far fa-chart-bar"></i>Ranking</a>
-          </li>
+          <a href="${path}/painel/ranking">
+            <i class="far fa-chart-bar"></i>Ranking</a>
+        </li>
       </ul>
     </div>
   </div>
@@ -105,20 +105,20 @@
         </div>
       </div>
     </nav>
-    <div class="content">        
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-header bg-success"><h4 class="card-title text-white bold"><i class="far fa-thumbs-up fa-2x"></i> Cadastro Realizado!</h4><hr></div>              
-              <div class="card-body bg-success">
-                <p class="text-white">O projeto <strong>${projeto.titulo}</strong> foi avaliado com sucesso.</p>
-                <p><a href="${path}/painel/projetos" class="btn btn-warning"><i class="far fa-share-square"></i> Voltar</a></p>
-              </div>
-              <div class="card-footer bg-success"></div>
+    <div class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header bg-success"><h4 class="card-title text-branco bold"><i class="far fa-thumbs-up fa-2x"></i> Cadastro Realizado!</h4><hr></div>
+            <div class="card-body bg-success">
+              <p class="text-branco">O projeto <strong>${projeto.titulo}</strong> foi avaliado com sucesso.</p>
+              <p><a href="${path}/painel/projetos" class="btn btn-warning"><i class="far fa-share-square"></i> Voltar</a></p>
             </div>
+            <div class="card-footer bg-success"></div>
           </div>
-        </div>              
+        </div>
       </div>
+    </div>
     <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
   </div>
 </div>
