@@ -99,7 +99,7 @@
 <!--  Notifications Plugin    -->
 <script src="${path}/assets/js/plugins/bootstrap-notify.js"></script>
 <!-- VIA CEP API -->
-<script type="text/javascript" src="api/via-cep.js"></script>
+<script type="text/javascript" src="${path}/api/via-cep.js"></script>
 <!-- CUSTOM SCRIPT -->
 <script type="text/javascript" src="${path}/assets/js/cpf-validator.js"></script>
 <script type="text/javascript" src="${path}/assets/js/script.js"></script>
