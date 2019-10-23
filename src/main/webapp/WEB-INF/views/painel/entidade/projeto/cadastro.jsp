@@ -105,7 +105,7 @@
               <form action="${path}/painel/projetos/cadastro" method="post" enctype="multipart/form-data" acceptcharset="UTF-8">
 
                 <!-- Cnpj da empresa que irá receber o projeto - Padrão 18.520.427/0001-86 -> Yabá Consultoria -->
-                <input type="hidden" name="cnpj" value="01.438.784/0001-05">
+                <input type="hidden" name="cnpj" value="40.432.544/0001-47">
 
                 <fieldset>
                   <legend class="text-primary">Órgão Executor:</legend>

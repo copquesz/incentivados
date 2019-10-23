@@ -26,11 +26,11 @@
       <div class="d-flex justify-content-center h-100" style="margin-top: 30%;">
         <div class="alert alert-danger bg-danger" role="alert">
           <input type="hidden" name="redirect" value="${redirect}">
-          <h1 class="alert-heading"> <i class="fas fa-check fa-2x text-white align-middle"></i> <strong>Falha!</strong></h1>
+          <h1 class="alert-heading"> <i class="fas fa-check fa-2x text-branco align-middle"></i> <strong>Falha!</strong></h1>
           <p class="lead">O cadastro foi não realizado devido a algum erro inesperado.</p>
           <p class="lead">Favor contate nosso suporte através do email <strong>suporte@incentivados.com.br</strong>.</p>
           <hr>
-          <p class="mb-0 lead">Clique<a class="text-white" href="${path}/login"><strong> <u>aqui</u></strong></a> para voltar.</p>
+          <p class="mb-0 lead">Clique<a class="text-branco" href="${path}/login"><strong> <u>aqui</u></strong></a> para voltar.</p>
         </div>
       </div>
   </div>

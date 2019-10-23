@@ -242,8 +242,8 @@
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="entidades" role="tabpanel" aria-labelledby="entidades-tab">
                   <c:if test = "${empty entidades.content}">
-                    <div class="alert alert-info" role="alert">
-                      <p class="text-bold">Não há entidade(s) cadastrada(s).</p>
+                    <div class="alert alert-info mt-3" role="alert">
+                      <p class="text-bold">Não há projeto(s) cadastrado(s).</p>
                     </div>
                   </c:if>
                   <c:if test = "${not empty entidades.content}">

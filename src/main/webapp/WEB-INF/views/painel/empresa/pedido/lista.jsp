@@ -24,248 +24,254 @@
 </head>
 
 <body class="">
-  <div class="wrapper ">
-    <!-- Sidebar -->
-    <div class="sidebar" data-color="verde" data-active-color="white">
-      <div class="logo">
-        <a href="#" class="simple-text logo-mini">
-          <div class="logo-image-small"><i class="far fa-user"></i></div>
-        </a>
-        <a href="${path}/painel/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
-      </div>
-      <div class="sidebar-wrapper">
-        <ul class="nav">
-          <li>
-            <a href="${path}/painel/dashboard"><i class="fas fa-desktop"></i>Painel Principal</a>
-          </li>
-          <li>
-            <a href="${path}/painel/${usuario.empresa.id}/analistas"><i class="fas fa-users"></i>Analistas</a>
-          </li>
-          <li>
-            <a href="${path}/painel/projetos"><i class="fas fa-project-diagram"></i>Projetos</a>
-          </li>
-          <li class="active">
-            <a href="${path}/painel/pedidos?filtro=TODOS&key="><i class="fas fa-praying-hands"></i>Pedidos</a>
-          </li>
-          <li>
-            <a href="${path}/painel/ranking"><i class="far fa-chart-bar"></i>Ranking</a>
-          </li>
-        </ul>
-      </div>
-    </div>   
-    <div class="main-panel">
-      <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
-        <div class="container-fluid">
-          <div class="navbar-wrapper">
-            <div class="navbar-toggle">
-              <button type="button" class="navbar-toggler">
-                <span class="navbar-toggler-bar bar1"></span>
-                <span class="navbar-toggler-bar bar2"></span>
-                <span class="navbar-toggler-bar bar3"></span>
-              </button>
-            </div>
-            <b><a class="navbar-brand" href="#">${usuario.empresa.nomeFantasia} <i class='fas fa-angle-double-right'></i> Pedidos</b>
+<div class="wrapper ">
+  <!-- Sidebar -->
+  <div class="sidebar" data-color="grey" data-active-color="white">
+    <div class="logo">
+      <a href="#" class="simple-text logo-mini">
+        <div class="logo-image-small"><i class="far fa-user"></i></div>
+      </a>
+      <a href="${path}/painel/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
+    </div>
+    <div class="sidebar-wrapper">
+      <ul class="nav">
+        <li>
+          <a href="${path}/painel/dashboard"><i class="fas fa-desktop"></i>Painel Principal</a>
+        </li>
+        <li>
+          <a href="${path}/painel/${usuario.empresa.id}/analistas"><i class="fas fa-users"></i>Analistas</a>
+        </li>
+        <li>
+          <a href="${path}/painel/projetos"><i class="fas fa-project-diagram"></i>Projetos</a>
+        </li>
+        <li class="active">
+          <a href="${path}/painel/pedidos?filtro=TODOS&key="><i class="fas fa-praying-hands"></i>Pedidos</a>
+        </li>
+        <li>
+          <a href="${path}/painel/ranking"><i class="far fa-chart-bar"></i>Ranking</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="main-panel">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+      <div class="container-fluid">
+        <div class="navbar-wrapper">
+          <div class="navbar-toggle">
+            <button type="button" class="navbar-toggler">
+              <span class="navbar-toggler-bar bar1"></span>
+              <span class="navbar-toggler-bar bar2"></span>
+              <span class="navbar-toggler-bar bar3"></span>
+            </button>
           </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navigation">
-            <ul class="navbar-nav">
-              <li class="nav-item btn-rotate dropdown">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-power-off"></i>
-                  <p><span class="d-lg-none d-md-block">Ações</span></p>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="${path}/painel/perfil">Meus Dados</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="${path}/sair">Sair</a>
-                </div>
-              </li>
-            </ul>
-          </div>
+          <b><a class="navbar-brand" href="#">${usuario.empresa.nomeFantasia} <i class='fas fa-angle-double-right'></i> Pedidos</b>
         </div>
-      </nav>
-      <div class="content">
-        <div class="row">          
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header "> 
-                <h5 class="card-title">Pedidos(s): ${qtdPedidos}</h5>
-                <div class="d-flex justify-content-start">
-                  <div class="row">
-                    <div class="col-12">
-                      <label>Filtrar por: </label>
-                      <form class="form-inline">                                          
-                        <div class="form-group mb-2">                          
-                          <select class="form-control" name="filtro" id="filtro-empresa">
-                             <c:forEach var="filtroPedido" items="${filtroPedidos}">
-                               <option value="${filtroPedido}">${filtroPedido.descricao}</option>
-                             </c:forEach>
-                          </select>
-                        </div>
-                        <div class="form-group mx-sm-3 mb-2">
-                          <input class="form-control" type="text" name="key" id="key-empresa" placeholder="palavra-chave" />
-                        </div>
-                        <div class="form-group mb-2">
-                          <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>
-                        </div>
-                      </form>
-                    </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navigation">
+          <ul class="navbar-nav">
+            <li class="nav-item btn-rotate dropdown">
+              <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-power-off"></i>
+                <p><span class="d-lg-none d-md-block">Ações</span></p>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="${path}/painel/perfil">Meus Dados</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="${path}/sair">Sair</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="content">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header ">
+              <h5 class="card-title">Pedidos(s): ${qtdPedidos}</h5>
+              <div class="d-flex justify-content-start">
+                <div class="row">
+                  <div class="col-12">
+                    <label>Filtrar por: </label>
+                    <form class="form-inline">
+                      <div class="form-group mb-2">
+                        <select class="form-control" name="filtro" id="filtro-empresa">
+                          <c:forEach var="filtroPedido" items="${filtroPedidos}">
+                            <option value="${filtroPedido}">${filtroPedido.descricao}</option>
+                          </c:forEach>
+                        </select>
+                      </div>
+                      <div class="form-group mx-sm-3 mb-2">
+                        <input class="form-control" type="text" name="key" id="key-empresa" placeholder="palavra-chave" />
+                      </div>
+                      <div class="form-group mb-2">
+                        <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
-              <div class="card-body">
-                <div class="row mt-2">
-                  <div class="col-12">
-                    <!-- MSG DE VAZIO -->
-                    <c:if test = "${empty pedidos.content}">
-                      <div class="alert alert-danger mt-3" role="alert">
-                        <p class="text-bold">Não há registro(s) ou não há resultados para esta palavra-chave.</p>
-                      </div>
-                    </c:if>      
-                    <c:if test = "${not empty pedidos.content}"> 
-                      <nav class="float-right" aria-label="Paginação de Pedidos">
-                        <ul class="pagination"> 
-                          <c:choose> 
-                            <c:when test = "${pedidos.totalPages == 1}">
-                              <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
-                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/pedidos?page=${pedidos.number}&filtro=${filtro}&key=${key}">${pedidos.number + 1}</a></li>
-                              <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
-                            </c:when>
-                            <c:when test = "${(pedidos.totalPages == 2) && (pedidos.number + 1 < pedidos.totalPages)}">
-                              <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
-                              <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/pedidos?page=${pedidos.number}&filtro=${filtro}&key=${key}">${pedidos.number + 1}</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.number + 1}&filtro=${filtro}&key=${key}">${pedidos.number + 2}</a></li>
-                              <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
-                            </c:when>
-                            <c:when test = "${(pedidos.totalPages == 2) && (pedidos.number + 1 == pedidos.totalPages)}">
-                              <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.number - 1}&filtro=${filtro}&key=${key}">${pedidos.number}</a></li>
-                              <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/pedidos?page=${pedidos.number}&filtro=${filtro}&key=${key}">${pedidos.number + 1}</a></li>
-                              <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
-                            </c:when>
-                            <c:when test = "${(pedidos.totalPages >= 3) && (pedidos.number == 0)}">
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?filtro=${filtro}&key=${key}">Primeira</a></li>
-                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/pedidos?page=${pedidos.number}&filtro=${filtro}&key=${key}">${pedidos.number + 1}</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.number + 1}&filtro=${filtro}&key=${key}">${pedidos.number + 2}</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.number + 2}&filtro=${filtro}&key=${key}">${pedidos.number + 3}</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.totalPages - 1}&filtro=${filtro}&key=${key}">Última</a></li>
-                            </c:when>
-                            <c:when test = "${(pedidos.totalPages >= 3) && (pedidos.number > 0) && (pedidos.number + 1 < pedidos.totalPages)}">
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?filtro=${filtro}&key=${key}">Primeira</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.number - 1}&filtro=${filtro}&key=${key}">${pedidos.number}</a></li>
-                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/pedidos?page=${pedidos.number}&filtro=${filtro}&key=${key}">${pedidos.number + 1}</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.number + 1}&filtro=${filtro}&key=${key}">${pedidos.number + 2}</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.totalPages - 1}&filtro=${filtro}&key=${key}">Última</a></li>
-                            </c:when>
-                            <c:when test = "${(pedidos.totalPages >= 3) && (pedidos.number + 1 == pedidos.totalPages)}">
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?filtro=${filtro}&key=${key}">Primeira</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.number - 2}&filtro=${filtro}&key=${key}">${pedidos.number - 1}</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.number - 1}&filtro=${filtro}&key=${key}">${pedidos.number}</a></li>
-                              <li class="page-item active"><a class="page-link text-white" href="${path}/painel/pedidos?page=${pedidos.number}&filtro=${filtro}&key=${key}">${pedidos.number + 1}</a></li>
-                              <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.totalPages - 1}&filtro=${filtro}&key=${key}">Última</a></li>
-                            </c:when>
-                          </c:choose> 
-                        </ul>
-                      </nav> 
-                      <div class="table-responsive-sm">
-                        <table class="table border">
-                          <thead class=" text-primary">
-                            <th class="text-center border">Código Pedido</th>
-                            <th class="text-center border">Data Solicitação</th>
-                            <th class="text-center border">Entidade</th>
-                            <th class="text-center border">Loja</th>
-                            <th class="text-center border">Carta Ofício</th>
-                            <th class="text-center border">Status</th>
-                            <th></th>
-                          </thead>
-                          <tbody>
-                            <c:forEach var="pedido" items="${pedidos.content}">
-                              <tr>
-                                <td class="text-center border"># ${pedido.id}</td>
-                                <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedido.dataCadastro}" var="dataCadastro" />
-                                <td class="text-center border">${dataCadastro}</td>
-                                <td class="text-center border" title="${pedido.entidade.razaoSocial}">${pedido.entidade.nomeFantasia}</td>
-                                <td class="text-center border" title="Cidade: ${pedido.analista.endereco.cidade} / Estado: ${pedido.analista.endereco.estado}"> ${pedido.analista.endereco.bairro}</td>
-                                <td class="text-center border"><a href="${path}/${pedido.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>
-                                <td class="text-center border">
-                                  <c:if test = "${pedido.status.id == 0}"><span class="bg-warning p-1 text-white">PENDENTE</span></c:if>
-                                  <c:if test = "${pedido.status.id == 1}"><span class="bg-danger p-1"><a href="#" class="text-white" data-toggle="modal" data-target="#modal-observacao-pedido-${pedido.id}" title="Visualizar Motivo">RECUSADO</a></span></c:if>
-                                  <c:if test = "${pedido.status.id == 2}"><span class="bg-primary p-1"><a href="#" class="text-white" data-toggle="modal" data-target="#modal-observacao-pedido-${pedido.id}" title="Visualizar Motivo">APROVADO</a></span></c:if>
-                                  <c:if test = "${pedido.status.id == 3}"><span class="bg-success p-1"><a href="#" class="text-white" data-toggle="modal" data-target="#modal-observacao-pedido-${pedido.id}" title="Visualizar Motivo">PRÉ-APROVADO</a></span></c:if>
-                                </td>
-                                <td class="text-center border">
-                                  <a class="btn btn-success btn-sm" href="${path}/painel/pedido/${pedido.id}" title="Visualizar"><i class="fas fa-sign-in-alt"></i></a>
-                                </td>
-                              </tr>
-                            </c:forEach>
-                          </tbody>
-                        </table>
-                      </div> 
-                    </c:if>  
-                  </div>     
+            </div>
+            <div class="card-body">
+              <div class="row mt-2">
+                <div class="col-12">
+                  <!-- MSG DE VAZIO -->
+                  <c:if test = "${empty pedidos.content}">
+                    <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
+                      <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                        <i class="nc-icon nc-simple-remove"></i>
+                      </button>
+                      <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
+                      <span data-notify="message">Não há registro(s) ou não há resultados para esta palavra-chave.</span>
+                    </div>
+                  </c:if>
+                  <c:if test = "${not empty pedidos.content}">
+                    <nav class="float-right" aria-label="Paginação de Pedidos">
+                      <ul class="pagination">
+                        <c:choose>
+                          <c:when test = "${pedidos.totalPages == 1}">
+                            <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
+                            <li class="page-item active"><a class="page-link text-white" href="${path}/painel/pedidos?page=${pedidos.number}&filtro=${filtro}&key=${key}">${pedidos.number + 1}</a></li>
+                            <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
+                          </c:when>
+                          <c:when test = "${(pedidos.totalPages == 2) && (pedidos.number + 1 < pedidos.totalPages)}">
+                            <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
+                            <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/pedidos?page=${pedidos.number}&filtro=${filtro}&key=${key}">${pedidos.number + 1}</a></li>
+                            <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.number + 1}&filtro=${filtro}&key=${key}">${pedidos.number + 2}</a></li>
+                            <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
+                          </c:when>
+                          <c:when test = "${(pedidos.totalPages == 2) && (pedidos.number + 1 == pedidos.totalPages)}">
+                            <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
+                            <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.number - 1}&filtro=${filtro}&key=${key}">${pedidos.number}</a></li>
+                            <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/pedidos?page=${pedidos.number}&filtro=${filtro}&key=${key}">${pedidos.number + 1}</a></li>
+                            <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
+                          </c:when>
+                          <c:when test = "${(pedidos.totalPages >= 3) && (pedidos.number == 0)}">
+                            <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?filtro=${filtro}&key=${key}">Primeira</a></li>
+                            <li class="page-item active"><a class="page-link text-white" href="${path}/painel/pedidos?page=${pedidos.number}&filtro=${filtro}&key=${key}">${pedidos.number + 1}</a></li>
+                            <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.number + 1}&filtro=${filtro}&key=${key}">${pedidos.number + 2}</a></li>
+                            <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.number + 2}&filtro=${filtro}&key=${key}">${pedidos.number + 3}</a></li>
+                            <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.totalPages - 1}&filtro=${filtro}&key=${key}">Última</a></li>
+                          </c:when>
+                          <c:when test = "${(pedidos.totalPages >= 3) && (pedidos.number > 0) && (pedidos.number + 1 < pedidos.totalPages)}">
+                            <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?filtro=${filtro}&key=${key}">Primeira</a></li>
+                            <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.number - 1}&filtro=${filtro}&key=${key}">${pedidos.number}</a></li>
+                            <li class="page-item active"><a class="page-link text-white" href="${path}/painel/pedidos?page=${pedidos.number}&filtro=${filtro}&key=${key}">${pedidos.number + 1}</a></li>
+                            <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.number + 1}&filtro=${filtro}&key=${key}">${pedidos.number + 2}</a></li>
+                            <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.totalPages - 1}&filtro=${filtro}&key=${key}">Última</a></li>
+                          </c:when>
+                          <c:when test = "${(pedidos.totalPages >= 3) && (pedidos.number + 1 == pedidos.totalPages)}">
+                            <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?filtro=${filtro}&key=${key}">Primeira</a></li>
+                            <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.number - 2}&filtro=${filtro}&key=${key}">${pedidos.number - 1}</a></li>
+                            <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.number - 1}&filtro=${filtro}&key=${key}">${pedidos.number}</a></li>
+                            <li class="page-item active"><a class="page-link text-white" href="${path}/painel/pedidos?page=${pedidos.number}&filtro=${filtro}&key=${key}">${pedidos.number + 1}</a></li>
+                            <li class="page-item"><a class="page-link text-primary" href="${path}/painel/pedidos?page=${pedidos.totalPages - 1}&filtro=${filtro}&key=${key}">Última</a></li>
+                          </c:when>
+                        </c:choose>
+                      </ul>
+                    </nav>
+                    <div class="table-responsive-sm">
+                      <table class="table border">
+                        <thead class=" text-primary">
+                        <th class="text-center border">Código Pedido</th>
+                        <th class="text-center border">Data Solicitação</th>
+                        <th class="text-center border">Entidade</th>
+                        <th class="text-center border">Loja</th>
+                        <th class="text-center border">Carta Ofício</th>
+                        <th class="text-center border">Status</th>
+                        <th></th>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="pedido" items="${pedidos.content}">
+                          <tr>
+                            <td class="text-center border"># ${pedido.id}</td>
+                            <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedido.dataCadastro}" var="dataCadastro" />
+                            <td class="text-center border">${dataCadastro}</td>
+                            <td class="text-center border" title="${pedido.entidade.razaoSocial}">${pedido.entidade.nomeFantasia}</td>
+                            <td class="text-center border" title="Cidade: ${pedido.analista.endereco.cidade} / Estado: ${pedido.analista.endereco.estado}"> ${pedido.analista.endereco.bairro}</td>
+                            <td class="text-center border"><a href="${path}/${pedido.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>
+                            <td class="text-center border">
+                              <c:if test = "${pedido.status.id == 0}"><span class="bg-warning p-1 text-white">PENDENTE</span></c:if>
+                              <c:if test = "${pedido.status.id == 1}"><span class="bg-danger p-1"><a href="#" class="text-white" data-toggle="modal" data-target="#modal-observacao-pedido-recusado-${pedido.id}" title="Visualizar Motivo">RECUSADO</a></span></c:if>
+                              <c:if test = "${pedido.status.id == 2}"><span class="bg-success p-1"><a href="#" class="text-white" data-toggle="modal" data-target="#modal-observacao-pedido-aprovado-${pedido.id}" title="Visualizar Motivo">APROVADO</a></span></c:if>
+                              <c:if test = "${pedido.status.id == 3}"><span class="bg-success p-1"><a href="#" class="text-white" data-toggle="modal" data-target="#modal-observacao-pedido-pre-aprovado-empresa-${pedido.id}" title="Visualizar Motivo">PRÉ-APROVADO</a></span></c:if>
+                            </td>
+                            <td class="text-center border">
+                              <a class="btn btn-success btn-sm" href="${path}/painel/pedido/${pedido.id}" title="Visualizar"><i class="fas fa-sign-in-alt"></i></a>
+                            </td>
+                          </tr>
+                        </c:forEach>
+                        </tbody>
+                      </table>
+                    </div>
+                  </c:if>
                 </div>
               </div>
-              <div class="card-footer">
-                <hr>
-              </div>
             </div>
-          </div>          
-        </div>         
+            <div class="card-footer">
+              <hr>
+            </div>
+          </div>
+        </div>
       </div>
-      <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
-      <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido.jsp" />
     </div>
+    <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
+    <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido-aprovado.jsp" />
+    <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido-recusado.jsp" />
+    <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido-pre-aprovado-empresa.jsp" />
   </div>
+</div>
 
-  <!--   JQUERY   -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <!--   POPPER   -->  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <!--   BOOTSTRAP   -->  
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>  
-  <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script type="text/javascript" src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script> 
-  <script type="text/javascript">
-    $(document).ready(function() {
-      var url = location.search.slice(1);
-        var partes = url.split('&');
-        partes.forEach(function (parte) {
-            var chaveValor = parte.split('=');
-            var chave = String(chaveValor[0]);
-            var valor = chaveValor[1];    
-            
-            if(chave == 'filtro'){
-              if(valor == 'LOJA'){
-                $("#filtro-empresa").val('LOJA');
-                $('#key-empresa').show();
+<!--   JQUERY   -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<!--   POPPER   -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<!--   BOOTSTRAP   -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script type="text/javascript" src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    var url = location.search.slice(1);
+    var partes = url.split('&');
+    partes.forEach(function (parte) {
+      var chaveValor = parte.split('=');
+      var chave = String(chaveValor[0]);
+      var valor = chaveValor[1];
 
-              }
-              else if(valor == 'CIDADE'){
-                $("#filtro-empresa").val('CIDADE');
-                $('#key-empresa').show();
-              }
-              else if(valor == 'ESTADO'){
-                $("#filtro-empresa").val('ESTADO');
-                $('#key-empresa').show();
-              }
-              else if(valor == 'ENTIDADE'){
-                $("#filtro-empresa").val('ENTIDADE');
-                $('#key-empresa').show();
-              }
-              else{
-                $("#filtro-empresa").val('TODOS');
-                $('#key-empresa').hide();
-              }
-            }
-        });
+      if(chave == 'filtro'){
+        if(valor == 'LOJA'){
+          $("#filtro-empresa").val('LOJA');
+          $('#key-empresa').show();
+
+        }
+        else if(valor == 'CIDADE'){
+          $("#filtro-empresa").val('CIDADE');
+          $('#key-empresa').show();
+        }
+        else if(valor == 'ESTADO'){
+          $("#filtro-empresa").val('ESTADO');
+          $('#key-empresa').show();
+        }
+        else if(valor == 'ENTIDADE'){
+          $("#filtro-empresa").val('ENTIDADE');
+          $('#key-empresa').show();
+        }
+        else{
+          $("#filtro-empresa").val('TODOS');
+          $('#key-empresa').hide();
+        }
+      }
     });
-  </script> 
+  });
+</script>
 </body>
 
 </html>

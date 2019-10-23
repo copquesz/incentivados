@@ -25,15 +25,15 @@
   <div class="container h-100">    
      <div class="d-flex justify-content-center h-100" style="margin-top: 30%;">
        <div class="alert alert-success bg-success" role="alert">
-         <h1 class="alert-heading"> <i class="fas fa-check fa-2x text-white align-middle"></i> <strong>Cadastro Realizado!</strong></h1>
+         <h1 class="alert-heading"> <i class="fas fa-check fa-2x text-branco align-middle"></i> <strong>Cadastro Realizado!</strong></h1>
          <p class="lead">Olá <strong>${usuario.nome}</strong>, seu cadastro foi realizado com sucesso em nossa plataforma.</p>
          <p class="lead">Agora você está apto para cadastrar sua entidade e seus respectivos projetos na plataforma <strong>INCENTIVADOS</strong>.</p>
          <hr>
          <c:if test="${redirect eq ''}">
-          <p class="mb-0 lead">Clique<a class="text-white" href='${path}/login'><strong> <u>aqui</u></strong></a> para acessar a plataforma!</p>
+          <p class="mb-0 lead">Clique<a class="text-branco" href='${path}/login'><strong> <u>aqui</u></strong></a> para acessar a plataforma!</p>
          </c:if>
          <c:if test="${redirect ne ''}">
-          <p class="mb-0 lead">Clique<a class="text-white" href='${path}/login?redirect=${redirect}'><strong> <u>aqui</u></strong></a> para acessar a plataforma!</p>
+          <p class="mb-0 lead">Clique<a class="text-branco" href='${path}/login?redirect=${redirect}'><strong> <u>aqui</u></strong></a> para acessar a plataforma!</p>
          </c:if>
        </div>
      </div>    

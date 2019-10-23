@@ -27,7 +27,7 @@
 
 <body class="">
 <div class="wrapper">
-    <!-- Sidebar -->    
+    <!-- Sidebar -->
     <div class="sidebar" data-color="grey" data-active-color="white">
       <div class="logo">
         <a href="#" class="simple-text logo-mini">
@@ -97,7 +97,7 @@
                   </ul>
                 </div>
             </div>
-        </nav> 
+        </nav>
         <div class="content">
             <div class="row">
                 <div class="col-md-4">
@@ -276,7 +276,7 @@
                         <div class="card-header ">
                             <h5 class="card-title">Minhas Solicitações</h5>
                             <div class="row">
-                                <div class="col-12">                                    
+                                <div class="col-12">
                                     <a href="${path}/painel/pedidos/cadastro?empresaCnpj=01.438.784/0001-05" class="btn btn-primary float-right"><i class="fas fa-plus mr-2"></i> Cadastrar Pedido</a>
                                 </div>
                             </div>
@@ -338,7 +338,7 @@
                 </div>
             </div>
         </div>
-        <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />        
+        <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
         <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido.jsp" />
         <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido-pre-aprovado-usuario.jsp" />
     </div>

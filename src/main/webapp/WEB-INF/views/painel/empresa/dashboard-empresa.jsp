@@ -24,320 +24,441 @@
 </head>
 
 <body class="">
-  <div class="wrapper ">
-    <!-- Sidebar -->
-    <div class="sidebar" data-color="verde" data-active-color="white">
-      <div class="logo">
-        <a href="#" class="simple-text logo-mini">
-          <div class="logo-image-small"><i class="far fa-user"></i></div>
-        </a>
-        <a href="${path}/painel/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
-      </div>
-      <div class="sidebar-wrapper">
-        <ul class="nav">
-          <li class="active">
-            <a href="${path}/painel/dashboard"><i class="fas fa-desktop"></i>Painel Principal</a>
-          </li>
-          <li>
-            <a href="${path}/painel/${usuario.empresa.id}/analistas"><i class="fas fa-users"></i>Analistas</a>
-          </li>
-          <li>
-            <a href="${path}/painel/projetos"><i class="fas fa-project-diagram"></i>Projetos</a>
-          </li>
-          <li>
-            <a href="${path}/painel/pedidos?filtro=TODOS&key="><i class="fas fa-praying-hands"></i>Pedidos</a>
-          </li>
-          <li>
-            <a href="${path}/painel/ranking">
-              <i class="far fa-chart-bar"></i>Ranking</a>
-          </li>
-        </ul>
-      </div>
-    </div>   
-    <div class="main-panel">
-      <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
-        <div class="container-fluid">
-          <div class="navbar-wrapper">
-            <div class="navbar-toggle">
-              <button type="button" class="navbar-toggler">
-                <span class="navbar-toggler-bar bar1"></span>
-                <span class="navbar-toggler-bar bar2"></span>
-                <span class="navbar-toggler-bar bar3"></span>
-              </button>
-            </div>
-            <b><a class="navbar-brand" href="#">Painel Principal</a></b>
-          </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navigation">
-            <ul class="navbar-nav">
-              <li class="nav-item btn-rotate dropdown">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-power-off"></i>
-                  <p><span class="d-lg-none d-md-block">Ações</span></p>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="${path}/painel/perfil">Meus Dados</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="${path}/sair">Sair</a>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <div class="content">
-        <div class="row">
-          <div class="col-lg-4 col-md-4 col-sm-6">            
-            <div class="card card-stats">
-              <div class="card-body ">
-                <div class="row">
-                  <div class="col-5 col-md-4">
-                    <div class="icon-big text-center icon-warning">
-                      <i class="fas fa-hand-holding-heart text-default"></i>
-                    </div>
-                  </div>
-                  <div class="col-7 col-md-8">
-                    <div class="numbers">
-                      <p class="card-category">Pedidos</p>
-                      <p class="card-title">
-                        ${qtdPedidos}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-footer ">
-                <hr>
-              </div>
-            </div>              
-          </div>
-        </div> 
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card ">
-              <div class="card-body">
-                <ul class="nav nav-pills" id="myTab" role="tablist">
-                  <li class="nav-item">
-                    <a class="nav-link active bg-warning text-white border" id="pendentes-tab" data-toggle="tab" href="#pendentes" role="tab" aria-controls="pendentes" aria-selected="true">Pendentes: ${qtdPendente}</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link bg-warning text-white border" id="pre-aprovados-tab" data-toggle="tab" href="#pre-aprovados" role="tab" aria-controls="pre-aprovados" aria-selected="true">Pré-Aprovados: ${qtdPreAprovado}</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link bg-success text-white border" id="aprovados-tab" data-toggle="tab" href="#aprovados" role="tab" aria-controls="aprovados" aria-selected="false">Aprovados: ${qtdAprovado}</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link bg-danger text-white border" id="recusados-tab" data-toggle="tab" href="#recusados" role="tab" aria-controls="recusados" aria-selected="false">Recusados: ${qtdRecusado}</a>
-                  </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                  <div class="tab-pane fade show active" id="pendentes" role="tabpanel" aria-labelledby="pendentes-tab"> 
-                    <c:if test = "${empty pendentes}">
-                      <div class="row mt-2">
-                          <div class="col-12">
-                            <div class="alert alert-danger" role="alert">
-                              <p class="text-bold">Não há registro(s).</p>
-                            </div>
-                          </div>
-                        </div>
-                    </c:if>      
-                    <c:if test = "${not empty pendentes}">   
-                      <div class="row mt-2">  
-                        <div class="col-12">         
-                          <div class="table-responsive pr-3">
-                            <table class="table">
-                              <thead class=" text-primary">
-                                <th class="text-center border">Código Pedido</th>
-                                <th class="text-center border">Data Solicitação</th>
-                                <th class="text-center border">Entidade</th>
-                                <th class="text-center border">Empresa</th>
-                                <th class="text-center border">Loja</th>
-                                <th class="text-center border">Carta Ofício</th>
-                                <th class="text-center"></th>
-                              </thead>
-                              <tbody>
-                                <c:forEach var="pedidoPendente" items="${pendentes}">
-                                  <tr>
-                                    <td class="text-center">${pedidoPendente.id}</td>
-                                    <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoPendente.dataCadastro}" var="dataCadastro" />
-                                    <td class="text-center border">${dataCadastro}</td>
-                                    <td class="text-center border">${pedidoPendente.entidade.nomeFantasia}</td>
-                                    <td class="text-center border">${pedidoPendente.empresa.nomeFantasia}</td>
-                                    <td class="text-center border">${pedidoPendente.analista.endereco.bairro}</td>
-                                    <td class="text-center border"><a href="${path}/${pedidoPendente.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td> 
-                                    <td class="text-center border"><a class="btn btn-success btn-sm" href="${path}/painel/pedido/${pedidoPendente.id}" title="Avaliar"><i class="fas fa-sign-in-alt"></i></a></td>
-                                  </tr>
-                                </c:forEach>
-                              </tbody>
-                            </table>
-                          </div> 
-                        </div>
-                      </div>  
-                    </c:if>          
-                  </div>  
-                  <div class="tab-pane fade show" id="pre-aprovados" role="tabpanel" aria-labelledby="pre-aprovados-tab"> 
-                    <c:if test = "${empty preAprovados}">
-                      <div class="row mt-2">
-                        <div class="col-12">
-                          <div class="alert alert-danger" role="alert">
-                            <p class="text-bold">Não há registro(s).</p>
-                          </div>
-                        </div>
-                      </div>
-                    </c:if>      
-                    <c:if test = "${not empty preAprovados}">   
-                      <div class="row mt-2">  
-                        <div class="col-12">            
-                          <div class="table-responsive pr-3">
-                            <table class="table border">
-                              <thead class=" text-primary">
-                                <th class="text-center border">Código Pedido</th>
-                                <th class="text-center border">Data Solicitação</th>
-                                <th class="text-center border">Entidade</th>
-                                <th class="text-center border">Empresa</th>
-                                <th class="text-center border">Loja</th>
-                                <th class="text-center border">Carta Ofício</th>
-                                <th class="text-center border">Parecer</th>
-                              </thead>
-                              <tbody>
-                                <c:forEach var="pedidoPreAprovado" items="${preAprovados}">
-                                  <tr>
-                                    <td class="text-center">${pedidoPreAprovado.id}</td>
-                                    <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoPreAprovado.dataCadastro}" var="dataCadastro" />
-                                    <td class="text-center border">${dataCadastro}</td>
-                                    <td class="text-center border">${pedidoPreAprovado.entidade.nomeFantasia}</td>
-                                    <td class="text-center border">${pedidoPreAprovado.empresa.nomeFantasia}</td>
-                                    <td class="text-center border">${pedidoPreAprovado.analista.endereco.bairro} - ${pedidoPreAprovado.analista.endereco.cidade} / ${pedidoPreAprovado.analista.endereco.estado}</td>
-                                    <td class="text-center border"><a href="${path}/${pedidoPreAprovado.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>   
-                                    <td class="text-center border"><a href="#" data-toggle="modal" data-target="#modal-observacao-pedido-pre-aprovado-${pedidoPreAprovado.id}" title="Visualizar"><i class="far fa-file-pdf"></i></a></td>                                 
-                                  </tr>
-                                </c:forEach>
-                              </tbody>
-                            </table>
-                          </div> 
-                        </div>
-                      </div>  
-                    </c:if>  
-                  </div>     
-                  <div class="tab-pane fade show" id="aprovados" role="tabpanel" aria-labelledby="aprovados-tab"> 
-                    <c:if test = "${empty aprovados}">
-                      <div class="row mt-2">
-                        <div class="col-12">
-                          <div class="alert alert-danger" role="alert">
-                            <p class="text-bold">Não há registro(s).</p>
-                          </div>
-                        </div>
-                      </div>
-                    </c:if>      
-                    <c:if test = "${not empty aprovados}">   
-                      <div class="row mt-2">  
-                        <div class="col-12">            
-                          <div class="table-responsive pr-3">
-                            <table class="table border">
-                              <thead class=" text-primary">
-                                <th class="text-center border">Código Pedido</th>
-                                <th class="text-center border">Data Solicitação</th>
-                                <th class="text-center border">Entidade</th>
-                                <th class="text-center border">Empresa</th>
-                                <th class="text-center border">Loja</th>
-                                <th class="text-center border">Carta Ofício</th>
-                                <th class="text-center border">Parecer</th>
-                              </thead>
-                              <tbody>
-                                <c:forEach var="pedidoAprovado" items="${aprovados}">
-                                  <tr>
-                                    <td class="text-center">${pedidoAprovado.id}</td>
-                                    <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoAprovado.dataCadastro}" var="dataCadastro" />
-                                    <td class="text-center border">${dataCadastro}</td>
-                                    <td class="text-center border">${pedidoAprovado.entidade.nomeFantasia}</td>
-                                    <td class="text-center border">${pedidoAprovado.empresa.nomeFantasia}</td>
-                                    <td class="text-center border">${pedidoAprovado.analista.endereco.bairro} - ${pedidoAprovado.analista.endereco.cidade} / ${pedidoAprovado.analista.endereco.estado}</td>
-                                    <td class="text-center border"><a href="${path}/${pedidoAprovado.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>    
-                                    <td class="text-center border"><a href="#" data-toggle="modal" data-target="#modal-observacao-pedido-aprovado-${pedidoAprovado.id}" title="Visualizar"><i class="far fa-file-pdf"></i></a></td>                                 
-                                  </tr>
-                                </c:forEach>
-                              </tbody>
-                            </table>
-                          </div> 
-                        </div>
-                      </div>  
-                    </c:if>  
-                  </div>                  
-                  <div class="tab-pane fade show" id="recusados" role="tabpanel" aria-labelledby="recusados-tab"> 
-                    <c:if test = "${empty recusados}">
-                      <div class="row mt-2">
-                        <div class="col-12">
-                          <div class="alert alert-danger" role="alert">
-                            <p class="text-bold">Não há registro(s).</p>
-                          </div>
-                        </div>
-                      </div>
-                    </c:if>      
-                    <c:if test = "${not empty recusados}">   
-                      <div class="row mt-2">  
-                        <div class="col-12">            
-                          <div class="table-responsive pr-3">
-                            <table class="table border">
-                              <thead class=" text-primary">
-                                <th class="text-center border">Código Pedido</th>
-                                <th class="text-center border">Data Solicitação</th>
-                                <th class="text-center border">Entidade</th>
-                                <th class="text-center border">Empresa</th>
-                                <th class="text-center border">Loja</th>
-                                <th class="text-center border">Carta Ofício</th>
-                                <th class="text-center border">Parecer</th>
-                              </thead>
-                              <tbody>
-                                <c:forEach var="pedidoReprovado" items="${recusados}">
-                                  <tr>
-                                    <td class="text-center">${pedidoReprovado.id}</td>
-                                    <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoReprovado.dataCadastro}" var="dataCadastro" />
-                                    <td class="text-center border">${dataCadastro}</td>
-                                    <td class="text-center border">${pedidoReprovado.entidade.nomeFantasia}</td>
-                                    <td class="text-center border">${pedidoReprovado.empresa.nomeFantasia}</td>
-                                    <td class="text-center border">${pedidoReprovado.analista.endereco.bairro} - ${pedidoReprovado.analista.endereco.cidade} / ${pedidoReprovado.analista.endereco.estado}</td>
-                                    <td class="text-center border"><a href="${path}/${pedidoReprovado.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td> 
-                                    <td class="text-center border"><a href="#" data-toggle="modal" data-target="#modal-observacao-pedido-recusado-${pedidoReprovado.id}" title="Visualizar"><i class="far fa-file-pdf"></i></a></td>                                
-                                  </tr>
-                                </c:forEach>
-                              </tbody>
-                            </table>
-                          </div>  
-                        </div>
-                      </div> 
-                    </c:if>  
-                  </div>
-                </div>
-              </div>              
-            </div>
-          </div>
-        </div>       
-      </div>
-      <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
-      <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido-aprovado.jsp" /> 
-      <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido-recusado.jsp" />
-      <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido-pre-aprovado.jsp" />           
-
+<div class="wrapper ">
+  <!-- Sidebar -->
+  <div class="sidebar" data-color="grey" data-active-color="white">
+    <div class="logo">
+      <a href="#" class="simple-text logo-mini">
+        <div class="logo-image-small"><i class="far fa-user"></i></div>
+      </a>
+      <a href="${path}/painel/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
+    </div>
+    <div class="sidebar-wrapper">
+      <ul class="nav">
+        <li class="active">
+          <a href="${path}/painel/dashboard"><i class="fas fa-desktop"></i>Painel Principal</a>
+        </li>
+        <li>
+          <a href="${path}/painel/${usuario.empresa.id}/analistas"><i class="fas fa-users"></i>Analistas</a>
+        </li>
+        <li>
+          <a href="${path}/painel/projetos"><i class="fas fa-project-diagram"></i>Projetos</a>
+        </li>
+        <li>
+          <a href="${path}/painel/pedidos?filtro=TODOS&key="><i class="fas fa-praying-hands"></i>Pedidos</a>
+        </li>
+        <li>
+          <a href="${path}/painel/ranking">
+            <i class="far fa-chart-bar"></i>Ranking</a>
+        </li>
+      </ul>
     </div>
   </div>
-  <!--   JQUERY   -->
-  <script src="${path}/assets/js/core/jquery.min.js"></script>
-  <script src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <!--   POPPER   -->  
-  <script src="${path}/assets/js/core/popper.min.js"></script>
-  <!--   BOOTSTRAP   -->  
-  <script src="${path}/assets/js/core/bootstrap.min.js"></script>  
-  <!--   CHART'S   --> 
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>  
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-  <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script type="text/javascript" src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <script src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
+  <div class="main-panel">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+      <div class="container-fluid">
+        <div class="navbar-wrapper">
+          <div class="navbar-toggle">
+            <button type="button" class="navbar-toggler">
+              <span class="navbar-toggler-bar bar1"></span>
+              <span class="navbar-toggler-bar bar2"></span>
+              <span class="navbar-toggler-bar bar3"></span>
+            </button>
+          </div>
+          <b><a class="navbar-brand" href="#">Painel Principal</a></b>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navigation">
+          <ul class="navbar-nav">
+            <li class="nav-item btn-rotate dropdown">
+              <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-power-off"></i>
+                <p><span class="d-lg-none d-md-block">Ações</span></p>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="${path}/painel/perfil">Meus Dados</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="${path}/sair">Sair</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="content">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-body ">
+              <div class="row">
+                <div class="col-5 col-md-4">
+                  <div class="icon-big text-center icon-warning">
+                    <i class="fas fa-project-diagram text-info"></i>
+                  </div>
+                </div>
+                <div class="col-7 col-md-8">
+                  <div class="numbers">
+                    <p class="card-category">Projetos</p>
+                    <p class="card-title">
+                      <c:if test = "${empty qtdProjetos}">0</c:if>
+                      <c:if test = "${not empty qtdProjetos}">${qtdProjetos}</c:if>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer ">
+              <hr>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-body ">
+              <div class="row">
+                <div class="col-5 col-md-4">
+                  <div class="icon-big text-center icon-warning">
+                    <i class="fas fa-hand-holding-heart text-default"></i>
+                  </div>
+                </div>
+                <div class="col-7 col-md-8">
+                  <div class="numbers">
+                    <p class="card-category">Pedidos</p>
+                    <p class="card-title">
+                      ${qtdPedidos}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer ">
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card ">
+            <div class="card-header ">
+              <h5 class="card-title">Projetos x Leis</h5>
+            </div>
+            <div class="card-body ">
+
+              <canvas id="bar-chart" height="150"></canvas>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card ">
+            <div class="card-header ">
+              <h5 class="card-title">Pedidos</h5>
+            </div>
+            <div class="card-body ">
+
+              <canvas id="doughnut-chart" height="150"></canvas>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card ">
+            <div class="card-body">
+              <ul class="nav nav-pills" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active text-branco border" id="pendentes-tab" data-toggle="tab" href="#pendentes" role="tab" aria-controls="pendentes" aria-selected="true" style="background-color: #f39c12">Pendentes: ${qtdPendente}</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link bg-blue text-branco border" id="pre-aprovados-tab" data-toggle="tab" href="#pre-aprovados" role="tab" aria-controls="pre-aprovados" aria-selected="true" style="background-color: #3498db;">Pré-Aprovados: ${qtdPreAprovado}</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-branco border" id="aprovados-tab" data-toggle="tab" href="#aprovados" role="tab" aria-controls="aprovados" aria-selected="false" style="background-color: #2ecc71">Aprovados: ${qtdAprovado}</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-branco border" id="recusados-tab" data-toggle="tab" href="#recusados" role="tab" aria-controls="recusados" aria-selected="false" style="background-color: #e74c3c">Recusados: ${qtdRecusado}</a>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="pendentes" role="tabpanel" aria-labelledby="pendentes-tab">
+                  <c:if test = "${empty pendentes}">
+                    <div class="row mt-2">
+                      <div class="col-12">
+                        <div class="alert alert-danger" role="alert">
+                          <p class="text-bold">Não há registro(s).</p>
+                        </div>
+                      </div>
+                    </div>
+                  </c:if>
+                  <c:if test = "${not empty pendentes}">
+                    <div class="row mt-2">
+                      <div class="col-12">
+                        <div class="table-responsive pr-3">
+                          <table class="table">
+                            <thead class=" text-primary">
+                            <th class="text-center border">Código Pedido</th>
+                            <th class="text-center border">Data Solicitação</th>
+                            <th class="text-center border">Entidade</th>
+                            <th class="text-center border">Empresa</th>
+                            <th class="text-center border">Loja</th>
+                            <th class="text-center border">Carta Ofício</th>
+                            <th class="text-center"></th>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="pedidoPendente" items="${pendentes}">
+                              <tr>
+                                <td class="text-center">${pedidoPendente.id}</td>
+                                <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoPendente.dataCadastro}" var="dataCadastro" />
+                                <td class="text-center border">${dataCadastro}</td>
+                                <td class="text-center border">${pedidoPendente.entidade.nomeFantasia}</td>
+                                <td class="text-center border">${pedidoPendente.empresa.nomeFantasia}</td>
+                                <td class="text-center border">${pedidoPendente.analista.endereco.bairro}</td>
+                                <td class="text-center border"><a href="${path}/${pedidoPendente.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>
+                                <td class="text-center border"><a class="btn btn-success btn-sm" href="${path}/painel/pedido/${pedidoPendente.id}" title="Avaliar"><i class="fas fa-sign-in-alt"></i></a></td>
+                              </tr>
+                            </c:forEach>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </c:if>
+                </div>
+                <div class="tab-pane fade show" id="pre-aprovados" role="tabpanel" aria-labelledby="pre-aprovados-tab">
+                  <c:if test = "${empty preAprovados}">
+                    <div class="row mt-2">
+                      <div class="col-12">
+                        <div class="alert alert-danger" role="alert">
+                          <p class="text-bold">Não há registro(s).</p>
+                        </div>
+                      </div>
+                    </div>
+                  </c:if>
+                  <c:if test = "${not empty preAprovados}">
+                    <div class="row mt-2">
+                      <div class="col-12">
+                        <div class="table-responsive pr-3">
+                          <table class="table border">
+                            <thead class=" text-primary">
+                            <th class="text-center border">Código Pedido</th>
+                            <th class="text-center border">Data Solicitação</th>
+                            <th class="text-center border">Entidade</th>
+                            <th class="text-center border">Empresa</th>
+                            <th class="text-center border">Loja</th>
+                            <th class="text-center border">Carta Ofício</th>
+                            <th class="text-center border">Parecer</th>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="pedidoPreAprovado" items="${preAprovados}">
+                              <tr>
+                                <td class="text-center">${pedidoPreAprovado.id}</td>
+                                <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoPreAprovado.dataCadastro}" var="dataCadastro" />
+                                <td class="text-center border">${dataCadastro}</td>
+                                <td class="text-center border">${pedidoPreAprovado.entidade.nomeFantasia}</td>
+                                <td class="text-center border">${pedidoPreAprovado.empresa.nomeFantasia}</td>
+                                <td class="text-center border">${pedidoPreAprovado.analista.endereco.bairro} - ${pedidoPreAprovado.analista.endereco.cidade} / ${pedidoPreAprovado.analista.endereco.estado}</td>
+                                <td class="text-center border"><a href="${path}/${pedidoPreAprovado.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>
+                                <td class="text-center border"><a href="#" data-toggle="modal" data-target="#modal-observacao-pedido-pre-aprovado-${pedidoPreAprovado.id}" title="Visualizar"><i class="far fa-file-pdf"></i></a></td>
+                              </tr>
+                            </c:forEach>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </c:if>
+                </div>
+                <div class="tab-pane fade show" id="aprovados" role="tabpanel" aria-labelledby="aprovados-tab">
+                  <c:if test = "${empty aprovados}">
+                    <div class="row mt-2">
+                      <div class="col-12">
+                        <div class="alert alert-danger" role="alert">
+                          <p class="text-bold">Não há registro(s).</p>
+                        </div>
+                      </div>
+                    </div>
+                  </c:if>
+                  <c:if test = "${not empty aprovados}">
+                    <div class="row mt-2">
+                      <div class="col-12">
+                        <div class="table-responsive pr-3">
+                          <table class="table border">
+                            <thead class=" text-primary">
+                            <th class="text-center border">Código Pedido</th>
+                            <th class="text-center border">Data Solicitação</th>
+                            <th class="text-center border">Entidade</th>
+                            <th class="text-center border">Empresa</th>
+                            <th class="text-center border">Loja</th>
+                            <th class="text-center border">Carta Ofício</th>
+                            <th class="text-center border">Parecer</th>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="pedidoAprovado" items="${aprovados}">
+                              <tr>
+                                <td class="text-center">${pedidoAprovado.id}</td>
+                                <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoAprovado.dataCadastro}" var="dataCadastro" />
+                                <td class="text-center border">${dataCadastro}</td>
+                                <td class="text-center border">${pedidoAprovado.entidade.nomeFantasia}</td>
+                                <td class="text-center border">${pedidoAprovado.empresa.nomeFantasia}</td>
+                                <td class="text-center border">${pedidoAprovado.analista.endereco.bairro} - ${pedidoAprovado.analista.endereco.cidade} / ${pedidoAprovado.analista.endereco.estado}</td>
+                                <td class="text-center border"><a href="${path}/${pedidoAprovado.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>
+                                <td class="text-center border"><a href="#" data-toggle="modal" data-target="#modal-observacao-pedido-aprovado-${pedidoAprovado.id}" title="Visualizar"><i class="far fa-file-pdf"></i></a></td>
+                              </tr>
+                            </c:forEach>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </c:if>
+                </div>
+                <div class="tab-pane fade show" id="recusados" role="tabpanel" aria-labelledby="recusados-tab">
+                  <c:if test = "${empty recusados}">
+                    <div class="row mt-2">
+                      <div class="col-12">
+                        <div class="alert alert-danger" role="alert">
+                          <p class="text-bold">Não há registro(s).</p>
+                        </div>
+                      </div>
+                    </div>
+                  </c:if>
+                  <c:if test = "${not empty recusados}">
+                    <div class="row mt-2">
+                      <div class="col-12">
+                        <div class="table-responsive pr-3">
+                          <table class="table border">
+                            <thead class=" text-primary">
+                            <th class="text-center border">Código Pedido</th>
+                            <th class="text-center border">Data Solicitação</th>
+                            <th class="text-center border">Entidade</th>
+                            <th class="text-center border">Empresa</th>
+                            <th class="text-center border">Loja</th>
+                            <th class="text-center border">Carta Ofício</th>
+                            <th class="text-center border">Parecer</th>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="pedidoReprovado" items="${recusados}">
+                              <tr>
+                                <td class="text-center">${pedidoReprovado.id}</td>
+                                <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoReprovado.dataCadastro}" var="dataCadastro" />
+                                <td class="text-center border">${dataCadastro}</td>
+                                <td class="text-center border">${pedidoReprovado.entidade.nomeFantasia}</td>
+                                <td class="text-center border">${pedidoReprovado.empresa.nomeFantasia}</td>
+                                <td class="text-center border">${pedidoReprovado.analista.endereco.bairro} - ${pedidoReprovado.analista.endereco.cidade} / ${pedidoReprovado.analista.endereco.estado}</td>
+                                <td class="text-center border"><a href="${path}/${pedidoReprovado.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>
+                                <td class="text-center border"><a href="#" data-toggle="modal" data-target="#modal-observacao-pedido-recusado-${pedidoReprovado.id}" title="Visualizar"><i class="far fa-file-pdf"></i></a></td>
+                              </tr>
+                            </c:forEach>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </c:if>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
+    <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido-aprovado.jsp" />
+    <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido-recusado.jsp" />
+    <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido-pre-aprovado.jsp" />
+
+  </div>
+</div>
+<!--   JQUERY   -->
+<script src="${path}/assets/js/core/jquery.min.js"></script>
+<script src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!--   POPPER   -->
+<script src="${path}/assets/js/core/popper.min.js"></script>
+<!--   BOOTSTRAP   -->
+<script src="${path}/assets/js/core/bootstrap.min.js"></script>
+<!--   CHART'S   -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script type="text/javascript" src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<script src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
+<script type="text/javascript">
+  var barCtx = document.getElementById("bar-chart").getContext('2d');
+  var barChart = new Chart(barCtx, {
+    type: 'bar',
+    data: {
+      labels: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'${incentivoFiscal.legislacao}',</c:forEach>],
+      datasets: [{
+        label: 'Registros',
+        data: [<c:forEach var="dataCharProjeto" items="${datasCharProjeto}">${dataCharProjeto},</c:forEach>],
+        backgroundColor: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'rgba(114, 191, 68, 0.2)',</c:forEach>],
+        borderColor: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'rgba(114, 191, 68, 1)',</c:forEach>],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      legend: {
+        display: false
+      },
+      scales: {
+        xAxes: [
+          {
+            ticks:{
+              callback: function (value) {
+                return ""
+              }
+            },
+          },
+        ],
+        yAxes: [{
+          ticks: {
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+  });
+
+  var doughnutCtx = document.getElementById("doughnut-chart").getContext('2d');
+  var doughnutChart = new Chart(doughnutCtx, {
+    type: 'doughnut',
+    data: {
+      labels: ["Pendente", "Pré-Aprovado", "Recusado", "Aprovado"],
+      datasets: [{
+        label: 'Registros',
+        data: ['${qtdPedidosPendente}', '${qtdPedidosPreAprovado}', '${qtdPedidosRecusado}', '${qtdPedidosAprovado}'],
+        backgroundColor: [
+          'rgba(241, 196, 15, 0.6)',
+          'rgba(52, 152, 219, 0.6)',
+          'rgba(231, 76, 60, 0.6)',
+          'rgba(46, 204, 113, 0.6)'
+        ],
+        borderColor: [
+          'rgba(241, 196, 15, 0.6)',
+          'rgba(52, 152, 219, 0.6)',
+          'rgba(231, 76, 60, 0.6)',
+          'rgba(46, 204, 113, 0.6)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      legend: {
+        display: false
+      },
+      scales: {
+        display: false
+      }
+    }
+  });
+</script>
 </body>
 
 </html>
