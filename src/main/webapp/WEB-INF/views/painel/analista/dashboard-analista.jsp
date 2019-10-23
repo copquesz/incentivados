@@ -120,7 +120,7 @@
                   <a class="nav-link active bg-warning text-branco border" id="pendentes-tab" data-toggle="tab" href="#pendentes" role="tab" aria-controls="pendentes" aria-selected="true">Pendentes: ${qtdPendente}</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link bg-warning text-branco border" id="pre-aprovados-tab" data-toggle="tab" href="#pre-aprovados" role="tab" aria-controls="pre-aprovados" aria-selected="true">Pré-Aprovados: ${qtdPreAprovado}</a>
+                  <a class="nav-link bg-blue text-branco border" id="pre-aprovados-tab" data-toggle="tab" href="#pre-aprovados" role="tab" aria-controls="pre-aprovados" aria-selected="true" style="background-color: #3498db;">Pré-Aprovados: ${qtdPreAprovado}</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link bg-success text-branco border" id="aprovados-tab" data-toggle="tab" href="#aprovados" role="tab" aria-controls="aprovados" aria-selected="false">Aprovados: ${qtdAprovado}</a>
@@ -132,12 +132,12 @@
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="pendentes" role="tabpanel" aria-labelledby="pendentes-tab">
                   <c:if test = "${empty pendentes}">
-                    <div class="row mt-2">
-                      <div class="col-12">
-                        <div class="alert alert-danger" role="alert">
-                          <p class="text-bold">Não há registro(s).</p>
-                        </div>
-                      </div>
+                    <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
+                      <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                        <i class="nc-icon nc-simple-remove"></i>
+                      </button>
+                      <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
+                      <span data-notify="message">Não há registro(s).</span>
                     </div>
                   </c:if>
                   <c:if test = "${not empty pendentes}">
@@ -176,12 +176,12 @@
                 </div>
                 <div class="tab-pane fade show" id="pre-aprovados" role="tabpanel" aria-labelledby="pre-aprovados-tab">
                   <c:if test = "${empty preAprovados}">
-                    <div class="row mt-2">
-                      <div class="col-12">
-                        <div class="alert alert-danger" role="alert">
-                          <p class="text-bold">Não há registro(s).</p>
-                        </div>
-                      </div>
+                    <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
+                      <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                        <i class="nc-icon nc-simple-remove"></i>
+                      </button>
+                      <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
+                      <span data-notify="message">Não há registro(s).</span>
                     </div>
                   </c:if>
                   <c:if test = "${not empty preAprovados}">
@@ -220,12 +220,12 @@
                 </div>
                 <div class="tab-pane fade show" id="aprovados" role="tabpanel" aria-labelledby="aprovados-tab">
                   <c:if test = "${empty aprovados}">
-                    <div class="row mt-2">
-                      <div class="col-12">
-                        <div class="alert alert-danger" role="alert">
-                          <p class="text-bold">Não há registro(s).</p>
-                        </div>
-                      </div>
+                    <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
+                      <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                        <i class="nc-icon nc-simple-remove"></i>
+                      </button>
+                      <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
+                      <span data-notify="message">Não há registro(s).</span>
                     </div>
                   </c:if>
                   <c:if test = "${not empty aprovados}">
@@ -264,12 +264,12 @@
                 </div>
                 <div class="tab-pane fade show" id="recusados" role="tabpanel" aria-labelledby="recusados-tab">
                   <c:if test = "${empty recusados}">
-                    <div class="row mt-2">
-                      <div class="col-12">
-                        <div class="alert alert-danger" role="alert">
-                          <p class="text-bold">Não há registro(s).</p>
-                        </div>
-                      </div>
+                    <div class="alert alert-info alert-with-icon alert-dismissible fade show mt-2" data-notify="container">
+                      <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                        <i class="nc-icon nc-simple-remove"></i>
+                      </button>
+                      <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
+                      <span data-notify="message">Não há registro(s).</span>
                     </div>
                   </c:if>
                   <c:if test = "${not empty recusados}">

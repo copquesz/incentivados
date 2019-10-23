@@ -194,7 +194,7 @@
                             <td class="border text-center">${empresa.nomeFantasia}</td>
                             <td class="border text-center" >${empresa.cnpj}</td>
                             <td class="border text-center">
-                              <a href="${path}/painel/empresas/${empresa.id}" class="btn btn-primary btn-sm text-white" title="Visualizar">
+                              <a href="${path}/painel/empresas/${empresa.id}" class="btn btn-primary btn-sm text-branco" title="Visualizar">
                                 <i class="far fa-address-card"></i>
                               </a>
                           </tr>
