@@ -216,7 +216,7 @@
                             <td class="text-center border">
                               <c:if test = "${pedido.status.id == 0}"><span class="bg-warning p-1 text-white">PENDENTE</span></c:if>
                               <c:if test = "${pedido.status.id == 1}"><span class="bg-danger p-1"><a href="#" class="text-white" data-toggle="modal" data-target="#modal-observacao-pedido-recusado-${pedido.id}" title="Visualizar Motivo">RECUSADO</a></span></c:if>
-                              <c:if test = "${pedido.status.id == 2}"><span class="bg-primary p-1"><a href="#" class="text-white" data-toggle="modal" data-target="#modal-observacao-pedido-aprovado-${pedido.id}" title="Visualizar Motivo">APROVADO</a></span></c:if>
+                              <c:if test = "${pedido.status.id == 2}"><span class="bg-success p-1"><a href="#" class="text-white" data-toggle="modal" data-target="#modal-observacao-pedido-aprovado-${pedido.id}" title="Visualizar Motivo">APROVADO</a></span></c:if>
                               <c:if test = "${pedido.status.id == 3}"><span class="bg-success p-1"><a href="#" class="text-white" data-toggle="modal" data-target="#modal-observacao-pedido-pre-aprovado-admin-${pedido.id}" title="Visualizar Motivo">PRÉ-APROVADO</a></span></c:if>
                             </td>
                             <td class="text-center border">
