@@ -34,7 +34,7 @@ public class EmpresaController {
     }
 
     @GetMapping({"/painel/empresas"})
-    public String getListar(@RequestParam(required = false,defaultValue = "") String key, @RequestParam(required = false,defaultValue = "0") int page, HttpServletRequest request, Model model) {
+    public String getListar(@RequestParam(required = false, defaultValue = "") String key, @RequestParam(required = false,defaultValue = "0") int page, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
         model.addAttribute("key", key);
         model.addAttribute("page", page);

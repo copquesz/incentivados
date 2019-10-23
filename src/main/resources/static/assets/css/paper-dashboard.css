@@ -467,8 +467,8 @@ Copyright (c) 2015 Daniel Eden
       box-shadow: none; }
 
 .btn-info {
-  background-color: #FFF;
-  color: #ED1C24; }
+  background-color: #ED1C24;
+  color: #FFFFFF; }
   .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .btn-info:active:focus, .btn-info:active:hover, .btn-info.active:focus, .btn-info.active:hover, .show > .btn-info.dropdown-toggle, .show > .btn-info.dropdown-toggle:focus, .show > .btn-info.dropdown-toggle:hover {
     background-color: #c61017 !important;
     color: #FFFFFF !important;
@@ -476,46 +476,18 @@ Copyright (c) 2015 Daniel Eden
   .btn-info:not([data-action]):hover {
     box-shadow: none; }
   .btn-info.disabled, .btn-info.disabled:hover, .btn-info.disabled:focus, .btn-info.disabled.focus, .btn-info.disabled:active, .btn-info.disabled.active, .btn-info:disabled, .btn-info:disabled:hover, .btn-info:disabled:focus, .btn-info:disabled.focus, .btn-info:disabled:active, .btn-info:disabled.active, .btn-info[disabled], .btn-info[disabled]:hover, .btn-info[disabled]:focus, .btn-info[disabled].focus, .btn-info[disabled]:active, .btn-info[disabled].active, fieldset[disabled] .btn-info, fieldset[disabled] .btn-info:hover, fieldset[disabled] .btn-info:focus, fieldset[disabled] .btn-info.focus, fieldset[disabled] .btn-info:active, fieldset[disabled] .btn-info.active {
-    background-color: #FFF;
-    border-color: #FFF; }
-  .btn-info.btn-danger {
-    color: #ff7675; }
-    .btn-info.btn-danger:hover, .btn-info.btn-danger:focus, .btn-info.btn-danger:active, .btn-info.btn-danger:active:focus {
-      color: #ff4d4c !important; }
-  .btn-info.btn-info {
-    color: #FFF !important; }
-    .btn-info.btn-info:hover, .btn-info.btn-info:focus, .btn-info.btn-info:active, .btn-info.btn-info:active:focus {
-      color: #FFF !important; }
-  .btn-info.btn-warning {
-    color: #444240 !important; }
-    .btn-info.btn-warning:hover, .btn-info.btn-warning:focus, .btn-info.btn-warning:active, .btn-info.btn-warning:active:focus {
-      color: #2a2927 !important; }
-  .btn-info.btn-success {
-    color: #6bd098 !important; }
-    .btn-info.btn-success:hover, .btn-info.btn-success:focus, .btn-info.btn-success:active, .btn-info.btn-success:active:focus {
-      color: #44c47d !important; }
-  .btn-info.btn-default {
-    color: #000000 !important; }
-    .btn-info.btn-default:hover, .btn-info.btn-default:focus, .btn-info.btn-default:active, .btn-info.btn-default:active:focus {
-      color: #000000 !important; }
-  .btn-info.active, .btn-info:active, .btn-info:active:focus, .btn-info:active:hover, .btn-info.active:focus, .btn-info.active:hover, .show > .btn-info.dropdown-toggle, .show > .btn-info.dropdown-toggle:focus, .show > .btn-info.dropdown-toggle:hover {
-    background-color: #FFFFFF !important;
-    color: #c61017 !important;
-    box-shadow: none !important; }
-  .btn-info:hover, .btn-info:focus {
-    color: #c61017 !important; }
-    .btn-info:hover:not(.nav-link), .btn-info:focus:not(.nav-link) {
-      box-shadow: none; }
+    background-color: #ED1C24;
+    border-color: #ED1C24; }
   .btn-info.btn-simple {
-    color: #FFF;
-    border-color: #FFF; }
+    color: #ED1C24;
+    border-color: #ED1C24; }
     .btn-info.btn-simple:hover, .btn-info.btn-simple:focus, .btn-info.btn-simple:active {
       background-color: transparent;
       color: #c61017;
       border-color: #c61017;
       box-shadow: none; }
   .btn-info.btn-link {
-    color: #FFF; }
+    color: #ED1C24; }
     .btn-info.btn-link:hover, .btn-info.btn-link:focus, .btn-info.btn-link:active, .btn-info.btn-link:active:focus {
       background-color: transparent;
       color: #c61017;

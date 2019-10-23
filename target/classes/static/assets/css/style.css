@@ -9,6 +9,10 @@ span a {
 .text-branco {
     color: #ffff;
 }
+.text-branco:hover {
+    color: #ffff;
+}
+
 body,
 html {
     margin: 0;

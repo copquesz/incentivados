@@ -26,7 +26,7 @@
 <body class="">
   <div class="wrapper ">    
     <!-- Sidebar -->
-    <div class="sidebar" data-color="verde" data-active-color="white">
+    <div class="sidebar" data-color="grey" data-active-color="white">
       <div class="logo">
         <a href="#" class="simple-text logo-mini">
           <div class="logo-image-small">
@@ -88,9 +88,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card">
-              <div class="card-header bg-primary"></div>
-              <div class="card-body border">                 
-
+              <div class="card-body border">
                 <fieldset class="mt-3 mt-3">
                 <legend><i class="fas fa-user-alt"></i> Usuário:</legend>
                 <div class="row">               
@@ -186,9 +184,7 @@
                   </div>
                 </div>
                 </fieldset>
-
               </div>
-              <div class="card-footer bg-primary"></div>
             </div>
           </div>
         </div>              
