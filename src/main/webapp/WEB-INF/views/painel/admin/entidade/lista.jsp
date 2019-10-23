@@ -34,7 +34,7 @@
           <i class="far fa-user"></i>
         </div>
       </a>
-      <a href="${path}/painel/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
+      <a href="${path}/painel/perfil" class="text-branco logo-normal">Bem vindo, ${usuario.nome}.</a>
     </div>
     <div class="sidebar-wrapper">
       <ul class="nav">
@@ -145,24 +145,24 @@
                         <c:choose>
                           <c:when test = "${entidades.totalPages == 1}">
                             <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
-                            <li class="page-item active"><a class="page-link text-white" href="${path}/painel/entidades?page=${entidades.number}">${entidades.number + 1}</a></li>
+                            <li class="page-item active"><a class="page-link text-branco" href="${path}/painel/entidades?page=${entidades.number}">${entidades.number + 1}</a></li>
                             <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
                           </c:when>
                           <c:when test = "${(entidades.totalPages == 2) && (entidades.number + 1 < entidades.totalPages)}">
                             <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
-                            <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/entidades?page=${entidades.number}">${entidades.number + 1}</a></li>
+                            <li class="page-item active"><a class="page-link text-primary text-branco" href="${path}/painel/entidades?page=${entidades.number}">${entidades.number + 1}</a></li>
                             <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades?page=${entidades.number + 1}">${entidades.number + 2}</a></li>
                             <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
                           </c:when>
                           <c:when test = "${(entidades.totalPages == 2) && (entidades.number + 1 == entidades.totalPages)}">
                             <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
                             <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades?page=${entidades.number - 1}">${entidades.number}</a></li>
-                            <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/entidades?page=${entidades.number}">${entidades.number + 1}</a></li>
+                            <li class="page-item active"><a class="page-link text-primary text-branco" href="${path}/painel/entidades?page=${entidades.number}">${entidades.number + 1}</a></li>
                             <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
                           </c:when>
                           <c:when test = "${(entidades.totalPages >= 3) && (entidades.number == 0)}">
                             <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades">Primeira</a></li>
-                            <li class="page-item active"><a class="page-link text-white" href="${path}/painel/entidades?page=${entidades.number}">${entidades.number + 1}</a></li>
+                            <li class="page-item active"><a class="page-link text-branco" href="${path}/painel/entidades?page=${entidades.number}">${entidades.number + 1}</a></li>
                             <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades?page=${entidades.number + 1}">${entidades.number + 2}</a></li>
                             <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades?page=${entidades.number + 2}">${entidades.number + 3}</a></li>
                             <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades?page=${entidades.totalPages - 1}">Última</a></li>
@@ -170,7 +170,7 @@
                           <c:when test = "${(entidades.totalPages >= 3) && (entidades.number > 0) && (entidades.number + 1 < entidades.totalPages)}">
                             <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades">Primeira</a></li>
                             <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades?page=${entidades.number - 1}">${entidades.number}</a></li>
-                            <li class="page-item active"><a class="page-link text-white" href="${path}/painel/entidades?page=${entidades.number}">${entidades.number + 1}</a></li>
+                            <li class="page-item active"><a class="page-link text-branco" href="${path}/painel/entidades?page=${entidades.number}">${entidades.number + 1}</a></li>
                             <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades?page=${entidades.number + 1}">${entidades.number + 2}</a></li>
                             <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades?page=${entidades.totalPages - 1}">Última</a></li>
                           </c:when>
@@ -178,7 +178,7 @@
                             <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades">Primeira</a></li>
                             <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades?page=${entidades.number - 2}">${entidades.number - 1}</a></li>
                             <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades?page=${entidades.number - 1}">${entidades.number}</a></li>
-                            <li class="page-item active"><a class="page-link text-white" href="${path}/painel/entidades?page=${entidades.number}">${entidades.number + 1}</a></li>
+                            <li class="page-item active"><a class="page-link text-branco" href="${path}/painel/entidades?page=${entidades.number}">${entidades.number + 1}</a></li>
                             <li class="page-item"><a class="page-link text-primary" href="${path}/painel/entidades?page=${entidades.totalPages - 1}">Última</a></li>
                           </c:when>
                         </c:choose>
@@ -201,7 +201,7 @@
                             <td class="border text-center">${entidade.nomeFantasia}</td>
                             <td class="border text-center" >${entidade.cnpj}</td>
                             <td class="border text-center">
-                              <a href="${path}/painel/entidades/${entidade.id}" class="btn btn-primary btn-sm text-white" title="Visualizar"><i class="far fa-address-card"></i></a></td>
+                              <a href="${path}/painel/entidades/${entidade.id}" class="btn btn-primary btn-sm text-branco" title="Visualizar"><i class="far fa-address-card"></i></a></td>
                           </tr>
                         </c:forEach>
                         </tbody>

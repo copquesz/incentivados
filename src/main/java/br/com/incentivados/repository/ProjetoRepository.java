@@ -42,7 +42,6 @@ public interface ProjetoRepository extends JpaRepository<Projeto, Projeto> {
     @Query("SELECT projeto FROM Projeto projeto ORDER BY projeto.notaGeral DESC, projeto.notaTecnica DESC, projeto.notaInstitucional DESC, projeto.qtdAvaliacoes DESC")
     Page<Projeto> getRanking(Pageable page);
 
-    @Query(value = "SELECT id FROM projeto pjt INNER JOIN empresa_has_projeto ehpjt ON pjt.id = ehpjt.projeto_id INNER JOIN projeto_has_incentivo_fiscal pjthif ON pjthif.projeto_id = pjt.id where ehpjt.empresa_id = :empresa_id AND pjthif.incentivo_fiscal_id = :incentivo_fiscal_id  AND pjt.titulo LIKE %:key%", nativeQuery = true)
-    List<BigInteger> findAllByEmpresaAndIncentivosFiscaisAndTituloContaining(@Param("empresa_id") Long empresaId, @Param("incentivo_fiscal_id") Long incentivoFiscalId, @Param("key") String key, Pageable page);
+    Page<Projeto> findAllByIncentivosFiscaisAndTituloContaining(IncentivoFiscal incentivoFiscal, String titulo, Pageable page);
 
 }

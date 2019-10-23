@@ -55,6 +55,7 @@ public class Projeto implements Serializable {
 
     private Double notaGeral = 0.0D;
 
+    @Column(name = "qtd_avaliacoes")
     private Integer qtdAvaliacoes = 0;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -70,12 +70,13 @@ public class ProjetoController {
                 case EMPRESA:
                     if (usuario.getEmpresa().getProjetos().size() > 0) {
                         if (categoria != null && !categoria.equals("0")) {
-                            projetos = this.projetoService.findAllByEmpresaAndIncentivosFiscaisAndTituloContaining(usuario.getEmpresa().getId(), categoria.getId(), key, pageable);
+                            projetos = this.projetoService.findAllByIncentivosFiscaisAndTituloContaining(categoria, key, pageable);
                         } else {
-                            projetos = new PageImpl(usuario.getEmpresa().getProjetos(), pageable, (long)usuario.getEmpresa().getProjetos().size());
+                            long start = pageable.getOffset();
+                            long end = ((int) start + pageable.getPageSize()) > usuario.getEmpresa().getProjetos().size() ? usuario.getEmpresa().getProjetos().size() : (start + pageable.getPageSize());
+                            projetos = new PageImpl(usuario.getEmpresa().getProjetos().subList((int) start, (int) end), pageable, (long)usuario.getEmpresa().getProjetos().size());
                         }
-
-                        projetos.forEach((projeto) -> {
+                        projetos.getContent().forEach((projeto) -> {
                             projeto.setAvaliado(this.projetoService.verifyAvaliacao(projeto.getId(), usuario.getId()));
                         });
                         model.addAttribute("projetos", projetos);

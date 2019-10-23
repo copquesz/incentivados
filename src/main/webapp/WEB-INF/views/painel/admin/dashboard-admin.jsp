@@ -371,8 +371,8 @@
       datasets: [{
         label: 'Registros',
         data: [<c:forEach var="dataCharProjeto" items="${datasCharProjeto}">${dataCharProjeto},</c:forEach>],
-        backgroundColor: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'rgba(114, 191, 68, 0.2)',</c:forEach>],
-        borderColor: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'rgba(114, 191, 68, 1)',</c:forEach>],
+        backgroundColor: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'rgba(232, 76, 60, 0.2)',</c:forEach>],
+        borderColor: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'rgba(232, 76, 60, 1)',</c:forEach>],
         borderWidth: 1
       }]
     },

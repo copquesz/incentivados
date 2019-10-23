@@ -130,23 +130,8 @@ public class ProjetoService {
 		return verify.intValue() == 1;
 	}
 
-	public Page<Projeto> findAllByEmpresaAndIncentivosFiscaisAndTituloContaining(Long empresaId, Long incentivoFiscalId, String key, Pageable pageable) {
-		List<Projeto> projetosList = new ArrayList();
-		List<BigInteger> ids = this.projetoRepository.findAllByEmpresaAndIncentivosFiscaisAndTituloContaining(empresaId, incentivoFiscalId, key, pageable);
-		if (ids.isEmpty()) {
-			return null;
-		} else {
-			Iterator var8 = ids.iterator();
-
-			while(var8.hasNext()) {
-				BigInteger id = (BigInteger)var8.next();
-				Optional<Projeto> projeto = this.findById(id.longValue());
-				projetosList.add(projeto.get());
-			}
-
-			Page<Projeto> projetosPage = new PageImpl(projetosList, pageable, (long)projetosList.size());
-			return projetosPage;
-		}
+	public Page<Projeto> findAllByIncentivosFiscaisAndTituloContaining(IncentivoFiscal incentivoFiscal, String key, Pageable pageable) {
+		return this.projetoRepository.findAllByIncentivosFiscaisAndTituloContaining(incentivoFiscal, key, pageable);
 	}
 
 	private Projeto uploadDocumentos(HttpServletRequest request, Projeto projeto) {

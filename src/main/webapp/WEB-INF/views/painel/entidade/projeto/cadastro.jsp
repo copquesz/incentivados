@@ -26,7 +26,7 @@
 <body class="">
 <div class="wrapper ">
   <!-- Sidebar -->
-  <div class="sidebar" data-color="verde" data-active-color="white">
+  <div class="sidebar" data-color="grey" data-active-color="white">
     <div class="logo">
       <a href="#" class="simple-text logo-mini">
         <div class="logo-image-small">
@@ -53,10 +53,10 @@
           </a>
         </li>
         <li>
-            <a href="${path}/documentos/manual-do-usuario.pdf" target="_blank">
-              <i class="far fa-question-circle"></i>Tutorial
-            </a>
-          </li>
+          <a href="${path}/documentos/manual-do-usuario.pdf" target="_blank">
+            <i class="far fa-question-circle"></i>Tutorial
+          </a>
+        </li>
       </ul>
     </div>
   </div>
@@ -110,7 +110,7 @@
                 <fieldset>
                   <legend class="text-primary">Órgão Executor:</legend>
                   <label>Entidade:</label>
-                  <select class="selectpicker form-control" name="entidade" title="Selecione ..." data-live-search="true" data-style="btn-info" required>
+                  <select class="selectpicker form-control" name="entidade" title="Selecione ..." data-live-search="true" data-style="btn-info new-red" required>
                     <c:forEach var="entidade" items="${entidades}">
                       <option value="${entidade.id}">${entidade.razaoSocial}</option>
                     </c:forEach>
@@ -120,7 +120,7 @@
                 <fieldset class="mt-5">
                   <legend class="text-primary">Categoria:</legend>
                   <label>Selecione:</label>
-                  <select class="selectpicker form-control" id="selectpicker-incentivo-fiscal" name="incentivosFiscais" multiple title="Selecione ..." data-live-search="true" data-style="btn-info" required>
+                  <select class="selectpicker form-control" id="selectpicker-incentivo-fiscal" name="incentivosFiscais" multiple title="Selecione ..." data-live-search="true" data-style="btn-info new-red" required>
                     <optgroup label="Categoria">
                       <c:forEach var="incentivoFiscal" items="${incentivosFiscais}">
                         <option value="${incentivoFiscal.id}">${incentivoFiscal.legislacao} (${incentivoFiscal.competencia.descricao})<c:if test = "${not empty incentivoFiscal.sigla}"> - ${incentivoFiscal.sigla}</c:if></option>
@@ -317,6 +317,7 @@
     });
   });
 </script>
+<!--
 <script type="text/javascript">
   $(document).ready(function () {
 
@@ -336,14 +337,9 @@
       let showCampoDadosBancariosFundo = false;
       let size = $(this).val().length;
       for(i = 0; i < size ; i++){
-        if(selectpicker_incentivo_fiscal.val()[i] == 2 || selectpicker_incentivo_fiscal.val()[i] == 3){
+        if(selectpicker_incentivo_fiscal.val()[i] == 3 || selectpicker_incentivo_fiscal.val()[i] == 4){
           showCampoDadosBancariosFundo = true;
         }
-        /*
-        if(selectpicker_incentivo_fiscal.val() == 12){
-          showCertificado = false;
-        }
-        */
       }
       if(showCampoDadosBancariosFundo){
         campo_dados_bancarios_fundo.show();
@@ -361,6 +357,7 @@
 
   });
 </script>
+-->
 <script type="text/javascript">
   $("#valor-solicitado").maskMoney({showSymbol: true, symbol:'R$ ', thousands:'.', decimal:','});
   $("#valor-total").maskMoney({showSymbol: true, symbol:'R$ ', thousands:'.', decimal:','});
