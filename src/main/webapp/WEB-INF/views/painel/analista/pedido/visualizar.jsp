@@ -87,7 +87,6 @@
         <div class="row">
         <div class="col-md-12">
         <div class="card">
-        <div class="card-header bg-primary"></div>
         <div class="card-body border">
                 <form action="${path]/painel/pedidos/${empresa.nomeFantasia}/cadastro" method="post" enctype="multipart/form-data" acceptcharset="UTF-8">
         <input type="hidden" name="pedido.id" value="${pedido.id}">
