@@ -28,7 +28,7 @@
               <label><strong>Parecer:</strong></label>
               <p class="text-justify">${modalPedido.observacaoPedido.avaliacao}</p>
               <c:if test = "${modalPedido.status.id == 2}">
-                <p class="my-3"><a href="#"><i class="fas fa-file-invoice-dollar"></i> <strong>Baixar Nota Fiscal</strong> </a></p>
+                <p class="my-3"><a href="${path}/${modalPedido.observacaoPedido.documentosObservacaoPedido.notaFiscal.path}"><i class="fas fa-file-invoice-dollar" target="_blank"></i> <strong>Baixar Nota Fiscal</strong> </a></p>
               </c:if>
             </div>
           </div>          
