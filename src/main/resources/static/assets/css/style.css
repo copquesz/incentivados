@@ -1,17 +1,8 @@
-.text-white {
-    color: #000;
-}
 
 span a {
     color: #FFF!important;
 }
 
-.text-branco {
-    color: #ffff;
-}
-.text-branco:hover {
-    color: #ffff;
-}
 
 body,
 html {
@@ -90,11 +81,10 @@ body {
 
 
 .login_user_image {
-    height: 110px;
-    width: 110px;
+    
     position: absolute;
-    top: 25px;
-    left: 120px;
+    top: -25px;
+    left: -12px;
 }
 
 .footer-leroy {
@@ -135,8 +125,15 @@ img-yaba {
 
 .login_btn {
     width: 100%;
-    background: #ED1C24 !important;
+    background: #1f1e1e !important;
     color: white !important;
+    transition: all .7s;
+}
+
+.login_btn:hover { 
+    background-color: #F6F6F6!important;
+    color: #1f1e1e!important;
+    border: 1px solid #B3B3B3;
 }
 
 .login_btn:focus {
@@ -149,7 +146,7 @@ img-yaba {
 }
 
 .input-group-text {
-    background: #ED1C24 !important;
+    background: #1f1e1e !important;
     color: white !important;
     border: 0 !important;
     border-radius: 0.25rem 0 0 0.25rem !important;
@@ -180,7 +177,7 @@ img-yaba {
 }
 
 .bg-blue {
-    background-color: #ED1C24;
+    background-color: #1f1e1e;
 }
 
 login_btn:hover {

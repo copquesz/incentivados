@@ -99,7 +99,6 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header bg-info"></div>
                         <div class="card-body border">
                             <c:if test = "${not empty projeto.ods}">
                                 <div class="row mt-2">
@@ -283,7 +282,6 @@
                                 </div>
                             </fieldset>
                         </div>
-                        <div class="card-footer bg-primary"></div>
                     </div>
                 </div>
 

@@ -68,19 +68,19 @@ $pale-bg:                    #FFFCF5 !default;
 $medium-pale-bg:             #F1EAE0 !default;
 $default-body-bg:                 #f4f3ef !default;
 
-$primary-color: #ED1C24!default; 
+$primary-color: #818285 !default; 
 $primary-states-color:       darken($primary-color, 10%) !default;
 
 $success-color:              #6bd098 !default;
 $success-states-color:       darken($success-color, 10%) !default;
 
-$icon-color:                 #ED1C24 !default;
+$icon-color:                 #181717 !default;
 $info-states-color:          darken($icon-color, 10%) !default;
 
 $warning-color:              #444240 !default;
 $warning-states-color:       darken($warning-color, 10%) !default;
 
-$danger-color:               #ff7675 !default;
+$danger-color:               #87898b !default;
 $danger-states-color:        darken($danger-color, 8%) !default;
 
 $link-disabled-color:        #666666 !default;
@@ -100,8 +100,7 @@ $danger-color-opacity:       rgba(255, 54, 54, .3) !default;
 
 $new-blue:            #1DC7EA;
 $new-purple:          #9368E9;
-$new-red:             #ED1C24;
-$secundary-red:       #e74c3c;
+$new-red:             #FB404B;
 $new-green:           #87CB16;
 $new-orange:          #FFA534;
 $new-dark-blue:       #1F77D0;
@@ -130,7 +129,7 @@ $brand-inverse:              $black-color !default;
 
 $link-disabled-color:        #666666 !default;
 $dark-color:                 #051832 !default;
-$grey-color:                #FFF !default;
+$grey-color:                #1F1E1E !default;
 
 //     light colors
 $light-blue:                 rgba($primary-color, .2);

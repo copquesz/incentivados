@@ -278,7 +278,7 @@
                             <h5 class="card-title">Minhas Solicitações</h5>
                             <div class="row">
                                 <div class="col-12">
-                                    <a href="${path}/painel/pedidos/cadastro?empresaCnpj=40.432.544/0001-47" class="btn btn-primary float-right"><i class="fas fa-plus mr-2"></i> Cadastrar Pedido</a>
+                                    <a href="${path}/painel/pedidos/cadastro?empresaCnpj=09.227.084/0001-75" class="btn btn-primary float-right"><i class="fas fa-plus mr-2"></i> Cadastrar Pedido</a>
                                 </div>
                             </div>
                             <c:if test="${empty pedidos.content}">

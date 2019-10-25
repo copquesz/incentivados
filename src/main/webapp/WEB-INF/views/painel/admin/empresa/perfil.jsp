@@ -107,7 +107,6 @@
       <div class="row">
         <div class="col-md-12">
           <div class="card">
-            <div class="card-header bg-info"></div>
             <div class="card-body border">
               <fieldset>
                 <legend class="text-primary">Informações Gerais:</legend>
@@ -209,7 +208,6 @@
               </div>
               <a href="${path}/painel/empresas" class="btn btn-warning float-left"><i class="fas fa-angle-double-left"></i> Voltar</a>
             </div>
-            <div class="card-footer bg-info"></div>
           </div>
         </div>
       </div>

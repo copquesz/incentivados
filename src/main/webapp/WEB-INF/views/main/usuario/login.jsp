@@ -43,7 +43,7 @@
             <div class="login_card">
                 <div class="d-flex justify-content-center">
                     <div class="login_image bg-white rounded-circle" style="border: 1.5px solid">
-                        <img src="${path}/main/images/logo-claro.png"
+                        <img src="${path}/main/images/logo-elo.png"
                             class="login_user_image img-fluid" alt="Logo">
                     </div>
                 </div>

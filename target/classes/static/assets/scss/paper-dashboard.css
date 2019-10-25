@@ -467,7 +467,7 @@ Copyright (c) 2015 Daniel Eden
       box-shadow: none; }
 
 .btn-info {
-  background-color: #ED1C24;
+  background-color: red;
   color: #FFFFFF; }
   .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .btn-info:active:focus, .btn-info:active:hover, .btn-info.active:focus, .btn-info.active:hover, .show > .btn-info.dropdown-toggle, .show > .btn-info.dropdown-toggle:focus, .show > .btn-info.dropdown-toggle:hover {
     background-color: black !important;
@@ -476,18 +476,18 @@ Copyright (c) 2015 Daniel Eden
   .btn-info:not([data-action]):hover {
     box-shadow: none; }
   .btn-info.disabled, .btn-info.disabled:hover, .btn-info.disabled:focus, .btn-info.disabled.focus, .btn-info.disabled:active, .btn-info.disabled.active, .btn-info:disabled, .btn-info:disabled:hover, .btn-info:disabled:focus, .btn-info:disabled.focus, .btn-info:disabled:active, .btn-info:disabled.active, .btn-info[disabled], .btn-info[disabled]:hover, .btn-info[disabled]:focus, .btn-info[disabled].focus, .btn-info[disabled]:active, .btn-info[disabled].active, fieldset[disabled] .btn-info, fieldset[disabled] .btn-info:hover, fieldset[disabled] .btn-info:focus, fieldset[disabled] .btn-info.focus, fieldset[disabled] .btn-info:active, fieldset[disabled] .btn-info.active {
-    background-color: #ED1C24;
-    border-color: #ED1C24; }
+    background-color: red;
+    border-color: red; }
   .btn-info.btn-simple {
-    color: #ED1C24;
-    border-color: #ED1C24; }
+    color: red;
+    border-color: red; }
     .btn-info.btn-simple:hover, .btn-info.btn-simple:focus, .btn-info.btn-simple:active {
       background-color: transparent;
       color: black;
       border-color: black;
       box-shadow: none; }
   .btn-info.btn-link {
-    color: #ED1C24; }
+    color: red; }
     .btn-info.btn-link:hover, .btn-info.btn-link:focus, .btn-info.btn-link:active, .btn-info.btn-link:active:focus {
       background-color: transparent;
       color: black;
@@ -697,9 +697,9 @@ Copyright (c) 2015 Daniel Eden
     .btn-neutral.btn-danger:hover, .btn-neutral.btn-danger:focus, .btn-neutral.btn-danger:active, .btn-neutral.btn-danger:active:focus {
       color: #737577 !important; }
   .btn-neutral.btn-info {
-    color: #ED1C24 !important; }
+    color: red !important; }
     .btn-neutral.btn-info:hover, .btn-neutral.btn-info:focus, .btn-neutral.btn-info:active, .btn-neutral.btn-info:active:focus {
-      color: #ED1C24 !important; }
+      color: red !important; }
   .btn-neutral.btn-warning {
     color: #444240 !important; }
     .btn-neutral.btn-warning:hover, .btn-neutral.btn-warning:focus, .btn-neutral.btn-warning:active, .btn-neutral.btn-warning:active:focus {
@@ -1413,7 +1413,7 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
   background-color: #818285 !important; }
 
 .bg-info {
-  background-color: #ED1C24 !important; }
+  background-color: red !important; }
 
 .bg-success {
   background-color: #6bd098 !important; }
@@ -1640,7 +1640,7 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
   .dropdown-menu.dropdown-primary .dropdown-item:hover, .dropdown-menu.dropdown-primary .dropdown-item:focus {
     background-color: #939497; }
   .dropdown-menu.dropdown-info .dropdown-item:hover, .dropdown-menu.dropdown-info .dropdown-item:focus {
-    background-color: #ED1C24; }
+    background-color: red; }
   .dropdown-menu.dropdown-success .dropdown-item:hover, .dropdown-menu.dropdown-success .dropdown-item:focus {
     background-color: #86d9ab; }
   .dropdown-menu.dropdown-warning .dropdown-item:hover, .dropdown-menu.dropdown-warning .dropdown-item:focus {
@@ -2755,7 +2755,7 @@ License - nucleoapp.com/license/
     background: #051832; }
   .sidebar[data-color="grey"]:after,
   .off-canvas-sidebar[data-color="grey"]:after {
-    background: #ED1C24; }
+    background: red; }
   .sidebar[data-active-color="primary"] .nav li.active > a, .sidebar[data-active-color="primary"] .nav li.active > a i, .sidebar[data-active-color="primary"] .nav li.active > a[data-toggle="collapse"], .sidebar[data-active-color="primary"] .nav li.active > a[data-toggle="collapse"] i, .sidebar[data-active-color="primary"] .nav li.active > a[data-toggle="collapse"] ~ div > ul > li.active .sidebar-mini-icon, .sidebar[data-active-color="primary"] .nav li.active > a[data-toggle="collapse"] ~ div > ul > li.active > a,
   .off-canvas-sidebar[data-active-color="primary"] .nav li.active > a,
   .off-canvas-sidebar[data-active-color="primary"] .nav li.active > a i,

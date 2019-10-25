@@ -3,13 +3,13 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header bg-danger">
-        <h5 class="modal-title">SESSAO EXPIRADA</h5>
+        <h5 class="modal-title text-white">SESSAO EXPIRADA</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>Por motivos de segurança, após uma hora de inatividade sua sessão é automaticamente expirada. Realize o login novamente para acessar o painel.</p>
+        <p>Por motivos de seguranï¿½a, apï¿½s uma hora de inatividade sua sessï¿½o ï¿½ automaticamente expirada. Realize o login novamente para acessar o painel.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
