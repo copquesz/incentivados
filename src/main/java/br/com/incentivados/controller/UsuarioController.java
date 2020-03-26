@@ -1,6 +1,7 @@
 package br.com.incentivados.controller;
 
 import br.com.incentivados.model.Usuario;
+import br.com.incentivados.service.JavaMailService;
 import br.com.incentivados.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,12 +17,15 @@ import java.util.logging.Logger;
 @Controller
 public class UsuarioController {
 
-    private UsuarioService usuarioService;
+    private final UsuarioService usuarioService;
+    private final JavaMailService javaMailService;
     private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
 
+
     @Autowired
-    public UsuarioController(UsuarioService usuarioService){
+    public UsuarioController(UsuarioService usuarioService, JavaMailService javaMailService) {
         this.usuarioService = usuarioService;
+        this.javaMailService = javaMailService;
     }
 
     /**
@@ -66,6 +70,7 @@ public class UsuarioController {
             redirectAttributes.addAttribute("recuperarSenha", "emailNotFound");
         }
         else{
+            javaMailService.recuperarSenha(email);
             redirectAttributes.addAttribute("recuperarSenha", "emailSended");
         }
         return "redirect:/login";
