@@ -40,6 +40,7 @@ public class Projeto implements Serializable {
     private String contrapartida;
     @Column(columnDefinition = "TEXT")
     private String objetivo;
+
     @Column(columnDefinition = "TEXT")
     private String resumo;
 

@@ -51,15 +51,16 @@ public class DashboardController {
     }
 
     @GetMapping({"/login"})
-    public String getLogin(@ModelAttribute("redirectAttributesAcesso") String redirectAttributesAcesso, HttpServletRequest request, Model model) {
+    public String getLogin(@ModelAttribute("redirectAttributesAcesso") String redirectAttributesAcesso, @ModelAttribute("recuperarSenha") String redirectAttributesRecuperarSenha, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-        if (redirectAttributesAcesso.equals("negado")) {
-            model.addAttribute("acessoNegado", true);
-        }
 
-        if (redirectAttributesAcesso.equals("expirado")) {
-            model.addAttribute("sessaoExpirada", true);
-        }
+        //Atributo que contém a mensagem que verifica se o usuário foi validade para acesar o painel
+        if (redirectAttributesAcesso.equals("negado")) {model.addAttribute("acessoNegado", true);}
+        if (redirectAttributesAcesso.equals("expirado")) {model.addAttribute("sessaoExpirada", true);}
+
+        //Atributo que contém a mensag'em que verifica se o usuário foi localizado no banco de dados para recuperar a senha
+        if (redirectAttributesRecuperarSenha.equals("emailNotFound")){ model.addAttribute("emailNotFound", true);}
+        if (redirectAttributesRecuperarSenha.equals("emailSended")){model.addAttribute("emailSended", true);}
 
         return "main/usuario/login";
     }
