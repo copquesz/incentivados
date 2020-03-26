@@ -10,7 +10,8 @@ public enum Atuacao {
     ESPORTE(2, "Esporte"),
     CULTURA(3, "Cultura"),
     SAUDE(4, "Saúde"),
-    EDUCACAO(5, "Educação");
+    EDUCACAO(5, "Educação"),
+    MARKETING(6, "Marketing");
 
 
     private int id;
