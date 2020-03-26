@@ -99,7 +99,7 @@ public class DashboardController {
         Pageable pageableProjetos = PageRequest.of(0, 4, Sort.by(new Order[]{Order.desc("id")}));
         Pageable pageableEntidades = PageRequest.of(0, 3, Sort.by(new Order[]{Order.desc("id")}));
         Pageable pageablePedidos = PageRequest.of(0, 5, Sort.by(new Order[]{Order.desc("id")}));
-        List incentivosFiscais;
+        List incentivosFiscais = new ArrayList();
         ArrayList datasCharProjeto;
         int i;
         switch(usuario.getTipoUsuario()) {
@@ -155,7 +155,7 @@ public class DashboardController {
                 model.addAttribute("datasChartEntidade", this.entidadeService.buildChart());
                 model.addAttribute("projetos", this.projetoService.findAll(pageableProjetos));
                 model.addAttribute("qtdProjetos", this.projetoService.count());
-                incentivosFiscais = this.incentivoFiscalService.findAll();
+                incentivosFiscais = incentivoFiscalService.findAll();
                 model.addAttribute("incentivosFiscais", incentivosFiscais);
                 datasCharProjeto = new ArrayList();
 
