@@ -630,6 +630,19 @@
 </footer>
 <%--CONTATO--%>
 
+<!--Vendor-JS-->
+<script src="${path}/main/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="${path}/main/js/vendor/bootstrap.min.js"></script>
+<!--Plugin-JS-->
+<script src="${path}/main/js/owl.carousel.min.js"></script>
+<script src="${path}/main/js/contact-form.js"></script>
+<script src="${path}/main/js/jquery.parallax-1.1.3.js"></script>
+<script src="${path}/main/js/scrollUp.min.js"></script>
+<script src="${path}/main/js/magnific-popup.min.js"></script>
+<script src="${path}/main/js/wow.min.js"></script>
+<!-- WOW-JS -->
+<!--Main-active-JS-->
+<script src="${path}/main/js/script.js"></script>
 <script>
     function typeWriter(elemento) {
         const textoArray = elemento.innerHTML.split('');
@@ -644,21 +657,6 @@
     const titulo = document.querySelector('.h2');
     typeWriter(titulo);
 </script>
-
-
-<!--Vendor-JS-->
-<script src="${path}/main/js/vendor/jquery-1.12.4.min.js"></script>
-<script src="${path}/main/js/vendor/bootstrap.min.js"></script>
-<!--Plugin-JS-->
-<script src="${path}/main/js/owl.carousel.min.js"></script>
-<script src="${path}/main/js/contact-form.js"></script>
-<script src="${path}/main/js/jquery.parallax-1.1.3.js"></script>
-<script src="${path}/main/js/scrollUp.min.js"></script>
-<script src="${path}/main/js/magnific-popup.min.js"></script>
-<script src="${path}/main/js/wow.min.js"></script>
-<!-- WOW-JS -->
-<!--Main-active-JS-->
-<script src="${path}/main/js/script.js"></script>
 </body>
 
 </html>

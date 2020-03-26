@@ -80,13 +80,27 @@
                                              class="ml-2">Cadastre-se</a>
                 </div>
                 <div class="d-flex justify-content-center links">
-                    <a href="#">Esqueceu sua senha?</a>
-                </div>
+                    <a href="#" data-toggle="modal" data-target="#modal-recuperar-senha">Esqueceu sua senha?</a>
+                </div>   
+
+                <%--Mensagem de recuperação e-mail não localizado para recuperar senha--%>             
+                <c:if test="${emailNotFound}">
+                    <div class="d-flex justify-content-center links pt-3">
+                        <p style="color: #e74c3c; font-weight: bold;">E-mail não localizado!</p>
+                    </div> 
+                </c:if>
+
+                <%--Mensagem de recuperação e-mail enviado para o email--%>             
+                <c:if test="${emailSended}">
+                    <div class="d-flex justify-content-center links pt-3">
+                        <p style="color: #27ae60; font-weight: bold;">E-mail enviado!</p>
+                    </div> 
+                </c:if>
+                
             </div>
         </div>
     </div>
 </div>
-
 
 <%--Logo Yaba canto inferios esquerdo--%>
 <%--<div class="footer-yaba rounded-circle" style="height: 18%;">--%>
@@ -114,6 +128,7 @@
 <c:import url="/WEB-INF/views/componentes/modal/modal-cadastro-usuario.jsp"/>
 <c:import url="/WEB-INF/views/componentes/modal/modal-acesso-negado.jsp"/>
 <c:import url="/WEB-INF/views/componentes/modal/modal-sessao-expirada.jsp"/>
+<c:import url="/WEB-INF/views/componentes/modal/modal-recuperar-senha.jsp" />
 
 </body>
 <!--   Core JS Files   -->

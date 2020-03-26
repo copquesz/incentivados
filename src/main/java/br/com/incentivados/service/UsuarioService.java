@@ -45,9 +45,9 @@ public class UsuarioService {
     }
 
     public Usuario login(String email) {
-        Usuario usuario = this.usuarioRepository.findByEmail(email);
-        this.ultimoAcesso(usuario);
-        return usuario;
+        Optional<Usuario> usuario = findByEmail(email);
+        this.ultimoAcesso(usuario.get());
+        return usuario.get();
     }
 
     public Usuario ultimoAcesso(Usuario usuario) {
@@ -55,6 +55,11 @@ public class UsuarioService {
         TimeZone.setDefault(tz);
         usuario.setUltimoAcesso(Calendar.getInstance(tz).getTime());
         System.out.println(Calendar.getInstance(tz).getTime());
+        return (Usuario)this.usuarioRepository.save(usuario);
+    }
+
+    public Usuario atualizaSenha(Usuario usuario) {
+        usuario.setSenha(usuario.getSenha());
         return (Usuario)this.usuarioRepository.save(usuario);
     }
 
@@ -66,6 +71,8 @@ public class UsuarioService {
     public Optional<Usuario> findById(Long id) {
         return this.usuarioRepository.findById(id);
     }
+
+    public Optional<Usuario> findByEmail(String email) { return this.usuarioRepository.findByEmail(email);}
 
     public List<Usuario> findAll() {
         return this.usuarioRepository.findAll();

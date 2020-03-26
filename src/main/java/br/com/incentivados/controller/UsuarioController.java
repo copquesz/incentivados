@@ -1,12 +1,14 @@
 package br.com.incentivados.controller;
 
 import br.com.incentivados.model.Usuario;
+import br.com.incentivados.service.JavaMailService;
 import br.com.incentivados.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.logging.Level;
@@ -15,12 +17,15 @@ import java.util.logging.Logger;
 @Controller
 public class UsuarioController {
 
-    private UsuarioService usuarioService;
+    private final UsuarioService usuarioService;
+    private final JavaMailService javaMailService;
     private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
 
+
     @Autowired
-    public UsuarioController(UsuarioService usuarioService){
+    public UsuarioController(UsuarioService usuarioService, JavaMailService javaMailService) {
         this.usuarioService = usuarioService;
+        this.javaMailService = javaMailService;
     }
 
     /**
@@ -56,5 +61,18 @@ public class UsuarioController {
             logger.log(Level.SEVERE, "Ocorreu um erro ao cadastrar o usuário.", e);
             return "main/usuario/cadastro-sem-sucesso";
         }
+    }
+
+    @PostMapping("/usuarios/recuperar-senha")
+    public String postRecuperarSenha(@RequestParam() String email, RedirectAttributes redirectAttributes, HttpServletRequest request, Model model){
+        model.addAttribute("path", request.getContextPath());
+        if (!usuarioService.existsByEmail(email)){
+            redirectAttributes.addAttribute("recuperarSenha", "emailNotFound");
+        }
+        else{
+            javaMailService.recuperarSenha(email);
+            redirectAttributes.addAttribute("recuperarSenha", "emailSended");
+        }
+        return "redirect:/login";
     }
 }
