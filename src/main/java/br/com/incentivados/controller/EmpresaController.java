@@ -104,7 +104,7 @@ public class EmpresaController {
             if (this.usuarioService.existsByEmail(responsavel.getEmail())) {
                 model.addAttribute("usuario", responsavel);
                 return "painel/admin/empresa/responsavel/cadastro-responsavel-falha-email-cadastrado";
-            } else if (!responsavel.getCpf().equals("") && this.usuarioService.existsByCpf(responsavel.getCpf())) {
+            } else if (!responsavel.getCpf().isEmpty() && this.usuarioService.existsByCpf(responsavel.getCpf())) {
                 model.addAttribute("usuario", responsavel);
                 return "painel/admin/empresa/responsavel/cadastro-responsavel-falha-cpf-cadastrado";
             } else {

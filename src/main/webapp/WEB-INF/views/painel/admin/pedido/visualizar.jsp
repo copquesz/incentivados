@@ -134,7 +134,11 @@
                     </div>   
                   </div>
                   <div class="row">
-                    <div class="col-12">
+                    <div class="col-6">
+                      <label>Tipo de Solicitação:</label>                      
+                      <input type="text" class="form-control" value="${pedido.tipoPedido.descricao}" readonly>
+                    </div>
+                    <div class="col-6">
                       <label>Entidade:</label>                      
                       <input type="text" class="form-control" value="${pedido.entidade.nomeFantasia}" readonly>
                     </div>

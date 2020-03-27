@@ -1,6 +1,7 @@
 package br.com.incentivados.model;
 
 import br.com.incentivados.enumerated.StatusPedido;
+import br.com.incentivados.enumerated.TipoPedido;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -28,6 +29,9 @@ public class Pedido implements Serializable {
 
 	@Enumerated(EnumType.ORDINAL)
 	private StatusPedido status;
+
+	@Enumerated(EnumType.STRING)
+	private TipoPedido tipoPedido;
 	
 	@JoinColumn(name = "documentos_pedido_id")
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
