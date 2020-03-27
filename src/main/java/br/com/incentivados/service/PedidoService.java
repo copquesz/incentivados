@@ -1,30 +1,30 @@
 package br.com.incentivados.service;
 
+import br.com.incentivados.enumerated.StatusPedido;
+import br.com.incentivados.model.*;
+import br.com.incentivados.repository.PedidoRepository;
+import br.com.incentivados.utility.FileUpload;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
-
-import br.com.incentivados.model.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-
-import br.com.incentivados.enumerated.StatusPedido;
-import br.com.incentivados.repository.PedidoRepository;
-import br.com.incentivados.utility.FileUpload;
-import org.springframework.web.multipart.MultipartFile;
-
 @Service
 public class PedidoService {
-    private PedidoRepository pedidoRepository;
+    private final PedidoRepository pedidoRepository;
+    private final JavaMailService javaMailService;
 
     @Autowired
-    public PedidoService(PedidoRepository pedidoRepository) {
+    public PedidoService(PedidoRepository pedidoRepository, JavaMailService javaMailService) {
         this.pedidoRepository = pedidoRepository;
+        this.javaMailService = javaMailService;
     }
 
     public Pedido save(Pedido pedido, HttpServletRequest request, Usuario usuario, Usuario analista, Empresa empresa, Entidade entidade) {
@@ -33,14 +33,18 @@ public class PedidoService {
         pedido.setEmpresa(empresa);
         pedido.setEntidade(entidade);
         pedido = this.uploadDocumentos(pedido, request);
-        return (Pedido)this.pedidoRepository.save(pedido);
+
+        javaMailService.enviarEmailPedidoDoacaoUsuario(pedido);
+        javaMailService.enviarEmailPedidoDoacaoAnalista(pedido);
+
+        return this.pedidoRepository.save(pedido);
     }
 
     public Pedido update(Pedido pedido, StatusPedido status, ObservacaoPedido observacaoPedido, Usuario usuario) {
         observacaoPedido.setUsuario(usuario);
         pedido.setStatus(status);
         pedido.setObservacaoPedido(observacaoPedido);
-        return (Pedido)this.pedidoRepository.save(pedido);
+        return (Pedido) this.pedidoRepository.save(pedido);
     }
 
     public Pedido update(Pedido pedido, HttpServletRequest request, MultipartFile notaFiscal) {
@@ -51,7 +55,7 @@ public class PedidoService {
         DocumentosObservacaoPedido documentosObservacaoPedido = new DocumentosObservacaoPedido();
         documentosObservacaoPedido.setNotaFiscal(arquivo);
         pedido.getObservacaoPedido().setDocumentosObservacaoPedido(documentosObservacaoPedido);
-        return (Pedido)this.pedidoRepository.save(pedido);
+        return (Pedido) this.pedidoRepository.save(pedido);
     }
 
     public Optional<Pedido> findById(Long id) {
