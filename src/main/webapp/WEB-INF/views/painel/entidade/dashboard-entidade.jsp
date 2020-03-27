@@ -299,7 +299,7 @@
                                         <th class="text-center border">Entidade</th>
                                         <th class="text-center border">Empresa</th>
                                         <th class="text-center border">Loja</th>
-                                        <th class="text-center border">Carta Ofício</th>
+                                        <th class="text-center border">Tipo de Solicitação</th>
                                         <th class="text-center border">Status</th>
                                         </thead>
                                         <tbody>
@@ -311,9 +311,7 @@
                                                 <td class="text-center border">${pedido.entidade.nomeFantasia}</td>
                                                 <td class="text-center border">${pedido.empresa.nomeFantasia}</td>
                                                 <td class="text-center border" title="Cidade: ${pedido.analista.endereco.cidade} / Estado: ${pedido.analista.endereco.estado}"> ${pedido.analista.endereco.bairro}</td>
-                                                <td class="text-center border">
-                                                    <a href="${path}/${pedido.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a>
-                                                </td>
+                                                <td class="text-center border">${pedido.tipoPedido.descricao}</td>
                                                 <th class="text-center border">
                                                     <c:if test="${pedido.status.id == 0}">
                                                         <span class="bg-warning p-1 text-white">PENDENTE</span>

@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 import br.com.incentivados.enumerated.FiltroPedidos;
+import br.com.incentivados.enumerated.TipoPedido;
 import br.com.incentivados.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -51,6 +52,7 @@ public class PedidoController {
             Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
             model.addAttribute("usuario", usuario);
             model.addAttribute("entidades", this.entidadeService.findAllByUsuario(usuario));
+            model.addAttribute("tiposPedido", TipoPedido.values());
             return "painel/entidade/pedido/cadastro";
         } else {
             this.logger.log(Level.WARNING, "Empresa não localizada.");

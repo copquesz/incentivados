@@ -157,19 +157,19 @@
                                 <th class="text-center border">Entidade</th>
                                 <th class="text-center border">Empresa</th>
                                 <th class="text-center border">Loja</th>
-                                <th class="text-center border">Carta Ofício</th>
+                                <th class="text-center border">Tipo de Solicitação</th>
                                 <th class="text-center"></th>
                               </thead>
                               <tbody>
                                 <c:forEach var="pedidoPendente" items="${pendentes}">
                                   <tr>
-                                    <td class="text-center">${pedidoPendente.id}</td>
+                                    <td class="text-center border">${pedidoPendente.id}</td>
                                     <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoPendente.dataCadastro}" var="dataCadastro" />
                                     <td class="text-center border">${dataCadastro}</td>
                                     <td class="text-center border">${pedidoPendente.entidade.nomeFantasia}</td>
                                     <td class="text-center border">${pedidoPendente.empresa.nomeFantasia}</td>
                                     <td class="text-center border">${pedidoPendente.analista.endereco.bairro}</td>
-                                    <td class="text-center border"><a href="${path}/${pedidoPendente.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td> 
+                                    <td class="text-center border">${pedido.tipoPedido.descricao}</td>
                                     <td class="text-center border"><a class="btn btn-success btn-sm" href="${path}/painel/pedido/${pedidoPendente.id}" title="Avaliar"><i class="fas fa-sign-in-alt"></i></a></td>
                                   </tr>
                                 </c:forEach>
@@ -201,19 +201,19 @@
                                 <th class="text-center border">Entidade</th>
                                 <th class="text-center border">Empresa</th>
                                 <th class="text-center border">Loja</th>
-                                <th class="text-center border">Carta Ofício</th>
+                                <th class="text-center border">Tipo de Solicitação</th>
                                 <th class="text-center border">Parecer</th>
                               </thead>
                               <tbody>
                                 <c:forEach var="pedidoPreAprovado" items="${preAprovados}">
                                   <tr>
-                                    <td class="text-center">${pedidoPreAprovado.id}</td>
+                                    <td class="text-center border">${pedidoPreAprovado.id}</td>
                                     <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoPreAprovado.dataCadastro}" var="dataCadastro" />
                                     <td class="text-center border">${dataCadastro}</td>
                                     <td class="text-center border">${pedidoPreAprovado.entidade.nomeFantasia}</td>
                                     <td class="text-center border">${pedidoPreAprovado.empresa.nomeFantasia}</td>
                                     <td class="text-center border">${pedidoPreAprovado.analista.endereco.bairro} - ${pedidoPreAprovado.analista.endereco.cidade} / ${pedidoPreAprovado.analista.endereco.estado}</td>
-                                    <td class="text-center border"><a href="${path}/${pedidoPreAprovado.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>   
+                                    <td class="text-center border">${pedido.tipoPedido.descricao}</td> 
                                     <td class="text-center border"><a href="#" data-toggle="modal" data-target="#modal-observacao-pedido-pre-aprovado-${pedidoPreAprovado.id}" title="Visualizar"><i class="far fa-file-pdf"></i></a></td>                                 
                                   </tr>
                                 </c:forEach>
@@ -245,19 +245,19 @@
                                 <th class="text-center border">Entidade</th>
                                 <th class="text-center border">Empresa</th>
                                 <th class="text-center border">Loja</th>
-                                <th class="text-center border">Carta Ofício</th>
+                                <th class="text-center border">Tipo de Solicitação</th>
                                 <th class="text-center border">Parecer</th>
                               </thead>
                               <tbody>
                                 <c:forEach var="pedidoAprovado" items="${aprovados}">
                                   <tr>
-                                    <td class="text-center">${pedidoAprovado.id}</td>
+                                    <td class="text-center border">${pedidoAprovado.id}</td>
                                     <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoAprovado.dataCadastro}" var="dataCadastro" />
                                     <td class="text-center border">${dataCadastro}</td>
                                     <td class="text-center border">${pedidoAprovado.entidade.nomeFantasia}</td>
                                     <td class="text-center border">${pedidoAprovado.empresa.nomeFantasia}</td>
                                     <td class="text-center border">${pedidoAprovado.analista.endereco.bairro} - ${pedidoAprovado.analista.endereco.cidade} / ${pedidoAprovado.analista.endereco.estado}</td>
-                                    <td class="text-center border"><a href="${path}/${pedidoAprovado.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>    
+                                    <td class="text-center border">${pedido.tipoPedido.descricao}</td>
                                     <td class="text-center border"><a href="#" data-toggle="modal" data-target="#modal-observacao-pedido-aprovado-${pedidoAprovado.id}" title="Visualizar"><i class="far fa-file-pdf"></i></a></td>                                 
                                   </tr>
                                 </c:forEach>
@@ -289,19 +289,19 @@
                                 <th class="text-center border">Entidade</th>
                                 <th class="text-center border">Empresa</th>
                                 <th class="text-center border">Loja</th>
-                                <th class="text-center border">Carta Ofício</th>
+                                <th class="text-center border">Tipo de Solicitação</th>
                                 <th class="text-center border">Parecer</th>
                               </thead>
                               <tbody>
                                 <c:forEach var="pedidoReprovado" items="${recusados}">
                                   <tr>
-                                    <td class="text-center">${pedidoReprovado.id}</td>
+                                    <td class="text-center border">${pedidoReprovado.id}</td>
                                     <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoReprovado.dataCadastro}" var="dataCadastro" />
                                     <td class="text-center border">${dataCadastro}</td>
                                     <td class="text-center border">${pedidoReprovado.entidade.nomeFantasia}</td>
                                     <td class="text-center border">${pedidoReprovado.empresa.nomeFantasia}</td>
                                     <td class="text-center border">${pedidoReprovado.analista.endereco.bairro} - ${pedidoReprovado.analista.endereco.cidade} / ${pedidoReprovado.analista.endereco.estado}</td>
-                                    <td class="text-center border"><a href="${path}/${pedidoReprovado.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td> 
+                                    <td class="text-center border">${pedido.tipoPedido.descricao}</td>
                                     <td class="text-center border"><a href="#" data-toggle="modal" data-target="#modal-observacao-pedido-recusado-${pedidoReprovado.id}" title="Visualizar"><i class="far fa-file-pdf"></i></a></td>                                
                                   </tr>
                                 </c:forEach>
@@ -316,7 +316,7 @@
               </div>              
             </div>
           </div>
-        </div>       
+        </div>        
       </div>
       <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
       <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido-aprovado.jsp" /> 

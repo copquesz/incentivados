@@ -123,7 +123,7 @@
                             <th class="text-center">Entidade</th>
                             <th class="text-center">Empresa</th>
                             <th class="text-center">Loja</th>
-                            <th class="text-center">Carta Ofício</th>
+                            <th class="text-center">Tipo de Solicitação</th>
                             <th class="text-center">Status</th>
                           </thead>
                           <tbody>
@@ -135,7 +135,7 @@
                                 <td class="text-center">${pedido.entidade.nomeFantasia}</td>
                                 <td class="text-center">${pedido.empresa.nomeFantasia}</td>
                                 <td class="text-center">${pedido.analista.endereco.bairro} - ${pedido.analista.endereco.cidade} / ${pedido.analista.endereco.estado}</td>
-                                <td class="text-center"><a href="${path}/${pedido.documentosPedido.cartaOficio.path}" title="Visualizar" target="_blank"><i class="far fa-file-alt"></i> Carta Ofício</a></td>
+                                <td class="text-center border">${pedido.tipoPedido.descricao}</td>
                                 <th class="text-center">
                                   <c:if test = "${pedido.status.id == 0}"><span class="bg-warning">${pedido.status}</span></c:if>
                                   <c:if test = "${pedido.status.id == 1}"><span class="bg-danger">${pedido.status}</span></c:if>

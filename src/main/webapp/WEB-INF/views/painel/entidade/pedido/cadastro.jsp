@@ -128,7 +128,15 @@
                     </div>   
                   </div>
                   <div class="row">
-                    <div class="col-12">
+                    <div class="col-6">
+                      <label>Tipo de Solicitação:</label>                      
+                      <select class="selectpicker form-control" name="tipoPedido" title="Selecione ..." data-live-search="true" data-style="btn-primary" required>
+                        <c:forEach var="tipoPedido" items="${tiposPedido}">
+                          <option value="${tipoPedido}" required>${tipoPedido.descricao}</option>
+                        </c:forEach>
+                      </select>
+                    </div>
+                    <div class="col-6">
                       <label>Entidade:</label>                      
                       <select class="selectpicker form-control" name="entidade.id" title="Selecione ..." data-live-search="true" data-style="btn-primary" required>
                         <c:forEach var="entidade" items="${entidades}">
