@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -61,6 +62,18 @@ public class UsuarioController {
             logger.log(Level.SEVERE, "Ocorreu um erro ao cadastrar o usuário.", e);
             return "main/usuario/cadastro-sem-sucesso";
         }
+    }
+
+    @PostMapping("/usuarios/alterar-senha")
+    public String alterarSenha(@RequestParam() String novaSenha, RedirectAttributes redirectAttributes, HttpServletRequest request, Model model){
+        model.addAttribute("path", request.getContextPath());
+
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        usuarioService.atualizaSenha(usuario, novaSenha);
+        redirectAttributes.addAttribute("senhaAlterada", "senhaAlterada");
+
+        logger.log(Level.INFO, "Senha de " + usuario.getEmail() + " alterada com sucesso! ");
+        return "redirect:/login";
     }
 
     @PostMapping("/usuarios/recuperar-senha")

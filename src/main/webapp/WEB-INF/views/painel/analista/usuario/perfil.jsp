@@ -68,7 +68,7 @@
           <div class="collapse navbar-collapse justify-content-end" id="navigation">            
             <ul class="navbar-nav">              
               <li class="nav-item btn-rotate dropdown">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fas fa-power-off"></i>
                   <p>
                     <span class="d-lg-none d-md-block">Ações</span>
@@ -76,6 +76,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="${path}/painel/perfil">Meus Dados</a>
+                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-alterar-senha">Alterar Senha</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="${path}/sair">Sair</a>
                 </div>
@@ -196,6 +197,9 @@
       <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
     </div>
   </div>
+
+  <!-- MODALS -->
+  <c:import url="/WEB-INF/views/componentes/modal/modal-alterar-senha.jsp" />
 
   <!--   JQUERY   -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -64,7 +64,7 @@
       </div>
     </div>
     <div class="main-panel">
-      <!-- Navbar -->
+        <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
             <div class="container-fluid">
                 <div class="navbar-wrapper">
@@ -91,6 +91,7 @@
                       </a>
                       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="${path}/painel/perfil">Meus Dados</a>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-alterar-senha">Alterar Senha</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="${path}/sair">Sair</a>
                       </div>
@@ -338,10 +339,14 @@
             </div>
         </div>
         <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />        
-        <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido.jsp" />
-        <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido-pre-aprovado-usuario.jsp" />
     </div>
 </div>
+
+<!-- MODALS -->
+<c:import url="/WEB-INF/views/componentes/modal/modal-alterar-senha.jsp" />
+<c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido.jsp" />
+<c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido-pre-aprovado-usuario.jsp" />
+
 <!--   JQUERY   -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <!--   POPPER   -->
