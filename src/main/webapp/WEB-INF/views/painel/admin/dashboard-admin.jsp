@@ -109,7 +109,7 @@
           </div>
         </div>
       </nav>  
-      <div class="content">
+      <div class="content">        
         <div class="row">
           <div class="col-lg-4 col-md-4 col-sm-6">
             <div class="card card-stats">

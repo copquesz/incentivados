@@ -9,7 +9,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Optional;
+import java.util.TimeZone;
 
 @Service
 public class UsuarioService {
@@ -21,7 +24,7 @@ public class UsuarioService {
 
     public Usuario save(Usuario usuario) {
         if (usuario.getCpf().equals("")) {
-            usuario.setCpf((String)null);
+            usuario.setCpf((String) null);
         }
 
         return this.usuarioRepository.save(usuario);
@@ -29,7 +32,7 @@ public class UsuarioService {
 
     public Usuario save(Usuario usuario, Empresa empresa) {
         usuario.setEmpresa(empresa);
-        return (Usuario)this.usuarioRepository.save(usuario);
+        return this.usuarioRepository.save(usuario);
     }
 
     public boolean existsByEmailAndSenha(String cpf, String senha) {
@@ -54,25 +57,26 @@ public class UsuarioService {
         TimeZone tz = TimeZone.getTimeZone("America/Sao_Paulo");
         TimeZone.setDefault(tz);
         usuario.setUltimoAcesso(Calendar.getInstance(tz).getTime());
-        System.out.println(Calendar.getInstance(tz).getTime());
-        return (Usuario)this.usuarioRepository.save(usuario);
+        return this.usuarioRepository.save(usuario);
     }
 
     public Usuario atualizaSenha(Usuario usuario, String novaSenha) {
-        usuario.setSenha(usuario.getSenha());
-        return (Usuario)this.usuarioRepository.save(usuario);
+        usuario.setSenha(novaSenha);
+        return this.usuarioRepository.save(usuario);
     }
 
     public Usuario setEmpresa(Usuario usuario, Empresa empresa) {
         usuario.setEmpresa(empresa);
-        return (Usuario)this.usuarioRepository.save(usuario);
+        return this.usuarioRepository.save(usuario);
     }
 
     public Optional<Usuario> findById(Long id) {
         return this.usuarioRepository.findById(id);
     }
 
-    public Optional<Usuario> findByEmail(String email) { return this.usuarioRepository.findByEmail(email);}
+    public Optional<Usuario> findByEmail(String email) {
+        return this.usuarioRepository.findByEmail(email);
+    }
 
     public List<Usuario> findAll() {
         return this.usuarioRepository.findAll();

@@ -96,6 +96,13 @@
                         <p style="color: #27ae60; font-weight: bold;">E-mail enviado!</p>
                     </div> 
                 </c:if>
+
+                <%--Mensagem de senha alterada com sucesso--%>             
+                <c:if test="${senhaAlterada}">
+                    <div class="d-flex justify-content-center links pt-3">
+                        <p style="color: #27ae60; font-weight: bold;">Senha alterada com sucesso!</p>
+                    </div> 
+                </c:if>
                 
             </div>
         </div>
