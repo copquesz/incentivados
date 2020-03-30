@@ -24,7 +24,7 @@ public class UsuarioService {
             usuario.setCpf((String)null);
         }
 
-        return (Usuario)this.usuarioRepository.save(usuario);
+        return this.usuarioRepository.save(usuario);
     }
 
     public Usuario save(Usuario usuario, Empresa empresa) {
@@ -58,7 +58,7 @@ public class UsuarioService {
         return (Usuario)this.usuarioRepository.save(usuario);
     }
 
-    public Usuario atualizaSenha(Usuario usuario) {
+    public Usuario atualizaSenha(Usuario usuario, String novaSenha) {
         usuario.setSenha(usuario.getSenha());
         return (Usuario)this.usuarioRepository.save(usuario);
     }

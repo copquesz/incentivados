@@ -32,8 +32,7 @@ public class JavaMailService {
     public void recuperarSenha(String email){
         String novaSenha = UUID.randomUUID().toString().substring(0, 8);
         Optional<Usuario> usuario = usuarioService.findByEmail(email);
-        usuario.get().setSenha(novaSenha);
-        usuarioService.atualizaSenha(usuario.get());
+        usuarioService.atualizaSenha(usuario.get(), novaSenha);
 
         String recipient = usuario.get().getEmail();
         String subject = "Senha Redefinida";
