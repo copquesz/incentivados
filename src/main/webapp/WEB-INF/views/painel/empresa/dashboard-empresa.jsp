@@ -82,6 +82,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="${path}/painel/perfil">Meus Dados</a>
+                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-alterar-senha">Alterar Senha</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="${path}/sair">Sair</a>
                 </div>
@@ -318,14 +319,17 @@
           </div>
         </div>        
       </div>
-      <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
-      <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido-aprovado.jsp" /> 
-      <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido-recusado.jsp" />
-      <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido-pre-aprovado.jsp" />           
-
+      <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />     
     </div>
   </div>
-  <!--   JQUERY   -->
+
+  <!-- MODALS -->
+  <c:import url="/WEB-INF/views/componentes/modal/modal-alterar-senha.jsp" />
+  <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido-aprovado.jsp" /> 
+  <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido-recusado.jsp" />
+  <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido-pre-aprovado.jsp" /> 
+
+    <!--   JQUERY   -->
   <script src="${path}/assets/js/core/jquery.min.js"></script>
   <script src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <!--   POPPER   -->  

@@ -97,7 +97,7 @@
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="${path}/painel/perfil">Meus Dados</a>
+                  <a class="dropdown-item" href="${path}/painel/perfi#${path}/painel/perfil" data-toggle="modal" data-target="#modal-alterar-senha">Alterar Senha</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="${path}/sair">Sair</a>
                 </div>
@@ -123,6 +123,10 @@
       <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
     </div>
   </div>
+
+  <!-- MODALS -->
+  <c:import url="/WEB-INF/views/componentes/modal/modal-alterar-senha.jsp" />
+
   <!--   JQUERY   -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <!--   POPPER   -->  

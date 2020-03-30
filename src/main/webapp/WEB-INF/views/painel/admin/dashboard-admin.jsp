@@ -92,7 +92,7 @@
           <div class="collapse navbar-collapse justify-content-end" id="navigation">            
             <ul class="navbar-nav">              
               <li class="nav-item btn-rotate dropdown">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fas fa-power-off"></i>
                   <p>
                     <span class="d-lg-none d-md-block">Ações</span>
@@ -100,6 +100,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="${path}/painel/perfil">Meus Dados</a>
+                  <a class="dropdown-item" href="${path}/painel/perfil" data-toggle="modal" data-target="#modal-alterar-senha">Alterar Senha</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="${path}/sair">Sair</a>
                 </div>
@@ -316,8 +317,9 @@
         </div>  
       </div>
       <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
+      <c:import url="/WEB-INF/views/componentes/modal/modal-alterar-senha.jsp" />
     </div>
-  </div>
+  </div>  
   <!--   JQUERY   -->
   <script src="${path}/assets/js/core/jquery.min.js"></script>
   <script src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>

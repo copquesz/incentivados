@@ -94,6 +94,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="${path}/painel/perfil">Meus Dados</a>
+                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-alterar-senha">Alterar Senha</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="${path}/sair">Sair</a>
                 </div>
@@ -219,6 +220,7 @@
       <c:import url="/WEB-INF/views/componentes/modal/modal-aprovar-pedido.jsp" /> 
       <c:import url="/WEB-INF/views/componentes/modal/modal-reprovar-pedido.jsp" /> 
       <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp" />
+      <c:import url="/WEB-INF/views/componentes/modal/modal-alterar-senha.jsp" />
     </div>
   </div>
 
