@@ -4,6 +4,7 @@ import br.com.incentivados.enumerated.StatusArquivo;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ import static br.com.incentivados.enumerated.StatusArquivo.*;
 @Getter
 @Entity
 @ToString
+@DynamicUpdate
 public class Arquivo implements Serializable {
 	
 	/**

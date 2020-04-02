@@ -113,7 +113,7 @@
               <div class="card-header "> 
                 <h5 class="card-title">Análise de Documentação</h5>  
               </div>
-              <form action="${path}/painel/entidades/${entidade.id}/documentos/analise" method="post"  acceptcharset="UTF-8">  
+              <form action="${path}/painel/entidades/documentos/analise" method="post"  acceptcharset="UTF-8">  
                 <input type="hidden" name="id" value="${entidade.documentosEntidade.id}">                           
                 <div class="card-body">
                   <div class="row">
@@ -152,7 +152,7 @@
                                       <td class="border text-center"><a href="${path}/${entidade.documentosEntidade.logo.path}" target="_blank" class="btn btn-danger btn-sm text-white" title="Visualizar">Logo</a></td>
                                       <td class="border text-center">
                                           <input id="checkbox-logo" name="logo.status" type="radio" value="APROVADO"><label for="checkbox-logo">APROVADO</label>
-                                          <input id="checkbox-logo" name="statusArquivos" type="radio" value="NEGADO" checked style="margin-left: 10%;"><label for="checkbox-logo">NEGADO</label>
+                                          <input id="checkbox-logo" name="logo.status" type="radio" value="NEGADO" checked style="margin-left: 10%;"><label for="checkbox-logo">NEGADO</label>
                                       </td> 
                                     </c:if>                                                                                                          
                                   </tr>

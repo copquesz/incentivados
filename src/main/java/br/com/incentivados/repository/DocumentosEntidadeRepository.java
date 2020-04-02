@@ -1,7 +1,7 @@
 package br.com.incentivados.repository;
 
 import br.com.incentivados.enumerated.StatusArquivo;
-import br.com.incentivados.model.Arquivo;
+import br.com.incentivados.model.DocumentosEntidade;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -11,12 +11,13 @@ import org.springframework.stereotype.Repository;
 /**
  * @author Lucas Copque
  * @version 1.0
- * @since 01/04/2020
+ * @since 02/04/2020
  */
 @Repository
-public interface ArquivoRepository extends JpaRepository<Arquivo, Long> {
+public interface DocumentosEntidadeRepository extends JpaRepository<DocumentosEntidade, Long> {
 
     @Modifying
-    @Query(value = "UPDATE Arquivo ar SET ar.status = :status WHERE ar.id = :id")
-    void atualizaStatus(@Param("id") Long id, @Param("status")StatusArquivo statusArquivo);
+    @Query(value = "UPDATE DocumentosEntidade docsEnt SET docsEnt.statusDocumentacao = :status WHERE docsEnt.id = :id")
+    void atualizaStatus(@Param("id") Long id, @Param("status") StatusArquivo statusArquivo);
+
 }
