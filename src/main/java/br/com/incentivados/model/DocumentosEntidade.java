@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Setter
 @Getter
@@ -43,5 +44,8 @@ public class DocumentosEntidade {
 
 	@Enumerated(EnumType.STRING)
 	private StatusArquivo statusDocumentacao;
+
+	@OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
+	private List<ParecerDocumentacao> parecerDocumentacaos;
 
 }
