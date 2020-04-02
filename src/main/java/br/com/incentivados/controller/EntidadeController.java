@@ -3,6 +3,7 @@ package br.com.incentivados.controller;
 import br.com.incentivados.model.Entidade;
 import br.com.incentivados.model.Usuario;
 import br.com.incentivados.service.EntidadeService;
+import br.com.incentivados.service.ProjetoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,12 +21,14 @@ import java.util.logging.Logger;
 
 @Controller
 public class EntidadeController {
-    private EntidadeService entidadeService;
+    private final EntidadeService entidadeService;
+    private final ProjetoService projetoService;
     private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
 
     @Autowired
-    public EntidadeController(EntidadeService entidadeService) {
+    public EntidadeController(EntidadeService entidadeService, ProjetoService projetoService) {
         this.entidadeService = entidadeService;
+        this.projetoService = projetoService;
     }
 
     @GetMapping({"/painel/entidades/cadastro"})
@@ -60,14 +63,18 @@ public class EntidadeController {
     public String getVisualizar(@PathVariable Long id, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
         Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        Pageable pageableProjetos = PageRequest.of(0, 50, Sort.by(new Sort.Order[]{Sort.Order.desc("id")}));
 
         try {
             if (this.entidadeService.findById(id).isPresent()) {
                 Entidade entidade = (Entidade)this.entidadeService.findById(id).get();
                 model.addAttribute("entidade", entidade);
+                model.addAttribute("projetos", projetoService.findAllByUsuario(entidade.getUsuario(), pageableProjetos));
                 switch(usuario.getTipoUsuario()) {
                     case ADMIN:
                         return "painel/admin/entidade/perfil";
+                    case EMPRESA:
+                        return "painel/empresa/entidade/perfil";
                     case ENTIDADE:
                         return "painel/entidade/entidade/perfil";
                     default:
@@ -94,6 +101,9 @@ public class EntidadeController {
                 case ADMIN:
                     model.addAttribute("entidades", this.entidadeService.findAll(pageable, key));
                     return "painel/admin/entidade/lista";
+                case EMPRESA:
+                    model.addAttribute("entidades", this.entidadeService.findAll(pageable, key));
+                    return "painel/empresa/entidade/lista";
                 case ENTIDADE:
                     model.addAttribute("entidades", this.entidadeService.findAllByUsuarioAndCnpjOrNomeFantasia(usuario, pageable, key));
                     return "painel/entidade/entidade/lista";

@@ -45,6 +45,9 @@
             <a href="${path}/painel/projetos"><i class="fas fa-project-diagram"></i>Projetos</a>
           </li>
           <li>
+            <a href="${path}/painel/entidades"><i class="fas fa-users"></i>Entidades</a>
+          </li>
+          <li>
             <a href="${path}/painel/pedidos?filtro=TODOS&key="><i class="fas fa-praying-hands"></i>Pedidos</a>
           </li>
           <li>
