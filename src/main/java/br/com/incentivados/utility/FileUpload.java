@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Objects;
 
 public class FileUpload implements Serializable {
 
@@ -13,7 +14,7 @@ public class FileUpload implements Serializable {
 	private static String REAL_PATH = "";
 
 	public static String upload(HttpServletRequest request, MultipartFile arquivo, String nomeArquivo,
-			String url) {
+								String url) {
 
 		REAL_PATH = request.getServletContext().getRealPath(url);
 
@@ -22,8 +23,11 @@ public class FileUpload implements Serializable {
 		}
 
 		try {
-			arquivo.transferTo(new File(REAL_PATH + "/" + nomeArquivo));
-			System.out.println("Arquivo salvo no local:\n" + REAL_PATH + "/" + nomeArquivo);
+			String extensao = getExtension(Objects.requireNonNull(arquivo.getOriginalFilename()));
+			nomeArquivo += "." + extensao;
+			String path = REAL_PATH + "/" + nomeArquivo;
+			arquivo.transferTo(new File(path));
+			System.out.println("Arquivo salvo no local:\n" + path);
 		} catch (IOException e) {
 			// TODO: handle exception
 		}
@@ -41,6 +45,13 @@ public class FileUpload implements Serializable {
 			System.out.println("Falha ao tentar excluir o arquivo: " + REAL_PATH);
 			System.out.println("Arquivo inexistente!");
 		}
+	}
+
+	private static String  getExtension(String filename){
+		if(filename.contains(".")){
+			return filename.substring(filename.lastIndexOf(".") + 1);
+		}
+		return "";
 	}
 
 }
