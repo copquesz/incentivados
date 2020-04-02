@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import br.com.incentivados.enumerated.StatusArquivo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -158,6 +159,8 @@ public class DashboardController {
                 model.addAttribute("datasChartEntidade", this.entidadeService.buildChart());
                 model.addAttribute("projetos", this.projetoService.findAll(pageableProjetos));
                 model.addAttribute("qtdProjetos", this.projetoService.count());
+                model.addAttribute("entidadesPendenteAnalise", this.entidadeService.findAllByDocumentosEntidadeStatusDocumentacao(PageRequest.of(0, 2, Sort.by(new Order[]{Order.desc("id")})), StatusArquivo.PENDENTE));
+                model.addAttribute("entidadesAprovadaAnalise", this.entidadeService.findAllByDocumentosEntidadeStatusDocumentacao(PageRequest.of(0, 2, Sort.by(new Order[]{Order.desc("id")})), StatusArquivo.APROVADO));
                 incentivosFiscais = incentivoFiscalService.findAll();
                 model.addAttribute("incentivosFiscais", incentivosFiscais);
                 datasCharProjeto = new ArrayList();

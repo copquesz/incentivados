@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
+import br.com.incentivados.enumerated.StatusArquivo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,6 +37,12 @@ public class EntidadeService {
         entidade = (Entidade)this.entidadeRepository.save(entidade);
         return entidade;
     }
+
+    public Entidade update(Entidade entidade){
+        return this.entidadeRepository.save(entidade);
+    }
+
+    public boolean existsById(Long id){ return  this.entidadeRepository.existsById(id);}
 
     public boolean existsByCnpj(String cnpj) {
         return this.entidadeRepository.existsByCnpj(cnpj);
@@ -67,6 +74,10 @@ public class EntidadeService {
 
     public Page<Entidade> findAllByUsuarioAndCnpjOrNomeFantasia(Usuario usuario, Pageable page, String key) {
         return this.entidadeRepository.findAllByUsuarioAndCnpjOrNomeFantasia(usuario, page, key);
+    }
+
+    public Page<Entidade> findAllByDocumentosEntidadeStatusDocumentacao(Pageable pageable, StatusArquivo statusArquivo){
+        return entidadeRepository.findAllByDocumentosEntidadeStatusDocumentacao(pageable, statusArquivo);
     }
 
     public Long count() {

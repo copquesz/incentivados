@@ -1,5 +1,6 @@
 package br.com.incentivados.model;
 
+import br.com.incentivados.enumerated.StatusArquivo;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

@@ -1,5 +1,6 @@
 package br.com.incentivados.model;
 
+import br.com.incentivados.enumerated.StatusArquivo;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
+@ToString
 public class DocumentosEntidade {
 	
 	@Id
@@ -38,5 +40,8 @@ public class DocumentosEntidade {
 	@ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "dados_bancarios")
 	private Arquivo dadosBancarios;
+
+	@Enumerated(EnumType.STRING)
+	private StatusArquivo statusDocumentacao;
 
 }

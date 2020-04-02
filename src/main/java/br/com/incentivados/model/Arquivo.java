@@ -15,6 +15,7 @@ import static br.com.incentivados.enumerated.StatusArquivo.*;
 @Setter
 @Getter
 @Entity
+@ToString
 public class Arquivo implements Serializable {
 	
 	/**

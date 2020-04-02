@@ -187,6 +187,31 @@
             </div>
           </div>
         </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title"><i class="fas fa-exclamation-circle"></i> Análises</h5>
+                <div class="card-body">
+                  <ul>
+                    <li>Entidades aguardando análise da documentação: <strong>${entidadesPendenteAnalise.totalElements}</strong></li>
+                    <c:if test="${not empty entidadesPendenteAnalise.content}">
+                      <ul style="margin-top: 10px;">
+                      <c:forEach var="entidadePendenteAnalise" items="${entidadesPendenteAnalise.content}">
+                        <strong><a href="${path}/painel/entidades/${entidadePendenteAnalise.id}/documentos" title="Clique para qualificar a documentação" class="text-primary"><li>${entidadePendenteAnalise.nomeFantasia}</li></a></strong>
+                      </c:forEach>
+                      </ul>
+                    </c:if>  
+                    <hr>  
+                    <li>Projetos aguardando análise da documentação: <strong>0</strong></li>                      
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="row">
           <div class="col-md-4">
             <div class="card ">
@@ -227,6 +252,8 @@
             </div>
           </div>
 
+        </div>
+        
         </div>
         <div class="row">
           <div class="col-md-12">
