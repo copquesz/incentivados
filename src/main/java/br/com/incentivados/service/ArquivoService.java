@@ -2,6 +2,8 @@ package br.com.incentivados.service;
 
 import br.com.incentivados.model.Arquivo;
 import br.com.incentivados.model.DocumentosEntidade;
+import br.com.incentivados.model.ParecerDocumentacao;
+import br.com.incentivados.model.Usuario;
 import br.com.incentivados.repository.ArquivoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +34,7 @@ public class ArquivoService {
     }
 
     @Transactional
-    public void analisaDocumentacaoEntidade(DocumentosEntidade documentosEntidade) {
+    public void analisaDocumentacaoEntidade(DocumentosEntidade documentosEntidade, ParecerDocumentacao parecerDocumentacao) {
 
         Arquivo logo = documentosEntidade.getLogo();
         this.arquivoRepositoryrepository.atualizaStatus(logo.getId(), logo.getStatus());
@@ -80,6 +82,9 @@ public class ArquivoService {
                 || identidade.getStatus() == NEGADO || dadosBancarios.getStatus() == NEGADO)
                 && documentosEntidade.getAtaEleicao() == null) {
             documentosEntidadeService.atualizaStatus(documentosEntidade.getId(), NEGADO);
+            DocumentosEntidade documentosEntidade1 = documentosEntidadeService.getOne(documentosEntidade.getId());
+            documentosEntidade1.getPareceresDocumentacao().add(parecerDocumentacao);
+            documentosEntidadeService.atualiza(documentosEntidade1);
         }
 
         // Altera o estado da documentação para NEGADO com Ata de Eleição == null
@@ -87,7 +92,11 @@ public class ArquivoService {
                 || identidade.getStatus() == NEGADO || dadosBancarios.getStatus() == NEGADO
                 || documentosEntidade.getAtaEleicao().getStatus() == NEGADO)
                 && documentosEntidade.getAtaEleicao() != null) {
+            documentosEntidade.setStatusDocumentacao(NEGADO);
             documentosEntidadeService.atualizaStatus(documentosEntidade.getId(), NEGADO);
+            DocumentosEntidade documentosEntidade1 = documentosEntidadeService.getOne(documentosEntidade.getId());
+            documentosEntidade1.getPareceresDocumentacao().add(parecerDocumentacao);
+            documentosEntidadeService.atualiza(documentosEntidade1);
         }
 
     }

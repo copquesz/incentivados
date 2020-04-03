@@ -61,7 +61,6 @@ public class Empresa implements Serializable {
         joinColumns = { @JoinColumn(name = "empresa_id") }, 
         inverseJoinColumns = { @JoinColumn(name = "usuario_id") }
     )
-
 	private List<Usuario> analistas;
 
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)

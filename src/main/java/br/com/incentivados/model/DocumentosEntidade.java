@@ -45,7 +45,12 @@ public class DocumentosEntidade {
 	@Enumerated(EnumType.STRING)
 	private StatusArquivo statusDocumentacao;
 
-	@OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
-	private List<ParecerDocumentacao> parecerDocumentacaos;
+	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "documentos_entidade_has_parecer_documentacao",
+			joinColumns = { @JoinColumn(name = "documentos_entidade_id") },
+			inverseJoinColumns = { @JoinColumn(name = "parecer_documentacao_id") }
+	)
+	private List<ParecerDocumentacao> pareceresDocumentacao;
 
 }

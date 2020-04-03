@@ -2,6 +2,7 @@ package br.com.incentivados.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,6 +15,7 @@ import java.util.Date;
 @Setter
 @Getter
 @Entity
+@ToString
 public class ParecerDocumentacao {
 
     @Id
@@ -30,5 +32,15 @@ public class ParecerDocumentacao {
     @JoinColumn(name = "usuario_id")
     @ManyToOne(fetch = FetchType.EAGER)
     private Usuario analista;
+
+    public ParecerDocumentacao(){
+        dataCadastro = new Date();
+    }
+
+    public ParecerDocumentacao(String analise, Usuario analista){
+        dataCadastro = new Date();
+        this.analise = analise;
+        this.analista = analista;
+    }
 
 }

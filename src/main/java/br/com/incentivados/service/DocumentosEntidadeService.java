@@ -1,6 +1,7 @@
 package br.com.incentivados.service;
 
 import br.com.incentivados.enumerated.StatusArquivo;
+import br.com.incentivados.model.DocumentosEntidade;
 import br.com.incentivados.repository.DocumentosEntidadeRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,14 @@ public class DocumentosEntidadeService {
 
     public DocumentosEntidadeService(DocumentosEntidadeRepository documentosEntidadeRepository) {
         this.documentosEntidadeRepository = documentosEntidadeRepository;
+    }
+
+    public DocumentosEntidade getOne(Long id){
+        return this.documentosEntidadeRepository.getOne(id);
+    }
+
+    public void atualiza(DocumentosEntidade documentosEntidade){
+        this.documentosEntidadeRepository.save(documentosEntidade);
     }
 
     public void atualizaStatus(Long id, StatusArquivo statusArquivo){

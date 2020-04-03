@@ -338,14 +338,13 @@
       let showCampoDadosBancariosFundo = false;
       let size = $(this).val().length;
       for(i = 0; i < size ; i++){
-        if(selectpicker_incentivo_fiscal.val()[i] == 2 || selectpicker_incentivo_fiscal.val()[i] == 3){
+        if(selectpicker_incentivo_fiscal.val()[i] == 5 || selectpicker_incentivo_fiscal.val()[i] == 6 || selectpicker_incentivo_fiscal.val()[i] == 7 || selectpicker_incentivo_fiscal.val()[i] == 8){
           showCampoDadosBancariosFundo = true;
         }
-        /*
+        
         if(selectpicker_incentivo_fiscal.val() == 12){
           showCertificado = false;
-        }
-        */
+        }        
       }
       if(showCampoDadosBancariosFundo){
         campo_dados_bancarios_fundo.show();

@@ -1,9 +1,7 @@
 package br.com.incentivados.controller;
 
 import br.com.incentivados.enumerated.StatusArquivo;
-import br.com.incentivados.model.Arquivo;
-import br.com.incentivados.model.DocumentosEntidade;
-import br.com.incentivados.model.Entidade;
+import br.com.incentivados.model.*;
 import br.com.incentivados.service.ArquivoService;
 import br.com.incentivados.service.EntidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +37,7 @@ public class ArquivoController {
         model.addAttribute("path", request.getContextPath());
         if(this.entidadeService.findById(idEntidade).isPresent()){
             model.addAttribute("entidade", this.entidadeService.findById(idEntidade).get());
-            model.addAttribute("arquivos", new ArrayList<Arquivo>());
+            model.addAttribute("analista", request.getSession().getAttribute("usuario"));
             return "painel/admin/entidade/documentos";
         }
         else{
@@ -48,9 +46,10 @@ public class ArquivoController {
     }
 
     @PostMapping("/painel/entidades/documentos/analise")
-    public String salvaAnalise(DocumentosEntidade documentosEntidade, HttpServletRequest request, Model model){
+    public String salvaAnalise(DocumentosEntidade documentosEntidade, ParecerDocumentacao parecerDocumentacao, HttpServletRequest request, Model model){
         model.addAttribute("path", request.getContextPath());
-        arquivoService.analisaDocumentacaoEntidade(documentosEntidade);
+        System.out.println(parecerDocumentacao);
+        arquivoService.analisaDocumentacaoEntidade(documentosEntidade, parecerDocumentacao);
         return "redirect:/painel/dashboard";
     }
 }
