@@ -68,21 +68,17 @@ public class ProjetoController {
                     model.addAttribute("projetos", this.projetoService.findAllByUsuario(usuario, pageable, key));
                     return "painel/entidade/projeto/lista";
                 case EMPRESA:
-                    if (usuario.getEmpresa().getProjetos().size() > 0) {
-                        if (categoria != null && !categoria.equals("0")) {
-                            projetos = this.projetoService.findAllByEmpresaAndIncentivosFiscaisAndTituloContaining(usuario.getEmpresa().getId(), categoria.getId(), key, pageable);
-                        } else {
-                            projetos = new PageImpl(usuario.getEmpresa().getProjetos(), pageable, (long)usuario.getEmpresa().getProjetos().size());
-                        }
-
-                        projetos.forEach((projeto) -> {
-                            projeto.setAvaliado(this.projetoService.verifyAvaliacao(projeto.getId(), usuario.getId()));
-                        });
-                        model.addAttribute("projetos", projetos);
-                        model.addAttribute("qtdAvaliados", this.projetoService.countProjetosAvaliados(usuario.getId()));
-                        model.addAttribute("qtdPendentes", this.projetoService.count() - this.projetoService.countProjetosAvaliados(usuario.getId()));
+                    if (categoria != null && !categoria.equals("0")) {
+                        projetos = this.projetoService.findAllByTituloOrIncentivosFiscaisContaining(pageable, key, categoria);
+                    } else {
+                        projetos = this.projetoService.findAll(pageable, key);
                     }
-
+                    projetos.getContent().forEach((projeto) -> {
+                        projeto.setAvaliado(this.projetoService.verifyAvaliacao(projeto.getId(), usuario.getId()));
+                    });
+                    model.addAttribute("projetos", projetos);
+                    model.addAttribute("qtdAvaliados", this.projetoService.countProjetosAvaliados(usuario.getId()));
+                    model.addAttribute("qtdPendentes", this.projetoService.count() - this.projetoService.countProjetosAvaliados(usuario.getId()));
                     return "painel/empresa/projeto/lista";
                 default:
                     this.logger.log(Level.WARNING, "Usuário não encontrado.");
