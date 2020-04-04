@@ -80,6 +80,10 @@ public class EntidadeService {
         return entidadeRepository.findAllByDocumentosEntidadeStatusDocumentacao(pageable, statusArquivo);
     }
 
+    public Page<Entidade> findAllByUsuarioAndAndDocumentosEntidadeStatusDocumentacao(Pageable pageable, Usuario usuario, StatusArquivo statusArquivo){
+        return entidadeRepository.findAllByUsuarioAndAndDocumentosEntidadeStatusDocumentacao(pageable, usuario, statusArquivo);
+    }
+
     public Long count() {
         return this.entidadeRepository.count();
     }

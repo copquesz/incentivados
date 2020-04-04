@@ -1,5 +1,6 @@
 package br.com.incentivados.model;
 
+import br.com.incentivados.enumerated.StatusArquivo;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -37,6 +38,9 @@ public class DocumentosProjeto implements Serializable {
 	@ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "certificado")
 	private Arquivo certificado;
+
+	@Enumerated(EnumType.STRING)
+	private StatusArquivo statusDocumentacao;
 
 	public DocumentosProjeto() {
 	}

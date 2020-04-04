@@ -218,7 +218,7 @@
                                     </c:when>                        
                                     <c:when test = "${entidade.documentosEntidade.logo.status eq 'NEGADO'|| entidade.documentosEntidade.ataEleicao.status eq 'NEGADO'|| entidade.documentosEntidade.estatutoSocial.status eq 'NEGADO'|| entidade.documentosEntidade.identidade.status eq 'NEGADO'|| entidade.documentosEntidade.cartaoCnpj.status eq 'NEGADO'|| entidade.documentosEntidade.dadosBancarios.status eq 'NEGADO' && not empty entidade.documentosEntidade.ataEleicao.path}">
                                       <div class="alert alert-danger" role="alert">
-                                        <small><strong><i class="far fa-times-circle"></i> A documentação possui arquivo(s) negado(s). </br><a href="#"><u>Clique aqui</u></a> para regularizar.</strong></small>
+                                        <small><strong><i class="far fa-times-circle"></i> A documentação possui arquivo(s) negado(s). </br><a href="#" data-toggle="modal" data-target="#modal-regularizacao-documentos-entidade"><u>Clique aqui</u></a> para regularizar.</strong></small>
                                       </div>
                                     </c:when>                        
                                     <c:when test = "${entidade.documentosEntidade.logo.status eq 'NEGADO' || entidade.documentosEntidade.estatutoSocial.status eq 'NEGADO'|| entidade.documentosEntidade.identidade.status eq 'NEGADO'|| entidade.documentosEntidade.cartaoCnpj.status eq 'NEGADO'|| entidade.documentosEntidade.dadosBancarios.status eq 'NEGADO' && empty entidade.documentosEntidade.ataEleicao.path}">
@@ -473,6 +473,7 @@
             </div>
         </div>
         <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp"/>
+        <c:import url="/WEB-INF/views/componentes/modal/modal-regularizacao-documentos-entidade.jsp" />
     </div>
 </div>
 
@@ -485,6 +486,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <!--   BOOTSTRAP   -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${path}/assets/js/file-validator.js"></script>
 <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 <script type="text/javascript" src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
 <script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script>

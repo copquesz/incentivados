@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import br.com.incentivados.enumerated.StatusArquivo;
+import br.com.incentivados.model.DocumentosEntidade;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -33,6 +34,8 @@ public interface EntidadeRepository extends JpaRepository<Entidade, Long> {
     Page<Entidade> findAllByUsuario(Usuario usuario, Pageable page);
 
     Page<Entidade> findAllByDocumentosEntidadeStatusDocumentacao(Pageable pageable, StatusArquivo statusArquivo);
+
+    Page<Entidade> findAllByUsuarioAndAndDocumentosEntidadeStatusDocumentacao(Pageable pageable, Usuario usuario, StatusArquivo statusArquivo);
 
     @Query("SELECT entidade FROM Entidade entidade WHERE entidade.nomeFantasia LIKE %:key% OR entidade.cnpj LIKE %:key%")
     Page<Entidade> findAll(Pageable page, @Param("key") String key);

@@ -69,6 +69,7 @@ public class EntidadeController {
                     case ADMIN:
                         return "painel/admin/entidade/perfil";
                     case ENTIDADE:
+                        model.addAttribute("size", entidade.getDocumentosEntidade().getPareceresDocumentacao().size());
                         return "painel/entidade/entidade/perfil";
                     default:
                         return "";

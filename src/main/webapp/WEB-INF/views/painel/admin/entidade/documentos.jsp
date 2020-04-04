@@ -314,7 +314,7 @@
                           <div class="form-group">
                             <input type="hidden" name="analista.id" value="${analista.id}">
                             <label>Parecer:</label>
-                            <textarea class="form-control" name="analise" rows="10" maxlength="3000" placeholder="Descreva sua o motivo pelo qual o(s) documento(s) está sendo negado ..."></textarea>
+                            <textarea class="form-control text-justify" name="analise" rows="10" maxlength="3000" placeholder="Descreva sua o motivo pelo qual o(s) documento(s) está sendo negado ..."></textarea>
                           </div>
                         </div>
                       </div>

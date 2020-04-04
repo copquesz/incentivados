@@ -48,8 +48,15 @@ public class ArquivoController {
     @PostMapping("/painel/entidades/documentos/analise")
     public String salvaAnalise(DocumentosEntidade documentosEntidade, ParecerDocumentacao parecerDocumentacao, HttpServletRequest request, Model model){
         model.addAttribute("path", request.getContextPath());
-        System.out.println(parecerDocumentacao);
         arquivoService.analisaDocumentacaoEntidade(documentosEntidade, parecerDocumentacao);
+        return "redirect:/painel/dashboard";
+    }
+
+    @PostMapping("/painel/entidades/{idEntidade}/documentos/reenviar")
+    public String reenviaDocumentacao(@PathVariable Long idEntidade, DocumentosEntidade documentosEntidade, HttpServletRequest request, Model model){
+        model.addAttribute("path", request.getContextPath());
+        Entidade entidade = entidadeService.findById(idEntidade).get();
+        arquivoService.reenviarDocumentacaoEntidade(entidade, documentosEntidade, request);
         return "redirect:/painel/dashboard";
     }
 }
