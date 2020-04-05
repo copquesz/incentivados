@@ -1,6 +1,7 @@
 package br.com.incentivados.service;
 
 import br.com.incentivados.enumerated.Ods;
+import br.com.incentivados.enumerated.StatusArquivo;
 import br.com.incentivados.enumerated.TipoAvaliacao;
 import br.com.incentivados.model.*;
 import br.com.incentivados.repository.ProjetoRepository;
@@ -91,6 +92,14 @@ public class ProjetoService {
 
 	public Page<Projeto> findAll(Pageable page, String key) {
 		return this.projetoRepository.findAll(page, key);
+	}
+
+	public Page<Projeto> findAllByDocumentosProjetoStatusDocumentacao(Pageable pageable, StatusArquivo statusArquivo){
+		return projetoRepository.findAllByDocumentosProjetoStatusDocumentacao(pageable, statusArquivo);
+	}
+
+	public Page<Projeto> findAllByUsuarioAndAndDocumentosProjetoStatusDocumentacao(Pageable pageable, Usuario usuario, StatusArquivo statusArquivo){
+		return projetoRepository.findAllByUsuarioAndAndDocumentosProjetoStatusDocumentacao(pageable, usuario, statusArquivo);
 	}
 
 	public Page<Projeto> findAllByTituloOrIncentivosFiscaisContaining(Pageable page, String key, IncentivoFiscal incentivoFiscal) {

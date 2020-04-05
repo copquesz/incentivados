@@ -161,8 +161,8 @@ public class DashboardController {
                 model.addAttribute("projetos", this.projetoService.findAll(pageableProjetos));
                 model.addAttribute("qtdProjetos", this.projetoService.count());
                 model.addAttribute("entidadesPendenteAnalise", this.entidadeService.findAllByDocumentosEntidadeStatusDocumentacao(PageRequest.of(0, 2, Sort.by(new Order[]{Order.desc("id")})), StatusArquivo.PENDENTE));
-                incentivosFiscais = incentivoFiscalService.findAll();
-                model.addAttribute("incentivosFiscais", incentivosFiscais);
+                model.addAttribute("projetosPendenteAnalise", this.projetoService.findAllByDocumentosProjetoStatusDocumentacao(PageRequest.of(0, 2, Sort.by(new Order[]{Order.desc("id")})), StatusArquivo.PENDENTE));
+                model.addAttribute("incentivosFiscais", incentivoFiscalService.findAll());
                 datasCharProjeto = new ArrayList();
 
                 for(i = 0; i < incentivosFiscais.size(); ++i) {

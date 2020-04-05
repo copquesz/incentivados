@@ -195,7 +195,7 @@
                 <h5 class="card-title"> Análises</h5>
                 <div class="card-body">
                   <ul>
-                    <li>Entidades aguardando análise da documentação: <strong>${entidadesPendenteAnalise.totalElements}</strong></li>
+                    <li>Entidades aguardando análise da documentação: <strong>${entidadesPendenteAnalise.content.size()}</strong> de <strong>${entidadesPendenteAnalise.totalElements}</strong>.</li>
                     <c:if test="${not empty entidadesPendenteAnalise.content}">
                       <ul style="margin-top: 10px;">
                       <c:forEach var="entidadePendenteAnalise" items="${entidadesPendenteAnalise.content}">
@@ -204,11 +204,11 @@
                       </ul>
                     </c:if>  
                     <hr>  
-                    <li>Projetos aguardando análise da documentação: <strong>${projetosPendenteAnalise.totalElements}</strong></li>  
+                    <li>Projetos aguardando análise da documentação: <strong>${projetosPendenteAnalise.content.size()}</strong> de <strong>${projetosPendenteAnalise.totalElements}</strong>.</li>
                     <c:if test="${not empty projetosPendenteAnalise.content}">
                       <ul style="margin-top: 10px;">
                       <c:forEach var="projetoPendenteAnalise" items="${projetosPendenteAnalise.content}">
-                        <strong><a href="${path}/painel/entidades/${projetoPendenteAnalise.id}/documentos" title="Visualizar" class="text-primary"><li>${entidadePendenteAnalise.nomeFantasia}</li></a></strong>
+                        <strong><a href="${path}/painel/projetos/${projetoPendenteAnalise.id}/documentos" title="Visualizar" class="text-primary"><li>${projetoPendenteAnalise.titulo}</li></a></strong>
                       </c:forEach>
                       </ul>
                     </c:if>                    

@@ -3,6 +3,7 @@ package br.com.incentivados.service;
 import br.com.incentivados.enumerated.StatusArquivo;
 import br.com.incentivados.model.DocumentosEntidade;
 import br.com.incentivados.repository.DocumentosEntidadeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,6 +16,7 @@ public class DocumentosEntidadeService {
 
     private final DocumentosEntidadeRepository documentosEntidadeRepository;
 
+    @Autowired
     public DocumentosEntidadeService(DocumentosEntidadeRepository documentosEntidadeRepository) {
         this.documentosEntidadeRepository = documentosEntidadeRepository;
     }

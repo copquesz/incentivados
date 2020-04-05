@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 import static br.com.incentivados.enumerated.StatusArquivo.PENDENTE;
 
@@ -43,6 +44,14 @@ public class DocumentosProjeto implements Serializable {
 
 	@Enumerated(EnumType.STRING)
 	private StatusArquivo statusDocumentacao;
+
+	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "documentos_projeto_has_parecer_documentacao",
+			joinColumns = { @JoinColumn(name = "documentos_projeto_id") },
+			inverseJoinColumns = { @JoinColumn(name = "parecer_documentacao_id") }
+	)
+	private List<ParecerDocumentacao> pareceresDocumentacao;
 
 	public DocumentosProjeto() {
 		this.statusDocumentacao = PENDENTE;

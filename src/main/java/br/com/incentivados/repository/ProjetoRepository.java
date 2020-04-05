@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.incentivados.enumerated.StatusArquivo;
 import br.com.incentivados.model.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,6 +34,10 @@ public interface ProjetoRepository extends JpaRepository<Projeto, Projeto> {
 
     @Query("SELECT projeto FROM Projeto projeto WHERE projeto.titulo LIKE %:key%")
     Page<Projeto> findAll(Pageable page, @Param("key") String key);
+
+    Page<Projeto> findAllByDocumentosProjetoStatusDocumentacao(Pageable pageable, StatusArquivo statusArquivo);
+
+    Page<Projeto> findAllByUsuarioAndAndDocumentosProjetoStatusDocumentacao(Pageable pageable, Usuario usuario, StatusArquivo statusArquivo);
 
     Page<Projeto> findAllByTituloOrIncentivosFiscaisContaining(Pageable page, String titulo, IncentivoFiscal incentivoFiscal);
 
