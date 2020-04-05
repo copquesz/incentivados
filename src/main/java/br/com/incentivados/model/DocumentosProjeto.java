@@ -8,6 +8,8 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.io.Serializable;
 
+import static br.com.incentivados.enumerated.StatusArquivo.PENDENTE;
+
 @Setter
 @Getter
 @Entity
@@ -43,5 +45,6 @@ public class DocumentosProjeto implements Serializable {
 	private StatusArquivo statusDocumentacao;
 
 	public DocumentosProjeto() {
+		this.statusDocumentacao = PENDENTE;
 	}
 }

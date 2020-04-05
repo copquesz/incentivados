@@ -8,6 +8,8 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.util.List;
 
+import static br.com.incentivados.enumerated.StatusArquivo.*;
+
 @Setter
 @Getter
 @Entity
@@ -52,5 +54,9 @@ public class DocumentosEntidade {
 			inverseJoinColumns = { @JoinColumn(name = "parecer_documentacao_id") }
 	)
 	private List<ParecerDocumentacao> pareceresDocumentacao;
+
+	public DocumentosEntidade(){
+		this.statusDocumentacao = PENDENTE;
+	}
 
 }
