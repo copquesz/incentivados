@@ -13,7 +13,6 @@ import static br.com.incentivados.enumerated.StatusArquivo.PENDENTE;
 @Setter
 @Getter
 @Entity
-@ToString
 public class DocumentosProjeto implements Serializable {
 
 	private static final long serialVersionUID = 4406458384830462217L;

@@ -2,6 +2,9 @@ package br.com.incentivados.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +14,7 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
+@ToString
 public class Entidade implements Serializable {
 
 	private static final long serialVersionUID = -5965040417561644262L;
@@ -46,7 +50,8 @@ public class Entidade implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private DocumentosEntidade documentosEntidade;
 	
-	@OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
+	@Fetch(FetchMode.SUBSELECT)
 	private List<Projeto> projetos;
 	
 	//Construtor Padrão

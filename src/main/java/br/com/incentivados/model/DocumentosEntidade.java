@@ -12,7 +12,6 @@ import static br.com.incentivados.enumerated.StatusArquivo.PENDENTE;
 @Setter
 @Getter
 @Entity
-@ToString
 public class DocumentosEntidade {
 	
 	@Id

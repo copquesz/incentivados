@@ -50,6 +50,7 @@ public class Empresa implements Serializable {
 			joinColumns = { @JoinColumn(name = "empresa_id") },
 			inverseJoinColumns = { @JoinColumn(name = "usuario_id") }
 	)
+	@Fetch(FetchMode.SUBSELECT)
 	private List<Usuario> responsaveis;
 	
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
@@ -58,6 +59,7 @@ public class Empresa implements Serializable {
         joinColumns = { @JoinColumn(name = "empresa_id") }, 
         inverseJoinColumns = { @JoinColumn(name = "usuario_id") }
     )
+	@Fetch(FetchMode.SUBSELECT)
 	private List<Usuario> analistas;
 
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)

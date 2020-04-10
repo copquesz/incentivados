@@ -4,6 +4,7 @@ import br.com.incentivados.model.Entidade;
 import br.com.incentivados.model.Usuario;
 import br.com.incentivados.service.EntidadeService;
 import br.com.incentivados.service.JavaMailService;
+import br.com.incentivados.service.ProjetoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,12 +24,15 @@ import java.util.logging.Logger;
 public class EntidadeController {
   
     private EntidadeService entidadeService;
+    private ProjetoService projetoService;
     private JavaMailService javaMailService;
     private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
 
     @Autowired
-    public EntidadeController(EntidadeService entidadeService, JavaMailService javaMailService) {
+    public EntidadeController(EntidadeService entidadeService, ProjetoService projetoService, JavaMailService javaMailService) {
         this.entidadeService = entidadeService;
+        this.projetoService = projetoService;
+        this.javaMailService = javaMailService;
     }
 
     @GetMapping({"/painel/entidades/cadastro"})
@@ -68,7 +72,7 @@ public class EntidadeController {
 
         try {
             if (this.entidadeService.findById(id).isPresent()) {
-                Entidade entidade = (Entidade)this.entidadeService.findById(id).get();
+                Entidade entidade = this.entidadeService.findById(id).get();
                 model.addAttribute("entidade", entidade);
                 model.addAttribute("projetos", projetoService.findAllByUsuario(entidade.getUsuario(), pageableProjetos));
                 switch(usuario.getTipoUsuario()) {

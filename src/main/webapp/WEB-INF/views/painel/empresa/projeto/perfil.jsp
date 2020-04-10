@@ -182,7 +182,7 @@
                                   <div class="form-group">
                                       <label>Entidade Executora:</label>
                                       <input type="text" class="form-control"
-                                             value="${projeto.entidade.razaoSocial}" readonly>
+                                             value="${projeto.entidade.nomeFantasia}" readonly>
                                   </div>
                               </div>
                           </div>

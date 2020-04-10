@@ -15,7 +15,6 @@ import static br.com.incentivados.enumerated.StatusArquivo.NAO_SE_APLICA;
 @Setter
 @Getter
 @Entity
-@ToString
 @DynamicUpdate
 public class Arquivo implements Serializable {
 	

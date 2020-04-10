@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <html lang="pt-br">
 
 <head>
@@ -228,13 +229,51 @@
                       </div>
                   </div>
               </fieldset>
+
+              <fieldset class="mt-5">
+                <legend class="text-primary">Projetos:</legend>
+                  <c:if test = "${empty projetos.content}">
+                    <div class="alert alert-info mt-3" role="alert">
+                      <p class="text-bold">Não há projeto(s) cadastrado(s).</p>
+                    </div>
+                  </c:if>
+                  <c:if test = "${not empty projetos.content}"> 
+                    <div class="row justify-content-start">
+                      <c:forEach var="projeto" items="${projetos.content}">
+                        <div class="col-12 col-xl-3 col-lg-6 col-md-6 d-flex align-items-stretch bd-highlight">
+                          <div class="card border align-self-stretch flex-fill bd-highlight mt-3">
+                            <img src="${path}/${projeto.documentosProjeto.logo.path}" class="card-img-top img-fluid" alt="..." style="max-height: 200px;">
+                            <div class="card-body">
+                              <h5 class="card-title" style="font-weight: bold;">
+                                <c:choose> 
+                                  <c:when test = "${fn:length(projeto.titulo) > 30}">
+                                    ${fn:substring(projeto.titulo, 0, 30)} ...
+                                  </c:when>
+                                  <c:otherwise>  
+                                    ${projeto.titulo}
+                                  </c:otherwise>
+                                </c:choose>
+                              </h5>
+                              <hr>
+                              <p class="card-text text-justify">${fn:substring(projeto.objetivo, 0, 180)} ...</p>
+                            </div>
+                            <div class="card-footer">
+                              <a href="${path}/painel/projetos/${projeto.id}" class="btn btn-primary">Ver Detalhes</a>
+                            </div>
+                          </div>
+                        </div>
+                      </c:forEach>
+                    </div>
+                  </c:if>
+              </fieldset>
+
               <fieldset class="mt-5">
                   <legend class="text-primary">Documentação:</legend>
                   <div class="row">
                     <div class="col-12">
 
                       <c:choose>                        
-                        <c:when test = "${entidade.documentosEntidade.logo.status eq 'APROVADO' && entidade.documentosEntidade.ataEleicao.status eq 'APROVADO' && entidade.documentosEntidade.estatutoSocial.status eq 'APROVADO' && entidade.documentosEntidade.identidade.status eq 'APROVADO' && entidade.documentosEntidade.cartaoCnpj.status eq 'APROVADO' && entidade.documentosEntidade.dadosBancarios.status eq 'APROVADO' && not empty entidade.documentosEntidade.ataEleicao.path}">
+                        <c:when test = "${entidade.documentosEntidade.logo.status eq 'APROVADO' && entidade.documentosEntidade.ataEleicao.status eq 'APROVADO' && entidade.documentosEntidade.estatutoSocial.status eq 'APROVADO' && entidade.documentosEntidade.identidade.status eq 'APROVADO' && entidade.documentosEntidade.cartaoCnpj.status eq 'APROVADO' && entidade.documentosEntidade.dadosBancarios.status eq 'APROVADO' &&  entidade.documentosEntidade.ataEleicao.status eq 'NAO_SE_APLICA'}">
                           <div class="alert alert-success" role="alert">
                             <small><strong><i class="far fa-check-circle"></i> A documentação está aprovada.</strong></small>
                           </div>
