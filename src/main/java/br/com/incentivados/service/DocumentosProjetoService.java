@@ -5,7 +5,6 @@ import br.com.incentivados.model.DocumentosProjeto;
 import br.com.incentivados.repository.DocumentosProjetoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Lucas Copque

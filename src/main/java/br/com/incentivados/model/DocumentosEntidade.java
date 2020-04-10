@@ -8,7 +8,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.util.List;
 
-import static br.com.incentivados.enumerated.StatusArquivo.*;
+import static br.com.incentivados.enumerated.StatusArquivo.PENDENTE;
 
 @Setter
 @Getter

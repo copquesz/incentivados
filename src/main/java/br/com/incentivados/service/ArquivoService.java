@@ -105,8 +105,6 @@ public class ArquivoService {
     @Transactional
     public void analisaDocumentacaoProjeto(Projeto projeto, DocumentosProjeto documentosProjeto, ParecerDocumentacao parecerDocumentacao) {
 
-        System.err.println(projeto);
-
         Arquivo logo = documentosProjeto.getLogo();
         projeto.getDocumentosProjeto().getLogo().setStatus(logo.getStatus());
         this.arquivoRepositoryrepository.atualizaStatus(logo.getId(), logo.getStatus());
@@ -124,7 +122,6 @@ public class ArquivoService {
         this.arquivoRepositoryrepository.atualizaStatus(certificado.getId(), certificado.getStatus());
 
         if (projeto.getDocumentosProjeto().getDadosBancariosFundo().getStatus() != NAO_SE_APLICA) {
-            System.err.println("PEGOU NULO");
             Arquivo dadosBancariosFundo = documentosProjeto.getDadosBancariosFundo();
             projeto.getDocumentosProjeto().getDadosBancariosFundo().setStatus(dadosBancariosFundo.getStatus());
             this.arquivoRepositoryrepository.atualizaStatus(dadosBancariosFundo.getId(), dadosBancariosFundo.getStatus());;
@@ -134,7 +131,6 @@ public class ArquivoService {
         if (logo.getStatus() == APROVADO && propostaTecnica.getStatus() == APROVADO && propostaOrcamentaria.getStatus() == APROVADO
                 && certificado.getStatus() == APROVADO && projeto.getDocumentosProjeto().getDadosBancariosFundo().getStatus() == NAO_SE_APLICA) {
             projeto.getDocumentosProjeto().setStatusDocumentacao(APROVADO);
-            System.err.println("TUDO APROVADO SEM DADOS BANCÁRIOS");
             documentosProjetoService.atualizaStatus(projeto.getDocumentosProjeto(), APROVADO);
         }
 
@@ -142,14 +138,12 @@ public class ArquivoService {
         else if (logo.getStatus() == APROVADO && propostaTecnica.getStatus() == APROVADO && propostaOrcamentaria.getStatus() == APROVADO
                 && certificado.getStatus() == APROVADO && projeto.getDocumentosProjeto().getDadosBancariosFundo().getStatus() == APROVADO) {
             projeto.getDocumentosProjeto().setStatusDocumentacao(APROVADO);
-            System.err.println("TUDO APROVADO COM DADOS BANCÁRIOS");
             documentosProjetoService.atualizaStatus(projeto.getDocumentosProjeto(), APROVADO);
         }
 
         // Altera o estado da documentação para NEGADO sem Dados Bancários do Fundo == null
         else if (logo.getStatus() == NEGADO || propostaTecnica.getStatus() == NEGADO || propostaOrcamentaria.getStatus() == NEGADO
                 || certificado.getStatus() == NEGADO && projeto.getDocumentosProjeto().getDadosBancariosFundo().getStatus() == NAO_SE_APLICA) {
-            System.err.println("OU NEGADO SEM DADOS BANCÁRIOS");
             projeto.getDocumentosProjeto().setStatusDocumentacao(NEGADO);
             documentosProjetoService.atualizaStatus(projeto.getDocumentosProjeto(), NEGADO);
             projeto.getDocumentosProjeto().getPareceresDocumentacao().add(parecerDocumentacao);
@@ -159,14 +153,11 @@ public class ArquivoService {
         // Altera o estado da documentação para NEGADO com Dados Bancários do Fundo != null
         else if (logo.getStatus() == NEGADO || propostaTecnica.getStatus() == NEGADO || propostaOrcamentaria.getStatus() == NEGADO
                 || certificado.getStatus() == NEGADO || projeto.getDocumentosProjeto().getDadosBancariosFundo().getStatus() == NEGADO) {
-
-            System.err.println("OU NEGADO COM DADOS BANCÁRIOS");
             projeto.getDocumentosProjeto().setStatusDocumentacao(NEGADO);
             documentosProjetoService.atualizaStatus(projeto.getDocumentosProjeto(), NEGADO);
             projeto.getDocumentosProjeto().getPareceresDocumentacao().add(parecerDocumentacao);
             documentosProjetoService.atualiza(projeto.getDocumentosProjeto());
         }
-        System.err.println(projeto);
         javaMailService.enviarEmailRelatorioDocumentosProjeto(projeto);
     }
 

@@ -11,7 +11,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-import static br.com.incentivados.enumerated.StatusArquivo.*;
+import static br.com.incentivados.enumerated.StatusArquivo.NAO_SE_APLICA;
 
 @Setter
 @Getter
