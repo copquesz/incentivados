@@ -113,7 +113,9 @@
               <div class="card-header "> 
                 <h5 class="card-title">Análise de Documentação</h5>  
               </div>
-              <form action="${path}/painel/entidades/documentos/analise" method="post"  acceptcharset="UTF-8">  
+
+              <form action="${path}/painel/entidades/${entidade.id}/documentos/analise" method="post"  acceptcharset="UTF-8" id="formulario-analise-documentos-entidade">  
+
                 <input type="hidden" name="id" value="${entidade.documentosEntidade.id}">                           
                 <div class="card-body">
                   <div class="row">
@@ -132,6 +134,7 @@
                                  
                                 <c:if test="${not empty entidade.documentosEntidade.logo.path}">  
                                 <input type="hidden" name="logo.id" value="${entidade.documentosEntidade.logo.id}">
+                                <input type="hidden" name="logo.path" value="${entidade.documentosEntidade.logo.path}">
                                   <tr>                                      
                                     <td class="border text-center">${entidade.documentosEntidade.logo.id}</td>
                                     <c:if test="${entidade.documentosEntidade.logo.status eq 'PENDENTE'}">
@@ -151,7 +154,7 @@
                                     <c:if test="${entidade.documentosEntidade.logo.status eq 'NEGADO'}">
                                       <td class="border text-center"><a href="${path}/${entidade.documentosEntidade.logo.path}" target="_blank" class="btn btn-danger btn-sm text-white" title="Visualizar">Logo</a></td>
                                       <td class="border text-center">
-                                          <input id="checkbox-logo" name="logo.status" type="radio" value="APROVADO"><label for="checkbox-logo">APROVADO</label>
+                                          <input id="checkbox-logo" name="logo.status" type="radio" value="APROVADO" checked><label for="checkbox-logo">APROVADO</label>
                                           <input id="checkbox-logo" name="logo.status" type="radio" value="NEGADO" checked style="margin-left: 10%;"><label for="checkbox-logo">NEGADO</label>
                                       </td> 
                                     </c:if>                                                                                                          
@@ -160,6 +163,7 @@
                                 
                                 <c:if test="${not empty entidade.documentosEntidade.ataEleicao.path}">  
                                 <input type="hidden" name="ataEleicao.id" value="${entidade.documentosEntidade.ataEleicao.id}">
+                                <input type="hidden" name="ataEleicao.path" value="${entidade.documentosEntidade.ataEleicao.path}">
                                   <tr>                                      
                                     <td class="border text-center">${entidade.documentosEntidade.ataEleicao.id}</td>
                                     <c:if test="${entidade.documentosEntidade.ataEleicao.status eq 'PENDENTE'}">
@@ -188,6 +192,7 @@
                                 
                                 <c:if test="${not empty entidade.documentosEntidade.estatutoSocial.path}"> 
                                 <input type="hidden" name="estatutoSocial.id" value="${entidade.documentosEntidade.estatutoSocial.id}">
+                                <input type="hidden" name="estatutoSocial.path" value="${entidade.documentosEntidade.estatutoSocial.path}">
                                   <tr>                                      
                                     <td class="border text-center">${entidade.documentosEntidade.estatutoSocial.id}</td>
                                     <c:if test="${entidade.documentosEntidade.estatutoSocial.status eq 'PENDENTE'}">
@@ -216,6 +221,7 @@
 
                                 <c:if test="${not empty entidade.documentosEntidade.identidade.path}">     
                                 <input type="hidden" name="identidade.id" value="${entidade.documentosEntidade.identidade.id}">
+                                <input type="hidden" name="identidade.path" value="${entidade.documentosEntidade.identidade.path}">
                                   <tr>                                      
                                     <td class="border text-center">${entidade.documentosEntidade.identidade.id}</td>
                                     <c:if test="${entidade.documentosEntidade.identidade.status eq 'PENDENTE'}">
@@ -244,6 +250,7 @@
 
                                 <c:if test="${not empty entidade.documentosEntidade.cartaoCnpj.path}">   
                                 <input type="hidden" name="cartaoCnpj.id" value="${entidade.documentosEntidade.cartaoCnpj.id}">
+                                <input type="hidden" name="cartaoCnpj.path" value="${entidade.documentosEntidade.cartaoCnpj.path}">
                                   <tr>                                      
                                     <td class="border text-center">${entidade.documentosEntidade.cartaoCnpj.id}</td>
                                     <c:if test="${entidade.documentosEntidade.cartaoCnpj.status eq 'PENDENTE'}">
@@ -272,6 +279,7 @@
                                 
                                 <c:if test="${not empty entidade.documentosEntidade.dadosBancarios.path}">
                                 <input type="hidden" name="dadosBancarios.id" value="${entidade.documentosEntidade.dadosBancarios.id}">
+                                <input type="hidden" name="dadosBancarios.path" value="${entidade.documentosEntidade.dadosBancarios.path}">
                                   <tr>                                      
                                     <td class="border text-center">${entidade.documentosEntidade.dadosBancarios.id}</td>
                                     <c:if test="${entidade.documentosEntidade.dadosBancarios.status eq 'PENDENTE'}">
@@ -303,6 +311,16 @@
                           </div>      
                         </div>        
                       </div> 
+                      <div class="row" id="campo-parecer">
+                        <div class="col-12">
+                          <div class="form-group">
+                            <input type="hidden" name="analista.id" value="${analista.id}">
+                            <label>Parecer:</label>
+                            <textarea class="form-control text-justify" name="analise" rows="10" maxlength="3000" placeholder="Descreva sua o motivo pelo qual o(s) documento(s) está sendo negado ..."></textarea>
+                          </div>
+                        </div>
+                      </div>
+
                       <div class="row">
                         <div class="col-12">
                           <button type="submit" class="btn btn-primary float-right">Enviar <i class="far fa-share-square"></i></button>
@@ -333,7 +351,28 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>  
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script type="text/javascript" src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script>  
+  <script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script> 
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+
+      // Variáveis globais
+      let campo_parecer = $('#campo-parecer');   
+      campo_parecer.hide();
+
+      $("#formulario-analise-documentos-entidade").change(function(){
+        
+          if($("input[name='logo.status']:checked").val() == 'NEGADO' || $("input[name='ataEleicao.status']:checked").val() == 'NEGADO' || $("input[name='estatutoSocial.status']:checked").val() == 'NEGADO' || $("input[name='identidade.status']:checked").val() == 'NEGADO' || $("input[name='cartaoCnpj.status']:checked").val() == 'NEGADO' || $("input[name='dadosBancarios.status']:checked").val() == 'NEGADO')
+            campo_parecer.show()
+          else{
+            campo_parecer.hide();
+          }
+          
+        
+      });
+    });
+  </script>
 
 </body>
 

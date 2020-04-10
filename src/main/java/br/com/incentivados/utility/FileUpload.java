@@ -14,7 +14,7 @@ public class FileUpload implements Serializable {
 	private static String REAL_PATH = "";
 
 	public static String upload(HttpServletRequest request, MultipartFile arquivo, String nomeArquivo,
-								String url) {
+			String url) {
 
 		REAL_PATH = request.getServletContext().getRealPath(url);
 
@@ -27,7 +27,7 @@ public class FileUpload implements Serializable {
 			nomeArquivo += "." + extensao;
 			String path = REAL_PATH + "/" + nomeArquivo;
 			arquivo.transferTo(new File(path));
-			System.out.println("Arquivo salvo no local:\n" + path);
+			System.out.println("Arquivo salvo com sucesso:" + path);
 		} catch (IOException e) {
 			// TODO: handle exception
 		}
@@ -53,5 +53,4 @@ public class FileUpload implements Serializable {
 		}
 		return "";
 	}
-
 }

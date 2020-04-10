@@ -1,5 +1,6 @@
 package br.com.incentivados.controller;
 
+import br.com.incentivados.enumerated.StatusArquivo;
 import br.com.incentivados.enumerated.StatusPedido;
 import br.com.incentivados.model.IncentivoFiscal;
 import br.com.incentivados.model.Usuario;
@@ -133,6 +134,8 @@ public class DashboardController {
                 model.addAttribute("qtdProjetos", this.projetoService.countByUsuario(usuario));
                 model.addAttribute("pedidos", this.pedidoService.findAllByUsuario(usuario, pageablePedidos));
                 model.addAttribute("qtdPedidos", this.pedidoService.countByUsuario(usuario));
+                model.addAttribute("entidadesNegadoAnalise", this.entidadeService.findAllByUsuarioAndAndDocumentosEntidadeStatusDocumentacao(PageRequest.of(0, 2, Sort.by(new Order[]{Order.desc("id")})), usuario, StatusArquivo.NEGADO));
+                model.addAttribute("projetosNegadoAnalise", this.projetoService.findAllByUsuarioAndAndDocumentosProjetoStatusDocumentacao(PageRequest.of(0, 2, Sort.by(new Order[]{Order.desc("id")})), usuario, StatusArquivo.NEGADO));
                 return "painel/entidade/dashboard-entidade";
             case ANALISTA:
                 model.addAttribute("qtdPedidos", this.pedidoService.countByAnalista(usuario));
@@ -151,8 +154,9 @@ public class DashboardController {
                 model.addAttribute("datasChartEntidade", this.entidadeService.buildChart());
                 model.addAttribute("projetos", this.projetoService.findAll(pageableProjetos));
                 model.addAttribute("qtdProjetos", this.projetoService.count());
-                incentivosFiscais = incentivoFiscalService.findAll();
-                model.addAttribute("incentivosFiscais", incentivosFiscais);
+                model.addAttribute("entidadesPendenteAnalise", this.entidadeService.findAllByDocumentosEntidadeStatusDocumentacao(PageRequest.of(0, 2, Sort.by(new Order[]{Order.desc("id")})), StatusArquivo.PENDENTE));
+                model.addAttribute("projetosPendenteAnalise", this.projetoService.findAllByDocumentosProjetoStatusDocumentacao(PageRequest.of(0, 2, Sort.by(new Order[]{Order.desc("id")})), StatusArquivo.PENDENTE));
+                model.addAttribute("incentivosFiscais", incentivoFiscalService.findAll());
                 datasCharProjeto = new ArrayList();
 
                 for(i = 0; i < incentivosFiscais.size(); ++i) {

@@ -1,13 +1,18 @@
 package br.com.incentivados.model;
 
+import br.com.incentivados.enumerated.StatusArquivo;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
+
+import static br.com.incentivados.enumerated.StatusArquivo.PENDENTE;
 
 @Setter
 @Getter
 @Entity
+@ToString
 public class DocumentosEntidade {
 	
 	@Id
@@ -37,5 +42,24 @@ public class DocumentosEntidade {
 	@ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "dados_bancarios")
 	private Arquivo dadosBancarios;
+
+	@Enumerated(EnumType.STRING)
+	private StatusArquivo statusDocumentacao;
+
+	@JoinColumn(name = "entidade_id")
+	@OneToOne(fetch = FetchType.LAZY)
+	Entidade entidade;
+
+	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "documentos_entidade_has_parecer_documentacao",
+			joinColumns = { @JoinColumn(name = "documentos_entidade_id") },
+			inverseJoinColumns = { @JoinColumn(name = "parecer_documentacao_id") }
+	)
+	private List<ParecerDocumentacao> pareceresDocumentacao;
+
+	public DocumentosEntidade(){
+		this.statusDocumentacao = PENDENTE;
+	}
 
 }

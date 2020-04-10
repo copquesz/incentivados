@@ -169,6 +169,41 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="card-title"> Análises</h5>
+                    <div class="card-body">
+                      <ul>                        
+                        <li>Entidades com documentação irregular: <strong>${entidadesNegadoAnalise.totalElements}</strong></li>
+                        <c:if test="${not empty entidadesNegadoAnalise.content}">
+                          <ul style="margin-top: 10px;">
+                              <c:forEach var="entidadeNegadoAnalise" items="${entidadesNegadoAnalise.content}">
+                                <strong><a href="${path}/painel/entidades/${entidadeNegadoAnalise.id}" title="Visualizar" class="text-primary"><li>${entidadeNegadoAnalise.nomeFantasia}</li></a></strong>
+                              </c:forEach>
+                          </ul>
+                        </c:if>   
+                        </li>
+                        <hr>                        
+                        <li>Projetos com documentação irregular: <strong>${projetosNegadoAnalise.totalElements}</strong></li>
+                        <c:if test="${not empty projetosNegadoAnalise.content}">
+                          <ul style="margin-top: 10px;">
+                              <c:forEach var="projetoNegadoAnalise" items="${projetosNegadoAnalise.content}">
+                                <strong><a href="${path}/painel/projetos/${projetoNegadoAnalise.id}" title="Visualizar" class="text-primary"><li>${projetoNegadoAnalise.titulo}</li></a></strong>
+                              </c:forEach>
+                          </ul>
+                        </c:if>   
+                        <hr>                         
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="card ">

@@ -121,9 +121,9 @@ public class EmpresaController {
                     return "painel/admin/empresa/responsavel/cadastro-responsavel-falha";
                 }
             }
-        } catch (Exception var6) {
-            System.out.println(var6.toString());
-            model.addAttribute("erro", var6);
+        } catch (Exception e) {
+            System.err.println(e.toString());
+            model.addAttribute("erro", e);
             return "painel/admin/empresa/responsavel/cadastro-analista-falha";
         }
     }
@@ -185,9 +185,9 @@ public class EmpresaController {
 
                         return "painel/admin/empresa/analista/cadastro-analista-sucesso";
                     }
-                } catch (Exception var8) {
-                    System.out.println(var8.toString());
-                    model.addAttribute("erro", var8);
+                } catch (Exception e) {
+                    System.err.println(e.toString());
+                    model.addAttribute("erro", e);
                     return "painel/admin/empresa/analista/cadastro-analista-falha";
                 }
             case EMPRESA:
@@ -212,9 +212,9 @@ public class EmpresaController {
 
                         return "painel/empresa/analista/cadastro-analista-sucesso";
                     }
-                } catch (Exception var7) {
-                    System.out.println(var7.toString());
-                    model.addAttribute("erro", var7);
+                } catch (Exception e) {
+                    System.err.println(e.toString());
+                    model.addAttribute("erro", e);
                     return "painel/empresa/analista/cadastro-analista-falha";
                 }
             default:

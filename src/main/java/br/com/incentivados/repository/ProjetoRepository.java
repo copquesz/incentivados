@@ -1,5 +1,6 @@
 package br.com.incentivados.repository;
 
+import br.com.incentivados.enumerated.StatusArquivo;
 import br.com.incentivados.model.IncentivoFiscal;
 import br.com.incentivados.model.Projeto;
 import br.com.incentivados.model.Usuario;
@@ -35,6 +36,10 @@ public interface ProjetoRepository extends JpaRepository<Projeto, Projeto> {
 
     @Query("SELECT projeto FROM Projeto projeto WHERE projeto.titulo LIKE %:key%")
     Page<Projeto> findAll(Pageable page, @Param("key") String key);
+
+    Page<Projeto> findAllByDocumentosProjetoStatusDocumentacao(Pageable pageable, StatusArquivo statusArquivo);
+
+    Page<Projeto> findAllByUsuarioAndAndDocumentosProjetoStatusDocumentacao(Pageable pageable, Usuario usuario, StatusArquivo statusArquivo);
 
     Page<Projeto> findAllByTituloOrIncentivosFiscaisContaining(Pageable page, String titulo, IncentivoFiscal incentivoFiscal);
 

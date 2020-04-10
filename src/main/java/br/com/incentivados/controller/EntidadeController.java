@@ -3,7 +3,7 @@ package br.com.incentivados.controller;
 import br.com.incentivados.model.Entidade;
 import br.com.incentivados.model.Usuario;
 import br.com.incentivados.service.EntidadeService;
-import br.com.incentivados.service.ProjetoService;
+import br.com.incentivados.service.JavaMailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -21,14 +21,14 @@ import java.util.logging.Logger;
 
 @Controller
 public class EntidadeController {
-    private final EntidadeService entidadeService;
-    private final ProjetoService projetoService;
+  
+    private EntidadeService entidadeService;
+    private JavaMailService javaMailService;
     private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
 
     @Autowired
-    public EntidadeController(EntidadeService entidadeService, ProjetoService projetoService) {
+    public EntidadeController(EntidadeService entidadeService, JavaMailService javaMailService) {
         this.entidadeService = entidadeService;
-        this.projetoService = projetoService;
     }
 
     @GetMapping({"/painel/entidades/cadastro"})
@@ -45,6 +45,7 @@ public class EntidadeController {
         try {
             if (!this.entidadeService.existsByCnpj(entidade.getCnpj())) {
                 entidade = this.entidadeService.save(entidade, usuario, request);
+                javaMailService.enviarEmailNotificacaoDocumentosEntidadePendenteAnalise(entidade);
                 model.addAttribute("entidade", entidade);
                 this.logger.log(Level.INFO, "Entidade cadastrada com sucesso: " + entidade.getNomeFantasia());
                 return "painel/entidade/entidade/cadastro-entidade-sucesso";
@@ -76,6 +77,7 @@ public class EntidadeController {
                     case EMPRESA:
                         return "painel/empresa/entidade/perfil";
                     case ENTIDADE:
+                        model.addAttribute("size", entidade.getDocumentosEntidade().getPareceresDocumentacao().size());
                         return "painel/entidade/entidade/perfil";
                     default:
                         return "";

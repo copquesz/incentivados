@@ -1,14 +1,19 @@
 package br.com.incentivados.model;
 
+import br.com.incentivados.enumerated.StatusArquivo;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+
+import static br.com.incentivados.enumerated.StatusArquivo.PENDENTE;
 
 @Setter
 @Getter
 @Entity
+@ToString
 public class DocumentosProjeto implements Serializable {
 
 	private static final long serialVersionUID = 4406458384830462217L;
@@ -37,6 +42,18 @@ public class DocumentosProjeto implements Serializable {
 	@JoinColumn(name = "certificado")
 	private Arquivo certificado;
 
+	@Enumerated(EnumType.STRING)
+	private StatusArquivo statusDocumentacao;
+
+	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "documentos_projeto_has_parecer_documentacao",
+			joinColumns = { @JoinColumn(name = "documentos_projeto_id") },
+			inverseJoinColumns = { @JoinColumn(name = "parecer_documentacao_id") }
+	)
+	private List<ParecerDocumentacao> pareceresDocumentacao;
+
 	public DocumentosProjeto() {
+		this.statusDocumentacao = PENDENTE;
 	}
 }
