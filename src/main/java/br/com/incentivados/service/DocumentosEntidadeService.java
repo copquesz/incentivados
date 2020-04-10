@@ -2,9 +2,11 @@ package br.com.incentivados.service;
 
 import br.com.incentivados.enumerated.StatusArquivo;
 import br.com.incentivados.model.DocumentosEntidade;
+import br.com.incentivados.model.Entidade;
 import br.com.incentivados.repository.DocumentosEntidadeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Lucas Copque
@@ -29,7 +31,7 @@ public class DocumentosEntidadeService {
         this.documentosEntidadeRepository.save(documentosEntidade);
     }
 
-    public void atualizaStatus(Long id, StatusArquivo statusArquivo){
-        this.documentosEntidadeRepository.atualizaStatus(id, statusArquivo);
+    public void atualizaStatus(DocumentosEntidade documentosEntidade, StatusArquivo statusArquivo){
+        this.documentosEntidadeRepository.atualizaStatus(documentosEntidade.getId(), statusArquivo);
     }
 }

@@ -4,6 +4,7 @@ import br.com.incentivados.enumerated.StatusArquivo;
 import br.com.incentivados.model.*;
 import br.com.incentivados.service.ArquivoService;
 import br.com.incentivados.service.EntidadeService;
+import br.com.incentivados.service.JavaMailService;
 import br.com.incentivados.service.ProjetoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,13 +27,15 @@ public class ArquivoController {
     private final ArquivoService arquivoService;
     private final EntidadeService entidadeService;
     private final ProjetoService projetoService;
+    private final JavaMailService javaMailService;
     private final Logger logger = Logger.getLogger(ArquivoController.class.getName());
 
     @Autowired
-    public ArquivoController(ArquivoService arquivoService, EntidadeService entidadeService, ProjetoService projetoService) {
+    public ArquivoController(ArquivoService arquivoService, EntidadeService entidadeService, ProjetoService projetoService, JavaMailService javaMailService) {
         this.arquivoService = arquivoService;
         this.entidadeService = entidadeService;
         this.projetoService = projetoService;
+        this.javaMailService = javaMailService;
     }
 
     @GetMapping("/painel/entidades/{idEntidade}/documentos")
@@ -61,17 +64,17 @@ public class ArquivoController {
         }
     }
 
-    @PostMapping("/painel/entidades/documentos/analise")
-    public String salvaAnaliseEntidade(DocumentosEntidade documentosEntidade, ParecerDocumentacao parecerDocumentacao, HttpServletRequest request, Model model){
+    @PostMapping("/painel/entidades/{idEntidade}/documentos/analise")
+    public String salvaAnaliseEntidade(@PathVariable Long idEntidade, DocumentosEntidade documentosEntidade, ParecerDocumentacao parecerDocumentacao, HttpServletRequest request, Model model){
         model.addAttribute("path", request.getContextPath());
-        arquivoService.analisaDocumentacaoEntidade(documentosEntidade, parecerDocumentacao);
+        arquivoService.analisaDocumentacaoEntidade(entidadeService.findById(idEntidade).get(), documentosEntidade, parecerDocumentacao);
         return "redirect:/painel/dashboard";
     }
 
-    @PostMapping("/painel/projetos/documentos/analise")
-    public String salvaAnaliseProjeto(DocumentosProjeto documentosProjeto, ParecerDocumentacao parecerDocumentacao, HttpServletRequest request, Model model){
+    @PostMapping("/painel/projetos/{idProjeto}/documentos/analise")
+    public String salvaAnaliseProjeto(@PathVariable Long idProjeto, DocumentosProjeto documentosProjeto, ParecerDocumentacao parecerDocumentacao, HttpServletRequest request, Model model){
         model.addAttribute("path", request.getContextPath());
-        arquivoService.analisaDocumentacaoProjeto(documentosProjeto, parecerDocumentacao);
+        arquivoService.analisaDocumentacaoProjeto(projetoService.findById(idProjeto).get(), documentosProjeto, parecerDocumentacao);
         return "redirect:/painel/dashboard";
     }
 

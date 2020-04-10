@@ -113,7 +113,7 @@
               <div class="card-header "> 
                 <h5 class="card-title">Análise de Documentação</h5>  
               </div>
-              <form action="${path}/painel/entidades/documentos/analise" method="post"  acceptcharset="UTF-8" id="formulario-analise-documentos-entidade">  
+              <form action="${path}/painel/entidades/${entidade.id}/documentos/analise" method="post"  acceptcharset="UTF-8" id="formulario-analise-documentos-entidade">  
                 <input type="hidden" name="id" value="${entidade.documentosEntidade.id}">                           
                 <div class="card-body">
                   <div class="row">

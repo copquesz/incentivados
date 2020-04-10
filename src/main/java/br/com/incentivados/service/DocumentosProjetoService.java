@@ -5,6 +5,7 @@ import br.com.incentivados.model.DocumentosProjeto;
 import br.com.incentivados.repository.DocumentosProjetoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Lucas Copque
@@ -12,12 +13,12 @@ import org.springframework.stereotype.Service;
  * @since 04/04/2020
  */
 @Service
-public class DocumentosProjetoServie {
+public class DocumentosProjetoService {
 
     private final DocumentosProjetoRepository documentosProjetoRepository;
 
     @Autowired
-    public DocumentosProjetoServie(DocumentosProjetoRepository documentosProjetoRepository) {
+    public DocumentosProjetoService(DocumentosProjetoRepository documentosProjetoRepository) {
         this.documentosProjetoRepository = documentosProjetoRepository;
     }
 
@@ -29,8 +30,8 @@ public class DocumentosProjetoServie {
         this.documentosProjetoRepository.save(documentosProjeto);
     }
 
-    public  void atualizaStatus(Long id, StatusArquivo statusArquivo){
-        this.documentosProjetoRepository.atualizaStatus(id, statusArquivo);
+    public  void atualizaStatus(DocumentosProjeto documentosProjeto, StatusArquivo statusArquivo){
+        this.documentosProjetoRepository.atualizaStatus(documentosProjeto.getId(), statusArquivo);
     }
 
 }

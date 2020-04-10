@@ -142,6 +142,7 @@ public class DashboardController {
                 model.addAttribute("pedidos", this.pedidoService.findAllByUsuario(usuario, pageablePedidos));
                 model.addAttribute("qtdPedidos", this.pedidoService.countByUsuario(usuario));
                 model.addAttribute("entidadesNegadoAnalise", this.entidadeService.findAllByUsuarioAndAndDocumentosEntidadeStatusDocumentacao(PageRequest.of(0, 2, Sort.by(new Order[]{Order.desc("id")})), usuario, StatusArquivo.NEGADO));
+                model.addAttribute("projetosNegadoAnalise", this.projetoService.findAllByUsuarioAndAndDocumentosProjetoStatusDocumentacao(PageRequest.of(0, 2, Sort.by(new Order[]{Order.desc("id")})), usuario, StatusArquivo.NEGADO));
                 return "painel/entidade/dashboard-entidade";
             case ANALISTA:
                 model.addAttribute("qtdPedidos", this.pedidoService.countByAnalista(usuario));

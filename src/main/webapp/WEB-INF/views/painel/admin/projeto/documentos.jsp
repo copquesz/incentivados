@@ -113,7 +113,7 @@
               <div class="card-header "> 
                 <h5 class="card-title">Análise de Documentação</h5>  
               </div>
-              <form action="${path}/painel/projetos/documentos/analise" method="post"  acceptcharset="UTF-8" id="formulario-analise-documentos-projeto">  
+              <form action="${path}/painel/projetos/${projeto.id}/documentos/analise" method="post"  acceptcharset="UTF-8" id="formulario-analise-documentos-projeto">  
                 <input type="hidden" name="id" value="${projeto.documentosProjeto.id}">                           
                 <div class="card-body">
                   <div class="row">
@@ -217,7 +217,7 @@
                                   </tr>
                                 </c:if>
 
-                                <c:if test="${not empty projeto.documentosProjeto.dadosBancariosFundo.path}">     
+                                <c:if test="${projeto.documentosProjeto.dadosBancariosFundo.status ne 'NAO_SE_APLICA'}">     
                                 <input type="hidden" name="dadosBancariosFundo.id" value="${projeto.documentosProjeto.dadosBancariosFundo.id}">
                                 <input type="hidden" name="dadosBancariosFundo.path" value="${projeto.documentosProjeto.dadosBancariosFundo.path}">
                                   <tr>                                      

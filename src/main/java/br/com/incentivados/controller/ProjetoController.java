@@ -5,10 +5,7 @@ import br.com.incentivados.model.Empresa;
 import br.com.incentivados.model.IncentivoFiscal;
 import br.com.incentivados.model.Projeto;
 import br.com.incentivados.model.Usuario;
-import br.com.incentivados.service.EmpresaService;
-import br.com.incentivados.service.EntidadeService;
-import br.com.incentivados.service.IncentivoFiscalService;
-import br.com.incentivados.service.ProjetoService;
+import br.com.incentivados.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Controller;
@@ -27,18 +24,20 @@ import java.util.logging.Logger;
 
 @Controller
 public class ProjetoController {
-    private ProjetoService projetoService;
-    private EntidadeService entidadeService;
-    private IncentivoFiscalService incentivoFiscalService;
-    private EmpresaService empresaService;
+    private final ProjetoService projetoService;
+    private final EntidadeService entidadeService;
+    private final IncentivoFiscalService incentivoFiscalService;
+    private final EmpresaService empresaService;
+    private final JavaMailService javaMailService;
     private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
 
     @Autowired
-    public ProjetoController(ProjetoService projetoService, EntidadeService entidadeService, IncentivoFiscalService incentivoFiscalService, EmpresaService empresaService) {
+    public ProjetoController(ProjetoService projetoService, EntidadeService entidadeService, IncentivoFiscalService incentivoFiscalService, EmpresaService empresaService, JavaMailService javaMailService) {
         this.projetoService = projetoService;
         this.entidadeService = entidadeService;
         this.incentivoFiscalService = incentivoFiscalService;
         this.empresaService = empresaService;
+        this.javaMailService = javaMailService;
     }
 
     @GetMapping({"/painel/projetos"})
@@ -116,7 +115,7 @@ public class ProjetoController {
                         this.logger.log(Level.INFO, "Projeto " + projeto.getTitulo() + " adicionado a lista de: " + ((Empresa)empresa.get()).getNomeFantasia());
                     }
                 }
-
+                javaMailService.enviarEmailNotificacaoDocumentosProjetoPendenteAnalise(projeto);
                 return "painel/entidade/projeto/cadastro-projeto-sucesso";
             } else {
                 model.addAttribute("projeto", projeto);

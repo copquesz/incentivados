@@ -9,14 +9,18 @@ import lombok.Getter;
  */
 @Getter
 public enum StatusArquivo {
-    PENDENTE(0, "Pendente"),
-    APROVADO(1, "Aprovado"),
-    NEGADO(2, "Negado");
+    PENDENTE(0, "Pendente", "#f1c40f"),
+    APROVADO(1, "Aprovado", "#2ecc71"),
+    NEGADO(2, "Negado", "#e74c3c"),
+    NAO_SE_APLICA(3, "Não se Aplica", "#7f8c8d");
+
     private int id;
     private String descricao;
+    private String cor;
 
-    StatusArquivo(int id, String descricao) {
+    StatusArquivo(int id, String descricao, String cor) {
         this.id = id;
         this.descricao = descricao;
+        this.cor = cor;
     }
 }

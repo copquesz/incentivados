@@ -47,6 +47,10 @@ public class DocumentosEntidade {
 	@Enumerated(EnumType.STRING)
 	private StatusArquivo statusDocumentacao;
 
+	@JoinColumn(name = "entidade_id")
+	@OneToOne(fetch = FetchType.LAZY)
+	Entidade entidade;
+
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "documentos_entidade_has_parecer_documentacao",

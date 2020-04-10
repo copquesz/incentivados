@@ -187,7 +187,14 @@
                         </c:if>   
                         </li>
                         <hr>                        
-                        <li>Projetos com documentação irregular: <strong>0</strong></li>  
+                        <li>Projetos com documentação irregular: <strong>${projetosNegadoAnalise.totalElements}</strong></li>
+                        <c:if test="${not empty projetosNegadoAnalise.content}">
+                          <ul style="margin-top: 10px;">
+                              <c:forEach var="projetoNegadoAnalise" items="${projetosNegadoAnalise.content}">
+                                <strong><a href="${path}/painel/projetos/${projetoNegadoAnalise.id}" title="Visualizar" class="text-primary"><li>${projetoNegadoAnalise.titulo}</li></a></strong>
+                              </c:forEach>
+                          </ul>
+                        </c:if>   
                         <hr>                         
                       </ul>
                     </div>

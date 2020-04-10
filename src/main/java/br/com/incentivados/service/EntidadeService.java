@@ -1,26 +1,18 @@
 package br.com.incentivados.service;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Optional;
-
-import javax.servlet.http.HttpServletRequest;
-
 import br.com.incentivados.enumerated.StatusArquivo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
 import br.com.incentivados.model.Arquivo;
 import br.com.incentivados.model.Entidade;
 import br.com.incentivados.model.Usuario;
 import br.com.incentivados.repository.EntidadeRepository;
 import br.com.incentivados.utility.FileUpload;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 @Service
 public class EntidadeService {
@@ -34,15 +26,17 @@ public class EntidadeService {
     public Entidade save(Entidade entidade, Usuario usuario, HttpServletRequest request) {
         entidade.setUsuario(usuario);
         entidade = this.uploadDocumentos(entidade, request);
-        entidade = (Entidade)this.entidadeRepository.save(entidade);
+        entidade = this.entidadeRepository.save(entidade);
         return entidade;
     }
 
-    public Entidade update(Entidade entidade){
+    public Entidade update(Entidade entidade) {
         return this.entidadeRepository.save(entidade);
     }
 
-    public boolean existsById(Long id){ return  this.entidadeRepository.existsById(id);}
+    public boolean existsById(Long id) {
+        return this.entidadeRepository.existsById(id);
+    }
 
     public boolean existsByCnpj(String cnpj) {
         return this.entidadeRepository.existsByCnpj(cnpj);
@@ -76,11 +70,11 @@ public class EntidadeService {
         return this.entidadeRepository.findAllByUsuarioAndCnpjOrNomeFantasia(usuario, page, key);
     }
 
-    public Page<Entidade> findAllByDocumentosEntidadeStatusDocumentacao(Pageable pageable, StatusArquivo statusArquivo){
+    public Page<Entidade> findAllByDocumentosEntidadeStatusDocumentacao(Pageable pageable, StatusArquivo statusArquivo) {
         return entidadeRepository.findAllByDocumentosEntidadeStatusDocumentacao(pageable, statusArquivo);
     }
 
-    public Page<Entidade> findAllByUsuarioAndAndDocumentosEntidadeStatusDocumentacao(Pageable pageable, Usuario usuario, StatusArquivo statusArquivo){
+    public Page<Entidade> findAllByUsuarioAndAndDocumentosEntidadeStatusDocumentacao(Pageable pageable, Usuario usuario, StatusArquivo statusArquivo) {
         return entidadeRepository.findAllByUsuarioAndAndDocumentosEntidadeStatusDocumentacao(pageable, usuario, statusArquivo);
     }
 
@@ -100,7 +94,7 @@ public class EntidadeService {
         int ANO_ATUAL = GregorianCalendar.getInstance().get(1);
         List<Long> array = new ArrayList();
 
-        for(int i = 0; i < 12; ++i) {
+        for (int i = 0; i < 12; ++i) {
             Calendar data = new GregorianCalendar(ANO_ATUAL, i, 1);
             array.add(this.countByIdAndDataCadastroBetween((new GregorianCalendar(ANO_ATUAL, i, data.getActualMinimum(5))).getTime(), (new GregorianCalendar(ANO_ATUAL, i, data.getActualMaximum(5))).getTime()));
         }

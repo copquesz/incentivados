@@ -44,7 +44,7 @@ public class Arquivo implements Serializable {
 	public Arquivo() {
 		super();
 		this.dataCadastro = new Date();
-		this.status = PENDENTE;
+		this.status = NAO_SE_APLICA;
 	}
 	
 	
