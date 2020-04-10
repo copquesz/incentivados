@@ -206,26 +206,21 @@
                                 <div class="col-12">
 
                                   <c:choose>                        
-                                    <c:when test = "${entidade.documentosEntidade.logo.status eq 'APROVADO' && entidade.documentosEntidade.ataEleicao.status eq 'APROVADO' && entidade.documentosEntidade.estatutoSocial.status eq 'APROVADO' && entidade.documentosEntidade.identidade.status eq 'APROVADO' && entidade.documentosEntidade.cartaoCnpj.status eq 'APROVADO' && entidade.documentosEntidade.dadosBancarios.status eq 'APROVADO' && not empty entidade.documentosEntidade.ataEleicao.path}">
+                                    <c:when test = "${entidade.documentosEntidade.logo.status eq 'APROVADO' && entidade.documentosEntidade.ataEleicao.status eq 'APROVADO' && entidade.documentosEntidade.estatutoSocial.status eq 'APROVADO' && entidade.documentosEntidade.identidade.status eq 'APROVADO' && entidade.documentosEntidade.cartaoCnpj.status eq 'APROVADO' && entidade.documentosEntidade.dadosBancarios.status eq 'APROVADO'}">
                                       <div class="alert alert-success" role="alert">
                                         <small><strong><i class="far fa-check-circle"></i> A documentação está aprovada.</strong></small>
                                       </div>
                                     </c:when>                        
-                                    <c:when test = "${entidade.documentosEntidade.logo.status eq 'APROVADO' && entidade.documentosEntidade.estatutoSocial.status eq 'APROVADO' && entidade.documentosEntidade.identidade.status eq 'APROVADO' && entidade.documentosEntidade.cartaoCnpj.status eq 'APROVADO' && entidade.documentosEntidade.dadosBancarios.status eq 'APROVADO' && empty entidade.documentosEntidade.ataEleicao.path}">
+                                    <c:when test = "${entidade.documentosEntidade.logo.status eq 'APROVADO' && entidade.documentosEntidade.estatutoSocial.status eq 'APROVADO' && entidade.documentosEntidade.identidade.status eq 'APROVADO' && entidade.documentosEntidade.cartaoCnpj.status eq 'APROVADO' && entidade.documentosEntidade.dadosBancarios.status eq 'APROVADO' && entidade.documentosEntidade.ataEleicao.status eq 'NAO_SE_APLICA'}">
                                       <div class="alert alert-success" role="alert">
                                         <small><strong><i class="far fa-check-circle"></i> A documentação está aprovada.</strong></small>
                                       </div>
                                     </c:when>                        
-                                    <c:when test = "${entidade.documentosEntidade.logo.status eq 'NEGADO'|| entidade.documentosEntidade.ataEleicao.status eq 'NEGADO'|| entidade.documentosEntidade.estatutoSocial.status eq 'NEGADO'|| entidade.documentosEntidade.identidade.status eq 'NEGADO'|| entidade.documentosEntidade.cartaoCnpj.status eq 'NEGADO'|| entidade.documentosEntidade.dadosBancarios.status eq 'NEGADO' && not empty entidade.documentosEntidade.ataEleicao.path}">
+                                    <c:when test = "${entidade.documentosEntidade.logo.status eq 'NEGADO'|| entidade.documentosEntidade.ataEleicao.status eq 'NEGADO'|| entidade.documentosEntidade.estatutoSocial.status eq 'NEGADO'|| entidade.documentosEntidade.identidade.status eq 'NEGADO'|| entidade.documentosEntidade.cartaoCnpj.status eq 'NEGADO'|| entidade.documentosEntidade.dadosBancarios.status eq 'NEGADO'}">
                                       <div class="alert alert-danger" role="alert">
                                         <small><strong><i class="far fa-times-circle"></i> A documentação possui arquivo(s) negado(s). </br><a href="#" data-toggle="modal" data-target="#modal-regularizacao-documentos-entidade"><u>Clique aqui</u></a> para regularizar.</strong></small>
                                       </div>
-                                    </c:when>                        
-                                    <c:when test = "${entidade.documentosEntidade.logo.status eq 'NEGADO' || entidade.documentosEntidade.estatutoSocial.status eq 'NEGADO'|| entidade.documentosEntidade.identidade.status eq 'NEGADO'|| entidade.documentosEntidade.cartaoCnpj.status eq 'NEGADO'|| entidade.documentosEntidade.dadosBancarios.status eq 'NEGADO' && empty entidade.documentosEntidade.ataEleicao.path}">
-                                      <div class="alert alert-danger" role="alert">
-                                        <small><strong><i class="far fa-times-circle"></i> A documentação possui arquivo(s) negado(s). </br><a href="#"><u>Clique aqui</u></a> para regularizar.</strong></small>
-                                      </div>
-                                    </c:when>
+                                    </c:when>  
                                     <c:otherwise>
                                       <div class="alert alert-warning" role="alert">
                                         <small><strong><i class="fas fa-exclamation-triangle"></i> A documentação está em processo de análise pelo comitê.</strong></small>

@@ -212,23 +212,18 @@
                                   <div class="col-12">
 
                                     <c:choose>                        
-                                      <c:when test = "${projeto.documentosProjeto.logo.status eq 'APROVADO' && projeto.documentosProjeto.propostaTecnica.status eq 'APROVADO' && projeto.documentosProjeto.propostOrcamentaria.status eq 'APROVADO' && projeto.documentosProjeto.dadosBancariosFundo.status eq 'APROVADO' && projeto.documentosProjeto.certificado.status eq 'APROVADO' && not empty projeto.documentosProjeto.dadosBancariosFundo.path}">
+                                      <c:when test = "${projeto.documentosProjeto.logo.status eq 'APROVADO' && projeto.documentosProjeto.propostaTecnica.status eq 'APROVADO' && projeto.documentosProjeto.propostOrcamentaria.status eq 'APROVADO' && projeto.documentosProjeto.dadosBancariosFundo.status eq 'APROVADO' && projeto.documentosProjeto.certificado.status eq 'APROVADO'}">
                                         <div class="alert alert-success" role="alert">
                                           <small><strong><i class="far fa-check-circle"></i> A documentação está aprovada.</strong></small>
                                         </div>
                                       </c:when> 
-                                      <c:when test = "${projeto.documentosProjeto.logo.status eq 'APROVADO' && projeto.documentosProjeto.propostaTecnica.status eq 'APROVADO' && projeto.documentosProjeto.propostOrcamentaria.status eq 'APROVADO' && projeto.documentosProjeto.certificado.status eq 'APROVADO' && empty projeto.documentosProjeto.dadosBancariosFundo.path}">
-                                        <div class="alert alert-success" role="alert">
-                                          <small><strong><i class="far fa-check-circle"></i> A documentação está aprovada.</strong></small>
-                                        </div>
-                                      </c:when>  
-                                      <c:when test = "${projeto.documentosProjeto.logo.status eq 'APROVADO' && projeto.documentosProjeto.propostaTecnica.status eq 'APROVADO' && projeto.documentosProjeto.propostOrcamentaria.status eq 'APROVADO' && projeto.documentosProjeto.dadosBancariosFundo.status eq 'APROVADO' && not empty projeto.documentosProjeto.dadosBancariosFundo.path}">
+                                      <c:when test = "${projeto.documentosProjeto.logo.status eq 'APROVADO' && projeto.documentosProjeto.propostaTecnica.status eq 'APROVADO' && projeto.documentosProjeto.propostOrcamentaria.status eq 'APROVADO' && projeto.documentosProjeto.certificado.status eq 'APROVADO' && projeto.documentosProjeto.dadosBancariosFundo.status eq 'NAO_SE_APLICA'}">
                                         <div class="alert alert-success" role="alert">
                                           <small><strong><i class="far fa-check-circle"></i> A documentação está aprovada.</strong></small>
                                         </div>
                                       </c:when>  
 
-                                      <c:when test = "${projeto.documentosProjeto.logo.status eq 'NEGADO' || projeto.documentosProjeto.propostaTecnica.status eq 'NEGADO' || projeto.documentosProjeto.propostOrcamentaria.status eq 'NEGADO' || projeto.documentosProjeto.dadosBancariosFundo.status eq 'NEGADO' || projeto.documentosProjeto.certificado.status eq 'NEGADO' && not empty projeto.documentosProjeto.dadosBancariosFundo.path}">
+                                      <c:when test = "${projeto.documentosProjeto.logo.status eq 'NEGADO' || projeto.documentosProjeto.propostaTecnica.status eq 'NEGADO' || projeto.documentosProjeto.propostOrcamentaria.status eq 'NEGADO' || projeto.documentosProjeto.dadosBancariosFundo.status eq 'NEGADO' || projeto.documentosProjeto.certificado.status eq 'NEGADO'}">
                                         <div class="alert alert-danger" role="alert">
                                           <small><strong><i class="far fa-times-circle"></i> A documentação possui arquivo(s) negado(s). </br><a href="#" data-toggle="modal" data-target="#modal-regularizacao-documentos-projeto"><u>Clique aqui</u></a> para regularizar.</strong></small>
                                         </div>
@@ -239,7 +234,7 @@
                                           <small><strong><i class="far fa-check-circle"></i> A documentação está aprovada.</strong></small>
                                         </div>
                                       </c:when>  
-                                      <c:when test = "${projeto.documentosProjeto.logo.status eq 'NEGADO' || projeto.documentosProjeto.propostaTecnica.status eq 'NEGADO' || projeto.documentosProjeto.propostOrcamentaria.status eq 'NEGADO' || projeto.documentosProjeto.dadosBancariosFundo.status eq 'NEGADO' && not empty projeto.documentosProjeto.dadosBancariosFundo.path}">
+                                      <c:when test = "${projeto.documentosProjeto.logo.status eq 'NEGADO' || projeto.documentosProjeto.propostaTecnica.status eq 'NEGADO' || projeto.documentosProjeto.propostOrcamentaria.status eq 'NEGADO' || projeto.documentosProjeto.dadosBancariosFundo.status eq 'NEGADO' && projeto.documentosProjeto.dadosBancariosFundo.status eq 'NAO_SE_APLICA'}">
                                         <div class="alert alert-danger" role="alert">
                                           <small><strong><i class="far fa-times-circle"></i> A documentação possui arquivo(s) negado(s). </br><a href="#" data-toggle="modal" data-target="#modal-regularizacao-documentos-projeto"><u>Clique aqui</u></a> para regularizar.</strong></small>
                                         </div>
