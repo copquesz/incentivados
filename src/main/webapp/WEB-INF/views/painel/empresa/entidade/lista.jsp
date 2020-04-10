@@ -28,47 +28,34 @@
     <!-- Sidebar -->
     <div class="sidebar" data-color="verde" data-active-color="white">
       <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-          <div class="logo-image-small">
-
-            <i class="far fa-user"></i>
-          </div>
+        <a href="#" class="simple-text logo-mini">
+          <div class="logo-image-small"><i class="far fa-user"></i></div>
         </a>
         <a href="${path}/painel/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li>
-            <a href="${path}/painel/dashboard">
-              <i class="nc-icon nc-bank"></i>Painel Principal</a>        
+            <a href="${path}/painel/dashboard"><i class="fas fa-desktop"></i>Painel Principal</a>
           </li>
           <li>
-            <a href="${path}/painel/empresas">
-              <i class="fas fa-city"></i>Empresas</a>
+            <a href="${path}/painel/${usuario.empresa.id}/analistas"><i class="fas fa-users"></i>Analistas</a>
           </li>
           <li class="active">
-            <a href="${path}/painel/entidades">
-              <i class="fas fa-users"></i>Entidades</a>
+            <a href="${path}/painel/entidades"><i class="fas fa-users"></i>Entidades</a>
           </li>
           <li>
-            <a href="${path}/painel/projetos">
-              <i class="fas fa-project-diagram"></i>Projetos</a>
+            <a href="${path}/painel/projetos"><i class="fas fa-project-diagram"></i>Projetos</a>
           </li>
           <li>
-            <a href="${path}/painel/incentivos-fiscais">
-              <i class="fas fa-gavel"></i>Incentivos Fiscais</a>
+            <a href="${path}/painel/pedidos?filtro=TODOS&key="><i class="fas fa-praying-hands"></i>Pedidos</a>
           </li>
           <li>
-            <a href="${path}/painel/pedidos?filtro=TODOS&key=">
-              <i class="fas fa-praying-hands"></i>Pedidos</a>
-          </li>
-          <li>
-            <a href="${path}/painel/ranking">
-              <i class="far fa-chart-bar"></i>Ranking</a>
+            <a href="${path}/painel/ranking"><i class="far fa-chart-bar"></i>Ranking</a>
           </li>
         </ul>
       </div>
-    </div>
+    </div> 
     <div class="main-panel">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">

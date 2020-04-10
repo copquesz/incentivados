@@ -42,6 +42,10 @@
             <a href="${path}/painel/${usuario.empresa.id}/analistas"><i class="fas fa-users"></i>Analistas</a>
           </li>
           <li>
+            <a href="${path}/painel/entidades"><i class="fas fa-users"></i>Entidades</a>
+          </li>
+        <li>
+          <li>
             <a href="${path}/painel/projetos"><i class="fas fa-project-diagram"></i>Projetos</a>
           </li>
           <li>

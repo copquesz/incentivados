@@ -113,7 +113,9 @@
               <div class="card-header "> 
                 <h5 class="card-title">Análise de Documentação</h5>  
               </div>
+
               <form action="${path}/painel/entidades/${entidade.id}/documentos/analise" method="post"  acceptcharset="UTF-8" id="formulario-analise-documentos-entidade">  
+
                 <input type="hidden" name="id" value="${entidade.documentosEntidade.id}">                           
                 <div class="card-body">
                   <div class="row">
@@ -318,6 +320,7 @@
                           </div>
                         </div>
                       </div>
+
                       <div class="row">
                         <div class="col-12">
                           <button type="submit" class="btn btn-primary float-right">Enviar <i class="far fa-share-square"></i></button>
@@ -348,7 +351,8 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>  
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script type="text/javascript" src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script>  
+  <script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script> 
+
 
   <script type="text/javascript">
     $(document).ready(function () {
