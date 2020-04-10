@@ -1,14 +1,13 @@
 package br.com.incentivados.controller;
 
-import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.servlet.http.HttpServletRequest;
-
 import br.com.incentivados.enumerated.FiltroPedidos;
+import br.com.incentivados.enumerated.StatusPedido;
 import br.com.incentivados.enumerated.TipoPedido;
 import br.com.incentivados.model.*;
+import br.com.incentivados.service.EmpresaService;
+import br.com.incentivados.service.EntidadeService;
+import br.com.incentivados.service.PedidoService;
+import br.com.incentivados.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,14 +17,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import br.com.incentivados.enumerated.StatusPedido;
-import br.com.incentivados.service.EmpresaService;
-import br.com.incentivados.service.EntidadeService;
-import br.com.incentivados.service.PedidoService;
-import br.com.incentivados.service.UsuarioService;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Controller
 public class PedidoController {

@@ -2,16 +2,13 @@ package br.com.incentivados.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.springframework.data.domain.Page;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Setter
 @Getter
@@ -61,7 +58,6 @@ public class Empresa implements Serializable {
         joinColumns = { @JoinColumn(name = "empresa_id") }, 
         inverseJoinColumns = { @JoinColumn(name = "usuario_id") }
     )
-
 	private List<Usuario> analistas;
 
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)

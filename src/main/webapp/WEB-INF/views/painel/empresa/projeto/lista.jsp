@@ -99,7 +99,26 @@
             <div class="card">
               <div class="card-header "> 
                 <h5 class="card-title">Projetos Cadastrado(s): ${projetos.totalElements}</h5>      
-                <p><small style="color: red; font-weight: bold;"><i class="far fa-thumbs-up"></i> Avaliado(s): ${qtdAvaliados}</small><small style="color: red; font-weight: bold;" class="mx-2"><i class="fas fa-grip-lines-vertical"></i></small><small style="color: red; font-weight: bold;"> <i class="far fa-thumbs-down"></i> Pendentes(s): ${qtdPendentes}</small></p>             
+                <p><small style="color: red; font-weight: bold;"><i class="far fa-thumbs-up"></i> Avaliado(s): ${qtdAvaliados}</small><small style="color: red; font-weight: bold;" class="mx-2"><i class="fas fa-grip-lines-vertical"></i></small><small style="color: red; font-weight: bold;"> <i class="far fa-thumbs-down"></i> Pendentes(s): ${qtdPendentes}</small></p> 
+                <div class="row">
+                <div class="col-12 d-flex justify-content-start">
+                  <form class="form-inline">                                          
+                    <div class="form-group mx-sm-1 mb-2">
+                      <input type="text" class="form-control" placeholder="Título ..." name="key">
+                    </div>
+                    <div class="form-group mx-sm-1 mb-2">
+                      <select class="form-control" name="categoria">
+                         <option value="0">Todos</option>
+                         <c:forEach var="incentivoFiscal" items="${incentivosFiscais}">
+                           <option value="${incentivoFiscal.id}">${incentivoFiscal.legislacao}</option>
+                         </c:forEach>
+                      </select>
+                    </div>
+                    <div class="form-group mb-2">
+                      <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>
+                    </div>                      
+                  </form>
+                </div>            
               </div>
               <div class="card-body">
                 <div class="row">

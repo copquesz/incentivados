@@ -1,15 +1,10 @@
 package br.com.incentivados.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
+import br.com.incentivados.enumerated.StatusArquivo;
+import br.com.incentivados.enumerated.StatusPedido;
+import br.com.incentivados.model.IncentivoFiscal;
+import br.com.incentivados.model.Usuario;
+import br.com.incentivados.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,14 +18,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.incentivados.enumerated.StatusPedido;
-import br.com.incentivados.model.IncentivoFiscal;
-import br.com.incentivados.model.Usuario;
-import br.com.incentivados.service.EntidadeService;
-import br.com.incentivados.service.IncentivoFiscalService;
-import br.com.incentivados.service.PedidoService;
-import br.com.incentivados.service.ProjetoService;
-import br.com.incentivados.service.UsuarioService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Controller
 public class DashboardController {
@@ -140,6 +134,8 @@ public class DashboardController {
                 model.addAttribute("qtdProjetos", this.projetoService.countByUsuario(usuario));
                 model.addAttribute("pedidos", this.pedidoService.findAllByUsuario(usuario, pageablePedidos));
                 model.addAttribute("qtdPedidos", this.pedidoService.countByUsuario(usuario));
+                model.addAttribute("entidadesNegadoAnalise", this.entidadeService.findAllByUsuarioAndAndDocumentosEntidadeStatusDocumentacao(PageRequest.of(0, 2, Sort.by(new Order[]{Order.desc("id")})), usuario, StatusArquivo.NEGADO));
+                model.addAttribute("projetosNegadoAnalise", this.projetoService.findAllByUsuarioAndAndDocumentosProjetoStatusDocumentacao(PageRequest.of(0, 2, Sort.by(new Order[]{Order.desc("id")})), usuario, StatusArquivo.NEGADO));
                 return "painel/entidade/dashboard-entidade";
             case ANALISTA:
                 model.addAttribute("qtdPedidos", this.pedidoService.countByAnalista(usuario));
@@ -158,8 +154,9 @@ public class DashboardController {
                 model.addAttribute("datasChartEntidade", this.entidadeService.buildChart());
                 model.addAttribute("projetos", this.projetoService.findAll(pageableProjetos));
                 model.addAttribute("qtdProjetos", this.projetoService.count());
-                incentivosFiscais = incentivoFiscalService.findAll();
-                model.addAttribute("incentivosFiscais", incentivosFiscais);
+                model.addAttribute("entidadesPendenteAnalise", this.entidadeService.findAllByDocumentosEntidadeStatusDocumentacao(PageRequest.of(0, 2, Sort.by(new Order[]{Order.desc("id")})), StatusArquivo.PENDENTE));
+                model.addAttribute("projetosPendenteAnalise", this.projetoService.findAllByDocumentosProjetoStatusDocumentacao(PageRequest.of(0, 2, Sort.by(new Order[]{Order.desc("id")})), StatusArquivo.PENDENTE));
+                model.addAttribute("incentivosFiscais", incentivoFiscalService.findAll());
                 datasCharProjeto = new ArrayList();
 
                 for(i = 0; i < incentivosFiscais.size(); ++i) {

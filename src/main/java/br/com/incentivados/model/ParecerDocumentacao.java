@@ -2,15 +2,21 @@ package br.com.incentivados.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @author Lucas Copque
+ * @version 1.0
+ * @since 02/04/2020
+ */
 @Setter
 @Getter
 @Entity
-public class ObservacaoPedido implements Serializable {
+@ToString
+public class ParecerDocumentacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,18 +27,20 @@ public class ObservacaoPedido implements Serializable {
     private Date dataCadastro;
 
     @Column(columnDefinition = "TEXT")
-    private String avaliacao;
+    private String analise;
 
     @JoinColumn(name = "usuario_id")
     @ManyToOne(fetch = FetchType.EAGER)
-    private Usuario usuario;
+    private Usuario analista;
 
-    @JoinColumn(name = "documentos_observacao_pedido_id")
-    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-    private DocumentosObservacaoPedido documentosObservacaoPedido;
-
-    // Construtor
-    public ObservacaoPedido() {
-        this.dataCadastro = new Date();
+    public ParecerDocumentacao(){
+        dataCadastro = new Date();
     }
+
+    public ParecerDocumentacao(String analise, Usuario analista){
+        dataCadastro = new Date();
+        this.analise = analise;
+        this.analista = analista;
+    }
+
 }

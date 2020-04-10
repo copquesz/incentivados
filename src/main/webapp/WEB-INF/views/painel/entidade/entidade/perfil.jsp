@@ -201,70 +201,271 @@
                             </fieldset>
 
                             <fieldset class="mt-5">
-                                <legend class="text-primary">Uploads:</legend>
+                              <legend class="text-primary">Documentação:</legend>
+                              <div class="row">
+                                <div class="col-12">
 
-                                <hr class="bg-primary">
-
-                                <div class="row justify-content-center">
-                                    <div class="col-lg-2 text-center mt-5">
-                                        <div class="form-group">
-                                            <a href="${path}/${entidade.documentosEntidade.logo.path}"
-                                               target="_blank"><i class="far fa-file-image text-primary"
-                                                                  style="font-size: 56px;"></i></a>
-                                            <hr>
-                                            <h5 class="text-center">Logo</h5>
-                                        </div>
-                                    </div>
-                                    <c:if test="${not empty entidade.documentosEntidade.ataEleicao.path}">
-                                      <div class="col-lg-2 text-center mt-5">
-                                          <div class="form-group">
-                                              <a href="${path}/${entidade.documentosEntidade.ataEleicao.path}"
-                                                 target="_blank"><i class="far fa-file-image text-primary"
-                                                                    style="font-size: 56px;"></i></a>
-                                              <hr>
-                                              <h5 class="text-center">Ata de Eleição</h5>
-                                          </div>
+                                  <c:choose>                        
+                                    <c:when test = "${entidade.documentosEntidade.logo.status eq 'APROVADO' && entidade.documentosEntidade.ataEleicao.status eq 'APROVADO' && entidade.documentosEntidade.estatutoSocial.status eq 'APROVADO' && entidade.documentosEntidade.identidade.status eq 'APROVADO' && entidade.documentosEntidade.cartaoCnpj.status eq 'APROVADO' && entidade.documentosEntidade.dadosBancarios.status eq 'APROVADO' && not empty entidade.documentosEntidade.ataEleicao.path}">
+                                      <div class="alert alert-success" role="alert">
+                                        <small><strong><i class="far fa-check-circle"></i> A documentação está aprovada.</strong></small>
                                       </div>
-                                    </c:if>
-                                    <div class="col-lg-2 text-center mt-5">
-                                        <div class="form-group">
-                                            <a href="${path}/${entidade.documentosEntidade.estatutoSocial.path}"
-                                               target="_blank"><i class="far fa-file-image text-primary"
-                                                                  style="font-size: 56px;"></i></a>
-                                            <hr>
-                                            <h5 class="text-center">Estatuto Social ou Contrato Social</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 text-center mt-5">
-                                        <div class="form-group">
-                                            <a href="${path}/${entidade.documentosEntidade.identidade.path}"
-                                               target="_blank"><i class="far fa-file-image text-primary"
-                                                                  style="font-size: 56px;"></i></a>
-                                            <hr>
-                                            <h5 class="text-center">Identidade Presidente</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 text-center mt-5">
-                                        <div class="form-group">
-                                            <a href="${path}/${entidade.documentosEntidade.cartaoCnpj.path}"
-                                               target="_blank"><i class="far fa-file-image text-primary"
-                                                                  style="font-size: 56px;"></i></a>
-                                            <hr>
-                                            <h5 class="text-center">Cartão CNPJ</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 text-center mt-5">
-                                        <div class="form-group">
-                                            <a href="${path}/${entidade.documentosEntidade.dadosBancarios.path}"
-                                               target="_blank"><i class="fas fa-file-pdf text-primary"
-                                                                  style="font-size: 56px;"></i></a>
-                                            <hr>
-                                            <h5 class="text-center">Dados Bancários da Entidade</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
+                                    </c:when>                        
+                                    <c:when test = "${entidade.documentosEntidade.logo.status eq 'APROVADO' && entidade.documentosEntidade.estatutoSocial.status eq 'APROVADO' && entidade.documentosEntidade.identidade.status eq 'APROVADO' && entidade.documentosEntidade.cartaoCnpj.status eq 'APROVADO' && entidade.documentosEntidade.dadosBancarios.status eq 'APROVADO' && empty entidade.documentosEntidade.ataEleicao.path}">
+                                      <div class="alert alert-success" role="alert">
+                                        <small><strong><i class="far fa-check-circle"></i> A documentação está aprovada.</strong></small>
+                                      </div>
+                                    </c:when>                        
+                                    <c:when test = "${entidade.documentosEntidade.logo.status eq 'NEGADO'|| entidade.documentosEntidade.ataEleicao.status eq 'NEGADO'|| entidade.documentosEntidade.estatutoSocial.status eq 'NEGADO'|| entidade.documentosEntidade.identidade.status eq 'NEGADO'|| entidade.documentosEntidade.cartaoCnpj.status eq 'NEGADO'|| entidade.documentosEntidade.dadosBancarios.status eq 'NEGADO' && not empty entidade.documentosEntidade.ataEleicao.path}">
+                                      <div class="alert alert-danger" role="alert">
+                                        <small><strong><i class="far fa-times-circle"></i> A documentação possui arquivo(s) negado(s). </br><a href="#" data-toggle="modal" data-target="#modal-regularizacao-documentos-entidade"><u>Clique aqui</u></a> para regularizar.</strong></small>
+                                      </div>
+                                    </c:when>                        
+                                    <c:when test = "${entidade.documentosEntidade.logo.status eq 'NEGADO' || entidade.documentosEntidade.estatutoSocial.status eq 'NEGADO'|| entidade.documentosEntidade.identidade.status eq 'NEGADO'|| entidade.documentosEntidade.cartaoCnpj.status eq 'NEGADO'|| entidade.documentosEntidade.dadosBancarios.status eq 'NEGADO' && empty entidade.documentosEntidade.ataEleicao.path}">
+                                      <div class="alert alert-danger" role="alert">
+                                        <small><strong><i class="far fa-times-circle"></i> A documentação possui arquivo(s) negado(s). </br><a href="#"><u>Clique aqui</u></a> para regularizar.</strong></small>
+                                      </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                      <div class="alert alert-warning" role="alert">
+                                        <small><strong><i class="fas fa-exclamation-triangle"></i> A documentação está em processo de análise pelo comitê.</strong></small>
+                                      </div>
+                                    </c:otherwise>
+                                  </c:choose>
 
+                                </div>
+                              </div>
+
+                              <hr class="bg-primary">
+
+                              <div class="row justify-content-center">
+
+                                <!-- LOGO APROVADO -->
+                                <c:if test="${entidade.documentosEntidade.logo.status eq 'APROVADO'}">
+                                  <div class="col-lg-2 text-center mt-5">
+                                      <div class="form-group">
+                                          <a title="Documento Aprovado" href="${path}/${entidade.documentosEntidade.logo.path}"
+                                             target="_blank"><i class="far fa-file-image text-primary"
+                                                                style="font-size: 56px;"></i></a>
+                                          <hr>
+                                          <h5 class="text-center"><strong style="color: #3fa733 !important">Logo</strong></h5>
+                                      </div>
+                                  </div>
+                                </c:if>
+                                <!-- LOGO NEGADO -->
+                                <c:if test="${entidade.documentosEntidade.logo.status eq 'NEGADO'}">
+                                  <div class="col-lg-2 text-center mt-5">
+                                      <div class="form-group">
+                                          <a title="Documento Negado" href="${path}/${entidade.documentosEntidade.logo.path}"
+                                             target="_blank"><i class="far fa-file-image text-primary"
+                                                                style="font-size: 56px; color: #e74c3c !important;"></i></a>
+                                          <hr>
+                                          <h5 class="text-center"><strong style="color: #e74c33 !important">Logo</strong></h5>
+                                      </div>
+                                  </div>
+                                </c:if>
+                                <!-- LOGO PENDENTE -->
+                                <c:if test="${entidade.documentosEntidade.logo.status eq 'PENDENTE'}">
+                                  <div class="col-lg-2 text-center mt-5">
+                                      <div class="form-group">
+                                          <a title="Documento em Análise" href="${path}/${entidade.documentosEntidade.logo.path}"
+                                             target="_blank"><i class="far fa-file-image text-primary"
+                                                                style="font-size: 56px; color: #f39c12 !important;"></i></a>
+                                          <hr>
+                                          <h5 class="text-center"><strong style="color: #f39c12 !important">Logo</strong></h5>
+                                      </div>
+                                  </div>
+                                </c:if>
+
+                                <!-- ATA DE ELEIÇÃO APROVADO -->
+                                <c:if test="${not empty entidade.documentosEntidade.ataEleicao.path}">
+                                  <c:if test="${entidade.documentosEntidade.ataEleicao.status eq 'APROVADO'}">
+                                    <div class="col-lg-2 text-center mt-5">
+                                        <div class="form-group">
+                                            <a title="Documento Aprovado" href="${path}/${entidade.documentosEntidade.ataEleicao.path}"
+                                               target="_blank"><i class="far fa-file-image text-primary"
+                                                                  style="font-size: 56px;"></i></a>
+                                            <hr>
+                                            <h5 class="text-center"><strong style="color: #3fa733 !important">Ata de Eleição</strong></h5>
+                                        </div>
+                                    </div>
+                                  </c:if>
+                                  <!-- ATA DE ELEIÇÃO NEGADO -->
+                                  <c:if test="${entidade.documentosEntidade.ataEleicao.status eq 'NEGADO'}">
+                                    <div class="col-lg-2 text-center mt-5">
+                                        <div class="form-group">
+                                            <a type="Documento Negado" href="${path}/${entidade.documentosEntidade.ataEleicao.path}"
+                                               target="_blank"><i class="far fa-file-image text-primary"
+                                                                  style="font-size: 56px; color: #e74c3c !important"></i></a>
+                                            <hr>
+                                            <h5 class="text-center"><strong style="color: #e74c3c !important">Ata de Eleição</strong></h5>
+                                        </div>
+                                    </div>
+                                  </c:if>
+                                  <!-- ATA DE ELEIÇÃO PENDENTE -->
+                                  <c:if test="${entidade.documentosEntidade.ataEleicao.status eq 'PENDENTE'}">
+                                    <div class="col-lg-2 text-center mt-5">
+                                        <div class="form-group">
+                                            <a title="Documento em Análise" href="${path}/${entidade.documentosEntidade.ataEleicao.path}"
+                                               target="_blank"><i class="far fa-file-image text-primary"
+                                                                  style="font-size: 56px; color: #f39c12 !important"></i></a>
+                                            <hr>
+                                            <h5 class="text-center"><strong style="color: #f39c12 !important">Ata de Eleição</strong></h5>
+                                        </div>
+                                    </div>
+                                  </c:if>
+                                </c:if>
+
+                                <!-- ESTATUTO SOCIAL APROVADO -->
+                                <c:if test="${entidade.documentosEntidade.estatutoSocial.status eq 'APROVADO'}">
+                                  <div class="col-lg-2 text-center mt-5">
+                                      <div class="form-group">
+                                          <a title="Documento Aprovado" href="${path}/${entidade.documentosEntidade.estatutoSocial.path}"
+                                             target="_blank"><i class="far fa-file-image text-primary"
+                                                                style="font-size: 56px;"></i></a>
+                                          <hr>
+                                          <h5 class="text-center"><strong style="color: #3fa733 !important">Estatuto Social ou Contrato Social</strong></h5>
+                                      </div>
+                                  </div>
+                                </c:if>
+                                <!-- ESTATUTO SOCIAL NEGADO -->
+                                <c:if test="${entidade.documentosEntidade.estatutoSocial.status eq 'NEGADO'}">
+                                  <div class="col-lg-2 text-center mt-5">
+                                      <div class="form-group">
+                                          <a title="Documento Negado" href="${path}/${entidade.documentosEntidade.estatutoSocial.path}"
+                                             target="_blank"><i class="far fa-file-image text-primary"
+                                                                style="font-size: 56px; color: #e74c3c !important"></i></a>
+                                          <hr>
+                                          <h5 class="text-center"><strong style="color: #e74c3c !important">Estatuto Social ou Contrato Social</strong></h5>
+                                      </div>
+                                  </div>
+                                </c:if>
+                                <!-- ESTATUTO SOCIAL PENDENTE -->
+                                <c:if test="${entidade.documentosEntidade.estatutoSocial.status eq 'PENDENTE'}">
+                                  <div class="col-lg-2 text-center mt-5">
+                                      <div class="form-group">
+                                          <a title="Documento em Análise" href="${path}/${entidade.documentosEntidade.estatutoSocial.path}"
+                                             target="_blank"><i class="far fa-file-image text-primary"
+                                                                style="font-size: 56px; color: #f39c12 !important"></i></a>
+                                          <hr>
+                                          <h5 class="text-center"><strong style="color: #f39c12 !important">Estatuto Social ou Contrato Social</strong></h5>
+                                      </div>
+                                  </div>
+                                </c:if>
+
+                                <!-- IDENTIDADE PRESIDENTE APROVADO -->
+                                <c:if test="${entidade.documentosEntidade.identidade.status eq 'APROVADO'}">
+                                  <div class="col-lg-2 text-center mt-5">
+                                      <div class="form-group">
+                                          <a title="Documento Aprovado" href="${path}/${entidade.documentosEntidade.identidade.path}"
+                                             target="_blank"><i class="far fa-file-image text-primary"
+                                                                style="font-size: 56px;"></i></a>
+                                          <hr>
+                                          <h5 class="text-center"><strong style="color: #3fa733 !important">Identidade Presidente</strong></h5>
+                                      </div>
+                                  </div>
+                                </c:if>
+                                <!-- IDENTIDADE PRESIDENTE NEGADO -->
+                                <c:if test="${entidade.documentosEntidade.identidade.status eq 'NEGADO'}">
+                                  <div class="col-lg-2 text-center mt-5">
+                                      <div class="form-group">
+                                          <a title="Documento Negado" href="${path}/${entidade.documentosEntidade.identidade.path}"
+                                             target="_blank"><i class="far fa-file-image text-primary"
+                                                                style="font-size: 56px; color: #e74c3c !important"></i></a>
+                                          <hr>
+                                          <h5 class="text-center"><strong style="color: #e74c3c !important">Identidade Presidente</strong></h5>
+                                      </div>
+                                  </div>
+                                </c:if>
+                                <!-- IDENTIDADE PENDENTE -->
+                                <c:if test="${entidade.documentosEntidade.identidade.status eq 'PENDENTE'}">
+                                  <div class="col-lg-2 text-center mt-5">
+                                      <div class="form-group">
+                                          <a title="Documento em Análise" href="${path}/${entidade.documentosEntidade.identidade.path}"
+                                             target="_blank"><i class="far fa-file-image text-primary"
+                                                                style="font-size: 56px; color: #f39c12 !important"></i></a>
+                                          <hr>
+                                          <h5 class="text-center"><strong style="color: #f39c12 !important">Identidade Presidente</strong></h5>
+                                      </div>
+                                  </div>
+                                </c:if>
+
+                                <!-- CARTÃO CNPJ APROVADO -->
+                                <c:if test="${entidade.documentosEntidade.cartaoCnpj.status eq 'APROVADO'}">
+                                  <div class="col-lg-2 text-center mt-5">
+                                      <div class="form-group">
+                                          <a title="Documento Aprovado" href="${path}/${entidade.documentosEntidade.cartaoCnpj.path}"
+                                             target="_blank"><i class="far fa-file-image text-primary"
+                                                                style="font-size: 56px;"></i></a>
+                                          <hr>
+                                          <h5 class="text-center"><strong style="color: #3fa733 !important">Cartão CNPJ</strong></h5>
+                                      </div>
+                                  </div>
+                                </c:if>
+                                <!-- CARTÃO CNPJ NEGADO -->
+                                <c:if test="${entidade.documentosEntidade.cartaoCnpj.status eq 'NEGADO'}">
+                                  <div class="col-lg-2 text-center mt-5">
+                                      <div class="form-group">
+                                          <a title="Documento Negado" href="${path}/${entidade.documentosEntidade.cartaoCnpj.path}"
+                                             target="_blank"><i class="far fa-file-image text-primary"
+                                                                style="font-size: 56px; color: #e74c3c !important"></i></a>
+                                          <hr>
+                                          <h5 class="text-center"><strong style="color: #e74c3c !important">Cartão CNPJ</strong></h5>
+                                      </div>
+                                  </div>
+                                </c:if>
+                                <!-- CARTÃO CNPJ PENDENTE -->
+                                <c:if test="${entidade.documentosEntidade.cartaoCnpj.status eq 'PENDENTE'}">
+                                  <div class="col-lg-2 text-center mt-5">
+                                      <div class="form-group">
+                                          <a title="Documento em Análise" href="${path}/${entidade.documentosEntidade.cartaoCnpj.path}"
+                                             target="_blank"><i class="far fa-file-image text-primary"
+                                                                style="font-size: 56px; color: #f39c12 !important"></i></a>
+                                          <hr>
+                                          <h5 class="text-center"><strong style="color: #f39c12 !important">Cartão CNPJ</strong></h5>
+                                      </div>
+                                  </div>
+                                </c:if>
+
+                                 <!-- DADOS BANCÁRIOS APROVADO -->
+                                <c:if test="${entidade.documentosEntidade.dadosBancarios.status eq 'APROVADO'}">
+                                  <div class="col-lg-2 text-center mt-5">
+                                      <div class="form-group">
+                                          <a title="Documento Aprovado" href="${path}/${entidade.documentosEntidade.dadosBancarios.path}"
+                                             target="_blank"><i class="far fa-file-image text-primary"
+                                                                style="font-size: 56px;"></i></a>
+                                          <hr>
+                                          <h5 class="text-center"><strong style="color: #3fa733 !important">Dados Bancários</strong></h5>
+                                      </div>
+                                  </div>
+                                </c:if>
+                                <!-- DADOS BANCÁRIOS NEGADO -->
+                                <c:if test="${entidade.documentosEntidade.dadosBancarios.status eq 'NEGADO'}">
+                                  <div class="col-lg-2 text-center mt-5">
+                                      <div class="form-group">
+                                          <a title="Documento Negado" href="${path}/${entidade.documentosEntidade.dadosBancarios.path}"
+                                             target="_blank"><i class="far fa-file-image text-primary"
+                                                                style="font-size: 56px; color: #e74c3c !important"></i></a>
+                                          <hr>
+                                          <h5 class="text-center"><strong style="color: #e74c3c !important">Dados Bancários</strong></h5>
+                                      </div>
+                                  </div>
+                                </c:if>
+                                <!-- DADOS BANCÁRIOS PENDENTE -->
+                                <c:if test="${entidade.documentosEntidade.dadosBancarios.status eq 'PENDENTE'}">
+                                  <div class="col-lg-2 text-center mt-5">
+                                      <div class="form-group">
+                                          <a title="Documento em Análise" href="${path}/${entidade.documentosEntidade.dadosBancarios.path}"
+                                             target="_blank"><i class="far fa-file-image text-primary"
+                                                                style="font-size: 56px; color: #f39c12 !important"></i></a>
+                                          <hr>
+                                          <h5 class="text-center"><strong style="color: #f39c12 !important">Dados Bancários</strong></h5>
+                                      </div>
+                                  </div>
+                                </c:if>                     
+                                
+                              </div>
+                          </fieldset>
                         </div>
                         <div class="card-footer bg-info"></div>
                     </div>
@@ -272,6 +473,7 @@
             </div>
         </div>
         <c:import url="/WEB-INF/views/componentes/footer/painel/footer.jsp"/>
+        <c:import url="/WEB-INF/views/componentes/modal/modal-regularizacao-documentos-entidade.jsp" />
     </div>
 </div>
 
@@ -284,6 +486,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <!--   BOOTSTRAP   -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${path}/assets/js/file-validator.js"></script>
 <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 <script type="text/javascript" src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
 <script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script>

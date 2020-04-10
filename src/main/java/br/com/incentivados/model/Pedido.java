@@ -4,7 +4,6 @@ import br.com.incentivados.enumerated.StatusPedido;
 import br.com.incentivados.enumerated.TipoPedido;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;

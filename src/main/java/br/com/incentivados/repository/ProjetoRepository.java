@@ -1,16 +1,19 @@
 package br.com.incentivados.repository;
 
-import java.math.BigInteger;
-import java.util.List;
-import java.util.Optional;
-
-import br.com.incentivados.model.*;
+import br.com.incentivados.enumerated.StatusArquivo;
+import br.com.incentivados.model.IncentivoFiscal;
+import br.com.incentivados.model.Projeto;
+import br.com.incentivados.model.Usuario;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.math.BigInteger;
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ProjetoRepository extends JpaRepository<Projeto, Projeto> {
@@ -33,6 +36,10 @@ public interface ProjetoRepository extends JpaRepository<Projeto, Projeto> {
 
     @Query("SELECT projeto FROM Projeto projeto WHERE projeto.titulo LIKE %:key%")
     Page<Projeto> findAll(Pageable page, @Param("key") String key);
+
+    Page<Projeto> findAllByDocumentosProjetoStatusDocumentacao(Pageable pageable, StatusArquivo statusArquivo);
+
+    Page<Projeto> findAllByUsuarioAndAndDocumentosProjetoStatusDocumentacao(Pageable pageable, Usuario usuario, StatusArquivo statusArquivo);
 
     Page<Projeto> findAllByTituloOrIncentivosFiscaisContaining(Pageable page, String titulo, IncentivoFiscal incentivoFiscal);
 

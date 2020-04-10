@@ -5,12 +5,12 @@ import br.com.incentivados.model.Empresa;
 import br.com.incentivados.model.IncentivoFiscal;
 import br.com.incentivados.model.Projeto;
 import br.com.incentivados.model.Usuario;
-import br.com.incentivados.service.EmpresaService;
-import br.com.incentivados.service.EntidadeService;
-import br.com.incentivados.service.IncentivoFiscalService;
-import br.com.incentivados.service.ProjetoService;
+import br.com.incentivados.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,18 +27,20 @@ import java.util.logging.Logger;
 
 @Controller
 public class ProjetoController {
-    private ProjetoService projetoService;
-    private EntidadeService entidadeService;
-    private IncentivoFiscalService incentivoFiscalService;
-    private EmpresaService empresaService;
+    private final ProjetoService projetoService;
+    private final EntidadeService entidadeService;
+    private final IncentivoFiscalService incentivoFiscalService;
+    private final EmpresaService empresaService;
+    private final JavaMailService javaMailService;
     private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
 
     @Autowired
-    public ProjetoController(ProjetoService projetoService, EntidadeService entidadeService, IncentivoFiscalService incentivoFiscalService, EmpresaService empresaService) {
+    public ProjetoController(ProjetoService projetoService, EntidadeService entidadeService, IncentivoFiscalService incentivoFiscalService, EmpresaService empresaService, JavaMailService javaMailService) {
         this.projetoService = projetoService;
         this.entidadeService = entidadeService;
         this.incentivoFiscalService = incentivoFiscalService;
         this.empresaService = empresaService;
+        this.javaMailService = javaMailService;
     }
 
     @GetMapping({"/painel/projetos"})
@@ -68,21 +70,17 @@ public class ProjetoController {
                     model.addAttribute("projetos", this.projetoService.findAllByUsuario(usuario, pageable, key));
                     return "painel/entidade/projeto/lista";
                 case EMPRESA:
-                    if (usuario.getEmpresa().getProjetos().size() > 0) {
-                        if (categoria != null && !categoria.equals("0")) {
-                            projetos = this.projetoService.findAllByEmpresaAndIncentivosFiscaisAndTituloContaining(usuario.getEmpresa().getId(), categoria.getId(), key, pageable);
-                        } else {
-                            projetos = new PageImpl(usuario.getEmpresa().getProjetos(), pageable, (long)usuario.getEmpresa().getProjetos().size());
-                        }
-
-                        projetos.forEach((projeto) -> {
-                            projeto.setAvaliado(this.projetoService.verifyAvaliacao(projeto.getId(), usuario.getId()));
-                        });
-                        model.addAttribute("projetos", projetos);
-                        model.addAttribute("qtdAvaliados", this.projetoService.countProjetosAvaliados(usuario.getId()));
-                        model.addAttribute("qtdPendentes", this.projetoService.count() - this.projetoService.countProjetosAvaliados(usuario.getId()));
+                    if (categoria != null && !categoria.equals("0")) {
+                        projetos = this.projetoService.findAllByTituloOrIncentivosFiscaisContaining(pageable, key, categoria);
+                    } else {
+                        projetos = this.projetoService.findAll(pageable, key);
                     }
-
+                    projetos.getContent().forEach((projeto) -> {
+                        projeto.setAvaliado(this.projetoService.verifyAvaliacao(projeto.getId(), usuario.getId()));
+                    });
+                    model.addAttribute("projetos", projetos);
+                    model.addAttribute("qtdAvaliados", this.projetoService.countProjetosAvaliados(usuario.getId()));
+                    model.addAttribute("qtdPendentes", this.projetoService.count() - this.projetoService.countProjetosAvaliados(usuario.getId()));
                     return "painel/empresa/projeto/lista";
                 default:
                     this.logger.log(Level.WARNING, "Usuário não encontrado.");
@@ -120,7 +118,7 @@ public class ProjetoController {
                         this.logger.log(Level.INFO, "Projeto " + projeto.getTitulo() + " adicionado a lista de: " + ((Empresa)empresa.get()).getNomeFantasia());
                     }
                 }
-
+                javaMailService.enviarEmailNotificacaoDocumentosProjetoPendenteAnalise(projeto);
                 return "painel/entidade/projeto/cadastro-projeto-sucesso";
             } else {
                 model.addAttribute("projeto", projeto);

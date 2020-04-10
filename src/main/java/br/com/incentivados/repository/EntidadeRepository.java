@@ -1,9 +1,8 @@
 package br.com.incentivados.repository;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-
+import br.com.incentivados.enumerated.StatusArquivo;
+import br.com.incentivados.model.Entidade;
+import br.com.incentivados.model.Usuario;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,8 +10,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import br.com.incentivados.model.Entidade;
-import br.com.incentivados.model.Usuario;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface EntidadeRepository extends JpaRepository<Entidade, Long> {
@@ -30,6 +30,10 @@ public interface EntidadeRepository extends JpaRepository<Entidade, Long> {
     List<Entidade> findAllByUsuario(Usuario usuario);
 
     Page<Entidade> findAllByUsuario(Usuario usuario, Pageable page);
+
+    Page<Entidade> findAllByDocumentosEntidadeStatusDocumentacao(Pageable pageable, StatusArquivo statusArquivo);
+
+    Page<Entidade> findAllByUsuarioAndAndDocumentosEntidadeStatusDocumentacao(Pageable pageable, Usuario usuario, StatusArquivo statusArquivo);
 
     @Query("SELECT entidade FROM Entidade entidade WHERE entidade.nomeFantasia LIKE %:key% OR entidade.cnpj LIKE %:key%")
     Page<Entidade> findAll(Pageable page, @Param("key") String key);
