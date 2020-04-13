@@ -168,6 +168,10 @@ public class ProjetoService {
         Arquivo dadosBancarios = projeto.getDocumentosProjeto().getDadosBancariosFundo();
         Arquivo certificado = projeto.getDocumentosProjeto().getCertificado();
 
+        if(dadosBancarios.getFile().isEmpty()){
+            projeto.getDocumentosProjeto().getDadosBancariosFundo().setStatus(NAO_SE_APLICA);
+        }
+
         projeto.getDocumentosProjeto().getLogo().setPath(FileUpload.upload(request, logo.getFile(), "logo", path));
         projeto.getDocumentosProjeto().getPropostaTecnica().setPath(FileUpload.upload(request, propostaTecnica.getFile(), "proposta-tecnica", path));
         projeto.getDocumentosProjeto().getPropostOrcamentaria().setPath(FileUpload.upload(request, propostaOrcamentaria.getFile(), "proposta-orcamentaria", path));

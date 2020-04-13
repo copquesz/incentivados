@@ -47,7 +47,7 @@ public class Entidade implements Serializable {
 	private Usuario usuario;
 	
 	@JoinColumn(name = "documentos_entidade_id")
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(optional = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private DocumentosEntidade documentosEntidade;
 	
 	@OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)

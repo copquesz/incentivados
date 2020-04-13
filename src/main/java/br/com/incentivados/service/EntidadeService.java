@@ -112,8 +112,12 @@ public class EntidadeService {
         Arquivo identidade = entidade.getDocumentosEntidade().getIdentidade();
         Arquivo cartaoCnpj = entidade.getDocumentosEntidade().getCartaoCnpj();
         Arquivo dadosBancarios = entidade.getDocumentosEntidade().getDadosBancarios();
-        entidade.getDocumentosEntidade().getLogo().setPath(FileUpload.upload(request, logo.getFile(), "logo", path));
 
+        if(ataEleicao.getFile().isEmpty()){
+            entidade.getDocumentosEntidade().getAtaEleicao().setStatus(NAO_SE_APLICA);
+        }
+
+        entidade.getDocumentosEntidade().getLogo().setPath(FileUpload.upload(request, logo.getFile(), "logo", path));
         entidade.getDocumentosEntidade().getAtaEleicao().setPath(FileUpload.upload(request, ataEleicao.getFile(), "ata-de-eleicao", path));
         entidade.getDocumentosEntidade().getDadosBancarios().setPath(FileUpload.upload(request, dadosBancarios.getFile(), "dados-bancarios", path));
         entidade.getDocumentosEntidade().getEstatutoSocial().setPath(FileUpload.upload(request, estatutoSocial.getFile(), "estatuto-social", path));

@@ -116,8 +116,9 @@ public class EntidadeController {
                 default:
                     return "";
             }
-        } catch (Exception var7) {
-            this.logger.log(Level.SEVERE, "Erro ao listar as entidades.", var7);
+        } catch (Exception e) {
+            System.out.println(e);
+            this.logger.log(Level.SEVERE, "Erro ao listar as entidades.", e);
             return "";
         }
     }
