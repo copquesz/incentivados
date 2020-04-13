@@ -167,16 +167,11 @@ public class ProjetoService {
         Arquivo propostaOrcamentaria = projeto.getDocumentosProjeto().getPropostOrcamentaria();
         Arquivo dadosBancarios = projeto.getDocumentosProjeto().getDadosBancariosFundo();
         Arquivo certificado = projeto.getDocumentosProjeto().getCertificado();
+
         projeto.getDocumentosProjeto().getLogo().setPath(FileUpload.upload(request, logo.getFile(), "logo", path));
         projeto.getDocumentosProjeto().getPropostaTecnica().setPath(FileUpload.upload(request, propostaTecnica.getFile(), "proposta-tecnica", path));
         projeto.getDocumentosProjeto().getPropostOrcamentaria().setPath(FileUpload.upload(request, propostaOrcamentaria.getFile(), "proposta-orcamentaria", path));
-        if (!dadosBancarios.getFile().isEmpty()) {
-            projeto.getDocumentosProjeto().getDadosBancariosFundo().setPath(FileUpload.upload(request, dadosBancarios.getFile(), "dados-bancarios", path));
-        }
-        else{
-            projeto.getDocumentosProjeto().getDadosBancariosFundo().setStatus(NAO_SE_APLICA);
-        }
-
+        projeto.getDocumentosProjeto().getDadosBancariosFundo().setPath(FileUpload.upload(request, dadosBancarios.getFile(), "dados-bancarios", path));
         projeto.getDocumentosProjeto().getCertificado().setPath(FileUpload.upload(request, certificado.getFile(), "certificado", path));
         return projeto;
     }
