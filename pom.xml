@@ -21,7 +21,7 @@
 	</parent>
 	<groupId>br.com.incentivados</groupId>
 	<artifactId>incentivados</artifactId>
-	<version>1.5.0-SNAPSHOT</version>
+	<version>1.5.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>incentivados</name>
 	<description>Projeto Incentivados desenvolvido com Spring Boot, Spring Data JPA e Spring Security.</description>
