@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import static br.com.incentivados.enumerated.StatusArquivo.NAO_SE_APLICA;
+import static br.com.incentivados.enumerated.StatusArquivo.PENDENTE;
 
 @Setter
 @Getter
@@ -42,7 +43,7 @@ public class Arquivo implements Serializable {
 	public Arquivo() {
 		super();
 		this.dataCadastro = new Date();
-		this.status = NAO_SE_APLICA;
+		this.status = PENDENTE;
 	}
 	
 	

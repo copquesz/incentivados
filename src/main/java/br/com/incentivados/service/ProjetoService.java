@@ -19,6 +19,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
+import static br.com.incentivados.enumerated.StatusArquivo.*;
+
 @Service
 public class ProjetoService {
     private final ProjetoRepository projetoRepository;
@@ -170,6 +172,9 @@ public class ProjetoService {
         projeto.getDocumentosProjeto().getPropostOrcamentaria().setPath(FileUpload.upload(request, propostaOrcamentaria.getFile(), "proposta-orcamentaria", path));
         if (!dadosBancarios.getFile().isEmpty()) {
             projeto.getDocumentosProjeto().getDadosBancariosFundo().setPath(FileUpload.upload(request, dadosBancarios.getFile(), "dados-bancarios", path));
+        }
+        else{
+            projeto.getDocumentosProjeto().getDadosBancariosFundo().setStatus(NAO_SE_APLICA);
         }
 
         projeto.getDocumentosProjeto().getCertificado().setPath(FileUpload.upload(request, certificado.getFile(), "certificado", path));

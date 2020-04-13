@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
+import static br.com.incentivados.enumerated.StatusArquivo.*;
+
 @Service
 public class EntidadeService {
     private EntidadeRepository entidadeRepository;
@@ -113,6 +115,9 @@ public class EntidadeService {
         entidade.getDocumentosEntidade().getLogo().setPath(FileUpload.upload(request, logo.getFile(), "logo", path));
         if (!ataEleicao.getFile().isEmpty()) {
             entidade.getDocumentosEntidade().getAtaEleicao().setPath(FileUpload.upload(request, ataEleicao.getFile(), "ata-de-eleicao", path));
+        }
+        else{
+            entidade.getDocumentosEntidade().getAtaEleicao().setStatus(NAO_SE_APLICA);
         }
 
         entidade.getDocumentosEntidade().getDadosBancarios().setPath(FileUpload.upload(request, dadosBancarios.getFile(), "dados-bancarios", path));
