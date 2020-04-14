@@ -115,6 +115,7 @@ public class EntidadeService {
 
         if(ataEleicao.getFile().isEmpty()){
             entidade.getDocumentosEntidade().getAtaEleicao().setStatus(NAO_SE_APLICA);
+            entidade.getDocumentosEntidade().getAtaEleicao().setPath(null);
         }
 
         entidade.getDocumentosEntidade().getLogo().setPath(FileUpload.upload(request, logo.getFile(), "logo", path));

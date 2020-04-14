@@ -170,6 +170,7 @@ public class ProjetoService {
 
         if(dadosBancarios.getFile().isEmpty()){
             projeto.getDocumentosProjeto().getDadosBancariosFundo().setStatus(NAO_SE_APLICA);
+            projeto.getDocumentosProjeto().getDadosBancariosFundo().setPath(null);
         }
 
         projeto.getDocumentosProjeto().getLogo().setPath(FileUpload.upload(request, logo.getFile(), "logo", path));
