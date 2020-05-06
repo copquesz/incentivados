@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +28,7 @@ public class PedidoService {
         this.javaMailService = javaMailService;
     }
 
+    @Transactional
     public Pedido save(Pedido pedido, HttpServletRequest request, Usuario usuario, Usuario analista, Empresa empresa, Entidade entidade) {
         pedido.setUsuario(usuario);
         pedido.setAnalista(analista);
@@ -40,6 +42,7 @@ public class PedidoService {
         return this.pedidoRepository.save(pedido);
     }
 
+    @Transactional
     public Pedido update(Pedido pedido, StatusPedido status, ObservacaoPedido observacaoPedido, Usuario usuario) {
         observacaoPedido.setUsuario(usuario);
         pedido.setStatus(status);
@@ -47,6 +50,7 @@ public class PedidoService {
         return (Pedido) this.pedidoRepository.save(pedido);
     }
 
+    @Transactional
     public Pedido update(Pedido pedido, HttpServletRequest request, MultipartFile notaFiscal) {
         pedido.setStatus(StatusPedido.APROVADO);
         Arquivo arquivo = new Arquivo();
