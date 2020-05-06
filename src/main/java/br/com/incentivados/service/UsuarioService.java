@@ -50,6 +50,9 @@ public class UsuarioService {
 
     public Usuario login(String email) {
         Optional<Usuario> usuario = findByEmail(email);
+        if(usuario.get().getUltimoAcesso() != null){
+            usuario.get().setAtivo(true);
+        }
         this.ultimoAcesso(usuario.get());
         return usuario.get();
     }

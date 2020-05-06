@@ -37,6 +37,9 @@ public class Usuario implements Serializable {
 	private String email;
 
 	private String senha;
+
+	@Transient
+	private boolean ativo;
 	
 	@OneToMany(mappedBy = "usuario",fetch = FetchType.LAZY, orphanRemoval = true)
 	private List<Pedido> pedidos;
@@ -56,6 +59,7 @@ public class Usuario implements Serializable {
 	public Usuario() {
 		super();
 		this.dataCadastro = new Date();
+		this.ativo = false;
 	}
 
 }
