@@ -9,24 +9,25 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.List;
-import java.util.Optional;
-import java.util.TimeZone;
+import java.util.*;
 
 @Service
 public class UsuarioService {
-    @Autowired
-    private UsuarioRepository usuarioRepository;
 
-    public UsuarioService() {
+    private final UsuarioRepository usuarioRepository;
+    private final JavaMailService javaMailService;
+
+    @Autowired
+    public UsuarioService(UsuarioRepository usuarioRepository, JavaMailService javaMailService) {
+        this.usuarioRepository = usuarioRepository;
+        this.javaMailService = javaMailService;
     }
 
     public Usuario save(Usuario usuario) {
         if (usuario.getCpf().equals("")) {
             usuario.setCpf((String) null);
         }
-
+        javaMailService.enviarEmailWelcome(usuario);
         return this.usuarioRepository.save(usuario);
     }
 
@@ -63,6 +64,12 @@ public class UsuarioService {
     public Usuario atualizaSenha(Usuario usuario, String novaSenha) {
         usuario.setSenha(novaSenha);
         return this.usuarioRepository.save(usuario);
+    }
+
+    public void recuperarSenha(Usuario usuario){
+        String novaSenha = UUID.randomUUID().toString().substring(0, 8);
+        atualizaSenha(usuario, novaSenha);
+        javaMailService.enviarEmailNovaSenha(usuario, novaSenha);
     }
 
     public Usuario setEmpresa(Usuario usuario, Empresa empresa) {
