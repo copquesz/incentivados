@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -78,11 +79,12 @@ public class UsuarioController {
     @PostMapping("/usuarios/recuperar-senha")
     public String postRecuperarSenha(@RequestParam() String email, RedirectAttributes redirectAttributes, HttpServletRequest request, Model model){
         model.addAttribute("path", request.getContextPath());
-        if (!usuarioService.existsByEmail(email)){
+        Optional<Usuario> usuario = usuarioService.findByEmail(email);
+        if (!usuario.isPresent()){
             redirectAttributes.addAttribute("recuperarSenha", "emailNotFound");
         }
         else{
-            javaMailService.recuperarSenha(email);
+            usuarioService.recuperarSenha(usuario.get());
             redirectAttributes.addAttribute("recuperarSenha", "emailSended");
         }
         return "redirect:/login";

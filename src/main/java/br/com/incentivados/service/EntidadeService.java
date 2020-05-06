@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
-import static br.com.incentivados.enumerated.StatusArquivo.*;
+import static br.com.incentivados.enumerated.StatusArquivo.NAO_SE_APLICA;
 
 @Service
 public class EntidadeService {

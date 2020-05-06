@@ -19,7 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-import static br.com.incentivados.enumerated.StatusArquivo.*;
+import static br.com.incentivados.enumerated.StatusArquivo.NAO_SE_APLICA;
 
 @Service
 public class ProjetoService {
