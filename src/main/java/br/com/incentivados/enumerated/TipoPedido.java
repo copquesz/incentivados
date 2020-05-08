@@ -10,8 +10,8 @@ import lombok.Getter;
 @Getter
 public enum TipoPedido {
 
-    MANUTENCAO(0, "Manutenção"),
-    REFORMA(1, "Reforma"),
+    MANUTENCAO(0, "Manutenção/Limpeza"),
+    REFORMA(1, "Reforma/Construção"),
     EQUIPAMENTOS(2, "Equipamentos"),
     JARDINAGEM(3, "Jardinagem"),
     ALIMENTOS(4, "Alimentos"),
