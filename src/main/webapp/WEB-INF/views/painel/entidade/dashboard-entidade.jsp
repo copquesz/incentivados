@@ -381,6 +381,7 @@
 <c:import url="/WEB-INF/views/componentes/modal/modal-alterar-senha.jsp" />
 <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido.jsp" />
 <c:import url="/WEB-INF/views/componentes/modal/modal-observacao-pedido-pre-aprovado-usuario.jsp" />
+<c:import url="/WEB-INF/views/componentes/modal/modal-welcome.jsp" />
 
 <!--   JQUERY   -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -392,5 +393,13 @@
 <script type="text/javascript" src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
 <script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script>
 </body>
+
+<c:if test="${!usuario.ativo}">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#modal-welcome').modal('show');
+        });
+    </script>
+</c:if>
 
 </html>
