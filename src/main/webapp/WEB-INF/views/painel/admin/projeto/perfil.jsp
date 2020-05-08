@@ -245,6 +245,28 @@
                                 </div>
                             </fieldset>
 
+                            
+                            <fieldset class="mt-5">
+                                <legend class="text-primary">Parceiros:</legend>
+                                <hr class="bg-primary">
+                                <c:if test="${empty projeto.parceiros}">
+                                  <div class="alert alert-danger" role="alert">
+                                    <small><i class="fas fa-info-circle"></i> Projeto não possui parceiro(s) cadastrado(s).</small>
+                                  </div>
+                                </c:if>
+                                <c:if test="${not empty projeto.parceiros}">
+                                  <div class="row">
+                                      <div class="col-lg-12">
+                                          <div class="form-group">
+                                              <ul>
+                                                <li class="lead">${projeto.parceiros}</li>
+                                              </ul>
+                                          </div>
+                                      </div>
+                                  </div>
+                                </c:if>
+                            </fieldset>
+
                             <fieldset class="mt-5">
                                 <legend class="text-primary">Documentação:</legend>
 
