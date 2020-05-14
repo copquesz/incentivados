@@ -65,7 +65,50 @@
           </li>
           <li>
             <a href="${path}/painel/ranking">
-              <i class="far fa-chart-bar"></i>Ranking</a>
+              <i class="fas fa-medal"></i>Ranking</a>
+          </li>
+          <li>
+            <a data-toggle="collapse" href="#graficos"><i class="fas fa-chart-line"></i>Gráficos<b class="caret"></b></a>
+              <div class="collapse" id="graficos">
+                <ul class="nav">
+                  <li>
+                    <a data-toggle="collapse" href="#graficos-entidade" style="margin-left: 30px;"><i class="fas fa-users"></i>Entidades <b class="caret"></b></a>
+                      <div class="collapse" id="graficos-entidade">
+                        <ul class="nav">
+                          <li>
+                            <a href="${path}/painel/graficos/entidades/linha-do-tempo" style="margin-left: 50px;"><i class="fas fa-chart-area"></i>Linha do Tempo</a>
+                          </li>
+                        </ul>
+                      </div>                   
+                  </li>
+                  <li>
+                    <a data-toggle="collapse" href="#graficos-projetos" style="margin-left: 30px;"><i class="fas fa-project-diagram"></i>Projetos <b class="caret"></b></a>
+                      <div class="collapse" id="graficos-projetos">
+                        <ul class="nav">
+                          <li>
+                            <a href="#" style="margin-left: 50px;"><i class="far fa-chart-bar"></i>Categoria</a>                            
+                          </li>
+                          <li>
+                            <a href="#" style="margin-left: 50px;"><i class="fas fa-globe-americas"></i>Mapa</a>
+                          </li>
+                        </ul>
+                      </div>                   
+                  </li>
+                  <li>
+                    <a data-toggle="collapse" href="#graficos-pedidos" style="margin-left: 30px;"><i class="fas fa-praying-hands"></i>Pedidos <b class="caret"></b></a>
+                      <div class="collapse" id="graficos-pedidos">
+                        <ul class="nav">
+                          <li>
+                            <a href="#" style="margin-left: 50px;"><i class="fas fa-chart-pie"></i>Status</a>                            
+                          </li>
+                          <li>
+                            <a href="#" style="margin-left: 50px;"><i class="fas fa-globe-americas"></i>Mapa</a>
+                          </li>
+                        </ul>
+                      </div>                   
+                  </li>
+                </ul>
+              </div>
           </li>
         </ul>
       </div>
@@ -219,19 +262,7 @@
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card ">
-              <div class="card-header ">
-                <h5 class="card-title">Entidades Cadastradas</h5>
-              </div>
-              <div class="card-body ">
-                
-                <canvas id="line-chart" height="250"></canvas>
-
-              </div>
-            </div>
-          </div>
+        <div class="row">          
 
           <div class="col-md-4">
             <div class="card ">
@@ -367,38 +398,7 @@
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
   <script type="text/javascript" src="${path}/assets/js/file-validator.js"></script>
-  <script type="text/javascript">    
-    var lineCtx = document.getElementById("line-chart").getContext('2d');
-    var lineChart = new Chart(lineCtx, {
-        type: 'line',
-        data: {
-            labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
-            datasets: [{
-                label: 'Registros',                  
-                data: [<c:forEach var="dataChartEntidade" items="${datasChartEntidade}">${dataChartEntidade},</c:forEach>],
-                backgroundColor: [
-                    'rgba(114, 191, 68, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(114, 191, 68, 1)',
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            legend: {
-                display: false
-            },
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero:true
-                    }
-                }]
-            }
-        }
-    });
-
+  <script type="text/javascript">        
     var barCtx = document.getElementById("bar-chart").getContext('2d');
     var barChart = new Chart(barCtx, {
         type: 'bar',
