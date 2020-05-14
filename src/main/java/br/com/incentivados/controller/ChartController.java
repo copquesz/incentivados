@@ -1,5 +1,6 @@
 package br.com.incentivados.controller;
 
+import br.com.incentivados.enumerated.StatusPedido;
 import br.com.incentivados.service.ChartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,10 +29,8 @@ public class ChartController {
 
     @GetMapping({"/painel/graficos/entidades/linha-do-tempo"})
     public String getLineChartEntidade(@RequestParam(required = false, defaultValue = "0") String ano, HttpServletRequest request, Model model) {
-        System.out.println(ano);
         model.addAttribute("path", request.getContextPath());
         model.addAttribute("entidadeLineCharts", chartService.buildLineChartEntidade(Integer.parseInt(ano)));
-
         return "painel/admin/graficos/grafico-entidades-linha-do-tempo";
     }
 
@@ -40,5 +39,14 @@ public class ChartController {
         model.addAttribute("path", request.getContextPath());
         model.addAttribute("projetoPieCharts", chartService.buildPieChartProjetosCategoria());
         return "painel/admin/graficos/grafico-projetos-categoria";
+    }
+
+    @GetMapping({"/painel/graficos/pedidos/status"})
+    public String getDonutChartPedidosStatus(HttpServletRequest request, Model model) {
+        model.addAttribute("path", request.getContextPath());
+        model.addAttribute("pendentes", chartService.buildDonutChartPedidosStatus(StatusPedido.PENDENTE));
+        model.addAttribute("recusados", chartService.buildDonutChartPedidosStatus(StatusPedido.RECUSADO));
+        model.addAttribute("aprovados", chartService.buildDonutChartPedidosStatus(StatusPedido.APROVADO));
+        return "painel/admin/graficos/grafico-pedidos-status";
     }
 }

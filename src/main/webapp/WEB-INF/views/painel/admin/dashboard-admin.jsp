@@ -99,7 +99,7 @@
                       <div class="collapse" id="graficos-pedidos">
                         <ul class="nav">
                           <li>
-                            <a href="#" style="margin-left: 50px;"><i class="fas fa-chart-pie"></i>Status</a>                            
+                            <a href="${path}/painel/graficos/pedidos/status" style="margin-left: 50px;"><i class="fas fa-chart-pie"></i>Status</a>                            
                           </li>
                           <li>
                             <a href="#" style="margin-left: 50px;"><i class="fas fa-globe-americas"></i>Mapa</a>
@@ -262,24 +262,6 @@
           </div>
         </div>
 
-        <div class="row">        
-
-          <div class="col-md-4">
-            <div class="card ">
-              <div class="card-header ">
-                <h5 class="card-title">Pedidos</h5>
-              </div>
-              <div class="card-body ">
-                
-                <canvas id="doughnut-chart" height="250"></canvas>
-
-              </div>
-            </div>
-          </div>
-
-        </div>
-        
-        </div>
         <div class="row">
           <div class="col-md-12">
             <div class="card ">
@@ -384,39 +366,7 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
-  <script type="text/javascript" src="${path}/assets/js/file-validator.js"></script>
-  <script type="text/javascript">        
-    var doughnutCtx = document.getElementById("doughnut-chart").getContext('2d');
-    var doughnutChart = new Chart(doughnutCtx, {
-        type: 'doughnut',
-        data: {
-            labels: ["Pendente", "Recusado", "Aprovado"],
-            datasets: [{
-                label: 'Registros',
-                data: ['${qtdPedidosPendente}', '${qtdPedidosRecusado}', '${qtdPedidosAprovado}'],
-                backgroundColor: [
-                    'rgba(241, 196, 15, 0.6)',
-                    'rgba(231, 76, 60, 0.6)',
-                    'rgba(46, 204, 113, 0.6)'
-                ],
-                borderColor: [
-                    'rgba(241, 196, 15, 0.6)',
-                    'rgba(231, 76, 60, 0.6)',
-                    'rgba(46, 204, 113, 0.6)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            legend: {
-                display: false
-            },
-            scales: {
-                display: false
-            }
-        }
-    });
-</script>
+  <script type="text/javascript" src="${path}/assets/js/file-validator.js"></script>  
 </body>
 
 </html>

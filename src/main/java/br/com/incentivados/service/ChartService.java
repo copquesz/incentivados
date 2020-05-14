@@ -1,7 +1,9 @@
 package br.com.incentivados.service;
 
 import br.com.incentivados.enumerated.Meses;
+import br.com.incentivados.enumerated.StatusPedido;
 import br.com.incentivados.model.IncentivoFiscal;
+import br.com.incentivados.model.chart.DonutChart;
 import br.com.incentivados.model.chart.LineChart;
 import br.com.incentivados.model.chart.PieChart;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +24,14 @@ public class ChartService {
 
     private final EntidadeService entidadeService;
     private final ProjetoService projetoService;
+    private final PedidoService pedidoService;
     private final IncentivoFiscalService incentivoFiscalService;
 
     @Autowired
-    public ChartService(EntidadeService entidadeService, ProjetoService projetoService, IncentivoFiscalService incentivoFiscalService) {
+    public ChartService(EntidadeService entidadeService, ProjetoService projetoService, PedidoService pedidoService, IncentivoFiscalService incentivoFiscalService) {
         this.entidadeService = entidadeService;
         this.projetoService = projetoService;
+        this.pedidoService = pedidoService;
         this.incentivoFiscalService = incentivoFiscalService;
     }
 
@@ -69,4 +73,10 @@ public class ChartService {
         );
         return  pieCharts;
     }
+
+    public DonutChart buildDonutChartPedidosStatus(StatusPedido statusPedido){
+        return new DonutChart(statusPedido.getDescricao(), pedidoService.countByStatus(statusPedido));
+    }
+
+
 }
