@@ -151,7 +151,6 @@ public class DashboardController {
             case ADMIN:
                 model.addAttribute("entidades", this.entidadeService.findAll(pageableEntidades));
                 model.addAttribute("qtdEntidades", this.entidadeService.count());
-                model.addAttribute("datasChartEntidade", this.entidadeService.buildChart());
                 model.addAttribute("projetos", this.projetoService.findAll(pageableProjetos));
                 model.addAttribute("qtdProjetos", this.projetoService.count());
                 model.addAttribute("entidadesPendenteAnalise", this.entidadeService.findAllByDocumentosEntidadeStatusDocumentacao(PageRequest.of(0, 2, Sort.by(new Order[]{Order.desc("id")})), StatusArquivo.PENDENTE));
