@@ -88,20 +88,8 @@ public class EntidadeService {
         return this.entidadeRepository.countByUsuario(usuario);
     }
 
-    private Long countByIdAndDataCadastroBetween(Date inicio, Date fim) {
+    public Long countByIdAndDataCadastroBetween(Date inicio, Date fim) {
         return this.entidadeRepository.countByDataCadastroBetween(inicio, fim);
-    }
-
-    public List<Long> buildChart() {
-        int ANO_ATUAL = GregorianCalendar.getInstance().get(1);
-        List<Long> array = new ArrayList();
-
-        for (int i = 0; i < 12; ++i) {
-            Calendar data = new GregorianCalendar(ANO_ATUAL, i, 1);
-            array.add(this.countByIdAndDataCadastroBetween((new GregorianCalendar(ANO_ATUAL, i, data.getActualMinimum(5))).getTime(), (new GregorianCalendar(ANO_ATUAL, i, data.getActualMaximum(5))).getTime()));
-        }
-
-        return array;
     }
 
     private Entidade uploadDocumentos(Entidade entidade, HttpServletRequest request) {

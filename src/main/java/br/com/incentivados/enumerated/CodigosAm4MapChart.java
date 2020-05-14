@@ -8,7 +8,7 @@ import lombok.Getter;
  * @since 14/05/2020
  */
 @Getter
-public enum CodigosAmChart {
+public enum CodigosAm4MapChart {
     BR_AC("BR-AC", "Acre"),
     BR_AL("BR-AL", "Alagoas"),
     BR_AP("BR-AP", "Amapá"),
@@ -40,7 +40,7 @@ public enum CodigosAmChart {
     private String id;
     private String descricao;
 
-    CodigosAmChart(String id, String descricao) {
+    CodigosAm4MapChart(String id, String descricao) {
         this.id = id;
         this.descricao = descricao;
     }

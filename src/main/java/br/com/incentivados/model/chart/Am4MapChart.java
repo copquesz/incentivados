@@ -1,6 +1,6 @@
 package br.com.incentivados.model.chart;
 
-import br.com.incentivados.enumerated.CodigosAmChart;
+import br.com.incentivados.enumerated.CodigosAm4MapChart;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,10 +14,10 @@ import javax.persistence.Enumerated;
  */
 @Getter
 @Setter
-public class AmChart {
+public class Am4MapChart {
 
     @Enumerated(EnumType.STRING)
-    private CodigosAmChart id;
+    private CodigosAm4MapChart id;
 
     private Long value;
 }
