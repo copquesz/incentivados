@@ -41,6 +41,14 @@ public class ChartController {
         return "painel/admin/graficos/grafico-projetos-categoria";
     }
 
+    @GetMapping({"/painel/graficos/projetos/mapa"})
+    public String getAm4ChartProjetosLocalidade(HttpServletRequest request, Model model) {
+        model.addAttribute("path", request.getContextPath());
+        model.addAttribute("am4ChartsProjetosLocalidade", chartService.buildAm4ChartProjetosLocalidade());
+        model.addAttribute("totalProjetos", chartService.countTotalProjetos());
+        return "painel/admin/graficos/grafico-projetos-localidade";
+    }
+
     @GetMapping({"/painel/graficos/pedidos/status"})
     public String getDonutChartPedidosStatus(HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());

@@ -132,6 +132,10 @@ public class ProjetoService {
         return this.projetoRepository.countByIncentivosFiscais(incentivoFiscal);
     }
 
+    public Long countByEntidadeEnderecoEstado(String estado){
+        return this.projetoRepository.countByEntidadeEnderecoEstado(estado);
+    }
+
     public Long countProjetosAvaliados(Long idAnalista) {
         return this.projetoRepository.countProjetosAvaliados(idAnalista);
     }

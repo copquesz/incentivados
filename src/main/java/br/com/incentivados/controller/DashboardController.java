@@ -145,10 +145,6 @@ public class DashboardController {
                 model.addAttribute("entidadesPendenteAnalise", this.entidadeService.findAllByDocumentosEntidadeStatusDocumentacao(PageRequest.of(0, 2, Sort.by(new Order[]{Order.desc("id")})), StatusArquivo.PENDENTE));
                 model.addAttribute("projetosPendenteAnalise", this.projetoService.findAllByDocumentosProjetoStatusDocumentacao(PageRequest.of(0, 2, Sort.by(new Order[]{Order.desc("id")})), StatusArquivo.PENDENTE));
                 model.addAttribute("qtdPedidos", this.pedidoService.count());
-                model.addAttribute("qtdPedidosPendente", this.pedidoService.countByStatus(StatusPedido.PENDENTE));
-                model.addAttribute("qtdPedidosPreAprovado", this.pedidoService.countByStatus(StatusPedido.PRE_APROVADO));
-                model.addAttribute("qtdPedidosAprovado", this.pedidoService.countByStatus(StatusPedido.APROVADO));
-                model.addAttribute("qtdPedidosRecusado", this.pedidoService.countByStatus(StatusPedido.RECUSADO));
                 return "painel/admin/dashboard-admin";
             default:
                 return "";

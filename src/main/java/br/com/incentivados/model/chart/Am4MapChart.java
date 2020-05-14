@@ -3,6 +3,7 @@ package br.com.incentivados.model.chart;
 import br.com.incentivados.enumerated.CodigosAm4MapChart;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,10 +15,15 @@ import javax.persistence.Enumerated;
  */
 @Getter
 @Setter
+@ToString
 public class Am4MapChart {
 
-    @Enumerated(EnumType.STRING)
-    private CodigosAm4MapChart id;
 
+    private String id;
     private Long value;
+
+    public Am4MapChart(String id, Long value) {
+        this.id = id;
+        this.value = value;
+    }
 }

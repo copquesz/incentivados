@@ -28,6 +28,8 @@ public interface ProjetoRepository extends JpaRepository<Projeto, Projeto> {
 
     Long countByIncentivosFiscais(IncentivoFiscal incentivoFiscal);
 
+    Long countByEntidadeEnderecoEstado(String estado);
+
     @Query(value = "SELECT COUNT(projeto_id) FROM projeto_has_avaliacao pjha INNER JOIN avaliacao av on pjha.avaliacao_id = av.id WHERE pjha.projeto_id = :idProjeto AND av.analista_id = :idUsuario", nativeQuery = true)
     Long verifyAvaliacao(@Param("idProjeto") Long idProjeto, @Param("idUsuario") Long idUsuario);
 
