@@ -68,8 +68,8 @@
               <i class="fas fa-medal"></i>Ranking</a>
           </li>
           <li>
-            <a data-toggle="collapse show" href="#graficos"><i class="fas fa-chart-line"></i>Gráficos<b class="caret"></b></a>
-              <div class="collapse" id="graficos">
+            <a data-toggle="collapse" href="#graficos"><i class="fas fa-chart-line"></i>Gráficos<b class="caret"></b></a>
+              <div class="collapse show" id="graficos">
                 <ul class="nav">
                   <li>
                     <a data-toggle="collapse" href="#graficos-entidade" style="margin-left: 30px;"><i class="fas fa-users"></i>Entidades <b class="caret"></b></a>
@@ -85,8 +85,8 @@
                     <a data-toggle="collapse" href="#graficos-projetos" style="margin-left: 30px;"><i class="fas fa-project-diagram"></i>Projetos <b class="caret"></b></a>
                       <div class="collapse show" id="graficos-projetos">
                         <ul class="nav">
-                          <li>
-                            <a href="#" class="active" style="margin-left: 50px;"><i class="far fa-chart-bar"></i>Categoria</a>                            
+                          <li class="active">
+                            <a href="${path}/painel/graficos/projetos/categoria" style="margin-left: 50px;"><i class="far fa-chart-bar"></i>Categoria</a>                            
                           </li>
                           <li>
                             <a href="#" style="margin-left: 50px;"><i class="fas fa-globe-americas"></i>Mapa</a>
@@ -187,12 +187,12 @@
     var pieChart = new Chart(pieCtx, {
         type: 'bar',
         data: {
-            labels: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'${incentivoFiscal.legislacao}',</c:forEach>],
+            labels: [<c:forEach var="projetoPieChartLabel" items="${projetoPieCharts}">'${projetoPieChartLabel.label}',</c:forEach>],
             datasets: [{
                 label: 'Registros',
-                data: [<c:forEach var="dataCharProjeto" items="${datasCharProjeto}">${dataCharProjeto},</c:forEach>],
-                backgroundColor: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'rgba(114, 191, 68, 0.2)',</c:forEach>],
-                borderColor: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'rgba(114, 191, 68, 1)',</c:forEach>],
+                data: [<c:forEach var="projetoPieChartValue" items="${projetoPieCharts}">${projetoPieChartValue.value}, </c:forEach>],
+                backgroundColor: [<c:forEach var="projetoPieChartBackgroundColor" items="${projetoPieCharts}">'rgba(114, 191, 68, 0.2)',</c:forEach>],
+                borderColor: [<c:forEach var="projetoPieChartBorderColor" items="${projetoPieCharts}">'rgba(114, 191, 68, 1)',</c:forEach>],
                 borderWidth: 1
             }]
         },

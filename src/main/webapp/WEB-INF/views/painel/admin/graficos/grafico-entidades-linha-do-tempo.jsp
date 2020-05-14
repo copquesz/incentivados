@@ -187,10 +187,10 @@
     var lineChart = new Chart(lineCtx, {
         type: 'line',
         data: {
-            labels: [<c:forEach var="lineChartLabel" items="${linesChart}">"${lineChartLabel.label}",</c:forEach>],
+            labels: [<c:forEach var="entidadeLineChartLabel" items="${entidadeLineCharts}">"${entidadeLineChartsLabel.label}",</c:forEach>],
             datasets: [{
                 label: 'Registros',                  
-                data: [<c:forEach var="lineChartValue" items="${linesChart}">${lineChartValue.value},</c:forEach>],
+                data: [<c:forEach var="entidadeLineChartValue" items="${entidadeLineCharts}">${entidadeLineChartValue.value},</c:forEach>],
                 backgroundColor: [
                     'rgba(114, 191, 68, 0.2)',
                 ],

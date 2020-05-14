@@ -86,7 +86,7 @@
                       <div class="collapse" id="graficos-projetos">
                         <ul class="nav">
                           <li>
-                            <a href="#" style="margin-left: 50px;"><i class="far fa-chart-bar"></i>Categoria</a>                            
+                            <a href="${path}/painel/graficos/projetos/categoria" style="margin-left: 50px;"><i class="far fa-chart-bar"></i>Categoria</a>                            
                           </li>
                           <li>
                             <a href="#" style="margin-left: 50px;"><i class="fas fa-globe-americas"></i>Mapa</a>
@@ -262,20 +262,7 @@
           </div>
         </div>
 
-        <div class="row">          
-
-          <div class="col-md-4">
-            <div class="card ">
-              <div class="card-header ">
-                <h5 class="card-title">Projetos x Leis</h5>
-              </div>
-              <div class="card-body ">
-                
-                <canvas id="bar-chart" height="250"></canvas>
-
-              </div>
-            </div>
-          </div>
+        <div class="row">        
 
           <div class="col-md-4">
             <div class="card ">
@@ -399,42 +386,6 @@
   <script src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
   <script type="text/javascript" src="${path}/assets/js/file-validator.js"></script>
   <script type="text/javascript">        
-    var barCtx = document.getElementById("bar-chart").getContext('2d');
-    var barChart = new Chart(barCtx, {
-        type: 'bar',
-        data: {
-            labels: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'${incentivoFiscal.legislacao}',</c:forEach>],
-            datasets: [{
-                label: 'Registros',
-                data: [<c:forEach var="dataCharProjeto" items="${datasCharProjeto}">${dataCharProjeto},</c:forEach>],
-                backgroundColor: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'rgba(114, 191, 68, 0.2)',</c:forEach>],
-                borderColor: [<c:forEach var="incentivoFiscal" items="${incentivosFiscais}">'rgba(114, 191, 68, 1)',</c:forEach>],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            legend: {
-                display: false
-            },
-            scales: {
-              xAxes: [
-                {
-                  ticks:{                      
-                    callback: function (value) {
-                      return ""
-                    }
-                  },
-                },
-              ],
-              yAxes: [{
-                  ticks: {
-                      beginAtZero:true
-                  }
-              }]
-            }
-        }
-    });
-
     var doughnutCtx = document.getElementById("doughnut-chart").getContext('2d');
     var doughnutChart = new Chart(doughnutCtx, {
         type: 'doughnut',

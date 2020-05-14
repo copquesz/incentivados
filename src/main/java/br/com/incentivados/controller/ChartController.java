@@ -27,7 +27,7 @@ public class ChartController {
     @GetMapping({"/painel/graficos/entidades/linha-do-tempo"})
     public String getLineChartEntidade(HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-        model.addAttribute("linesChart", chartService.buildLineChartEntidade(2020));
+        model.addAttribute("entidadeLineCharts", chartService.buildLineChartEntidade(2020));
 
         return "painel/admin/graficos/grafico-entidades-linha-do-tempo";
     }
@@ -35,7 +35,7 @@ public class ChartController {
     @GetMapping({"/painel/graficos/projetos/categoria"})
     public String getPieChartProjeto(HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-
+        model.addAttribute("projetoPieCharts", chartService.buildPieChartProjetosCategoria());
         return "painel/admin/graficos/grafico-projetos-categoria";
     }
 }
