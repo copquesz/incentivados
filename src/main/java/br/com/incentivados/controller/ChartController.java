@@ -29,6 +29,13 @@ public class ChartController {
         model.addAttribute("path", request.getContextPath());
         model.addAttribute("linesChart", chartService.buildLineChartEntidade(2020));
 
-        return "painel/admin/graficos/grafico-entidade-linha-do-tempo";
+        return "painel/admin/graficos/grafico-entidades-linha-do-tempo";
+    }
+
+    @GetMapping({"/painel/graficos/projetos/categoria"})
+    public String getPieChartProjeto(HttpServletRequest request, Model model) {
+        model.addAttribute("path", request.getContextPath());
+
+        return "painel/admin/graficos/grafico-projetos-categoria";
     }
 }
