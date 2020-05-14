@@ -157,7 +157,21 @@
           <div class="col-md-10 mx-auto">
             <div class="card ">
               <div class="card-header ">
-                <h5 class="card-title">Entidades Cadastradas</h5>                
+                <h5 class="card-title">Entidades Cadastradas</h5>    
+                <div class="row">
+                  <div class="col-12 d-flex justify-content-start">
+                    <form class="form-inline">
+                      <div class="form-group mx-sm-1 mb-2">
+                        <select class="form-control" name="ano">
+                           <option value="2020">2020</option>
+                           <option value="2019">2019</option>                           
+                        </select>
+                      </div>
+                      <div class="form-group mb-2">
+                        <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>
+                      </div>                      
+                    </form>
+                  </div>            
               </div>
               <div class="card-body ">                
                 <canvas id="entidade-line-chart"></canvas>
@@ -187,7 +201,7 @@
     var lineChart = new Chart(lineCtx, {
         type: 'line',
         data: {
-            labels: [<c:forEach var="entidadeLineChartLabel" items="${entidadeLineCharts}">"${entidadeLineChartsLabel.label}",</c:forEach>],
+            labels: [<c:forEach var="entidadeLineChartLabel" items="${entidadeLineCharts}">"${entidadeLineChartLabel.label}",</c:forEach>],
             datasets: [{
                 label: 'Registros',                  
                 data: [<c:forEach var="entidadeLineChartValue" items="${entidadeLineCharts}">${entidadeLineChartValue.value},</c:forEach>],

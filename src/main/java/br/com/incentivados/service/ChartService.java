@@ -40,16 +40,13 @@ public class ChartService {
             ano = GregorianCalendar.getInstance().get(1);
         }
 
-        // carrega o vetor com os meses
-        Meses meses[] = Meses.values();
-
         // Popula o array com os dados em cada label
-        for (int i = 0; i < meses.length; ++i) {
-            Calendar data = new GregorianCalendar(ano, i, 1);
-            lineCharts.add(new LineChart(meses[i].getDescricao(),
+        for (Meses mes: Meses.values()) {
+            Calendar data = new GregorianCalendar(ano, mes.getId(), 1);
+            lineCharts.add(new LineChart(mes.getDescricao(),
                             entidadeService.countByIdAndDataCadastroBetween(
-                                    (new GregorianCalendar(ano, i, data.getActualMinimum(5))).getTime(),
-                                    (new GregorianCalendar(ano, i, data.getActualMaximum(5))).getTime())
+                                    (new GregorianCalendar(ano, mes.getId(), data.getActualMinimum(5))).getTime(),
+                                    (new GregorianCalendar(ano, mes.getId(), data.getActualMaximum(5))).getTime())
                             )
             );
         }

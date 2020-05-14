@@ -6,8 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.GregorianCalendar;
 
 /**
  * @author Lucas Copque
@@ -25,9 +27,10 @@ public class ChartController {
     }
 
     @GetMapping({"/painel/graficos/entidades/linha-do-tempo"})
-    public String getLineChartEntidade(HttpServletRequest request, Model model) {
+    public String getLineChartEntidade(@RequestParam(required = false, defaultValue = "0") String ano, HttpServletRequest request, Model model) {
+        System.out.println(ano);
         model.addAttribute("path", request.getContextPath());
-        model.addAttribute("entidadeLineCharts", chartService.buildLineChartEntidade(2020));
+        model.addAttribute("entidadeLineCharts", chartService.buildLineChartEntidade(Integer.parseInt(ano)));
 
         return "painel/admin/graficos/grafico-entidades-linha-do-tempo";
     }
