@@ -15,7 +15,7 @@
           <div class="row">
             <div class="col-12">
               <label>Informe o motivo pelo qual está recusando o pedido:</label>
-              <textarea class="form-control" name="avaliacao" rows="5"></textarea>
+              <textarea class="form-control text-justify" name="avaliacao" rows="8">Prezado(a), ${pedido.usuario.nome}. Obrigada por cadastrar seus dados e registrar o pedido em nossa plataforma! Sabemos que os produtos e materiais de construção são fundamentais para garantir a qualidade do atendimento social. A sua solicitação foi avaliada pelo Comitê Interno e, neste momento, não foi possível atendê-la. Destacamos que a entidade ficará registrada em nosso banco de dados e caso surjam oportunidades em ocasiões futuras, entraremos em contato. A plataforma está disponível o ano inteiro para recepcionar futuros pedidos de doação, cadastros de projetos incentivados ou pedidos de patrocínio.</textarea>
             </div>
           </div>          
         </div>
