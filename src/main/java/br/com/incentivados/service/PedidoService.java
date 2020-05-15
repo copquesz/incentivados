@@ -190,6 +190,10 @@ public class PedidoService {
         return this.pedidoRepository.countByAnalistaAndStatus(analista, status);
     }
 
+    public long countByUsuarioEnderecoEstado(String estado){
+        return this.pedidoRepository.countByUsuarioEnderecoEstado(estado);
+    }
+
     private Pedido uploadDocumentos(Pedido pedido, HttpServletRequest request) {
         String path = "documentos/empresas/" + pedido.getEmpresa().getNomeFantasia() + "/pedidos";
         Arquivo cartaOficio = pedido.getDocumentosPedido().getCartaOficio();
