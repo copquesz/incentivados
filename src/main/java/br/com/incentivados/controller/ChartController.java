@@ -54,7 +54,7 @@ public class ChartController {
 
         switch (usuario.getTipoUsuario()){
             case ADMIN:
-                return "painel/admin/graficos/graficos/grafico-projetos-categoria";
+                return "painel/admin/graficos/grafico-projetos-categoria";
             case EMPRESA:
                 return "painel/empresa/graficos/grafico-projetos-categoria";
             default:
@@ -73,7 +73,7 @@ public class ChartController {
 
         switch (usuario.getTipoUsuario()){
             case ADMIN:
-                return "painel/admin/graficos/graficos/grafico-projetos-localidade";
+                return "painel/admin/graficos/grafico-projetos-localidade";
             case EMPRESA:
                 return "painel/empresa/graficos/grafico-projetos-localidade";
             default:
@@ -93,7 +93,7 @@ public class ChartController {
 
         switch (usuario.getTipoUsuario()){
             case ADMIN:
-                return "painel/admin/graficos/graficos/grafico-pedidos-status";
+                return "painel/admin/graficos/grafico-pedidos-status";
             case EMPRESA:
                 return "painel/empresa/graficos/grafico-pedidos-status";
             default:
@@ -112,7 +112,7 @@ public class ChartController {
 
         switch (usuario.getTipoUsuario()){
             case ADMIN:
-                return "painel/admin/graficos/graficos/grafico-pedidos-localidade";
+                return "painel/admin/graficos/grafico-pedidos-localidade";
             case EMPRESA:
                 return "painel/empresa/graficos/grafico-pedidos-localidade";
             default:
