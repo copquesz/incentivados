@@ -20,8 +20,6 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
 	List<Pedido> findAllByStatus(StatusPedido status, Pageable page);
 
-	List<Pedido> findAllByEmpresaAndStatus(Empresa empresa, StatusPedido status, Pageable page);
-
 	List<Pedido> findAllByUsuarioAndStatus(Usuario usuario, StatusPedido status, Pageable page);
 
 	List<Pedido> findAllByAnalistaAndStatus(Usuario analista, StatusPedido status, Pageable page);
@@ -43,6 +41,8 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 	Page<Pedido> findAllByEmpresa(Empresa empresa, Pageable page);
 
 	Page<Pedido> findAllByUsuario(Usuario usuario, Pageable page);
+
+	Page<Pedido> findAllByEmpresaAndStatus(Empresa empresa, StatusPedido status, Pageable page);
 
 	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.analista.endereco.bairro LIKE %:key%")
 	Page<Pedido> findAllByLoja(@Param("key") String key, Pageable page);

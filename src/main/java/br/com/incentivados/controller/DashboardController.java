@@ -99,21 +99,12 @@ public class DashboardController {
 
         switch(usuario.getTipoUsuario()) {
             case EMPRESA:
+                model.addAttribute("qtdProjetos", this.projetoService.count());
                 model.addAttribute("qtdPedidos", this.pedidoService.countByEmpresa(usuario.getEmpresa()));
                 model.addAttribute("pendentes", this.pedidoService.findAllByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.PENDENTE, pageablePedidos));
-                model.addAttribute("qtdPendente", this.pedidoService.countByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.PENDENTE));
                 model.addAttribute("aprovados", this.pedidoService.findAllByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.APROVADO, pageablePedidos));
-                model.addAttribute("qtdAprovado", this.pedidoService.countByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.APROVADO));
                 model.addAttribute("recusados", this.pedidoService.findAllByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.RECUSADO, pageablePedidos));
-                model.addAttribute("qtdRecusado", this.pedidoService.countByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.RECUSADO));
                 model.addAttribute("preAprovados", this.pedidoService.findAllByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.PRE_APROVADO, pageablePedidos));
-                model.addAttribute("qtdPreAprovado", this.pedidoService.countByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.PRE_APROVADO));
-                model.addAttribute("qtdProjetos", this.projetoService.count());
-                model.addAttribute("qtdPedidos", this.pedidoService.count());
-                model.addAttribute("qtdPedidosPendente", this.pedidoService.countByStatus(StatusPedido.PENDENTE));
-                model.addAttribute("qtdPedidosPreAprovado", this.pedidoService.countByStatus(StatusPedido.PRE_APROVADO));
-                model.addAttribute("qtdPedidosAprovado", this.pedidoService.countByStatus(StatusPedido.APROVADO));
-                model.addAttribute("qtdPedidosRecusado", this.pedidoService.countByStatus(StatusPedido.RECUSADO));
                 return "painel/empresa/dashboard-empresa";
             case ENTIDADE:
                 model.addAttribute("cadastroProjeto", this.entidadeService.existsByUsuario(usuario));

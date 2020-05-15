@@ -122,7 +122,7 @@ public class PedidoService {
         return this.pedidoRepository.findAllByEmpresa(empresa, page);
     }
 
-    public List<Pedido> findAllByEmpresaAndStatus(Empresa empresa, StatusPedido status, Pageable page) {
+    public Page<Pedido> findAllByEmpresaAndStatus(Empresa empresa, StatusPedido status, Pageable page) {
         return this.pedidoRepository.findAllByEmpresaAndStatus(empresa, status, page);
     }
 

@@ -55,6 +55,49 @@
             <a href="${path}/painel/ranking">
               <i class="far fa-chart-bar"></i>Ranking</a>
           </li>
+          <li>
+            <a data-toggle="collapse" href="#graficos"><i class="fas fa-chart-line"></i>Gráficos<b class="caret"></b></a>
+              <div class="collapse" id="graficos">
+                <ul class="nav">
+                  <li>
+                    <a data-toggle="collapse" href="#graficos-entidade" style="margin-left: 30px;"><i class="fas fa-users"></i>Entidades <b class="caret"></b></a>
+                      <div class="collapse" id="graficos-entidade">
+                        <ul class="nav">
+                          <li>
+                            <a href="${path}/painel/graficos/entidades/linha-do-tempo" style="margin-left: 50px;"><i class="fas fa-chart-area"></i>Linha do Tempo</a>
+                          </li>
+                        </ul>
+                      </div>                   
+                  </li>
+                  <li>
+                    <a data-toggle="collapse" href="#graficos-projetos" style="margin-left: 30px;"><i class="fas fa-project-diagram"></i>Projetos <b class="caret"></b></a>
+                      <div class="collapse" id="graficos-projetos">
+                        <ul class="nav">
+                          <li>
+                            <a href="${path}/painel/graficos/projetos/categoria" style="margin-left: 50px;"><i class="far fa-chart-bar"></i>Categoria</a>                            
+                          </li>
+                          <li>
+                            <a href="${path}/painel/graficos/projetos/mapa" style="margin-left: 50px;"><i class="fas fa-globe-americas"></i>Mapa</a>
+                          </li>
+                        </ul>
+                      </div>                   
+                  </li>
+                  <li>
+                    <a data-toggle="collapse" href="#graficos-pedidos" style="margin-left: 30px;"><i class="fas fa-praying-hands"></i>Pedidos <b class="caret"></b></a>
+                      <div class="collapse" id="graficos-pedidos">
+                        <ul class="nav">
+                          <li>
+                            <a href="${path}/painel/graficos/pedidos/status" style="margin-left: 50px;"><i class="fas fa-chart-pie"></i>Status</a>                            
+                          </li>
+                          <li>
+                            <a href="${path}/painel/graficos/pedidos/mapa" style="margin-left: 50px;"><i class="fas fa-globe-americas"></i>Mapa</a>
+                          </li>
+                        </ul>
+                      </div>                   
+                  </li>
+                </ul>
+              </div>
+          </li>
         </ul>
       </div>
     </div>   
@@ -103,7 +146,31 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="fas fa-hand-holding-heart text-default"></i>
+                      <i class="fas fa-project-diagram text-info"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Projetos</p>
+                      <p class="card-title">
+                        ${qtdProjetos}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer ">
+                <hr>
+              </div>
+            </div>              
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-6">            
+            <div class="card card-stats">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <i class="fas fa-hand-holding-heart text-info"></i>
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
@@ -128,21 +195,21 @@
               <div class="card-body">
                 <ul class="nav nav-pills" id="myTab" role="tablist">
                   <li class="nav-item">
-                    <a class="nav-link active bg-warning text-white border" id="pendentes-tab" data-toggle="tab" href="#pendentes" role="tab" aria-controls="pendentes" aria-selected="true">Pendentes: ${qtdPendente}</a>
+                    <a class="nav-link active bg-warning text-white border" id="pendentes-tab" data-toggle="tab" href="#pendentes" role="tab" aria-controls="pendentes" aria-selected="true">Pendentes: ${pendentes.totalElements}</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link bg-warning text-white border" id="pre-aprovados-tab" data-toggle="tab" href="#pre-aprovados" role="tab" aria-controls="pre-aprovados" aria-selected="true">Pré-Aprovados: ${qtdPreAprovado}</a>
+                    <a class="nav-link bg-warning text-white border" id="pre-aprovados-tab" data-toggle="tab" href="#pre-aprovados" role="tab" aria-controls="pre-aprovados" aria-selected="true">Pré-Aprovados: ${preAprovados.totalElements}</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link bg-success text-white border" id="aprovados-tab" data-toggle="tab" href="#aprovados" role="tab" aria-controls="aprovados" aria-selected="false">Aprovados: ${qtdAprovado}</a>
+                    <a class="nav-link bg-success text-white border" id="aprovados-tab" data-toggle="tab" href="#aprovados" role="tab" aria-controls="aprovados" aria-selected="false">Aprovados: ${aprovados.totalElements}</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link bg-danger text-white border" id="recusados-tab" data-toggle="tab" href="#recusados" role="tab" aria-controls="recusados" aria-selected="false">Recusados: ${qtdRecusado}</a>
+                    <a class="nav-link bg-danger text-white border" id="recusados-tab" data-toggle="tab" href="#recusados" role="tab" aria-controls="recusados" aria-selected="false">Recusados: ${recusados.totalElements}</a>
                   </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
                   <div class="tab-pane fade show active" id="pendentes" role="tabpanel" aria-labelledby="pendentes-tab"> 
-                    <c:if test = "${empty pendentes}">
+                    <c:if test = "${empty pendentes.content}">
                       <div class="row mt-2">
                           <div class="col-12">
                             <div class="alert alert-danger" role="alert">
@@ -151,7 +218,7 @@
                           </div>
                         </div>
                     </c:if>      
-                    <c:if test = "${not empty pendentes}">   
+                    <c:if test = "${not empty pendentes.content}">   
                       <div class="row mt-2">  
                         <div class="col-12">         
                           <div class="table-responsive pr-3">
@@ -166,7 +233,7 @@
                                 <th class="text-center"></th>
                               </thead>
                               <tbody>
-                                <c:forEach var="pedidoPendente" items="${pendentes}">
+                                <c:forEach var="pedidoPendente" items="${pendentes.content}">
                                   <tr>
                                     <td class="text-center border">${pedidoPendente.id}</td>
                                     <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoPendente.dataCadastro}" var="dataCadastro" />
@@ -174,7 +241,7 @@
                                     <td class="text-center border">${pedidoPendente.entidade.nomeFantasia}</td>
                                     <td class="text-center border">${pedidoPendente.empresa.nomeFantasia}</td>
                                     <td class="text-center border">${pedidoPendente.analista.endereco.bairro}</td>
-                                    <td class="text-center border">${pedido.tipoPedido.descricao}</td>
+                                    <td class="text-center border">${pedidoPendente.tipoPedido.descricao}</td>
                                     <td class="text-center border"><a class="btn btn-success btn-sm" href="${path}/painel/pedido/${pedidoPendente.id}" title="Avaliar"><i class="fas fa-sign-in-alt"></i></a></td>
                                   </tr>
                                 </c:forEach>
@@ -186,7 +253,7 @@
                     </c:if>          
                   </div>  
                   <div class="tab-pane fade show" id="pre-aprovados" role="tabpanel" aria-labelledby="pre-aprovados-tab"> 
-                    <c:if test = "${empty preAprovados}">
+                    <c:if test = "${empty preAprovados.content}">
                       <div class="row mt-2">
                         <div class="col-12">
                           <div class="alert alert-danger" role="alert">
@@ -195,7 +262,7 @@
                         </div>
                       </div>
                     </c:if>      
-                    <c:if test = "${not empty preAprovados}">   
+                    <c:if test = "${not empty preAprovados.content}">   
                       <div class="row mt-2">  
                         <div class="col-12">            
                           <div class="table-responsive pr-3">
@@ -210,7 +277,7 @@
                                 <th class="text-center border">Parecer</th>
                               </thead>
                               <tbody>
-                                <c:forEach var="pedidoPreAprovado" items="${preAprovados}">
+                                <c:forEach var="pedidoPreAprovado" items="${preAprovados.content}">
                                   <tr>
                                     <td class="text-center border">${pedidoPreAprovado.id}</td>
                                     <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoPreAprovado.dataCadastro}" var="dataCadastro" />
@@ -218,7 +285,7 @@
                                     <td class="text-center border">${pedidoPreAprovado.entidade.nomeFantasia}</td>
                                     <td class="text-center border">${pedidoPreAprovado.empresa.nomeFantasia}</td>
                                     <td class="text-center border">${pedidoPreAprovado.analista.endereco.bairro} - ${pedidoPreAprovado.analista.endereco.cidade} / ${pedidoPreAprovado.analista.endereco.estado}</td>
-                                    <td class="text-center border">${pedido.tipoPedido.descricao}</td> 
+                                    <td class="text-center border">${pedidoPreAprovado.tipoPedido.descricao}</td> 
                                     <td class="text-center border"><a href="#" data-toggle="modal" data-target="#modal-observacao-pedido-pre-aprovado-${pedidoPreAprovado.id}" title="Visualizar"><i class="far fa-file-pdf"></i></a></td>                                 
                                   </tr>
                                 </c:forEach>
@@ -230,7 +297,7 @@
                     </c:if>  
                   </div>     
                   <div class="tab-pane fade show" id="aprovados" role="tabpanel" aria-labelledby="aprovados-tab"> 
-                    <c:if test = "${empty aprovados}">
+                    <c:if test = "${empty aprovados.content}">
                       <div class="row mt-2">
                         <div class="col-12">
                           <div class="alert alert-danger" role="alert">
@@ -239,7 +306,7 @@
                         </div>
                       </div>
                     </c:if>      
-                    <c:if test = "${not empty aprovados}">   
+                    <c:if test = "${not empty aprovados.content}">   
                       <div class="row mt-2">  
                         <div class="col-12">            
                           <div class="table-responsive pr-3">
@@ -254,7 +321,7 @@
                                 <th class="text-center border">Parecer</th>
                               </thead>
                               <tbody>
-                                <c:forEach var="pedidoAprovado" items="${aprovados}">
+                                <c:forEach var="pedidoAprovado" items="${aprovados.content}">
                                   <tr>
                                     <td class="text-center border">${pedidoAprovado.id}</td>
                                     <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoAprovado.dataCadastro}" var="dataCadastro" />
@@ -262,7 +329,7 @@
                                     <td class="text-center border">${pedidoAprovado.entidade.nomeFantasia}</td>
                                     <td class="text-center border">${pedidoAprovado.empresa.nomeFantasia}</td>
                                     <td class="text-center border">${pedidoAprovado.analista.endereco.bairro} - ${pedidoAprovado.analista.endereco.cidade} / ${pedidoAprovado.analista.endereco.estado}</td>
-                                    <td class="text-center border">${pedido.tipoPedido.descricao}</td>
+                                    <td class="text-center border">${pedidoAprovado.tipoPedido.descricao}</td>
                                     <td class="text-center border"><a href="#" data-toggle="modal" data-target="#modal-observacao-pedido-aprovado-${pedidoAprovado.id}" title="Visualizar"><i class="far fa-file-pdf"></i></a></td>                                 
                                   </tr>
                                 </c:forEach>
@@ -274,7 +341,7 @@
                     </c:if>  
                   </div>                  
                   <div class="tab-pane fade show" id="recusados" role="tabpanel" aria-labelledby="recusados-tab"> 
-                    <c:if test = "${empty recusados}">
+                    <c:if test = "${empty recusados.content}">
                       <div class="row mt-2">
                         <div class="col-12">
                           <div class="alert alert-danger" role="alert">
@@ -283,7 +350,7 @@
                         </div>
                       </div>
                     </c:if>      
-                    <c:if test = "${not empty recusados}">   
+                    <c:if test = "${not empty recusados.content}">   
                       <div class="row mt-2">  
                         <div class="col-12">            
                           <div class="table-responsive pr-3">
@@ -298,16 +365,16 @@
                                 <th class="text-center border">Parecer</th>
                               </thead>
                               <tbody>
-                                <c:forEach var="pedidoReprovado" items="${recusados}">
+                                <c:forEach var="pedidosRecusado" items="${recusados.content}">
                                   <tr>
-                                    <td class="text-center border">${pedidoReprovado.id}</td>
-                                    <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoReprovado.dataCadastro}" var="dataCadastro" />
+                                    <td class="text-center border">${pedidosRecusado.id}</td>
+                                    <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidosRecusado.dataCadastro}" var="dataCadastro" />
                                     <td class="text-center border">${dataCadastro}</td>
-                                    <td class="text-center border">${pedidoReprovado.entidade.nomeFantasia}</td>
-                                    <td class="text-center border">${pedidoReprovado.empresa.nomeFantasia}</td>
-                                    <td class="text-center border">${pedidoReprovado.analista.endereco.bairro} - ${pedidoReprovado.analista.endereco.cidade} / ${pedidoReprovado.analista.endereco.estado}</td>
-                                    <td class="text-center border">${pedido.tipoPedido.descricao}</td>
-                                    <td class="text-center border"><a href="#" data-toggle="modal" data-target="#modal-observacao-pedido-recusado-${pedidoReprovado.id}" title="Visualizar"><i class="far fa-file-pdf"></i></a></td>                                
+                                    <td class="text-center border">${pedidosRecusado.entidade.nomeFantasia}</td>
+                                    <td class="text-center border">${pedidosRecusado.empresa.nomeFantasia}</td>
+                                    <td class="text-center border">${pedidosRecusado.analista.endereco.bairro} - ${pedidosRecusado.analista.endereco.cidade} / ${pedidosRecusado.analista.endereco.estado}</td>
+                                    <td class="text-center border">${pedidosRecusado.tipoPedido.descricao}</td>
+                                    <td class="text-center border"><a href="#" data-toggle="modal" data-target="#modal-observacao-pedido-recusado-${pedidosRecusado.id}" title="Visualizar"><i class="far fa-file-pdf"></i></a></td>                                
                                   </tr>
                                 </c:forEach>
                               </tbody>
