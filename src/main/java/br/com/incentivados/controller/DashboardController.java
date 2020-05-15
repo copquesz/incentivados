@@ -2,7 +2,6 @@ package br.com.incentivados.controller;
 
 import br.com.incentivados.enumerated.StatusArquivo;
 import br.com.incentivados.enumerated.StatusPedido;
-import br.com.incentivados.model.IncentivoFiscal;
 import br.com.incentivados.model.Usuario;
 import br.com.incentivados.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
