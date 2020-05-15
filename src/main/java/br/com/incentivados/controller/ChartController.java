@@ -1,6 +1,7 @@
 package br.com.incentivados.controller;
 
 import br.com.incentivados.enumerated.StatusPedido;
+import br.com.incentivados.model.Usuario;
 import br.com.incentivados.service.ChartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,40 +30,94 @@ public class ChartController {
 
     @GetMapping({"/painel/graficos/entidades/linha-do-tempo"})
     public String getLineChartEntidade(@RequestParam(required = false, defaultValue = "0") String ano, HttpServletRequest request, Model model) {
+
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+
         model.addAttribute("path", request.getContextPath());
-        model.addAttribute("entidadeLineCharts", chartService.buildLineChartEntidade(Integer.parseInt(ano)));
-        return "painel/admin/graficos/grafico-entidades-linha-do-tempo";
+
+        switch (usuario.getTipoUsuario()){
+            case ADMIN:
+                return "painel/admin/graficos/grafico-entidades-linha-do-tempo";
+            case EMPRESA:
+                return "painel/empresa/graficos/grafico-entidades-linha-do-tempo";
+            default:
+                return "";
+        }
     }
 
     @GetMapping({"/painel/graficos/projetos/categoria"})
     public String getPieChartProjeto(HttpServletRequest request, Model model) {
+
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+
         model.addAttribute("path", request.getContextPath());
         model.addAttribute("projetoPieCharts", chartService.buildPieChartProjetosCategoria());
-        return "painel/admin/graficos/grafico-projetos-categoria";
+
+        switch (usuario.getTipoUsuario()){
+            case ADMIN:
+                return "painel/admin/graficos/graficos/grafico-projetos-categoria";
+            case EMPRESA:
+                return "painel/empresa/graficos/grafico-projetos-categoria";
+            default:
+                return "";
+        }
     }
 
     @GetMapping({"/painel/graficos/projetos/mapa"})
     public String getAm4ChartProjetosLocalidade(HttpServletRequest request, Model model) {
+
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+
         model.addAttribute("path", request.getContextPath());
         model.addAttribute("am4ChartsProjetosLocalidade", chartService.buildAm4ChartProjetosLocalidade());
         model.addAttribute("totalProjetos", chartService.countTotalProjetos());
-        return "painel/admin/graficos/grafico-projetos-localidade";
+
+        switch (usuario.getTipoUsuario()){
+            case ADMIN:
+                return "painel/admin/graficos/graficos/grafico-projetos-localidade";
+            case EMPRESA:
+                return "painel/empresa/graficos/grafico-projetos-localidade";
+            default:
+                return "";
+        }
     }
 
     @GetMapping({"/painel/graficos/pedidos/status"})
     public String getDonutChartPedidosStatus(HttpServletRequest request, Model model) {
+
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+
         model.addAttribute("path", request.getContextPath());
         model.addAttribute("pendentes", chartService.buildDonutChartPedidosStatus(StatusPedido.PENDENTE));
         model.addAttribute("recusados", chartService.buildDonutChartPedidosStatus(StatusPedido.RECUSADO));
         model.addAttribute("aprovados", chartService.buildDonutChartPedidosStatus(StatusPedido.APROVADO));
-        return "painel/admin/graficos/grafico-pedidos-status";
+
+        switch (usuario.getTipoUsuario()){
+            case ADMIN:
+                return "painel/admin/graficos/graficos/grafico-pedidos-status";
+            case EMPRESA:
+                return "painel/empresa/graficos/grafico-pedidos-status";
+            default:
+                return "";
+        }
     }
 
     @GetMapping({"/painel/graficos/pedidos/mapa"})
     public String getAm4ChartPedidosLocalidade(HttpServletRequest request, Model model) {
+
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+
         model.addAttribute("path", request.getContextPath());
         model.addAttribute("am4ChartsPedidosLocalidade", chartService.buildAm4ChartPedidosLocalidade());
         model.addAttribute("totalPedidos", chartService.countTotalPedidos());
-        return "painel/admin/graficos/grafico-pedidos-localidade";
+
+        switch (usuario.getTipoUsuario()){
+            case ADMIN:
+                return "painel/admin/graficos/graficos/grafico-pedidos-localidade";
+            case EMPRESA:
+                return "painel/empresa/graficos/grafico-pedidos-localidade";
+            default:
+                return "";
+        }
     }
 }
