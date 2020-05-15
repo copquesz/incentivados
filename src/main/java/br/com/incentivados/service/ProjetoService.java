@@ -48,7 +48,7 @@ public class ProjetoService {
             }
         }
 
-        return (Projeto) this.projetoRepository.save(projeto);
+        return this.projetoRepository.save(projeto);
     }
 
     public boolean existsByTitulo(String titulo) {
@@ -80,7 +80,7 @@ public class ProjetoService {
 
         projeto.setNotaGeral((projeto.getNotaTecnica() + projeto.getNotaInstitucional()) / 2.0D);
         projeto.setQtdAvaliacoes(projeto.getQtdAvaliacoes() + 1);
-        projeto = (Projeto) this.projetoRepository.save(projeto);
+        projeto = this.projetoRepository.save(projeto);
         return projeto;
     }
 
@@ -143,25 +143,6 @@ public class ProjetoService {
     public boolean verifyAvaliacao(Long idProjeto, Long idUsuario) {
         Long verify = this.projetoRepository.verifyAvaliacao(idProjeto, idUsuario);
         return verify.intValue() == 1;
-    }
-
-    public Page<Projeto> findAllByEmpresaAndIncentivosFiscaisAndTituloContaining(Long empresaId, Long incentivoFiscalId, String key, Pageable pageable) {
-        List<Projeto> projetosList = new ArrayList();
-        List<BigInteger> ids = this.projetoRepository.findAllByEmpresaAndIncentivosFiscaisAndTituloContaining(empresaId, incentivoFiscalId, key, pageable);
-        if (ids.isEmpty()) {
-            return null;
-        } else {
-            Iterator var8 = ids.iterator();
-
-            while (var8.hasNext()) {
-                BigInteger id = (BigInteger) var8.next();
-                Optional<Projeto> projeto = this.findById(id.longValue());
-                projetosList.add(projeto.get());
-            }
-
-            Page<Projeto> projetosPage = new PageImpl(projetosList, pageable, (long) projetosList.size());
-            return projetosPage;
-        }
     }
 
     private Projeto uploadDocumentos(HttpServletRequest request, Projeto projeto) {

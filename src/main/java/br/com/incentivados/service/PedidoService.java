@@ -59,7 +59,7 @@ public class PedidoService {
         DocumentosObservacaoPedido documentosObservacaoPedido = new DocumentosObservacaoPedido();
         documentosObservacaoPedido.setNotaFiscal(arquivo);
         pedido.getObservacaoPedido().setDocumentosObservacaoPedido(documentosObservacaoPedido);
-        return (Pedido) this.pedidoRepository.save(pedido);
+        return this.pedidoRepository.save(pedido);
     }
 
     public Optional<Pedido> findById(Long id) {
@@ -110,10 +110,6 @@ public class PedidoService {
         return this.pedidoRepository.findAllByUsuario(usuario, page);
     }
 
-    public List<Pedido> findAllByUsuarioAndStatus(Usuario usuario, StatusPedido status, Pageable page) {
-        return this.pedidoRepository.findAllByUsuarioAndStatus(usuario, status, page);
-    }
-
     public List<Pedido> findAllByStatus(StatusPedido status, Pageable page) {
         return this.pedidoRepository.findAllByStatus(status, page);
     }
@@ -142,7 +138,7 @@ public class PedidoService {
         return this.pedidoRepository.findAllByEmpresaAndEntidade(empresa, key, page);
     }
 
-    public List<Pedido> findAllByAnalistaAndStatus(Usuario analista, StatusPedido status, Pageable page) {
+    public Page<Pedido> findAllByAnalistaAndStatus(Usuario analista, StatusPedido status, Pageable page) {
         return this.pedidoRepository.findAllByAnalistaAndStatus(analista, status, page);
     }
 
@@ -180,14 +176,6 @@ public class PedidoService {
 
     public Long countByStatus(StatusPedido status) {
         return this.pedidoRepository.countByStatus(status);
-    }
-
-    public Long countByEmpresaAndStatus(Empresa empresa, StatusPedido status) {
-        return this.pedidoRepository.countByEmpresaAndStatus(empresa, status);
-    }
-
-    public Long countByAnalistaAndStatus(Usuario analista, StatusPedido status) {
-        return this.pedidoRepository.countByAnalistaAndStatus(analista, status);
     }
 
     public long countByUsuarioEnderecoEstado(String estado){

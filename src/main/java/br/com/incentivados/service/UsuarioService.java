@@ -75,11 +75,6 @@ public class UsuarioService {
         javaMailService.enviarEmailNovaSenha(usuario, novaSenha);
     }
 
-    public Usuario setEmpresa(Usuario usuario, Empresa empresa) {
-        usuario.setEmpresa(empresa);
-        return this.usuarioRepository.save(usuario);
-    }
-
     public Optional<Usuario> findById(Long id) {
         return this.usuarioRepository.findById(id);
     }

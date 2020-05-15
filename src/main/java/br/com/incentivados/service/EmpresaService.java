@@ -28,7 +28,7 @@ public class EmpresaService {
         empresa.setDataCadastro(new Date());
         empresa.setUsuario(usuario);
         empresa = this.uploadDocumentos(empresa, request);
-        empresa = (Empresa)this.empresaRepository.save(empresa);
+        empresa = this.empresaRepository.save(empresa);
         return empresa;
     }
 
@@ -42,17 +42,17 @@ public class EmpresaService {
 
     public Empresa adcionaAnalista(Empresa empresa, Usuario usuario) {
         empresa.getAnalistas().add(usuario);
-        return (Empresa)this.empresaRepository.save(empresa);
+        return this.empresaRepository.save(empresa);
     }
 
     public Empresa adicionaResponsavel(Empresa empresa, Usuario usuario) {
         empresa.getResponsaveis().add(usuario);
-        return (Empresa)this.empresaRepository.save(empresa);
+        return this.empresaRepository.save(empresa);
     }
 
     public Empresa adicionaProjeto(Empresa empresa, Projeto projeto) {
         empresa.getProjetos().add(projeto);
-        return (Empresa)this.empresaRepository.save(empresa);
+        return this.empresaRepository.save(empresa);
     }
 
     public Optional<Empresa> findById(Long id) {
@@ -63,16 +63,8 @@ public class EmpresaService {
         return this.empresaRepository.findByCnpj(cnpj);
     }
 
-    public Optional<Empresa> findByNomeFantasia(String nomeFantasia) {
-        return this.empresaRepository.findByNomeFantasia(nomeFantasia);
-    }
-
     public List<Empresa> findAll() {
         return this.empresaRepository.findAll();
-    }
-
-    public List<Empresa> findByNomeFantasiaContains(String nomeFantasia) {
-        return this.empresaRepository.findByNomeFantasiaContains(nomeFantasia);
     }
 
     public Page<Empresa> findAll(Pageable page) {

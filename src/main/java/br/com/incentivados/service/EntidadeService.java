@@ -36,10 +36,6 @@ public class EntidadeService {
         return this.entidadeRepository.save(entidade);
     }
 
-    public boolean existsById(Long id) {
-        return this.entidadeRepository.existsById(id);
-    }
-
     public boolean existsByCnpj(String cnpj) {
         return this.entidadeRepository.existsByCnpj(cnpj);
     }

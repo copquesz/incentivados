@@ -255,8 +255,4 @@ public class ArquivoService {
         documentosProjetoService.atualizaStatus(projeto.getDocumentosProjeto(), PENDENTE);
         javaMailService.enviarEmailNotificacaoDocumentosProjetoPendenteAnalise(projeto);
     }
-
-    public boolean exists(Long id) {
-        return this.arquivoRepositoryrepository.existsById(id);
-    }
 }

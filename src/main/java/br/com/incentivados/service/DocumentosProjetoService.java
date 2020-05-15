@@ -21,10 +21,6 @@ public class DocumentosProjetoService {
         this.documentosProjetoRepository = documentosProjetoRepository;
     }
 
-    public DocumentosProjeto getOne(Long id) {
-        return this.documentosProjetoRepository.getOne(id);
-    }
-
     public void atualiza(DocumentosProjeto documentosProjeto){
         this.documentosProjetoRepository.save(documentosProjeto);
     }
