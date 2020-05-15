@@ -96,9 +96,7 @@ public class DashboardController {
         Pageable pageableProjetos = PageRequest.of(0, 4, Sort.by(new Order[]{Order.desc("id")}));
         Pageable pageableEntidades = PageRequest.of(0, 3, Sort.by(new Order[]{Order.desc("id")}));
         Pageable pageablePedidos = PageRequest.of(0, 5, Sort.by(new Order[]{Order.desc("id")}));
-        List incentivosFiscais = new ArrayList();
-        ArrayList datasCharProjeto;
-        int i;
+
         switch(usuario.getTipoUsuario()) {
             case EMPRESA:
                 model.addAttribute("qtdPedidos", this.pedidoService.countByEmpresa(usuario.getEmpresa()));
@@ -111,15 +109,6 @@ public class DashboardController {
                 model.addAttribute("preAprovados", this.pedidoService.findAllByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.PRE_APROVADO, pageablePedidos));
                 model.addAttribute("qtdPreAprovado", this.pedidoService.countByEmpresaAndStatus(usuario.getEmpresa(), StatusPedido.PRE_APROVADO));
                 model.addAttribute("qtdProjetos", this.projetoService.count());
-                incentivosFiscais = this.incentivoFiscalService.findAll();
-                model.addAttribute("incentivosFiscais", incentivosFiscais);
-                datasCharProjeto = new ArrayList();
-
-                for(i = 0; i < incentivosFiscais.size(); ++i) {
-                    datasCharProjeto.add(this.projetoService.countByIncentivosFiscais((IncentivoFiscal)incentivosFiscais.get(i)));
-                }
-
-                model.addAttribute("datasCharProjeto", datasCharProjeto);
                 model.addAttribute("qtdPedidos", this.pedidoService.count());
                 model.addAttribute("qtdPedidosPendente", this.pedidoService.countByStatus(StatusPedido.PENDENTE));
                 model.addAttribute("qtdPedidosPreAprovado", this.pedidoService.countByStatus(StatusPedido.PRE_APROVADO));
@@ -151,24 +140,11 @@ public class DashboardController {
             case ADMIN:
                 model.addAttribute("entidades", this.entidadeService.findAll(pageableEntidades));
                 model.addAttribute("qtdEntidades", this.entidadeService.count());
-                model.addAttribute("datasChartEntidade", this.entidadeService.buildChart());
                 model.addAttribute("projetos", this.projetoService.findAll(pageableProjetos));
                 model.addAttribute("qtdProjetos", this.projetoService.count());
                 model.addAttribute("entidadesPendenteAnalise", this.entidadeService.findAllByDocumentosEntidadeStatusDocumentacao(PageRequest.of(0, 2, Sort.by(new Order[]{Order.desc("id")})), StatusArquivo.PENDENTE));
                 model.addAttribute("projetosPendenteAnalise", this.projetoService.findAllByDocumentosProjetoStatusDocumentacao(PageRequest.of(0, 2, Sort.by(new Order[]{Order.desc("id")})), StatusArquivo.PENDENTE));
-                model.addAttribute("incentivosFiscais", incentivoFiscalService.findAll());
-                datasCharProjeto = new ArrayList();
-
-                for(i = 0; i < incentivosFiscais.size(); ++i) {
-                    datasCharProjeto.add(this.projetoService.countByIncentivosFiscais((IncentivoFiscal)incentivosFiscais.get(i)));
-                }
-
-                model.addAttribute("datasCharProjeto", datasCharProjeto);
                 model.addAttribute("qtdPedidos", this.pedidoService.count());
-                model.addAttribute("qtdPedidosPendente", this.pedidoService.countByStatus(StatusPedido.PENDENTE));
-                model.addAttribute("qtdPedidosPreAprovado", this.pedidoService.countByStatus(StatusPedido.PRE_APROVADO));
-                model.addAttribute("qtdPedidosAprovado", this.pedidoService.countByStatus(StatusPedido.APROVADO));
-                model.addAttribute("qtdPedidosRecusado", this.pedidoService.countByStatus(StatusPedido.RECUSADO));
                 return "painel/admin/dashboard-admin";
             default:
                 return "";
