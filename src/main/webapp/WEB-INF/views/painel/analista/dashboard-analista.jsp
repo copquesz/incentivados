@@ -118,21 +118,21 @@
               <div class="card-body">
                 <ul class="nav nav-pills" id="myTab" role="tablist">
                   <li class="nav-item">
-                    <a class="nav-link active bg-warning text-white border" id="pendentes-tab" data-toggle="tab" href="#pendentes" role="tab" aria-controls="pendentes" aria-selected="true">Pendentes: ${qtdPendente}</a>
+                    <a class="nav-link active bg-warning text-white border" id="pendentes-tab" data-toggle="tab" href="#pendentes" role="tab" aria-controls="pendentes" aria-selected="true">Pendentes: ${pendentes.totalElements}</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link bg-warning text-white border" id="pre-aprovados-tab" data-toggle="tab" href="#pre-aprovados" role="tab" aria-controls="pre-aprovados" aria-selected="true">Pré-Aprovados: ${qtdPreAprovado}</a>
+                    <a class="nav-link bg-warning text-white border" id="pre-aprovados-tab" data-toggle="tab" href="#pre-aprovados" role="tab" aria-controls="pre-aprovados" aria-selected="true">Pré-Aprovados: ${preAprovados.totalElements}</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link bg-success text-white border" id="aprovados-tab" data-toggle="tab" href="#aprovados" role="tab" aria-controls="aprovados" aria-selected="false">Aprovados: ${qtdAprovado}</a>
+                    <a class="nav-link bg-success text-white border" id="aprovados-tab" data-toggle="tab" href="#aprovados" role="tab" aria-controls="aprovados" aria-selected="false">Aprovados: ${aprovados.totalElements}</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link bg-danger text-white border" id="recusados-tab" data-toggle="tab" href="#recusados" role="tab" aria-controls="recusados" aria-selected="false">Recusados: ${qtdRecusado}</a>
+                    <a class="nav-link bg-danger text-white border" id="recusados-tab" data-toggle="tab" href="#recusados" role="tab" aria-controls="recusados" aria-selected="false">Recusados: ${recusados.totalElements}</a>
                   </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
                   <div class="tab-pane fade show active" id="pendentes" role="tabpanel" aria-labelledby="pendentes-tab"> 
-                    <c:if test = "${empty pendentes}">
+                    <c:if test = "${empty pendentes.content}">
                       <div class="row mt-2">
                           <div class="col-12">
                             <div class="alert alert-danger" role="alert">
@@ -141,7 +141,7 @@
                           </div>
                         </div>
                     </c:if>      
-                    <c:if test = "${not empty pendentes}">   
+                    <c:if test = "${not empty pendentes.content}">   
                       <div class="row mt-2">  
                         <div class="col-12">         
                           <div class="table-responsive pr-3">
@@ -156,7 +156,7 @@
                                 <th class="text-center"></th>
                               </thead>
                               <tbody>
-                                <c:forEach var="pedidoPendente" items="${pendentes}">
+                                <c:forEach var="pedidoPendente" items="${pendentes.content}">
                                   <tr>
                                     <td class="text-center border">${pedidoPendente.id}</td>
                                     <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoPendente.dataCadastro}" var="dataCadastro" />
@@ -176,7 +176,7 @@
                     </c:if>          
                   </div>  
                   <div class="tab-pane fade show" id="pre-aprovados" role="tabpanel" aria-labelledby="pre-aprovados-tab"> 
-                    <c:if test = "${empty preAprovados}">
+                    <c:if test = "${empty preAprovados.content}">
                       <div class="row mt-2">
                         <div class="col-12">
                           <div class="alert alert-danger" role="alert">
@@ -185,7 +185,7 @@
                         </div>
                       </div>
                     </c:if>      
-                    <c:if test = "${not empty preAprovados}">   
+                    <c:if test = "${not empty preAprovados.content}">   
                       <div class="row mt-2">  
                         <div class="col-12">            
                           <div class="table-responsive pr-3">
@@ -200,7 +200,7 @@
                                 <th class="text-center border">Parecer</th>
                               </thead>
                               <tbody>
-                                <c:forEach var="pedidoPreAprovado" items="${preAprovados}">
+                                <c:forEach var="pedidoPreAprovado" items="${preAprovados.content}">
                                   <tr>
                                     <td class="text-center border">${pedidoPreAprovado.id}</td>
                                     <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoPreAprovado.dataCadastro}" var="dataCadastro" />
@@ -220,7 +220,7 @@
                     </c:if>  
                   </div>     
                   <div class="tab-pane fade show" id="aprovados" role="tabpanel" aria-labelledby="aprovados-tab"> 
-                    <c:if test = "${empty aprovados}">
+                    <c:if test = "${empty aprovados.content}">
                       <div class="row mt-2">
                         <div class="col-12">
                           <div class="alert alert-danger" role="alert">
@@ -229,7 +229,7 @@
                         </div>
                       </div>
                     </c:if>      
-                    <c:if test = "${not empty aprovados}">   
+                    <c:if test = "${not empty aprovados.content}">   
                       <div class="row mt-2">  
                         <div class="col-12">            
                           <div class="table-responsive pr-3">
@@ -244,7 +244,7 @@
                                 <th class="text-center border">Parecer</th>
                               </thead>
                               <tbody>
-                                <c:forEach var="pedidoAprovado" items="${aprovados}">
+                                <c:forEach var="pedidoAprovado" items="${aprovados.content}">
                                   <tr>
                                     <td class="text-center border">${pedidoAprovado.id}</td>
                                     <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoAprovado.dataCadastro}" var="dataCadastro" />
@@ -264,7 +264,7 @@
                     </c:if>  
                   </div>                  
                   <div class="tab-pane fade show" id="recusados" role="tabpanel" aria-labelledby="recusados-tab"> 
-                    <c:if test = "${empty recusados}">
+                    <c:if test = "${empty recusados.content}">
                       <div class="row mt-2">
                         <div class="col-12">
                           <div class="alert alert-danger" role="alert">
@@ -273,7 +273,7 @@
                         </div>
                       </div>
                     </c:if>      
-                    <c:if test = "${not empty recusados}">   
+                    <c:if test = "${not empty recusados.content}">   
                       <div class="row mt-2">  
                         <div class="col-12">            
                           <div class="table-responsive pr-3">
@@ -288,16 +288,16 @@
                                 <th class="text-center border">Parecer</th>
                               </thead>
                               <tbody>
-                                <c:forEach var="pedidoReprovado" items="${recusados}">
+                                <c:forEach var="pedidoRecusado" items="${recusados.content}">
                                   <tr>
-                                    <td class="text-center border">${pedidoReprovado.id}</td>
-                                    <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoReprovado.dataCadastro}" var="dataCadastro" />
+                                    <td class="text-center border">${pedidoRecusado.id}</td>
+                                    <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${pedidoRecusado.dataCadastro}" var="dataCadastro" />
                                     <td class="text-center border">${dataCadastro}</td>
-                                    <td class="text-center border">${pedidoReprovado.entidade.nomeFantasia}</td>
-                                    <td class="text-center border">${pedidoReprovado.empresa.nomeFantasia}</td>
-                                    <td class="text-center border">${pedidoReprovado.analista.endereco.bairro} - ${pedidoReprovado.analista.endereco.cidade} / ${pedidoReprovado.analista.endereco.estado}</td>
+                                    <td class="text-center border">${pedidoRecusado.entidade.nomeFantasia}</td>
+                                    <td class="text-center border">${pedidoRecusado.empresa.nomeFantasia}</td>
+                                    <td class="text-center border">${pedidoRecusado.analista.endereco.bairro} - ${pedidoRecusado.analista.endereco.cidade} / ${pedidoRecusado.analista.endereco.estado}</td>
                                     <td class="text-center border">${pedido.tipoPedido.descricao}</td>
-                                    <td class="text-center border"><a href="#" data-toggle="modal" data-target="#modal-observacao-pedido-recusado-${pedidoReprovado.id}" title="Visualizar"><i class="far fa-file-pdf"></i></a></td>                                
+                                    <td class="text-center border"><a href="#" data-toggle="modal" data-target="#modal-observacao-pedido-recusado-${pedidoRecusado.id}" title="Visualizar"><i class="far fa-file-pdf"></i></a></td>                                
                                   </tr>
                                 </c:forEach>
                               </tbody>

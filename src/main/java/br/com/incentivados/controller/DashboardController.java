@@ -120,14 +120,10 @@ public class DashboardController {
             case ANALISTA:
                 model.addAttribute("qtdPedidos", this.pedidoService.countByAnalista(usuario));
                 model.addAttribute("pendentes", this.pedidoService.findAllByAnalistaAndStatus(usuario, StatusPedido.PENDENTE, pageablePedidos));
-                model.addAttribute("qtdPendente", this.pedidoService.countByAnalistaAndStatus(usuario, StatusPedido.PENDENTE));
                 model.addAttribute("aprovados", this.pedidoService.findAllByAnalistaAndStatus(usuario, StatusPedido.APROVADO, pageablePedidos));
-                model.addAttribute("qtdAprovado", this.pedidoService.countByAnalistaAndStatus(usuario, StatusPedido.APROVADO));
                 model.addAttribute("recusados", this.pedidoService.findAllByAnalistaAndStatus(usuario, StatusPedido.RECUSADO, pageablePedidos));
-                model.addAttribute("qtdRecusado", this.pedidoService.countByAnalistaAndStatus(usuario, StatusPedido.RECUSADO));
                 model.addAttribute("preAprovados", this.pedidoService.findAllByAnalistaAndStatus(usuario, StatusPedido.PRE_APROVADO, pageablePedidos));
-                model.addAttribute("qtdPreAprovado", this.pedidoService.countByAnalistaAndStatus(usuario, StatusPedido.PRE_APROVADO));
-                return "painel/analista/dashboard-analista";
+               return "painel/analista/dashboard-analista";
             case ADMIN:
                 model.addAttribute("entidades", this.entidadeService.findAll(pageableEntidades));
                 model.addAttribute("qtdEntidades", this.entidadeService.count());
