@@ -86,10 +86,10 @@
                       <div class="collapse" id="graficos-projetos">
                         <ul class="nav">
                           <li>
-                            <a href="#" style="margin-left: 50px;"><i class="far fa-chart-bar"></i>Categoria</a>                            
+                            <a href="${path}/painel/graficos/projetos/categoria" style="margin-left: 50px;"><i class="far fa-chart-bar"></i>Categoria</a>                            
                           </li>
                           <li>
-                            <a href="#" style="margin-left: 50px;"><i class="fas fa-globe-americas"></i>Mapa</a>
+                            <a href="${path}/painel/graficos/projetos/mapa" style="margin-left: 50px;"><i class="fas fa-globe-americas"></i>Mapa</a>
                           </li>
                         </ul>
                       </div>                   
@@ -102,7 +102,7 @@
                             <a href="${path}/painel/graficos/pedidos/status" style="margin-left: 50px;"><i class="fas fa-chart-pie"></i>Status</a>                            
                           </li>
                           <li>
-                            <a href="#" style="margin-left: 50px;"><i class="fas fa-globe-americas"></i>Mapa</a>
+                            <a href="${path}/painel/graficos/pedidos/mapa" style="margin-left: 50px;"><i class="fas fa-globe-americas"></i>Mapa</a>
                           </li>
                         </ul>
                       </div>                   

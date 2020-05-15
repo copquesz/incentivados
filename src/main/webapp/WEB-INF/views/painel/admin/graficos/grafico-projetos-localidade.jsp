@@ -99,10 +99,10 @@
                       <div class="collapse" id="graficos-pedidos">
                         <ul class="nav">
                           <li>
-                            <a href="#" style="margin-left: 50px;"><i class="fas fa-chart-pie"></i>Status</a>                            
+                            <a href="${path}/painel/graficos/pedidos/status" style="margin-left: 50px;"><i class="fas fa-chart-pie"></i>Status</a>                            
                           </li>
                           <li>
-                            <a href="#" style="margin-left: 50px;"><i class="fas fa-globe-americas"></i>Mapa</a>
+                            <a href="${path}/painel/graficos/pedidos/mapa" style="margin-left: 50px;"><i class="fas fa-globe-americas"></i>Mapa</a>
                           </li>
                         </ul>
                       </div>                   
@@ -161,7 +161,7 @@
                 <p><small>Total: ${totalProjetos}</small></p>     
               </div>
               <div class="card-body ">               
-                <div id="chartdiv" style="width: 80vw; height: 80vh;"></div>
+                <div id="projetos-am4-mapchart-div" style="width: 80vw; height: 80vh;"></div>
               </div>
             </div>
           </div>
@@ -192,7 +192,7 @@
     let dados = [<c:forEach var='am4ChartProjetosLocalidade' items='${am4ChartsProjetosLocalidade}'>{"id": '${am4ChartProjetosLocalidade.id}', "value": '${am4ChartProjetosLocalidade.value}'}, </c:forEach>];
     
       // Define o local e tipo de gráfico
-    let chart = am4core.create("chartdiv", am4maps.MapChart);
+    let chart = am4core.create("projetos-am4-mapchart-div", am4maps.MapChart);
     // Atribui o 'brazilLow' como o mapa
     // Você pode optar pelo 'brazilHigh', basta alterar aqui e src do script no html
     // Também define que as partes que montam o mapa serão com base no MapPolygonSeries

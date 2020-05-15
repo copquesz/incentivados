@@ -92,8 +92,24 @@ public class ChartService {
         return am4MapChartList;
     }
 
+    public List<Am4MapChart> buildAm4ChartPedidosLocalidade() {
+        List<Am4MapChart> am4MapChartList = new ArrayList<>();
+        for (CodigosAm4MapChart codigosAm4MapChart : CodigosAm4MapChart.values()) {
+            am4MapChartList.add(
+                    new Am4MapChart(codigosAm4MapChart.getId(),
+                            pedidoService.countByUsuarioEnderecoEstado(codigosAm4MapChart.getDescricao())
+                    )
+            );
+        }
+        return am4MapChartList;
+    }
+
     public long countTotalProjetos(){
         return projetoService.count();
     }
+    public long countTotalPedidos(){
+        return pedidoService.count();
+    }
+
 
 }

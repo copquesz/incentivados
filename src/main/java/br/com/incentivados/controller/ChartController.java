@@ -57,4 +57,12 @@ public class ChartController {
         model.addAttribute("aprovados", chartService.buildDonutChartPedidosStatus(StatusPedido.APROVADO));
         return "painel/admin/graficos/grafico-pedidos-status";
     }
+
+    @GetMapping({"/painel/graficos/pedidos/mapa"})
+    public String getAm4ChartPedidosLocalidade(HttpServletRequest request, Model model) {
+        model.addAttribute("path", request.getContextPath());
+        model.addAttribute("am4ChartsPedidosLocalidade", chartService.buildAm4ChartPedidosLocalidade());
+        model.addAttribute("totalPedidos", chartService.countTotalPedidos());
+        return "painel/admin/graficos/grafico-pedidos-localidade";
+    }
 }

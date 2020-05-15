@@ -34,6 +34,8 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
 	Long countByStatus(StatusPedido status);
 
+	Long countByUsuarioEnderecoEstado(String estado);
+
 	Long countByEmpresaAndStatus(Empresa empresa, StatusPedido status);
 
 	Long countByAnalistaAndStatus(Usuario analista, StatusPedido status);

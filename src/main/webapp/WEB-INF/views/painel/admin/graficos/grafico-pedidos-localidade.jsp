@@ -73,9 +73,9 @@
                 <ul class="nav">
                   <li>
                     <a data-toggle="collapse" href="#graficos-entidade" style="margin-left: 30px;"><i class="fas fa-users"></i>Entidades <b class="caret"></b></a>
-                      <div class="collapse show" id="graficos-entidade">
+                      <div class="collapse" id="graficos-entidade">
                         <ul class="nav">
-                          <li class="active">
+                          <li>
                             <a href="${path}/painel/graficos/entidades/linha-do-tempo" style="margin-left: 50px;"><i class="fas fa-chart-area"></i>Linha do Tempo</a>
                           </li>
                         </ul>
@@ -96,12 +96,12 @@
                   </li>
                   <li>
                     <a data-toggle="collapse" href="#graficos-pedidos" style="margin-left: 30px;"><i class="fas fa-praying-hands"></i>Pedidos <b class="caret"></b></a>
-                      <div class="collapse" id="graficos-pedidos">
+                      <div class="collapse show" id="graficos-pedidos">
                         <ul class="nav">
                           <li>
                             <a href="${path}/painel/graficos/pedidos/status" style="margin-left: 50px;"><i class="fas fa-chart-pie"></i>Status</a>                            
                           </li>
-                          <li>
+                          <li class="active">
                             <a href="${path}/painel/graficos/pedidos/mapa" style="margin-left: 50px;"><i class="fas fa-globe-americas"></i>Mapa</a>
                           </li>
                         </ul>
@@ -125,7 +125,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <b><a class="navbar-brand" href="#">Gráficos <i class='fas fa-angle-double-right'></i> Entidades <i class='fas fa-angle-double-right'></i> Linha do Tempo</a></b>
+            <b><a class="navbar-brand" href="#">Gráficos <i class='fas fa-angle-double-right'></i> Pedidos <i class='fas fa-angle-double-right'></i> Mapa</a></b>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -154,27 +154,14 @@
       </nav>  
       <div class="content">   
         <div class="row">
-          <div class="col-md-10 mx-auto">
+          <div class="col-md-12 mx-auto">
             <div class="card ">
               <div class="card-header ">
-                <h5 class="card-title">Entidades Cadastradas</h5>    
-                <div class="row">
-                  <div class="col-12 d-flex justify-content-start">
-                    <form class="form-inline">
-                      <div class="form-group mx-sm-1 mb-2">
-                        <select class="form-control" name="ano">
-                           <option value="2020">2020</option>
-                           <option value="2019">2019</option>                           
-                        </select>
-                      </div>
-                      <div class="form-group mb-2">
-                        <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>
-                      </div>                      
-                    </form>
-                  </div>            
+                <h5 class="card-title">Pedidos x Localidade</h5>        
+                <p><small>Total: ${totalPedidos}</small></p>     
               </div>
-              <div class="card-body ">                
-                <canvas id="entidade-line-chart"></canvas>
+              <div class="card-body ">               
+                <div id="pedidos-am4-mapchart-div" style="width: 80vw; height: 80vh;"></div>
               </div>
             </div>
           </div>
@@ -196,38 +183,97 @@
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
   <script type="text/javascript" src="${path}/assets/js/file-validator.js"></script>
-  <script type="text/javascript">    
-    var lineCtx = document.getElementById("entidade-line-chart").getContext('2d');
-    var lineChart = new Chart(lineCtx, {
-        type: 'line',
-        data: {
-            labels: [<c:forEach var="entidadeLineChartLabel" items="${entidadeLineCharts}">"${entidadeLineChartLabel.label}",</c:forEach>],
-            datasets: [{
-                label: 'Registros',                  
-                data: [<c:forEach var="entidadeLineChartValue" items="${entidadeLineCharts}">${entidadeLineChartValue.value},</c:forEach>],
-                backgroundColor: [
-                    'rgba(114, 191, 68, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(114, 191, 68, 1)',
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            legend: {
-                display: false
-            },
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero:true
-                    }
-                }]
-            }
-        }
+  <script src="https://www.amcharts.com/lib/4/core.js"></script>
+  <script src="https://www.amcharts.com/lib/4/maps.js"></script>
+  <script src="https://www.amcharts.com/lib/4/geodata/brazilLow.js"></script>
+  <script type="text/javascript">  
+
+
+    let dados = [<c:forEach var='am4ChartPedidosLocalidade' items='${am4ChartsPedidosLocalidade}'>{"id": '${am4ChartPedidosLocalidade.id}', "value": '${am4ChartPedidosLocalidade.value}'}, </c:forEach>];
+    
+      // Define o local e tipo de gráfico
+    let chart = am4core.create("pedidos-am4-mapchart-div", am4maps.MapChart);
+    // Atribui o 'brazilLow' como o mapa
+    // Você pode optar pelo 'brazilHigh', basta alterar aqui e src do script no html
+    // Também define que as partes que montam o mapa serão com base no MapPolygonSeries
+    chart.geodata = am4geodata_brazilLow;
+    // Enable export
+    chart.exporting.menu = new am4core.ExportMenu();
+    let polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
+    polygonSeries.data = dados;
+    polygonSeries.useGeodata = true;
+    polygonSeries.tooltip.getFillFromObject = false;
+    polygonSeries.tooltip.background.fill = am4core.color("#562c74");
+
+    //labels
+    var labelSeries = chart.series.push(new am4maps.MapImageSeries());
+    var labelTemplate = labelSeries.mapImages.template.createChild(am4core.Label);
+    labelTemplate.horizontalCenter = "middle";
+    labelTemplate.verticalCenter = "middle";
+    labelTemplate.fontSize = 10;
+    labelTemplate.interactionsEnabled = false;
+    labelTemplate.nonScaling = true;
+    labelTemplate.fontWeight = "90";
+    labelSeries.stroke = "#2c3e50";
+
+
+    // Set up label series to populate
+    polygonSeries.events.on("inited", function () {
+      for(var i = 0; i < dados.length; i++){
+        var polygon = polygonSeries.getPolygonById(dados[i].id);
+        if(polygon){
+          var label = labelSeries.mapImages.create();
+          //var state = polygon.dataItem.dataContext.id.split("-").pop();
+          label.latitude = polygon.visualLatitude;
+          label.longitude = polygon.visualLongitude;
+          label.children.getIndex(0).text = dados[i].value;
+      }
+      }
     });
-</script>
+
+    // Preenche os dados para fazer o mapa de calor
+    // Faremos com que os menores valores sejam verdes e maiores sejam vermelhos
+    polygonSeries.heatRules.push({
+      property: "fill",
+      target: polygonSeries.mapPolygons.template,
+      min: am4core.color("#7bed9f"),
+      max: am4core.color("#2ed573")
+    });
+    // Define as legendas, posição e cores.
+    let heatLegend = chart.createChild(am4maps.HeatLegend);
+    heatLegend.series = polygonSeries;
+    heatLegend.align = "right";
+    heatLegend.width = am4core.percent(25);
+    heatLegend.marginBottom = am4core.percent(6);
+    heatLegend.marginRight = am4core.percent(4);
+    heatLegend.minValue = 0; 
+    heatLegend.maxValue = ${totalPedidos};
+    heatLegend.valign = "bottom";
+
+    // Set up custom heat map legend labels using axis ranges
+    var minRange = heatLegend.valueAxis.axisRanges.create();
+    minRange.value = heatLegend.minValue;
+    minRange.label.text = "Pouco";
+    var maxRange = heatLegend.valueAxis.axisRanges.create();
+    maxRange.value = heatLegend.maxValue;
+    maxRange.label.text = "Muito";
+
+    // Blank out internal heat legend value axis labels
+    heatLegend.valueAxis.renderer.labels.template.adapter.add("text", function(labelText) {
+      return "";
+    });
+
+    // Configuras os tooltips (texto ao passar o mouse)
+    let polygonTemplate = polygonSeries.mapPolygons.template;
+    polygonTemplate.tooltipText = "{name}: {value}";
+    polygonTemplate.nonScalingStroke = true;
+    polygonTemplate.strokeWidth = 0.5;
+
+    // Muda a cor do estado ao passar o mouse
+    let hs = polygonTemplate.states.create("hover");
+    hs.properties.fill = am4core.color("rgba(86, 44, 116, 0.8)");
+
+  </script>
 </body>
 
 </html>
