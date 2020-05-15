@@ -57,7 +57,6 @@
           <li>
             <a href="${path}/painel/ranking"><i class="far fa-chart-bar"></i>Ranking</a>
           </li>
-        </ul>
           <li>
             <a data-toggle="collapse" href="#graficos"><i class="fas fa-chart-line"></i>Gráficos<b class="caret"></b></a>
               <div class="collapse show" id="graficos">
@@ -192,10 +191,10 @@
     var lineChart = new Chart(lineCtx, {
         type: 'line',
         data: {
-            labels: [<c:forEach var="entidadeLineChartLabel" items="${entidadeLineCharts}">"${entidadeLineChartLabel.label}",</c:forEach>],
+            labels: [<c:forEach var="entidadeLineChartLabel" items="${entidadesLineChart}">"${entidadeLineChartLabel.label}",</c:forEach>],
             datasets: [{
                 label: 'Registros',                  
-                data: [<c:forEach var="entidadeLineChartValue" items="${entidadeLineCharts}">${entidadeLineChartValue.value},</c:forEach>],
+                data: [<c:forEach var="entidadeLineChartValue" items="${entidadesLineChart}">${entidadeLineChartValue.value},</c:forEach>],
                 backgroundColor: [
                     'rgba(114, 191, 68, 0.2)',
                 ],

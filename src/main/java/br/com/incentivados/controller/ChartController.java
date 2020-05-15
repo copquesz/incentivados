@@ -33,6 +33,7 @@ public class ChartController {
 
         Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
 
+        model.addAttribute("entidadesLineChart", chartService.buildLineChartEntidade(Integer.parseInt(ano)));
         model.addAttribute("path", request.getContextPath());
 
         switch (usuario.getTipoUsuario()){

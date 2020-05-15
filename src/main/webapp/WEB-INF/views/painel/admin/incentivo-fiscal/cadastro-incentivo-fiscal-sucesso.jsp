@@ -64,6 +64,49 @@
             <a href="${path}/painel/ranking">
               <i class="far fa-chart-bar"></i>Ranking</a>
           </li>
+          <li>
+            <a data-toggle="collapse" href="#graficos"><i class="fas fa-chart-line"></i>Gráficos<b class="caret"></b></a>
+              <div class="collapse" id="graficos">
+                <ul class="nav">
+                  <li>
+                    <a data-toggle="collapse" href="#graficos-entidade" style="margin-left: 30px;"><i class="fas fa-users"></i>Entidades <b class="caret"></b></a>
+                      <div class="collapse" id="graficos-entidade">
+                        <ul class="nav">
+                          <li>
+                            <a href="${path}/painel/graficos/entidades/linha-do-tempo" style="margin-left: 50px;"><i class="fas fa-chart-area"></i>Linha do Tempo</a>
+                          </li>
+                        </ul>
+                      </div>                   
+                  </li>
+                  <li>
+                    <a data-toggle="collapse" href="#graficos-projetos" style="margin-left: 30px;"><i class="fas fa-project-diagram"></i>Projetos <b class="caret"></b></a>
+                      <div class="collapse" id="graficos-projetos">
+                        <ul class="nav">
+                          <li>
+                            <a href="${path}/painel/graficos/projetos/categoria" style="margin-left: 50px;"><i class="far fa-chart-bar"></i>Categoria</a>                            
+                          </li>
+                          <li>
+                            <a href="${path}/painel/graficos/projetos/mapa" style="margin-left: 50px;"><i class="fas fa-globe-americas"></i>Mapa</a>
+                          </li>
+                        </ul>
+                      </div>                   
+                  </li>
+                  <li>
+                    <a data-toggle="collapse" href="#graficos-pedidos" style="margin-left: 30px;"><i class="fas fa-praying-hands"></i>Pedidos <b class="caret"></b></a>
+                      <div class="collapse" id="graficos-pedidos">
+                        <ul class="nav">
+                          <li>
+                            <a href="${path}/painel/graficos/pedidos/status" style="margin-left: 50px;"><i class="fas fa-chart-pie"></i>Status</a>                            
+                          </li>
+                          <li>
+                            <a href="${path}/painel/graficos/pedidos/mapa" style="margin-left: 50px;"><i class="fas fa-globe-americas"></i>Mapa</a>
+                          </li>
+                        </ul>
+                      </div>                   
+                  </li>
+                </ul>
+              </div>
+          </li>
         </ul>
       </div>
     </div>
