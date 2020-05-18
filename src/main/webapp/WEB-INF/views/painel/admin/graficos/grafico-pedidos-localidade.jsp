@@ -236,8 +236,8 @@
     polygonSeries.heatRules.push({
       property: "fill",
       target: polygonSeries.mapPolygons.template,
-      min: am4core.color("#7bed9f"),
-      max: am4core.color("#2ed573")
+      min: am4core.color("#9CDF6D"),
+      max: am4core.color("#72BF44")
     });
     // Define as legendas, posição e cores.
     let heatLegend = chart.createChild(am4maps.HeatLegend);
