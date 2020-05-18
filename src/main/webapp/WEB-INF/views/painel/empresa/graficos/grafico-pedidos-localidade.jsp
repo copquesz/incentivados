@@ -40,32 +40,22 @@
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li>
-            <a href="${path}/painel/dashboard">
-              <i class="nc-icon nc-bank"></i>Painel Principal</a>        
+            <a href="${path}/painel/dashboard"><i class="fas fa-desktop"></i>Painel Principal</a>
           </li>
           <li>
-            <a href="${path}/painel/empresas">
-              <i class="fas fa-city"></i>Empresas</a>
+            <a href="${path}/painel/${usuario.empresa.id}/analistas"><i class="fas fa-users"></i>Analistas</a>
           </li>
           <li>
-            <a href="${path}/painel/entidades">
-              <i class="fas fa-users"></i>Entidades</a>
+            <a href="${path}/painel/entidades"><i class="fas fa-users"></i>Entidades</a>
           </li>
           <li>
-            <a href="${path}/painel/projetos">
-              <i class="fas fa-project-diagram"></i>Projetos</a>
+            <a href="${path}/painel/projetos"><i class="fas fa-project-diagram"></i>Projetos</a>
+          </li>
+          <li class="active">
+            <a href="${path}/painel/pedidos?filtro=TODOS&key="><i class="fas fa-praying-hands"></i>Pedidos</a>
           </li>
           <li>
-            <a href="${path}/painel/incentivos-fiscais">
-              <i class="fas fa-gavel"></i>Incentivos Fiscais</a>
-          </li>
-          <li>
-            <a href="${path}/painel/pedidos?filtro=TODOS&key=">
-              <i class="fas fa-praying-hands"></i>Pedidos</a>
-          </li>
-          <li>
-            <a href="${path}/painel/ranking">
-              <i class="fas fa-medal"></i>Ranking</a>
+            <a href="${path}/painel/ranking"><i class="far fa-chart-bar"></i>Ranking</a>
           </li>
           <li>
             <a data-toggle="collapse" href="#graficos"><i class="fas fa-chart-line"></i>Gráficos<b class="caret"></b></a>
