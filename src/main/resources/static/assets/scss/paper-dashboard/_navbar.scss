@@ -222,7 +222,7 @@
       border-bottom: 1px solid #ddd;
 
       a:not(.dropdown-item):not(.btn){
-        color: $default-color;
+        color: $white-color;
 
         &.disabled{
           opacity: .5;
@@ -264,7 +264,7 @@
         .nav-item .nav-link:not(.btn):focus,
         .nav-item .nav-link:not(.btn):hover,
         .nav-item .nav-link:not(.btn):active{
-            color: $info-color;
+            color: $icon-color;
         }
 
         .logo-container{
@@ -290,19 +290,19 @@
 }
 
 .bg-info{
-    background-color: $info-color !important;
+    background-color: $grey-color !important;
 }
 
 .bg-success{
     background-color: $success-color !important;
 }
 
-.bg-danger{
-    background-color: $danger-color !important;
+.new-red{
+    background-color: $new-red !important;
 }
 
-.bg-warning{
-    background-color: $warning-color !important;
+.new-orange{
+    background-color: $new-orange !important;
 }
 
 .bg-white{

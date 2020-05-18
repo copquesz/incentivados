@@ -77,7 +77,7 @@
 
             > a{
                 margin: 10px 15px 0;
-                color: $white-color;
+                color: #000;
                 display: block;
                 text-decoration: none;
                 position: relative;
@@ -111,7 +111,7 @@
             line-height: 30px;
             width: 34px;
             text-align: center;
-            color: $opacity-5;
+            color: red;
             position: relative;
         }
 
@@ -202,7 +202,7 @@
             display: block;
             white-space: nowrap;
             font-size: $font-size-large;
-            color: $white-color;
+            color: $new-red;
             text-decoration: none;
             font-weight: $font-weight-normal;
             line-height: 30px;
@@ -249,8 +249,8 @@
     &[data-color="black"]{
       @include sidebar-color($dark-color);
     }
-    &[data-color="verde"]{
-        @include sidebar-color($verde-color);
+    &[data-color="grey"]{
+        @include sidebar-color($grey-color);
     }
 
 
@@ -260,7 +260,7 @@
         @include sidebar-active-color($primary-color);
     }
     &[data-active-color="info"]{
-        @include sidebar-active-color($info-color);
+        @include sidebar-active-color($icon-color);
     }
     &[data-active-color="success"]{
         @include sidebar-active-color($success-color);
@@ -298,7 +298,7 @@
     position: relative;
     float: right;
     width: $sidebar-width;
-    background-color: #e5e6e8;
+    background-color: $secundary-red;
 
 
     @include transition (0.50s, cubic-bezier(0.685, 0.0473, 0.346, 1));

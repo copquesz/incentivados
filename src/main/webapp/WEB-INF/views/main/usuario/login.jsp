@@ -36,20 +36,13 @@
 </head>
 
 <body class="bg-blue">
-<div>
-    <div class="row justify-content-end" style="position:absolute; bottom:0; right: 0">
-        <div class="col-xl-9 bg-white rounded-circle mb-3 mr-4" style="max-width: 150px; min-height: 120px">
-            <img src="${path}/assets/img/LogoLeroy.png" class="img-fluid pb-2 mt-3" style="max-width: 100px; min-height: 80px;" >
-        </div>
-    </div>
-</div>
 <div class="container justify-content-center h-100" style="position: relative">
 
     <div class="d-flex justify-content-center h-100 d-inline-block">
         <div class="login_card">
             <div class="d-flex justify-content-center">
                 <div class="login_image bg-white rounded-circle" style="border: 1.5px solid #3ab524!important">
-                    <img src="${path}/assets/img/usuario.jpg" class="login_user_image img-fluid" alt="Logo">
+                    <img src="${path}/assets/img/logo-claro.png" class="login_user_image img-fluid" alt="Logo">
                 </div>
             </div>
             <div class="d-flex justify-content-center form_container">

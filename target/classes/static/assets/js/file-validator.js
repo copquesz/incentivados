@@ -1,7 +1,7 @@
 var limite_bytes = 20971520 // 20MB
 
 function validaImg($input, id) {
-  var extPermitidas = ['jpg',, 'jpeg', 'png', 'bmp'];
+  var extPermitidas = ['jpg', 'jpeg', 'png', 'bmp'];
   var extArquivo = $input.value.split('.').pop();
   var seletor = $(id);
 
