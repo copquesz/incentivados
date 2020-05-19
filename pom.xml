@@ -20,7 +20,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.incentivados</groupId>
-	<artifactId>incentivados</artifactId>
+	<artifactId>incentivados-claro</artifactId>
 	<version>1.8.0.3-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>incentivados</name>
