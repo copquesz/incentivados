@@ -26,7 +26,7 @@
 <body class="">
   <div class="wrapper ">    
     <!-- Sidebar -->
-    <div class="sidebar" data-color="verde" data-active-color="white">
+    <div class="sidebar" data-color="grey" data-active-color="white">
       <div class="logo">
         <a href="#" class="simple-text logo-mini">
           <div class="logo-image-small"><i class="far fa-user"></i></div>
@@ -150,8 +150,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card">
-              <div class="card-header bg-primary"></div>
-              <div class="card-body border">
+              <div class="card-body">
                 <form action="${path}/painel/pedidos/${empresa.nomeFantasia}/cadastro" method="post" enctype="multipart/form-data" acceptcharset="UTF-8">
                   <input type="hidden" name="pedido.id" value="${pedido.id}">
                   <fieldset>
@@ -255,7 +254,6 @@
                   <a href="${path}/painel/dashboard" class="btn btn-warning float-right"><i class="fas fa-angle-double-left"></i> Voltar</a>
                 </form>
               </div>
-              <div class="card-footer bg-primary"></div>
             </div>
           </div>
         </div>              

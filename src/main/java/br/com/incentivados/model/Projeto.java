@@ -36,7 +36,9 @@ public class Projeto implements Serializable {
 
     private Integer beneficiariosIndiretos;
 
+    @Column(columnDefinition = "TEXT")
     private String contrapartida;
+
     @Column(columnDefinition = "TEXT")
     private String objetivo;
 

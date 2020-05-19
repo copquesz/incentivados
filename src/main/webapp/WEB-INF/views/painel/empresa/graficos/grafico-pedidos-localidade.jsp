@@ -27,7 +27,7 @@
 <body class="">
   <div class="wrapper ">
     <!-- Sidebar -->
-    <div class="sidebar" data-color="verde" data-active-color="white">
+    <div class="sidebar" data-color="grey" data-active-color="white">
       <div class="logo">
         <a href="http://www.creative-tim.com" class="simple-text logo-mini">
           <div class="logo-image-small">
@@ -193,7 +193,7 @@
     polygonSeries.data = dados;
     polygonSeries.useGeodata = true;
     polygonSeries.tooltip.getFillFromObject = false;
-    polygonSeries.tooltip.background.fill = am4core.color("#562c74");
+    polygonSeries.tooltip.background.fill = am4core.color("#000");
 
     //labels
     var labelSeries = chart.series.push(new am4maps.MapImageSeries());
@@ -204,7 +204,7 @@
     labelTemplate.interactionsEnabled = false;
     labelTemplate.nonScaling = true;
     labelTemplate.fontWeight = "90";
-    labelSeries.stroke = "#2c3e50";
+    labelSeries.stroke = "#000";
 
 
     // Set up label series to populate
@@ -226,8 +226,8 @@
     polygonSeries.heatRules.push({
       property: "fill",
       target: polygonSeries.mapPolygons.template,
-      min: am4core.color("#9CDF6D"),
-      max: am4core.color("#72BF44")
+      min: am4core.color("#e74c3c"),
+      max: am4core.color("#c0392b")
     });
     // Define as legendas, posição e cores.
     let heatLegend = chart.createChild(am4maps.HeatLegend);
@@ -240,13 +240,16 @@
     heatLegend.maxValue = ${totalPedidos};
     heatLegend.valign = "bottom";
 
-    // Set up custom heat map legend labels using axis ranges
+    /// Set up custom heat map legend labels using axis ranges
+    if(heatLegend.maxValue > 1){
     var minRange = heatLegend.valueAxis.axisRanges.create();
-    minRange.value = heatLegend.minValue;
-    minRange.label.text = "Pouco";
-    var maxRange = heatLegend.valueAxis.axisRanges.create();
-    maxRange.value = heatLegend.maxValue;
-    maxRange.label.text = "Muito";
+      minRange.value = heatLegend.minValue;
+      minRange.label.text = "Pouco";
+    
+      var maxRange = heatLegend.valueAxis.axisRanges.create();
+      maxRange.value = heatLegend.maxValue;
+      maxRange.label.text = "Muito";
+    }
 
     // Blank out internal heat legend value axis labels
     heatLegend.valueAxis.renderer.labels.template.adapter.add("text", function(labelText) {
@@ -261,7 +264,7 @@
 
     // Muda a cor do estado ao passar o mouse
     let hs = polygonTemplate.states.create("hover");
-    hs.properties.fill = am4core.color("rgba(86, 44, 116, 0.8)");
+    hs.properties.fill = am4core.color("#7f8c8d");
 
   </script>
 </body>

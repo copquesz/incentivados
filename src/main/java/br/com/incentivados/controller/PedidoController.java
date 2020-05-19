@@ -179,7 +179,6 @@ public class PedidoController {
                         model.addAttribute("recusados", this.pedidoService.findAllByStatus(StatusPedido.RECUSADO, pageablePedidosAdmin));
                         model.addAttribute("aprovados", this.pedidoService.findAllByStatus(StatusPedido.APROVADO, pageablePedidosAdmin));
                     }
-
                     return "painel/admin/pedido/lista";
                 case ANALISTA:
                     Pageable pageablePedidosAnalista = PageRequest.of(page, 5, Sort.by(new Sort.Order[]{Sort.Order.desc("id")}));

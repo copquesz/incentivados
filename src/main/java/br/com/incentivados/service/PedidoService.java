@@ -78,7 +78,7 @@ public class PedidoService {
         return this.pedidoRepository.findAllByLoja(key, page);
     }
 
-    public List<Pedido> findAllByLojaAndStatus(String key, StatusPedido status, Pageable page) {
+    public Page<Pedido> findAllByLojaAndStatus(String key, StatusPedido status, Pageable page) {
         return this.pedidoRepository.findAllByLojaAndStatus(key, status, page);
     }
 
@@ -86,7 +86,7 @@ public class PedidoService {
         return this.pedidoRepository.findAllByCidade(key, page);
     }
 
-    public List<Pedido> findAllByCidadeAndStatus(String key, StatusPedido status, Pageable page) {
+    public Page<Pedido> findAllByCidadeAndStatus(String key, StatusPedido status, Pageable page) {
         return this.pedidoRepository.findAllByCidadeAndStatus(key, status, page);
     }
 
@@ -94,7 +94,7 @@ public class PedidoService {
         return this.pedidoRepository.findAllByEstado(key, page);
     }
 
-    public List<Pedido> findAllByEstadoAndStatus(String key, StatusPedido status, Pageable page) {
+    public Page<Pedido> findAllByEstadoAndStatus(String key, StatusPedido status, Pageable page) {
         return this.pedidoRepository.findAllByEstadoAndStatus(key, status, page);
     }
 
@@ -102,7 +102,7 @@ public class PedidoService {
         return this.pedidoRepository.findAllByEntidade(key, page);
     }
 
-    public List<Pedido> findAllByEntidadeAndStatus(String key, StatusPedido status, Pageable page) {
+    public Page<Pedido> findAllByEntidadeAndStatus(String key, StatusPedido status, Pageable page) {
         return this.pedidoRepository.findAllByEntidadeAndStatus(key, status, page);
     }
 
@@ -110,7 +110,7 @@ public class PedidoService {
         return this.pedidoRepository.findAllByUsuario(usuario, page);
     }
 
-    public List<Pedido> findAllByStatus(StatusPedido status, Pageable page) {
+    public Page<Pedido> findAllByStatus(StatusPedido status, Pageable page) {
         return this.pedidoRepository.findAllByStatus(status, page);
     }
 

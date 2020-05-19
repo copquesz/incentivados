@@ -42,7 +42,7 @@ public class JavaMail {
 
     private static Message prepareMessage(Session session, String myAccount, String recipient, String subject, String text) throws MessagingException {
         Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress("Plataforma Incentivados - Leroy Merlin <" + myAccount + ">"));
+        message.setFrom(new InternetAddress("Plataforma Incentivados - Claro <" + myAccount + ">"));
         message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
         message.setSubject(subject);
         message.setContent(text, "text/html");

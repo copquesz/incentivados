@@ -26,7 +26,7 @@
 <body class="">
 <div class="wrapper ">
   <!-- Sidebar -->
-  <div class="sidebar" data-color="verde" data-active-color="white">
+  <div class="sidebar" data-color="grey" data-active-color="white">
     <div class="logo">
       <a href="#" class="simple-text logo-mini">
         <div class="logo-image-small">
@@ -101,8 +101,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="card">
-            <div class="card-header bg-info"></div>
-            <div class="card-body border">
+            <div class="card-body">
               <form action="${path}/painel/projetos/cadastro" method="post" enctype="multipart/form-data" acceptcharset="UTF-8">
 
                 <!-- Cnpj da empresa que irá receber o projeto - Padrão 18.520.427/0001-86 -> Yabá Consultoria -->
@@ -270,7 +269,6 @@
                 <a href="${path}/painel/dashboard" class="btn btn-danger float-right"><i class="fas fa-angle-double-left"></i> Voltar</a>
               </form>
             </div>
-            <div class="card-footer bg-info"></div>
           </div>
         </div>
       </div>
@@ -338,13 +336,9 @@
       let showCampoDadosBancariosFundo = false;
       let size = $(this).val().length;
       for(i = 0; i < size ; i++){
-        if(selectpicker_incentivo_fiscal.val()[i] == 5 || selectpicker_incentivo_fiscal.val()[i] == 6 || selectpicker_incentivo_fiscal.val()[i] == 7 || selectpicker_incentivo_fiscal.val()[i] == 8){
+        if(selectpicker_incentivo_fiscal.val()[i] == 3 || selectpicker_incentivo_fiscal.val()[i] == 4){
           showCampoDadosBancariosFundo = true;
-        }
-        
-        if(selectpicker_incentivo_fiscal.val() == 12){
-          showCertificado = false;
-        }        
+        }    
       }
       if(showCampoDadosBancariosFundo){
         campo_dados_bancarios_fundo.show();

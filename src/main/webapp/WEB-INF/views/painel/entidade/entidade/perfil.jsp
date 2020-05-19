@@ -28,7 +28,7 @@
 <body class="">
 <div class="wrapper ">
     <!-- Sidebar -->    
-    <div class="sidebar" data-color="verde" data-active-color="white">
+    <div class="sidebar" data-color="grey" data-active-color="white">
       <div class="logo">
         <a href="#" class="simple-text logo-mini">
           <div class="logo-image-small">
@@ -103,8 +103,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header bg-info"></div>
-                        <div class="card-body border">
+                        <div class="card-body">
 
                             <div class="row mt-3">
                                 <div class="col-md-3 text-center">
@@ -229,9 +228,7 @@
                                   </c:choose>
 
                                 </div>
-                              </div>
-
-                              <hr class="bg-primary">
+                              </div>                             
 
                               <div class="row justify-content-center">
 
@@ -240,10 +237,10 @@
                                   <div class="col-lg-2 text-center mt-5">
                                       <div class="form-group">
                                           <a title="Documento Aprovado" href="${path}/${entidade.documentosEntidade.logo.path}"
-                                             target="_blank"><i class="far fa-file-image text-primary"
+                                             target="_blank"><i class="far fa-file-image text-success"
                                                                 style="font-size: 56px;"></i></a>
                                           <hr>
-                                          <h5 class="text-center"><strong style="color: #3fa733 !important">Logo</strong></h5>
+                                          <h5 class="text-center text-success"><strong>Logo</strong></h5>
                                       </div>
                                   </div>
                                 </c:if>
@@ -252,10 +249,10 @@
                                   <div class="col-lg-2 text-center mt-5">
                                       <div class="form-group">
                                           <a title="Documento Negado" href="${path}/${entidade.documentosEntidade.logo.path}"
-                                             target="_blank"><i class="far fa-file-image text-primary"
-                                                                style="font-size: 56px; color: #e74c3c !important;"></i></a>
+                                             target="_blank"><i class="far fa-file-image text-danger"
+                                                                style="font-size: 56px;"></i></a>
                                           <hr>
-                                          <h5 class="text-center"><strong style="color: #e74c33 !important">Logo</strong></h5>
+                                          <h5 class="text-center text-danger"><strong>Logo</strong></h5>
                                       </div>
                                   </div>
                                 </c:if>
@@ -264,10 +261,10 @@
                                   <div class="col-lg-2 text-center mt-5">
                                       <div class="form-group">
                                           <a title="Documento em Análise" href="${path}/${entidade.documentosEntidade.logo.path}"
-                                             target="_blank"><i class="far fa-file-image text-primary"
-                                                                style="font-size: 56px; color: #f39c12 !important;"></i></a>
+                                             target="_blank"><i class="far fa-file-image text-warning"
+                                                                style="font-size: 56px;"></i></a>
                                           <hr>
-                                          <h5 class="text-center"><strong style="color: #f39c12 !important">Logo</strong></h5>
+                                          <h5 class="text-center text-warning"><strong>Logo</strong></h5>
                                       </div>
                                   </div>
                                 </c:if>
@@ -278,10 +275,10 @@
                                     <div class="col-lg-2 text-center mt-5">
                                         <div class="form-group">
                                             <a title="Documento Aprovado" href="${path}/${entidade.documentosEntidade.ataEleicao.path}"
-                                               target="_blank"><i class="far fa-file-image text-primary"
+                                               target="_blank"><i class="far fa-file-image text-success"
                                                                   style="font-size: 56px;"></i></a>
                                             <hr>
-                                            <h5 class="text-center"><strong style="color: #3fa733 !important">Ata de Eleição</strong></h5>
+                                            <h5 class="text-center text-success"><strong>Ata de Eleição</strong></h5>
                                         </div>
                                     </div>
                                   </c:if>
@@ -290,10 +287,10 @@
                                     <div class="col-lg-2 text-center mt-5">
                                         <div class="form-group">
                                             <a type="Documento Negado" href="${path}/${entidade.documentosEntidade.ataEleicao.path}"
-                                               target="_blank"><i class="far fa-file-image text-primary"
-                                                                  style="font-size: 56px; color: #e74c3c !important"></i></a>
+                                               target="_blank"><i class="far fa-file-image text-danger"
+                                                                  style="font-size: 56px;"></i></a>
                                             <hr>
-                                            <h5 class="text-center"><strong style="color: #e74c3c !important">Ata de Eleição</strong></h5>
+                                            <h5 class="text-center text-danger"><strong>Ata de Eleição</strong></h5>
                                         </div>
                                     </div>
                                   </c:if>
@@ -302,10 +299,10 @@
                                     <div class="col-lg-2 text-center mt-5">
                                         <div class="form-group">
                                             <a title="Documento em Análise" href="${path}/${entidade.documentosEntidade.ataEleicao.path}"
-                                               target="_blank"><i class="far fa-file-image text-primary"
-                                                                  style="font-size: 56px; color: #f39c12 !important"></i></a>
+                                               target="_blank"><i class="far fa-file-image text-warning"
+                                                                  style="font-size: 56px; "></i></a>
                                             <hr>
-                                            <h5 class="text-center"><strong style="color: #f39c12 !important">Ata de Eleição</strong></h5>
+                                            <h5 class="text-center text-warning"><strong>Ata de Eleição</strong></h5>
                                         </div>
                                     </div>
                                   </c:if>
@@ -316,10 +313,10 @@
                                   <div class="col-lg-2 text-center mt-5">
                                       <div class="form-group">
                                           <a title="Documento Aprovado" href="${path}/${entidade.documentosEntidade.estatutoSocial.path}"
-                                             target="_blank"><i class="far fa-file-image text-primary"
+                                             target="_blank"><i class="far fa-file-image text-success"
                                                                 style="font-size: 56px;"></i></a>
                                           <hr>
-                                          <h5 class="text-center"><strong style="color: #3fa733 !important">Estatuto Social ou Contrato Social</strong></h5>
+                                          <h5 class="text-center text-success"><strong>Estatuto Social ou Contrato Social</strong></h5>
                                       </div>
                                   </div>
                                 </c:if>
@@ -328,10 +325,10 @@
                                   <div class="col-lg-2 text-center mt-5">
                                       <div class="form-group">
                                           <a title="Documento Negado" href="${path}/${entidade.documentosEntidade.estatutoSocial.path}"
-                                             target="_blank"><i class="far fa-file-image text-primary"
-                                                                style="font-size: 56px; color: #e74c3c !important"></i></a>
+                                             target="_blank"><i class="far fa-file-image text-danger"
+                                                                style="font-size: 56px;"></i></a>
                                           <hr>
-                                          <h5 class="text-center"><strong style="color: #e74c3c !important">Estatuto Social ou Contrato Social</strong></h5>
+                                          <h5 class="text-center text-danger"><strong>Estatuto Social ou Contrato Social</strong></h5>
                                       </div>
                                   </div>
                                 </c:if>
@@ -340,10 +337,10 @@
                                   <div class="col-lg-2 text-center mt-5">
                                       <div class="form-group">
                                           <a title="Documento em Análise" href="${path}/${entidade.documentosEntidade.estatutoSocial.path}"
-                                             target="_blank"><i class="far fa-file-image text-primary"
-                                                                style="font-size: 56px; color: #f39c12 !important"></i></a>
+                                             target="_blank"><i class="far fa-file-image text-warning"
+                                                                style="font-size: 56px; "></i></a>
                                           <hr>
-                                          <h5 class="text-center"><strong style="color: #f39c12 !important">Estatuto Social ou Contrato Social</strong></h5>
+                                          <h5 class="text-center text-warning"><strong style="">Estatuto Social ou Contrato Social</strong></h5>
                                       </div>
                                   </div>
                                 </c:if>
@@ -353,10 +350,10 @@
                                   <div class="col-lg-2 text-center mt-5">
                                       <div class="form-group">
                                           <a title="Documento Aprovado" href="${path}/${entidade.documentosEntidade.identidade.path}"
-                                             target="_blank"><i class="far fa-file-image text-primary"
+                                             target="_blank"><i class="far fa-file-image text-success"
                                                                 style="font-size: 56px;"></i></a>
                                           <hr>
-                                          <h5 class="text-center"><strong style="color: #3fa733 !important">Identidade Presidente</strong></h5>
+                                          <h5 class="text-center text-success"><strong>Identidade Presidente</strong></h5>
                                       </div>
                                   </div>
                                 </c:if>
@@ -365,10 +362,10 @@
                                   <div class="col-lg-2 text-center mt-5">
                                       <div class="form-group">
                                           <a title="Documento Negado" href="${path}/${entidade.documentosEntidade.identidade.path}"
-                                             target="_blank"><i class="far fa-file-image text-primary"
-                                                                style="font-size: 56px; color: #e74c3c !important"></i></a>
+                                             target="_blank"><i class="far fa-file-image text-danger"
+                                                                style="font-size: 56px;"></i></a>
                                           <hr>
-                                          <h5 class="text-center"><strong style="color: #e74c3c !important">Identidade Presidente</strong></h5>
+                                          <h5 class="text-center text-danger"><strong>Identidade Presidente</strong></h5>
                                       </div>
                                   </div>
                                 </c:if>
@@ -377,10 +374,10 @@
                                   <div class="col-lg-2 text-center mt-5">
                                       <div class="form-group">
                                           <a title="Documento em Análise" href="${path}/${entidade.documentosEntidade.identidade.path}"
-                                             target="_blank"><i class="far fa-file-image text-primary"
-                                                                style="font-size: 56px; color: #f39c12 !important"></i></a>
+                                             target="_blank"><i class="far fa-file-image text-warning"
+                                                                style="font-size: 56px; "></i></a>
                                           <hr>
-                                          <h5 class="text-center"><strong style="color: #f39c12 !important">Identidade Presidente</strong></h5>
+                                          <h5 class="text-center text-warning"><strong style="">Identidade Presidente</strong></h5>
                                       </div>
                                   </div>
                                 </c:if>
@@ -390,10 +387,10 @@
                                   <div class="col-lg-2 text-center mt-5">
                                       <div class="form-group">
                                           <a title="Documento Aprovado" href="${path}/${entidade.documentosEntidade.cartaoCnpj.path}"
-                                             target="_blank"><i class="far fa-file-image text-primary"
+                                             target="_blank"><i class="far fa-file-image text-success"
                                                                 style="font-size: 56px;"></i></a>
                                           <hr>
-                                          <h5 class="text-center"><strong style="color: #3fa733 !important">Cartão CNPJ</strong></h5>
+                                          <h5 class="text-center text-success"><strong>Cartão CNPJ</strong></h5>
                                       </div>
                                   </div>
                                 </c:if>
@@ -402,10 +399,10 @@
                                   <div class="col-lg-2 text-center mt-5">
                                       <div class="form-group">
                                           <a title="Documento Negado" href="${path}/${entidade.documentosEntidade.cartaoCnpj.path}"
-                                             target="_blank"><i class="far fa-file-image text-primary"
-                                                                style="font-size: 56px; color: #e74c3c !important"></i></a>
+                                             target="_blank"><i class="far fa-file-image text-danger"
+                                                                style="font-size: 56px;"></i></a>
                                           <hr>
-                                          <h5 class="text-center"><strong style="color: #e74c3c !important">Cartão CNPJ</strong></h5>
+                                          <h5 class="text-center text-danger"><strong>Cartão CNPJ</strong></h5>
                                       </div>
                                   </div>
                                 </c:if>
@@ -414,10 +411,10 @@
                                   <div class="col-lg-2 text-center mt-5">
                                       <div class="form-group">
                                           <a title="Documento em Análise" href="${path}/${entidade.documentosEntidade.cartaoCnpj.path}"
-                                             target="_blank"><i class="far fa-file-image text-primary"
-                                                                style="font-size: 56px; color: #f39c12 !important"></i></a>
+                                             target="_blank"><i class="far fa-file-image text-warning"
+                                                                style="font-size: 56px;"></i></a>
                                           <hr>
-                                          <h5 class="text-center"><strong style="color: #f39c12 !important">Cartão CNPJ</strong></h5>
+                                          <h5 class="text-center text-warning"><strong>Cartão CNPJ</strong></h5>
                                       </div>
                                   </div>
                                 </c:if>
@@ -427,10 +424,10 @@
                                   <div class="col-lg-2 text-center mt-5">
                                       <div class="form-group">
                                           <a title="Documento Aprovado" href="${path}/${entidade.documentosEntidade.dadosBancarios.path}"
-                                             target="_blank"><i class="far fa-file-image text-primary"
+                                             target="_blank"><i class="far fa-file-image text-success"
                                                                 style="font-size: 56px;"></i></a>
                                           <hr>
-                                          <h5 class="text-center"><strong style="color: #3fa733 !important">Dados Bancários</strong></h5>
+                                          <h5 class="text-center text-success"><strong>Dados Bancários</strong></h5>
                                       </div>
                                   </div>
                                 </c:if>
@@ -439,10 +436,10 @@
                                   <div class="col-lg-2 text-center mt-5">
                                       <div class="form-group">
                                           <a title="Documento Negado" href="${path}/${entidade.documentosEntidade.dadosBancarios.path}"
-                                             target="_blank"><i class="far fa-file-image text-primary"
-                                                                style="font-size: 56px; color: #e74c3c !important"></i></a>
+                                             target="_blank"><i class="far fa-file-image text-danger"
+                                                                style="font-size: 56px;"></i></a>
                                           <hr>
-                                          <h5 class="text-center"><strong style="color: #e74c3c !important">Dados Bancários</strong></h5>
+                                          <h5 class="text-center text-danger"><strong>Dados Bancários</strong></h5>
                                       </div>
                                   </div>
                                 </c:if>
@@ -451,10 +448,10 @@
                                   <div class="col-lg-2 text-center mt-5">
                                       <div class="form-group">
                                           <a title="Documento em Análise" href="${path}/${entidade.documentosEntidade.dadosBancarios.path}"
-                                             target="_blank"><i class="far fa-file-image text-primary"
-                                                                style="font-size: 56px; color: #f39c12 !important"></i></a>
+                                             target="_blank"><i class="far fa-file-image text-warning"
+                                                                style="font-size: 56px; "></i></a>
                                           <hr>
-                                          <h5 class="text-center"><strong style="color: #f39c12 !important">Dados Bancários</strong></h5>
+                                          <h5 class="text-center text-warning"><strong style="">Dados Bancários</strong></h5>
                                       </div>
                                   </div>
                                 </c:if>                     
@@ -462,7 +459,6 @@
                               </div>
                           </fieldset>
                         </div>
-                        <div class="card-footer bg-info"></div>
                     </div>
                 </div>
             </div>

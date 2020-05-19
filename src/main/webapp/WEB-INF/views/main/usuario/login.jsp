@@ -107,7 +107,7 @@
 <%--    <img src="${path}/assets/img/LogoYaba.png" class="img-fluid">--%>
 <%--</div>--%>
 <%--&lt;%&ndash;Logo Leroy canto inferior direito&ndash;%&gt;--%>
-<%--<div class="footer-leroy bg-white rounded-circle" style="height: 18%;">--%>
+<%--<div class="footer-claro bg-white rounded-circle" style="height: 18%;">--%>
 <%--    <img src="${path}/assets/img/LogoLeroy.png" class="img-fluid">--%>
 <%--</div>--%>
 

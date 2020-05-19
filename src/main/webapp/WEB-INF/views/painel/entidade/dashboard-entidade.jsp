@@ -29,7 +29,7 @@
 <body class="">
 <div class="wrapper ">
     <!-- Sidebar -->    
-    <div class="sidebar" data-color="verde" data-active-color="white">
+    <div class="sidebar" data-color="grey" data-active-color="white">
       <div class="logo">
         <a href="#" class="simple-text logo-mini">
           <div class="logo-image-small">
@@ -314,7 +314,7 @@
                             <h5 class="card-title">Minhas Solicitações</h5>
                             <div class="row">
                                 <div class="col-12">                                    
-                                    <a href="${path}/painel/pedidos/cadastro?empresaCnpj=01.438.784/0001-05" class="btn btn-primary float-right"><i class="fas fa-plus mr-2"></i> Cadastrar Pedido</a>
+                                    <a href="${path}/painel/pedidos/cadastro?empresaCnpj=40.432.544/0001-47" class="btn btn-primary float-right"><i class="fas fa-plus mr-2"></i> Cadastrar Pedido</a>
                                 </div>
                             </div>
                             <c:if test="${empty pedidos.content}">

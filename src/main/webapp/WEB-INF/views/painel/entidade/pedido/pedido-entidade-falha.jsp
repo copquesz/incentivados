@@ -25,7 +25,7 @@
 <body class="">
   <div class="wrapper ">
     <!-- Sidebar -->    
-    <div class="sidebar" data-color="verde" data-active-color="white">
+    <div class="sidebar" data-color="grey" data-active-color="white">
       <div class="logo">
         <a href="#" class="simple-text logo-mini">
           <div class="logo-image-small">
@@ -100,12 +100,11 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card">
-              <div class="card-header bg-danger"><h4 class="card-title text-white bold"><i class="far fa-thumbs-down fa-2x"></i> Falha!</h4><hr></div>              
-              <div class="card-body bg-danger">
-                <p class="text-white">Ocorreu um erro ao realizar o cadastro na plataforma.</p>
+              <div class="card-header"><h4 class="card-title bold"><i class="far fa-thumbs-down fa-2x"></i> Falha!</h4><hr></div>              
+              <div class="card-body">
+                <p>Ocorreu um erro ao realizar o cadastro na plataforma.</p>
                 <p><a href="${path}/painel/dashboard" class="btn btn-warning rounded"><i class="fas fa-angle-double-left"></i> Voltar</a></p>
               </div>
-              <div class="card-footer bg-danger"></div>
             </div>
           </div>
         </div>              

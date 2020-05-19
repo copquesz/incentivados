@@ -25,7 +25,7 @@
 <body class="">
   <div class="wrapper ">
     <!-- Sidebar -->
-    <div class="sidebar" data-color="verde" data-active-color="white">
+    <div class="sidebar" data-color="grey" data-active-color="white">
       <div class="logo">
         <a href="#" class="simple-text logo-mini">
             <div class="logo-image-small"><i class="far fa-user"></i></div>
@@ -152,14 +152,12 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header bg-success"><h4 class="card-title text-white bold"><i class="far fa-thumbs-up fa-2x"></i> Cadastro Realizado!</h4><hr></div>              
-              <div class="card-body bg-success">
-                <p class="text-white bold">Empresa: ${empresa.razaoSocial}</br>CNPJ: ${empresa.cnpj}</p>
-                <p class="text-white">O cadastro foi realizado com sucesso na plataforma.</p>
-                <p>
-                  <a href="${path}/painel/empresas" class="btn btn-warning"><i class="fas fa-angle-double-left"></i> Voltar</a>
-                  <a href="${path}/painel/dashboard" class="btn btn-warning"><i class="far fa-share-square"></i> Ver Registros</a></p>
+              <div class="card-body">
+                <p class="bold">Empresa: ${empresa.razaoSocial}</br>CNPJ: ${empresa.cnpj}</p>
+                <p>O cadastro foi realizado com sucesso na plataforma.</p>
+                <p>                  
+                  <a href="${path}/painel/empresas" class="btn btn-warning"><i class="far fa-share-square"></i> Ver Registros</a></p>
               </div>
-              <div class="card-footer bg-success"></div>
             </div>
           </div>
         </div>              

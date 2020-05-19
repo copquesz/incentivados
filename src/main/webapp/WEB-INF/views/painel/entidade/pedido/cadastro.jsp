@@ -26,7 +26,7 @@
 <body class="">
   <div class="wrapper ">    
     <!-- Sidebar -->    
-    <div class="sidebar" data-color="verde" data-active-color="white">
+    <div class="sidebar" data-color="grey" data-active-color="white">
       <div class="logo">
         <a href="#" class="simple-text logo-mini">
           <div class="logo-image-small">
@@ -101,8 +101,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card">
-              <div class="card-header bg-primary"></div>
-              <div class="card-body border">
+              <div class="card-body">
                 <form action="${path}/painel/pedidos/cadastro" method="post" enctype="multipart/form-data" acceptcharset="UTF-8">
                   <fieldset>
                   <legend class="text-primary">Solicitante:</legend>
@@ -212,7 +211,6 @@
                   <a href="${path}/painel/dashboard" class="btn btn-danger float-right"><i class="fas fa-angle-double-left"></i> Voltar</a>
                 </form>
               </div>
-              <div class="card-footer bg-primary"></div>
             </div>
           </div>
         </div>              

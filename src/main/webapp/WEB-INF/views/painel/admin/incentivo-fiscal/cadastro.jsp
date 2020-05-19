@@ -26,7 +26,7 @@
 <body class="">
   <div class="wrapper ">
     <!-- Sidebar -->
-    <div class="sidebar" data-color="verde" data-active-color="white">
+    <div class="sidebar" data-color="grey" data-active-color="white">
       <div class="logo">
         <a href="http://www.creative-tim.com" class="simple-text logo-mini">
           <div class="logo-image-small">
@@ -154,7 +154,7 @@
         <div class="row">          
           <div class="col-12">
             <div class="card">
-              <div class="card-header ">                
+              <div class="card-header">                
                 <h5 class="card-title text-primary">Cadastro de Incentivo Fiscal</h5>
               </div>
               <div class="card-body">
@@ -212,9 +212,6 @@
                     </form> 
                   </div>     
                 </div>
-              </div>
-              <div class="card-footer">
-                <hr>
               </div>
             </div>
           </div>          

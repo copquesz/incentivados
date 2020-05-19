@@ -18,8 +18,6 @@ import java.util.Optional;
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 	Optional<Pedido> findById(Long id);
 
-	List<Pedido> findAllByStatus(StatusPedido status, Pageable page);
-
 	Long countByUsuario(Usuario usuario);
 
 	Long countByEmpresa(Empresa empresa);
@@ -34,6 +32,8 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
 	Page<Pedido> findAllByUsuario(Usuario usuario, Pageable page);
 
+	Page<Pedido> findAllByStatus(StatusPedido status, Pageable page);
+
 	Page<Pedido> findAllByEmpresaAndStatus(Empresa empresa, StatusPedido status, Pageable page);
 
 	Page<Pedido> findAllByAnalistaAndStatus(Usuario analista, StatusPedido status, Pageable page);
@@ -42,25 +42,25 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 	Page<Pedido> findAllByLoja(@Param("key") String key, Pageable page);
 
 	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.analista.endereco.bairro LIKE %:key% AND pedido.status = :status")
-	List<Pedido> findAllByLojaAndStatus(@Param("key") String key, @Param("status") StatusPedido status, Pageable page);
+	Page<Pedido> findAllByLojaAndStatus(@Param("key") String key, @Param("status") StatusPedido status, Pageable page);
 
 	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.analista.endereco.cidade LIKE %:key%")
 	Page<Pedido> findAllByCidade(@Param("key") String key, Pageable page);
 
 	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.analista.endereco.cidade LIKE %:key% AND pedido.status = :status")
-	List<Pedido> findAllByCidadeAndStatus(@Param("key") String key, @Param("status") StatusPedido status, Pageable page);
+	Page<Pedido> findAllByCidadeAndStatus(@Param("key") String key, @Param("status") StatusPedido status, Pageable page);
 
 	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.analista.endereco.estado LIKE %:key%")
 	Page<Pedido> findAllByEstado(@Param("key") String key, Pageable page);
 
 	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.analista.endereco.estado LIKE %:key% AND pedido.status = :status")
-	List<Pedido> findAllByEstadoAndStatus(@Param("key") String key, @Param("status") StatusPedido status, Pageable page);
+	Page<Pedido> findAllByEstadoAndStatus(@Param("key") String key, @Param("status") StatusPedido status, Pageable page);
 
 	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.entidade.nomeFantasia LIKE %:key%")
 	Page<Pedido> findAllByEntidade(@Param("key") String key, Pageable page);
 
 	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.entidade.nomeFantasia LIKE %:key% AND pedido.status = :status")
-	List<Pedido> findAllByEntidadeAndStatus(@Param("key") String key, @Param("status") StatusPedido status, Pageable page);
+	Page<Pedido> findAllByEntidadeAndStatus(@Param("key") String key, @Param("status") StatusPedido status, Pageable page);
 
 	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.empresa = :empresa and pedido.analista.endereco.bairro LIKE %:key%")
 	Page<Pedido> findAllByEmpresaAndLoja(@Param("empresa") Empresa empresa, @Param("key") String key, Pageable page);

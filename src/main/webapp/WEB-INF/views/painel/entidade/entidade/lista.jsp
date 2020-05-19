@@ -26,7 +26,7 @@
 <body class="">
   <div class="wrapper ">
     <!-- Sidebar -->    
-    <div class="sidebar" data-color="verde" data-active-color="white">
+    <div class="sidebar" data-color="grey" data-active-color="white">
       <div class="logo">
         <a href="#" class="simple-text logo-mini">
           <div class="logo-image-small">
@@ -193,7 +193,7 @@
                                 <td class="border text-center">${entidade.nomeFantasia}</td>
                                 <td class="border text-center" >${entidade.cnpj}</td>
                                 <td class="border text-center">
-                                  <a href="${path}/painel/entidades/${entidade.id}" class="btn btn-primary btn-sm text-white" title="Visualizar"><i class="far fa-address-card"></i></a></td>
+                                  <a href="${path}/painel/entidades/${entidade.id}" class="btn btn-primary btn-sm" title="Visualizar"><i class="far fa-address-card"></i></a></td>
                               </tr>
                             </c:forEach>
                           </tbody>

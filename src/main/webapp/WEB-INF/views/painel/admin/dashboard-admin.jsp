@@ -27,7 +27,7 @@
 <body class="">
   <div class="wrapper ">
     <!-- Sidebar -->
-    <div class="sidebar" data-color="verde" data-active-color="white">
+    <div class="sidebar" data-color="grey" data-active-color="white">
       <div class="logo">
         <a href="http://www.creative-tim.com" class="simple-text logo-mini">
           <div class="logo-image-small">
@@ -277,7 +277,7 @@
                 <div class="tab-content" id="myTabContent">
                   <div class="tab-pane fade show active" id="entidades" role="tabpanel" aria-labelledby="entidades-tab"> 
                     <c:if test = "${empty entidades.content}">
-                      <div class="alert alert-info" role="alert">
+                      <div class="alert alert-info mt-3" role="alert">
                         <p class="text-bold">Não há entidade(s) cadastrada(s).</p>
                       </div>
                     </c:if>      

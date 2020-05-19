@@ -26,7 +26,7 @@
 <body class="">
 <div class="wrapper ">
     <!-- Sidebar -->    
-    <div class="sidebar" data-color="verde" data-active-color="white">
+    <div class="sidebar" data-color="grey" data-active-color="white">
       <div class="logo">
         <a href="#" class="simple-text logo-mini">
           <div class="logo-image-small">
@@ -100,9 +100,8 @@
         <div class="content">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header bg-info"></div>
-                        <div class="card-body border">
+                    <div class="card">                        
+                        <div class="card-body">
                             <form action="${path}/painel/entidades/cadastro" method="post" enctype="multipart/form-data"
                                   acceptcharset="UTF-8">
 
@@ -300,13 +299,12 @@
                                 </fieldset>
 
                                 <hr class="bg-primary">
-                                <button type="submit" class="btn btn-primary float-right">Enviar <i
+                                <button type="submit" class="btn btn-success float-right">Enviar <i
                                         class="far fa-share-square"></i></button>
                                 <a href="${path}/painel/dashboard" class="btn btn-danger float-right"><i
                                         class="fas fa-angle-double-left"></i> Voltar</a>
                             </form>
                         </div>
-                        <div class="card-footer bg-info"></div>
                     </div>
                 </div>
             </div>

@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="credits ml-auto">
-                <span class="copyright">
+                <span class="copyright" style="color: #fff;">
                   ©<script>document.write(new Date().getFullYear())</script> Todos os direitos reservados Yabá Consultoria
                 </span>
             </div>

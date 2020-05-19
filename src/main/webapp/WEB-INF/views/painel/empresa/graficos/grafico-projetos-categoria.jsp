@@ -27,7 +27,7 @@
 <body class="">
   <div class="wrapper ">
     <!-- Sidebar -->
-    <div class="sidebar" data-color="verde" data-active-color="white">
+    <div class="sidebar" data-color="grey" data-active-color="white">
       <div class="logo">
         <a href="http://www.creative-tim.com" class="simple-text logo-mini">
           <div class="logo-image-small">
@@ -181,8 +181,8 @@
             datasets: [{
                 label: 'Registros',
                 data: [<c:forEach var="projetoPieChartValue" items="${projetoPieCharts}">${projetoPieChartValue.value}, </c:forEach>],
-                backgroundColor: [<c:forEach var="projetoPieChartBackgroundColor" items="${projetoPieCharts}">'rgba(114, 191, 68, 0.2)',</c:forEach>],
-                borderColor: [<c:forEach var="projetoPieChartBorderColor" items="${projetoPieCharts}">'rgba(114, 191, 68, 1)',</c:forEach>],
+                backgroundColor: [<c:forEach var="projetoPieChartBackgroundColor" items="${projetoPieCharts}">'rgba(237, 28, 36, 0.2)',</c:forEach>],
+                borderColor: [<c:forEach var="projetoPieChartBorderColor" items="${projetoPieCharts}">'rgba(237, 28, 36, 1)',</c:forEach>],
                 borderWidth: 1
             }]
         },

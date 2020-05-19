@@ -27,7 +27,7 @@
 <body class="">
   <div class="wrapper ">
     <!-- Sidebar -->
-    <div class="sidebar" data-color="verde" data-active-color="white">
+    <div class="sidebar" data-color="grey" data-active-color="white">
       <div class="logo">
         <a href="http://www.creative-tim.com" class="simple-text logo-mini">
           <div class="logo-image-small">
@@ -206,10 +206,10 @@
                 label: 'Registros',                  
                 data: [<c:forEach var="entidadeLineChartValue" items="${entidadesLineChart}">${entidadeLineChartValue.value},</c:forEach>],
                 backgroundColor: [
-                    'rgba(114, 191, 68, 0.2)',
+                    'rgba(237, 28, 36, 0.2)',
                 ],
                 borderColor: [
-                    'rgba(114, 191, 68, 1)',
+                    'rgba(237, 28, 36, 1)',
                 ],
                 borderWidth: 1
             }]

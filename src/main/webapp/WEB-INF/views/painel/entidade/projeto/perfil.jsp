@@ -28,7 +28,7 @@
 <body class="">
 <div class="wrapper ">
     <!-- Sidebar -->    
-    <div class="sidebar" data-color="verde" data-active-color="white">
+    <div class="sidebar" data-color="grey" data-active-color="white">
       <div class="logo">
         <a href="#" class="simple-text logo-mini">
           <div class="logo-image-small">
@@ -103,8 +103,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header bg-info"></div>
-                        <div class="card-body border">
+                        <div class="card-body">
                             <div class="row mt-4">
                                 <div class="col-sm-12 col-md-4 text-sm-center">
                                     <figure class="figure">
@@ -121,32 +120,32 @@
                             <hr>
                             <div class="row justify-content-center mt-5">
                                 <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 bg-primary rounded text-center p-3 mx-3 my-1">
-                                    <h5 class="text-white"><i class="fas fa-file-invoice-dollar fa-3x"></i></h5>
+                                    <h5 style="color: #fff;"><i class="fas fa-file-invoice-dollar fa-3x"></i></h5>
                                     <hr>
-                                    <h5 class="text-white bold"><span
-                                            style="font-size: 0.8rem;">Valor Total:</span> </br><span
-                                            style="font-size: 1.3rem;">R$ ${projeto.valorTotal}</span></h5>
+                                    <h5 class="bold"><span
+                                            style="font-size: 0.8rem; color: #fff;">Valor Total:</span> </br><span
+                                            style="font-size: 1.3rem; color: #fff;">R$ ${projeto.valorTotal}</span></h5>
                                 </div>
                                 <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 bg-primary rounded text-center p-3 mx-3 my-1">
-                                    <h5 class="text-white"><i class="fas fa-hand-holding-usd fa-3x"></i></h5>
+                                    <h5 style="color: #fff;"><i class="fas fa-hand-holding-usd fa-3x"></i></h5>
                                     <hr>
-                                    <h5 class="text-white bold"><span
-                                            style="font-size: 0.8rem;">Valor Solicitado:</span> </br><span
-                                            style="font-size: 1.3rem;">R$ ${projeto.valorSolicitado}</span></h5>
+                                    <h5 class="bold"><span
+                                            style="font-size: 0.8rem; color: #fff;">Valor Solicitado:</span> </br><span
+                                            style="font-size: 1.3rem; color: #fff;">R$ ${projeto.valorSolicitado}</span></h5>
                                 </div>
                                 <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 bg-primary rounded text-center p-3 mx-3 my-1">
-                                    <h5 class="text-white"><i class="fas fa-compress-arrows-alt fa-3x"></i></h5>
+                                    <h5 style="color: #fff;"><i class="fas fa-compress-arrows-alt fa-3x"></i></h5>
                                     <hr>
-                                    <h5 class="text-white bold"><span
-                                            style="font-size: 0.8rem;">Beneficiários Diretos:</span> </br><span
-                                            style="font-size: 1.3rem;"><i
+                                    <h5 class="bold"><span
+                                            style="font-size: 0.8rem; color: #fff;">Beneficiários Diretos:</span> </br><span
+                                            style="font-size: 1.3rem; color: #fff;" color: #fff;><i
                                             class="fas fa-users"></i> ${projeto.beneficiariosDiretos}</span></h5>
                                 </div>
                                 <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 bg-primary rounded text-center p-3 mx-3 my-1">
-                                    <h5 class="text-white"><i class="fas fa-expand-arrows-alt fa-3x"></i></h5>
+                                    <h5 style="color: #fff;"><i class="fas fa-expand-arrows-alt fa-3x"></i></h5>
                                     <hr>
-                                    <h5 class="text-white bold"><span style="font-size: 0.8rem;">Beneficiários Indiretos:</span> </br>
-                                        <span style="font-size: 1.3rem;"><i
+                                    <h5 class="bold"><span style="font-size: 0.8rem; color: #fff;">Beneficiários Indiretos:</span> </br>
+                                        <span style="font-size: 1.3rem; color: #fff;"><i
                                                 class="fas fa-users"></i> ${projeto.beneficiariosIndiretos}</span></h5>
                                 </div>
                             </div>
@@ -268,10 +267,10 @@
                                       <div class="col-lg-2 text-center mt-5">
                                           <div class="form-group">
                                               <a title="Documento Aprovado" href="${path}/${projeto.documentosProjeto.logo.path}"
-                                                 target="_blank"><i class="far fa-file-image text-primary"
+                                                 target="_blank"><i class="far fa-file-image text-success"
                                                                     style="font-size: 56px;"></i></a>
                                               <hr>
-                                              <h5 class="text-center"><strong style="color: #3fa733 !important">Logo</strong></h5>
+                                              <h5 class="text-center text-success"><strong>Logo</strong></h5>
                                           </div>
                                       </div>
                                     </c:if>
@@ -280,10 +279,10 @@
                                       <div class="col-lg-2 text-center mt-5">
                                           <div class="form-group">
                                               <a title="Documento Negado" href="${path}/${projeto.documentosProjeto.logo.path}"
-                                                 target="_blank"><i class="far fa-file-image text-primary"
-                                                                    style="font-size: 56px; color: #e74c3c !important;"></i></a>
+                                                 target="_blank"><i class="far fa-file-image text-danger"
+                                                                    style="font-size: 56px;"></i></a>
                                               <hr>
-                                              <h5 class="text-center"><strong style="color: #e74c33 !important">Logo</strong></h5>
+                                              <h5 class="text-center text-danger"><strong>Logo</strong></h5>
                                           </div>
                                       </div>
                                     </c:if>
@@ -292,10 +291,10 @@
                                       <div class="col-lg-2 text-center mt-5">
                                           <div class="form-group">
                                               <a title="Documento em Análise" href="${path}/${projeto.documentosProjeto.logo.path}"
-                                                 target="_blank"><i class="far fa-file-image text-primary"
-                                                                    style="font-size: 56px; color: #f39c12 !important;"></i></a>
+                                                 target="_blank"><i class="far fa-file-image text-warning"
+                                                                    style="font-size: 56px;"></i></a>
                                               <hr>
-                                              <h5 class="text-center"><strong style="color: #f39c12 !important">Logo</strong></h5>
+                                              <h5 class="text-center text-warning"><strong>Logo</strong></h5>
                                           </div>
                                       </div>
                                     </c:if>
@@ -305,10 +304,10 @@
                                       <div class="col-lg-2 text-center mt-5">
                                           <div class="form-group">
                                               <a title="Documento Aprovado" href="${path}/${projeto.documentosProjeto.propostaTecnica.path}"
-                                                 target="_blank"><i class="far fa-file-image text-primary"
+                                                 target="_blank"><i class="far fa-file-image text-success"
                                                                     style="font-size: 56px;"></i></a>
                                               <hr>
-                                              <h5 class="text-center"><strong style="color: #3fa733 !important">Proposta</strong></h5>
+                                              <h5 class="text-center text-success"><strong>Proposta</strong></h5>
                                           </div>
                                       </div>
                                     </c:if>
@@ -317,10 +316,10 @@
                                       <div class="col-lg-2 text-center mt-5">
                                           <div class="form-group">
                                               <a title="Documento Negado" href="${path}/${projeto.documentosProjeto.propostaTecnica.path}"
-                                                 target="_blank"><i class="far fa-file-image text-primary"
-                                                                    style="font-size: 56px; color: #e74c3c !important;"></i></a>
+                                                 target="_blank"><i class="far fa-file-image text-danger"
+                                                                    style="font-size: 56px;"></i></a>
                                               <hr>
-                                              <h5 class="text-center"><strong style="color: #e74c33 !important">Proposta</strong></h5>
+                                              <h5 class="text-center text-danger"><strong>Proposta</strong></h5>
                                           </div>
                                       </div>
                                     </c:if>
@@ -329,10 +328,10 @@
                                       <div class="col-lg-2 text-center mt-5">
                                           <div class="form-group">
                                               <a title="Documento em Análise" href="${path}/${projeto.documentosProjeto.propostaTecnica.path}"
-                                                 target="_blank"><i class="far fa-file-image text-primary"
-                                                                    style="font-size: 56px; color: #f39c12 !important;"></i></a>
+                                                 target="_blank"><i class="far fa-file-image text-warning"
+                                                                    style="font-size: 56px;"></i></a>
                                               <hr>
-                                              <h5 class="text-center"><strong style="color: #f39c12 !important">Proposta</strong></h5>
+                                              <h5 class="text-center text-warning"><strong>Proposta</strong></h5>
                                           </div>
                                       </div>
                                     </c:if>
@@ -342,10 +341,10 @@
                                       <div class="col-lg-2 text-center mt-5">
                                           <div class="form-group">
                                               <a title="Documento Aprovado" href="${path}/${projeto.documentosProjeto.propostOrcamentaria.path}"
-                                                 target="_blank"><i class="far fa-file-image text-primary"
+                                                 target="_blank"><i class="far fa-file-image text-success"
                                                                     style="font-size: 56px;"></i></a>
                                               <hr>
-                                              <h5 class="text-center"><strong style="color: #3fa733 !important">Orçamentário</strong></h5>
+                                              <h5 class="text-center text-success"><strong>Orçamentário</strong></h5>
                                           </div>
                                       </div>
                                     </c:if>
@@ -354,10 +353,10 @@
                                       <div class="col-lg-2 text-center mt-5">
                                           <div class="form-group">
                                               <a title="Documento Negado" href="${path}/${projeto.documentosProjeto.propostOrcamentaria.path}"
-                                                 target="_blank"><i class="far fa-file-image text-primary"
-                                                                    style="font-size: 56px; color: #e74c3c !important;"></i></a>
+                                                 target="_blank"><i class="far fa-file-image text-danger"
+                                                                    style="font-size: 56px;"></i></a>
                                               <hr>
-                                              <h5 class="text-center"><strong style="color: #e74c33 !important">Orçamentário</strong></h5>
+                                              <h5 class="text-center text-danger"><strong>Orçamentário</strong></h5>
                                           </div>
                                       </div>
                                     </c:if>
@@ -366,10 +365,10 @@
                                       <div class="col-lg-2 text-center mt-5">
                                           <div class="form-group">
                                               <a title="Documento em Análise" href="${path}/${projeto.documentosProjeto.propostOrcamentaria.path}"
-                                                 target="_blank"><i class="far fa-file-image text-primary"
-                                                                    style="font-size: 56px; color: #f39c12 !important;"></i></a>
+                                                 target="_blank"><i class="far fa-file-image text-warning"
+                                                                    style="font-size: 56px;"></i></a>
                                               <hr>
-                                              <h5 class="text-center"><strong style="color: #f39c12 !important">Orçamentário</strong></h5>
+                                              <h5 class="text-center text-warning"><strong>Orçamentário</strong></h5>
                                           </div>
                                       </div>
                                     </c:if>                                    
@@ -381,10 +380,10 @@
                                         <div class="col-lg-2 text-center mt-5">
                                             <div class="form-group">
                                                 <a title="Documento Aprovado" href="${path}/${projeto.documentosProjeto.dadosBancariosFundo.path}"
-                                                   target="_blank"><i class="far fa-file-image text-primary"
+                                                   target="_blank"><i class="far fa-file-image text-success"
                                                                       style="font-size: 56px;"></i></a>
                                                 <hr>
-                                                <h5 class="text-center"><strong style="color: #3fa733 !important">Dados Bancários do Fundo</strong></h5>
+                                                <h5 class="text-center text-success"><strong>Dados Bancários do Fundo</strong></h5>
                                             </div>
                                         </div>
                                       </c:if>
@@ -393,10 +392,10 @@
                                         <div class="col-lg-2 text-center mt-5">
                                             <div class="form-group">
                                                 <a title="Documento Negado" href="${path}/${projeto.documentosProjeto.dadosBancariosFundo.path}"
-                                                   target="_blank"><i class="far fa-file-image text-primary"
-                                                                      style="font-size: 56px; color: #e74c3c !important;"></i></a>
+                                                   target="_blank"><i class="far fa-file-image text-danger"
+                                                                      style="font-size: 56px;"></i></a>
                                                 <hr>
-                                                <h5 class="text-center"><strong style="color: #e74c33 !important">Dados Bancários do Fundo</strong></h5>
+                                                <h5 class="text-center text-danger"><strong>Dados Bancários do Fundo</strong></h5>
                                             </div>
                                         </div>
                                       </c:if>
@@ -405,10 +404,10 @@
                                         <div class="col-lg-2 text-center mt-5">
                                             <div class="form-group">
                                                 <a title="Documento em Análise" href="${path}/${projeto.documentosProjeto.dadosBancariosFundo.path}"
-                                                   target="_blank"><i class="far fa-file-image text-primary"
-                                                                      style="font-size: 56px; color: #f39c12 !important;"></i></a>
+                                                   target="_blank"><i class="far fa-file-image text-warning"
+                                                                      style="font-size: 56px;"></i></a>
                                                 <hr>
-                                                <h5 class="text-center"><strong style="color: #f39c12 !important">Dados Bancários do Fundo</strong></h5>
+                                                <h5 class="text-center text-warning"><strong>Dados Bancários do Fundo</strong></h5>
                                             </div>
                                         </div>
                                       </c:if>                                       
@@ -421,10 +420,10 @@
                                         <div class="col-lg-2 text-center mt-5">
                                             <div class="form-group">
                                                 <a title="Documento Aprovado" href="${path}/${projeto.documentosProjeto.certificado.path}"
-                                                   target="_blank"><i class="far fa-file-image text-primary"
+                                                   target="_blank"><i class="far fa-file-image text-success"
                                                                       style="font-size: 56px;"></i></a>
                                                 <hr>
-                                                <h5 class="text-center"><strong style="color: #3fa733 !important">Certificado</strong></h5>
+                                                <h5 class="text-center text-success"><strong>Certificado</strong></h5>
                                             </div>
                                         </div>
                                       </c:if>
@@ -433,10 +432,10 @@
                                         <div class="col-lg-2 text-center mt-5">
                                             <div class="form-group">
                                                 <a title="Documento Negado" href="${path}/${projeto.documentosProjeto.certificado.path}"
-                                                   target="_blank"><i class="far fa-file-image text-primary"
-                                                                      style="font-size: 56px; color: #e74c3c !important;"></i></a>
+                                                   target="_blank"><i class="far fa-file-image text-danger"
+                                                                      style="font-size: 56px;"></i></a>
                                                 <hr>
-                                                <h5 class="text-center"><strong style="color: #e74c33 !important">Certificado</strong></h5>
+                                                <h5 class="text-center text-danger"><strong>Certificado</strong></h5>
                                             </div>
                                         </div>
                                       </c:if>
@@ -445,10 +444,10 @@
                                         <div class="col-lg-2 text-center mt-5">
                                             <div class="form-group">
                                                 <a title="Documento em Análise" href="${path}/${projeto.documentosProjeto.certificado.path}"
-                                                   target="_blank"><i class="far fa-file-image text-primary"
-                                                                      style="font-size: 56px; color: #f39c12 !important;"></i></a>
+                                                   target="_blank"><i class="far fa-file-image text-warning"
+                                                                      style="font-size: 56px;"></i></a>
                                                 <hr>
-                                                <h5 class="text-center"><strong style="color: #f39c12 !important">Certificado</strong></h5>
+                                                <h5 class="text-center text-warning"><strong>Certificado</strong></h5>
                                             </div>
                                         </div>
                                       </c:if>
@@ -456,7 +455,6 @@
                                 </div>
                             </fieldset>
                         </div>
-                        <div class="card-footer bg-primary"></div>
                     </div>
                 </div>
 

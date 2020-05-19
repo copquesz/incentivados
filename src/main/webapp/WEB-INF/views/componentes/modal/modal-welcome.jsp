@@ -14,11 +14,11 @@
           <div class="row">
             <div class="col-12 text-justify">
               <p>Olá, ${usuario.nome}.</p> 
-              <p>Seja bem-vindo à Plataforma Incentivados da Leroy Merlin.</p>
+              <p>Seja bem-vindo à Plataforma Incentivados da Claro.</p>
               <p>Para ter uma ótima experiência por aqui, preparamos um tutorial com informações sobre como navegar e suas funcionalidades.</p>
               <p>Nesta sua primeira visita você pode acessá-lo clicando no no botão abaixo. E, sempre que precisar pelo menu de navegação no canto esquerdo no item <strong style="color: #ED1C24;">TUTORIAL</strong>.
               <p>Ficamos felizes em ter você por aqui!</p>
-              <p><small>Em caso de dúvida ou dificuldades entre em contato com o e-mail: <strong>leroymerlin@yabaconsultoria.com.br</strong>.</small>
+              <p><small>Em caso de dúvida ou dificuldades entre em contato com o e-mail: <strong>claro@incentivados.com.br</strong>.</small>
             </div>
           </div> 
         </div>

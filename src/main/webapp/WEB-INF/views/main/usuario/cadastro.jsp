@@ -145,8 +145,8 @@
                                 class="far fa-share-square"></i></button>
                         <a href="${path}/login" class="btn btn-info float-right">Login <i
                                 class="fas fa-sign-in-alt"></i></a>
-                        <a href="${path}/login?redirect=painel/pedidos/Leroy Merlin/cadastro"
-                           class="btn btn-info float-right">Pedidos Leroy</a>
+                        <a href="${path}/login?redirect=painel/pedidos/Claro/cadastro"
+                           class="btn btn-info float-right">Pedidos Claro</a>
                     </form>
                 </div>
             </div>

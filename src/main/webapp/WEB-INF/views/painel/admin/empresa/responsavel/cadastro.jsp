@@ -25,7 +25,7 @@
 <body class="">
   <div class="wrapper "> 
     <!-- Sidebar -->
-    <div class="sidebar" data-color="verde" data-active-color="white">
+    <div class="sidebar" data-color="grey" data-active-color="white">
       <div class="logo">
         <a href="#" class="simple-text logo-mini">
             <div class="logo-image-small"><i class="far fa-user"></i></div>
@@ -151,8 +151,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card">
-              <div class="card-header bg-info"></div>
-              <div class="card-body border">
+              <div class="card-body">
                 <form action="${path}/painel/empresas/${empresa.id}/responsavel/cadastro" method="post" acceptcharset="UTF-8">                  
                   <input type="hidden" class="form-control" name="tipoUsuario" value="EMPRESA">    
                   <fieldset class="mt-3 mt-3">
@@ -205,7 +204,6 @@
                   
                 </form>       
               </div>
-              <div class="card-footer bg-info"></div>
             </div>
           </div>
         </div>              

@@ -27,7 +27,7 @@
 <body class="">
   <div class="wrapper ">
     <!-- Sidebar -->
-    <div class="sidebar" data-color="verde" data-active-color="white">
+    <div class="sidebar" data-color="grey" data-active-color="white">
       <div class="logo">
         <a href="#" class="simple-text logo-mini">
           <div class="logo-image-small"><i class="far fa-user"></i></div>
@@ -204,7 +204,7 @@
                                   </tr>
                                 </c:if> 
                                 
-                                <c:if test="${not empty entidade.documentosEntidade.ataEleicao.path}">  
+                                <c:if test="$entidade.documentosEntidade.ataEleicao.status ne 'NAO_SE_APLICA'}">  
                                 <input type="hidden" name="ataEleicao.id" value="${entidade.documentosEntidade.ataEleicao.id}">
                                 <input type="hidden" name="ataEleicao.path" value="${entidade.documentosEntidade.ataEleicao.path}">
                                   <tr>                                      

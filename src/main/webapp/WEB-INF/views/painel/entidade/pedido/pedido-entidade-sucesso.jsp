@@ -25,7 +25,7 @@
 <body class="">
   <div class="wrapper ">
     <!-- Sidebar -->    
-    <div class="sidebar" data-color="verde" data-active-color="white">
+    <div class="sidebar" data-color="grey" data-active-color="white">
       <div class="logo">
         <a href="#" class="simple-text logo-mini">
           <div class="logo-image-small">
@@ -100,13 +100,12 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card">
-              <div class="card-header bg-success"><h4 class="card-title text-white bold"><i class="far fa-thumbs-up fa-2x"></i> Cadastro Realizado!</h4><hr></div>              
-              <div class="card-body bg-success">
-                <p class="text-white bold">Código Pedido: ${pedido.id}</br>Solicitante: ${pedido.usuario.nome} ${pedido.usuario.sobrenome} - ${pedido.entidade.nomeFantasia}</br>Patrocinador: ${pedido.empresa.nomeFantasia}</br>Loja: ${pedido.analista.endereco.bairro} - ${pedido.analista.endereco.cidade} / ${pedido.analista.endereco.estado}</p>
-                <p class="text-white">O pedido foi solicitado com sucesso na plataforma.</p>
+              <div class="card-header"><h4 class="card-title bold"><i class="far fa-thumbs-up fa-2x"></i> Cadastro Realizado!</h4><hr></div>              
+              <div class="card-body">
+                <p class="bold">Código Pedido: ${pedido.id}</br>Solicitante: ${pedido.usuario.nome} ${pedido.usuario.sobrenome} - ${pedido.entidade.nomeFantasia}</br>Patrocinador: ${pedido.empresa.nomeFantasia}</br>Loja: ${pedido.analista.endereco.bairro} - ${pedido.analista.endereco.cidade} / ${pedido.analista.endereco.estado}</p>
+                <p>O pedido foi solicitado com sucesso na plataforma.</p>
                 <p><a href="${path}/painel/dashboard" class="btn btn-warning rounded"><i class="fas fa-angle-double-left"></i> Voltar</a></p>
               </div>
-              <div class="card-footer bg-success"></div>
             </div>
           </div>
         </div>              

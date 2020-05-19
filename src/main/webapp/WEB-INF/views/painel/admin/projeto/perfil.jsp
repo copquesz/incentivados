@@ -29,7 +29,7 @@
 <body class="">
 <div class="wrapper ">
     <!-- Sidebar -->
-    <div class="sidebar" data-color="verde" data-active-color="white">
+    <div class="sidebar" data-color="grey" data-active-color="white">
       <div class="logo">
         <a href="http://www.creative-tim.com" class="simple-text logo-mini">
           <div class="logo-image-small">
@@ -157,8 +157,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header bg-info"></div>
-                        <div class="card-body border">
+                        <div class="card-body">
                             <c:if test = "${not empty projeto.ods}">
                               <div class="row mt-2">
                                 <div class="col-md-12">
@@ -184,32 +183,32 @@
                             <hr>
                             <div class="row justify-content-center mt-5">
                                 <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 bg-primary rounded text-center p-3 mx-3 my-1">
-                                    <h5 class="text-white"><i class="fas fa-file-invoice-dollar fa-3x"></i></h5>
+                                    <h5 style="color: #fff;"><i class="fas fa-file-invoice-dollar fa-3x"></i></h5>
                                     <hr>
-                                    <h5 class="text-white bold"><span
-                                            style="font-size: 0.8rem;">Valor Total:</span> </br><span
-                                            style="font-size: 1.3rem;">R$ ${projeto.valorTotal}</span></h5>
+                                    <h5 class="bold"><span
+                                            style="font-size: 0.8rem; color: #fff;">Valor Total:</span> </br><span
+                                            style="font-size: 1.3rem; color: #fff;">R$ ${projeto.valorTotal}</span></h5>
                                 </div>
                                 <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 bg-primary rounded text-center p-3 mx-3 my-1">
-                                    <h5 class="text-white"><i class="fas fa-hand-holding-usd fa-3x"></i></h5>
+                                    <h5 style="color: #fff;"><i class="fas fa-hand-holding-usd fa-3x"></i></h5>
                                     <hr>
-                                    <h5 class="text-white bold"><span
-                                            style="font-size: 0.8rem;">Valor Solicitado:</span> </br><span
-                                            style="font-size: 1.3rem;">R$ ${projeto.valorSolicitado}</span></h5>
+                                    <h5 class="bold"><span
+                                            style="font-size: 0.8rem; color: #fff;">Valor Solicitado:</span> </br><span
+                                            style="font-size: 1.3rem; color: #fff;">R$ ${projeto.valorSolicitado}</span></h5>
                                 </div>
                                 <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 bg-primary rounded text-center p-3 mx-3 my-1">
-                                    <h5 class="text-white"><i class="fas fa-compress-arrows-alt fa-3x"></i></h5>
+                                    <h5 style="color: #fff;"><i class="fas fa-compress-arrows-alt fa-3x"></i></h5>
                                     <hr>
-                                    <h5 class="text-white bold"><span
-                                            style="font-size: 0.8rem;">Beneficiários Diretos:</span> </br><span
-                                            style="font-size: 1.3rem;"><i
+                                    <h5 class="bold"><span
+                                            style="font-size: 0.8rem; color: #fff;">Beneficiários Diretos:</span> </br><span
+                                            style="font-size: 1.3rem; color: #fff;" color: #fff;><i
                                             class="fas fa-users"></i> ${projeto.beneficiariosDiretos}</span></h5>
                                 </div>
                                 <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 bg-primary rounded text-center p-3 mx-3 my-1">
-                                    <h5 class="text-white"><i class="fas fa-expand-arrows-alt fa-3x"></i></h5>
+                                    <h5 style="color: #fff;"><i class="fas fa-expand-arrows-alt fa-3x"></i></h5>
                                     <hr>
-                                    <h5 class="text-white bold"><span style="font-size: 0.8rem;">Beneficiários Indiretos:</span> </br>
-                                        <span style="font-size: 1.3rem;"><i
+                                    <h5 class="bold"><span style="font-size: 0.8rem; color: #fff;">Beneficiários Indiretos:</span> </br>
+                                        <span style="font-size: 1.3rem; color: #fff;"><i
                                                 class="fas fa-users"></i> ${projeto.beneficiariosIndiretos}</span></h5>
                                 </div>
                             </div>
@@ -311,234 +310,234 @@
                             </fieldset>
 
                             <fieldset class="mt-5">
-                                <legend class="text-primary">Documentação:</legend>
+                              <legend class="text-primary">Documentação:</legend>
 
-                                <div class="row">
-                                  <div class="col-12">
+                              <div class="row">
+                                <div class="col-12">
 
-                                    <c:choose>                        
-                                      <c:when test = "${projeto.documentosProjeto.logo.status eq 'APROVADO' && projeto.documentosProjeto.propostaTecnica.status eq 'APROVADO' && projeto.documentosProjeto.propostOrcamentaria.status eq 'APROVADO' && projeto.documentosProjeto.dadosBancariosFundo.status eq 'APROVADO' && projeto.documentosProjeto.certificado.status eq 'APROVADO'}">
-                                        <div class="alert alert-success" role="alert">
-                                          <small><strong><i class="far fa-check-circle"></i> A documentação está aprovada.</strong></small>
-                                        </div>
-                                      </c:when> 
-                                      <c:when test = "${projeto.documentosProjeto.logo.status eq 'APROVADO' && projeto.documentosProjeto.propostaTecnica.status eq 'APROVADO' && projeto.documentosProjeto.propostOrcamentaria.status eq 'APROVADO' && projeto.documentosProjeto.certificado.status eq 'APROVADO' && projeto.documentosProjeto.dadosBancariosFundo.status eq 'NAO_SE_APLICA'}">
-                                        <div class="alert alert-success" role="alert">
-                                          <small><strong><i class="far fa-check-circle"></i> A documentação está aprovada.</strong></small>
-                                        </div>
-                                      </c:when>  
+                                  <c:choose>                        
+                                    <c:when test = "${projeto.documentosProjeto.logo.status eq 'APROVADO' && projeto.documentosProjeto.propostaTecnica.status eq 'APROVADO' && projeto.documentosProjeto.propostOrcamentaria.status eq 'APROVADO' && projeto.documentosProjeto.dadosBancariosFundo.status eq 'APROVADO' && projeto.documentosProjeto.certificado.status eq 'APROVADO'}">
+                                      <div class="alert alert-success" role="alert">
+                                        <small><strong><i class="far fa-check-circle"></i> A documentação está aprovada.</strong></small>
+                                      </div>
+                                    </c:when> 
+                                    <c:when test = "${projeto.documentosProjeto.logo.status eq 'APROVADO' && projeto.documentosProjeto.propostaTecnica.status eq 'APROVADO' && projeto.documentosProjeto.propostOrcamentaria.status eq 'APROVADO' && projeto.documentosProjeto.certificado.status eq 'APROVADO' && projeto.documentosProjeto.dadosBancariosFundo.status eq 'NAO_SE_APLICA'}">
+                                      <div class="alert alert-success" role="alert">
+                                        <small><strong><i class="far fa-check-circle"></i> A documentação está aprovada.</strong></small>
+                                      </div>
+                                    </c:when>  
 
-                                      <c:when test = "${projeto.documentosProjeto.logo.status eq 'NEGADO' || projeto.documentosProjeto.propostaTecnica.status eq 'NEGADO' || projeto.documentosProjeto.propostOrcamentaria.status eq 'NEGADO' || projeto.documentosProjeto.dadosBancariosFundo.status eq 'NEGADO' || projeto.documentosProjeto.certificado.status eq 'NEGADO'}">
-                                        <div class="alert alert-danger" role="alert">
-                                          <small><strong><i class="far fa-times-circle"></i> A documentação possui arquivo(s) negado(s). </br><a href="#" data-toggle="modal" data-target="#modal-regularizacao-documentos-projeto"><u>Clique aqui</u></a> para regularizar.</strong></small>
-                                        </div>
-                                      </c:when>                                      
-                                      
-                                      <c:otherwise>
-                                        <div class="alert alert-warning" role="alert">
-                                          <small><strong><i class="fas fa-exclamation-triangle"></i> A documentação está em processo de análise pelo comitê.</strong></small>
-                                        </div>
-                                      </c:otherwise>
-                                    </c:choose>
+                                    <c:when test = "${projeto.documentosProjeto.logo.status eq 'NEGADO' || projeto.documentosProjeto.propostaTecnica.status eq 'NEGADO' || projeto.documentosProjeto.propostOrcamentaria.status eq 'NEGADO' || projeto.documentosProjeto.dadosBancariosFundo.status eq 'NEGADO' || projeto.documentosProjeto.certificado.status eq 'NEGADO'}">
+                                      <div class="alert alert-danger" role="alert">
+                                        <small><strong><i class="far fa-times-circle"></i> A documentação possui arquivo(s) negado(s). </br><a href="#" data-toggle="modal" data-target="#modal-regularizacao-documentos-projeto"><u>Clique aqui</u></a> para regularizar.</strong></small>
+                                      </div>
+                                    </c:when>                                      
                                     
-                                  </div>
+                                    <c:otherwise>
+                                      <div class="alert alert-warning" role="alert">
+                                        <small><strong><i class="fas fa-exclamation-triangle"></i> A documentação está em processo de análise pelo comitê.</strong></small>
+                                      </div>
+                                    </c:otherwise>
+                                  </c:choose>
+
                                 </div>
+                              </div>
 
-                                <hr class="bg-primary">
-                                <div class="row justify-content-center">
+                              <hr class="bg-primary">
+                              <div class="row justify-content-center">
 
-                                    <!-- LOGO APROVADO -->
-                                    <c:if test="${projeto.documentosProjeto.logo.status eq 'APROVADO'}">
+                                  <!-- LOGO APROVADO -->
+                                  <c:if test="${projeto.documentosProjeto.logo.status eq 'APROVADO'}">
+                                    <div class="col-lg-2 text-center mt-5">
+                                        <div class="form-group">
+                                            <a title="Documento Aprovado" href="${path}/${projeto.documentosProjeto.logo.path}"
+                                               target="_blank"><i class="far fa-file-image text-success"
+                                                                  style="font-size: 56px;"></i></a>
+                                            <hr>
+                                            <h5 class="text-center text-success"><strong>Logo</strong></h5>
+                                        </div>
+                                    </div>
+                                  </c:if>
+                                  <!-- LOGO NEGADO -->
+                                  <c:if test="${projeto.documentosProjeto.logo.status eq 'NEGADO'}">
+                                    <div class="col-lg-2 text-center mt-5">
+                                        <div class="form-group">
+                                            <a title="Documento Negado" href="${path}/${projeto.documentosProjeto.logo.path}"
+                                               target="_blank"><i class="far fa-file-image text-danger"
+                                                                  style="font-size: 56px;"></i></a>
+                                            <hr>
+                                            <h5 class="text-center text-danger"><strong>Logo</strong></h5>
+                                        </div>
+                                    </div>
+                                  </c:if>
+                                  <!-- LOGO PENDENTE -->
+                                  <c:if test="${projeto.documentosProjeto.logo.status eq 'PENDENTE'}">
+                                    <div class="col-lg-2 text-center mt-5">
+                                        <div class="form-group">
+                                            <a title="Documento em Análise" href="${path}/${projeto.documentosProjeto.logo.path}"
+                                               target="_blank"><i class="far fa-file-image text-warning"
+                                                                  style="font-size: 56px;"></i></a>
+                                            <hr>
+                                            <h5 class="text-center text-warning"><strong>Logo</strong></h5>
+                                        </div>
+                                    </div>
+                                  </c:if>
+
+                                  <!-- PROPOSTA TÉCNICA APROVADO -->
+                                  <c:if test="${projeto.documentosProjeto.propostaTecnica.status eq 'APROVADO'}">
+                                    <div class="col-lg-2 text-center mt-5">
+                                        <div class="form-group">
+                                            <a title="Documento Aprovado" href="${path}/${projeto.documentosProjeto.propostaTecnica.path}"
+                                               target="_blank"><i class="far fa-file-image text-success"
+                                                                  style="font-size: 56px;"></i></a>
+                                            <hr>
+                                            <h5 class="text-center text-success"><strong>Proposta</strong></h5>
+                                        </div>
+                                    </div>
+                                  </c:if>
+                                  <!-- PROPOSTA TÉCNICA NEGADO -->
+                                  <c:if test="${projeto.documentosProjeto.propostaTecnica.status eq 'NEGADO'}">
+                                    <div class="col-lg-2 text-center mt-5">
+                                        <div class="form-group">
+                                            <a title="Documento Negado" href="${path}/${projeto.documentosProjeto.propostaTecnica.path}"
+                                               target="_blank"><i class="far fa-file-image text-danger"
+                                                                  style="font-size: 56px;"></i></a>
+                                            <hr>
+                                            <h5 class="text-center text-danger"><strong>Proposta</strong></h5>
+                                        </div>
+                                    </div>
+                                  </c:if>
+                                  <!-- PROPOSTA TÉCNICA PENDENTE -->
+                                  <c:if test="${projeto.documentosProjeto.propostaTecnica.status eq 'PENDENTE'}">
+                                    <div class="col-lg-2 text-center mt-5">
+                                        <div class="form-group">
+                                            <a title="Documento em Análise" href="${path}/${projeto.documentosProjeto.propostaTecnica.path}"
+                                               target="_blank"><i class="far fa-file-image text-warning"
+                                                                  style="font-size: 56px;"></i></a>
+                                            <hr>
+                                            <h5 class="text-center text-warning"><strong>Proposta</strong></h5>
+                                        </div>
+                                    </div>
+                                  </c:if>
+
+                                  <!-- ORÇAMENTÁRIO APROVADO -->
+                                  <c:if test="${projeto.documentosProjeto.propostOrcamentaria.status eq 'APROVADO'}">
+                                    <div class="col-lg-2 text-center mt-5">
+                                        <div class="form-group">
+                                            <a title="Documento Aprovado" href="${path}/${projeto.documentosProjeto.propostOrcamentaria.path}"
+                                               target="_blank"><i class="far fa-file-image text-success"
+                                                                  style="font-size: 56px;"></i></a>
+                                            <hr>
+                                            <h5 class="text-center text-success"><strong>Orçamentário</strong></h5>
+                                        </div>
+                                    </div>
+                                  </c:if>
+                                  <!-- ORÇAMENTÁRIO NEGADO -->
+                                  <c:if test="${projeto.documentosProjeto.propostOrcamentaria.status eq 'NEGADO'}">
+                                    <div class="col-lg-2 text-center mt-5">
+                                        <div class="form-group">
+                                            <a title="Documento Negado" href="${path}/${projeto.documentosProjeto.propostOrcamentaria.path}"
+                                               target="_blank"><i class="far fa-file-image text-danger"
+                                                                  style="font-size: 56px;"></i></a>
+                                            <hr>
+                                            <h5 class="text-center text-danger"><strong>Orçamentário</strong></h5>
+                                        </div>
+                                    </div>
+                                  </c:if>
+                                  <!-- ORÇAMENTÁRIO PENDENTE -->
+                                  <c:if test="${projeto.documentosProjeto.propostOrcamentaria.status eq 'PENDENTE'}">
+                                    <div class="col-lg-2 text-center mt-5">
+                                        <div class="form-group">
+                                            <a title="Documento em Análise" href="${path}/${projeto.documentosProjeto.propostOrcamentaria.path}"
+                                               target="_blank"><i class="far fa-file-image text-warning"
+                                                                  style="font-size: 56px;"></i></a>
+                                            <hr>
+                                            <h5 class="text-center text-warning"><strong>Orçamentário</strong></h5>
+                                        </div>
+                                    </div>
+                                  </c:if>                                    
+                                  
+
+                                  <c:if test="${not empty projeto.documentosProjeto.dadosBancariosFundo.path}">
+                                    <!-- DADOS FUNDO APROVADO -->
+                                    <c:if test="${projeto.documentosProjeto.dadosBancariosFundo.status eq 'APROVADO'}">
                                       <div class="col-lg-2 text-center mt-5">
                                           <div class="form-group">
-                                              <a title="Documento Aprovado" href="${path}/${projeto.documentosProjeto.logo.path}"
-                                                 target="_blank"><i class="far fa-file-image text-primary"
+                                              <a title="Documento Aprovado" href="${path}/${projeto.documentosProjeto.dadosBancariosFundo.path}"
+                                                 target="_blank"><i class="far fa-file-image text-success"
                                                                     style="font-size: 56px;"></i></a>
                                               <hr>
-                                              <h5 class="text-center"><strong style="color: #3fa733 !important">Logo</strong></h5>
+                                              <h5 class="text-center text-success"><strong>Dados Bancários do Fundo</strong></h5>
                                           </div>
                                       </div>
                                     </c:if>
-                                    <!-- LOGO NEGADO -->
-                                    <c:if test="${projeto.documentosProjeto.logo.status eq 'NEGADO'}">
+                                    <!-- DADOS FUNDO NEGADO-->
+                                    <c:if test="${projeto.documentosProjeto.dadosBancariosFundo.status eq 'NEGADO'}">
                                       <div class="col-lg-2 text-center mt-5">
                                           <div class="form-group">
-                                              <a title="Documento Negado" href="${path}/${projeto.documentosProjeto.logo.path}"
-                                                 target="_blank"><i class="far fa-file-image text-primary"
-                                                                    style="font-size: 56px; color: #e74c3c !important;"></i></a>
-                                              <hr>
-                                              <h5 class="text-center"><strong style="color: #e74c33 !important">Logo</strong></h5>
-                                          </div>
-                                      </div>
-                                    </c:if>
-                                    <!-- LOGO PENDENTE -->
-                                    <c:if test="${projeto.documentosProjeto.logo.status eq 'PENDENTE'}">
-                                      <div class="col-lg-2 text-center mt-5">
-                                          <div class="form-group">
-                                              <a title="Documento em Análise" href="${path}/${projeto.documentosProjeto.logo.path}"
-                                                 target="_blank"><i class="far fa-file-image text-primary"
-                                                                    style="font-size: 56px; color: #f39c12 !important;"></i></a>
-                                              <hr>
-                                              <h5 class="text-center"><strong style="color: #f39c12 !important">Logo</strong></h5>
-                                          </div>
-                                      </div>
-                                    </c:if>
-
-                                    <!-- PROPOSTA TÉCNICA APROVADO -->
-                                    <c:if test="${projeto.documentosProjeto.propostaTecnica.status eq 'APROVADO'}">
-                                      <div class="col-lg-2 text-center mt-5">
-                                          <div class="form-group">
-                                              <a title="Documento Aprovado" href="${path}/${projeto.documentosProjeto.propostaTecnica.path}"
-                                                 target="_blank"><i class="far fa-file-image text-primary"
+                                              <a title="Documento Negado" href="${path}/${projeto.documentosProjeto.dadosBancariosFundo.path}"
+                                                 target="_blank"><i class="far fa-file-image text-danger"
                                                                     style="font-size: 56px;"></i></a>
                                               <hr>
-                                              <h5 class="text-center"><strong style="color: #3fa733 !important">Proposta</strong></h5>
+                                              <h5 class="text-center text-danger"><strong>Dados Bancários do Fundo</strong></h5>
                                           </div>
                                       </div>
                                     </c:if>
-                                    <!-- PROPOSTA TÉCNICA NEGADO -->
-                                    <c:if test="${projeto.documentosProjeto.propostaTecnica.status eq 'NEGADO'}">
+                                    <!-- DADOS FUNDO PENDENTE-->
+                                    <c:if test="${projeto.documentosProjeto.dadosBancariosFundo.status eq 'PENDENTE'}">
                                       <div class="col-lg-2 text-center mt-5">
                                           <div class="form-group">
-                                              <a title="Documento Negado" href="${path}/${projeto.documentosProjeto.propostaTecnica.path}"
-                                                 target="_blank"><i class="far fa-file-image text-primary"
-                                                                    style="font-size: 56px; color: #e74c3c !important;"></i></a>
-                                              <hr>
-                                              <h5 class="text-center"><strong style="color: #e74c33 !important">Proposta</strong></h5>
-                                          </div>
-                                      </div>
-                                    </c:if>
-                                    <!-- PROPOSTA TÉCNICA PENDENTE -->
-                                    <c:if test="${projeto.documentosProjeto.propostaTecnica.status eq 'PENDENTE'}">
-                                      <div class="col-lg-2 text-center mt-5">
-                                          <div class="form-group">
-                                              <a title="Documento em Análise" href="${path}/${projeto.documentosProjeto.propostaTecnica.path}"
-                                                 target="_blank"><i class="far fa-file-image text-primary"
-                                                                    style="font-size: 56px; color: #f39c12 !important;"></i></a>
-                                              <hr>
-                                              <h5 class="text-center"><strong style="color: #f39c12 !important">Proposta</strong></h5>
-                                          </div>
-                                      </div>
-                                    </c:if>
-
-                                    <!-- ORÇAMENTÁRIO APROVADO -->
-                                    <c:if test="${projeto.documentosProjeto.propostOrcamentaria.status eq 'APROVADO'}">
-                                      <div class="col-lg-2 text-center mt-5">
-                                          <div class="form-group">
-                                              <a title="Documento Aprovado" href="${path}/${projeto.documentosProjeto.propostOrcamentaria.path}"
-                                                 target="_blank"><i class="far fa-file-image text-primary"
+                                              <a title="Documento em Análise" href="${path}/${projeto.documentosProjeto.dadosBancariosFundo.path}"
+                                                 target="_blank"><i class="far fa-file-image text-warning"
                                                                     style="font-size: 56px;"></i></a>
                                               <hr>
-                                              <h5 class="text-center"><strong style="color: #3fa733 !important">Orçamentário</strong></h5>
+                                              <h5 class="text-center text-warning"><strong>Dados Bancários do Fundo</strong></h5>
                                           </div>
                                       </div>
-                                    </c:if>
-                                    <!-- ORÇAMENTÁRIO NEGADO -->
-                                    <c:if test="${projeto.documentosProjeto.propostOrcamentaria.status eq 'NEGADO'}">
+                                    </c:if>                                       
+                                  </c:if>
+
+
+                                  <c:if test="${not empty projeto.documentosProjeto.certificado.path}">
+                                    <!-- CERTIFICADO APROVADO -->
+                                    <c:if test="${projeto.documentosProjeto.certificado.status eq 'APROVADO'}">
                                       <div class="col-lg-2 text-center mt-5">
                                           <div class="form-group">
-                                              <a title="Documento Negado" href="${path}/${projeto.documentosProjeto.propostOrcamentaria.path}"
-                                                 target="_blank"><i class="far fa-file-image text-primary"
-                                                                    style="font-size: 56px; color: #e74c3c !important;"></i></a>
+                                              <a title="Documento Aprovado" href="${path}/${projeto.documentosProjeto.certificado.path}"
+                                                 target="_blank"><i class="far fa-file-image text-success"
+                                                                    style="font-size: 56px;"></i></a>
                                               <hr>
-                                              <h5 class="text-center"><strong style="color: #e74c33 !important">Orçamentário</strong></h5>
+                                              <h5 class="text-center text-success"><strong>Certificado</strong></h5>
                                           </div>
                                       </div>
                                     </c:if>
-                                    <!-- ORÇAMENTÁRIO PENDENTE -->
-                                    <c:if test="${projeto.documentosProjeto.propostOrcamentaria.status eq 'PENDENTE'}">
+                                    <!-- CERTIFICADO NEGADO -->
+                                    <c:if test="${projeto.documentosProjeto.certificado.status eq 'NEGADO'}">
                                       <div class="col-lg-2 text-center mt-5">
                                           <div class="form-group">
-                                              <a title="Documento em Análise" href="${path}/${projeto.documentosProjeto.propostOrcamentaria.path}"
-                                                 target="_blank"><i class="far fa-file-image text-primary"
-                                                                    style="font-size: 56px; color: #f39c12 !important;"></i></a>
+                                              <a title="Documento Negado" href="${path}/${projeto.documentosProjeto.certificado.path}"
+                                                 target="_blank"><i class="far fa-file-image text-danger"
+                                                                    style="font-size: 56px;"></i></a>
                                               <hr>
-                                              <h5 class="text-center"><strong style="color: #f39c12 !important">Orçamentário</strong></h5>
+                                              <h5 class="text-center text-danger"><strong>Certificado</strong></h5>
                                           </div>
                                       </div>
-                                    </c:if>                                    
-                                    
-
-                                    <c:if test="${not empty projeto.documentosProjeto.dadosBancariosFundo.path}">
-                                      <!-- DADOS FUNDO APROVADO -->
-                                      <c:if test="${projeto.documentosProjeto.dadosBancariosFundo.status eq 'APROVADO'}">
-                                        <div class="col-lg-2 text-center mt-5">
-                                            <div class="form-group">
-                                                <a title="Documento Aprovado" href="${path}/${projeto.documentosProjeto.dadosBancariosFundo.path}"
-                                                   target="_blank"><i class="far fa-file-image text-primary"
-                                                                      style="font-size: 56px;"></i></a>
-                                                <hr>
-                                                <h5 class="text-center"><strong style="color: #3fa733 !important">Dados Bancários do Fundo</strong></h5>
-                                            </div>
-                                        </div>
-                                      </c:if>
-                                      <!-- DADOS FUNDO NEGADO-->
-                                      <c:if test="${projeto.documentosProjeto.dadosBancariosFundo.status eq 'NEGADO'}">
-                                        <div class="col-lg-2 text-center mt-5">
-                                            <div class="form-group">
-                                                <a title="Documento Negado" href="${path}/${projeto.documentosProjeto.dadosBancariosFundo.path}"
-                                                   target="_blank"><i class="far fa-file-image text-primary"
-                                                                      style="font-size: 56px; color: #e74c3c !important;"></i></a>
-                                                <hr>
-                                                <h5 class="text-center"><strong style="color: #e74c33 !important">Dados Bancários do Fundo</strong></h5>
-                                            </div>
-                                        </div>
-                                      </c:if>
-                                      <!-- DADOS FUNDO PENDENTE-->
-                                      <c:if test="${projeto.documentosProjeto.dadosBancariosFundo.status eq 'PENDENTE'}">
-                                        <div class="col-lg-2 text-center mt-5">
-                                            <div class="form-group">
-                                                <a title="Documento em Análise" href="${path}/${projeto.documentosProjeto.dadosBancariosFundo.path}"
-                                                   target="_blank"><i class="far fa-file-image text-primary"
-                                                                      style="font-size: 56px; color: #f39c12 !important;"></i></a>
-                                                <hr>
-                                                <h5 class="text-center"><strong style="color: #f39c12 !important">Dados Bancários do Fundo</strong></h5>
-                                            </div>
-                                        </div>
-                                      </c:if>                                       
                                     </c:if>
-
-
-                                    <c:if test="${not empty projeto.documentosProjeto.certificado.path}">
-                                      <!-- CERTIFICADO APROVADO -->
-                                      <c:if test="${projeto.documentosProjeto.certificado.status eq 'APROVADO'}">
-                                        <div class="col-lg-2 text-center mt-5">
-                                            <div class="form-group">
-                                                <a title="Documento Aprovado" href="${path}/${projeto.documentosProjeto.certificado.path}"
-                                                   target="_blank"><i class="far fa-file-image text-primary"
-                                                                      style="font-size: 56px;"></i></a>
-                                                <hr>
-                                                <h5 class="text-center"><strong style="color: #3fa733 !important">Certificado</strong></h5>
-                                            </div>
-                                        </div>
-                                      </c:if>
-                                      <!-- CERTIFICADO NEGADO -->
-                                      <c:if test="${projeto.documentosProjeto.certificado.status eq 'NEGADO'}">
-                                        <div class="col-lg-2 text-center mt-5">
-                                            <div class="form-group">
-                                                <a title="Documento Negado" href="${path}/${projeto.documentosProjeto.certificado.path}"
-                                                   target="_blank"><i class="far fa-file-image text-primary"
-                                                                      style="font-size: 56px; color: #e74c3c !important;"></i></a>
-                                                <hr>
-                                                <h5 class="text-center"><strong style="color: #e74c33 !important">Certificado</strong></h5>
-                                            </div>
-                                        </div>
-                                      </c:if>
-                                      <!-- CERTIFICADO PENDENTE -->
-                                      <c:if test="${projeto.documentosProjeto.certificado.status eq 'PENDENTE'}">
-                                        <div class="col-lg-2 text-center mt-5">
-                                            <div class="form-group">
-                                                <a title="Documento em Análise" href="${path}/${projeto.documentosProjeto.certificado.path}"
-                                                   target="_blank"><i class="far fa-file-image text-primary"
-                                                                      style="font-size: 56px; color: #f39c12 !important;"></i></a>
-                                                <hr>
-                                                <h5 class="text-center"><strong style="color: #f39c12 !important">Certificado</strong></h5>
-                                            </div>
-                                        </div>
-                                      </c:if>
+                                    <!-- CERTIFICADO PENDENTE -->
+                                    <c:if test="${projeto.documentosProjeto.certificado.status eq 'PENDENTE'}">
+                                      <div class="col-lg-2 text-center mt-5">
+                                          <div class="form-group">
+                                              <a title="Documento em Análise" href="${path}/${projeto.documentosProjeto.certificado.path}"
+                                                 target="_blank"><i class="far fa-file-image text-warning"
+                                                                    style="font-size: 56px;"></i></a>
+                                              <hr>
+                                              <h5 class="text-center text-warning"><strong>Certificado</strong></h5>
+                                          </div>
+                                      </div>
                                     </c:if>
-                                </div>
-                            </fieldset>
+                                  </c:if>
+                              </div>
+                          </fieldset>
                         </div>
                         <div class="card-footer">
                           <button type="button" class="btn btn-primary float-right mx-1" data-toggle="modal" data-target="#modal-indicacao">

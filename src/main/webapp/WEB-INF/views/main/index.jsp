@@ -72,7 +72,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="#" class="navbar-brand logo">
-                <img src="${path}/asstets/img/logo-claro.png.png" width="30" height="30"
+                <img src="${path}/asstets/img/logo-claro.png" width="30" height="30"
                      style="display:inline-block;">
                 Incentivados
                 <h5>Yabá Consultoria</h5>
