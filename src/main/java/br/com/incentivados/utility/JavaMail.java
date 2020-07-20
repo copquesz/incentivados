@@ -41,11 +41,11 @@ public class JavaMail {
     }
 
     private static Message prepareMessage(Session session, String myAccount, String recipient, String subject, String text) throws MessagingException {
-        Message message = new MimeMessage(session);
+        MimeMessage message = new MimeMessage(session);
         message.setFrom(new InternetAddress("Plataforma Incentivados - Leroy Merlin <" + myAccount + ">"));
         message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
-        message.setSubject(subject);
-        message.setContent(text, "text/html");
+        message.setSubject(subject, "utf-8");
+        message.setContent(text, "text/html; charset=utf-8");
         return message;
     }
 }
