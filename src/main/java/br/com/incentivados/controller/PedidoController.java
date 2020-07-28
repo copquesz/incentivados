@@ -27,14 +27,14 @@ import java.util.logging.Logger;
 
 @Controller
 public class PedidoController {
-    private EmpresaService empresaService;
-    private EntidadeService entidadeService;
-    private UsuarioService usuarioService;
-    private PedidoService pedidoService;
+    private final EmpresaService empresaService;
+    private final EntidadeService entidadeService;
+    private final UsuarioService usuarioService;
+    private final PedidoService pedidoService;
     private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
 
     @Autowired
-    public PedidoController(EmpresaService empresaService, EntidadeService entidadeService, UsuarioService usuarioService, PedidoService pedidoService, HttpServletRequest request) {
+    public PedidoController(EmpresaService empresaService, EntidadeService entidadeService, UsuarioService usuarioService, PedidoService pedidoService) {
         this.empresaService = empresaService;
         this.entidadeService = entidadeService;
         this.usuarioService = usuarioService;
@@ -67,7 +67,7 @@ public class PedidoController {
             Optional<Usuario> analista = this.usuarioService.findById(pedido.getAnalista().getId());
             Optional<Empresa> empresa = this.empresaService.findById(pedido.getEmpresa().getId());
             Optional<Entidade> entidade = this.entidadeService.findById(pedido.getEntidade().getId());
-            pedido = this.pedidoService.save(pedido, request, (Usuario)usuario.get(), (Usuario)analista.get(), (Empresa)empresa.get(), (Entidade)entidade.get());
+            pedido = this.pedidoService.save(pedido, request, usuario.get(), analista.get(), empresa.get(), entidade.get());
             model.addAttribute("pedido", pedido);
             this.logger.log(Level.INFO, "Pedido cadastrado com sucesso: #" + pedido.getId());
             return "painel/entidade/pedido/pedido-entidade-sucesso";
@@ -109,12 +109,12 @@ public class PedidoController {
         model.addAttribute("usuario", usuario);
         Optional<Pedido> pedido = this.pedidoService.findById(id);
         if (pedido.isPresent()) {
-            if (((Pedido)pedido.get()).getStatus() == StatusPedido.PENDENTE) {
-                this.pedidoService.update((Pedido)pedido.get(), status, observacao, usuario);
-                this.logger.log(Level.INFO, "Pedido avaliado: #" + ((Pedido)pedido.get()).getId());
+            if ((pedido.get()).getStatus() == StatusPedido.PENDENTE) {
+                this.pedidoService.update(pedido.get(), status, observacao, usuario);
+                this.logger.log(Level.INFO, "Pedido avaliado: #" + (pedido.get()).getId());
                 return "redirect:/painel/dashboard";
             } else {
-                this.logger.log(Level.WARNING, "Pedido avaliado já avaliado: #" + ((Pedido)pedido.get()).getId());
+                this.logger.log(Level.WARNING, "Pedido avaliado já avaliado: #" + (pedido.get()).getId());
                 return "painel/empresa/pedido/erro/pedido-ja-avaliado";
             }
         } else {
@@ -129,11 +129,11 @@ public class PedidoController {
         Optional<Pedido> pedido = this.pedidoService.findById(id);
         if (pedido.isPresent()) {
             if (!notaFiscal.isEmpty()) {
-                this.pedidoService.update((Pedido)pedido.get(), request, notaFiscal);
-                this.logger.log(Level.INFO, "Nota Fiscal submetidda com sucesso! - Pedido: #" + ((Pedido)pedido.get()).getId());
+                this.pedidoService.update(pedido.get(), request, notaFiscal);
+                this.logger.log(Level.INFO, "Nota Fiscal submetidda com sucesso! - Pedido: #" + (pedido.get()).getId());
                 return "redirect:/painel/dashboard";
             } else {
-                this.logger.log(Level.WARNING, "Erro ao submeter nota fiscal: #" + ((Pedido)pedido.get()).getId());
+                this.logger.log(Level.WARNING, "Erro ao submeter nota fiscal: #" + (pedido.get()).getId());
                 return "painel/empresa/pedido/erro/pedido-nao-localizado";
             }
         } else {
@@ -158,26 +158,27 @@ public class PedidoController {
             switch(usuario.getTipoUsuario()) {
                 case ADMIN:
                     Pageable pageablePedidosAdmin = PageRequest.of(page, 10, Sort.by(new Sort.Order[]{Sort.Order.desc("id")}));
+                    Pageable pageableDefaultPedidosAdmin = PageRequest.of(0, 10, Sort.by(new Sort.Order[]{Sort.Order.desc("id")}));
                     if (filtro == FiltroPedidos.LOJA) {
                         model.addAttribute("pedidos", this.pedidoService.findAllByLoja(key, pageablePedidosAdmin));
-                        model.addAttribute("recusados", this.pedidoService.findAllByLojaAndStatus(key, StatusPedido.RECUSADO, pageablePedidosAdmin));
-                        model.addAttribute("aprovados", this.pedidoService.findAllByLojaAndStatus(key, StatusPedido.APROVADO, pageablePedidosAdmin));
+                        model.addAttribute("recusados", this.pedidoService.findAllByLojaAndStatus(key, StatusPedido.RECUSADO, pageableDefaultPedidosAdmin));
+                        model.addAttribute("aprovados", this.pedidoService.findAllByLojaAndStatus(key, StatusPedido.APROVADO, pageableDefaultPedidosAdmin));
                     } else if (filtro == FiltroPedidos.CIDADE) {
                         model.addAttribute("pedidos", this.pedidoService.findAllByCidade(key, pageablePedidosAdmin));
-                        model.addAttribute("recusados", this.pedidoService.findAllByCidadeAndStatus(key, StatusPedido.RECUSADO, pageablePedidosAdmin));
-                        model.addAttribute("aprovados", this.pedidoService.findAllByCidadeAndStatus(key, StatusPedido.APROVADO, pageablePedidosAdmin));
+                        model.addAttribute("recusados", this.pedidoService.findAllByCidadeAndStatus(key, StatusPedido.RECUSADO, pageableDefaultPedidosAdmin));
+                        model.addAttribute("aprovados", this.pedidoService.findAllByCidadeAndStatus(key, StatusPedido.APROVADO, pageableDefaultPedidosAdmin));
                     } else if (filtro == FiltroPedidos.ESTADO) {
                         model.addAttribute("pedidos", this.pedidoService.findAllByEstado(key, pageablePedidosAdmin));
-                        model.addAttribute("recusados", this.pedidoService.findAllByEstadoAndStatus(key, StatusPedido.RECUSADO, pageablePedidosAdmin));
-                        model.addAttribute("aprovados", this.pedidoService.findAllByEstadoAndStatus(key, StatusPedido.APROVADO, pageablePedidosAdmin));
+                        model.addAttribute("recusados", this.pedidoService.findAllByEstadoAndStatus(key, StatusPedido.RECUSADO, pageableDefaultPedidosAdmin));
+                        model.addAttribute("aprovados", this.pedidoService.findAllByEstadoAndStatus(key, StatusPedido.APROVADO, pageableDefaultPedidosAdmin));
                     } else if (filtro == FiltroPedidos.ENTIDADE) {
                         model.addAttribute("pedidos", this.pedidoService.findAllByEntidade(key, pageablePedidosAdmin));
-                        model.addAttribute("recusados", this.pedidoService.findAllByEntidadeAndStatus(key, StatusPedido.RECUSADO, pageablePedidosAdmin));
-                        model.addAttribute("aprovados", this.pedidoService.findAllByEntidadeAndStatus(key, StatusPedido.APROVADO, pageablePedidosAdmin));
+                        model.addAttribute("recusados", this.pedidoService.findAllByEntidadeAndStatus(key, StatusPedido.RECUSADO, pageableDefaultPedidosAdmin));
+                        model.addAttribute("aprovados", this.pedidoService.findAllByEntidadeAndStatus(key, StatusPedido.APROVADO, pageableDefaultPedidosAdmin));
                     } else {
                         model.addAttribute("pedidos", this.pedidoService.findAll(pageablePedidosAdmin));
-                        model.addAttribute("recusados", this.pedidoService.findAllByStatus(StatusPedido.RECUSADO, pageablePedidosAdmin));
-                        model.addAttribute("aprovados", this.pedidoService.findAllByStatus(StatusPedido.APROVADO, pageablePedidosAdmin));
+                        model.addAttribute("recusados", this.pedidoService.findAllByStatus(StatusPedido.RECUSADO, pageableDefaultPedidosAdmin));
+                        model.addAttribute("aprovados", this.pedidoService.findAllByStatus(StatusPedido.APROVADO, pageableDefaultPedidosAdmin));
                     }
 
                     return "painel/admin/pedido/lista";

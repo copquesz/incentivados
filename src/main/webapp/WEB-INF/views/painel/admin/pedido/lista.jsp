@@ -255,9 +255,9 @@
                                 <td class="text-center border">${pedido.tipoPedido.descricao}</td>
                                 <td class="text-center border">
                                   <c:if test = "${pedido.status.id == 0}"><span class="bg-warning p-1 text-white">PENDENTE</span></c:if>
-                                  <c:if test = "${pedido.status.id == 1}"><span class="bg-danger p-1"><a href="#" class="text-white" data-toggle="modal" data-target="#modal-observacao-pedido-recusado-${pedido.id}" title="Visualizar Motivo">RECUSADO</a></span></c:if>
-                                  <c:if test = "${pedido.status.id == 2}"><span class="bg-primary p-1"><a href="#" class="text-white" data-toggle="modal" data-target="#modal-observacao-pedido-aprovado-${pedido.id}" title="Visualizar Motivo">APROVADO</a></span></c:if>
-                                  <c:if test = "${pedido.status.id == 3}"><span class="bg-success p-1"><a href="#" class="text-white" data-toggle="modal" data-target="#modal-observacao-pedidopre-aprovado-admin-${pedido.id}" title="Visualizar Motivo">PRÉ-APROVADO</a></span></c:if>
+                                  <c:if test = "${pedido.status.id == 1}"><span class="bg-danger p-1"><a href="#" class="text-white" data-toggle="modal" data-target="#modal-observacao-pedido-recusado-${pedido.id}" title="Visualizar Parecer - Recusado">RECUSADO</a></span></c:if>
+                                  <c:if test = "${pedido.status.id == 2}"><span class="bg-primary p-1"><a href="#" class="text-white" data-toggle="modal" data-target="#modal-observacao-pedido-aprovado-${pedido.id}" title="Visualizar Parecer - Aprovado">APROVADO</a></span></c:if>
+                                  <c:if test = "${pedido.status.id == 3}"><span class="bg-success p-1"><a href="#" class="text-white" data-toggle="modal" data-target="#modal-observacao-pedidopre-aprovado-admin-${pedido.id}" title="Visualizar Parecer - Pré Aprovado">PRÉ-APROVADO</a></span></c:if>
                                 </td>
                                 <td class="text-center border">
                                   <a class="btn btn-success btn-sm" href="${path}/painel/pedido/${pedido.id}" title="Visualizar"><i class="fas fa-sign-in-alt"></i></a>
