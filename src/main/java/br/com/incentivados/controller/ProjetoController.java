@@ -46,6 +46,8 @@ public class ProjetoController {
     @GetMapping({"/painel/projetos"})
     public String getListar(@RequestParam(required = false,defaultValue = "0") int page, @RequestParam(required = false,defaultValue = "") String key, @RequestParam(required = false,defaultValue = "0") IncentivoFiscal categoria, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
+        model.addAttribute("categoria", categoria);
+        model.addAttribute("key", key);
         model.addAttribute("incentivosFiscais", this.incentivoFiscalService.findAll());
         Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
 
@@ -55,7 +57,7 @@ public class ProjetoController {
             switch(usuario.getTipoUsuario()) {
                 case ADMIN:
                     if (categoria != null && !categoria.equals("0")) {
-                        projetos = this.projetoService.findAllByTituloOrIncentivosFiscaisContaining(pageable, key, categoria);
+                        projetos = this.projetoService.findAllByTituloContainingAndIncentivosFiscaisContaining(pageable, key, categoria);
                     } else {
                         projetos = this.projetoService.findAll(pageable, key);
                     }
@@ -71,7 +73,7 @@ public class ProjetoController {
                     return "painel/entidade/projeto/lista";
                 case EMPRESA:
                     if (categoria != null && !categoria.equals("0")) {
-                        projetos = this.projetoService.findAllByTituloOrIncentivosFiscaisContaining(pageable, key, categoria);
+                        projetos = this.projetoService.findAllByTituloContainingAndIncentivosFiscaisContaining(pageable, key, categoria);
                     } else {
                         projetos = this.projetoService.findAll(pageable, key);
                     }

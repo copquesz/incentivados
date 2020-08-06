@@ -169,7 +169,7 @@
                 <div class="row">
                   <div class="col-4">
                     <div class="form-group">
-                        <label>Bairro:</label>                      
+                        <label>Loja:</label>
                         <input type="text" class="form-control" id="bairro" value="${usuario.endereco.bairro}" placeholder="Não Informado" readonly >
                     </div>
                   </div>

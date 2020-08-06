@@ -162,10 +162,10 @@
                   <div class="col-12 d-flex justify-content-start">
                     <form class="form-inline">                                          
                       <div class="form-group mx-sm-1 mb-2">
-                        <input type="text" class="form-control" placeholder="Título ..." name="key">
+                        <input type="text" class="form-control" placeholder="Título ..." name="key" id="filtro-key">
                       </div>
                       <div class="form-group mx-sm-1 mb-2">
-                        <select class="form-control" name="categoria">
+                        <select class="form-control" name="categoria" id="filtro-categoria">
                            <option value="0">Todos</option>
                            <c:forEach var="incentivoFiscal" items="${incentivosFiscais}">
                              <option value="${incentivoFiscal.id}">${incentivoFiscal.legislacao}</option>
@@ -201,41 +201,41 @@
                               <c:choose> 
                                 <c:when test = "${projetos.totalPages == 1}">
                                   <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
-                                  <li class="page-item active"><a class="page-link text-white" href="${path}/painel/projetos?page=${projetos.number}">${projetos.number + 1}</a></li>
+                                  <li class="page-item active"><a class="page-link text-white" href="${path}/painel/projetos?page=${projetos.number}&categoria=${categoria.id}&key=${key}">${projetos.number + 1}</a></li>
                                   <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
                                 </c:when>
                                 <c:when test = "${(projetos.totalPages == 2) && (projetos.number + 1 < projetos.totalPages)}">
                                   <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
-                                  <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/projetos?page=${projetos.number}">${projetos.number + 1}</a></li>
-                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.number + 1}">${projetos.number + 2}</a></li>
+                                  <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/projetos?page=${projetos.number}&categoria=${categoria.id}&key=${key}">${projetos.number + 1}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.number + 1}&categoria=${categoria.id}&key=${key}">${projetos.number + 2}</a></li>
                                   <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
                                 </c:when>
                                 <c:when test = "${(projetos.totalPages == 2) && (projetos.number + 1 == projetos.totalPages)}">
                                   <li class="page-item"><button class="page-link text-primary" disabled>Primeira</button></li>
-                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.number - 1}">${projetos.number}</a></li>
-                                  <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/projetos?page=${projetos.number}">${projetos.number + 1}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.number - 1}&categoria=${categoria.id}&key=${key}">${projetos.number}</a></li>
+                                  <li class="page-item active"><a class="page-link text-primary text-white" href="${path}/painel/projetos?page=${projetos.number}&categoria=${categoria.id}&key=${key}">${projetos.number + 1}</a></li>
                                   <li class="page-item"><button class="page-link text-primary" disabled>Última</button></li>
                                 </c:when>
                                 <c:when test = "${(projetos.totalPages >= 3) && (projetos.number == 0)}">
-                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos">Primeira</a></li>
-                                  <li class="page-item active"><a class="page-link text-white" href="${path}/painel/projetos?page=${projetos.number}">${projetos.number + 1}</a></li>
-                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.number + 1}">${projetos.number + 2}</a></li>
-                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.number + 2}">${projetos.number + 3}</a></li>
-                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.totalPages - 1}">Última</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?categoria=${categoria.id}&key=${key}">Primeira</a></li>
+                                  <li class="page-item active"><a class="page-link text-white" href="${path}/painel/projetos?page=${projetos.number}&categoria=${categoria.id}&key=${key}">${projetos.number + 1}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.number + 1}&categoria=${categoria.id}&key=${key}">${projetos.number + 2}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.number + 2}&categoria=${categoria.id}&key=${key}">${projetos.number + 3}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.totalPages - 1}&categoria=${categoria.id}&key=${key}">Última</a></li>
                                 </c:when>
                                 <c:when test = "${(projetos.totalPages >= 3) && (projetos.number > 0) && (projetos.number + 1 < projetos.totalPages)}">
-                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos">Primeira</a></li>
-                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.number - 1}">${projetos.number}</a></li>
-                                  <li class="page-item active"><a class="page-link text-white" href="${path}/painel/projetos?page=${projetos.number}">${projetos.number + 1}</a></li>
-                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.number + 1}">${projetos.number + 2}</a></li>
-                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.totalPages - 1}">Última</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?categoria=${categoria.id}&key=${key}">Primeira</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.number - 1}&categoria=${categoria.id}&key=${key}">${projetos.number}</a></li>
+                                  <li class="page-item active"><a class="page-link text-white" href="${path}/painel/projetos?page=${projetos.number}&categoria=${categoria.id}&key=${key}">${projetos.number + 1}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.number + 1}&categoria=${categoria.id}&key=${key}">${projetos.number + 2}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.totalPages - 1}&categoria=${categoria.id}&key=${key}">Última</a></li>
                                 </c:when>
                                 <c:when test = "${(projetos.totalPages >= 3) && (projetos.number + 1 == projetos.totalPages)}">
-                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos">Primeira</a></li>
-                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.number - 2}">${projetos.number - 1}</a></li>
-                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.number - 1}">${projetos.number}</a></li>
-                                  <li class="page-item active"><a class="page-link text-white" href="${path}/painel/projetos?page=${projetos.number}">${projetos.number + 1}</a></li>
-                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.totalPages - 1}">Última</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?categoria=${categoria.id}&key=${key}">Primeira</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.number - 2}&categoria=${categoria.id}&key=${key}">${projetos.number - 1}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.number - 1}&categoria=${categoria.id}&key=${key}">${projetos.number}</a></li>
+                                  <li class="page-item active"><a class="page-link text-white" href="${path}/painel/projetos?page=${projetos.number}&categoria=${categoria.id}&key=${key}">${projetos.number + 1}</a></li>
+                                  <li class="page-item"><a class="page-link text-primary" href="${path}/painel/projetos?page=${projetos.totalPages - 1}&categoria=${categoria.id}&key=${key}">Última</a></li>
                                 </c:when>
                               </c:choose> 
                             </ul>
@@ -309,6 +309,30 @@
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script type="text/javascript" src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <script type="text/javascript" src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0"></script>  
+  <script type="text/javascript">
+    $(document).ready(function() {
+      var url = location.search.slice(1);
+        var partes = url.split('&');
+        partes.forEach(function (parte) {
+            var chaveValor = parte.split('=');
+            var chave = String(chaveValor[0]);
+            var valor = chaveValor[1];    
+            
+            
+            if(chave == 'categoria'){
+              if(valor != null){
+                $("#filtro-categoria").val(valor);
+              }
+            }
+
+            if(chave == 'key'){
+              if(valor != null){
+                $("#filtro-key").val(valor);
+              }
+            }
+        });
+    });
+  </script>
 
 </body>
 

@@ -41,7 +41,7 @@ public interface ProjetoRepository extends JpaRepository<Projeto, Projeto> {
 
     Page<Projeto> findAllByUsuarioAndAndDocumentosProjetoStatusDocumentacao(Pageable pageable, Usuario usuario, StatusArquivo statusArquivo);
 
-    Page<Projeto> findAllByTituloOrIncentivosFiscaisContaining(Pageable page, String titulo, IncentivoFiscal incentivoFiscal);
+    Page<Projeto> findAllByTituloContainingAndIncentivosFiscaisContaining(Pageable page, String titulo, IncentivoFiscal incentivoFiscal);
 
     @Query("SELECT projeto FROM Projeto projeto WHERE projeto.usuario = :usuario AND projeto.titulo LIKE %:key%")
     Page<Projeto> findAllByUsuario(@Param("usuario") Usuario usuario, Pageable page, @Param("key") String key);

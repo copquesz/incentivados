@@ -101,8 +101,8 @@ public class ProjetoService {
         return projetoRepository.findAllByUsuarioAndAndDocumentosProjetoStatusDocumentacao(pageable, usuario, statusArquivo);
     }
 
-    public Page<Projeto> findAllByTituloOrIncentivosFiscaisContaining(Pageable page, String key, IncentivoFiscal incentivoFiscal) {
-        return this.projetoRepository.findAllByTituloOrIncentivosFiscaisContaining(page, key, incentivoFiscal);
+    public Page<Projeto> findAllByTituloContainingAndIncentivosFiscaisContaining(Pageable page, String key, IncentivoFiscal incentivoFiscal) {
+        return this.projetoRepository.findAllByTituloContainingAndIncentivosFiscaisContaining(page, key, incentivoFiscal);
     }
 
     public Page<Projeto> findAllByUsuario(Usuario usuario, Pageable page) {
