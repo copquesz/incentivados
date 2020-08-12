@@ -5,13 +5,14 @@ function validaImg($input, id) {
   var extArquivo = $input.value.split('.').pop();
   var seletor = $(id);
 
-  if(typeof extPermitidas.find(function(ext){ return extArquivo == ext; }) == 'undefined') {
-    $('#arquivo-recusado-img').modal('show');
-    $('#' + id).val('');    
-  } 
-  if((document.getElementById(id)).files[0].size > limite_bytes){
+  if($input.files[0].size > limite_bytes){
     $('#arquivo-recusado-tamanho').modal('show');
-    $('#' + id).val('');
+    $(seletor).val('');
+  }
+
+  if(typeof extPermitidas.find(function(ext){ return extArquivo.toLowerCase() == ext.toLowerCase(); }) == 'undefined') {
+    $('#arquivo-recusado-img').modal('show');
+    $(seletor).val('');
   }
 }
 
@@ -19,14 +20,17 @@ function validaPdf($input, id) {
   var extPermitidas = ['pdf'];
   var extArquivo = $input.value.split('.').pop();
   var seletor = $(id);
-  
-  if(typeof extPermitidas.find(function(ext){ return extArquivo == ext; }) == 'undefined') {    
-    $('#arquivo-recusado-pdf').modal('show');    
-    $('#' + id).val('');    
-  }
-  if((document.getElementById(id)).files[0].size > limite_bytes){
+
+  console.log(seletor);
+
+  if($input.files[0].size > limite_bytes){
     $('#arquivo-recusado-tamanho').modal('show');
-    $('#' + id).val('');
+    $(seletor).val('');
+  }
+
+  if(typeof extPermitidas.find(function(ext){ return extArquivo.toLowerCase() == ext.toLowerCase(); }) == 'undefined') {
+    $('#arquivo-recusado-pdf').modal('show');    
+    $(seletor).val('');
   }
 }
 
@@ -35,12 +39,13 @@ function validaImgPdf($input, id) {
   var extArquivo = $input.value.split('.').pop();
   var seletor = $(id);
 
-  if(typeof extPermitidas.find(function(ext){ return extArquivo == ext; }) == 'undefined') {
-    $('#arquivo-recusado-all').modal('show');  
-    $('#' + id).val('');    
-  }
-  if((document.getElementById(id)).files[0].size > limite_bytes){
+  if($input.files[0].size > limite_bytes){
     $('#arquivo-recusado-tamanho').modal('show');
-    $('#' + id).val('');
+    $(seletor).val('');
+  }
+
+  if(typeof extPermitidas.find(function(ext){ return extArquivo.toLowerCase() == ext.toLowerCase(); }) == 'undefined') {
+    $('#arquivo-recusado-all').modal('show');  
+    $(seletor).val('');
   }
 }
