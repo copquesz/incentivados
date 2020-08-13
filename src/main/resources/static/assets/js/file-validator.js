@@ -10,7 +10,7 @@ function validaImg($input, id) {
     $(seletor).val('');
   }
 
-  if(typeof extPermitidas.find(function(ext){ return extArquivo.toLowerCase() == ext.toLowerCase(); }) == 'undefined') {
+  if(typeof extPermitidas.find(function(ext){ return extArquivo.toLowerCase() === ext }) == 'undefined') {
     $('#arquivo-recusado-img').modal('show');
     $(seletor).val('');
   }
@@ -28,7 +28,7 @@ function validaPdf($input, id) {
     $(seletor).val('');
   }
 
-  if(typeof extPermitidas.find(function(ext){ return extArquivo.toLowerCase() == ext.toLowerCase(); }) == 'undefined') {
+  if(typeof extPermitidas.find(function(ext){ return extArquivo.toLowerCase() === ext }) == 'undefined') {
     $('#arquivo-recusado-pdf').modal('show');    
     $(seletor).val('');
   }
@@ -44,7 +44,7 @@ function validaImgPdf($input, id) {
     $(seletor).val('');
   }
 
-  if(typeof extPermitidas.find(function(ext){ return extArquivo.toLowerCase() == ext.toLowerCase(); }) == 'undefined') {
+  if(typeof extPermitidas.find(function(ext){ return extArquivo.toLowerCase() === ext; }) == 'undefined') {
     $('#arquivo-recusado-all').modal('show');  
     $(seletor).val('');
   }
