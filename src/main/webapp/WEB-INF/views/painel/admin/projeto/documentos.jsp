@@ -41,8 +41,8 @@
               <i class="nc-icon nc-bank"></i>Painel Principal</a>        
           </li>
           <li>
-            <a href="${path}/painel/empresas">
-              <i class="fas fa-city"></i>Empresas</a>
+            <a href="${path}/painel/entidades">
+              <i class="fas fa-users"></i>Entidades</a>
           </li>
           <li class="active">
             <a href="${path}/painel/projetos">
