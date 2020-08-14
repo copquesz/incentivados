@@ -1,6 +1,7 @@
 package br.com.incentivados.repository;
 
 import br.com.incentivados.enumerated.StatusArquivo;
+import br.com.incentivados.model.Entidade;
 import br.com.incentivados.model.IncentivoFiscal;
 import br.com.incentivados.model.Projeto;
 import br.com.incentivados.model.Usuario;
@@ -21,6 +22,8 @@ public interface ProjetoRepository extends JpaRepository<Projeto, Projeto> {
     Optional<Projeto> findById(Long id);
 
     Page<Projeto> findAllByUsuario(Usuario usuario, Pageable page);
+
+    Page<Projeto> findAllByEntidade(Entidade entidade, Pageable pageable);
 
     Long countByUsuario(Usuario usuario);
 

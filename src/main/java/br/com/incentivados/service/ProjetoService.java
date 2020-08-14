@@ -109,6 +109,10 @@ public class ProjetoService {
         return this.projetoRepository.findAllByUsuario(usuario, page);
     }
 
+    public Page<Projeto> findAllByEntidade(Entidade entidade, Pageable pageable){
+        return this.projetoRepository.findAllByEntidade(entidade, pageable);
+    }
+
     public Page<Projeto> findAllByUsuario(Usuario usuario, Pageable page, String key) {
         return this.projetoRepository.findAllByUsuario(usuario, page, key);
     }

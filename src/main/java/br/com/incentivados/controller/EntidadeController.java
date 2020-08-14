@@ -74,7 +74,7 @@ public class EntidadeController {
             if (this.entidadeService.findById(id).isPresent()) {
                 Entidade entidade = this.entidadeService.findById(id).get();
                 model.addAttribute("entidade", entidade);
-                model.addAttribute("projetos", projetoService.findAllByUsuario(entidade.getUsuario(), pageableProjetos));
+                model.addAttribute("projetos", projetoService.findAllByEntidade(entidade, pageableProjetos));
                 switch(usuario.getTipoUsuario()) {
                     case ADMIN:
                         return "painel/admin/entidade/perfil";
