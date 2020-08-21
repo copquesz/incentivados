@@ -48,10 +48,6 @@ public class ProjetoService {
         return this.projetoRepository.save(projeto);
     }
 
-    public boolean existsByTitulo(String titulo) {
-        return this.projetoRepository.existsByTitulo(titulo);
-    }
-
     public Projeto setAvaliacao(Projeto projeto, Avaliacao avaliacao) {
 
         // Instancia variável média
@@ -81,10 +77,25 @@ public class ProjetoService {
             projeto.setNotaInstitucional((projeto.getNotaInstitucional() + avaliacao.getNota()) / 2);
         }
 
+        // Incrementa número avaliação no projeto
         projeto.setQtdAvaliacoes(projeto.getQtdAvaliacoes() + 1);
-        projeto.setNotaGeral((projeto.getNotaTecnica() + projeto.getNotaInstitucional()) / projeto.getQtdAvaliacoes());
-        projeto = this.projetoRepository.save(projeto);
 
+        // Calcula a nota geral do projeto
+        if(projeto.getNotaInstitucional().equals(0.0) && !projeto.getNotaTecnica().equals(0.0)){
+            projeto.setNotaGeral(projeto.getNotaTecnica());
+        }
+        else if(!projeto.getNotaInstitucional().equals(0.0) && projeto.getNotaTecnica().equals(0.0)){
+            projeto.setNotaGeral(projeto.getNotaInstitucional());
+        }
+        else if(!projeto.getNotaInstitucional().equals(0.0) && !projeto.getNotaTecnica().equals(0.0)){
+            projeto.setNotaGeral((projeto.getNotaTecnica() + projeto.getNotaInstitucional()) / 2);
+        }
+        else{
+            projeto.setNotaGeral(0.0);
+        }
+
+        // Persiste o projeto atualizado
+        projeto = this.projetoRepository.save(projeto);
         return projeto;
     }
 
