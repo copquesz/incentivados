@@ -209,7 +209,7 @@ public class ProjetoController {
 
     @GetMapping({"/painel/ranking"})
     public String getRanking(HttpServletRequest request, Model model) {
-        Pageable pageable = PageRequest.of(0, 25);
+        Pageable pageable = PageRequest.of(0, 30);
         model.addAttribute("path", request.getContextPath());
         model.addAttribute("projetos", this.projetoService.getRanking(pageable));
         Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
