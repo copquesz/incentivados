@@ -227,7 +227,7 @@
                                     <c:if test="${cadastroProjeto}">
                                         <a href="#" data-toggle="modal" data-target="#modal-inscricoes-encerradas" class="btn btn-primary float-right"><i class="fas fa-plus mr-2"></i> Cadastrar Projeto</a>
                                     </c:if>
-                                    <a href="#" data-toggle="modal" data-target="#modal-inscricoes-encerradas" class="btn btn-primary float-right"><i class="fas fa-plus mr-2"></i> Cadastrar Entidade</a>
+                                    <a href="${path}/painel/entidades/cadastro" class="btn btn-primary float-right"><i class="fas fa-plus mr-2"></i> Cadastrar Entidade</a>
                                 </div>
                             </div>
                         </div>
