@@ -14,7 +14,7 @@
           <div class="row">
             <div class="col-12 text-justify">
               <p>Olá, ${usuario.nome}.</p> 
-              <p>O processo de inscrições de projetos está encerrado desde 23:59:59 de 15/08/2020.</p>
+              <p>O processo de inscrições de projetos está encerrado desde de 15/08/2020 - 23:59:59.</p>
               <p>A partir de agora a equipe Incentivados em conjunto com a Leroy Merlin dará sequência aos trâmites de triagem dos projetos, orientando-lhes referente a documentação que será encaminhada para o comitê de compliance.</p>
               <p>Entraremos em contato via e-mail referente ao processo de seleção.</p>
               <p>Em caso de dúvidas entre em contato com o e-mail: <strong>leroymerlin@yabaconsultoria.com.br</strong>.
