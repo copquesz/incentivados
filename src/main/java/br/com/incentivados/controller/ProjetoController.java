@@ -94,6 +94,8 @@ public class ProjetoController {
         }
     }
 
+    /*
+     * DESABILITA INSCRIÇÃO DE PROJETOS
     @GetMapping({"/painel/projetos/cadastro"})
     public String getCadastrar(HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
@@ -102,6 +104,8 @@ public class ProjetoController {
         model.addAttribute("incentivosFiscais", this.incentivoFiscalService.findAll());
         return "painel/entidade/projeto/cadastro";
     }
+
+
 
     @PostMapping({"/painel/projetos/cadastro"})
     public String postCadastrar(@RequestParam(required = false,defaultValue = "18.520.427/0001-86") String cnpj, Projeto projeto, HttpServletRequest request, Model model) {
@@ -132,6 +136,8 @@ public class ProjetoController {
             return "painel/entidade/projeto/cadastro-projeto-falha";
         }
     }
+
+    */
 
     @GetMapping({"/painel/projetos/{id}"})
     public String getPerfil(@PathVariable Long id, HttpServletRequest request, Model model) {
