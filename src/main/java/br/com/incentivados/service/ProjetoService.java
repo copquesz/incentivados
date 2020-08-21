@@ -53,31 +53,38 @@ public class ProjetoService {
     }
 
     public Projeto setAvaliacao(Projeto projeto, Avaliacao avaliacao) {
-        Double media = 0.0D;
 
-        Double nota;
-        for (Iterator var4 = avaliacao.getNotas().iterator(); var4.hasNext(); media = media + nota) {
-            nota = (Double) var4.next();
+        // Instancia variável média
+        Double media = 0.0;
+
+        // Soma todas as notas da request
+        for(Double nota: avaliacao.getNotas()){
+            media += nota;
         }
 
-        media = media / (double) avaliacao.getNotas().size();
+        // Calcula a média com da nota obtida e seta o valor no objeto
+        media = media / avaliacao.getNotas().size();
         avaliacao.setNota(media);
         projeto.getAvaliacoes().add(avaliacao);
+
+        // Adiciona a nova nota do projeto: TÉCNICA ou INSTITUCIONAL
+        // Caso o projeto não tenha nota ainda, adiciona a nota obitida no momento
         if (avaliacao.getTipoAvaliacao() == TipoAvaliacao.TECNICA) {
-            if (projeto.getNotaTecnica().equals(new Double(0.0D))) {
+            if (projeto.getNotaTecnica().equals(0.0)) {
                 projeto.setNotaTecnica(avaliacao.getNota());
             } else {
-                projeto.setNotaTecnica((projeto.getNotaTecnica() + avaliacao.getNota()) / 2.0D);
+                projeto.setNotaTecnica((projeto.getNotaTecnica() + avaliacao.getNota()) / 2);
             }
-        } else if (projeto.getNotaInstitucional().equals(new Double(0.0D))) {
+        } else if (projeto.getNotaInstitucional().equals(0.0)) {
             projeto.setNotaInstitucional(avaliacao.getNota());
         } else {
-            projeto.setNotaInstitucional((projeto.getNotaInstitucional() + avaliacao.getNota()) / 2.0D);
+            projeto.setNotaInstitucional((projeto.getNotaInstitucional() + avaliacao.getNota()) / 2);
         }
 
-        projeto.setNotaGeral((projeto.getNotaTecnica() + projeto.getNotaInstitucional()) / 2.0D);
         projeto.setQtdAvaliacoes(projeto.getQtdAvaliacoes() + 1);
+        projeto.setNotaGeral((projeto.getNotaTecnica() + projeto.getNotaInstitucional()) / projeto.getQtdAvaliacoes());
         projeto = this.projetoRepository.save(projeto);
+
         return projeto;
     }
 
