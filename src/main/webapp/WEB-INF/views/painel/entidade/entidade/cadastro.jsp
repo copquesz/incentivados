@@ -132,14 +132,14 @@
                                             <div class="form-group">
                                                 <label>Nome Fantasia:</label>
                                                 <input type="text" class="form-control text-capitalize"
-                                                       name="nomeFantasia" required oninput="validaCaracteres(this)">
+                                                      id="nome-fantasia" name="nomeFantasia" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Razao Social:</label>
                                                 <input type="text" class="form-control text-capitalize"
-                                                       name="razaoSocial" required oninput="validaCaracteres(this)">
+                                                      id="razao-social" name="razaoSocial" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -361,10 +361,15 @@
 <!-- VALIDATOR -->
 <script type="text/javascript" src="${path}/assets/js/cnpj-validator.js"></script>
 <script type="text/javascript" src="${path}/assets/js/file-validator.js"></script>
-<script type="text/javascript" src="${path}/assets/js/regex.js"></script>
 <!-- MASK -->
 <script type="text/javascript" src="${path}/assets/js/core/jquery.maskedinput.js"></script>
 <script type="text/javascript">
+    $('#nome-fantasia').on('input', function () {
+        this.value = this.value.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()@\+\?><\[\]\+]/g,"").replace(/\s{2,}/g," ");
+    });
+    $('#razao-social').on('input', function () {
+        this.value = this.value.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()@\+\?><\[\]\+]/g,"").replace(/\s{2,}/g," ");
+    });
     $("#cnpj").mask("99.999.999/9999-99");
     $("#cep").mask("99999-999");
 </script>

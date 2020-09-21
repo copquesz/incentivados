@@ -163,8 +163,8 @@
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label>Título:</label>
-                                                <input type="text" class="form-control text-capitalize" name="titulo"
-                                                       required oninput="validaCaracteres(this)">
+                                                <input type="text" class="form-control text-capitalize" id="titulo" name="titulo"
+                                                       required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -355,7 +355,6 @@
 <script type="text/javascript" src="${path}/api/via-cep.js"></script>
 <!-- VALIDATOR -->
 <script type="text/javascript" src="${path}/assets/js/file-validator.js"></script>
-<script type="text/javascript" src="${path}/assets/js/regex.js"></script>
 <!-- MASK -->
 <script type="text/javascript" src="${path}/assets/js/core/jquery.maskedinput.js"></script>
 <script type="text/javascript" src="${path}/assets/js/core/jquery.maskMoney.js"></script>
@@ -416,6 +415,9 @@
     });
 </script>
 <script type="text/javascript">
+    $('#titulo').on('input', function () {
+        this.value = this.value.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()@\+\?><\[\]\+]/g,"").replace(/\s{2,}/g," ");
+    });
     $('#beneficiarios-direto').on('input', function () {
         this.value = this.value.replace(/[^0-9\-]+/g, '').replace(/(\..*)\./g, '$1');
     });
