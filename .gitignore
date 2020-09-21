@@ -27,3 +27,4 @@
 
 ### Ignorar Documentos ###
 /src/main/webapp/documentos/
+!/src/main/resources/application.properties
