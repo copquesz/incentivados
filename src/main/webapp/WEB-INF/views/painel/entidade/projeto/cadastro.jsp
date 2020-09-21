@@ -174,13 +174,13 @@
                     <div class="col-sm-12 col-md-3">
                       <div class="form-group">
                         <label>Beneficiários Diretos:</label>
-                        <input type="number" class="form-control" name="beneficiariosDiretos" required>
+                        <input type="text" class="form-control" id="beneficiarios-direto" name="beneficiariosDiretos" required>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-3">
                       <div class="form-group">
                         <label>Beneficiários Indiretos:</label>
-                        <input type="number" class="form-control" name="beneficiariosIndiretos" required>
+                        <input type="text" class="form-control" id="beneficiarios-indireto" name="beneficiariosIndiretos" required>
                       </div>
                     </div>
                   </div>
@@ -373,6 +373,12 @@
   });
 </script>
 <script type="text/javascript">
+  $('#beneficiarios-direto').on('input', function(){
+    this.value = this.value.replace(/[^0-9\-]+/g, '').replace(/(\..*)\./g, '$1');
+  });
+  $('#beneficiarios-indireto').on('input', function(){
+    this.value = this.value.replace(/[^0-9\-]+/g, '').replace(/(\..*)\./g, '$1');
+  });
   $("#valor-solicitado").maskMoney({showSymbol: true, symbol:'R$ ', thousands:'.', decimal:','});
   $("#valor-total").maskMoney({showSymbol: true, symbol:'R$ ', thousands:'.', decimal:','});
   $("#prazo-captacao").mask("99/99/9999");
