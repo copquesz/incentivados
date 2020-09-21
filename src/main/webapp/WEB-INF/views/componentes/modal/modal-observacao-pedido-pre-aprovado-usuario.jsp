@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!-- Modal Observação Pedido -->
+<!-- Modal Observação Pedido Pré Aprovado Usuário -->
 <c:forEach var="modalPedidoPreAprovadoUsuario" items="${pedidos.content}">
     <div class="modal fade" id="modal-observacao-pedidopre-aprovado-usuario-${modalPedidoPreAprovadoUsuario.id}"
          tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -1,4 +1,5 @@
-<!-- Modal Login Permitido-->
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!-- Modal Acesso Negado -->
 <div class="modal fade" id="modal-acesso-negado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -10,7 +11,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>E-mail e/ou senha inv�lidos.</p>
+                <p>E-mail e/ou senha inválidos.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>

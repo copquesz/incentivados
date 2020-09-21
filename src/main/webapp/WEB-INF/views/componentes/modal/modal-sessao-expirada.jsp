@@ -1,4 +1,5 @@
-<!-- Modal Login Permitido-->
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!-- Modal Sessão Expirada -->
 <div class="modal fade" id="modal-sessao-expirada" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -10,7 +11,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Por motivos de seguran�a, ap�s uma hora de inatividade sua sess�o � automaticamente expirada. Realize
+                <p>Por motivos de segurança, após uma hora de inatividade sua sessão é automaticamente expirada. Realize
                     o login novamente para acessar o painel.</p>
             </div>
             <div class="modal-footer">
