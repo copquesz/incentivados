@@ -36,7 +36,9 @@ public class Projeto implements Serializable {
 
     private Integer beneficiariosIndiretos;
 
+    @Column(columnDefinition = "TEXT")
     private String contrapartida;
+
     @Column(columnDefinition = "TEXT")
     private String objetivo;
 
@@ -71,15 +73,15 @@ public class Projeto implements Serializable {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "projeto_has_incentivo_fiscal",
-			joinColumns = {@JoinColumn(name = "projeto_id")},
+            joinColumns = {@JoinColumn(name = "projeto_id")},
             inverseJoinColumns = {@JoinColumn(name = "incentivo_fiscal_id")}
     )
     private Set<IncentivoFiscal> incentivosFiscais = null;
 
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(name = "projeto_has_avaliacao",
-            joinColumns = {@JoinColumn( name = "projeto_id")},
-            inverseJoinColumns = {@JoinColumn( name = "avaliacao_id")}
+            joinColumns = {@JoinColumn(name = "projeto_id")},
+            inverseJoinColumns = {@JoinColumn(name = "avaliacao_id")}
     )
     private Set<Avaliacao> avaliacoes;
 
