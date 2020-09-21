@@ -14,7 +14,7 @@ public enum FiltroPedidos {
     private int id;
     private String descricao;
 
-    FiltroPedidos(int id, String descricao){
+    FiltroPedidos(int id, String descricao) {
         this.id = id;
         this.descricao = descricao;
     }

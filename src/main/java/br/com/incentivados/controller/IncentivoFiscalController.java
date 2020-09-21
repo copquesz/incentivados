@@ -19,8 +19,8 @@ import java.util.logging.Logger;
 
 @Controller
 public class IncentivoFiscalController {
-    private IncentivoFiscalService incentivoFiscalService;
     private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
+    private IncentivoFiscalService incentivoFiscalService;
 
     @Autowired
     public IncentivoFiscalController(IncentivoFiscalService incentivoFiscalService) {
@@ -28,7 +28,7 @@ public class IncentivoFiscalController {
     }
 
     @GetMapping({"/painel/incentivos-fiscais"})
-    public String getListar(@RequestParam(required = false,defaultValue = "0") int page, HttpServletRequest request, Model model) {
+    public String getListar(@RequestParam(required = false, defaultValue = "0") int page, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
         model.addAttribute("qtdIncentivosFiscais", this.incentivoFiscalService.count());
         model.addAttribute("incentivosFiscais", this.incentivoFiscalService.findAll(PageRequest.of(page, 10, Sort.by(new Sort.Order[]{Sort.Order.asc("id")}))));

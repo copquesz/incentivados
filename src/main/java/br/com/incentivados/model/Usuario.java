@@ -14,52 +14,52 @@ import java.util.List;
 @Entity
 public class Usuario implements Serializable {
 
-	private static final long serialVersionUID = 4802512298815065850L;
+    private static final long serialVersionUID = 4802512298815065850L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Temporal(TemporalType.TIMESTAMP)	
-	private Date dataCadastro;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataCadastro;
 
-	@Temporal(TemporalType.TIMESTAMP)	
-	private Date ultimoAcesso;
-	
-	private String nome;
-	
-	private String sobrenome;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date ultimoAcesso;
 
-	private String telefone;
+    private String nome;
 
-	private String cpf;
-	
-	private String email;
+    private String sobrenome;
 
-	private String senha;
+    private String telefone;
 
-	@Transient
-	private boolean ativo;
-	
-	@OneToMany(mappedBy = "usuario",fetch = FetchType.LAZY, orphanRemoval = true)
-	private List<Pedido> pedidos;
+    private String cpf;
 
-	@Enumerated(EnumType.ORDINAL)
-	@Column(name = "tipo_usuario")
-	private TipoUsuario tipoUsuario;
+    private String email;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "endereco_id")
-	private Endereco endereco;
+    private String senha;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "empresa_id")
-	private Empresa empresa;
+    @Transient
+    private boolean ativo;
 
-	public Usuario() {
-		super();
-		this.dataCadastro = new Date();
-		this.ativo = false;
-	}
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Pedido> pedidos;
+
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "tipo_usuario")
+    private TipoUsuario tipoUsuario;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "endereco_id")
+    private Endereco endereco;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "empresa_id")
+    private Empresa empresa;
+
+    public Usuario() {
+        super();
+        this.dataCadastro = new Date();
+        this.ativo = false;
+    }
 
 }

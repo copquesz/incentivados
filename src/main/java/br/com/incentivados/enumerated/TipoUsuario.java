@@ -13,7 +13,7 @@ public enum TipoUsuario {
     private int id;
     private String descricao;
 
-    TipoUsuario(int id, String descricao){
+    TipoUsuario(int id, String descricao) {
         this.id = id;
         this.descricao = descricao;
     }

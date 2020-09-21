@@ -38,47 +38,45 @@ public class ArquivoController {
     }
 
     @GetMapping("/painel/entidades/{idEntidade}/documentos")
-    public String exibeDocumentacaoEntidade(@PathVariable Long idEntidade, HttpServletRequest request, Model model){
+    public String exibeDocumentacaoEntidade(@PathVariable Long idEntidade, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-        if(this.entidadeService.findById(idEntidade).isPresent()){
+        if (this.entidadeService.findById(idEntidade).isPresent()) {
             model.addAttribute("entidade", this.entidadeService.findById(idEntidade).get());
             model.addAttribute("analista", request.getSession().getAttribute("usuario"));
             return "painel/admin/entidade/documentos";
-        }
-        else{
+        } else {
             return "";
         }
     }
 
     @GetMapping("/painel/projetos/{idProjeto}/documentos")
-    public String exibeDocumentacaoProjeto(@PathVariable Long idProjeto, HttpServletRequest request, Model model){
+    public String exibeDocumentacaoProjeto(@PathVariable Long idProjeto, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-        if(this.projetoService.findById(idProjeto).isPresent()){
+        if (this.projetoService.findById(idProjeto).isPresent()) {
             model.addAttribute("projeto", this.projetoService.findById(idProjeto).get());
             model.addAttribute("analista", request.getSession().getAttribute("usuario"));
             return "painel/admin/projeto/documentos";
-        }
-        else{
+        } else {
             return "";
         }
     }
 
     @PostMapping("/painel/entidades/{idEntidade}/documentos/analise")
-    public String salvaAnaliseEntidade(@PathVariable Long idEntidade, DocumentosEntidade documentosEntidade, ParecerDocumentacao parecerDocumentacao, HttpServletRequest request, Model model){
+    public String salvaAnaliseEntidade(@PathVariable Long idEntidade, DocumentosEntidade documentosEntidade, ParecerDocumentacao parecerDocumentacao, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
         arquivoService.analisaDocumentacaoEntidade(entidadeService.findById(idEntidade).get(), documentosEntidade, parecerDocumentacao);
         return "redirect:/painel/dashboard";
     }
 
     @PostMapping("/painel/projetos/{idProjeto}/documentos/analise")
-    public String salvaAnaliseProjeto(@PathVariable Long idProjeto, DocumentosProjeto documentosProjeto, ParecerDocumentacao parecerDocumentacao, HttpServletRequest request, Model model){
+    public String salvaAnaliseProjeto(@PathVariable Long idProjeto, DocumentosProjeto documentosProjeto, ParecerDocumentacao parecerDocumentacao, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
         arquivoService.analisaDocumentacaoProjeto(projetoService.findById(idProjeto).get(), documentosProjeto, parecerDocumentacao);
         return "redirect:/painel/dashboard";
     }
 
     @PostMapping("/painel/entidades/{idEntidade}/documentos/reenviar")
-    public String reenviaDocumentacaoEntidade(@PathVariable Long idEntidade, DocumentosEntidade documentosEntidade, HttpServletRequest request, Model model){
+    public String reenviaDocumentacaoEntidade(@PathVariable Long idEntidade, DocumentosEntidade documentosEntidade, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
         Entidade entidade = entidadeService.findById(idEntidade).get();
         arquivoService.reenviarDocumentacaoEntidade(entidade, documentosEntidade, request);
@@ -86,7 +84,7 @@ public class ArquivoController {
     }
 
     @PostMapping("/painel/projetos/{idProjeto}/documentos/reenviar")
-    public String reenviaDocumentacaoProjeto(@PathVariable Long idProjeto, DocumentosProjeto documentosProjeto, HttpServletRequest request, Model model){
+    public String reenviaDocumentacaoProjeto(@PathVariable Long idProjeto, DocumentosProjeto documentosProjeto, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
         Projeto projeto = projetoService.findById(idProjeto).get();
         arquivoService.reenviarDocumentacaoProjeto(projeto, documentosProjeto, request);

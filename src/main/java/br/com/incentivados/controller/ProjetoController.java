@@ -44,17 +44,17 @@ public class ProjetoController {
     }
 
     @GetMapping({"/painel/projetos"})
-    public String getListar(@RequestParam(required = false,defaultValue = "0") int page, @RequestParam(required = false,defaultValue = "") String key, @RequestParam(required = false,defaultValue = "0") IncentivoFiscal categoria, HttpServletRequest request, Model model) {
+    public String getListar(@RequestParam(required = false, defaultValue = "0") int page, @RequestParam(required = false, defaultValue = "") String key, @RequestParam(required = false, defaultValue = "0") IncentivoFiscal categoria, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
         model.addAttribute("categoria", categoria);
         model.addAttribute("key", key);
         model.addAttribute("incentivosFiscais", this.incentivoFiscalService.findAll());
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
         try {
             Pageable pageable = PageRequest.of(page, 12, Sort.by(new Sort.Order[]{Sort.Order.desc("id"), Sort.Order.desc("qtdAvaliacoes")}));
             Page<Projeto> projetos;
-            switch(usuario.getTipoUsuario()) {
+            switch (usuario.getTipoUsuario()) {
                 case ADMIN:
                     if (categoria != null && !categoria.equals("0")) {
                         projetos = this.projetoService.findAllByTituloContainingAndIncentivosFiscaisContaining(pageable, key, categoria);
@@ -94,23 +94,20 @@ public class ProjetoController {
         }
     }
 
-    /*
-     * DESABILITA INSCRIÇÃO DE PROJETOS
     @GetMapping({"/painel/projetos/cadastro"})
     public String getCadastrar(HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         model.addAttribute("entidades", this.entidadeService.findAllByUsuario(usuario));
         model.addAttribute("incentivosFiscais", this.incentivoFiscalService.findAll());
         return "painel/entidade/projeto/cadastro";
     }
 
 
-
     @PostMapping({"/painel/projetos/cadastro"})
-    public String postCadastrar(@RequestParam(required = false,defaultValue = "18.520.427/0001-86") String cnpj, Projeto projeto, HttpServletRequest request, Model model) {
+    public String postCadastrar(@RequestParam(required = false, defaultValue = "18.520.427/0001-86") String cnpj, Projeto projeto, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
         try {
             if (!this.projetoService.existsByTitulo(projeto.getTitulo())) {
@@ -120,8 +117,8 @@ public class ProjetoController {
                 if (!cnpj.equals("18.520.427/0001-86")) {
                     Optional<Empresa> empresa = this.empresaService.findByCnpj(cnpj);
                     if (empresa.isPresent()) {
-                        this.empresaService.adicionaProjeto((Empresa)empresa.get(), projeto);
-                        this.logger.log(Level.INFO, "Projeto " + projeto.getTitulo() + " adicionado a lista de: " + ((Empresa)empresa.get()).getNomeFantasia());
+                        this.empresaService.adicionaProjeto((Empresa) empresa.get(), projeto);
+                        this.logger.log(Level.INFO, "Projeto " + projeto.getTitulo() + " adicionado a lista de: " + ((Empresa) empresa.get()).getNomeFantasia());
                     }
                 }
                 javaMailService.enviarEmailNotificacaoDocumentosProjetoPendenteAnalise(projeto);
@@ -137,12 +134,10 @@ public class ProjetoController {
         }
     }
 
-    */
-
     @GetMapping({"/painel/projetos/{id}"})
     public String getPerfil(@PathVariable Long id, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
         try {
             Optional<Projeto> projeto = this.projetoService.findById(id);
@@ -150,14 +145,14 @@ public class ProjetoController {
                 model.addAttribute("projeto", projeto.get());
             }
 
-            switch(usuario.getTipoUsuario()) {
+            switch (usuario.getTipoUsuario()) {
                 case ADMIN:
                     List<Empresa> empresas = this.empresaService.findAll();
                     Iterator var7 = empresas.iterator();
 
-                    while(var7.hasNext()) {
-                        Empresa empresa = (Empresa)var7.next();
-                        empresa.setIndicacao(this.empresaService.isIndicacao(empresa, (Projeto)projeto.get()));
+                    while (var7.hasNext()) {
+                        Empresa empresa = (Empresa) var7.next();
+                        empresa.setIndicacao(this.empresaService.isIndicacao(empresa, (Projeto) projeto.get()));
                     }
 
                     model.addAttribute("empresas", empresas);
@@ -184,13 +179,13 @@ public class ProjetoController {
         Optional<Projeto> projeto = this.projetoService.findById(projetoId);
         Optional<Empresa> empresa = this.empresaService.findById(empresaId);
         if (projeto.isPresent() && empresa.isPresent()) {
-            this.empresaService.adicionaProjeto((Empresa)empresa.get(), (Projeto)projeto.get());
-            this.logger.log(Level.INFO, "Projeto " + ((Projeto)projeto.get()).getTitulo() + " adicionado a lista de: " + ((Empresa)empresa.get()).getNomeFantasia());
+            this.empresaService.adicionaProjeto((Empresa) empresa.get(), (Projeto) projeto.get());
+            this.logger.log(Level.INFO, "Projeto " + ((Projeto) projeto.get()).getTitulo() + " adicionado a lista de: " + ((Empresa) empresa.get()).getNomeFantasia());
         } else {
             this.logger.log(Level.WARNING, "Projeto ou Empresa não localizado.");
         }
 
-        return "redirect:/painel/projetos/" + ((Projeto)projeto.get()).getId();
+        return "redirect:/painel/projetos/" + ((Projeto) projeto.get()).getId();
     }
 
     @PostMapping({"/painel/projetos/ods"})
@@ -198,13 +193,13 @@ public class ProjetoController {
         model.addAttribute("path", request.getContextPath());
         Optional<Projeto> projeto = this.projetoService.findById(projetoId);
         if (projeto.isPresent()) {
-            this.projetoService.adicionaOds((Projeto)projeto.get(), ods);
-            this.logger.log(Level.INFO, "ODS's adicionada ao projeto " + ((Projeto)projeto.get()).getTitulo());
+            this.projetoService.adicionaOds((Projeto) projeto.get(), ods);
+            this.logger.log(Level.INFO, "ODS's adicionada ao projeto " + ((Projeto) projeto.get()).getTitulo());
         } else {
-            this.logger.log(Level.SEVERE, "Falha ao adicionar as ODS no projeto " + ((Projeto)projeto.get()).getTitulo());
+            this.logger.log(Level.SEVERE, "Falha ao adicionar as ODS no projeto " + ((Projeto) projeto.get()).getTitulo());
         }
 
-        return "redirect:/painel/projetos/" + ((Projeto)projeto.get()).getId();
+        return "redirect:/painel/projetos/" + ((Projeto) projeto.get()).getId();
     }
 
     @GetMapping({"/painel/ranking"})
@@ -212,8 +207,8 @@ public class ProjetoController {
         Pageable pageable = PageRequest.of(0, 30);
         model.addAttribute("path", request.getContextPath());
         model.addAttribute("projetos", this.projetoService.getRanking(pageable));
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
-        switch(usuario.getTipoUsuario()) {
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        switch (usuario.getTipoUsuario()) {
             case ADMIN:
                 return "painel/admin/projeto/ranking";
             case EMPRESA:

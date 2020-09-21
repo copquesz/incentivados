@@ -29,12 +29,12 @@ public class ChartController {
     @GetMapping({"/painel/graficos/entidades/linha-do-tempo"})
     public String getLineChartEntidade(@RequestParam(required = false, defaultValue = "0") String ano, HttpServletRequest request, Model model) {
 
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
         model.addAttribute("entidadesLineChart", chartService.buildLineChartEntidade(Integer.parseInt(ano)));
         model.addAttribute("path", request.getContextPath());
 
-        switch (usuario.getTipoUsuario()){
+        switch (usuario.getTipoUsuario()) {
             case ADMIN:
                 return "painel/admin/graficos/grafico-entidades-linha-do-tempo";
             case EMPRESA:
@@ -47,12 +47,12 @@ public class ChartController {
     @GetMapping({"/painel/graficos/projetos/categoria"})
     public String getPieChartProjeto(HttpServletRequest request, Model model) {
 
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
         model.addAttribute("path", request.getContextPath());
         model.addAttribute("projetoPieCharts", chartService.buildPieChartProjetosCategoria());
 
-        switch (usuario.getTipoUsuario()){
+        switch (usuario.getTipoUsuario()) {
             case ADMIN:
                 return "painel/admin/graficos/grafico-projetos-categoria";
             case EMPRESA:
@@ -65,13 +65,13 @@ public class ChartController {
     @GetMapping({"/painel/graficos/projetos/mapa"})
     public String getAm4ChartProjetosLocalidade(HttpServletRequest request, Model model) {
 
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
         model.addAttribute("path", request.getContextPath());
         model.addAttribute("am4ChartsProjetosLocalidade", chartService.buildAm4ChartProjetosLocalidade());
         model.addAttribute("totalProjetos", chartService.countTotalProjetos());
 
-        switch (usuario.getTipoUsuario()){
+        switch (usuario.getTipoUsuario()) {
             case ADMIN:
                 return "painel/admin/graficos/grafico-projetos-localidade";
             case EMPRESA:
@@ -84,14 +84,14 @@ public class ChartController {
     @GetMapping({"/painel/graficos/pedidos/status"})
     public String getDonutChartPedidosStatus(HttpServletRequest request, Model model) {
 
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
         model.addAttribute("path", request.getContextPath());
         model.addAttribute("pendentes", chartService.buildDonutChartPedidosStatus(StatusPedido.PENDENTE));
         model.addAttribute("recusados", chartService.buildDonutChartPedidosStatus(StatusPedido.RECUSADO));
         model.addAttribute("aprovados", chartService.buildDonutChartPedidosStatus(StatusPedido.APROVADO));
 
-        switch (usuario.getTipoUsuario()){
+        switch (usuario.getTipoUsuario()) {
             case ADMIN:
                 return "painel/admin/graficos/grafico-pedidos-status";
             case EMPRESA:
@@ -104,13 +104,13 @@ public class ChartController {
     @GetMapping({"/painel/graficos/pedidos/mapa"})
     public String getAm4ChartPedidosLocalidade(HttpServletRequest request, Model model) {
 
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
         model.addAttribute("path", request.getContextPath());
         model.addAttribute("am4ChartsPedidosLocalidade", chartService.buildAm4ChartPedidosLocalidade());
         model.addAttribute("totalPedidos", chartService.countTotalPedidos());
 
-        switch (usuario.getTipoUsuario()){
+        switch (usuario.getTipoUsuario()) {
             case ADMIN:
                 return "painel/admin/graficos/grafico-pedidos-localidade";
             case EMPRESA:

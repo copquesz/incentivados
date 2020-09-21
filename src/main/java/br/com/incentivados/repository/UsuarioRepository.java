@@ -15,13 +15,15 @@ import java.util.Optional;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-	boolean existsByCpf(String cpf);
-	boolean existsByEmail(String email);
-	boolean existsByEmailAndSenha(String cpf, String senha);  
-    
+    boolean existsByCpf(String cpf);
+
+    boolean existsByEmail(String email);
+
+    boolean existsByEmailAndSenha(String cpf, String senha);
+
     Optional<Usuario> findByEmail(String email);
 
-	@Query("SELECT usuario FROM Usuario usuario WHERE usuario.empresa = :empresa AND usuario.tipoUsuario = :tipoUsuario AND (usuario.nome LIKE %:key% OR usuario.sobrenome LIKE %:key%)")
-    Page<Usuario> findAllByEmpresa(Pageable page, @Param("empresa") Empresa empresa, @Param("key")String key, @Param("tipoUsuario") TipoUsuario tipoUsuario);
+    @Query("SELECT usuario FROM Usuario usuario WHERE usuario.empresa = :empresa AND usuario.tipoUsuario = :tipoUsuario AND (usuario.nome LIKE %:key% OR usuario.sobrenome LIKE %:key%)")
+    Page<Usuario> findAllByEmpresa(Pageable page, @Param("empresa") Empresa empresa, @Param("key") String key, @Param("tipoUsuario") TipoUsuario tipoUsuario);
 
 }

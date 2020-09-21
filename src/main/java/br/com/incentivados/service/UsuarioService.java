@@ -50,7 +50,7 @@ public class UsuarioService {
 
     public Usuario login(String email) {
         Optional<Usuario> usuario = findByEmail(email);
-        if(usuario.get().getUltimoAcesso() != null){
+        if (usuario.get().getUltimoAcesso() != null) {
             usuario.get().setAtivo(true);
         }
         this.ultimoAcesso(usuario.get());
@@ -69,7 +69,7 @@ public class UsuarioService {
         return this.usuarioRepository.save(usuario);
     }
 
-    public void recuperarSenha(Usuario usuario){
+    public void recuperarSenha(Usuario usuario) {
         String novaSenha = UUID.randomUUID().toString().substring(0, 8);
         atualizaSenha(usuario, novaSenha);
         javaMailService.enviarEmailNovaSenha(usuario, novaSenha);

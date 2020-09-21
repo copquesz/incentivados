@@ -12,20 +12,20 @@ import java.util.Date;
 @Setter
 @Getter
 @Entity
-public class IncentivoFiscal implements Serializable{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4814179166096065060L;
+public class IncentivoFiscal implements Serializable {
 
-	@Id
+    /**
+     *
+     */
+    private static final long serialVersionUID = -4814179166096065060L;
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "data_cadastro")
-	private Date dataCadastro;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_cadastro")
+    private Date dataCadastro;
 
     private String legislacao;
 
@@ -37,6 +37,6 @@ public class IncentivoFiscal implements Serializable{
     private Competencia competencia;
 
     @Enumerated(EnumType.ORDINAL)
-    private Atuacao atuacao;    
+    private Atuacao atuacao;
 
 }

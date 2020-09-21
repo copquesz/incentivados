@@ -14,7 +14,7 @@ public enum Ods {
     ENERGIA_LIMPA_E_ACESSIVEL(6, "Energia Limpa e Acessível", "ods/icon-7.png"),
     TRABALHO_DECENTE_E_CRESCIMENTO_ECONOMICO(7, "Trabalho Decente e Crescimento Econômico", "ods/icon-8.png"),
     INDUSTRIA_INOVACAO_E_INFRAESTRUTURA(8, "Indústria, Inovação e Infraestrutura", "ods/icon-9.png"),
-    REDUCAO_DAS_DESIGUALDADES(9, "Redução das Desigualdades","ods/icon-10.png"),
+    REDUCAO_DAS_DESIGUALDADES(9, "Redução das Desigualdades", "ods/icon-10.png"),
     CIDADES_E_COMUNIDADES_SUSTENTAVEIS(10, "Cidades e Comunidades Sustentáveis", "ods/icon-11.png"),
     CONSUMO_E_PRODUCAO_RESPONSAVEIS(11, "Consumo e Produção Responsáveis", "ods.icon-12.png"),
     ACAO_CONTRA_MUDANCA_GLOBAL_DO_CLIMA(12, "Ação Contra Mudança Global do Clima", "ods/icon-13.png"),

@@ -14,24 +14,24 @@ import java.io.Serializable;
 @Entity
 public class Endereco implements Serializable {
 
-	private static final long serialVersionUID = 7684657415763592L;
+    private static final long serialVersionUID = 7684657415763592L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	private String logradouro;
+    private String logradouro;
 
-	private String numero;
+    private String numero;
 
-	private String complemento;
+    private String complemento;
 
-	private String bairro;
+    private String bairro;
 
-	private String cidade;
+    private String cidade;
 
-	private String estado;
+    private String estado;
 
-	private String cep;
+    private String cep;
 
 }

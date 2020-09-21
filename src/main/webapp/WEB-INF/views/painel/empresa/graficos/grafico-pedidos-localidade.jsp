@@ -1,187 +1,206 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html lang="pt-br">
 
 <head>
-  <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="${path}/assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>
-    Incentivados - Painel
-  </title>
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-  <!--     Fonts and icons     -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <!-- CSS Files -->
-  <link href="${path}/assets/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="${path}/assets/css/paper-dashboard.css?v=2.0.0" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="${path}/assets/css/style.css" rel="stylesheet" />
+    <meta charset="utf-8"/>
+    <link rel="apple-touch-icon" sizes="76x76" href="${path}/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>
+        Incentivados - Painel
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+          name='viewport'/>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <!-- CSS Files -->
+    <link href="${path}/assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="${path}/assets/css/paper-dashboard.css?v=2.0.0" rel="stylesheet"/>
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="${path}/assets/css/style.css" rel="stylesheet"/>
 </head>
 
 <body class="">
-  <div class="wrapper ">
+<div class="wrapper ">
     <!-- Sidebar -->
     <div class="sidebar" data-color="verde" data-active-color="white">
-      <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-          <div class="logo-image-small">
+        <div class="logo">
+            <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+                <div class="logo-image-small">
 
-            <i class="far fa-user"></i>
-          </div>
-        </a>
-        <a href="${path}/painel/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
-      </div>
-      <div class="sidebar-wrapper">
-        <ul class="nav">
-          <li>
-            <a href="${path}/painel/dashboard"><i class="fas fa-desktop"></i>Painel Principal</a>
-          </li>
-          <li>
-            <a href="${path}/painel/${usuario.empresa.id}/analistas"><i class="fas fa-users"></i>Analistas</a>
-          </li>
-          <li>
-            <a href="${path}/painel/entidades"><i class="fas fa-users"></i>Entidades</a>
-          </li>
-          <li>
-            <a href="${path}/painel/projetos"><i class="fas fa-project-diagram"></i>Projetos</a>
-          </li>
-          <li class="active">
-            <a href="${path}/painel/pedidos?filtro=TODOS&key="><i class="fas fa-praying-hands"></i>Pedidos</a>
-          </li>
-          <li>
-            <a href="${path}/painel/ranking"><i class="far fa-chart-bar"></i>Ranking</a>
-          </li>
-          <li>
-            <a data-toggle="collapse" href="#graficos"><i class="fas fa-chart-line"></i>Gráficos<b class="caret"></b></a>
-              <div class="collapse show" id="graficos">
-                <ul class="nav">
-                  <li>
-                    <a data-toggle="collapse" href="#graficos-entidade" style="margin-left: 30px;"><i class="fas fa-users"></i>Entidades <b class="caret"></b></a>
-                      <div class="collapse" id="graficos-entidade">
+                    <i class="far fa-user"></i>
+                </div>
+            </a>
+            <a href="${path}/painel/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
+        </div>
+        <div class="sidebar-wrapper">
+            <ul class="nav">
+                <li>
+                    <a href="${path}/painel/dashboard"><i class="fas fa-desktop"></i>Painel Principal</a>
+                </li>
+                <li>
+                    <a href="${path}/painel/${usuario.empresa.id}/analistas"><i class="fas fa-users"></i>Analistas</a>
+                </li>
+                <li>
+                    <a href="${path}/painel/entidades"><i class="fas fa-users"></i>Entidades</a>
+                </li>
+                <li>
+                    <a href="${path}/painel/projetos"><i class="fas fa-project-diagram"></i>Projetos</a>
+                </li>
+                <li class="active">
+                    <a href="${path}/painel/pedidos?filtro=TODOS&key="><i class="fas fa-praying-hands"></i>Pedidos</a>
+                </li>
+                <li>
+                    <a href="${path}/painel/ranking"><i class="far fa-chart-bar"></i>Ranking</a>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#graficos"><i class="fas fa-chart-line"></i>Gráficos<b
+                            class="caret"></b></a>
+                    <div class="collapse show" id="graficos">
                         <ul class="nav">
-                          <li>
-                            <a href="${path}/painel/graficos/entidades/linha-do-tempo" style="margin-left: 50px;"><i class="fas fa-chart-area"></i>Linha do Tempo</a>
-                          </li>
+                            <li>
+                                <a data-toggle="collapse" href="#graficos-entidade" style="margin-left: 30px;"><i
+                                        class="fas fa-users"></i>Entidades <b class="caret"></b></a>
+                                <div class="collapse" id="graficos-entidade">
+                                    <ul class="nav">
+                                        <li>
+                                            <a href="${path}/painel/graficos/entidades/linha-do-tempo"
+                                               style="margin-left: 50px;"><i class="fas fa-chart-area"></i>Linha do
+                                                Tempo</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <a data-toggle="collapse" href="#graficos-projetos" style="margin-left: 30px;"><i
+                                        class="fas fa-project-diagram"></i>Projetos <b class="caret"></b></a>
+                                <div class="collapse" id="graficos-projetos">
+                                    <ul class="nav">
+                                        <li>
+                                            <a href="${path}/painel/graficos/projetos/categoria"
+                                               style="margin-left: 50px;"><i class="far fa-chart-bar"></i>Categoria</a>
+                                        </li>
+                                        <li>
+                                            <a href="${path}/painel/graficos/projetos/mapa"
+                                               style="margin-left: 50px;"><i class="fas fa-globe-americas"></i>Mapa</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <a data-toggle="collapse" href="#graficos-pedidos" style="margin-left: 30px;"><i
+                                        class="fas fa-praying-hands"></i>Pedidos <b class="caret"></b></a>
+                                <div class="collapse show" id="graficos-pedidos">
+                                    <ul class="nav">
+                                        <li>
+                                            <a href="${path}/painel/graficos/pedidos/status" style="margin-left: 50px;"><i
+                                                    class="fas fa-chart-pie"></i>Status</a>
+                                        </li>
+                                        <li class="active">
+                                            <a href="${path}/painel/graficos/pedidos/mapa" style="margin-left: 50px;"><i
+                                                    class="fas fa-globe-americas"></i>Mapa</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
                         </ul>
-                      </div>                   
-                  </li>
-                  <li>
-                    <a data-toggle="collapse" href="#graficos-projetos" style="margin-left: 30px;"><i class="fas fa-project-diagram"></i>Projetos <b class="caret"></b></a>
-                      <div class="collapse" id="graficos-projetos">
-                        <ul class="nav">
-                          <li>
-                            <a href="${path}/painel/graficos/projetos/categoria" style="margin-left: 50px;"><i class="far fa-chart-bar"></i>Categoria</a>                            
-                          </li>
-                          <li>
-                            <a href="${path}/painel/graficos/projetos/mapa" style="margin-left: 50px;"><i class="fas fa-globe-americas"></i>Mapa</a>
-                          </li>
-                        </ul>
-                      </div>                   
-                  </li>
-                  <li>
-                    <a data-toggle="collapse" href="#graficos-pedidos" style="margin-left: 30px;"><i class="fas fa-praying-hands"></i>Pedidos <b class="caret"></b></a>
-                      <div class="collapse show" id="graficos-pedidos">
-                        <ul class="nav">
-                          <li>
-                            <a href="${path}/painel/graficos/pedidos/status" style="margin-left: 50px;"><i class="fas fa-chart-pie"></i>Status</a>                            
-                          </li>
-                          <li class="active">
-                            <a href="${path}/painel/graficos/pedidos/mapa" style="margin-left: 50px;"><i class="fas fa-globe-americas"></i>Mapa</a>
-                          </li>
-                        </ul>
-                      </div>                   
-                  </li>
-                </ul>
-              </div>
-          </li>
-        </ul>
-      </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="main-panel">
-      <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
-        <div class="container-fluid">
-          <div class="navbar-wrapper">
-            <div class="navbar-toggle">
-              <button type="button" class="navbar-toggler">
-                <span class="navbar-toggler-bar bar1"></span>
-                <span class="navbar-toggler-bar bar2"></span>
-                <span class="navbar-toggler-bar bar3"></span>
-              </button>
-            </div>
-            <b><a class="navbar-brand" href="#">Gráficos <i class='fas fa-angle-double-right'></i> Pedidos <i class='fas fa-angle-double-right'></i> Mapa</a></b>
-          </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navigation">            
-            <ul class="navbar-nav">              
-              <li class="nav-item btn-rotate dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-power-off"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Ações</span>
-                  </p>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="${path}/painel/perfil">Meus Dados</a>
-                  <a class="dropdown-item" href="${path}/painel/perfil" data-toggle="modal" data-target="#modal-alterar-senha">Alterar Senha</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="${path}/sair">Sair</a>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+            <div class="container-fluid">
+                <div class="navbar-wrapper">
+                    <div class="navbar-toggle">
+                        <button type="button" class="navbar-toggler">
+                            <span class="navbar-toggler-bar bar1"></span>
+                            <span class="navbar-toggler-bar bar2"></span>
+                            <span class="navbar-toggler-bar bar3"></span>
+                        </button>
+                    </div>
+                    <b><a class="navbar-brand" href="#">Gráficos <i class='fas fa-angle-double-right'></i> Pedidos <i
+                            class='fas fa-angle-double-right'></i> Mapa</a></b>
                 </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>  
-      <div class="content">   
-        <div class="row">
-          <div class="col-md-12 mx-auto">
-            <div class="card ">
-              <div class="card-header ">
-                <h5 class="card-title">Pedidos x Localidade</h5>        
-                <p><small>Total: ${totalPedidos}</small></p>     
-              </div>
-              <div class="card-body ">               
-                <div id="pedidos-am4-mapchart-div" style="width: 80vw; height: 80vh;"></div>
-              </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                        aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                    <ul class="navbar-nav">
+                        <li class="nav-item btn-rotate dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-power-off"></i>
+                                <p>
+                                    <span class="d-lg-none d-md-block">Ações</span>
+                                </p>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="${path}/painel/perfil">Meus Dados</a>
+                                <a class="dropdown-item" href="${path}/painel/perfil" data-toggle="modal"
+                                   data-target="#modal-alterar-senha">Alterar Senha</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="${path}/sair">Sair</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
-          </div>
+        </nav>
+        <div class="content">
+            <div class="row">
+                <div class="col-md-12 mx-auto">
+                    <div class="card ">
+                        <div class="card-header ">
+                            <h5 class="card-title">Pedidos x Localidade</h5>
+                            <p><small>Total: ${totalPedidos}</small></p>
+                        </div>
+                        <div class="card-body ">
+                            <div id="pedidos-am4-mapchart-div" style="width: 80vw; height: 80vh;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        
-      </div>
     </div>
-  </div>  
-  <!--   JQUERY   -->
-  <script src="${path}/assets/js/core/jquery.min.js"></script>
-  <script src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <!--   POPPER   -->  
-  <script src="${path}/assets/js/core/popper.min.js"></script>
-  <!--   BOOTSTRAP   -->  
-  <script src="${path}/assets/js/core/bootstrap.min.js"></script>  
-  <!--   CHART'S   --> 
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>  
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-  <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
-  <script type="text/javascript" src="${path}/assets/js/file-validator.js"></script>
-  <script src="https://www.amcharts.com/lib/4/core.js"></script>
-  <script src="https://www.amcharts.com/lib/4/maps.js"></script>
-  <script src="https://www.amcharts.com/lib/4/geodata/brazilLow.js"></script>
-  <script type="text/javascript">  
+</div>
+<!--   JQUERY   -->
+<script src="${path}/assets/js/core/jquery.min.js"></script>
+<script src="${path}/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!--   POPPER   -->
+<script src="${path}/assets/js/core/popper.min.js"></script>
+<!--   BOOTSTRAP   -->
+<script src="${path}/assets/js/core/bootstrap.min.js"></script>
+<!--   CHART'S   -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="${path}/assets/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
+<script type="text/javascript" src="${path}/assets/js/file-validator.js"></script>
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/maps.js"></script>
+<script src="https://www.amcharts.com/lib/4/geodata/brazilLow.js"></script>
+<script type="text/javascript">
 
 
-    let dados = [<c:forEach var='am4ChartPedidosLocalidade' items='${am4ChartsPedidosLocalidade}'>{"id": '${am4ChartPedidosLocalidade.id}', "value": '${am4ChartPedidosLocalidade.value}'}, </c:forEach>];
-    
-      // Define o local e tipo de gráfico
+    let dados = [<c:forEach var='am4ChartPedidosLocalidade' items='${am4ChartsPedidosLocalidade}'>{
+        "id": '${am4ChartPedidosLocalidade.id}',
+        "value": '${am4ChartPedidosLocalidade.value}'
+    }, </c:forEach>];
+
+    // Define o local e tipo de gráfico
     let chart = am4core.create("pedidos-am4-mapchart-div", am4maps.MapChart);
     // Atribui o 'brazilLow' como o mapa
     // Você pode optar pelo 'brazilHigh', basta alterar aqui e src do script no html
@@ -209,25 +228,25 @@
 
     // Set up label series to populate
     polygonSeries.events.on("inited", function () {
-      for(var i = 0; i < dados.length; i++){
-        var polygon = polygonSeries.getPolygonById(dados[i].id);
-        if(polygon){
-          var label = labelSeries.mapImages.create();
-          //var state = polygon.dataItem.dataContext.id.split("-").pop();
-          label.latitude = polygon.visualLatitude;
-          label.longitude = polygon.visualLongitude;
-          label.children.getIndex(0).text = dados[i].value;
-      }
-      }
+        for (var i = 0; i < dados.length; i++) {
+            var polygon = polygonSeries.getPolygonById(dados[i].id);
+            if (polygon) {
+                var label = labelSeries.mapImages.create();
+                //var state = polygon.dataItem.dataContext.id.split("-").pop();
+                label.latitude = polygon.visualLatitude;
+                label.longitude = polygon.visualLongitude;
+                label.children.getIndex(0).text = dados[i].value;
+            }
+        }
     });
 
     // Preenche os dados para fazer o mapa de calor
     // Faremos com que os menores valores sejam verdes e maiores sejam vermelhos
     polygonSeries.heatRules.push({
-      property: "fill",
-      target: polygonSeries.mapPolygons.template,
-      min: am4core.color("#9CDF6D"),
-      max: am4core.color("#72BF44")
+        property: "fill",
+        target: polygonSeries.mapPolygons.template,
+        min: am4core.color("#9CDF6D"),
+        max: am4core.color("#72BF44")
     });
     // Define as legendas, posição e cores.
     let heatLegend = chart.createChild(am4maps.HeatLegend);
@@ -236,7 +255,7 @@
     heatLegend.width = am4core.percent(25);
     heatLegend.marginBottom = am4core.percent(6);
     heatLegend.marginRight = am4core.percent(4);
-    heatLegend.minValue = 0; 
+    heatLegend.minValue = 0;
     heatLegend.maxValue = ${totalPedidos};
     heatLegend.valign = "bottom";
 
@@ -249,8 +268,8 @@
     maxRange.label.text = "Muito";
 
     // Blank out internal heat legend value axis labels
-    heatLegend.valueAxis.renderer.labels.template.adapter.add("text", function(labelText) {
-      return "";
+    heatLegend.valueAxis.renderer.labels.template.adapter.add("text", function (labelText) {
+        return "";
     });
 
     // Configuras os tooltips (texto ao passar o mouse)
@@ -263,7 +282,7 @@
     let hs = polygonTemplate.states.create("hover");
     hs.properties.fill = am4core.color("rgba(86, 44, 116, 0.8)");
 
-  </script>
+</script>
 </body>
 
 </html>

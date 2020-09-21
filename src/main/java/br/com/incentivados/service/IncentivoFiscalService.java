@@ -12,28 +12,28 @@ import java.util.List;
 
 @Service
 public class IncentivoFiscalService {
-	
-	private IncentivoFiscalRepository incentivoFiscalRepository;
 
-	@Autowired
-	public IncentivoFiscalService(IncentivoFiscalRepository incentivoFiscalRepository){
-		this.incentivoFiscalRepository = incentivoFiscalRepository;
-	}
-	
-	public IncentivoFiscal save(IncentivoFiscal incentivoFiscal) {
-		return incentivoFiscalRepository.save(incentivoFiscal);
-	}
-	
-	public Long count() {
-		return incentivoFiscalRepository.count();
-	}
+    private IncentivoFiscalRepository incentivoFiscalRepository;
 
-	public List<IncentivoFiscal> findAll(){
-		return incentivoFiscalRepository.findAll();
-	}
-	
-	public Page<IncentivoFiscal> findAll(Pageable page){
-		return incentivoFiscalRepository.findAll(page);
-	}
+    @Autowired
+    public IncentivoFiscalService(IncentivoFiscalRepository incentivoFiscalRepository) {
+        this.incentivoFiscalRepository = incentivoFiscalRepository;
+    }
+
+    public IncentivoFiscal save(IncentivoFiscal incentivoFiscal) {
+        return incentivoFiscalRepository.save(incentivoFiscal);
+    }
+
+    public Long count() {
+        return incentivoFiscalRepository.count();
+    }
+
+    public List<IncentivoFiscal> findAll() {
+        return incentivoFiscalRepository.findAll();
+    }
+
+    public Page<IncentivoFiscal> findAll(Pageable page) {
+        return incentivoFiscalRepository.findAll(page);
+    }
 
 }

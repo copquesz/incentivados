@@ -178,7 +178,7 @@ public class PedidoService {
         return this.pedidoRepository.countByStatus(status);
     }
 
-    public long countByUsuarioEnderecoEstado(String estado){
+    public long countByUsuarioEnderecoEstado(String estado) {
         return this.pedidoRepository.countByUsuarioEnderecoEstado(estado);
     }
 

@@ -21,11 +21,11 @@ public class DocumentosProjetoService {
         this.documentosProjetoRepository = documentosProjetoRepository;
     }
 
-    public void atualiza(DocumentosProjeto documentosProjeto){
+    public void atualiza(DocumentosProjeto documentosProjeto) {
         this.documentosProjetoRepository.save(documentosProjeto);
     }
 
-    public  void atualizaStatus(DocumentosProjeto documentosProjeto, StatusArquivo statusArquivo){
+    public void atualizaStatus(DocumentosProjeto documentosProjeto, StatusArquivo statusArquivo) {
         this.documentosProjetoRepository.atualizaStatus(documentosProjeto.getId(), statusArquivo);
     }
 

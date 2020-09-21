@@ -149,7 +149,9 @@
                         <div class="col-lg-12">
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="termos-de-uso" required>
-                                <label class="form-check-label" for="termos-de-uso">Li e estou ciente com os <strong><a href="${path}/documentos/termo-de-uso-compromisso.pdf" target="_blank">TERMOS DE USO E COMPROMISSO</a></strong> da plataforma.</label>
+                                <label class="form-check-label" for="termos-de-uso">Li e estou ciente com os <strong><a
+                                        href="${path}/documentos/termo-de-uso-compromisso.pdf" target="_blank">TERMOS DE
+                                    USO E COMPROMISSO</a></strong> da plataforma.</label>
                             </div>
                         </div>
                     </div>

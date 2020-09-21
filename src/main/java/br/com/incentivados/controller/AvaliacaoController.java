@@ -30,11 +30,11 @@ public class AvaliacaoController {
 
     @GetMapping({"/painel/projetos/avaliacao/{idProjeto}"})
     public String getAvaliacao(@PathVariable Long idProjeto, HttpServletRequest request, Model model) {
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
-        Projeto projeto = (Projeto)this.projetoService.findById(idProjeto).get();
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        Projeto projeto = (Projeto) this.projetoService.findById(idProjeto).get();
         model.addAttribute("projeto", projeto);
         model.addAttribute("path", request.getContextPath());
-        switch(usuario.getTipoUsuario()) {
+        switch (usuario.getTipoUsuario()) {
             case ADMIN:
                 return "painel/admin/projeto/avaliacao";
             case EMPRESA:
@@ -47,11 +47,11 @@ public class AvaliacaoController {
     @PostMapping({"/painel/projetos/avaliacao/{idProjeto}"})
     @Transactional
     public String postAvaliacao(@PathVariable Long idProjeto, Avaliacao avaliacao, HttpServletRequest request, Model model) {
-        Projeto projeto = (Projeto)this.projetoService.findById(idProjeto).get();
+        Projeto projeto = (Projeto) this.projetoService.findById(idProjeto).get();
         projeto = this.projetoService.setAvaliacao(projeto, avaliacao);
         model.addAttribute("projeto", projeto);
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
-        switch(usuario.getTipoUsuario()) {
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        switch (usuario.getTipoUsuario()) {
             case ADMIN:
                 return "painel/admin/projeto/avaliacao-sucesso";
             case EMPRESA:

@@ -6,16 +6,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="author" content="Yabá Consultoria">
-    <meta name="description" content="O Incentivados é uma iniciativa da YABÁ com objetivo de potencializar o uso estratégico e qualificado das Leis de Incentivo Fiscal, beneficiando empresas e sociedade.">
+    <meta name="description"
+          content="O Incentivados é uma iniciativa da YABÁ com objetivo de potencializar o uso estratégico e qualificado das Leis de Incentivo Fiscal, beneficiando empresas e sociedade.">
     <meta name="keywords" content="Incentivados, Leis de Incentivo, Captação de Recursos.">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- Metas OG -->
-    <meta property="og:title" content="Plataforma Incentivados" />
-    <meta property="og:description" content="O Incentivados é uma iniciativa da YABÁ com objetivo de potencializar o uso estratégico e qualificado das Leis de Incentivo Fiscal, beneficiando empresas e sociedade." />
-    <meta property="og:image" content="http://www.incentivados.com.br/main/images/logoIncentivadoscolor.png" />
-    <meta property="og:url" content="http://www.incentivados.com.br" />
+    <meta property="og:title" content="Plataforma Incentivados"/>
+    <meta property="og:description"
+          content="O Incentivados é uma iniciativa da YABÁ com objetivo de potencializar o uso estratégico e qualificado das Leis de Incentivo Fiscal, beneficiando empresas e sociedade."/>
+    <meta property="og:image" content="http://www.incentivados.com.br/main/images/logoIncentivadoscolor.png"/>
+    <meta property="og:url" content="http://www.incentivados.com.br"/>
 
 
     <!-- Title -->
@@ -258,7 +260,8 @@
                                     </div>
                                     <div class="caption-desc" data-animation="animated fadeInUp">
                                         <p>Para Acessar a plataforma realize seu cadastro, simples e rápido, assim que
-                                            seu cadastro for feito realize seu login para assim ter acesso ao painel. </p>
+                                            seu cadastro for feito realize seu login para assim ter acesso ao
+                                            painel. </p>
                                     </div>
                                     <div class="caption-button" data-animation="animated fadeInUp">
                                         <a href="${path}/login" class="button white">Cadastre-se</a>

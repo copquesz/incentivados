@@ -25,12 +25,12 @@ import java.util.logging.Logger;
 
 @Controller
 public class DashboardController {
+    private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
     private UsuarioService usuarioService;
     private EntidadeService entidadeService;
     private ProjetoService projetoService;
     private PedidoService pedidoService;
     private IncentivoFiscalService incentivoFiscalService;
-    private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
 
     @Autowired
     public DashboardController(UsuarioService usuarioService, EntidadeService entidadeService, ProjetoService projetoService, PedidoService pedidoService, IncentivoFiscalService incentivoFiscalService) {
@@ -46,21 +46,31 @@ public class DashboardController {
         model.addAttribute("path", request.getContextPath());
 
         //Atributo que contém a mensagem que verifica se o usuário foi validade para acesar o painel
-        if (redirectAttributesAcesso.equals("negado")) {model.addAttribute("acessoNegado", true);}
-        if (redirectAttributesAcesso.equals("expirado")) {model.addAttribute("sessaoExpirada", true);}
+        if (redirectAttributesAcesso.equals("negado")) {
+            model.addAttribute("acessoNegado", true);
+        }
+        if (redirectAttributesAcesso.equals("expirado")) {
+            model.addAttribute("sessaoExpirada", true);
+        }
 
         //Atributo que contém a mensagem que verifica se o usuário foi localizado no banco de dados para recuperar a senha
-        if (redirectAttributesRecuperarSenha.equals("emailNotFound")){ model.addAttribute("emailNotFound", true);}
-        if (redirectAttributesRecuperarSenha.equals("emailSended")){model.addAttribute("emailSended", true);}
+        if (redirectAttributesRecuperarSenha.equals("emailNotFound")) {
+            model.addAttribute("emailNotFound", true);
+        }
+        if (redirectAttributesRecuperarSenha.equals("emailSended")) {
+            model.addAttribute("emailSended", true);
+        }
 
         //Atributo que contém a mensagem que verifica se o usuário alterou a senha de acesso
-        if(redirectAttributesSenhaAlterada.equals("senhaAlterada")){model.addAttribute("senhaAlterada", true);}
+        if (redirectAttributesSenhaAlterada.equals("senhaAlterada")) {
+            model.addAttribute("senhaAlterada", true);
+        }
 
         return "main/usuario/login";
     }
 
     @PostMapping({"/login"})
-    public String postLogin(@RequestParam(required = false,defaultValue = "") String redirect, String email, String senha, HttpServletRequest request, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+    public String postLogin(@RequestParam(required = false, defaultValue = "") String redirect, String email, String senha, HttpServletRequest request, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         model.addAttribute("path", request.getContextPath());
 
         try {
@@ -88,13 +98,13 @@ public class DashboardController {
     public String getDashboard(HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
         model.addAttribute("breadcrumb", "Dashboard");
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         model.addAttribute("usuario", usuario);
         Pageable pageableProjetos = PageRequest.of(0, 4, Sort.by(new Order[]{Order.desc("id")}));
         Pageable pageableEntidades = PageRequest.of(0, 3, Sort.by(new Order[]{Order.desc("id")}));
         Pageable pageablePedidos = PageRequest.of(0, 5, Sort.by(new Order[]{Order.desc("id")}));
 
-        switch(usuario.getTipoUsuario()) {
+        switch (usuario.getTipoUsuario()) {
             case EMPRESA:
                 model.addAttribute("qtdProjetos", this.projetoService.count());
                 model.addAttribute("qtdPedidos", this.pedidoService.countByEmpresa(usuario.getEmpresa()));
@@ -120,7 +130,7 @@ public class DashboardController {
                 model.addAttribute("aprovados", this.pedidoService.findAllByAnalistaAndStatus(usuario, StatusPedido.APROVADO, pageablePedidos));
                 model.addAttribute("recusados", this.pedidoService.findAllByAnalistaAndStatus(usuario, StatusPedido.RECUSADO, pageablePedidos));
                 model.addAttribute("preAprovados", this.pedidoService.findAllByAnalistaAndStatus(usuario, StatusPedido.PRE_APROVADO, pageablePedidos));
-               return "painel/analista/dashboard-analista";
+                return "painel/analista/dashboard-analista";
             case ADMIN:
                 model.addAttribute("entidades", this.entidadeService.findAll(pageableEntidades));
                 model.addAttribute("qtdEntidades", this.entidadeService.count());
@@ -138,9 +148,9 @@ public class DashboardController {
     @GetMapping({"/painel/perfil"})
     public String getPerfil(HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         model.addAttribute("usuario", usuario);
-        switch(usuario.getTipoUsuario()) {
+        switch (usuario.getTipoUsuario()) {
             case EMPRESA:
                 return "painel/empresa/usuario/perfil";
             case ENTIDADE:

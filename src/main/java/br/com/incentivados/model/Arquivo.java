@@ -17,34 +17,33 @@ import static br.com.incentivados.enumerated.StatusArquivo.PENDENTE;
 @Entity
 @DynamicUpdate
 public class Arquivo implements Serializable {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4626812439647558635L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "data_cadastro")
-	private Date dataCadastro;
 
-	@Enumerated(EnumType.STRING)
-	private StatusArquivo status;
-	
-	@Transient
-	private MultipartFile file;
-	
-	private String path;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -4626812439647558635L;
 
-	public Arquivo() {
-		super();
-		this.dataCadastro = new Date();
-		this.status = PENDENTE;
-	}
-	
-	
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_cadastro")
+    private Date dataCadastro;
+
+    @Enumerated(EnumType.STRING)
+    private StatusArquivo status;
+
+    @Transient
+    private MultipartFile file;
+
+    private String path;
+
+    public Arquivo() {
+        super();
+        this.dataCadastro = new Date();
+        this.status = PENDENTE;
+    }
+
 
 }

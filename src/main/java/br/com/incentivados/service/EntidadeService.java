@@ -99,7 +99,7 @@ public class EntidadeService {
         Arquivo cartaoCnpj = entidade.getDocumentosEntidade().getCartaoCnpj();
         Arquivo dadosBancarios = entidade.getDocumentosEntidade().getDadosBancarios();
 
-        if(ataEleicao.getFile().isEmpty()){
+        if (ataEleicao.getFile().isEmpty()) {
             entidade.getDocumentosEntidade().getAtaEleicao().setStatus(NAO_SE_APLICA);
             entidade.getDocumentosEntidade().getAtaEleicao().setPath(null);
         }

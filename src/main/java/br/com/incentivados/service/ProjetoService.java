@@ -54,7 +54,7 @@ public class ProjetoService {
         Double media = 0.0;
 
         // Soma todas as notas da request
-        for(Double nota: avaliacao.getNotas()){
+        for (Double nota : avaliacao.getNotas()) {
             media += nota;
         }
 
@@ -81,22 +81,23 @@ public class ProjetoService {
         projeto.setQtdAvaliacoes(projeto.getQtdAvaliacoes() + 1);
 
         // Calcula a nota geral do projeto
-        if(projeto.getNotaInstitucional().equals(0.0) && !projeto.getNotaTecnica().equals(0.0)){
+        if (projeto.getNotaInstitucional().equals(0.0) && !projeto.getNotaTecnica().equals(0.0)) {
             projeto.setNotaGeral(projeto.getNotaTecnica());
-        }
-        else if(!projeto.getNotaInstitucional().equals(0.0) && projeto.getNotaTecnica().equals(0.0)){
+        } else if (!projeto.getNotaInstitucional().equals(0.0) && projeto.getNotaTecnica().equals(0.0)) {
             projeto.setNotaGeral(projeto.getNotaInstitucional());
-        }
-        else if(!projeto.getNotaInstitucional().equals(0.0) && !projeto.getNotaTecnica().equals(0.0)){
+        } else if (!projeto.getNotaInstitucional().equals(0.0) && !projeto.getNotaTecnica().equals(0.0)) {
             projeto.setNotaGeral((projeto.getNotaTecnica() + projeto.getNotaInstitucional()) / 2);
-        }
-        else{
+        } else {
             projeto.setNotaGeral(0.0);
         }
 
         // Persiste o projeto atualizado
         projeto = this.projetoRepository.save(projeto);
         return projeto;
+    }
+
+    public Boolean existsByTitulo(String titulo) {
+        return this.projetoRepository.existsByTitulo(titulo);
     }
 
     public Optional<Projeto> findById(Long id) {
@@ -127,7 +128,7 @@ public class ProjetoService {
         return this.projetoRepository.findAllByUsuario(usuario, page);
     }
 
-    public Page<Projeto> findAllByEntidade(Entidade entidade, Pageable pageable){
+    public Page<Projeto> findAllByEntidade(Entidade entidade, Pageable pageable) {
         return this.projetoRepository.findAllByEntidade(entidade, pageable);
     }
 
@@ -151,7 +152,7 @@ public class ProjetoService {
         return this.projetoRepository.countByIncentivosFiscais(incentivoFiscal);
     }
 
-    public Long countByEntidadeEnderecoEstado(String estado){
+    public Long countByEntidadeEnderecoEstado(String estado) {
         return this.projetoRepository.countByEntidadeEnderecoEstado(estado);
     }
 
@@ -172,7 +173,7 @@ public class ProjetoService {
         Arquivo dadosBancarios = projeto.getDocumentosProjeto().getDadosBancariosFundo();
         Arquivo certificado = projeto.getDocumentosProjeto().getCertificado();
 
-        if(dadosBancarios.getFile().isEmpty()){
+        if (dadosBancarios.getFile().isEmpty()) {
             projeto.getDocumentosProjeto().getDadosBancariosFundo().setStatus(NAO_SE_APLICA);
             projeto.getDocumentosProjeto().getDadosBancariosFundo().setPath(null);
         }

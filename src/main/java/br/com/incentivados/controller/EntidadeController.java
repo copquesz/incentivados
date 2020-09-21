@@ -22,11 +22,11 @@ import java.util.logging.Logger;
 
 @Controller
 public class EntidadeController {
-  
+
+    private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
     private EntidadeService entidadeService;
     private ProjetoService projetoService;
     private JavaMailService javaMailService;
-    private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
 
     @Autowired
     public EntidadeController(EntidadeService entidadeService, ProjetoService projetoService, JavaMailService javaMailService) {
@@ -44,7 +44,7 @@ public class EntidadeController {
     @PostMapping({"/painel/entidades/cadastro"})
     public String postCadastrar(Entidade entidade, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
         try {
             if (!this.entidadeService.existsByCnpj(entidade.getCnpj())) {
@@ -67,7 +67,7 @@ public class EntidadeController {
     @GetMapping({"/painel/entidades/{id}"})
     public String getVisualizar(@PathVariable Long id, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         Pageable pageableProjetos = PageRequest.of(0, 50, Sort.by(new Sort.Order[]{Sort.Order.desc("id")}));
 
         try {
@@ -75,7 +75,7 @@ public class EntidadeController {
                 Entidade entidade = this.entidadeService.findById(id).get();
                 model.addAttribute("entidade", entidade);
                 model.addAttribute("projetos", projetoService.findAllByEntidade(entidade, pageableProjetos));
-                switch(usuario.getTipoUsuario()) {
+                switch (usuario.getTipoUsuario()) {
                     case ADMIN:
                         return "painel/admin/entidade/perfil";
                     case EMPRESA:
@@ -97,13 +97,13 @@ public class EntidadeController {
     }
 
     @GetMapping({"/painel/entidades"})
-    public String getListar(HttpServletRequest request, Model model, @RequestParam(required = false,defaultValue = "0") int page, @RequestParam(required = false,defaultValue = "0") String key) {
+    public String getListar(HttpServletRequest request, Model model, @RequestParam(required = false, defaultValue = "0") int page, @RequestParam(required = false, defaultValue = "0") String key) {
         model.addAttribute("path", request.getContextPath());
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
         try {
             Pageable pageable = PageRequest.of(page, 5, Sort.by(new Sort.Order[]{Sort.Order.asc("id")}));
-            switch(usuario.getTipoUsuario()) {
+            switch (usuario.getTipoUsuario()) {
                 case ADMIN:
                     model.addAttribute("entidades", this.entidadeService.findAll(pageable, key));
                     return "painel/admin/entidade/lista";

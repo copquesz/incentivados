@@ -104,10 +104,11 @@ public class ChartService {
         return am4MapChartList;
     }
 
-    public long countTotalProjetos(){
+    public long countTotalProjetos() {
         return projetoService.count();
     }
-    public long countTotalPedidos(){
+
+    public long countTotalPedidos() {
         return pedidoService.count();
     }
 

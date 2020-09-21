@@ -17,7 +17,7 @@ public enum Atuacao {
     private int id;
     private String descricao;
 
-    Atuacao(int id, String descricao){
+    Atuacao(int id, String descricao) {
         this.id = id;
         this.descricao = descricao;
     }

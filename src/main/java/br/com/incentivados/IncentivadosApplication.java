@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class IncentivadosApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(IncentivadosApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(IncentivadosApplication.class, args);
+    }
 
 }
 

@@ -21,11 +21,11 @@ public class DocumentosEntidadeService {
         this.documentosEntidadeRepository = documentosEntidadeRepository;
     }
 
-    public void atualiza(DocumentosEntidade documentosEntidade){
+    public void atualiza(DocumentosEntidade documentosEntidade) {
         this.documentosEntidadeRepository.save(documentosEntidade);
     }
 
-    public void atualizaStatus(DocumentosEntidade documentosEntidade, StatusArquivo statusArquivo){
+    public void atualizaStatus(DocumentosEntidade documentosEntidade, StatusArquivo statusArquivo) {
         this.documentosEntidadeRepository.atualizaStatus(documentosEntidade.getId(), statusArquivo);
     }
 }

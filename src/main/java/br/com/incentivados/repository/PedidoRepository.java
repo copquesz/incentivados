@@ -16,70 +16,70 @@ import java.util.Optional;
 
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
-	Optional<Pedido> findById(Long id);
+    Optional<Pedido> findById(Long id);
 
-	Long countByUsuario(Usuario usuario);
+    Long countByUsuario(Usuario usuario);
 
-	Long countByEmpresa(Empresa empresa);
+    Long countByEmpresa(Empresa empresa);
 
-	Long countByAnalista(Usuario analista);
+    Long countByAnalista(Usuario analista);
 
-	Long countByStatus(StatusPedido status);
+    Long countByStatus(StatusPedido status);
 
-	Long countByUsuarioEnderecoEstado(String estado);
+    Long countByUsuarioEnderecoEstado(String estado);
 
-	Page<Pedido> findAllByStatus(StatusPedido status, Pageable page);
+    Page<Pedido> findAllByStatus(StatusPedido status, Pageable page);
 
-	Page<Pedido> findAllByEmpresa(Empresa empresa, Pageable page);
+    Page<Pedido> findAllByEmpresa(Empresa empresa, Pageable page);
 
-	Page<Pedido> findAllByUsuario(Usuario usuario, Pageable page);
+    Page<Pedido> findAllByUsuario(Usuario usuario, Pageable page);
 
-	Page<Pedido> findAllByEmpresaAndStatus(Empresa empresa, StatusPedido status, Pageable page);
+    Page<Pedido> findAllByEmpresaAndStatus(Empresa empresa, StatusPedido status, Pageable page);
 
-	Page<Pedido> findAllByAnalistaAndStatus(Usuario analista, StatusPedido status, Pageable page);
+    Page<Pedido> findAllByAnalistaAndStatus(Usuario analista, StatusPedido status, Pageable page);
 
-	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.analista.endereco.bairro LIKE %:key%")
-	Page<Pedido> findAllByLoja(@Param("key") String key, Pageable page);
+    @Query("SELECT pedido FROM Pedido pedido WHERE pedido.analista.endereco.bairro LIKE %:key%")
+    Page<Pedido> findAllByLoja(@Param("key") String key, Pageable page);
 
-	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.analista.endereco.bairro LIKE %:key% AND pedido.status = :status")
-	Page<Pedido> findAllByLojaAndStatus(@Param("key") String key, @Param("status") StatusPedido status, Pageable page);
+    @Query("SELECT pedido FROM Pedido pedido WHERE pedido.analista.endereco.bairro LIKE %:key% AND pedido.status = :status")
+    Page<Pedido> findAllByLojaAndStatus(@Param("key") String key, @Param("status") StatusPedido status, Pageable page);
 
-	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.analista.endereco.cidade LIKE %:key%")
-	Page<Pedido> findAllByCidade(@Param("key") String key, Pageable page);
+    @Query("SELECT pedido FROM Pedido pedido WHERE pedido.analista.endereco.cidade LIKE %:key%")
+    Page<Pedido> findAllByCidade(@Param("key") String key, Pageable page);
 
-	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.analista.endereco.cidade LIKE %:key% AND pedido.status = :status")
-	Page<Pedido> findAllByCidadeAndStatus(@Param("key") String key, @Param("status") StatusPedido status, Pageable page);
+    @Query("SELECT pedido FROM Pedido pedido WHERE pedido.analista.endereco.cidade LIKE %:key% AND pedido.status = :status")
+    Page<Pedido> findAllByCidadeAndStatus(@Param("key") String key, @Param("status") StatusPedido status, Pageable page);
 
-	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.analista.endereco.estado LIKE %:key%")
-	Page<Pedido> findAllByEstado(@Param("key") String key, Pageable page);
+    @Query("SELECT pedido FROM Pedido pedido WHERE pedido.analista.endereco.estado LIKE %:key%")
+    Page<Pedido> findAllByEstado(@Param("key") String key, Pageable page);
 
-	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.analista.endereco.estado LIKE %:key% AND pedido.status = :status")
-	Page<Pedido> findAllByEstadoAndStatus(@Param("key") String key, @Param("status") StatusPedido status, Pageable page);
+    @Query("SELECT pedido FROM Pedido pedido WHERE pedido.analista.endereco.estado LIKE %:key% AND pedido.status = :status")
+    Page<Pedido> findAllByEstadoAndStatus(@Param("key") String key, @Param("status") StatusPedido status, Pageable page);
 
-	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.entidade.nomeFantasia LIKE %:key%")
-	Page<Pedido> findAllByEntidade(@Param("key") String key, Pageable page);
+    @Query("SELECT pedido FROM Pedido pedido WHERE pedido.entidade.nomeFantasia LIKE %:key%")
+    Page<Pedido> findAllByEntidade(@Param("key") String key, Pageable page);
 
-	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.entidade.nomeFantasia LIKE %:key% AND pedido.status = :status")
-	Page<Pedido> findAllByEntidadeAndStatus(@Param("key") String key, @Param("status") StatusPedido status, Pageable page);
+    @Query("SELECT pedido FROM Pedido pedido WHERE pedido.entidade.nomeFantasia LIKE %:key% AND pedido.status = :status")
+    Page<Pedido> findAllByEntidadeAndStatus(@Param("key") String key, @Param("status") StatusPedido status, Pageable page);
 
-	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.empresa = :empresa and pedido.analista.endereco.bairro LIKE %:key%")
-	Page<Pedido> findAllByEmpresaAndLoja(@Param("empresa") Empresa empresa, @Param("key") String key, Pageable page);
+    @Query("SELECT pedido FROM Pedido pedido WHERE pedido.empresa = :empresa and pedido.analista.endereco.bairro LIKE %:key%")
+    Page<Pedido> findAllByEmpresaAndLoja(@Param("empresa") Empresa empresa, @Param("key") String key, Pageable page);
 
-	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.empresa = :empresa and pedido.status = :status and pedido.analista.endereco.bairro LIKE %:key%")
-	Page<Pedido> findAllByEmpresaAndLojaAndStatus(@Param("empresa") Empresa empresa, @Param("key") String key, @Param("status") StatusPedido status, Pageable page);
+    @Query("SELECT pedido FROM Pedido pedido WHERE pedido.empresa = :empresa and pedido.status = :status and pedido.analista.endereco.bairro LIKE %:key%")
+    Page<Pedido> findAllByEmpresaAndLojaAndStatus(@Param("empresa") Empresa empresa, @Param("key") String key, @Param("status") StatusPedido status, Pageable page);
 
-	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.empresa = :empresa and pedido.analista.endereco.cidade LIKE %:key%")
-	Page<Pedido> findAllByEmpresaAndCidade(@Param("empresa") Empresa empresa, @Param("key") String key, Pageable page);
+    @Query("SELECT pedido FROM Pedido pedido WHERE pedido.empresa = :empresa and pedido.analista.endereco.cidade LIKE %:key%")
+    Page<Pedido> findAllByEmpresaAndCidade(@Param("empresa") Empresa empresa, @Param("key") String key, Pageable page);
 
-		@Query("SELECT pedido FROM Pedido pedido WHERE pedido.empresa = :empresa and pedido.analista.endereco.estado LIKE %:key%")
-	Page<Pedido> findAllByEmpresaAndEstado(@Param("empresa") Empresa empresa, @Param("key") String key, Pageable page);
+    @Query("SELECT pedido FROM Pedido pedido WHERE pedido.empresa = :empresa and pedido.analista.endereco.estado LIKE %:key%")
+    Page<Pedido> findAllByEmpresaAndEstado(@Param("empresa") Empresa empresa, @Param("key") String key, Pageable page);
 
-	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.empresa = :empresa and pedido.status = :status and pedido.analista.endereco.estado LIKE %:key%")
-	List<Pedido> findAllByEmpresaAndEstadoAndStatus(@Param("empresa") Empresa empresa, @Param("key") String key, @Param("status") StatusPedido status, Pageable page);
+    @Query("SELECT pedido FROM Pedido pedido WHERE pedido.empresa = :empresa and pedido.status = :status and pedido.analista.endereco.estado LIKE %:key%")
+    List<Pedido> findAllByEmpresaAndEstadoAndStatus(@Param("empresa") Empresa empresa, @Param("key") String key, @Param("status") StatusPedido status, Pageable page);
 
-	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.empresa = :empresa and pedido.entidade.nomeFantasia LIKE %:key%")
-	Page<Pedido> findAllByEmpresaAndEntidade(@Param("empresa") Empresa empresa, @Param("key") String key, Pageable page);
+    @Query("SELECT pedido FROM Pedido pedido WHERE pedido.empresa = :empresa and pedido.entidade.nomeFantasia LIKE %:key%")
+    Page<Pedido> findAllByEmpresaAndEntidade(@Param("empresa") Empresa empresa, @Param("key") String key, Pageable page);
 
-	@Query("SELECT pedido FROM Pedido pedido WHERE pedido.empresa = :empresa and pedido.status = :status and pedido.entidade.nomeFantasia LIKE %:key%")
-	List<Pedido> findAllByEmpresaAndEntidadeAndStatus(@Param("empresa") Empresa empresa, @Param("key") String key, @Param("status") StatusPedido status, Pageable page);
+    @Query("SELECT pedido FROM Pedido pedido WHERE pedido.empresa = :empresa and pedido.status = :status and pedido.entidade.nomeFantasia LIKE %:key%")
+    List<Pedido> findAllByEmpresaAndEntidadeAndStatus(@Param("empresa") Empresa empresa, @Param("key") String key, @Param("status") StatusPedido status, Pageable page);
 }

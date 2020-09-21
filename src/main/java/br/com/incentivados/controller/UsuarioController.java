@@ -31,12 +31,13 @@ public class UsuarioController {
 
     /**
      * Persiste os dados do usuário no banco de dados.
+     *
      * @param redirect Contém a url de redirecionamento vinda da getLogin(), onde após efetuar o cadastro o usuário repassa este atributo para o método recapturar a informação.
-     * @param usuario Objeto que será persistido no banco de dados.
-     * @param request Recebe dados da requisição.
-     * @param model   Fornece dados para a view.
+     * @param usuario  Objeto que será persistido no banco de dados.
+     * @param request  Recebe dados da requisição.
+     * @param model    Fornece dados para a view.
      * @return 1) Retorna a página de sucesso caso usuário for cadastrado.
-     *         2) Retorna a página de erro, caso não consiga cadastrar o usuário.
+     * 2) Retorna a página de erro, caso não consiga cadastrar o usuário.
      */
     @PostMapping("/usuarios/cadastro")
     public String postCadastrar(@RequestParam(required = false, defaultValue = "") String redirect, Usuario usuario, HttpServletRequest request, Model model) {
@@ -45,15 +46,13 @@ public class UsuarioController {
         model.addAttribute("path", request.getContextPath());
         model.addAttribute("redirect", redirect);
         try {
-            if(usuarioService.existsByCpf(usuario.getCpf())){
+            if (usuarioService.existsByCpf(usuario.getCpf())) {
                 logger.log(Level.WARNING, "Cpf já cadastrado: " + usuario.getCpf());
                 return "main/usuario/cadastro-sem-sucesso";
-            }
-            else if(usuarioService.existsByEmail(usuario.getEmail())){
+            } else if (usuarioService.existsByEmail(usuario.getEmail())) {
                 logger.log(Level.WARNING, "E-mail já cadastrado: " + usuario.getEmail());
                 return "main/usuario/cadastro-sem-sucesso";
-            }
-            else{
+            } else {
                 usuarioService.save(usuario);
                 logger.log(Level.INFO, "Usuário salvo com sucesso: " + usuario.getEmail());
                 return "main/usuario/cadastro-efetuado-com-sucesso";
@@ -65,10 +64,10 @@ public class UsuarioController {
     }
 
     @PostMapping("/usuarios/alterar-senha")
-    public String alterarSenha(@RequestParam() String novaSenha, RedirectAttributes redirectAttributes, HttpServletRequest request, Model model){
+    public String alterarSenha(@RequestParam() String novaSenha, RedirectAttributes redirectAttributes, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
 
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         usuarioService.atualizaSenha(usuario, novaSenha);
         redirectAttributes.addAttribute("senhaAlterada", "senhaAlterada");
 
@@ -77,13 +76,12 @@ public class UsuarioController {
     }
 
     @PostMapping("/usuarios/recuperar-senha")
-    public String postRecuperarSenha(@RequestParam() String email, RedirectAttributes redirectAttributes, HttpServletRequest request, Model model){
+    public String postRecuperarSenha(@RequestParam() String email, RedirectAttributes redirectAttributes, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
         Optional<Usuario> usuario = usuarioService.findByEmail(email);
-        if (!usuario.isPresent()){
+        if (!usuario.isPresent()) {
             redirectAttributes.addAttribute("recuperarSenha", "emailNotFound");
-        }
-        else{
+        } else {
             usuarioService.recuperarSenha(usuario.get());
             redirectAttributes.addAttribute("recuperarSenha", "emailSended");
         }

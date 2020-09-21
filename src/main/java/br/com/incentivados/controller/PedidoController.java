@@ -47,7 +47,7 @@ public class PedidoController {
         Optional<Empresa> empresa = this.empresaService.findByCnpj(empresaCnpj);
         if (empresa.isPresent()) {
             model.addAttribute("empresa", empresa.get());
-            Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+            Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
             model.addAttribute("usuario", usuario);
             model.addAttribute("entidades", this.entidadeService.findAllByUsuario(usuario));
             model.addAttribute("tiposPedido", TipoPedido.values());
@@ -80,7 +80,7 @@ public class PedidoController {
     @GetMapping({"/painel/pedido/{id}"})
     public String getAvaliacaoPedido(@PathVariable Long id, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         model.addAttribute("usuario", usuario);
         Optional<Pedido> pedido = this.pedidoService.findById(id);
         if (pedido.isPresent()) {
@@ -89,7 +89,7 @@ public class PedidoController {
             this.logger.log(Level.WARNING, "Pedido não localizado.");
         }
 
-        switch(usuario.getTipoUsuario()) {
+        switch (usuario.getTipoUsuario()) {
             case ADMIN:
                 return "painel/admin/pedido/visualizar";
             case ANALISTA:
@@ -105,7 +105,7 @@ public class PedidoController {
     @PostMapping({"/painel/pedido/{id}/avaliar"})
     public String postAvaliacaoPedido(@PathVariable Long id, @RequestParam StatusPedido status, ObservacaoPedido observacao, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         model.addAttribute("usuario", usuario);
         Optional<Pedido> pedido = this.pedidoService.findById(id);
         if (pedido.isPresent()) {
@@ -143,19 +143,19 @@ public class PedidoController {
     }
 
     @GetMapping({"/painel/pedidos"})
-    public String getPedidos(@RequestParam(required = false,defaultValue = "0") int page, @RequestParam(required = false,defaultValue = "") String key, @RequestParam(required = false,defaultValue = "TODOS") FiltroPedidos filtro, HttpServletRequest request, Model model) {
+    public String getPedidos(@RequestParam(required = false, defaultValue = "0") int page, @RequestParam(required = false, defaultValue = "") String key, @RequestParam(required = false, defaultValue = "TODOS") FiltroPedidos filtro, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
         model.addAttribute("page", page);
         model.addAttribute("key", key);
         model.addAttribute("filtro", filtro);
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         model.addAttribute("usuario", usuario);
         Empresa empresa = usuario.getEmpresa();
 
         try {
             FiltroPedidos[] filtroPedidos = FiltroPedidos.values();
             model.addAttribute("filtroPedidos", filtroPedidos);
-            switch(usuario.getTipoUsuario()) {
+            switch (usuario.getTipoUsuario()) {
                 case ADMIN:
                     Pageable pageablePedidosAdmin = PageRequest.of(page, 10, Sort.by(new Sort.Order[]{Sort.Order.desc("id")}));
                     Pageable pageableDefaultPedidosAdmin = PageRequest.of(0, 10, Sort.by(new Sort.Order[]{Sort.Order.desc("id")}));

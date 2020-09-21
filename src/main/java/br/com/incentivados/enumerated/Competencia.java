@@ -12,7 +12,7 @@ public enum Competencia {
     private int id;
     private String descricao;
 
-    Competencia(int id, String descricao){
+    Competencia(int id, String descricao) {
         this.id = id;
         this.descricao = descricao;
     }

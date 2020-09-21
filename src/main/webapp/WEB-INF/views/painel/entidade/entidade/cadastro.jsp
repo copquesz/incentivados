@@ -24,88 +24,95 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-173176674-1"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
 
-      gtag('config', 'UA-173176674-1');
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-173176674-1');
     </script>
 </head>
 
 <body class="">
 <div class="wrapper ">
-    <!-- Sidebar -->    
+    <!-- Sidebar -->
     <div class="sidebar" data-color="verde" data-active-color="white">
-      <div class="logo">
-        <a href="#" class="simple-text logo-mini">
-          <div class="logo-image-small">
-            <i class="far fa-user"></i>
-          </div>
-        </a>
-        <a href="${path}/painel/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
-      </div>
-      <div class="sidebar-wrapper">
-        <ul class="nav">
-          <li>
-            <a href="${path}/painel/dashboard">
-              <i class="fas fa-desktop"></i>Painel Principal
+        <div class="logo">
+            <a href="#" class="simple-text logo-mini">
+                <div class="logo-image-small">
+                    <i class="far fa-user"></i>
+                </div>
             </a>
-          </li>
-          <li class="active">
-            <a href="${path}/painel/entidades">
-              <i class="fas fa-users"></i>Entidades
-            </a>
-          </li>
-          <li>
-            <a href="${path}/painel/projetos">
-              <i class="fas fa-project-diagram"></i>Projetos
-            </a>
-          </li>
-          <li>
-            <a href="${path}/documentos/manual-do-usuario.pdf" target="_blank">
-              <i class="far fa-question-circle"></i>Tutorial
-            </a>
-          </li>
-        </ul>
-      </div>
+            <a href="${path}/painel/perfil" class="text-white logo-normal">Bem vindo, ${usuario.nome}.</a>
+        </div>
+        <div class="sidebar-wrapper">
+            <ul class="nav">
+                <li>
+                    <a href="${path}/painel/dashboard">
+                        <i class="fas fa-desktop"></i>Painel Principal
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="${path}/painel/entidades">
+                        <i class="fas fa-users"></i>Entidades
+                    </a>
+                </li>
+                <li>
+                    <a href="${path}/painel/projetos">
+                        <i class="fas fa-project-diagram"></i>Projetos
+                    </a>
+                </li>
+                <li>
+                    <a href="${path}/documentos/manual-do-usuario.pdf" target="_blank">
+                        <i class="far fa-question-circle"></i>Tutorial
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="main-panel">
-      <!-- Navbar -->
+        <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
             <div class="container-fluid">
-            <div class="navbar-wrapper">
-              <div class="navbar-toggle">
-                <button type="button" class="navbar-toggler">
-                  <span class="navbar-toggler-bar bar1"></span>
-                  <span class="navbar-toggler-bar bar2"></span>
-                  <span class="navbar-toggler-bar bar3"></span>
+                <div class="navbar-wrapper">
+                    <div class="navbar-toggle">
+                        <button type="button" class="navbar-toggler">
+                            <span class="navbar-toggler-bar bar1"></span>
+                            <span class="navbar-toggler-bar bar2"></span>
+                            <span class="navbar-toggler-bar bar3"></span>
+                        </button>
+                    </div>
+                    <b><a class="navbar-brand" href="#">Entidade <i class='fas fa-angle-double-right'></i> Cadastro</a></b>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                        aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                    <span class="navbar-toggler-bar navbar-kebab"></span>
                 </button>
-              </div>
-              <b><a class="navbar-brand" href="#">Entidade <i class='fas fa-angle-double-right'></i> Cadastro</a></b>
+                <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                    <ul class="navbar-nav">
+                        <li class="nav-item btn-rotate dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-power-off"></i>
+                                <p><span class="d-lg-none d-md-block">Ações</span></p>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="${path}/painel/perfil">Meus Dados</a>
+                                <a class="dropdown-item" href="#" data-toggle="modal"
+                                   data-target="#modal-alterar-senha">Alterar Senha</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="${path}/sair">Sair</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-bar navbar-kebab"></span>
-                <span class="navbar-toggler-bar navbar-kebab"></span>
-                <span class="navbar-toggler-bar navbar-kebab"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navigation">
-              <ul class="navbar-nav">
-                <li class="nav-item btn-rotate dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-power-off"></i>
-                    <p><span class="d-lg-none d-md-block">Ações</span></p>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="${path}/painel/perfil">Meus Dados</a>
-                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-alterar-senha">Alterar Senha</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="${path}/sair">Sair</a>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            </div>
-        </nav> 
+        </nav>
         <div class="content">
             <div class="row">
                 <div class="col-md-12">
@@ -124,13 +131,15 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Nome Fantasia:</label>
-                                                <input type="text" class="form-control text-capitalize" name="nomeFantasia" required oninput="validaCaracteres(this)">
+                                                <input type="text" class="form-control text-capitalize"
+                                                       name="nomeFantasia" required oninput="validaCaracteres(this)">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Razao Social:</label>
-                                                <input type="text" class="form-control text-capitalize" name="razaoSocial" required oninput="validaCaracteres(this)">
+                                                <input type="text" class="form-control text-capitalize"
+                                                       name="razaoSocial" required oninput="validaCaracteres(this)">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -255,7 +264,8 @@
                                         <div class="col-md-6 col-lg-4 text-center mt-5">
                                             <div class="form-group">
                                                 <label for="ata-eleicao">
-                                                    <i class="far fa-file-pdf text-primary"style="font-size: 56px;"></i></label>
+                                                    <i class="far fa-file-pdf text-primary"
+                                                       style="font-size: 56px;"></i></label>
                                                 <hr>
                                                 <h5 class="text-center">Ata de Eleição</h5>
                                                 <input type="file" id="ata-eleicao"
@@ -288,7 +298,8 @@
                                         <div class="col-md-12 col-lg-4 text-center mt-5">
                                             <div class="form-group">
                                                 <label for="cartao-cnpj">
-                                                    <i class="far fa-file-pdf text-primary" style="font-size: 56px;"></i>
+                                                    <i class="far fa-file-pdf text-primary"
+                                                       style="font-size: 56px;"></i>
                                                 </label>
                                                 <hr>
                                                 <h5 class="text-center">Cartão CNPJ</h5>
@@ -299,12 +310,15 @@
                                         </div>
                                         <div class="col-sm-12 col-md-4 text-center mt-5">
                                             <div class="form-group">
-                                                <label for="dados-bancarios"><i class="far fa-file-pdf text-primary" style="font-size: 56px;"></i></label>
+                                                <label for="dados-bancarios"><i class="far fa-file-pdf text-primary"
+                                                                                style="font-size: 56px;"></i></label>
                                                 <hr>
                                                 <h5 class="text-center">Dados Bancários da Entidade</h5>
-                                                <input type="file" id="dados-bancarios" name="documentosEntidade.dadosBancarios.file" onchange="validaImgPdf(this, this.id)" required>
+                                                <input type="file" id="dados-bancarios"
+                                                       name="documentosEntidade.dadosBancarios.file"
+                                                       onchange="validaImgPdf(this, this.id)" required>
                                             </div>
-                                          </div>
+                                        </div>
                                     </div>
                                 </fieldset>
 
@@ -330,7 +344,7 @@
 <c:import url="/WEB-INF/views/componentes/modal/modal-arquivo-recusado-img.jsp"/>
 <c:import url="/WEB-INF/views/componentes/modal/modal-arquivo-recusado-pdf.jsp"/>
 <c:import url="/WEB-INF/views/componentes/modal/modal-arquivo-recusado-tamanho.jsp"/>
-<c:import url="/WEB-INF/views/componentes/modal/modal-alterar-senha.jsp" />
+<c:import url="/WEB-INF/views/componentes/modal/modal-alterar-senha.jsp"/>
 
 
 <!--   JQUERY   -->

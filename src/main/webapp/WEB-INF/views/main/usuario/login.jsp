@@ -39,7 +39,8 @@
 <div>
     <div class="row justify-content-end" style="position:absolute; bottom:0; right: 0">
         <div class="col-xl-9 bg-white rounded-circle mb-3 mr-4" style="max-width: 150px; min-height: 120px">
-            <img src="${path}/assets/img/LogoLeroy.png" class="img-fluid pb-2 mt-3" style="max-width: 100px; min-height: 80px;" >
+            <img src="${path}/assets/img/LogoLeroy.png" class="img-fluid pb-2 mt-3"
+                 style="max-width: 100px; min-height: 80px;">
         </div>
     </div>
 </div>
@@ -81,29 +82,29 @@
                 </div>
                 <div class="d-flex justify-content-center links">
                     <a href="#" data-toggle="modal" data-target="#modal-recuperar-senha">Esqueceu sua senha?</a>
-                </div>   
+                </div>
 
-                <%--Mensagem de recuperação e-mail não localizado para recuperar senha--%>             
+                <%--Mensagem de recuperação e-mail não localizado para recuperar senha--%>
                 <c:if test="${emailNotFound}">
                     <div class="d-flex justify-content-center links pt-3">
                         <p style="color: #e74c3c; font-weight: bold;">E-mail não localizado!</p>
-                    </div> 
+                    </div>
                 </c:if>
 
-                <%--Mensagem de recuperação e-mail enviado para o email--%>             
+                <%--Mensagem de recuperação e-mail enviado para o email--%>
                 <c:if test="${emailSended}">
                     <div class="d-flex justify-content-center links pt-3">
                         <p style="color: #27ae60; font-weight: bold;">E-mail enviado!</p>
-                    </div> 
+                    </div>
                 </c:if>
 
-                <%--Mensagem de senha alterada com sucesso--%>             
+                <%--Mensagem de senha alterada com sucesso--%>
                 <c:if test="${senhaAlterada}">
                     <div class="d-flex justify-content-center links pt-3">
                         <p style="color: #27ae60; font-weight: bold;">Senha alterada com sucesso!</p>
-                    </div> 
+                    </div>
                 </c:if>
-                
+
             </div>
         </div>
     </div>
@@ -135,7 +136,7 @@
 <c:import url="/WEB-INF/views/componentes/modal/modal-cadastro-usuario.jsp"/>
 <c:import url="/WEB-INF/views/componentes/modal/modal-acesso-negado.jsp"/>
 <c:import url="/WEB-INF/views/componentes/modal/modal-sessao-expirada.jsp"/>
-<c:import url="/WEB-INF/views/componentes/modal/modal-recuperar-senha.jsp" />
+<c:import url="/WEB-INF/views/componentes/modal/modal-recuperar-senha.jsp"/>
 
 </body>
 <!--   Core JS Files   -->

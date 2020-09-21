@@ -33,11 +33,11 @@ public class ParecerDocumentacao {
     @ManyToOne(fetch = FetchType.EAGER)
     private Usuario analista;
 
-    public ParecerDocumentacao(){
+    public ParecerDocumentacao() {
         dataCadastro = new Date();
     }
 
-    public ParecerDocumentacao(String analise, Usuario analista){
+    public ParecerDocumentacao(String analise, Usuario analista) {
         dataCadastro = new Date();
         this.analise = analise;
         this.analista = analista;

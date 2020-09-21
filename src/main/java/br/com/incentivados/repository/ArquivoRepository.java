@@ -18,9 +18,9 @@ public interface ArquivoRepository extends JpaRepository<Arquivo, Long> {
 
     @Modifying
     @Query(value = "UPDATE Arquivo ar SET ar.status = :status WHERE ar.id = :id")
-    void atualizaStatus(@Param("id") Long id, @Param("status")StatusArquivo statusArquivo);
+    void atualizaStatus(@Param("id") Long id, @Param("status") StatusArquivo statusArquivo);
 
     @Modifying
     @Query(value = "UPDATE Arquivo ar SET ar.status = :status, ar.path = :path  WHERE ar.id = :id")
-    void atualizaStatusAndPath(@Param("id") Long id, @Param("status")StatusArquivo statusArquivo, @Param("path") String path);
+    void atualizaStatusAndPath(@Param("id") Long id, @Param("status") StatusArquivo statusArquivo, @Param("path") String path);
 }

@@ -23,9 +23,9 @@ import java.util.logging.Logger;
 
 @Controller
 public class EmpresaController {
+    private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
     private EmpresaService empresaService;
     private UsuarioService usuarioService;
-    private final Logger logger = Logger.getLogger(EntidadeController.class.getName());
 
     @Autowired
     public EmpresaController(EmpresaService empresaService, UsuarioService usuarioService) {
@@ -34,7 +34,7 @@ public class EmpresaController {
     }
 
     @GetMapping({"/painel/empresas"})
-    public String getListar(@RequestParam(required = false,defaultValue = "") String key, @RequestParam(required = false,defaultValue = "0") int page, HttpServletRequest request, Model model) {
+    public String getListar(@RequestParam(required = false, defaultValue = "") String key, @RequestParam(required = false, defaultValue = "0") int page, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
         model.addAttribute("key", key);
         model.addAttribute("page", page);
@@ -63,7 +63,7 @@ public class EmpresaController {
     @GetMapping({"/painel/empresas/cadastro"})
     public String getCadastrar(HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         model.addAttribute("usuario", usuario);
         return "painel/admin/empresa/cadastro";
     }
@@ -73,7 +73,7 @@ public class EmpresaController {
         model.addAttribute("path", request.getContextPath());
 
         try {
-            Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+            Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
             model.addAttribute("usuario", usuario);
             if (!this.empresaService.existsbyCnpj(empresa.getCnpj())) {
                 empresa = this.empresaService.save(empresa, usuario, request);
@@ -110,10 +110,10 @@ public class EmpresaController {
             } else {
                 Optional<Empresa> empresa = this.empresaService.findById(empresaId);
                 if (empresa.isPresent()) {
-                    responsavel = this.usuarioService.save(responsavel, (Empresa)empresa.get());
+                    responsavel = this.usuarioService.save(responsavel, (Empresa) empresa.get());
                     model.addAttribute("usuario", responsavel);
-                    if (this.empresaService.verifyRelacionamentoResponsavel(((Empresa)empresa.get()).getId(), responsavel.getId()) == 0L) {
-                        this.empresaService.adicionaResponsavel((Empresa)empresa.get(), responsavel);
+                    if (this.empresaService.verifyRelacionamentoResponsavel(((Empresa) empresa.get()).getId(), responsavel.getId()) == 0L) {
+                        this.empresaService.adicionaResponsavel((Empresa) empresa.get(), responsavel);
                     }
 
                     return "painel/admin/empresa/responsavel/cadastro-responsavel-sucesso";
@@ -129,23 +129,23 @@ public class EmpresaController {
     }
 
     @GetMapping({"/painel/{empresaId}/analistas"})
-    public String getAnalistas(@PathVariable Long empresaId, @RequestParam(required = false,defaultValue = "0") int page, @RequestParam(required = false,defaultValue = "") String key, HttpServletRequest request, Model model) {
+    public String getAnalistas(@PathVariable Long empresaId, @RequestParam(required = false, defaultValue = "0") int page, @RequestParam(required = false, defaultValue = "") String key, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         model.addAttribute("usuario", usuario);
         Optional<Empresa> empresa = this.empresaService.findById(empresaId);
         model.addAttribute("empresa", empresa.get());
         Pageable pageableAnalistas = PageRequest.of(page, 10, Sort.by(new Sort.Order[]{Sort.Order.desc("id")}));
-        model.addAttribute("analistas", this.usuarioService.findAllByEmpresa(pageableAnalistas, (Empresa)empresa.get(), key, TipoUsuario.ANALISTA));
+        model.addAttribute("analistas", this.usuarioService.findAllByEmpresa(pageableAnalistas, (Empresa) empresa.get(), key, TipoUsuario.ANALISTA));
         return "painel/empresa/analista/lista";
     }
 
     @GetMapping({"/painel/empresas/{empresaId}/analistas/cadastro", "/painel/{empresaId}/analistas/cadastro"})
     public String getAnalistaCadastrar(@PathVariable Long empresaId, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         model.addAttribute("usuario", usuario);
-        switch(usuario.getTipoUsuario()) {
+        switch (usuario.getTipoUsuario()) {
             case ADMIN:
                 Optional<Empresa> empresa = this.empresaService.findById(empresaId);
                 model.addAttribute("empresa", empresa.get());
@@ -160,9 +160,9 @@ public class EmpresaController {
     @PostMapping({"/painel/empresas/{empresaId}/analistas/cadastro", "/painel/{empresaId}/analistas/cadastro"})
     public String postAnalistaCadastrar(@PathVariable Long empresaId, Usuario analista, HttpServletRequest request, Model model) {
         model.addAttribute("path", request.getContextPath());
-        Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         Optional empresa;
-        switch(usuario.getTipoUsuario()) {
+        switch (usuario.getTipoUsuario()) {
             case ADMIN:
                 try {
                     if (this.usuarioService.existsByEmail(analista.getEmail())) {
@@ -176,10 +176,10 @@ public class EmpresaController {
 
                         empresa = this.empresaService.findById(empresaId);
                         if (empresa.isPresent()) {
-                            analista = this.usuarioService.save(analista, (Empresa)empresa.get());
+                            analista = this.usuarioService.save(analista, (Empresa) empresa.get());
                             model.addAttribute("analista", analista);
-                            if (this.empresaService.verifyRelacionamentoAnalista(((Empresa)empresa.get()).getId(), analista.getId()) == 0L) {
-                                this.empresaService.adcionaAnalista((Empresa)empresa.get(), analista);
+                            if (this.empresaService.verifyRelacionamentoAnalista(((Empresa) empresa.get()).getId(), analista.getId()) == 0L) {
+                                this.empresaService.adcionaAnalista((Empresa) empresa.get(), analista);
                             }
                         }
 
@@ -203,10 +203,10 @@ public class EmpresaController {
 
                         empresa = this.empresaService.findById(empresaId);
                         if (empresa.isPresent()) {
-                            analista = this.usuarioService.save(analista, (Empresa)empresa.get());
+                            analista = this.usuarioService.save(analista, (Empresa) empresa.get());
                             model.addAttribute("analista", analista);
-                            if (this.empresaService.verifyRelacionamentoAnalista(((Empresa)empresa.get()).getId(), analista.getId()) == 0L) {
-                                this.empresaService.adcionaAnalista((Empresa)empresa.get(), analista);
+                            if (this.empresaService.verifyRelacionamentoAnalista(((Empresa) empresa.get()).getId(), analista.getId()) == 0L) {
+                                this.empresaService.adcionaAnalista((Empresa) empresa.get(), analista);
                             }
                         }
 

@@ -124,7 +124,8 @@ public class ArquivoService {
         if (projeto.getDocumentosProjeto().getDadosBancariosFundo().getStatus() != NAO_SE_APLICA) {
             Arquivo dadosBancariosFundo = documentosProjeto.getDadosBancariosFundo();
             projeto.getDocumentosProjeto().getDadosBancariosFundo().setStatus(dadosBancariosFundo.getStatus());
-            this.arquivoRepositoryrepository.atualizaStatus(dadosBancariosFundo.getId(), dadosBancariosFundo.getStatus());;
+            this.arquivoRepositoryrepository.atualizaStatus(dadosBancariosFundo.getId(), dadosBancariosFundo.getStatus());
+            ;
         }
 
         // Altera o estado da documentação para APROVADO com Dados Bancários do Fundo == null
