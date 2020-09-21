@@ -112,11 +112,7 @@
     $('#accordion .panel-title a').prepend('<span></span>');
 
 
-
-
-
-
-    //Function to animate slider captions 
+    //Function to animate slider captions
     function doAnimations(elems) {
         //Cache the animationend event in a variable
         var animEndEv = 'webkitAnimationEnd animationend';
@@ -151,9 +147,6 @@
     });
 
 
-
-
-
     // Select all links with hashes
     $('.mainmenu-area a[href*="#"]')
         // Remove links that don't actually link to anything
@@ -184,15 +177,12 @@
                         } else {
                             $target.attr('tabindex', '-1'); // Adding tabindex for elements not focusable
                             $target.focus(); // Set focus again
-                        };
+                        }
+                        ;
                     });
                 }
             }
         });
-
-
-
-
 
 
     /* Preloader Js

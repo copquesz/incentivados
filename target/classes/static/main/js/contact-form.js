@@ -23,19 +23,19 @@ Ajax Contact Form
 
         // get the form data
         var formData = {
-            'name' : $('input[name="form-name"]').val(),
-            'email' : $('input[name="form-email"]').val(),
-            'subject' : $('input[name="form-subject"]').val(),
-            'message' : $('textarea[name="form-message"]').val()
+            'name': $('input[name="form-name"]').val(),
+            'email': $('input[name="form-email"]').val(),
+            'subject': $('input[name="form-subject"]').val(),
+            'message': $('textarea[name="form-message"]').val()
         };
 
         // process the form
         $.ajax({
-            type : 'POST',
-            url  : 'process.php',
-            data : formData,
-            dataType : 'json',
-            encode : true
+            type: 'POST',
+            url: 'process.php',
+            data: formData,
+            dataType: 'json',
+            encode: true
         }).done(function (data) {
             // handle errors
             if (!data.success) {
